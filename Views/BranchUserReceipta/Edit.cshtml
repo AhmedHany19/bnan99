@@ -1,0 +1,214 @@
+﻿@model RentCar.Models.CR_Cas_Account_Receipt
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_LayoutSys3.cshtml";
+}
+
+<style>
+    .tooltip > .tooltip-inner {
+        background-color: #f00;
+    }
+
+    .tooltip > .tooltip-arrow {
+        border-top-color: #f00 !important;
+    }
+</style>
+<style>
+    #date_btn1 {
+        font-size: 0 !important;
+        background: url('../../BSys3Styles/Images/icone_calendre.png') center 3px no-repeat;
+        width: 30px;
+        border: none;
+        border-left: 0;
+        height: 27px;
+        position: absolute;
+        left: 17px;
+        margin-top: -29px;
+    }
+</style>
+<div class="content">
+    <!-- Start Content-->
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card-box table-responsive" style="height:79vh">
+                    <div class="title_corp"><h3> التقرير المالي لموظف / بيانات القيد</h3></div>
+                    <div class="subtitle_corp">تمكنك الصفحة من عرض البيانات التفصيلية للقيد</div>
+                    <div class="hr_60"></div>
+                    <div class="hr_80"></div>
+                    <div class="corp_page">
+                        <div class="page_content" style="float:left;width:100%">
+                            @using (Html.BeginForm())
+                            {
+                                @Html.AntiForgeryToken()
+                               
+                            <div class="form-horizontal">
+
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                <div class="row">
+                                    <div class="col-md-6" style="margin-top:10px;">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <label class="control-label">رقم القيد</label>
+                                            </div>
+                                            <div class="col-md-5">
+                                                @Html.TextBoxFor(model => model.CR_Cas_Account_Receipt_No, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6" style="margin-top:10px;">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <label class="control-label">نوع القيد</label>
+                                            </div>
+                                            <div class="col-md-5">
+                                                @Html.TextBoxFor(model => model.CR_Cas_Account_Receipt_Reference_Type, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6" style="margin-top:10px;">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <label class="control-label">تاريخ القيد</label>
+                                            </div>
+                                            <div class="col-md-5">
+                                                <input class="form-control text-box single-line" data-val="true" id="Date" name="Date" type="date" value="@ViewBag.Date" data-inputmask="'alias': 'yyyy-mm-dd'" style="width:100%" onblur="affich_btn_1(event)">
+                                                <input name="b1" type="button" class="hijri-date-input2" id="date_btn1" onblur="affich_affich_1(event)" readonly />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6" style="margin-top:10px;">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <label class="control-label">القيمة</label><label id="asterisk">***</label>
+                                            </div>
+                                            <div class="col-md-5">
+
+                                                @Html.EditorFor(model => model.CR_Cas_Account_Receipt_Payment, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6" style="margin-top:10px;">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <label class="control-label">رقم المرجع</label>
+                                            </div>
+                                            <div class="col-md-5">
+                                                @Html.EditorFor(model => model.CR_Cas_Account_Receipt_Contract_Operation, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6" style="margin-top:10px;">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <label class="control-label">نوع المرجع</label>
+                                            </div>
+                                            <div class="col-md-5">
+                                                @Html.EditorFor(model => model.CR_Cas_Account_Receipt_Reference_Type, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6" style="margin-top:10px;">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <label class="control-label">طريقة الدفع</label>
+                                            </div>
+                                            <div class="col-md-5">
+                                                @Html.EditorFor(model => model.CR_Mas_Sup_Payment_Method.CR_Mas_Sup_Payment_Method_Ar_Name, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6" style="margin-top:10px;">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <label class="control-label">نقطة البيع</label>
+                                            </div>
+                                            <div class="col-md-5">
+                                                @Html.EditorFor(model => model.CR_Cas_Sup_SalesPoint.CR_Cas_Sup_SalesPoint_Ar_Name, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6" style="margin-top:10px;">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <label class="control-label">منفذ القيد</label>
+                                            </div>
+                                            <div class="col-md-5">
+                                                @Html.EditorFor(model => model.CR_Cas_User_Information.CR_Cas_User_Information_Ar_Name, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6" style="margin-top:10px;">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <label class="control-label">حالة العهدة</label>
+                                            </div>
+                                            <div class="col-md-5">
+                                                <input type="text" class="form-control" id="ReceiptStatus" name="ReceiptStatus" value="@ViewBag.ReceiptStatus" readonly />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6" style="margin-top:10px;">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <label class="control-label">المستلم</label>
+                                            </div>
+                                            <div class="col-md-5">
+                                                @Html.EditorFor(model => model.CR_Cas_User_Information.CR_Cas_User_Information_Ar_Name, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6" style="margin-top:10px;">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <label class="control-label">تاريخ التسليم</label>
+                                            </div>
+                                            <div class="col-md-5">
+                                                <input class="form-control text-box single-line" data-val="true" id="TransferDate" name="TransferDate" type="date" value="@ViewBag.TransferDate" data-inputmask="'alias': 'yyyy-mm-dd'" style="width:100%" onblur="affich_btn_1(event)">
+                                                <input name="b1" type="button" class="hijri-date-input2" id="date_btn1" onblur="affich_affich_1(event)" readonly />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12" style="margin-top:10px;">
+                                        <div class="row">
+                                            <div class="col-md-2">
+                                                <label class="control-label">المرجع</label>
+                                            </div>
+                                            <div class="col-md-10">
+                                                @Html.EditorFor(model => model.CR_Cas_Account_Receipt_Reasons, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                                <div class="row">
+                                   
+                                    <div class="col-md-10 col-50" style="margin-top:150px;margin-bottom:10px;">
+                                        <a href="BranchHome/BranchHome" class="btn btn-primary waves-effect" style="float:left;">انهاء</a>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

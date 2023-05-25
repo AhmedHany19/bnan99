@@ -1,0 +1,83 @@
+﻿@model RentCar.Models.CR_Cas_Sup_Beneficiary
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_CASLayout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>CR_Cas_Sup_Beneficiary</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CR_Cas_Sup_Beneficiary_Commercial_Registration_No)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CR_Cas_Sup_Beneficiary_Commercial_Registration_No)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CR_Cas_Sup_Beneficiary_Sector)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CR_Cas_Sup_Beneficiary_Sector)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CR_Cas_Sup_Beneficiary_Ar_Long_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CR_Cas_Sup_Beneficiary_Ar_Long_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CR_Cas_Sup_Beneficiary_En_Long_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CR_Cas_Sup_Beneficiary_En_Long_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CR_Cas_Sup_Beneficiary_Fr_Long_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CR_Cas_Sup_Beneficiary_Fr_Long_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CR_Cas_Sup_Beneficiary_Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CR_Cas_Sup_Beneficiary_Status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CR_Cas_Sup_Beneficiary_Reasons)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CR_Cas_Sup_Beneficiary_Reasons)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CR_Mas_Com_Lessor.CR_Mas_Com_Lessor_Logo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CR_Mas_Com_Lessor.CR_Mas_Com_Lessor_Logo)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

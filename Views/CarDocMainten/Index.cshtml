@@ -1,0 +1,260 @@
+﻿@model IEnumerable<RentCar.Models.CR_Cas_Sup_Car_Doc_Mainten>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_CASLayout.cshtml";
+}
+
+<style>
+    label {
+        float: none
+    }
+
+    .radio_top {
+        float: left;
+        margin-right: 10px;
+        line-height: 0.8
+    }
+    .btn_form2 i {
+        width: 30px;
+        height: 30px;
+        line-height: 30px;
+        text-align: center;
+        color: #fff;
+        background: #4F7DB1;
+        float: right;
+        font-size: 20px;
+        margin-left: 10px;
+        text-align: center
+    }
+
+    .btn_form2 {
+        float: right;
+        color: #F3B161;
+        font-weight: bold;
+        margin-left: 10px;
+        width: 30px;
+        height: 30px;
+        line-height: 30px;
+        text-align: center;
+        color: #fff;
+        background: #4F7DB1;
+        border: none;
+        float: right;
+        margin-left: 10px;
+    }
+
+
+</style>
+<div class="content">
+    <!-- Start Content-->
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-12">
+
+                <div class="card-box table-responsive" style="height:79vh">
+                    <div class="title_corp"><h3>  السيارات / الوثائق /عرض البيانات </h3></div>
+                    <div class="subtitle_corp"> تمكنك الصفحة من البحث و طباعة و تعديل بيانات وثائق السيارات</div>
+                    <div class="hr_60"></div>
+                    <div class="hr_80"></div>
+                    <div class="corp_page">
+                        <div class="page_content">
+                            <form method="post">
+                                <div class="form_bg" style="width:100%">
+                                    <div class="href_layout">
+                                        <a href="/CasHome/index" class="btn_form"><i class="fa fa-times" title="إغلاق"></i></a>
+                                        <button type="submit" name="excelCall" class="btn_form" value="Excel" style="padding-right:4px;" data-toggle="tooltip" data-placement="top" title="ترحيل البيانات للإكسل" hidden>
+                                            <i class="far fa-file-excel" aria-hidden="true" style=" margin-bottom: 3px; padding-left: 10px;"></i>
+                                        </button>
+                                        <a href="" class="btn_form" data-toggle="tooltip" data-placement="top" title="طباعة" hidden><i class="fa fa-print"></i></a>
+                                    </div>
+                                    <div class="dataTables_filter">
+                                        <label class="label_search_input">
+                                            <img src="~/images/srch.png" id="SrchImg" />
+                                            بحث:<input class="form-control form_search_input" type="text" id="inputtext" name="TxtSearch" style="width:52%" />
+                                        </label>
+                                    </div>
+                                    
+                                    <div class="row" style="width: 100%; min-height: 20px">
+                                        <div class="col-md-7 ">
+                                            <div class="row" hidden>
+                                                <div class="col-md-5" style="float:right">
+                                                    <div class="row">
+                                                        <div class="col-md-3" style="float:right">
+                                                            <label>من</label>
+                                                        </div>
+                                                        <div class="col-md-9" style="float:right">
+                                                            <input type="date" id="Startdate" value="@ViewBag.StartDate" onclick="GetDateFilter()" style="width:100%">
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-5" style="float:right">
+                                                    <div class="row">
+                                                        <div class="col-md-3" style="float:right;padding-right:30px;">
+                                                            <label>إلى</label>
+                                                        </div>
+                                                        <div class="col-md-9" style="float:right">
+                                                            <input type="date" id="Enddate" value="@ViewBag.EndDate" onclick="GetDateFilter()" style="width:100%">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <a href="javascript:GetFilterDate();" class="btn_form2" data-toggle="tooltip" data-placement="top" title="بحث"><i class="fa fa-check-circle"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-5" style="float:right">
+                                            <div class="radio_top">
+                                                <input type="radio" id="ShowExpired" name="Show" onclick="LoadData();GetFilter()" style="float:right;margin-left:4px;width:13px;height:13px;">
+                                                <label for="javascript" style="float: left; font-size: 0.75rem">منتهي</label>
+                                            </div>
+                                            <div class="radio_top">
+                                                <input type="radio" id="ShowAboutExpire" name="Show" onclick="LoadData();GetFilter()" style="float:right;margin-left:4px;width:13px;height:13px;">
+                                                <label for="javascript" style="float: left; font-size: 0.75rem">على وشك الإنتهاء</label>
+                                            </div>
+                                            <div class="radio_top" hidden>
+                                                <input type="radio" id="ShowDeleted" name="Show" onclick="LoadData();GetFilter()" style="float:right;margin-left:4px;width:13px;height:13px;">
+                                                <label for="javascript" style="float: left; font-size: 0.75rem">محذوف</label>
+                                            </div>
+                                            <div class="radio_top">
+                                                <input type="radio" id="ShowUnder" name="Show" onclick="LoadData();GetFilter()" style="float:right;margin-left:4px;width:13px;height:13px;">
+                                                <label for="javascript" style="float: left; font-size: 0.75rem">لم يسجل</label>
+                                            </div>
+                                            <div class="radio_top">
+                                                <input type="radio" id="ShowActive" name="Show" onclick="LoadData();GetFilter()" style="float:right;margin-left:4px;width:13px;height:13px;">
+                                                <label for="css" style="float: left; font-size: 0.75rem">نشط</label>
+                                            </div>
+                                            <div class="radio_top">
+                                                <input type="radio" id="ShowAll" name="Show" onclick="LoadData();GetFilter()" style="float:right;margin-left:4px;width:13px;height:13px;">
+                                                <label for="html" style="float: left; font-size: 0.75rem">الكل</label>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div id="Table">
+                                        @{
+                                            Html.RenderAction("PartialIndex");
+                                        }
+
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- end row -->
+
+        </div> <!-- container-fluid -->
+
+    </div> <!-- content -->
+    <script>
+
+        function GetFilterDate() {
+            var sd = document.getElementById('Startdate').value;
+            var ed = document.getElementById('Enddate').value;
+
+                $.ajax({
+                url: '@Url.Action("PartialIndex", "CarDocMainten")',
+                type: "POST",
+                    data: { type: "Date", StartDate: sd, EndDate:ed },
+                    success: function (data) {
+
+                        $('#Table').html(data);
+                }
+                });
+        }
+
+
+        function GetFilter() {
+
+            if (document.getElementById('ShowAboutExpire').checked) {
+                $.ajax({
+                url: '@Url.Action("PartialIndex", "CarDocMainten")',
+                type: "POST",
+                data: { type: "X" },
+                    success: function (data) {
+
+                        $('#Table').html(data);
+                        $('#preloader').css('display', 'none');
+                }
+                });
+            } else if (document.getElementById('ShowActive').checked) {
+
+                 $.ajax({
+                         url: '@Url.Action("PartialIndex", "CarDocMainten")',
+                        type: "POST",
+                        data: { type: "A" },
+                        success: function (data) {
+                            $('#Table').html(data);
+                            $('#preloader').css('display', 'none');
+                        }
+                });
+            } else if (document.getElementById('ShowDeleted').checked) {
+
+                 $.ajax({
+                        url: '@Url.Action("PartialIndex", "CarDocMainten")',
+                        type: "POST",
+                        data: { type: "D" },
+                        success: function (data) {
+                            $('#Table').html(data);
+                            $('#preloader').css('display', 'none');
+                        }
+                });
+            } else if (document.getElementById('ShowExpired').checked) {
+
+                 $.ajax({
+                        url: '@Url.Action("PartialIndex", "CarDocMainten")',
+                        type: "POST",
+                        data: { type: "E" },
+                        success: function (data) {
+                            $('#Table').html(data);
+                            $('#preloader').css('display', 'none');
+                        }
+                });
+            }else if (document.getElementById('ShowUnder').checked) {
+
+                 $.ajax({
+                        url: '@Url.Action("PartialIndex", "CarDocMainten")',
+                        type: "POST",
+                        data: { type: "N" },
+                        success: function (data) {
+                            $('#Table').html(data);
+                            $('#preloader').css('display', 'none');
+                        }
+                });
+            } else if (document.getElementById('ShowAll').checked) {
+
+                 $.ajax({
+                        url: '@Url.Action("PartialIndex", "CarDocMainten")',
+                        type: "POST",
+                        data: { type: "All" },
+                        success: function (data) {
+                            $('#Table').html(data);
+                            $('#preloader').css('display', 'none');
+                        }
+                });
+            }
+            else {
+                $.ajax({
+                     url: '@Url.Action("PartialIndex", "CarDocMainten")',
+                    type: "POST",
+                    data: { type: "" },
+                        success: function (data) {
+                            $('#Table').html(data);
+                            $('#preloader').css('display', 'none');
+                        }
+                });
+            }
+        }
+    </script>
+    <script>
+        function LoadData() {
+            //alert();
+            $('#preloader').css('display', 'block');
+            $('#status').css('display', 'block');
+        }
+
+    </script>
+</div>

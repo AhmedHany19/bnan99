@@ -1,0 +1,240 @@
+﻿@model IEnumerable<RentCar.Models.CR_Cas_Contract_Basic>
+
+<div class="table-rep-plugin" id="TableDiv">
+    <table id="myTable" class="table table-striped mb-0" style="cursor:pointer">
+        <thead style="overflow-y: scroll; flex-grow: 1;">
+            <tr>
+                <th style="width:15%">
+                    رقم العقد
+                </th>
+                <th style="width:10%">
+                    تاريخه
+                </th>
+                @*<th  style="width:8%">
+                    بدايته
+                </th>
+                <th  style="width:8%">
+                    نهايته
+                </th>*@
+
+                <th style="width:20%">
+                    المستأجر
+                </th>
+                <th style="width:35%">
+                    السيارة
+                </th>
+
+                <th style="width:8%">
+                    الحالة
+                </th>
+
+                <th style="width:12%">
+                    إنشاء العقد
+                </th>
+                <th style="width: 12%">
+                    إغلاق العقد
+                </th>
+
+
+            </tr>
+        </thead>
+        <tbody id="tbl">
+
+            @foreach (var item in Model)
+            {
+                int copyNumber = item.CR_Cas_Contract_Basic_Copy;
+                if (item.CR_Cas_Contract_Basic_Status == "E")
+                {
+                    <tr>
+                        <td style="width:15%;color:red">
+                            @Html.DisplayFor(modelItem => item.CR_Cas_Contract_Basic_No)
+                            @{
+
+                                copyNumber = copyNumber - 1;
+                                if (copyNumber > 0)
+                                {
+                                    <label style="float:left;color:red;">(@copyNumber)</label>
+                                }
+
+                            }
+                        </td>
+                        <td style="width: 10%; color: red">
+                            @if (item.CR_Cas_Contract_Basic_Date != null)
+                            {
+                                @item.CR_Cas_Contract_Basic_Date.Value.ToString("yyyy/MM/dd")
+                            }
+
+
+                        </td>
+
+                        <td style="width: 20%; color: red">
+
+                            @Html.DisplayFor(modelItem => item.CR_Mas_Renter_Information.CR_Mas_Renter_Information_Ar_Name)
+
+                        </td>
+                        <td style="width: 35%; color: red">
+
+                            @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Information.CR_Cas_Sup_Car_Collect_Ar_Name)
+
+                        </td>
+
+                        <td style="width: 8%; color: red" align="center">
+                            @if (item.CR_Cas_Contract_Basic_Status == "A")
+                            {
+                                <label>نشط</label>
+                            }
+                            @if (item.CR_Cas_Contract_Basic_Status == "U")
+                            {
+                                <label>لم يكتمل</label>
+                            }
+                            @if (item.CR_Cas_Contract_Basic_Status == "y")
+                            {
+                                <label>ممدد</label>
+                            }
+                            else if (item.CR_Cas_Contract_Basic_Status == "C")
+                            {
+                                <label>مغلق</label>
+                            }
+                            else if (item.CR_Cas_Contract_Basic_Status == "E")
+                            {
+                                <label>منتهي</label>
+                            }
+
+                        </td>
+
+                        <td align="center" style="width: 12%; color: red">
+                            <a href="~/BasicContract/PDFFlyer/?p=@Html.DisplayFor(modelItem => item.CR_Cas_Contract_Basic_CreateContract_Pdf)" target="_blank">
+                                <i class="fas fa-file-pdf" style="color:red;"></i>
+
+                            </a>
+                        </td>
+                        <td align="center" style="width: 12%; color: red">
+                            @if (item.CR_Cas_Contract_Basic_CloseContract_Pdf != null)
+                            {
+                                <a href="~/BasicContract/PDFFlyer/?p=@Html.DisplayFor(modelItem => item.CR_Cas_Contract_Basic_CloseContract_Pdf)" target="_blank">
+                                    <i class="fas fa-file-pdf" style="color:red;"></i>
+
+                                </a>
+                            }
+
+                        </td>
+                    </tr>
+                }
+                else
+                {
+                    <tr>
+                        <td style="width:15%">
+                            @Html.DisplayFor(modelItem => item.CR_Cas_Contract_Basic_No)
+                            @{
+
+                                copyNumber = copyNumber - 1;
+                                if (copyNumber > 0)
+                                {
+                                    <label style="float:left;color:red;">(@copyNumber)</label>
+                                }
+
+                            }
+                        </td>
+                        <td style="width:10%">
+                            @if (item.CR_Cas_Contract_Basic_Date != null)
+                            {
+                                @item.CR_Cas_Contract_Basic_Date.Value.ToString("yyyy/MM/dd")
+                            }
+
+
+                        </td>
+                        @*<td style="width:8%">
+                            @if (item.CR_Cas_Contract_Basic_Start_Date != null)
+                            {
+                                @item.CR_Cas_Contract_Basic_Start_Date.Value.ToString("yyyy/MM/dd")
+                            }
+
+
+                        </td>
+                        <td style="width:8%">
+                            @if (item.CR_Cas_Contract_Basic_Expected_End_Date != null)
+                            {
+                                @item.CR_Cas_Contract_Basic_Expected_End_Date.Value.ToString("yyyy/MM/dd")
+                            }
+
+
+                        </td>*@
+                        <td style="width:20%">
+
+                            @Html.DisplayFor(modelItem => item.CR_Mas_Renter_Information.CR_Mas_Renter_Information_Ar_Name)
+
+                        </td>
+                        <td style="width:35%">
+
+                            @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Information.CR_Cas_Sup_Car_Collect_Ar_Name)
+
+                        </td>
+
+                        <td style="width:8%" align="center">
+                            @if (item.CR_Cas_Contract_Basic_Status == "A")
+                            {
+                                <label>نشط</label>
+                            }
+                            @if (item.CR_Cas_Contract_Basic_Status == "U")
+                            {
+                                <label>لم يكتمل</label>
+                            }
+                            @if (item.CR_Cas_Contract_Basic_Status == "y")
+                            {
+                                <label>ممدد</label>
+                            }
+                            else if (item.CR_Cas_Contract_Basic_Status == "C")
+                            {
+                                <label>مغلق</label>
+                            }
+                            else if (item.CR_Cas_Contract_Basic_Status == "E")
+                            {
+                                <label>منتهي</label>
+                            }
+
+                        </td>
+
+                        @*<td>
+                            @{
+                                if (item.CR_Cas_Contract_Basic_Expected_End_Date != null)
+                                {
+                                    DateTime currentdate = DateTime.Now;
+                                    DateTime enddate = (DateTime)item.CR_Cas_Contract_Basic_Expected_End_Date;
+
+                                    var diff = (enddate - currentdate).TotalDays;
+                                    if (diff > 0)
+                                    {
+                                        <label>@String.Format("{0:#,##0}", diff)</label>
+                                    }
+                                    else
+                                    {
+                                        <label>@String.Format("{0:#,##0}", 0)</label>
+                                    }
+
+                                }
+
+                            }
+
+                        </td>*@
+                        <td align="center" style="width:12%">
+                            <a href="~/BasicContract/PDFFlyer/?p=@Html.DisplayFor(modelItem => item.CR_Cas_Contract_Basic_CreateContract_Pdf)" target="_blank">
+                                <i class="fas fa-file-pdf" style="color:red;"></i>
+
+                            </a>
+                        </td>
+                        <td align="center" style="width:12%">
+                            @if (item.CR_Cas_Contract_Basic_CloseContract_Pdf != null)
+                            {
+                                <a href="~/BasicContract/PDFFlyer/?p=@Html.DisplayFor(modelItem => item.CR_Cas_Contract_Basic_CloseContract_Pdf)" target="_blank">
+                                    <i class="fas fa-file-pdf" style="color:red;"></i>
+
+                                </a>
+                            }
+
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>

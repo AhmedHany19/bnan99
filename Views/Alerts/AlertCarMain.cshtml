@@ -1,0 +1,197 @@
+﻿@model IEnumerable<RentCar.Models.CR_Cas_Sup_Follow_Up_Mechanism>
+
+<table class="table " style="border: none !important;" id="myTable">
+    <thead>
+        <tr hidden="hidden">
+
+            <th style="width:8%;">إسم المستند</th>
+
+            <th style="width:8%;">تفعيل الخدمة</th>
+
+            <th style="width:8%;">التنبيه قبل</th>
+            <th style="width:8%;"></th>
+
+            <th style="width:8%;"></th>
+
+            <th style="width:8%;"></th>
+            <th style="width:8%;"></th>
+
+
+        </tr>
+    </thead>
+    <tbody id="tbl" style="border: none !important;margin-top:10px;" class="body">
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td align="right" style="width: 30%;" hidden>
+                    @{
+                        var id = item.CR_Cas_Sup_Follow_Up_Mechanism_Lessor_Code + "_" + item.CR_Cas_Sup_Follow_Up_Mechanism_Procedures_Code;
+                    }
+                    @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Follow_Up_Mechanism_Lessor_Code)
+
+                </td>
+
+                <td align="right" style="width:30%;" hidden>
+
+                    @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Follow_Up_Mechanism_Procedures_Code)
+
+                </td>
+                <td align="right" style="width: 30%;float:right;">
+
+                    @Html.DisplayFor(modelItem => item.CR_Mas_Sup_Procedures.CR_Mas_Sup_Procedures_Ar_Name)
+
+                </td>
+
+                <td style="vertical-align: middle !important; width: 12.5%; float: right;">
+
+                    <label class="switch">
+
+                        <input type="checkbox" id="ch_@id" name="CR_Cas_Sup_Follow_Up_Mechanism_Activate_Service" class="MyCheckBox"
+                               checked="@item.CR_Cas_Sup_Follow_Up_Mechanism_Activate_Service.GetValueOrDefault()">
+                        <span class="slider round"></span>
+                    </label>
+                </td>
+
+                <td style="vertical-align: middle !important; width: 7.5%; float: right;">
+                    <input class="form-control BExpire" data-val="true" data-val-number="The field CR_Cas_Sup_Follow_Up_Mechanism_Befor_Expire must be a number."
+                           id="ch_@id" name="item.CR_Cas_Sup_Follow_Up_Mechanism_Befor_Expire" maxlength="2"
+                           value="@item.CR_Cas_Sup_Follow_Up_Mechanism_Befor_Expire" style="width:100%;float:right;">
+                </td>
+                <td style="vertical-align: middle !important; width: 10%; float: right;">
+                    <input class="form-control BKm" data-val="true" data-val-number="The field CR_Cas_Sup_Follow_Up_Mechanism_Befor_KM must be a number."
+                           id="ch_@id" name="item.CR_Cas_Sup_Follow_Up_Mechanism_Befor_KM" maxlength="3"
+                           value="@item.CR_Cas_Sup_Follow_Up_Mechanism_Befor_KM" style="width: 100%; float: right;">
+                </td>
+                <td style="vertical-align: middle !important; width:12.5%;float:right">
+                    <input class="form-control DKm" data-val="true" data-val-number="The field CR_Cas_Sup_Follow_Up_Mechanism_After_Expire must be a number."
+                           id="ch_@id" name="item.CR_Cas_Sup_Follow_Up_Mechanism_Default_KM"
+                           value="@item.CR_Cas_Sup_Follow_Up_Mechanism_Default_KM" style="width: 100%; float: right;">
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+@*<script>
+        $(document).ready(
+            function () {
+            $(".MyCheckBox").change(function () {
+                var CR_Cas_Sup_Follow_Up_Mechanism_Activate_Service = this.checked;
+                var CR_Cas_Sup_Follow_Up_Mechanism_Lessor_Code = this.id.split("_")[1];
+                var CR_Cas_Sup_Follow_Up_Mechanism_Procedures_Code = this.id.split("_")[2];
+
+                $.ajax({
+                    url: '@Url.Action("CheckBoxChanged")',
+                    type: "POST",
+                    data: {
+                        "CR_Cas_Sup_Follow_Up_Mechanism_Activate_Service": CR_Cas_Sup_Follow_Up_Mechanism_Activate_Service,
+                        "CR_Cas_Sup_Follow_Up_Mechanism_Lessor_Code": CR_Cas_Sup_Follow_Up_Mechanism_Lessor_Code,
+                        "CR_Cas_Sup_Follow_Up_Mechanism_Procedures_Code": CR_Cas_Sup_Follow_Up_Mechanism_Procedures_Code
+                    },
+                    success: function (data) {
+
+                    },
+                    error: function (jqXHR, error, errorThrown) {
+
+                        alert("Something went wrong");
+                    }
+                });
+            }
+            )
+            })
+
+
+        $(document).ready(
+            function () {
+            $(".BExpire").change(function () {
+                var CR_Cas_Sup_Follow_Up_Mechanism_Befor_Expire = this.value;
+
+                var CR_Cas_Sup_Follow_Up_Mechanism_Lessor_Code = this.id.split("_")[1];
+                var CR_Cas_Sup_Follow_Up_Mechanism_Procedures_Code = this.id.split("_")[2];
+
+                $.ajax({
+                    url: '@Url.Action("BeforeExpireChanged")',
+                    type: "POST",
+                    data: {
+                        "CR_Cas_Sup_Follow_Up_Mechanism_Befor_Expire": CR_Cas_Sup_Follow_Up_Mechanism_Befor_Expire,
+
+                        "CR_Cas_Sup_Follow_Up_Mechanism_Lessor_Code": CR_Cas_Sup_Follow_Up_Mechanism_Lessor_Code,
+                        "CR_Cas_Sup_Follow_Up_Mechanism_Procedures_Code": CR_Cas_Sup_Follow_Up_Mechanism_Procedures_Code
+                    },
+                    success: function (data) {
+
+                    },
+                    error: function (jqXHR, error, errorThrown) {
+
+                        alert("Something went wrong");
+                    }
+                });
+            }
+            )
+            })
+
+        $(document).ready(
+            function () {
+            $(".AExpire").change(function () {
+
+                var CR_Cas_Sup_Follow_Up_Mechanism_Default_KM = this.value;
+                var CR_Cas_Sup_Follow_Up_Mechanism_Lessor_Code = this.id.split("_")[1];
+                var CR_Cas_Sup_Follow_Up_Mechanism_Procedures_Code = this.id.split("_")[2];
+
+                $.ajax({
+                    url: '@Url.Action("AfterExpireChanged")',
+                    type: "POST",
+                    data: {
+
+                        "CR_Cas_Sup_Follow_Up_Mechanism_Default_KM": CR_Cas_Sup_Follow_Up_Mechanism_Default_KM,
+                        "CR_Cas_Sup_Follow_Up_Mechanism_Lessor_Code": CR_Cas_Sup_Follow_Up_Mechanism_Lessor_Code,
+                        "CR_Cas_Sup_Follow_Up_Mechanism_Procedures_Code": CR_Cas_Sup_Follow_Up_Mechanism_Procedures_Code
+                    },
+                    success: function (data) {
+
+                    },
+                    error: function (jqXHR, error, errorThrown) {
+
+                        alert("Something went wrong");
+                    }
+                });
+            }
+            )
+        })
+
+        $(document).ready(
+            function () {
+            $(".BKm").change(function () {
+
+                var CR_Cas_Sup_Follow_Up_Mechanism_Befor_KM = this.value;
+                var CR_Cas_Sup_Follow_Up_Mechanism_Lessor_Code = this.id.split("_")[1];
+                var CR_Cas_Sup_Follow_Up_Mechanism_Procedures_Code = this.id.split("_")[2];
+
+                $.ajax({
+                    url: '@Url.Action("BeforKmChanged")',
+                    type: "POST",
+                    data: {
+
+                        "CR_Cas_Sup_Follow_Up_Mechanism_Befor_KM": CR_Cas_Sup_Follow_Up_Mechanism_Befor_KM,
+                        "CR_Cas_Sup_Follow_Up_Mechanism_Lessor_Code": CR_Cas_Sup_Follow_Up_Mechanism_Lessor_Code,
+                        "CR_Cas_Sup_Follow_Up_Mechanism_Procedures_Code": CR_Cas_Sup_Follow_Up_Mechanism_Procedures_Code
+                    },
+                    success: function (data) {
+
+                    },
+                    error: function (jqXHR, error, errorThrown) {
+
+                        alert("Something went wrong");
+                    }
+                });
+            }
+            )
+        })
+
+    </script>*@
+
+
+
+
+@*https://www.aspsnippets.com/articles/mvc-inline-editing-implement-inline-editing-in-gridview-in-aspnet-mvc.aspx*@

@@ -1,0 +1,195 @@
+﻿@model RentCar.Models.CR_Cas_Sup_Owners
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_CasLayout.cshtml";
+}
+
+
+
+<div class="content">
+    <!-- Start Content-->
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card-box table-responsive" style="height:49vh">
+                    <div class="title_corp"><h3> الشركة /الملاك / إضافة </h3></div>
+                    <div class="subtitle_corp">تمكنك الصفحة من إضافة مالك جديد</div>
+                    <div class="hr_60"></div>
+                    <div class="hr_80"></div>
+                    <div class="corp_page">
+                        <div class="page_content" style="float:left;width:100%">
+                            <form id="form_validation" action="/CasOwners/Create" enctype="multipart/form-data" method="post" data-parsley-validate novalidate>
+
+                                @Html.AntiForgeryToken()
+
+                                <div class="form-horizontal" style="margin-top:15px;min-height:35%" >
+
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                                    <div class="row mb-2">
+                                        <div class="col-lg-7 offset-lg-5 col-md-12">
+                                            <div class="row" style="height:43px;">
+                                                <div class="col-lg-3 col-md-4 padding_left_none">
+                                                    <label class="lbl" style=" float:right">الرقم الحكومي<span id="asterisk">*</span></label>
+                                                </div>
+                                                <div class="col-lg-3 col-md-3 padding_right_none">
+                                                    @Html.TextBoxFor(model => model.CR_Cas_Sup_Owners_Code, new { @class = "form-control", @Value = "7",@id="GovernmentNumber", oninput = "this.value=this.value.replace(/[^0-9]/g,'')" ,sonkeyup = "movetoNext('CR_Cas_Sup_Owners_Commercial_Registration_No')", onfocusout = "CheckRenterMobile(this.value)", minlength = "10", maxlength = "10", required = "required", autocomplete = "off", htmlAttributes = new { tabindex = 1 } })
+                                                    <div class="texterr">@ViewBag.LRExistCode</div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    @Html.HiddenFor(model => model.CR_Cas_Sup_Owners_Lessor_Code)
+                                    @Html.HiddenFor(model => model.CR_Cas_Sup_Owners_Sector)
+
+
+                                    <div class="row mb-2">
+                                        <div class="col-lg-7 offset-lg-5 col-md-12">
+                                            <div class="row" style="height:43px;">
+                                                <div class="col-lg-3 col-md-3 padding_left_none">
+                                                    @*@Html.LabelFor(model => model.CR_Cas_Sup_Owners_Commercial_Registration_No, new { @class = "label_form" })*@
+                                                    <label class="lbl" style=" float:right">السجل التجاري</label>
+                                                </div>
+                                                <div class="col-lg-3 col-md-3 padding_right_none">
+                                                    @Html.TextBoxFor(model => model.CR_Cas_Sup_Owners_Commercial_Registration_No, new { @class = "form-control", onkeyup = "movetoNext('CR_Cas_Sup_Owners_Ar_Long_Name')", maxlength = "10", autocomplete = "off", htmlAttributes = new { tabindex = 2 } })
+                                                    <div class="texterr">@ViewBag.LRExistCommercial</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-2">
+                                        <div class="col-lg-7 offset-lg-5 col-md-12">
+                                            <div class="row" style="height:43px;">
+                                                <div class="col-lg-3 col-md-3 padding_left_none">
+                                                    @*@Html.LabelFor(model => model.CR_Cas_Sup_Owners_Ar_Long_Name, new { @class = "label_form", style = "float:right" })<label id="asterisk">*</label>*@
+                                                    <label class="lbl" style=" float:right">الإسم بالعربي<span id="asterisk">*</span></label>
+                                                </div>
+                                                <div class="col-lg-5 col-md-9 padding_right_none">
+                                                    @Html.TextBoxFor(model => model.CR_Cas_Sup_Owners_Ar_Long_Name, new { @class = "form-control", maxlength = "100", onkeyup = "movetoNext('CR_Cas_Sup_Owners_En_Long_Name')", required = "required", autocomplete = "off", onkeypress = "return CheckArabicCharactersOnly(event);", htmlAttributes = new { tabindex = 3 } })
+                                                    <div class="texterr">@ViewBag.LRExistAr</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-2">
+                                        <div class="col-lg-7 offset-lg-5 col-md-12">
+                                            <div class="row" style="height:43px;">
+                                                <div class="col-lg-3 col-md-3 padding_left_none">
+                                                    @*@Html.LabelFor(model => model.CR_Cas_Sup_Owners_En_Long_Name, new { @class = "label_form", style = "float:right" })<label id="asterisk">*</label>*@
+                                                    <label class="lbl" style=" float:right">الإسم بالإنجليزي<span id="asterisk">*</span></label>
+                                                </div>
+                                                <div class="col-lg-5 col-md-9 padding_right_none">
+                                                    @Html.TextBoxFor(model => model.CR_Cas_Sup_Owners_En_Long_Name, new { @class = "form-control", maxlength = "100", onkeyup = "movetoNext('add_btn')", autocomplete = "off", required = "required", oninput = "this.value=this.value.replace(/[^a-zA-Z\\s]/g,'')", htmlAttributes = new { tabindex = 4 } })
+                                                    <div class="texterr">@ViewBag.LRExistEn</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group" hidden="hidden">
+                                        @Html.LabelFor(model => model.CR_Cas_Sup_Owners_Fr_Long_Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(model => model.CR_Cas_Sup_Owners_Fr_Long_Name, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.CR_Cas_Sup_Owners_Fr_Long_Name, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group" hidden="hidden">
+                                        @Html.LabelFor(model => model.CR_Cas_Sup_Owners_Status, htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(model => model.CR_Cas_Sup_Owners_Status, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.CR_Cas_Sup_Owners_Status, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-7 offset-lg-5 col-md-12">
+                                            <div class="row" style="height:43px;">
+                                                @*@Html.LabelFor(model => model.CR_Cas_Sup_Owners_Reasons, htmlAttributes: new { @class = "control-label col-md-3 padding_left_none" })*@
+                                                <div class="col-lg-3 col-md-3 padding_left_none">
+                                                    <label class="lbl" style=" float:right">الملاحظات</label>
+                                                </div>
+                                                <div class="col-md-9 padding_right_none">
+                                                    @Html.TextBoxFor(model => model.CR_Cas_Sup_Owners_Reasons,  new { @class = "form-control", } )
+                                                    @Html.ValidationMessageFor(model => model.CR_Cas_Sup_Owners_Reasons, "", new { @class = "text-danger", @maxlength = "100" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-1 col-50" style="margin-top:30px;">
+                                        <div></div>
+                                        <input type="submit" name="add" class="btn btn-primary waves-effect" id="add_btn" value="حفظ" />
+                                    </div>
+                                    <div class="col-md-1 col-50" style="margin-top:30px;">
+                                        <div></div>
+                                        <a href="/CasOwners/Index/" tabindex="" class="btn btn-primary waves-effect" style="float:left">انهاء</a>
+                                    </div>
+
+                                </div>
+                                @*<div class="col-md-6" id="Message" style="font-family:'Times New Roman';font-size:16px;color:red;margin-Top: 380px; margin-right: 330px;position:absolute;">@TempData["TempModel"]</div>*@
+
+                                @*if (@ViewBag.LRExistCode == null && @ViewBag.LRExistAr == null && @ViewBag.LRExistEn == null && @ViewBag.LRExistCommercial == null)
+                                    {
+                                    <script>document.getElementById('CR_Cas_Sup_Owners_Code').focus()</script>
+                                    }
+                                    else if (@ViewBag.LRExistCode != null)
+                                    {
+                                    <script>document.getElementById('CR_Cas_Sup_Owners_Code').focus()</script>
+                                    }
+                                    else if (@ViewBag.LRExistCode == null && @ViewBag.LRExistCommercial != null)
+                                    {
+                                    <script>document.getElementById('CR_Cas_Sup_Owners_Commercial_Registration_No').focus()</script>
+                                    }
+                                    else if (@ViewBag.LRExistCode == null && @ViewBag.LRExistCommercial == null && @ViewBag.LRExistAr != null)
+                                    {
+                                    <script>document.getElementById('CR_Cas_Sup_Owners_Ar_Long_Name').focus()</script>
+                                    }
+                                    else if (@ViewBag.LRExistCode == null && @ViewBag.LRExistCommercial == null && @ViewBag.LRExistAr == null && @ViewBag.LRExistEn != null)
+                                    {
+                                    <script>document.getElementById('CR_Cas_Sup_Owners_En_Long_Name').focus()</script>
+                                    }
+                                    else if (@ViewBag.LRExiLRExistCodestAr != null && @ViewBag.LRExistAr != null && @ViewBag.LRExistEn != null && @ViewBag.LRExistCommercial != null)
+                                    {
+                                    <script>document.getElementById('CR_Cas_Sup_Owners_Code').focus()</script>
+                                    }*@
+
+                                @*<script type="text/javascript">
+                                        $(document).ready(function () { setTimeout(function () { $("#Message").fadeOut(); }, 4000); });
+                                    </script>*@
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script type="text/javascript">
+        window.addEventListener("load", function () {
+
+            if ('@TempData["TempModel"]' =="Added") {
+                toastr.success("تم الحفظ بنجاح");
+            }
+
+        });
+
+    function CheckRenterMobile(v) {
+        var govNum = v;
+        if (govNum[0] == "7") {
+            document.getElementById('GovernmentNumber').innerHTML = "";
+          
+        } else {
+            document.getElementById('GovernmentNumber').value = "7";
+        }
+    }
+</script>

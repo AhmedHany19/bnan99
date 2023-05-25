@@ -1,0 +1,132 @@
+﻿@model IEnumerable<RentCar.Models.CR_Cas_Renter_Lessor>
+
+<div style="width: 100%; min-height: 55vh; overflow: auto;">
+    <table id="myTable" class="table table-striped mb-0" style="cursor:pointer">
+        <thead>
+
+            <tr>
+                <th width="12%">
+                    الهوية
+                </th>
+                <th width="30%">
+                    الإسم
+                </th>
+
+                <th width="12%" hidden>
+                    أول زيارة
+                </th>
+                <th width="12%">
+                    آخر زيارة
+                </th>
+                <th width="10%">
+                    الرصيد
+                </th>
+
+                <th width="10%">
+                    المتداولة
+                </th>
+
+                <th width="12%">
+                    عدد العقود
+                </th>
+                <th width="10%">
+                    التقييم
+                </th>
+                <th width="8%">
+                    الحالة
+                </th>
+
+            </tr>
+        </thead>
+        <tbody id="tbl">
+            @foreach (var item in Model)
+            {
+                <tr class="text-center">
+                    <td width="12%">
+                        <a href="~/BasicContract/RenterContracts/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Id)">
+                            @Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Id)
+                        </a>
+                    </td>
+                    <td width="30%" class="text-left">
+                        <a href="~/BasicContract/RenterContracts/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Id)">
+                            @Html.DisplayFor(modelItem => item.CR_Mas_Renter_Information.CR_Mas_Renter_Information_Ar_Name)
+                        </a>
+                    </td>
+
+
+                    <td width="12%" hidden>
+                        <a href="~/BasicContract/RenterContracts/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Id)">
+                            @item.CR_Cas_Renter_Lessor_Date_First_Interaction.Value.ToString("yyyy/MM/dd")
+                        </a>
+                    </td>
+                    <td width="12%">
+                        @if (item.CR_Cas_Renter_Lessor_Date_Last_Interaction != null)
+                        {
+                            <a href="~/BasicContract/RenterContracts/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Id)">
+                                @item.CR_Cas_Renter_Lessor_Date_Last_Interaction.Value.ToString("yyyy/MM/dd")
+                            </a>
+                        }
+                    </td>
+                    <!--This To Convert Number like 15000 to 15,000-->
+                    @{
+                        var convertToFloat1 = (float)item.CR_Cas_Renter_Lessor_Balance;
+                        var Renter_Lessor_Balance = convertToFloat1.ToString("N0");
+                        var convertToFloat2 = (float)item.CR_Cas_Renter_Lessor_Interaction_Amount_Value;
+                        var Interaction_Amount_Value = convertToFloat2.ToString("N0");
+
+                    }
+                    <!--This To Convert Number like 15000 to 15,000-->
+
+                    <td width="10%" style="direction:ltr;">
+                        <a href="~/BasicContract/RenterContracts/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Id)">
+                            @Renter_Lessor_Balance
+                        </a>
+                    </td>
+                    <td width="10%">
+                        <a href="~/BasicContract/RenterContracts/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Id)">
+                            @Interaction_Amount_Value
+                        </a>
+                    </td>
+
+
+                    <td width="12%">
+                        <a href="~/BasicContract/RenterContracts/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Id)">
+                            @Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Contract_Number)
+                        </a>
+                    </td>
+                    <td width="10%">
+                        <a href="~/BasicContract/RenterContracts/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Id)">
+                            @Html.DisplayFor(modelItem => item.CR_Cas_Renter_Rating)
+                        </a>
+
+                    </td>
+                    <td style="text-align:center!important;vertical-align:middle" width="8%">
+
+                        @if (item.CR_Cas_Renter_Lessor_Status == "D")
+                        {
+                            <label>محذوف</label>
+                        }
+                        else if (item.CR_Cas_Renter_Lessor_Status == "A")
+                        {
+                            <label>نشط</label>
+                        }
+                        else if (item.CR_Cas_Renter_Lessor_Status == "H")
+                        {
+                            <label>موقوف</label>
+                        }
+                        else if (item.CR_Cas_Renter_Lessor_Status == "K")
+                        {
+                            <label>محضور</label>
+                        }
+                        else if (item.CR_Cas_Renter_Lessor_Status == "R")
+                        {
+                            <label>مستأجر</label>
+                        }
+
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

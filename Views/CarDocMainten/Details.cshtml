@@ -1,0 +1,115 @@
+﻿@model RentCar.Models.CR_Cas_Sup_Car_Doc_Mainten
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_CASLayout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>CR_Cas_Sup_Car_Doc_Mainten</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CR_Cas_Sup_Car_Doc_Mainten_No)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CR_Cas_Sup_Car_Doc_Mainten_No)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CR_Cas_Sup_Car_Doc_Mainten_Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CR_Cas_Sup_Car_Doc_Mainten_Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CR_Cas_Sup_Car_Doc_Mainten_Start_Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CR_Cas_Sup_Car_Doc_Mainten_Start_Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CR_Cas_Sup_Car_Doc_Mainten_End_Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CR_Cas_Sup_Car_Doc_Mainten_End_Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CR_Cas_Sup_Car_Doc_Mainten_Activation)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CR_Cas_Sup_Car_Doc_Mainten_Activation)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CR_Cas_Sup_Car_Doc_Mainten_Limit_KM)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CR_Cas_Sup_Car_Doc_Mainten_Limit_KM)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CR_Cas_Sup_Car_Doc_Mainten_About_To_Expire)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CR_Cas_Sup_Car_Doc_Mainten_About_To_Expire)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CR_Cas_Sup_Car_Doc_Mainten_Default_KM)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CR_Cas_Sup_Car_Doc_Mainten_Default_KM)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CR_Cas_Sup_Car_Doc_Mainten_Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CR_Cas_Sup_Car_Doc_Mainten_Status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CR_Cas_Sup_Car_Doc_Mainten_Type)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CR_Cas_Sup_Car_Doc_Mainten_Type)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CR_Mas_Sup_Procedures.CR_Mas_Sup_Procedures_Type)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CR_Mas_Sup_Procedures.CR_Mas_Sup_Procedures_Type)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CR_Cas_Sup_Car_Information.CR_Cas_Sup_Car_Lessor_Code)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CR_Cas_Sup_Car_Information.CR_Cas_Sup_Car_Lessor_Code)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

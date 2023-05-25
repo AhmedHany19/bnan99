@@ -1,0 +1,58 @@
+﻿@model RentCar.Models.CR_Mas_Sup_Features
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+<div>
+    <h4>CR_Mas_Sup_Features</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CR_Mas_Sup_Features_Ar)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CR_Mas_Sup_Features_Ar)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CR_Mas_Sup_Features_En)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CR_Mas_Sup_Features_En)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CR_Mas_Sup_Features_Fr)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CR_Mas_Sup_Features_Fr)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CR_Mas_Sup_Features_Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CR_Mas_Sup_Features_Status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CR_Mas_Sup_Features_Reasons)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CR_Mas_Sup_Features_Reasons)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.CR_Mas_Sup_Features_Code }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

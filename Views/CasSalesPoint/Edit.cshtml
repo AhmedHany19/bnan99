@@ -1,0 +1,424 @@
+﻿@model RentCar.Models.CR_Cas_Sup_SalesPoint
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_CASLayout.cshtml";
+}
+
+<link href="~/BSys3Styles/CSS/style_form.css" rel="stylesheet" />
+<style>
+    .tooltip > .tooltip-inner {
+        background-color: #f00;
+    }
+
+    .tooltip > .tooltip-arrow {
+        border-top-color: #f00 !important;
+    }
+</style>
+<div class="content">
+    <!-- Start Content-->
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card-box table-responsive" style="height:79vh">
+                    <div class="title_corp"> <h3> نقاط البيع  / تعديل </h3></div>
+                    <div class="subtitle_corp"> تمكنك الصفحة من تعديل نقطة بيع </div>
+                    <div class="hr_60"></div>
+                    <div class="hr_80"></div>
+                    <div class="corp_page">
+                        <div class="page_content" style="float:left;width:100%">
+                            @using (Html.BeginForm())
+                            {
+                                @Html.AntiForgeryToken()
+                                @Html.HiddenFor(Model => Model.CR_Cas_Sup_SalesPoint_Code)
+                                @Html.HiddenFor(Model => Model.CR_Cas_Sup_SalesPoint_Com_Code)
+                                @Html.HiddenFor(Model => Model.CR_Cas_Sup_SalesPoint_Brn_Code)
+
+                                @Html.HiddenFor(Model => Model.CR_Cas_Sup_SalesPoint_Status)
+                                <div class="form-horizontal" style="margin-top:15px;min-height:35%">
+
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                                    <div class="row">
+                                        <div class="col-md-6 offset-md-6 " style="height: 43px;">
+                                            <div class="row">
+                                                <div class="col-md-4 padding_left_none">
+                                                    <label class="control-label">الفرع</label><label id="asterisk">*</label>
+                                                </div>
+                                                <div class="col-md-5 padding_right_none">
+                                                    @Html.DropDownList("CR_Cas_Sup_SalesPoint_Brn_Code", null, htmlAttributes: new { @class = "form-control", @readonly = "readonly" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6 offset-md-6 " style="height: 43px;">
+                                            <div class="row">
+                                                <div class="col-md-4 padding_left_none">
+                                                    <label class="control-label">الحساب</label><label id="asterisk">*</label>
+                                                </div>
+                                                <div class="col-md-5 padding_right_none">
+                                                    @*@Html.DropDownList("CR_Cas_Sup_Bank_Ar_Name",new SelectList(""), htmlAttributes: new { @class = "form-control" })*@
+                                                    @Html.DropDownList("CR_Cas_Sup_SalesPoint_Bank_Code", null, "", htmlAttributes: new { @class = "form-control", @readonly = "readonly" })
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6 offset-md-6 " style="height: 43px;">
+                                            <div class="row">
+                                                <div class="col-md-4 padding_left_none">
+                                                    <label class="control-label">رقم الحساب</label><label id="asterisk">*</label>
+                                                </div>
+                                                <div class="col-md-5 padding_right_none">
+                                                    <input type="text" id="CR_Cas_Sup_Bank_Account_No" name="CR_Cas_Sup_Bank_Account_No" value="@ViewBag.AccountNo" class="form-control" autocomplete="off" readonly />
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="row">
+                                        <div class="col-md-6 offset-md-6 " style="height: 43px;">
+                                            <div class="row">
+                                                <div class="col-md-4 padding_left_none">
+                                                    <label class="control-label">البنك</label><label id="asterisk">*</label>
+                                                </div>
+                                                <div class="col-md-5 padding_right_none">
+                                                    @Html.DropDownList("CR_Mas_Sup_Bank", null, htmlAttributes: new { @class = "form-control", @readonly = "readonly" })
+                                                    @*@Html.DropDownList("CR_Mas_Sup_Bank",null,"", htmlAttributes: new { @class = "form-control" })*@
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+
+                                    <div class="row">
+                                        <div class="col-md-6 offset-md-6 " style="height: 43px;">
+                                            <div class="row">
+                                                <div class="col-md-4 padding_left_none">
+                                                    <label class="control-label">رقم نقطة البيع</label><label id="asterisk">*</label>
+                                                </div>
+                                                <div class="col-md-5 padding_right_none">
+                                                    @Html.EditorFor(model => model.CR_Cas_Sup_SalesPoint_Bank_No, new { htmlAttributes = new { @class = "form-control", maxlength = "20", @autocomplete = "off", @readonly = "readonly" } })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6 offset-md-6 " style="height: 43px;">
+                                            <div class="row">
+                                                <div class="col-md-4 padding_left_none">
+                                                    <label class="control-label">وصف نقطة البيع عربي</label><label id="asterisk">*</label>
+                                                </div>
+                                                <div class="col-md-8 padding_right_none">
+                                                    @Html.EditorFor(model => model.CR_Cas_Sup_SalesPoint_Ar_Name, new { htmlAttributes = new { @class = "form-control", maxlength = "50", onkeypress = "restrictInputOtherThanArabic(event);", @readonly = "readonly" } })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6 offset-md-6 " style="height: 43px;">
+                                            <div class="row">
+                                                <div class="col-md-4 padding_left_none">
+                                                    <label class="control-label">وصف نقطة البيع إنجليزي</label><label id="asterisk">*</label>
+                                                </div>
+                                                <div class="col-md-8 padding_right_none">
+                                                    @Html.EditorFor(model => model.CR_Cas_Sup_SalesPoint_En_Name, new { htmlAttributes = new { @class = "form-control", maxlength = "50", @readonly = "readonly" } })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6 offset-md-6 " style="height: 43px;">
+                                            <div class="row">
+                                                <div class="col-md-4 padding_left_none">
+                                                    <label class="control-label">رصيد نقطة البيع</label><label id="asterisk">*</label>
+                                                </div>
+                                                <div class="col-md-3 padding_right_none">
+                                                    @Html.EditorFor(model => model.CR_Cas_Sup_SalesPoint_Balance, new { htmlAttributes = new { @class = "form-control", maxlength = "10", @readonly = "readonly" } })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-12" style="height: 43px;">
+                                            <div class="row">
+                                                <div class="col-md-2 padding_left_none">
+                                                    <label class="control-label">ملاحظات</label>
+                                                </div>
+                                                <div class="col-md-8 padding_right_none">
+                                                    @Html.EditorFor(model => model.CR_Cas_Sup_SalesPoint_Reasons, new { htmlAttributes = new { @class = "form-control", maxlength = "100" } })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="row" style="margin-top:0px;margin-top:10px;">
+                                    <div style="width:100%;padding-left:15px;padding-right:15px;">
+                                          <div class="row" style="margin-top: 0px">
+                                              <div class="col-md-6 col-70">
+
+                                                  <input type="button" onclick="Save();" name="save" value="حفظ" class="btn btn-primary waves-effect" style="float: right; margin-left: 20px; margin-top: 0px;" />
+                                                  <input type="submit" name="save" id="save" value="حفظ" class="btn btn-primary waves-effect" style="float: right; margin-left: 20px; margin-top: 0px;" hidden />
+                                                  <input type="button" name="hold" id="btnHold" class="btn btn-primary waves-effect" value="@ViewBag.h" style="float: right; margin-left: 20px;" />
+                                                  <input type="button" name="delete" class="btn btn-primary waves-effect" id="btn-confirm" value="@ViewBag.stat"
+                                                         style="float: right; margin-left: 20px;" />
+                                                  <a href="/CasSalesPoint/Index/" class="btn btn-primary waves-effect">انهاء</a>
+
+                                              </div>
+                                               @* <div class="col-md-6 col-30" style="margin-top:0px;">
+                                                </div>*@
+
+                                            </div>
+
+
+                                        
+                                        <div class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" id="mi-modal">
+                                            <div class="modal-dialog modal-dialog-centered">
+                                                <div class="modal-content">
+                                                    <div class="modal-body" style="padding: 35px;">
+                                                        @if (ViewBag.st == "D")
+                                                        {
+                                                        <div style="width:75%;float:right;text-align:right;">
+                                                            <b style="color:red;">تأكيد إسترجاع الحذف ......</b><br />
+                                                            هل ترغب باسترجاع بيانات نقطة البيع
+                                                        </div>
+                                                        }
+                                                        else
+                                                        { 
+                                                            <div style="width:75%;float:right;text-align:right;">
+                                                                <b style="color:red;">تأكيد الحذف ......</b><br />
+                                                                سيترتب على حذف بيانات نقطة البيع عدم إجراء عمليات الدفع مع الاحتفاظ بجميع الإجراءات الإدارية و المالية السابقة
+                                                            </div>
+                                                        }
+                                                        <div style="width:20%;margin-right:5%;float:right;">
+                                                            @if (ViewBag.st == "D")
+                                                            {
+                                                                <input type="submit" name="delete" class="btn btn-primary waves-effect" value="@ViewBag.stat" id="modal-btn-si" style="float: left;" />
+                                                            }
+                                                            else
+                                                            {
+                                                                <input type="submit" name="delete" class="btn btn-primary waves-effect" value="@ViewBag.stat" id="modal-btn-si" style="float:left;" />
+                                                            }
+                                                            <button type="button" class="btn btn-primary" id="modal-btn-no" style="float: left;margin-top:25px;">إلغاء</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
+                                        <div class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" id="H-modal">
+                                            <div class="modal-dialog modal-dialog-centered">
+                                                <div class="modal-content">
+                                                    <div class="modal-body" style="padding: 35px;">
+                                                        @if (ViewBag.st == "H")
+                                                        {
+                                                            <div style="width:75%;float:right;text-align:right;">
+                                                                <b style="color:red;">تأكيد إسترجاع الإيقاف ......</b><br />
+                                                                سيترتب على استرجاع إيقاف بيانات نقطة البيع استرجاع عملية الدفع بنقاط البيع
+                                                            </div>
+                                                        }
+                                                        else
+                                                        {
+                                                            <div style="width:75%;float:right;text-align:right;">
+                                                                <b style="color:red;">تأكيد الإيقاف ......</b><br />
+                                                                سيترتب على إيقاف بيانات نقطة البيع إيقاف عملية الدفع بنقاط البيع
+                                                            </div>
+                                                        }
+
+                                                        <div style="width:20%;margin-right:5%;float:right;">
+                                                            @if (ViewBag.st == "H")
+                                                            {
+                                                                <input type="submit" name="hold" class="btn btn-primary waves-effect" id="HoldModal-btn-si" value="@ViewBag.h" style="float: left;" />
+                                                            }
+                                                            else
+                                                            {
+                                                                <input type="submit" name="hold" class="btn btn-primary waves-effect" id="HoldModal-btn-si" value="@ViewBag.h" style="float: left;" />
+                                                            }
+
+                                                            <button type="button" class="btn btn-primary" id="HoldModal-btn-no" style="float: left;margin-top:25px;">إلغاء</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<script type="text/javascript">
+        window.addEventListener("load", function () {
+
+            if ('@TempData["TempModel"]'!="") {
+                toastr.success("تم الحفظ بنجاح");
+            }
+            event.preventDefault();
+
+        });
+
+        function restrictInputOtherThanArabic(event) {
+            var arabicCharUnicodeRange = /[\u0600-\u06FF]/;
+            var key = event.which;
+            var str = String.fromCharCode(key);
+            if (arabicCharUnicodeRange.test(str) || key == 8 || key == 0 || key === 32) {
+                return true;
+            } else {
+                alert("يرجى ادخال المعلومات باللغة العربية");
+                return false;
+            }
+        }
+
+    //$field.bind("paste", function (event) {
+    //    var pastedData = event.originalEvent.clipboardData.getData('Text');
+    //    if (arabicCharUnicodeRange.test(pastedData)) {
+    //        return true;
+    //    }
+    //    alert("يرجى ادخال المعلومات باللغة العربية");
+    //    return false;
+    //});
+
+</script>
+
+
+<style>
+    select {
+        -webkit-appearance: none !important;
+        -moz-appearance: none !important;
+        text-indent: 1px;
+        text-overflow: '';
+        display: block;
+        pointer-events: none
+    }
+    option{
+        display  :none
+    }
+</style>
+<script>
+
+    function Save() {
+        var st = '@ViewBag.st';
+        if (st == 'A') {
+            document.getElementById("save").click();
+        } else if (st == 'D') {
+            toastr.info("لايمكن حفظ بيانات نقطة بيع محذوفة");
+        } else if (st == 'H') {
+            toastr.info("لايمكن حفظ بيانات نقطة بيع موقوفة");
+        }
+    }
+
+    var modalConfirm = function (callback) {
+        $("#btn-confirm").on("click", function () {
+           var st = '@ViewBag.st';
+            if (st == 'A') {
+                var Balance = '@TempData["Balance"]';
+                var x = false;
+
+                if (Balance === "True") {
+                    toastr.info("لايمكن إيقاف نقطة بيع بها رصيد");
+                    return;
+                } else {
+                    x = true;
+                }
+
+                if (x == true) {
+                    $("#mi-modal").modal('show');
+                }
+            } else if (st == 'D') {
+                $("#mi-modal").modal('show');
+            } else if (st == 'H') {
+                toastr.info("لايمكن حذف نقطة بيع موقوفة");
+            }
+
+
+           // $("#mi-modal").modal('show');
+
+        });
+        $("#modal-btn-si").on("click", function () {
+            callback(true);
+            $("#mi-modal").modal('hide');
+        });
+        $("#modal-btn-no").on("click", function () {
+            callback(false);
+            $("#mi-modal").modal('hide');
+        });
+    };
+    modalConfirm(function (confirm) {
+        if (confirm) {
+            //Acciones si el usuario confirma
+            $("#form1").submit();
+        } else {
+            //Acciones si el usuario no confirma
+            $("#result").html("canceled");
+        }
+    });
+</script>
+<script>
+    var HoldModal = function (callback) {
+        $("#btnHold").on("click", function () {
+            var st = '@ViewBag.st';
+            if (st == 'A') {
+                var Balance = '@TempData["Balance"]';
+                var x = false;
+
+                if (Balance === "True") {
+                    toastr.info("لايمكن إيقاف نقطة بيع بها رصيد");
+                    return;
+                } else {
+                    x = true;
+                }
+
+
+                if (x == true) {
+                    $("#H-modal").modal('show');
+                }
+            } else if (st == 'H') {
+                $("#H-modal").modal('show');
+            } else if (st == 'D') {
+                toastr.info("لايمكن إيقاف نقطة بيع محذوفة");
+            }
+
+        });
+        $("#HoldModal-btn-si").on("click", function () {
+            callback(true);
+            $("#H-modal").modal('hide');
+        });
+        $("#HoldModal-btn-no").on("click", function () {
+            callback(false);
+            $("#H-modal").modal('hide');
+        });
+    };
+    HoldModal(function (confirm) {
+        if (confirm) {
+            //Acciones si el usuario confirma
+            $("#form1").submit();
+        } else {
+            //Acciones si el usuario no confirma
+            $("#result").html("canceled");
+        }
+    });
+</script>

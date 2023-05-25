@@ -1,0 +1,133 @@
+﻿@model IEnumerable<RentCar.Models.CR_Cas_Renter_Lessor>
+
+<table id="myTable" class="table table-striped mb-0" style="cursor:pointer">
+    <thead>
+
+        <tr>
+            <th width="10%">
+                رقم الهوية
+            </th>
+            <th width="35%">
+                الإسم
+            </th>
+            <th width="14%">
+                الرصيد
+            </th>
+
+            <th width="15%">
+                حجم المبالغ المتداولة
+            </th>
+            <th width="8%">
+                اخر زيارة
+            </th>
+            <th width="10%">
+                عدد العقود
+            </th>
+            <th width="10%" hidden>
+                التقييم
+            </th>
+            <th width="8%" hidden>
+                الحالة
+            </th>
+
+        </tr>
+    </thead>
+    <tbody id="tbl">
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td width="10%" align="center">
+                <a href="~/TransferfromRenter/create/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Id)
+                                                                           &id2=@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Code)">
+                    @Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Id)
+                </a>
+            </td>
+            <td width="35%">
+                <a href="~/TransferfromRenter/create/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Id)
+                                                                           &id2=@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Code)">
+                    @Html.DisplayFor(modelItem => item.CR_Mas_Renter_Information.CR_Mas_Renter_Information_Ar_Name)
+                </a>
+            </td>
+
+            <td style="text-align:center!important;vertical-align:middle" width="14%">
+                <a href="~/TransferfromRenter/create/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Id)
+                                                                           &id2=@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Code)">
+                    @Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Balance)
+                </a>
+            </td>
+
+            <td style="text-align:center!important;vertical-align:middle" width="15%">
+                <a href="~/TransferfromRenter/create/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Id)
+                                                                           &id2=@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Code)">
+                    @Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Interaction_Amount_Value)
+                </a>
+            </td>
+            <td style="text-align:center!important;vertical-align:middle" width="8%">
+                <a href="~/TransferfromRenter/create/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Id)
+                                                                           &id2=@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Code)">
+                    @if (item.CR_Cas_Renter_Lessor_Date_Last_Interaction != null)
+                    {
+                        @item.CR_Cas_Renter_Lessor_Date_Last_Interaction.Value.ToString("yyyy/MM/dd");
+                    }
+
+                </a>
+            </td>
+
+            <td style="text-align:center!important;vertical-align:middle" width="10%">
+                <a href="~/TransferfromRenter/create/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Id)
+                                                                           &id2=@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Code)">
+                    @Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Contract_Number)
+                </a>
+
+            </td>
+
+            <td style="text-align:center!important;vertical-align:middle" width="10%" hidden>
+                <a href="~/TransferfromRenter/create/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Id)
+                                                                           &id2=@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Code)">
+                    @Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Contract_Number)
+                </a>
+
+            </td>
+
+
+            <td style="text-align:center!important;vertical-align:middle" width="8%" hidden>
+
+                @if (item.CR_Cas_Renter_Lessor_Status == "D")
+                {
+                    <a href="~/TransferfromRenter/create/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Id)
+                                                                           &id2=@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Code)">
+                        <label>محذوف</label>
+                    </a>
+
+                }
+                else if (item.CR_Cas_Renter_Lessor_Status == "A")
+                {
+                    <a href="~/TransferfromRenter/create/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Id)
+                                                                           &id2=@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Code)">
+                        <label>نشط</label>
+                    </a>
+
+                }
+                else if (item.CR_Cas_Renter_Lessor_Status == "K")
+                {
+                    <a href="~/TransferfromRenter/create/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Id)
+                                                                           &id2=@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Code)">
+                        <label>محضور</label>
+                    </a>
+
+                }
+                else if (item.CR_Cas_Renter_Lessor_Status == "R")
+                {
+                    <a href="~/TransferfromRenter/create/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Id)
+                                                                           &id2=@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Code)">
+                        <label>مستأجر</label>
+                    </a>
+
+                }
+
+            </td>
+
+        </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,68 @@
+﻿@model IEnumerable<RentCar.Models.CR_Cas_Sup_Follow_Up_Mechanism>
+
+<table class="table " style="border: none !important;">
+    <thead>
+        <tr hidden="hidden">
+
+            <th style="width:8%;">إسم المستند</th>
+
+            <th style="width:8%;">تفعيل الخدمة</th>
+
+            <th style="width:8%;">التنبيه قبل</th>
+
+        </tr>
+    </thead>
+    <tbody id="tbl" style="border: none !important;margin-top:10px;" class="body">
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                <td align="right" style="width:30%;" hidden>
+                    @{
+                        var id = item.CR_Cas_Sup_Follow_Up_Mechanism_Lessor_Code + "_" + item.CR_Cas_Sup_Follow_Up_Mechanism_Procedures_Code;
+                    }
+                    @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Follow_Up_Mechanism_Lessor_Code)
+
+                </td>
+
+                <td align="right" style="width:30%;" hidden>
+
+                    @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Follow_Up_Mechanism_Procedures_Code)
+
+                </td>
+                <td align="right" style="width:30%;">
+
+                    @Html.DisplayFor(modelItem => item.CR_Mas_Sup_Procedures.CR_Mas_Sup_Procedures_Ar_Name)
+
+                </td>
+
+                <td style="vertical-align: middle !important; width: 5%">
+
+                    <label class="switch">
+
+                        <input type="checkbox" id="ch_@id" name="CR_Cas_Sup_Follow_Up_Mechanism_Activate_Service" class="MyCheckBox"
+                               checked="@item.CR_Cas_Sup_Follow_Up_Mechanism_Activate_Service.GetValueOrDefault()">
+                        <span class="slider round"></span>
+                    </label>
+                </td>
+
+                <td>
+                    <input class="form-control BExpire" data-val="true" data-val-number="The field CR_Cas_Sup_Follow_Up_Mechanism_Befor_Expire must be a number."
+                           id="ch_@id" name="item.CR_Cas_Sup_Follow_Up_Mechanism_Befor_Expire" max="30" maxlength="2"
+                           value="@item.CR_Cas_Sup_Follow_Up_Mechanism_Befor_Expire" style="width: 12.5%;float:right;">
+                </td>
+                <td hidden>
+                    <input class="form-control BKm" data-val="true" data-val-number="The field CR_Cas_Sup_Follow_Up_Mechanism_Befor_KM must be a number."
+                           id="ch_@id" name="item.CR_Cas_Sup_Follow_Up_Mechanism_Befor_KM" maxlength="3"
+                           value="@item.CR_Cas_Sup_Follow_Up_Mechanism_Befor_KM" style="width: 12.5%; float: right; margin-right: 2.5%;">
+                </td>
+                <td hidden>
+                    <input class="form-control DKm" data-val="true" data-val-number="The field CR_Cas_Sup_Follow_Up_Mechanism_After_Expire must be a number."
+                           id="ch_@id" name="item.CR_Cas_Sup_Follow_Up_Mechanism_Default_KM"
+                           value="@item.CR_Cas_Sup_Follow_Up_Mechanism_Default_KM" style="width: 12.5%; float: right; margin-right: 2.5%;">
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>

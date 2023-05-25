@@ -1,0 +1,496 @@
+﻿@model RentCar.Models.CR_Cas_Company_Contract
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_CASLayout.cshtml";
+}
+
+
+<link href="~/BSys3Styles/CSS/style_form.css" rel="stylesheet" />
+<style>
+    #date_btn1, #date_btn2, #date_btn3 {
+        font-size: 0 !important;
+        background: url('../../BSys3Styles/Images/icone_calendre.png') center 3px no-repeat;
+        width: 30px;
+        border: none;
+        border-left: 0;
+        height: 27px;
+        position: absolute;
+        left: 17px;
+        margin-top: -29px;
+    }
+</style>
+<div class="content">
+
+    <!-- Start Content-->
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card-box table-responsive" style="height:79vh">
+                    <div class="title_corp"><h3>  الشركة /العقود /تحديث </h3></div>
+                    <div class="subtitle_corp">تمكنك هذه الصفحة من تحديث بيانات العقود </div>
+                    <div class="hr_60"></div>
+                    <div class="hr_80"></div>
+                    <div class="corp_page" style=" padding-top: 20px;">
+                        <div class="page_content">
+                            @using (Html.BeginForm())
+                            {
+                                @Html.AntiForgeryToken()
+
+                                <div class="form-horizontal" style="min-height:45%">
+
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <label class="col-md-6 label6"> نوع العقد </label>
+                                                    <div class="col-md-6 input6">
+
+                                                        @if (Model.CR_Cas_Company_Contract_Code == "17")
+                                                        {
+                                                            <input class="form-control text-box single-line" data-val="true" id="Name" name="Name" type="text" value="تم" readonly>
+                                                        }
+                                                        else if (Model.CR_Cas_Company_Contract_Code == "19")
+                                                        {
+                                                            <input class="form-control text-box single-line" data-val="true" id="Name" name="Name" type="text" value="نظام هيئة النقل" readonly>
+
+                                                        }
+                                                    </div>
+                                                    <div class="texterr"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4" hidden>
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <label class="col-md-6 label6"> رقم العقد </label>
+                                                    <div class="col-md-6 input6">
+                                                        @Html.EditorFor(model => model.CR_Cas_Company_Contract_No, new { htmlAttributes = new { @class = "form-control", oninput = "this.value=this.value.replace(/[^0-9]/g,'')", required = "required" } })
+                                                    </div>
+                                                    <div class="texterr">@ViewBag.ContractNo</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <label class="col-md-6 label6"> رقم العقد </label>
+                                                    <div class="col-md-6 input6">
+                                                        @Html.EditorFor(model => model.CR_Cas_Company_Contract_Number, new { htmlAttributes = new { @class = "form-control", oninput = "this.value=this.value.replace(/[^0-9]/g,'')", required = "required" } })
+                                                    </div>
+                                                    <div class="texterr">@ViewBag.ContractNumber</div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="row" hidden>
+                                        @*canceled by abu abdel malek*@
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <label class="col-md-6 label6"> رقم المستند </label>
+                                                    <div class="col-md-6 input6">
+                                                        <input class="form-control text-box single-line" data-val="true" id="No" name="No" type="text" value="">
+                                                    </div>
+                                                    <div class="texterr"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <label class="col-md-6 label6"> تاريخه </label>
+                                                    <div class="col-md-6 input6">
+                                                        <input class="form-control text-box single-line" data-val="true" data-val-date="The field CR_Cas_Company_Contract_Date must be a date."
+                                                               id="ContractDate" name="ContractDate" type="date" value="">
+                                                    </div>
+                                                    <div class="texterr"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    @Html.HiddenFor(model => model.CR_Cas_Company_Contract_Year, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.HiddenFor(model => model.CR_Cas_Company_Contract_Lessor)
+                                    @Html.HiddenFor(model => model.CR_Cas_Company_Contract_Sector)
+                                    @Html.HiddenFor(model => model.CR_Cas_Company_Contract_Code, new { htmlAttributes = new { @class = "form-control" } })
+
+                                    @Html.HiddenFor(model => model.CR_Cas_Company_Contract_Status, new { htmlAttributes = new { @class = "form-control" } })
+                                    <input type="text" id="ProcedureCode" name="ProcedureCode" hidden="hidden" value="@ViewBag.proc">
+                                    <input type="text" id="BranchCode" name="BranchCode" hidden="hidden" value="@ViewBag.branch">
+                                    <input type="text" id="ContractCode" name="ContractCode" hidden="hidden" value="@ViewBag.ContractCode">
+
+
+                                    <div class="row mb-2">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <label class="col-md-6 label6 padding_left_none">تاريخ العقد</label>
+                                                    <div class="col-md-6 input6">
+                                                        <input class="form-control text-box single-line dateOfContractInp" data-val="true" data-val-date="The field CR_Cas_Company_Contract_Date must be a date."
+                                                               id="CR_Cas_Company_Contract_Date" name="CR_Cas_Company_Contract_Date" type="text" value="@ViewBag.DocDate" data-inputmask="'alias': 'yyyy-mm-dd'" onblur="affich_btn_1(event)" onchange="reset()" />
+                                                        <input type="button" class="hijri-date-input2 dateOfContract" id="date_btn1" onblur="affich_affich_1(event)" onchange="reset()" />
+                                                        <div class="texterr">@ViewBag.DocDateError</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-2">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+
+                                                <div class="row">
+                                                    <label class="col-md-6 label6 padding_left_none">بدايته </label>
+                                                    <div class="col-md-6 input6">
+                                                        <input class="form-control text-box single-line" data-val="true" data-val-date="The field CR_Cas_Sup_Branch_Documentation_Date must be a date."
+                                                               id="CR_Cas_Company_Contract_Start_Date" name="CR_Cas_Company_Contract_Start_Date" type="text" value="@ViewBag.StartDate" data-inputmask="'alias': 'yyyy-mm-dd'" onblur="affich_btn_2(event)" required>
+                                                        <input type="button" class="hijri-date-input2 startDate" id="date_btn2" onblur="affich_affich_2(event)" />
+                                                        <div class="texterr">@ViewBag.DocStartDateError</div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <label class="col-md-6 label6">نهايته </label>
+                                                    <div class="col-md-6 input6">
+                                                        <input class="form-control text-box single-line" data-val="true" data-val-date="The field CR_Cas_Sup_Branch_Documentation_Date must be a date."
+                                                               id="CR_Cas_Company_Contract_End_Date" name="CR_Cas_Company_Contract_End_Date" type="text" value="@ViewBag.EndDate" data-inputmask="'alias': 'yyyy-mm-dd'" onblur="affich_btn_3(event)" required>
+                                                        <input type="button" class="hijri-date-input2" id="date_btn3" onblur="affich_affich_3(event)" />
+                                                        <div class="texterr">@ViewBag.DocEndDateError</div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--<div class="row">-->
+                                    @*canceled by abu abdel malek*@
+                                    <!--<div class="col-md-4">
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <label class="col-md-6 label6">
+                                                        رسوم الإشتراك
+                                                    </label>
+                                                    <div class="col-md-6 input6">
+                                                        @Html.EditorFor(model => model.CR_Cas_Company_Contract_Annual_Fees, new { htmlAttributes = new { @class = "form-control", autocomplete = "off" } })
+                                                    </div>
+                                                    <div class="texterr">@ViewBag.DocEndDateError</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <label class="col-md-6 label6">
+                                                        نسبة الضريبة
+                                                    </label>
+                                                    <div class="col-md-6 input6">
+                                                        @Html.EditorFor(model => model.CR_Cas_Company_Contract_Tax_Rate, new { htmlAttributes = new { @class = "form-control", autocomplete = "off" } })
+                                                        <div class="texterr">@ViewBag.DocDateError</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4" hidden>
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <label class="col-md-6 label6">رسم الخدمة</label>
+                                                    <div class="col-md-6 input6">
+                                                        <input type="text" class="form-control" />
+                                                    </div>
+                                                    <div class="texterr"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>-->
+                                    <div class="row mb-2" hidden>
+                                        @*canceled by abu abdel malek*@
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <div class="row">
+
+                                                    <label class="col-md-6 label6" , style="float:right;">قيمة الخصم</label>
+                                                    <div class="col-md-6 input6">
+                                                        @Html.EditorFor(model => model.CR_Cas_Company_Contract_Discount_Rate, new { htmlAttributes = new { @class = "form-control" } })
+                                                    </div>
+                                                    <div class="texterr">@ViewBag.DocStartDateError</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <label class="col-md-6 label6">
+                                                        قيمة الضريبة
+                                                    </label>
+                                                    <div class="col-md-6 input6">
+                                                        @Html.EditorFor(model => model.CR_Cas_Company_Contract_Tax_Rate, new { htmlAttributes = new { @class = "form-control", autocomplete = "off" } })
+                                                        <div class="texterr">@ViewBag.DocDateError</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-2">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <label class="col-md-6 label6">
+                                                        المستخدم
+                                                    </label>
+                                                    <div class="col-md-6 input6">
+                                                        @Html.EditorFor(model => model.CR_Cas_Company_Contract_Tamm_User_Id, new { htmlAttributes = new { @class = "form-control", autocomplete = "off", @required = "required" } })
+                                                    </div>
+                                                    <div class="texterr"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <label class="col-md-6 label6">
+                                                        كلمة السر
+                                                    </label>
+                                                    <div class="col-md-6 input6">
+                                                        @Html.EditorFor(model => model.CR_Cas_Company_Contract_Tamm_User_Password, new { htmlAttributes = new { @class = "form-control", autocomplete = "off", @required = "requried" } })
+                                                    </div>
+                                                    <div class="texterr"></div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="row mb-2" hidden>
+                                        @*canceled by abu abdel malek*@
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <label class="col-md-6 label6">طريقة الدفع</label>
+                                                    <div class="col-md-6 input6">
+                                                        <input type="text" class="form-control" />
+                                                    </div>
+                                                    <div class="texterr"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <label class="col-md-6 label6"> البنك</label>
+                                                    <div class="col-md-6 input6">
+                                                        <input type="text" class="form-control" />
+                                                    </div>
+                                                    <div class="texterr"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-2">
+                                        <div class="col-md-8">
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <label class="col-md-3">الملاحظات</label>
+                                                    <div class="col-md-9">
+                                                        @Html.EditorFor(model => model.CR_Cas_Company_Contract_Reasons, new { htmlAttributes = new { @class = "form-control", autocomplete = "off" } })
+                                                    </div>
+                                                    <div class="texterr"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    @*<div>
+                                            @{
+                                                Html.RenderAction("TammFees");
+                                            }
+                                        </div>*@
+
+
+                                </div>
+
+
+
+                                <div class="row">
+
+                                    <div class="col-md-6">
+
+
+                                        @if (ViewBag.Status == "D")
+                                        {
+                                            <input type="submit" name="save" value="حفظ" class="btn btn-primary waves-effect" style="float: right;margin-right:10px;cursor:no-drop;" onclick="javascript:return false;" disabled />
+                                            <input type="button" name="delete" class="btn btn-primary waves-effect" id="btn-confirm" value="@ViewBag.stat" style="margin-right: 20px; " />
+                                        }
+                                        else if (ViewBag.Status == "N" || ViewBag.Status == "X" || ViewBag.Status == "X")
+                                        {
+
+                                            <input type="submit" name="save" value="حفظ" class="btn btn-primary waves-effect" style="float: right;margin-right:10px;" />
+
+                                            <input type="button" name="delete" class="btn btn-primary waves-effect" id="btn-confirm" value="@ViewBag.stat" style="margin-right: 20px; cursor:no-drop;" onclick="javascript:return false;" disabled />
+                                        }
+                                        else if (ViewBag.Status == "A")
+                                        {
+                                            <input type="submit" name="save" value="حفظ" class="btn btn-primary waves-effect" style="float: right;margin-right:10px;cursor:no-drop;" onclick="javascript:return false;" disabled />
+                                            <input type="button" name="delete" class="btn btn-primary waves-effect" id="btn-confirm" value="@ViewBag.stat" style="margin-right: 20px;" />
+                                        }
+
+                                        else
+                                        {
+                                            if (ViewBag.R == "R")
+                                            {
+                                                <input type="submit" name="save" value="حفظ" class="btn btn-primary waves-effect" style="float: right;margin-right:10px;cursor:no-drop;" onclick="javascript:return false;" disabled />
+                                            }
+                                            else
+                                            {
+                                                <input type="submit" name="save" value="حفظ" class="btn btn-primary waves-effect" style="float: right;margin-right:10px;" />
+                                            }
+                                            <input type="button" name="delete" class="btn btn-primary waves-effect" id="btn-confirm" value="@ViewBag.stat" style="margin-right: 20px;" />
+                                        }
+
+                                        <a href="/CR_Cas_Company_Contract/Index/" class="btn btn-primary waves-effect" style="margin-right:10px ">انهاء</a>
+
+
+                                    </div>
+                                    <div class="col-md-2">
+                                    </div>
+                                    <div class="col-md-6" id="Message" style="font-family:'Times New Roman';font-size:16px;color:red;margin-Top: 30px; margin-right: 330px;position:absolute;">@TempData["TempModel"]</div>
+                                </div>
+
+
+
+                                <div class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" id="mi-modal" style="z-index: 999999;">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-body" style="padding: 35px;">
+                                                <div style="width:75%;float:right;text-align:right;">
+                                                    <b style="color:red;">تأكيد الحذف ......</b><br />
+                                                    هل أنت متأكد من الحذف
+                                                </div>
+                                                <div style="width:20%;margin-right:5%;float:right;">
+                                                    @if (ViewBag.delete == "D")
+                                                    {
+                                                        <input type="submit" name="delete" class="btn btn-primary waves-effect" value="@ViewBag.stat" id="modal-btn-si" style="float:left;" />
+                                                    }
+                                                    else
+                                                    {
+                                                        <input type="submit" name="delete" class="btn btn-primary waves-effect" value="@ViewBag.stat" id="modal-btn-si" style="float: left;" />
+                                                    }
+                                                    <button type="button" class="btn btn-primary" id="modal-btn-no" style="float: left;margin-top:25px;">إلغاء الأمر</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <script>
+                                    var modalConfirm = function (callback) {
+
+                                        $("#btn-confirm").on("click", function () {
+                                            $("#mi-modal").modal('show');
+                                        });
+                                        $("#modal-btn-si").on("click", function () {
+                                            callback(true);
+                                            $("#mi-modal").modal('hide');
+                                        });
+                                        $("#modal-btn-no").on("click", function () {
+                                            callback(false);
+                                            $("#mi-modal").modal('hide');
+                                        });
+                                    };
+                                    modalConfirm(function (confirm) {
+                                        if (confirm) {
+                                            //Acciones si el usuario confirma
+                                            $("#form1").submit();
+                                        } else {
+                                            //Acciones si el usuario no confirma
+                                            $("#result").html("canceled");
+                                        }
+                                    });
+                                </script>
+                            }
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .parsley-required {
+        padding-top: 5px !important;
+    }
+</style>
+<script type="text/javascript">
+
+    function affich_affich_1(e) {
+        var date = e.target.value;
+        document.getElementById("CR_Cas_Company_Contract_Date").value = date;
+
+        var dateOfContract = $(".dateOfContractInp").val();
+        $(".startDate").hijriDatePicker({
+            format: 'YYYY-MM-DD',
+            minDate: dateOfContract,
+
+        })
+        console.log(555)
+    }
+    function affich_btn_1(e) {
+        var date = e.target.value;
+        document.getElementById("date_btn1").value = date;
+    }
+    function affich_affich_2(e) {
+        var date = e.target.value;
+        document.getElementById("CR_Cas_Company_Contract_Start_Date").value = date;
+    }
+    function affich_btn_2(e) {
+        var date = e.target.value;
+        document.getElementById("date_btn2").value = date;
+    }
+    function affich_affich_3(e) {
+        var date = e.target.value;
+        document.getElementById("CR_Cas_Company_Contract_End_Date").value = date;
+    }
+    function affich_btn_3(e) {
+        var date = e.target.value;
+        document.getElementById("date_btn3").value = date;
+    }
+</script>
+<script type="text/javascript">
+        window.addEventListener("load", function () {
+
+            if ('@TempData["TempModel"]'!="") {
+                toastr.success("تم الحفظ بنجاح");
+            }
+
+        });
+</script>
+
+<script>
+
+    $(document).ready(function () {
+
+        var nowDate = new Date();
+        var t = nowDate.getFullYear() + '-' + (nowDate.getMonth() + 1) + '-' + nowDate.getDate();
+        console.log(t)
+        $(".dateOfContract").hijriDatePicker({
+            format: 'YYYY-MM-DD',
+            minDate: '2022-5-5',
+            maxDate: t,
+           
+
+        })
+       
+    })
+
+</script>

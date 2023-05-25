@@ -1,0 +1,336 @@
+﻿@model RentCar.Models.CR_Mas_Sup_Category_Car
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    #save-btn {
+        margin-right: 10px;
+        background-color: #5bc0de !important;
+        width: 80px;
+        margin-left: 20px;
+        margin-bottom: 10px;
+    }
+    #bttn {
+        float: right;
+        width: 80px;
+        background-color: #5bc0de !important;
+        margin-left: 20px;
+    }
+    #btn-confirm {
+        float: right;
+        width: 80px;
+        margin-left: 20px;
+    }
+    .lbl {
+        margin-right: 30px;
+        font-size: 16px;
+        font-family: 'Times New Roman';
+    }
+    .hidden {
+        display: none
+    }
+    .text-danger {
+        font-size: 12px;
+        margin-right: 160px;
+        font-family: 'Times New Roman';
+    }
+    .a {
+        float: right;
+        background-color: #5bc0de;
+        width: 80px;
+        height: 25px;
+        padding-top: 5px;
+        padding-right: 10px;
+        font-size: 12px;
+        font-family: times new roman;
+    }
+    .texterr {
+        font-family: 'Times New Roman' !important;
+        font-size: 14px !important;
+        color: red !important;
+        margin-right: 40% !important;
+        height: 10px;
+        float: right;
+    }
+    #asterisk {
+        color: red;
+        float: right;
+        font-size: 15px !important;
+        margin-right: 130px;
+        margin-top: 5px;
+        position: absolute;
+        font-family: 'Times New Roman';
+    }
+    .row {
+        margin-bottom: 10px;
+    }
+    .label_form {
+        width: 150px;
+    }
+    .input_form {
+        width: 200px !important;
+    }
+    input[type=file] {
+        border-radius: 0px !important;
+        width: 200px;
+        height: 30px;
+        padding-top: 3px;
+        border-color: #F3B161;
+        border-width: 2px;
+        font-family: 'Times New Roman';
+        font-size: 12px;
+        display: -webkit-inline-box !important;
+    }
+    .zoom {
+        padding: 30px;
+        transition: transform .2s;
+        width: 150px;
+        height: 150px;
+        z-index: 100;
+        position: relative;
+    }
+    .zoom:hover {
+        -ms-transform: scale(1.5); /* IE 9 */
+        -webkit-transform: scale(1.5); /* Safari 3-8 */
+        transform: scale(1.5);
+    }
+</style>
+<div class="corp_content">
+    <div class="title_corp" style="margin-top:-15px;"> تحديد الفئة / تعديل</div>
+    <div class="subtitle_corp"> تمكن هذه الصفحة المستخدم من التعديل على تحديد الفئات</div>
+    <div style="float:left; margin-left:50px;margin-top:-85px;" class="zoom">
+        @if (Model.CR_Mas_Sup_Category_Car_Picture != null && Model.CR_Mas_Sup_Category_Car_Picture!="")
+        {
+            <img src="@Url.Content(Model.CR_Mas_Sup_Category_Car_Picture)" id="output" width="110" height="80" />
+        }
+    </div>
+    <div class="hr_60"></div>
+    <div class="hr_70"></div>
+    <div class="corp_page" style="margin-top:-40px;">
+        <div class="page_content" style="margin-top:10px;">
+            @using (Html.BeginForm("Edit", "CategoryCar", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+                @*<div class="text-danger" id="Message" style="margin-Top: 10px; margin-right: 300px;">@TempData["TempModif"]</div>*@
+                <div class="form-horizontal" style="height:50%">
+                    @Html.HiddenFor(model => model.CR_Mas_Sup_Category_Model_Code)
+
+                    @Html.HiddenFor(model => model.CR_Mas_Sup_Category_Car_Year)
+
+                    <div class="row" style="margin-top:0px;">
+                        <div class="col-md-6" style="float:right;">
+                            @Html.LabelFor(model => model.CR_Mas_Sup_Category_Car_Code, "الفئة", htmlAttributes: new { @class = "label_form col-md-4", style = "float:right" })
+                            @Html.DropDownList("CR_Mas_Sup_Category_Car_Code", null,"", htmlAttributes: new { @class = "input_form col-md-4", style = "float:right", @disabled = "disabled" })
+                            <input type="text" id="Category_Car_Code" name="Category_Car_Code" value="@Model.CR_Mas_Sup_Category_Car_Code" hidden />
+                            <div id="asterisk">*</div>
+                            <div class="texterr"></div>
+                        </div>
+                        <div class="col-md-6" style="float:right;">
+                            @Html.LabelFor(model => model.CR_Mas_Sup_Category_Car_Door_No, htmlAttributes: new { @class = "label_form col-md-4", style = "float:right" })
+                            @Html.TextBoxFor(model => model.CR_Mas_Sup_Category_Car_Door_No, htmlAttributes: new { @class = "input_form col-md-4", style = "float:right", oninput = "this.value=this.value.replace(/[^0-9]/g,'')", autocomplete = "off" })
+                            <div id="asterisk">*</div>
+                            <div class="texterr">@ViewBag.LRExistDoor</div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6" style="float:right;">
+                            @Html.LabelFor(model => model.CR_Mas_Sup_Category_Car_Bag_Bags, htmlAttributes: new { @class = "label_form col-md-4", style = "float:right" })
+                            @Html.TextBoxFor(model => model.CR_Mas_Sup_Category_Car_Bag_Bags, htmlAttributes: new { @class = "input_form col-md-4", style = "float:right", oninput = "this.value=this.value.replace(/[^0-9]/g,'')", autocomplete = "off" })
+                            <div id="asterisk">*</div>
+                            <div class="texterr">@ViewBag.LRExistBigBags</div>
+                        </div>
+                        <div class="col-md-6" style="float:right;">
+                            @Html.LabelFor(model => model.CR_Mas_Sup_Category_Car_Small_Bags, htmlAttributes: new { @class = "label_form col-md-4", style = "float:right" })
+                            @Html.TextBoxFor(model => model.CR_Mas_Sup_Category_Car_Small_Bags, htmlAttributes: new { @class = "input_form col-md-4", style = "float:right", oninput = "this.value=this.value.replace(/[^0-9]/g,'')", autocomplete = "off" })
+                            <div id="asterisk">*</div>
+                            <div class="texterr">@ViewBag.LRExistSmallBags</div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6" style="float:right;">
+                            @Html.LabelFor(model => model.CR_Mas_Sup_Category_Car_Passengers_No, htmlAttributes: new { @class = "label_form col-md-4", style = "float:right" })
+                            @Html.TextBoxFor(model => model.CR_Mas_Sup_Category_Car_Passengers_No, htmlAttributes: new { @class = "input_form col-md-4", style = "float:right", oninput = "this.value=this.value.replace(/[^0-9]/g,'')", autocomplete = "off" })
+                            <div id="asterisk">*</div>
+                            <div class="texterr">@ViewBag.LRExistPassenger</div>
+                        </div>
+                        @*<div class="col-md-6" style="float:right;">
+                            @Html.LabelFor(model => model.CR_Mas_Sup_Category_Car_Weight, htmlAttributes: new { @class = "label_form col-md-4", style = "float:right" })
+                            @Html.TextBoxFor(model => model.CR_Mas_Sup_Category_Car_Weight, htmlAttributes: new { @class = "input_form col-md-4", style = "float:right", oninput = "this.value=this.value.replace(/[^0-9]/g,'')", autocomplete = "off" })
+                            <div id="asterisk">*</div>
+                            <div class="texterr">@ViewBag.LRExistWeight</div>
+                        </div>*@
+                    </div>
+                    @*<div class="row">
+                        <div class="col-md-6" style="float:right;">
+                            @Html.LabelFor(model => model.CR_Mas_Sup_Category_Car_Clinder, htmlAttributes: new { @class = "label_form col-md-4", style = "float:right" })
+                            @Html.TextBoxFor(model => model.CR_Mas_Sup_Category_Car_Clinder, htmlAttributes: new { @class = "input_form col-md-4", style = "float:right", oninput = "this.value=this.value.replace(/[^0-9]/g,'')", autocomplete = "off" })
+                            <div id="asterisk">*</div>
+                            <div class="texterr">@ViewBag.LRExistCylinder</div>
+                        </div>
+                        <div class="col-md-6" style="float:right;">
+                            @Html.LabelFor(model => model.CR_Mas_Sup_Category_Car_Hourses, htmlAttributes: new { @class = "label_form col-md-4", style = "float:right" })
+                            @Html.TextBoxFor(model => model.CR_Mas_Sup_Category_Car_Hourses, htmlAttributes: new { @class = "input_form col-md-4", style = "float:right", oninput = "this.value=this.value.replace(/[^0-9]/g,'')", autocomplete = "off" })
+                            <div id="asterisk">*</div>
+                            <div class="texterr">@ViewBag.LRExistHorses</div>
+                        </div>
+                    </div>*@
+                    <div class="row" hidden>
+                        @*<div class="col-md-6" style="float:right;">
+                            @Html.LabelFor(model => model.CR_Mas_Sup_Category_Car_Payload, htmlAttributes: new { @class = "label_form col-md-4", style = "float:right" })
+                            @Html.TextBoxFor(model => model.CR_Mas_Sup_Category_Car_Payload, htmlAttributes: new { @class = "input_form col-md-4", style = "float:right", oninput = "this.value=this.value.replace(/[^0-9]/g,'')", autocomplete = "off" })
+                            <div id="asterisk">*</div>
+                            <div class="texterr">@ViewBag.LRExistLoad</div>
+                        </div>*@
+                        <div class="col-md-6" style="float:right;" >
+                            @Html.LabelFor(model => model.CR_Mas_Sup_Category_Car_Status, htmlAttributes: new { @class = "label_form col-md-4", style = "float:right" })
+                            @Html.TextBoxFor(model => model.CR_Mas_Sup_Category_Car_Status, htmlAttributes: new { @class = "input_form col-md-4", style = "float:right" })
+                            <div class="texterr"></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12" style="float:right;">
+                            @Html.LabelFor(model => model.CR_Mas_Sup_Category_Car_Picture, htmlAttributes: new { @class = "label_form col-md-4", style = "float:right" })
+                            @Html.TextBoxFor(model => model.CR_Mas_Sup_Category_Car_Picture, htmlAttributes: new { @class = "Hidden" })
+                            <input type="file" name="img" class="form-control" style="float:right; width:629px;" accept="image/*" id="file" onchange="loadFile(event)" />
+                            <div class="texterr"></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12" style="float:right;">
+                            @Html.LabelFor(model => model.CR_Mas_Sup_Category_Car_Reasons, htmlAttributes: new { @class = "label_form col-md-4", style = "float:right" })
+                            @Html.TextBoxFor(model => model.CR_Mas_Sup_Category_Car_Reasons, htmlAttributes: new { @class = "input_form col-md-4", style = "float:right;width:629px!important;" })
+                            <div class="texterr"></div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        @*@using (Html.BeginForm("Edit", "CategoryCar", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                            {
+                            @Html.AntiForgeryToken()*@
+                        @if (ViewBag.delete == "D")
+                        {
+                            if (Session["ST_1508_undelete"].ToString()=="true" && Session["ST_1508_delete"].ToString() == "true")
+                            {
+                                <input type="submit" name="save" value="حفظ" class="submit_btn" style="float: right;margin-right:29px;margin-top:10px;cursor:no-drop;" onclick="javascript:return false;" disabled />
+                                <input type="submit" name="hold" class="submit_btn" value="@ViewBag.h" style=" margin-right: 20px; margin-top: 10px;cursor:no-drop;" onclick="javascript:return false;" disabled />
+                                <input type="button" name="delete" class="submit_btn" id="btn-confirm" value="@ViewBag.stat" style="margin-right: 20px; margin-top: 10px; background-color: #F3B161;" />
+                            }
+                            else
+                            {
+                                <input type="submit" name="save" value="حفظ" class="submit_btn" style="float: right;margin-right:29px;margin-top:10px;cursor:no-drop;" onclick="javascript:return false;" disabled />
+                                <input type="submit" name="hold" class="submit_btn" value="@ViewBag.h" style=" margin-right: 20px; margin-top: 10px;cursor:no-drop;" onclick="javascript:return false;" disabled />
+                                <input type="button" name="delete" class="submit_btn" id="btn-confirm" value="@ViewBag.stat" style="margin-right: 20px; margin-top: 10px; background-color: #F3B161;cursor:no-drop;" onclick="javascript:return false;" disabled />
+                            }
+                        }
+                        else
+                        {
+                            if (ViewBag.delete == "H")
+                            {
+                                if (Session["ST_1508_hold"].ToString() == "true" && Session["ST_1503_unhold"].ToString() == "true")
+                                {
+                                    <input type="submit" name="save" value="حفظ" class="submit_btn" style="float: right;margin-right:29px;margin-top:10px;cursor:no-drop;" onclick="javascript:return false;" disabled />
+                                    <input type="submit" name="hold" class="submit_btn" value="@ViewBag.h" style=" margin-right: 20px; margin-top: 10px;" />
+                                    <input type="button" name="delete" class="submit_btn" id="btn-confirm" value="@ViewBag.stat" style="margin-right: 20px; margin-top: 10px; background-color: #F3B161;cursor:no-drop;" onclick="javascript:return false;" disabled />
+                                }
+                                else
+                                {
+                                    <input type="submit" name="save" value="حفظ" class="submit_btn" style="float: right;margin-right:29px;margin-top:10px;cursor:no-drop;" onclick="javascript:return false;" disabled />
+                                    <input type="submit" name="hold" class="submit_btn" value="@ViewBag.h" style=" margin-right: 20px; margin-top: 10px;cursor:no-drop;" onclick="javascript:return false;" disabled />
+                                    <input type="button" name="delete" class="submit_btn" id="btn-confirm" value="@ViewBag.stat" style="margin-right: 20px; margin-top: 10px; background-color: #F3B161;cursor:no-drop;" onclick="javascript:return false;" disabled />
+                                }
+                            }
+                            else
+                            {
+                                if (Session["ST_1508_update"].ToString() == "true")
+                                {
+                                    <input type="submit" name="save" value="حفظ" class="submit_btn" style="float: right;margin-right:29px;margin-top:10px;" />
+                                }
+                                else
+                                {
+                                    <input type="submit" name="save" value="حفظ" class="submit_btn" style="float: right;margin-right:29px;margin-top:10px;cursor:no-drop;" onclick="javascript:return false;" disabled />
+                                }
+                                if (Session["ST_1508_hold"].ToString() == "true" || Session["ST_1508_unhold"].ToString() == "true")
+                                {
+                                    <input type="submit" name="hold" class="submit_btn" value="@ViewBag.h" style=" margin-right: 20px; margin-top: 10px;" />
+                                }
+                                else
+                                {
+                                    <input type="submit" name="hold" class="submit_btn" value="@ViewBag.h" style=" margin-right: 20px; margin-top: 10px;cursor:no-drop;" onclick="javascript:return false;" />
+                                }
+
+                                if (Session["ST_1508_delete"].ToString() == "true" || Session["ST_1508_undelete"].ToString() == "true")
+                                {
+                                    <input type="button" name="delete" class="submit_btn" id="btn-confirm" value="@ViewBag.stat" style="margin-right: 20px; margin-top: 10px; background-color: #F3B161;" />
+                                }
+                                else
+                                {
+                                    <input type="button" name="delete" class="submit_btn" id="btn-confirm" value="@ViewBag.stat" style="margin-right: 20px; margin-top: 10px; background-color: #F3B161;cursor:no-drop;" onclick="javascript:return false;" />
+                                }
+                            }
+                        }
+                        <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="mi-modal" style="margin-top:17%;">
+                            <div class="modal-dialog modal-sm">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title" id="myModalLabel" style=" margin-right: 10%;">تأكيد</h4>
+                                    </div>
+                                    <div class="modal-footer">
+                                        @if (ViewBag.delete == "D")
+                                        {
+                                            <input type="submit" name="delete" class="submit_btn" value="@ViewBag.stat" id="modal-btn-si" style="float:right;width:80px;height:40px;font:bold 14px Tahoma;margin-left:10px;color:white;background-color:#5cb85c;" />
+                                        }
+                                        else
+                                        {
+                                            <input type="submit" name="delete" class="submit_btn" value="@ViewBag.stat" id="modal-btn-si" style="float:right;width:80px;height:40px;font:bold 14px Tahoma;margin-left:10px;color:white;background-color:#d9534f;" />
+                                        }
+                                        <button type="button" class="btn btn-primary" id="modal-btn-no" style="float: left;width: 80px;height: 40px;font: bold 14px Tahoma">إلغاء</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <script>
+                            var modalConfirm = function (callback) {
+
+                                $("#btn-confirm").on("click", function () {
+                                    $("#mi-modal").modal('show');
+                                });
+                                $("#modal-btn-si").on("click", function () {
+                                    callback(true);
+                                    $("#mi-modal").modal('hide');
+                                });
+                                $("#modal-btn-no").on("click", function () {
+                                    callback(false);
+                                    $("#mi-modal").modal('hide');
+                                });
+                            };
+                            modalConfirm(function (confirm) {
+                                if (confirm) {
+                                    //Acciones si el usuario confirma
+                                    $("#form1").submit();
+                                } else {
+                                    //Acciones si el usuario no confirma
+                                    $("#result").html("canceled");
+                                }
+                            });
+                        </script>
+                        <div class="col-md-6" style="margin-top:10px;margin-bottom:10px;">
+                            <a href="/CategoryCar/Index/" class="btn" style="color:white;background-color:#F3B161;width:80px!important;padding-right:27px;border-radius:unset;height:30px;padding-top:5px;float:left;font-size:15px!important;font-family:'Times New Roman';">انهاء</a>
+                        </div>
+                    </div>
+                </div>
+                <script type="text/javascript">
+                    $(document).ready(function () { setTimeout(function () { $("#Message").fadeOut(); }, 3000); });
+                </script>
+                <script>
+                    var loadFile = function (event) {
+                        var image = document.getElementById('output');
+                        image.src = URL.createObjectURL(event.target.files[0]);
+                    };
+                </script>
+            }
+        </div>
+    </div>
+</div>

@@ -1,0 +1,251 @@
+﻿@model IEnumerable<RentCar.Models.CR_Cas_User_Information>
+
+<table id="myTable" class="table table-striped mb-0" style="cursor:pointer">
+    <thead>
+        <tr>
+            <th width="11%">
+                رقم المستخدم
+            </th>
+            <th width="20%">
+                إسم المستخدم
+            </th>
+            <th width="8%">
+                الإدارة
+            </th>
+            <th width="8%">
+                الفروع
+            </th>
+            <th width="8%">
+                الملاك
+            </th>
+            <th width="10%">
+                رقم الجوال
+            </th>
+            <th width="28%">
+                البريد الإلكتروني
+            </th>
+            <th width="7%">
+                الحالة
+            </th>
+
+        </tr>
+    </thead>
+    <tbody id="tbl">
+        @foreach (var item in Model)
+        {
+            if (@item.CR_Cas_User_Information_Status == "H" || @item.CR_Cas_User_Information_Status == "D")
+            {
+                <tr>
+                    <td width="11%" style="text-align:center">
+
+                        <a href="~/CasUser/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_User_Information_Id)" style="color:red">
+                            @Html.DisplayFor(modelItem => item.CR_Cas_User_Information_Id)
+                        </a>
+                    </td>
+                    <td width="20%">
+                        <a href="~/CasUser/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_User_Information_Id)" style="color:red">
+                            @Html.DisplayFor(modelItem => item.CR_Cas_User_Information_Ar_Name)
+                        </a>
+                    </td>
+                    <td align="center" width="8%">
+                      
+                        @if (item.CR_Cas_User_Information_Auth_System == true)
+                        {
+                            <a href="~/CasUser/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_User_Information_Id)" style="color:red">
+                                مفعل
+                            </a>
+                        }
+                        else
+                        {
+                            <a href="~/CasUser/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_User_Information_Id)" style="color:red">
+                                غير مفعل
+                            </a>
+                        }
+
+                    </td>
+                    <td align="center" width="8%">
+                      
+                        <a href="~/CasUser/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_User_Information_Id)" style="color:red">
+                            @if (item.CR_Cas_User_Information_Auth_Branch == true)
+                            {
+                                <a href="~/CasUser/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_User_Information_Id)" style="color:red">
+                                     مفعل
+                                </a>
+                            }
+                            else
+                            {
+                                <a href="~/CasUser/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_User_Information_Id)" style="color:red">
+                                   غير مفعل
+                                </a>
+                            }
+                        </a>
+                    </td>
+
+                    <td align="center" width="8%">
+                       
+                            @if (item.CR_Cas_User_Information_Auth_Owners == true)
+                            {
+                                <a href="~/CasUser/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_User_Information_Id)" style="color:red">
+                                    مفعل
+                                </a>
+                            }
+                            else
+                            {
+                                <a href="~/CasUser/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_User_Information_Id)" style="color:red">
+                                    غير مفعل
+                                </a>
+                            }
+                         
+                    </td>
+
+                    <td  width="10%" style="text-align:center">
+                        <a href="~/CasUser/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_User_Information_Id)" style="color:red">
+                            @Html.DisplayFor(modelItem => item.CR_Cas_User_Information_Mobile)
+                        </a>
+                    </td>
+
+                    <td align="left" width="28%">
+                        <a href="~/CasUser/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_User_Information_Id)" style="color:red">
+                            @Html.DisplayFor(modelItem => item.CR_Cas_User_Information_Emaile)
+                        </a>
+                    </td>
+
+                    @if (item.CR_Cas_User_Information_Status == "A")
+                    {
+                        <td align="center" style="padding-right:10px;" width="7%">
+                            <a href="~/CasUser/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_User_Information_Id)" style="color:red">
+                                نشط
+                            </a>
+                        </td>
+                    }
+
+                    @if (item.CR_Cas_User_Information_Status == "H")
+                    {
+                        <td align="center" style="padding-right:10px;" width="7%">
+                            <a href="~/CasUser/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_User_Information_Id)" style="color:red">
+                                موقوف
+                            </a>
+                        </td>
+                    }
+
+                    @if (item.CR_Cas_User_Information_Status == "D")
+                    {
+                        <td align="center" style="padding-right:10px;" width="7%">
+                            <a href="~/CasUser/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_User_Information_Id)" style="color:red">
+                                محذوف
+                            </a>
+                        </td>
+                    }
+
+
+                </tr>
+            }
+            else
+            {
+                <tr>
+                    <td width="11%" style="text-align:center">
+
+                        <a href="~/CasUser/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_User_Information_Id)">
+                            @Html.DisplayFor(modelItem => item.CR_Cas_User_Information_Id)
+                        </a>
+                    </td>
+                    <td width="20%">
+                        <a href="~/CasUser/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_User_Information_Id)">
+                            @Html.DisplayFor(modelItem => item.CR_Cas_User_Information_Ar_Name)
+                        </a>
+                    </td>
+                    <td align="center" width="8%">
+                        @*@Html.CheckBox("CR_Cas_User_Information_Auth_System", item.CR_Cas_User_Information_Auth_System.GetValueOrDefault(),
+                            new { @class = "CheckBox", disabled = true, htmlAttributes = new { tabindex = 0 }, style = "height:25px;width:25px;" })*@
+                        @if (item.CR_Cas_User_Information_Auth_System == true)
+                        {
+                            <a href="~/CasUser/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_User_Information_Id)">
+                                 مفعل
+                            </a>
+                        }
+                        else
+                        {
+                            <a href="~/CasUser/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_User_Information_Id)">
+                                غير مفعل
+                            </a>
+                        }
+                    </td>
+                    <td align="center" width="8%">
+                        @*@Html.CheckBox("CR_Cas_User_Information_Auth_Branch", item.CR_Cas_User_Information_Auth_Branch.GetValueOrDefault(),
+                            new { @class = "CheckBox", disabled = true, htmlAttributes = new { tabindex = 0 }, style = "height:25px;width:25px;" })*@
+                        @if (item.CR_Cas_User_Information_Auth_Branch == true)
+                        {
+                            <a href="~/CasUser/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_User_Information_Id)">
+                                 مفعل
+                            </a>
+                        }
+                        else
+                        {
+                            <a href="~/CasUser/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_User_Information_Id)">
+                                غير مفعل
+                            </a>
+                        }
+                    </td>
+                     <td align="center" width="8%">
+                       
+                            @if (item.CR_Cas_User_Information_Auth_Owners == true)
+                            {
+                                <a href="~/CasUser/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_User_Information_Id)">
+                                    مفعل
+                                </a>
+                            }
+                            else
+                            {
+                                <a href="~/CasUser/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_User_Information_Id)">
+                                    غير مفعل
+                                </a>
+                            }
+                         
+                    </td>
+
+                    <td width="10%" style="text-align:center">
+                        <a href="~/CasUser/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_User_Information_Id)">
+                            @Html.DisplayFor(modelItem => item.CR_Cas_User_Information_Mobile)
+                        </a>
+                    </td>
+
+                    <td align="left" width="28%">
+                        <a href="~/CasUser/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_User_Information_Id)">
+                            @Html.DisplayFor(modelItem => item.CR_Cas_User_Information_Emaile)
+                        </a>
+                    </td>
+
+                    @if (item.CR_Cas_User_Information_Status == "A")
+                    {
+                        <td align="center" style="padding-right:10px;" width="7%">
+                            <a href="~/CasUser/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_User_Information_Id)">
+                                نشط
+                            </a>
+                        </td>
+                    }
+
+                    @if (item.CR_Cas_User_Information_Status == "H")
+                    {
+                        <td align="center" style="padding-right:10px;" width="7%">
+                            <a href="~/CasUser/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_User_Information_Id)">
+                                موقوف
+                            </a>
+                        </td>
+                    }
+
+                    @if (item.CR_Cas_User_Information_Status == "D")
+                    {
+                        <td align="center" style="padding-right:10px;" width="7%">
+                            <a href="~/CasUser/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_User_Information_Id)">
+                                محذوف
+                            </a>
+                        </td>
+                    }
+
+
+                </tr>
+            }
+
+        }
+    </tbody>
+</table>

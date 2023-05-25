@@ -1,0 +1,165 @@
+﻿@model RentCar.Models.CR_Cas_Administrative_Procedures
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_CASLayout.cshtml";
+}
+
+<link href="~/BSys3Styles/CSS/style_form.css" rel="stylesheet" />
+<style>
+    .tooltip > .tooltip-inner {
+        background-color: #f00;
+    }
+
+    .tooltip > .tooltip-arrow {
+        border-top-color: #f00 !important;
+    }
+</style>
+<style>
+    #date_btn1 {
+        font-size: 0 !important;
+        background: url('../../BSys3Styles/Images/icone_calendre.png') center 3px no-repeat;
+        width: 30px;
+        border: none;
+        border-left: 0;
+        height: 27px;
+        position: absolute;
+        left: 17px;
+        margin-top: -29px;
+    }
+</style>
+<div class="content">
+    <!-- Start Content-->
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card-box table-responsive" style="height:79vh">
+                    <div class="title_corp"> <h3> ( الحسابات  / مستحقات القيمة المضافة / حذف </h3></div>
+                    <div class="subtitle_corp"> تمكنك الصفحة من عرض جميع العقود التي لم تسدد مستحقات القيمة المضافة، كذلك بإمكانك اختيار العقود  التي ترغب بتسديدها   </div>
+                    <div class="hr_60"></div>
+                    <div class="hr_80"></div>
+                    <div class="corp_page">
+                        <div class="page_content" style="float:left;width:100%">
+                            <form id="form_validation" action="/PayTaxes/Edit" enctype="multipart/form-data" method="post" data-parsley-validate novalidate>
+                                @Html.AntiForgeryToken()
+                                @Html.HiddenFor(Model => Model.CR_Cas_Administrative_Procedures_No)
+                                @Html.HiddenFor(Model => Model.CR_Cas_Administrative_Int_Procedures_Code)
+                                @Html.HiddenFor(Model => Model.CR_Cas_Administrative_Procedures_Action)
+                                @Html.HiddenFor(Model => Model.CR_Cas_Administrative_Procedures_Code)
+                                @Html.HiddenFor(Model => Model.CR_Cas_Administrative_Procedures_Com_Supporting)
+                                @Html.HiddenFor(Model => Model.CR_Cas_Administrative_Procedures_Date)
+                                @Html.HiddenFor(Model => Model.CR_Cas_Administrative_Procedures_Doc_Date)
+                                @Html.HiddenFor(Model => Model.CR_Cas_Administrative_Procedures_Doc_End_Date)
+                                @Html.HiddenFor(Model => Model.CR_Cas_Administrative_Procedures_Doc_No)
+                                @Html.HiddenFor(Model => Model.CR_Cas_Administrative_Procedures_Doc_Start_Date)
+                                @Html.HiddenFor(Model => Model.CR_Cas_Administrative_Procedures_From_Branch)
+                                @Html.HiddenFor(Model => Model.CR_Cas_Administrative_Procedures_Lessor)
+                                @Html.HiddenFor(Model => Model.CR_Cas_Administrative_Procedures_Reasons)
+                                @Html.HiddenFor(Model => Model.CR_Cas_Administrative_Procedures_Sector)
+                                @Html.HiddenFor(Model => Model.CR_Cas_Administrative_Procedures_Targeted_Action)
+                                @Html.HiddenFor(Model => Model.CR_Cas_Administrative_Procedures_Time)
+                                @Html.HiddenFor(Model => Model.CR_Cas_Administrative_Procedures_To_Branch)
+                                @Html.HiddenFor(Model => Model.CR_Cas_Administrative_Procedures_Type)
+                                @Html.HiddenFor(Model => Model.CR_Cas_Administrative_Procedures_User_Insert)
+                                @Html.HiddenFor(Model => Model.CR_Cas_Administrative_Procedures_Value)
+                                @Html.HiddenFor(Model => Model.CR_Cas_Administrative_Procedures_Year)
+                                <div class="form-horizontal">
+
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    <div class="row">
+                                        <div class="col-md-6 offset-md-6 " style="margin-top:10px;">
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <label class="control-label">رقم تسديد القيمة المضافة</label>
+                                                </div>
+                                                <div class="col-md-5">
+                                                    <input type="text" id="TracingNo" name="TracingNo" value="@ViewBag.Administrative_Procedures_No" class="form-control" readonly />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 offset-md-6 " style="margin-top:0px;">
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <label class="control-label">تاريخ التسديد</label>
+                                                </div>
+                                                <div class="col-md-5">
+                                                    <input class="form-control text-box single-line" data-val="true" id="PayDate" name="PayDate" type="text" value="@ViewBag.PayDate" data-inputmask="'alias': 'yyyy-mm-dd'" style="width:100%" onblur="affich_btn_1(event)" onchange="CheckDate(this.value)">
+                                                    <input name="b1" type="button" onchange="CheckDate(this.value)" class="hijri-date-input2" id="date_btn1" onblur="affich_affich_1(event)" />
+                                                    <div class="texterr" id="StDate" style="float:right;margin-top:0 !important"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6 offset-md-6 " style="margin-top:0px;">
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <label class="control-label">المبلغ المسدد</label>
+                                                </div>
+                                                <div class="col-md-5">
+                                                    <input type="text" name="PayedVal" id="PayedVal" value="@ViewBag.PayedVal" min="1" maxlength="10" readonly required class="form-control" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12" style="margin-top:0px;">
+                                            <div class="row">
+                                                <div class="col-md-2">
+                                                    <label class="control-label">الملاحظات</label>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <input type="text" name="Reasons" id="Reasons" value="@ViewBag.Reasons" class="form-control" maxlength="100" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="Table">
+                                        @{
+                                            Html.RenderAction("PartialIndexTableEdit");
+                                        }
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-md-6 col-50" style="margin-top:150px;margin-bottom:10px;">
+                                        <input type="submit" name="delete" value="حذف" class="btn btn-primary waves-effect" style="float:right;" />
+                                    </div>
+                                    <div class="col-md-6 col-50" style="margin-top:150px;margin-bottom:10px;">
+                                        <a href="/PayTaxes/Index/" class="btn btn-primary waves-effect" style="float:left;">انهاء</a>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+
+    function affich_affich_1(e) {
+        var date = e.target.value;
+        document.getElementById("PayDate").value = date;
+    }
+    function affich_btn_1(e) {
+        var date = e.target.value;
+        document.getElementById("date_btn1").value = date;
+    }
+
+    function CheckDate(d) {
+        //alert(d);
+    }
+
+
+
+</script>
+

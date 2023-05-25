@@ -1,0 +1,1278 @@
+﻿<html lang="ar">
+<html lang="ar">
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>بنان لإدارة شركات تأجير السيارات</title>
+    <meta http-equiv="Page-Exit" content="progid:DXImageTransform.Microsoft.Fade(Duration=0.3)">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/x-icon" href="/BSys3 Styles/Images/favicon.ico" />
+    @*<link href="~/BSys3Styles/CSS/bootstrap.min.css" id="bootstrap-stylesheet" rel="stylesheet" type="text/css" />*@
+    <link href="~/BSys3Styles/CSS/bootstrap.css" rel="stylesheet" />
+    <link href="~/BSys3Styles/CSS/bootstrap-datetimepicker.css" rel="stylesheet" />
+    <link href="~/BSys3Styles/CSS/icons.min.css" rel="stylesheet" />
+    <link href="~/BSys3Styles/CSS/app-rtl.min.css" id="bootstrap-stylesheet" rel="stylesheet" type="text/css" />
+    <link href="~/BSys3Styles/CSS/style_app.css" rel="stylesheet" />
+    <link href="~/Bootstrap_Arabic/font-awesome.css" type="text/css" rel="stylesheet" />
+    <link href="~/BSys3Styles/CSS/style_form.css" rel="stylesheet" />
+    <link href="~/Content/toastr.css" rel="stylesheet" />
+    <script src="~/Bootstrap_Arabic/jquery-v1.11.2.js"></script>
+
+    <style>
+        textarea {
+            width: 500px;
+            border-color: #4A80B4;
+            display: block;
+            width: 100%;
+            height: calc(2.25rem + 2px);
+            padding: 0.375rem 0.75rem;
+            font-size: 1rem;
+            font-weight: 400;
+            line-height: 1.5;
+            color: #495057;
+            background-color: #fff;
+            background-clip: padding-box;
+            border: 1px solid #ced4da;
+            border-radius: 0.25rem;
+            transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+            height: 130px
+        }
+
+        input {
+            font-family: 'Cairo';
+        }
+    </style>
+
+    <style>
+        body {
+            background: rgba(252, 244, 233,0.5) url('/BSys3 Styles/Images/bg.jpg') center;
+            padding-bottom: 0
+        }
+
+        input {
+            text-align: right
+        }
+
+        label {
+            float: right
+        }
+
+        .parsley-errors-list {
+            font-size: 14px;
+            float: right
+        }
+
+        .form-control {
+            height: 30px;
+            padding: 0 0.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 0.5rem;
+        }
+
+        .error_span {
+            font-size: 14px;
+            font-family: Roboto,sans-serif;
+            color: #ff5b5b;
+            padding-right: 0px;
+            float: right;
+        }
+    </style>
+    <style>
+        .custom-switch .custom-control-label::before {
+            border-color: red;
+        }
+
+        .custom-switch .custom-control-label::after {
+            background-color: red;
+        }
+
+        .custom-switch {
+            padding-right: 3rem;
+        }
+
+        .focus-btn-group {
+            float: left;
+        }
+
+        .btn-toolbar .btn-group {
+            display: none
+        }
+
+
+        #SrchImg {
+            left: 0;
+            margin-top: -3px;
+            margin-left: 0px;
+            margin-right: -35px;
+            position: relative;
+            float: left;
+            height: 35px;
+        }
+
+        .hr_60 {
+            float: right;
+            width: 60%;
+            height: 0.5px;
+            background: #73A0C1;
+            margin-top: 3px;
+        }
+
+        .hr_50 {
+            float: right;
+            width: 50%;
+            height: 0.5px;
+            background: #73A0C1;
+            margin-top: 3px;
+        }
+
+        .hr_70 {
+            float: right;
+            width: 70%;
+            height: 0.5px;
+            background: #73A0C1;
+            margin-top: 3px;
+        }
+
+        .hr_80 {
+            float: right;
+            width: 80%;
+            height: 0.5px;
+            background: #73A0C1;
+            margin-top: 3px;
+        }
+
+        .hr_85 {
+            float: right;
+            width: 85%;
+            height: 0.5px;
+            background: #73A0C1;
+            margin-top: 3px;
+        }
+
+        .hr_90 {
+            float: right;
+            width: 90%;
+            height: 0.5px;
+            background: #73A0C1;
+            margin-top: 3px;
+        }
+
+        .hr_100 {
+            float: right;
+            width: 100%;
+            height: 0.5px;
+            background: #73A0C1;
+            margin-top: 3px;
+        }
+
+        .hr_60_left {
+            float: left;
+            width: 60%;
+            height: 0.5px;
+            background: #73A0C1;
+            margin-top: 3px;
+        }
+
+        .hr_80_left {
+            float: left;
+            width: 60%;
+            height: 0.5px;
+            background: #73A0C1;
+            margin-top: 3px;
+        }
+
+        .hr_50_left {
+            float: left;
+            width: 50%;
+            height: 0.5px;
+            background: #73A0C1;
+            margin-top: 3px;
+        }
+
+        .hr_70_left {
+            float: left;
+            width: 70%;
+            height: 0.5px;
+            background: #73A0C1;
+            margin-top: 3px;
+        }
+
+        .hr_85_left {
+            float: left;
+            width: 85%;
+            height: 0.5px;
+            background: #73A0C1;
+            margin-top: 3px;
+        }
+
+        .hr_90_left {
+            float: left;
+            width: 90%;
+            height: 0.5px;
+            background: #73A0C1;
+            margin-top: 3px;
+        }
+
+        .header-title {
+            font-size: 25px;
+            color: #0A4169
+        }
+
+        .btn_form i {
+            width: 35px;
+            height: 35px;
+            line-height: 40px;
+            text-align: center;
+            color: #fff;
+            background: #4F7DB1;
+            float: right;
+            margin-left: 10px;
+            padding-right: 12px;
+            text-align: center
+        }
+
+        .btn_form {
+            float: right;
+            color: #F3B161;
+            font-weight: bold;
+            margin-left: 10px;
+            width: 45px;
+            height: 40px;
+            line-height: 37px;
+            text-align: center;
+            color: #fff;
+            background: #4F7DB1;
+            border: none;
+            float: right;
+            margin-left: 10px;
+        }
+
+        .table thead th {
+            color: #124f77;
+            border: solid 2px #4A80B3;
+            text-align: center;
+            background: #D1EAFA;
+            position: sticky;
+            top: 0;
+        }
+
+        .table td {
+            color: #083555;
+            padding: 0.25rem;
+            border: solid 1px #4A80B3;
+        }
+
+            .table td a {
+                color: #4F7DB1
+            }
+
+        .table-striped tbody tr:nth-of-type(odd) {
+            background-color: rgba(5,157,250,.05)
+        }
+
+        input[type="button"] {
+            font-family: 'Sakkal Majalla';
+            font-size: 16px;
+            border-color: #4B80B4;
+            background-color: #4B80B4;
+            color: white;
+            border: none;
+        }
+
+        .top_content {
+            width: 100%;
+            float: left;
+            margin-bottom: 10px;
+        }
+
+
+        .btn {
+            min-width: 75px;
+            padding: 0.45rem 0 !important
+        }
+
+        .btn-disabled {
+            opacity: 0.7
+        }
+
+        .texterr {
+            font-size: 11px !important;
+            color: #ff5b5b;
+            position: relative;
+            list-style: none;
+            font-family: 'Cairo',sans-serif !important;
+            padding-right: 0px;
+            margin-top: 5px;
+        }
+
+        /*.texterr:before {
+                content: "\F0159";
+                font-family: "Material Design Icons";
+                position: absolute;
+                left: auto;
+                right: 2px;
+                top: 0px;
+            }*/
+        .bootstrap-datetimepicker-widget {
+            background-color: white !important;
+            width: auto !important;
+        }
+
+        .card-box {
+            background: #fff;
+        }
+    </style>
+
+</head>
+<body>
+    <div id="preloader">
+        <div id="status">
+            <img src="~/BSys3Styles/Images/logo.png" style="width:150px;height:150px;margin:25px" />
+        </div>
+    </div>
+
+    <div id="wrapper">
+        <style>
+            .date_header {
+                padding-top: 20px;
+                color: #4a80b4;
+                font-size: 20px;
+                font-weight: bold;
+                float: right;
+            }
+
+            .dropdown-menu {
+                min-width: 100px;
+                width: 130px;
+                background: #EAE7EE;
+            }
+
+            .notif_after a::after {
+                display: none !important
+            }
+
+            .notification-list .noti-icon-badge {
+                left: 25px
+            }
+        </style>
+
+        <div class="navbar-custom" style="background-color:#FFCE94;height:10vh;min-height:70px">
+            <ul class="list-unstyled topnav-menu float-right mb-0">
+                <li class=" notification-list">
+                    @if (Session["AuthBranch"].ToString() == "true")
+                    {
+                    <a href="~/BranchHome/BranchStat" class="nav-link  nav-user mr-0 waves-effect" data-toggle="tooltip" data-placement="left" title="نظام الفروع" style="margin-top:25px;height:22px">
+                        <i class="fe-tablet noti-icon"></i>
+                    </a>
+                    }
+                    else
+                    {
+                        <a class="nav-link nav-user mr-0 waves-effect" data-toggle="tooltip" data-placement="left" title="نظام الفروع" style="margin-top:25px;height:22px;cursor:no-drop;">
+                            <i class="fe-tablet noti-icon"></i>
+                        </a>
+                    }
+
+
+                </li>
+                <li class="dropdown notification-list notif_after" data-toggle="tooltip" data-placement="left" title="الإشعارات" style="height:50px">
+                    <a class="nav-link dropdown-toggle  waves-effect" data-toggle="dropdown" role="button" aria-haspopup="false" aria-expanded="false" style="margin-top: 25px; height: 25px; display: initial;">
+
+                        <span class="badge badge-danger rounded-circle noti-icon-badge" style="top:-10px">@(Session["AlertsNbr"])</span>
+                        <i class="fe-bell noti-icon"></i>
+                    </a>
+                    <div style="float: left; margin-right: 10px;" class="dropdown " data-toggle="tooltip" data-placement="left" title="" data-original-title="الإشعارات" id="tooltip_notif">
+                     
+                        <div class="dropdown-menu dropdown-menu-right dropdown-lg" style="width: 350px; background-color:white;">
+
+                            <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 290px;">
+                                <div class="slimscroll noti-scroll" style="max-height: 290px !important; height: 290px; overflow: hidden; width: auto;">
+
+                                    <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                        <p class="notify-details" style="text-align:right;margin-right:0">
+                                            <span style="float:right">مستندات الفرع</span>
+                                            <small class="text-muted" style="float:left;color:green!important" title="مستندات الفرع النشطه">@(Session["BranchdocsN"])</small>
+                                            <small class="text-muted" style="float:left;margin-left:15px;color:orange!important" title="مستندات الفرع  على وشك الإنتهاء ">@(Session["BranchdocsX"])</small>
+                                            <small class="text-muted" style="float:left;margin-left:15px;color:red!important" title="مستندات الفرع  المنتهيه ">@(Session["BranchdocsE"])</small>
+                                        </p>
+                                    </a>
+
+                                    <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                        <p class="notify-details" style="text-align:right;margin-right:0">
+                                            <span style="float:right"> وثائق السيارات</span>
+                                            <small class="text-muted" style="float:left;color:green!important" title="وثائق السيارات النشطه ">@(Session["BranchCarsDocN"])</small>
+                                            <small class="text-muted" style="float:left;margin-left:15px;color:orange!important " title="وثائق السيارات  على وشك الإنتهاء ">@(Session["BranchCarsDocX"])</small>
+                                            <small class="text-muted" style="float:left;margin-left:15px;color:red!important" title=" وثائق السيارات المنتهيه ">@(Session["BranchCarsDocE"])</small>
+                                        </p>
+                                    </a>
+                                    <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                        <p class="notify-details" style="text-align:right;margin-right:0">
+                                            <span style="float:right"> صيانة السيارات</span>
+                                            <small class="text-muted" style="float:left;color:green!important" title="صيانةالسيارات النشطه ">@(Session["BranchCarsMaintenanceN"])</small>
+                                            <small class="text-muted" style="float:left;margin-left:15px;color:orange!important" title="صيانة السيارات على وشك الإنتهاء ">@(Session["BranchCarsMaintenanceX"])</small>
+                                            <small class="text-muted" style="float:left;margin-left:15px;color:red!important" title=" صيانة السيارات المنتهيه ">@(Session["BranchCarsMaintenanceE"])</small>
+                                        </p>
+                                    </a>
+                                    <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                        <p class="notify-details" style="text-align:right;margin-right:0">
+                                            <span style="float:right"> أسعار السيارات</span>
+                                            <small class="text-muted" style="float:left;color:green!important" title="أسعارالسيارات النشطه ">@(Session["BranchPricesN"])</small>
+                                            <small class="text-muted" style="float:left;margin-left:15px;color:orange!important" title="أسعار السيارات على وشك الإنتهاء ">@(Session["BranchPricesX"])</small>
+                                            <small class="text-muted" style="float:left;margin-left:15px;color:red!important" title=" صيانة السيارات المنتهيه ">@(Session["BranchPricesE"])</small>
+                                        </p>
+                                    </a>
+
+                                </div><div class="slimScrollBar" style="background: rgb(158, 165, 171); width: 8px; position: absolute; top: 0px; opacity: 0.4; display: block; border-radius: 7px; z-index: 99; right: 1px;"></div><div class="slimScrollRail" style="width: 8px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(51, 51, 51); opacity: 0.2; z-index: 90; right: 1px;"></div>
+                            </div>
+
+                        </div>
+                    </div>
+                </li>
+
+                <!--<li class="dropdown notification-list">
+                <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false" style="margin-top:25px;height:70px">
+                    <i class="fe-settings noti-icon"></i>
+                </a>
+                <div class="dropdown-menu dropdown-menu-left profile-dropdown ">-->
+                <!-- item-->
+                <!--<a href="javascript:void(0);" class="dropdown-item notify-item">
+                    <span>العربية</span>
+                </a>-->
+                <!-- item-->
+                <!--<a href="javascript:void(0);" class="dropdown-item notify-item">
+                    <span>الفرنسية</span>
+                </a>-->
+                <!-- item-->
+                <!--<a href="login.php" class="dropdown-item notify-item">
+                            <span>الأنجليزية</span>
+                        </a>
+
+                    </div>
+                </li>-->
+                <li class=" notification-list">
+                    <a class="nav-link nav-user mr-0 waves-effect" a href="~/AccountInformation/Edit" data-toggle="tooltip" data-placement="left" title="حسابي" style="margin-top:25px;height:20px">
+                        <span class="pro-user-name ml-1">
+                            <i class="fe-user noti-icon"></i>
+                        </span>
+                    </a>
+                </li>
+                <li class="notification-list">
+                    <a class="nav-link nav-user mr-0 waves-effect" href="~/Account/CloseSession" data-toggle="tooltip" data-placement="left" title="خروج" style="margin-top:25px;height:22px">
+                        <span class="pro-user-name ml-1">
+                            <i class="fe-lock noti-icon"></i>
+                        </span>
+                    </a>
+                </li>
+                @*<li style="margin-top:25px;height:70px">
+                        <a href="#" style="color:#5292C3"><b>عربي</b></a> |
+                        <a href="#" style="color:#5292C3"><b>English</b></a> |
+                        <a href="#" style="color:#5292C3"><b>Francais</b></a>
+
+                    </li>*@
+            </ul>
+
+            <!-- LOGO -->
+            <div class="logo-box" style="height:10vh">
+
+            </div>
+
+            <ul class="list-unstyled topnav-menu topnav-menu-left mb-0">
+                <li>
+                    <button class="button-menu-mobile disable-btn waves-effect">
+                        <i class="fe-menu"></i>
+                    </button>
+                </li>
+
+                <li>
+
+                    @if (Session["LessorLogo"].ToString() != null && Session["LessorLogo"].ToString() != "")
+                    {
+                        <img src="@Url.Content(Session["LessorLogo"].ToString())" id="output" style="height:70px;width:auto;object-fit:cover" />
+
+                    }
+                    else
+                    {
+                        @*<img id="logo" src="~/images/RentCar/Logo.png" />*@
+                    }
+                    <div class="date_header" style="float:left;margin-right:40px">
+                        <span>@Session["CompName"]</span>
+                    </div>
+
+                </li>
+            </ul>
+
+        </div>
+        <div class="left-side-menu" style="margin-top: -10vh; z-index: 999999; padding-top: 10px">
+
+            <div class="slimscroll-menu">
+
+                <div class="user-box text-center">
+                    @if (Session["UserImage"].ToString() != null && Session["UserImage"].ToString() != "")
+                    {
+                        <img src="@Url.Content(Session["UserImage"].ToString())" alt="user-img" class="rounded-circle img-thumbnail avatar-md">
+                    }
+                    @*else
+                        {
+                            <img src="~/images/user.jpg" alt="user-img" title="" class="rounded-circle img-thumbnail avatar-md">
+                        }*@
+
+                    <div class="dropdown">
+                        <a href="#" class="user-name  h5 mt-2 mb-1 d-block" style="cursor:default">@Session["Hello"]</a>
+                        <!--<div class="dropdown-menu user-pro-dropdown">-->
+                        <!-- item-->
+                        <!--<a href="javascript:void(0);" class="dropdown-item notify-item">
+                            <i class="fe-user mr-1"></i>
+                            <span>حسابي</span>
+                        </a>-->
+                        <!-- item-->
+                        <!--<a href="login.php" class="dropdown-item notify-item">
+                                <i class="fe-log-out mr-1"></i>
+                                <span>تسجيل خروج</span>
+                            </a>
+
+                        </div>-->
+                    </div>
+                    @*<p class="text-muted">رئيس الادارة</p>*@
+
+                </div>
+                <!--- Sidemenu -->
+                <div id="sidebar-menu">
+
+                    <ul class="metismenu" id="side-menu">
+
+                        <!--<li class="menu-title">Navigation</li>-->
+
+
+                        <li>
+                            <a href="javascript: void(0);">
+                                <span> الشركة </span>
+                                <span class="menu-arrow"></span>
+                            </a>
+                            <ul class="nav-second-level" aria-expanded="false">
+                                <li><a href="~/CasBranch/index">الفروع</a></li>
+                                <li><a href="~/CasDocumentation/index">المستندات</a></li>
+                                <li><a href="~/CR_Cas_Company_Contract/index">العقود </a></li>
+                                @*<li><a href="~/CasDocumentationContract/index">القديم </a></li>*@
+                                <li><a href="~/CasOwners/index">الملاك</a></li>
+                            </ul>
+                        </li>
+
+                        <li>
+                            <a href="javascript: void(0);">
+                                <span>  السيارات </span>
+                                <span class="menu-arrow"></span>
+                            </a>
+
+                            <ul class="nav-second-level" aria-expanded="false">
+                                <li><a href="~/CasCarInformation/index">بيانات السيارات</a></li>
+                                <li><a href="~/CarDocMainten/index">الوثائق</a></li>
+                                <li><a href="~/Car_Mainten/index">الصيانة</a></li>
+                                <li><a href="~/TransferCars/index">نقل السيارة</a></li>
+                                @*<li><a href="#"> بيع السيارة</a></li>*@
+                                <li><a href="~/CarChangeOwner/index">تغيير المالك</a></li>
+                                @*<li><a href="~/CarDocMainten/index">المستندات</a></li>*@
+                                <li><a href="~/CarBasicPrice/Index">الأسعار</a></li>
+
+                            </ul>
+                        </li>
+
+                        <li>
+                            <a href="javascript: void(0);">
+                                <span> المستأجرين </span>
+                                <span class="menu-arrow"></span>
+                            </a>
+                            <ul class="nav-second-level" aria-expanded="false">
+                                <li><a href="~/CasRenterLessor/index">بيانات المستأجرين</a></li>
+                                <li><a href="~/CasRenterLessor/LoadRenters">عقود المستأجرين</a></li>
+                                <li><a href="~/RenterReceiptList/RenterReceiptBalance"> أرصدة المستأجرين</a></li>
+                                @*<li><a href="#">حسابات المستأجرين</a></li>*@
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="javascript: void(0);">
+                                <span> الحسابات </span>
+                                <span class="menu-arrow"></span>
+                            </a>
+                            <ul class="nav-second-level" aria-expanded="false">
+                                <li><a href="~/TransferToUser/index">تغذية الصندوق</a></li>
+                                <li><a href="~/ClosingReception/index">إستلام عهدة</a></li>
+                                <li><a href="~/TransferToRenter/index">تحويل الى مستأجر</a></li>
+                                <li><a href="~/TransferFromRenter/index">تحويل من مستأجر</a></li>
+
+                                @*<li><a href="~/RenterCredit/index"> المستأجرين الدائنون</a></li>
+                                    <li><a href="~/RenterDebit/index"> المستأجرين المدينون</a></li>*@
+
+                                @*<li><a href="#">مستحقات علم</a></li>*@
+                                <li><a href="~/TaxOwed/index">مستحقات الضرائب</a></li>
+                                <li><a href="~/PayTaxes/index">تسديد المستحقات</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="javascript: void(0);">
+                                <span> التقارير</span>
+                                <span class="menu-arrow"></span>
+                            </a>
+                            <ul class="nav-second-level" aria-expanded="false">
+                                @*<li><a href="~/Reports/Admin_Procedures/FrmTracing.aspx">تقارير إدارية تفصيلية</a></li>*@
+                                <li><a href="~/ShortTracing/Index">الإجراءات الإدارية</a></li>
+                                <li><a href="~/FinancialTracing/Index">الإجراءات المالية</a></li>
+                                <li><a href="~/CasRenterContracts/index">العقود</a></li>
+                                <li><a href="~/RenterReceiptList/index"> الحركة المالية للمستأجرين</a></li>
+                                <li><a href="~/SalesPointReceiptList/index"> الحركة المالية لنقاط البيع</a></li>
+                                <li><a href="~/CasUserReceipt/Index"> الحركة المالية للموظفين</a></li>
+                                <li><a href="~/CasContractStat/Index">  إحصائيات العقود</a></li>
+                                <li><a href="~/CasCarsStat/Index"> إحصائيات السيارات</a></li>
+                                <li><a href="#"> إحصائيات المستأجرين</a></li>
+                                @*<li><a href="#">تقارير إحصائية</a></li>*@
+
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="javascript: void(0);">
+                                <span> المستخدمين </span>
+                                <span class="menu-arrow"></span>
+                            </a>
+                            <ul class="nav-second-level" aria-expanded="false">
+                                <li><a href="~/CasUSer/index">المستخدمين</a></li>
+                                @*<li><a href="#">الصلاحيات</a></li>*@
+                                <li><a href="~/Cas_User_Validity_Contract/index">صلاحيات العقد</a></li>
+                            </ul>
+                        </li>
+
+                        <li>
+                            <a href="javascript: void(0);">
+                                <span> الخدمات </span>
+                                <span class="menu-arrow"></span>
+                            </a>
+                            <ul class="nav-second-level" aria-expanded="false">
+                                <li><a href="~/Alerts/Create">التنبيهات</a></li>
+                                @*<li><a href="#">العروض </a></li>*@
+                                <li><a href="~/CasConditionsMembership/index"> شروط العضوية</a></li>
+                                <li><a href="~/CasSupBank/index"> بنوك</a></li>
+                                <li><a href="~/CasSalesPoint/index">نقاط البيع</a></li>
+                                @*<li><a href="#"> الرسائل النصية</a></li>
+                                    <li><a href="#"> رسائل الواتس أب</a></li>
+                                    <li><a href="#"> رسائل البريد الإلكتروني</a></li>*@
+                                @*<li><a href="~/Tracing/index">تقارير إدارية تفصيلية</a></li>*@
+                            </ul>
+                        </li>
+
+                    </ul>
+
+                </div>
+                <!-- End Sidebar -->
+
+                <div class="clearfix"></div>
+
+            </div>
+            <!-- Sidebar -left -->
+
+        </div>
+
+        <style>
+            body {
+                background-color: transparent !important
+            }
+
+                body[data-layout=horizontal] .content-page {
+                    padding: 125px 12px 0 12px !important;
+                    background-color: transparent !important
+                }
+
+            .date_header {
+                padding-top: 20px;
+                color: #4a80b4;
+                font-size: 20px;
+                font-weight: bold;
+            }
+
+            .langue_header {
+                margin-top: 15px;
+                color: #4a80b4;
+                font-size: 18px;
+                font-weight: bold;
+            }
+
+            .reseau {
+                width:180px !important
+            }
+
+            .reseau i {
+                color: #EDA63C;
+                font-size: 24px;
+                margin-top: 5px;
+                margin-right: 5px;
+                float: left
+            }
+
+            .footer-reseau a {
+                margin-right: 5px
+            }
+
+            .footer a, .footer .footer-links a, .footer {
+                color: #fff !important;
+                font-size: 16px;
+            }
+
+            .footer-reseau a, .footer-reseau i {
+                color: #fff !important;
+                font-size: 24px;
+            }
+
+            .card-box {
+                padding: 15px;
+            }
+ 
+            html {
+                background: url('./bg.jpg');
+            }
+            .card-box.table-responsive{
+                overflow:auto;
+                height:89vh !important;
+            }
+        </style>
+        <div class="content-page" style="margin-top:12vh !important;">
+            <div class="content">
+
+                <!-- Start Content-->
+                <div class="container-fluid" style="height:80vh;max-height:80vh;">
+                    <div style="float:left;width:100%;">
+                        @RenderBody()
+                    </div>
+                </div> <!-- container-fluid -->
+
+            </div> <!-- content -->
+            <!-- Footer Start -->
+            @* <footer class="footer">
+                    <div class="container-fluid">
+                        <div class="row" style="height:5vh ">
+
+                            <div class="col-md-8">
+                                <div class="text-md-left footer-links d-none d-sm-block">
+                                    <a href="javascript:void(0);">من نحن</a>
+                                    <a href="javascript:void(0);">الأكثر شيوعا</a>
+                                    <a href="javascript:void(0);">سياسة الخصوصية</a>
+                                    <a href="javascript:void(0);">الشروط والاحكام</a>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="text-md-right footer-reseau d-none d-sm-block" style="line-height: 5vh;">
+                                    <a href="javascript:void(0);"><i class="fa fa-facebook-square" style="margin-top: 2px;"></i></a>
+                                    <a href="javascript:void(0);"> <i class="fa fa-linkedin-square"></i></a>
+                                    <a href="javascript:void(0);"><i class="fa fa-twitter-square"></i></a>
+                                    <a href="javascript:void(0);"><i class="fa fa-youtube-square"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </footer>*@
+            <!-- end Footer -->
+
+        </div>
+
+
+        @*<script>
+            function CloseCAS() {
+                alert();
+                @Session["UserId"] = "";
+            }
+            </script>*@
+    </div>
+
+    <!-- validation init -->
+    <script src="~/BSys3Styles/Js/vendor.min.js"></script>
+    <script src="~/BSys3Styles/Js/momentjs.js"></script>
+    <script src="~/BSys3Styles/Js/moment-with-locales.js"></script>
+    <script src="~/BSys3Styles/Js/moment-hijri.js"></script>
+    <script src="~/BSys3Styles/Js/bootstrap-hijri-datetimepicker.js"></script>
+    <script src="~/BSys3Styles/Js/jquery.inputmask.bundle.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("input").inputmask();
+        });
+    </script>
+    @*date hijri*@
+    <script type="text/javascript">
+
+        $(function () {
+
+            initHijrDatePicker();
+
+            //initHijrDatePickerDefault();
+
+            $('.disable-date').hijriDatePicker({
+
+                minDate: "2020-01-01",
+                maxDate: "2021-01-01",
+                viewMode: "years",
+                hijri: true,
+                debug: false,
+                keepOpen: false
+            });
+
+        });
+
+        function initHijrDatePicker() {
+            $(".hijri-date-input2").hijriDatePicker({
+                locale: "ar-sa",
+                format: "YYYY-MM-DD",
+                hijriFormat: "YYYY-MM-DD",
+                dayViewHeaderFormat: "MMMM YYYY",
+                hijriDayViewHeaderFormat: "iMMMM iYYYY",
+                showSwitcher: true,
+                allowInputToggle: false,
+                showTodayButton: false,
+                useCurrent: false,
+                isRTL: false,
+                viewMode: 'days',
+                keepOpen: false,
+                hijri: false,
+                debug: false,
+                showClear: false,
+                showTodayButton: false,
+                showClose: false,
+                keepOpen: false
+            });
+            $(".hijri-date-input").hijriDatePicker({
+                locale: "ar-sa",
+                format: "MM-DD-YYYY",
+                hijriFormat: "MM-DD-YYYY",
+                dayViewHeaderFormat: "MMMM YYYY",
+                hijriDayViewHeaderFormat: "iMMMM iYYYY",
+                showSwitcher: false,
+                allowInputToggle: false,
+                showTodayButton: true,
+                useCurrent: true,
+                isRTL: false,
+                viewMode: 'days',
+                keepOpen: false,
+                hijri: false,
+                debug: false,
+                showClear: true,
+                showTodayButton: true,
+                showClose: false,
+                keepOpen: false
+            });
+        }
+
+
+        function initHijrDatePickerDefault() {
+
+            $(".hijri-date-input").hijriDatePicker();
+        }
+        function intPart(floatNum) {
+            if (floatNum < -0.0000001) {
+                return Math.ceil(floatNum - 0.0000001)
+            }
+            return Math.floor(floatNum + 0.0000001)
+        }
+
+        function convertToGreg(d, m, y) {
+            d = parseInt(d)
+            m = parseInt(m)
+            y = parseInt(y)
+
+            jd = intPart((11 * y + 3) / 30) + 354 * y + 30 * m - intPart((m - 1) / 2) + d + 1948440 - 385
+            if (jd > 2299160) {
+                l = jd + 68569
+                n = intPart((4 * l) / 146097)
+                l = l - intPart((146097 * n + 3) / 4)
+                i = intPart((4000 * (l + 1)) / 1461001)
+                l = l - intPart((1461 * i) / 4) + 31
+                j = intPart((80 * l) / 2447)
+                d = l - intPart((2447 * j) / 80)
+                l = intPart(j / 11)
+                m = j + 2 - 12 * l
+                y = 100 * (n - 49) + i + l
+            }
+            else {
+                j = jd + 1402
+                k = intPart((j - 1) / 1461)
+                l = j - 1461 * k
+                n = intPart((l - 1) / 365) - intPart(l / 1461)
+                i = l - 365 * n + 30
+                j = intPart((80 * i) / 2447)
+                d = i - intPart((2447 * j) / 80)
+                i = intPart(j / 11)
+                m = j + 2 - 12 * i
+                y = 4 * k + n + i - 4716
+            }
+            /*document.getElementById('<%=this.txtGregDay.ClientID%>').value = d;
+            document.getElementById('<%=this.txtGregMonth.ClientID%>').value = m;
+            document.getElementById('<%=this.txtGregYear.ClientID%>').value = y;
+
+            document.getElementById('<%=this.hidGregDay.ClientID%>').value = d;
+            document.getElementById('<%=this.hidGregMonth.ClientID%>').value = m;
+            document.getElementById('<%=this.hidGregYear.ClientID%>').value = y;*/
+            if (d < 10) d = '0' + d;
+            if (m < 10) m = '0' + m;
+            return m + '-' + d + '-' + y;
+
+        }
+        function affich_date(e) {
+            var date = e.target.value;
+            var dateparts = date.split("-");
+            affichdate = dateparts[0] + '-' + dateparts[1] + '-' + dateparts[2];
+            if (dateparts[2] < 1900) {
+                //affichdate = convertToGreg(01, 09, 1443);
+                affichdate = dateparts[0] + '-' + dateparts[1] + '-' + dateparts[2];;
+            }
+            document.getElementById("date_affich").value = affichdate;
+        }
+
+    </script>
+    @*<script src="~/BSys3Styles/Js/vendor.min.js"></script>*@
+
+
+    <script src="~/BSys3Styles/Js/parsley_ar.min.js"></script>
+    <script src="~/BSys3Styles/Js/pages/form-validation.init.js"></script>
+    <link href="~/Bootstrap_Arabic/bootstrap-big-grid.min.css" rel="stylesheet" />
+    <link href="~/Bootstrap_Arabic/jquery.dataTables.min.css" type="text/css" rel="stylesheet" />
+    <script src="~/Scripts/toastr.min.js"></script>
+    <script src="~/Scripts/toastr.js"></script>
+
+    <script src="~/BSys3Styles/Js/app.min.js"></script>
+    @*date hijri*@
+
+
+
+    <script type="text/javascript">
+        $(document).ready(function () { setTimeout(function () { $("#Message").fadeOut(); }, 4000); });
+    </script>
+    <script language="javascript" type="text/javascript">
+        $(document).ready(function () {
+            $("a").tooltip();
+        });
+        // Allow Arabic Characters only
+        function CheckArabicCharactersOnly(e) {
+            var unicode = e.charCode ? e.charCode : e.keyCode
+            if (unicode != 8) { //if the key isn't the backspace key (which we should allow)
+                if (unicode == 32)
+                    return true;
+                else {
+                    if ((unicode > 48 || unicode < 57) && (unicode < 0x0600 || unicode > 0x06FF)) //if not a number or arabic
+                        return false; //disable key press
+                }
+            }
+        }
+        function CheckenglishCharactersOnly(e) {
+            var unicode = e.charCode ? e.charCode : e.keyCode
+            if (unicode != 8) { //if the key isn't the backspace key (which we should allow)
+                if (unicode == 32)
+                    return true;
+                else {
+                    if ((unicode > 48 || unicode < 57) && (unicode < 0x0600 || unicode > 0x06FF)) //if not a number or arabic
+                        return false; //disable key press
+                }
+            }
+        }
+        function movetoNext(nextFieldID) {
+            if (event.keyCode === 13) {
+                document.getElementById(nextFieldID).focus();
+            }
+        };
+
+
+        //////////////// disable auto validate on enter click ///////////////
+        $(document).keypress(function (e) {
+            if (e.keyCode === 13) {
+                e.preventDefault();
+                return false;
+            }
+        });
+        ////////////////////////////////////////////////////////////////////
+    </script>
+
+    <script>
+        var loadFilesLicence = function (event) {
+            var image = document.getElementById('imgLicence');
+            image.src = URL.createObjectURL(event.target.files[0]);
+        };
+    </script>
+    <script>
+        $(document).ready(function () {
+            $("#CR_Cas_Sup_Car_Model_Code").change(function () {
+                $.ajax({
+                    url: '@Url.Action("GetBrand", "CasCarInformation")',
+                    type: "GET",
+                    data: { ModelCode: $("#CR_Cas_Sup_Car_Model_Code").val() },
+                    success: function (result) {
+                        $("#CR_Cas_Sup_Car_Brand_Code").val(result.CR_Mas_Sup_Brand_Ar_Name);
+                        $("#BrandCode").val(result.CR_Mas_Sup_Brand_Code);
+                        var year = document.getElementById("listyear").value;
+
+                        if (year != "") {
+                            Getinfo();
+                        } else {
+                            toastr.info("رجاء إختر السنة");
+                        }
+
+                    }
+                });
+            })
+        });
+    </script>
+    <script>
+        function Getinfo() {
+
+                $.ajax({
+                    url: '@Url.Action("GetCategory", "CasCarInformation")',
+                    type: "GET",
+                    data: { year: $("#listyear").val(), ModelCode: $("#CR_Cas_Sup_Car_Model_Code").val() },
+                    success: function (result) {
+
+                        if (result.CR_Mas_Sup_Category_Ar_Name != null) {
+                            $("#CR_Cas_Sup_Car_Category_Code").val(result.CR_Mas_Sup_Category_Ar_Name);
+                        } else {
+
+                            $("#CR_Cas_Sup_Car_Category_Code").val="";
+                        }
+
+                        if (result.CR_Mas_Sup_Category_Code != "") {
+                            $("#CategoryCode").val(result.CR_Mas_Sup_Category_Code);
+                            document.getElementById("CarCatError").innerHTML = "";
+                        } else {
+                            $("#CategoryCode").val = "";
+                            document.getElementById("CarCatError").innerHTML = "عفوا هذه السيارة غير مصنفة";
+                        }
+
+                        if (result.CR_Mas_Sup_Category_Reasons != null) {
+                            $("img[id=carimg]").attr("src", result.CR_Mas_Sup_Category_Reasons);
+                            $("#CarImage").val(result.CR_Mas_Sup_Category_Reasons);
+                        } else {
+                            $("img[id=carimg]").attr("src", "");
+                        }
+                        LoadImg(result.CR_Mas_Sup_Category_Reasons);
+
+
+                    }
+                });
+
+        };
+
+    </script>
+
+
+    <script>
+        function getcarinfo() {
+            var year = $("#CR_Cas_Sup_Car_Year").val();
+            var model = $("#CR_Cas_Sup_Car_Model_Code").val();
+            if (year == null || model == null) {
+                return;
+            }
+                $.ajax({
+                    url: '@Url.Action("GetCategory", "CasCarInformation")',
+                    type: "GET",
+                    data: { year: $("#listyear").val(), ModelCode: $("#CR_Cas_Sup_Car_Model_Code").val() },
+                    success: function (result) {
+
+                        if (result.CR_Mas_Sup_Category_Ar_Name != null) {
+                            $("#CR_Cas_Sup_Car_Category_Code").val(result.CR_Mas_Sup_Category_Ar_Name);
+                        } else {
+
+                            $("#CR_Cas_Sup_Car_Category_Code").val="";
+                        }
+
+
+                        if (result.CR_Mas_Sup_Category_Code != "" && result.CR_Mas_Sup_Category_Code != null) {
+                            $("#CategoryCode").val(result.CR_Mas_Sup_Category_Code);
+                            document.getElementById("CarCatError").innerHTML = "";
+                        } else {
+                            $("#CategoryCode").val = "";
+                            document.getElementById("CarCatError").innerHTML = "عفوا هذه السيارة غير مصنفة";
+                        }
+
+                        if (result.CR_Mas_Sup_Category_Reasons != null) {
+                            $("img[id=carimg]").attr("src", result.CR_Mas_Sup_Category_Reasons);
+                            $("#CarImage").val(result.CR_Mas_Sup_Category_Reasons);
+                        } else {
+                            $("img[id=carimg]").attr("src", "");
+                        }
+                        LoadImg(result.CR_Mas_Sup_Category_Reasons);
+
+
+                    }
+                });
+
+        };
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $("#inputtext").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $("#tbl tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
+    <script>
+        function LoadImg(content) {
+
+            if (content != null && content != '') {
+                document.getElementById("carimg")
+                    .style.display = "block";
+
+            } else {
+                document.getElementById("carimg")
+                    .style.display = "none";
+
+            }
+        }
+    </script>
+    <script>
+        function printDiv() {
+            window.frames["print_frame"].document.body.innerHTML = document.getElementById("dtBasicExample_print").innerHTML;
+            window.frames["print_frame"].window.focus();
+            window.frames["print_frame"].window.print();
+        }
+    </script>
+    @*<script>
+            $(document).ready(function () {
+                $('#dtBasicExample').DataTable();
+                $('.dataTables_length').addClass('bs-select');
+            });
+        </script>*@
+    <script>
+        var loadFilestamp = function (event) {
+            var image = document.getElementById('stamp');
+            image.src = URL.createObjectURL(event.target.files[0]);
+            document.getElementById("signature").style.borderColor = "#e7e7e7";
+        };
+    </script>
+
+
+    <script>
+        var loadFilesignature = function (event) {
+            document.getElementById("signature").style.display = "block";
+            var image = document.getElementById('signature');
+            image.src = URL.createObjectURL(event.target.files[0]);
+            document.getElementById("signature").style.borderColor = "#e7e7e7";
+        };
+    </script>
+
+    <script>
+        var LoadUserSignature = function (event) {
+            document.getElementById("UserSignature").style.display = "block";
+            var image = document.getElementById('UserSignature');
+            image.src = URL.createObjectURL(event.target.files[0]);
+            document.getElementById("signature").style.borderColor = "#e7e7e7";
+        };
+    </script>
+
+    <script>
+        var LoadUserImg = function (event) {
+            document.getElementById("UserImg").style.display = "block";
+            var image = document.getElementById('UserImg');
+            image.src = URL.createObjectURL(event.target.files[0]);
+            document.getElementById("signature").style.borderColor = "#e7e7e7";
+        };
+    </script>
+
+
+
+    @*<script>
+            var modalConfirm = function (callback) {
+
+                $("#btn-confirm").on("click", function () {
+                    $("#mi-modal").modal('show');
+                });
+                $("#modal-btn-si").on("click", function () {
+                    callback(true);
+                    $("#mi-modal").modal('hide');
+                });
+                $("#modal-btn-no").on("click", function () {
+                    callback(false);
+                    $("#mi-modal").modal('hide');
+                });
+            };
+            modalConfirm(function (confirm) {
+                if (confirm) {
+                    //Acciones si el usuario confirma
+                    $("#form1").submit();
+                } else {
+                    //Acciones si el usuario no confirma
+                    $("#result").html("canceled");
+                }
+            });
+        </script>
+        <script>
+            var HoldModal = function (callback) {
+                $("#btnHold").on("click", function () {
+                    $("#H-modal").modal('show');
+                });
+                $("#HoldModal-btn-si").on("click", function () {
+                    callback(true);
+                    $("#H-modal").modal('hide');
+                });
+                $("#HoldModal-btn-no").on("click", function () {
+                    callback(false);
+                    $("#H-modal").modal('hide');
+                });
+            };
+            HoldModal(function (confirm) {
+                if (confirm) {
+                    //Acciones si el usuario confirma
+                    $("#form1").submit();
+                } else {
+                    //Acciones si el usuario no confirma
+                    $("#result").html("canceled");
+                }
+            });
+        </script>*@
+
+
+    <script>
+        $(document).ready(function () {
+            $("#CR_MAS_SUP_City_Code").change(function () {
+                $.get("/CasBranch/GetCity", { CityCode: $("#CR_MAS_SUP_City_Code").val() }, function (data) {
+                    $("#CR_MAS_SUP_Region_Ar_Name").empty();
+                    $("#CR_MAS_SUP_Region_Ar_Name").val(data);
+                });
+            })
+        });
+    </script>
+
+    <script>
+        //timer for close session
+        var time = new Date().getTime();
+        $(document.body).bind("mousemove keypress", function (e) {
+            time = new Date().getTime();
+        });
+
+        function refresh() {
+            if (new Date().getTime() - time >= 60000 * 10)
+                window.location.reload(true);
+            else
+                setTimeout(refresh, 10000);
+        }
+
+        setTimeout(refresh, 10000);
+    </script>
+
+    @*<script>
+            $.ajax({
+                url: '@Url.Action("OpenBranchSystem", "CasHome")',
+                type: "GET",
+                data: {},
+                success: function (result) {
+                    $('#categories sidebar').html(result);
+
+                }
+            });
+        </script>*@
+<script>
+    $(document).ready(function () {
+        $(':input').on('focus', function () {
+            $(this).attr('autocomplete', 'off');
+        });
+    });
+</script>
+
+
+</body>
+</html>
+
+

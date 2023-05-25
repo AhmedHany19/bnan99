@@ -1,0 +1,42 @@
+﻿<div class="row" style="height:auto">
+
+    <div class="col-md-12">
+        <script src="~/Scripts/Chart.js"></script>
+
+        <canvas id="ChartKm" style="width:100%;max-width:895px;height:450px;"></canvas>
+
+        <script>
+            var xValues = ["أقل من 20", "من 21 إلى 30", "من 31 إلى 40", "من 41 إلى 50", "من 51 الي 60", "اكبر من 60"];
+            var yValues = [@ViewBag.A1,@ViewBag.A2,@ViewBag.A3,@ViewBag.A4,@ViewBag.A5,@ViewBag.A6];
+            var barColors = [
+                "#b91d47",
+                "#00aba9",
+                "#2b5797",
+                "#e8c3b9",
+                "#FFB533",
+                "#45B39D",
+            ];
+
+            new Chart("ChartKm", {
+                type: "bar",
+                data: {
+                    labels: xValues,
+                    datasets: [{
+                        backgroundColor: barColors,
+                        data: yValues
+                    }]
+                },
+                options: {
+                    legend: { display: false },
+                    title: {
+                        display: true,
+                        text: "العقود  @ViewBag.NbrTot"
+                    }
+                }
+            });
+        </script>
+
+    </div>
+
+</div>
+

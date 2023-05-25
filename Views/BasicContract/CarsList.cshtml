@@ -1,0 +1,765 @@
+﻿@model IEnumerable<RentCar.Models.BranchSys.CarInfoPrice>
+
+
+
+    <div class="row">
+        <div class="col-12">
+            <div class="text-center">
+                @*<h2 class="mt-0">
+                        <i class="mdi mdi-check-all"></i>
+                    </h2>
+                    <h3 class="mt-0">السيارة </h3>*@
+                <div class="row">
+                    <div class="col-md-12" style="float:right">
+                        <div class="row tab_width">
+                            <div class="tab_price first" id="firstli" data-target-form="#accountForm" style="z-index:8">
+                                <span class="step"> المستأجر</span>
+                            </div>
+                            <div class="tab_price" data-target-form="#thirdForm" style="z-index:7">
+                                <span class="step active"> السيارة</span>
+                            </div>
+                            <div class="tab_price" data-target-form="#profileForm" style="z-index:6">
+                                <span class="step">السائق</span>
+                            </div>
+                            <div class="tab_price" id="thirdli" data-target-form="#AdditionalDriverForm" style="z-index:5">
+                                <span class="step"> السائق الإضافي</span>
+                            </div>
+                            <div class="tab_price" data-target-form="#fourForm" style="z-index:4">
+                                <span class="step"> الخيارات</span>
+                            </div>
+                            <div class="tab_price" data-target-form="#fiveForm" style="z-index:3">
+                                <span class="step"> الإضافات</span>
+                            </div>
+                            <div class="tab_price" data-target-form="#sixForm" style="z-index:2">
+                                <span class="step"> الفحص الظاهري</span>
+                            </div>
+                            <div class="tab_price last" data-target-form="#sevenForm" style="z-index:1">
+                                <span class="step">الدفع</span>
+                            </div>
+                        </div>
+                        <fieldset class="fildest51" style="overflow-y:hidden">
+                            <div class="col-md-3" style="float:right;margin-top:10px;">
+                                <div class="categories sidebar wow fadeInRight">
+
+                                    @{
+                                        Html.RenderAction("CategoriesList");
+                                    }
+                                </div>
+                            </div>
+
+                            <div class="col-md-9" style="float:right;margin-top:5px;">
+                                <table width="100%" class="woo-products-page" id="ListCars">
+                                    <tbody>
+                                        @{
+                                            int c = 0;
+                                            foreach (var item in Model)
+                                            {
+                                                c++;
+                                                <tr>
+                                                    <td class="keyCarsList" hidden="hidden">
+                                                        <input class="keyCarsListVal" value="@c" id="CarsListIndex" />
+                                                    </td>
+                                                    <td id="back_@item.CR_Cas_Sup_Car_Serail_No" style="border: 1px solid #ccc; border-radius:5px !important;width:100%;margin-bottom:5px;float:left;">
+                                                        <div class="flex-container">
+                                                            <div class="imgs divcar">
+                                                                @Html.HiddenFor(modelItem => item.CR_Cas_Sup_Car_Serail_No)
+                                                                @Html.HiddenFor(modelItem => item.CR_Cas_Car_Price_Basic_No)
+
+                                                                <input type="text" id="ModelCode_@item.CR_Cas_Sup_Car_Serail_No" name="ModelCode_@item.CR_Cas_Sup_Car_Serail_No" value="@item.CR_Cas_Sup_Car_Model_Code" hidden />
+                                                                <input type="text" id="CarYear_@item.CR_Cas_Sup_Car_Serail_No" name="CarYear_@item.CR_Cas_Sup_Car_Serail_No" value="@item.CR_Cas_Sup_Car_Year" hidden />
+
+                                                                <input type="text" id="PriceBasicNo_@item.CR_Cas_Sup_Car_Serail_No" name="PriceBasicNo_@item.CR_Cas_Sup_Car_Serail_No" value="@item.CR_Cas_Car_Price_Basic_No" hidden />
+
+                                                                <input type="text" id="MinAge_@item.CR_Cas_Sup_Car_Serail_No" name="MinAge_@item.CR_Cas_Sup_Car_Serail_No" value="@item.CR_Cas_Car_Price_Basic_Min_Age_Renter" hidden />
+                                                                <input type="text" id="MaxAge_@item.CR_Cas_Sup_Car_Serail_No" name="MaxAge_@item.CR_Cas_Sup_Car_Serail_No" value="@item.CR_Cas_Car_Price_Basic_Max_Age_Renter" hidden />
+
+                                                                @Html.CheckBox("AllowAdditionalDriver_" + @item.CR_Cas_Sup_Car_Serail_No, item.CR_Cas_Car_Price_Basic_Additional_Driver.GetValueOrDefault(), new { @class = "text", disabled = true, @hidden = "hidden" })
+
+
+                                                                <input type="text" id="AllowPassDocs_@item.CR_Cas_Sup_Car_Serail_No" name="AllowPassDocs_@item.CR_Cas_Sup_Car_Serail_No" value="@item.PassCarDoc" hidden>
+                                                                <input type="text" id="AllowPassMain_@item.CR_Cas_Sup_Car_Serail_No" name="AllowPassMain_@item.CR_Cas_Sup_Car_Serail_No" value="@item.PassCarMain" hidden>
+
+
+                                                                <input type="radio" id="chk_@item.CR_Cas_Sup_Car_Serail_No" name="chk_@item.CR_Cas_Sup_Car_Serail_No" class="CLRadio" hidden>
+                                                                <div style="height:80px;object-fit:cover;width:100%">
+                                                                    @if (!String.IsNullOrEmpty(item.CR_Mas_Sup_Category_Car.CR_Mas_Sup_Category_Car_Picture))
+                                                                    {
+
+                                                                        <img src="@Url.Content(item.CR_Mas_Sup_Category_Car.CR_Mas_Sup_Category_Car_Picture)" style="height:80px;object-fit:cover;width:100%" />
+
+                                                                    }
+                                                                </div>
+
+                                                                <div id="CarsMainError_@item.CR_Cas_Sup_Car_Serail_No" class="CarsMainError" style="color:red;float:right;width:100%;">
+                                                                    @item.CarsMainError
+                                                                </div>
+                                                                <div id="CarsDocError_@item.CR_Cas_Sup_Car_Serail_No" class="CarsDocError" style="color:red">
+                                                                    @item.CarsDocError
+                                                                </div>
+                                                            </div>
+
+                                                            @*<div id="CarsMainError_@item.CR_Cas_Sup_Car_Serail_No" class="CarsMainError" value="@item.CarsMainError" style="color:red;float:right;"></div>
+                                                            <div id="CarsDocError_@item.CR_Cas_Sup_Car_Serail_No" class="CarsDocError" value="@item.CarsDocError" style="color:red"></div>*@
+
+                                                            <div class="details-pro div60">
+                                                                <div style="height:85px;">
+                                                                    <label style="float:right;font-size:13px;font-weight:bold;">
+                                                                        @item.CR_Cas_Sup_Car_Collect_Ar_Short_Name
+
+                                                                    </label>
+
+                                                                    <span style="float: right; margin-left: 2.5px; margin-right: 2.5px "> @item.CR_Mas_Sup_Category_Car.CR_Mas_Sup_Category.CR_Mas_Sup_Category_Ar_Name</span>
+                                                                    <label style="float: left;">
+                                                                        <b>القراءة الحالية:</b>
+                                                                        <span id="CurrentMeter_@item.CR_Cas_Sup_Car_Serail_No"> @item.CR_Cas_Sup_Car_No_Current_Meter</span>
+                                                                    </label>
+                                                                    <br />
+                                                                    <label style="float:right; margin-top:15px">
+                                                                        @if (item.CR_Mas_Sup_Color != null)
+                                                                        {
+                                                                            @item.CR_Mas_Sup_Color.CR_Mas_Sup_Color_Ar_Name
+                                                                        }
+                                                                        @item.CR_Cas_Sup_Car_Plate_Ar_No
+                                                                    </label>
+                                                                    <label style="font-size:16px;color:black;float:left; margin-top:15px;line-height:1">
+                                                                        <span style="float: right; margin-right: 5px; margin-left: 2px "> @item.CR_Mas_Sup_Category_Car.CR_Mas_Sup_Category_Car_Passengers_No</span><img src="~/BSys3Styles/Images/ic1.png" style="margin-top: 0px; float: right;height:16px">@*<span style="float:right;margin-left:2.55px;margin-right:2.5px"> | </span>*@
+                                                                        <span style="float: right; margin-right: 5px; margin-left: 2px "> @item.CR_Mas_Sup_Category_Car.CR_Mas_Sup_Category_Car_Door_No</span><img src="~/BSys3Styles/Images/ic2.png" style="margin-top: 0px; float: right;height:16px;">@*<span style="float: right; margin-left: 2.5px; margin-right: 2.5px"> | </span>*@
+                                                                        <span style="float: right; margin-right: 5px; margin-left: 2px "> @item.CR_Mas_Sup_Category_Car.CR_Mas_Sup_Category_Car_Bag_Bags</span><img src="~/BSys3Styles/Images/ic3.png" style="height:16px; margin-top: 0px; float: right">@*<span style="float: right; margin-left: 2.5px; margin-right: 2.5px"> | </span>*@
+                                                                        <span style="float: right; margin-right: 5px; margin-left: 2px "> @item.CR_Mas_Sup_Category_Car.CR_Mas_Sup_Category_Car_Small_Bags</span><img src="~/BSys3Styles/Images/ic3.png" style="height: 11px; margin-top: 2.5px; float: right">@*<span style="float: right; margin-left: 2.5px; margin-right: 2.5px"> | </span>*@
+
+
+                                                                    </label>
+
+                                                                  
+                                                                </div>
+                                                                <div style="height:110px;" hidden>
+                                                                    <label style="font-size: 20px; font-weight: bold; float: right; width: 100%; text-align: right; color: #4A80B4">
+                                                                        الأسعار
+                                                                    </label>
+
+                                                                    <br />
+
+                                                                    <label style="float: right; width: 100%; text-align: right">
+                                                                        <b>الإجار:</b>
+                                                                        <span id="pr1_@item.CR_Cas_Sup_Car_Serail_No" name="pr1_@item.CR_Cas_Sup_Car_Serail_No">@Html.DisplayFor(Modelitem => item.CR_Cas_Car_Price_Basic_Daily_Rent)</span>/<span id="pr2_@item.CR_Cas_Sup_Car_Serail_No">@item.CR_Cas_Car_Price_Basic_Weekly_Rent</span>
+                                                                        /<span id="pr3_@item.CR_Cas_Sup_Car_Serail_No">@item.CR_Cas_Car_Price_Basic_Monthly_Rent</span>
+                                                                    </label>
+
+                                                                    <br />
+
+
+                                                                    <label style="float: right; width: 100%; text-align: right">
+                                                                        <b> كم. إضافي:</b>
+                                                                        @item.CR_Cas_Car_Price_Basic_Additional_KM_Value
+                                                                    </label>
+
+                                                                    <br />
+
+                                                                    <label style="float: right; width: 100%; text-align: right">
+                                                                        <b> السائق الاضافي:</b>
+                                                                        <span id="AdditionalDriverVal_@item.CR_Cas_Sup_Car_Serail_No">
+                                                                            @item.CR_Cas_Car_Price_Basic_Additional_Driver_Value
+                                                                        </span>
+
+                                                                    </label>
+
+                                                                    <br />
+
+                                                                    <label style="float: right; width: 100%; text-align: right">
+                                                                        <b> الساعة الاضافية:</b>
+                                                                        @item.CR_Cas_Car_Price_Basic_Extra_Hour_Value
+                                                                    </label>
+                                                                    <br />
+
+                                                                    <label style="float: right; width: 100%; text-align: right">
+                                                                        <b> التفويض:</b>
+                                                                        <span id="InternalFeeTamm_@item.CR_Cas_Sup_Car_Serail_No">@item.CR_Cas_Car_Price_Basic_Internal_Fees_Tamm</span>
+                                                                        /
+                                                                        <span id="ExternalFeeTamm_@item.CR_Cas_Sup_Car_Serail_No">@item.CR_Cas_Car_Price_Basic_International_Fees_Tamm</span>
+                                                                    </label>
+
+                                                                    <br />
+                                                                    <label style="float: right; width: 100%; text-align: right">
+                                                                        <b> الضريبة:</b>
+                                                                        <span id="TAX_@item.CR_Cas_Sup_Car_Serail_No">
+                                                                            @item.CR_Cas_Car_Price_Basic_Rental_Tax_Rate
+                                                                        </span><span>%</span>
+
+                                                                    </label>
+
+                                                                </div>
+
+
+                                                                @*<a href="" class="btn btn-primary button add_to_cart_button product_type_simple" style="float:left;">مزيد من المعلومات</a>*@
+                                                            </div>
+                                                            <div class="details-pro div3">
+
+                                                                <div class="btn-group">
+                                                                    <button type="button" class="btn btn-primary btn-sm dropdown-toggle" style="float: right; border-radius: .15rem !important; color: #4A80B4; background-color: white; border-color: white;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                        <i class="fa fa-money-bill"></i>
+                                                                    </button>
+                                                                    <div class="dropdown-menu" style="width: 235px; padding: 25px; background: #ffeed5 !important;color:#000 !important">
+                                                                        <div style="height:110px;">
+
+                                                                            <label style="float: right; width: 100%; text-align: right">
+                                                                                <b>الإجار:</b>
+                                                                                <span id="pr1_@item.CR_Cas_Sup_Car_Serail_No" name="pr1_@item.CR_Cas_Sup_Car_Serail_No">@Html.DisplayFor(Modelitem => item.CR_Cas_Car_Price_Basic_Daily_Rent)</span>/<span id="pr2_@item.CR_Cas_Sup_Car_Serail_No">@item.CR_Cas_Car_Price_Basic_Weekly_Rent</span>
+                                                                                /<span id="pr3_@item.CR_Cas_Sup_Car_Serail_No">@item.CR_Cas_Car_Price_Basic_Monthly_Rent</span>
+                                                                            </label>
+
+                                                                            <br />
+
+
+                                                                            <label style="float: right; width: 100%; text-align: right">
+                                                                                <b> كم. إضافي:</b>
+                                                                                @item.CR_Cas_Car_Price_Basic_Additional_KM_Value
+                                                                            </label>
+
+                                                                            <br />
+
+                                                                            <label style="float: right; width: 100%; text-align: right">
+                                                                                <b> السائق الاضافي:</b>
+                                                                                <span id="AdditionalDriverVal_@item.CR_Cas_Sup_Car_Serail_No">
+                                                                                    @item.CR_Cas_Car_Price_Basic_Additional_Driver_Value
+                                                                                </span>
+
+                                                                            </label>
+
+                                                                            <br />
+
+                                                                            <label style="float: right; width: 100%; text-align: right">
+                                                                                <b> الساعة الاضافية:</b>
+                                                                                @item.CR_Cas_Car_Price_Basic_Extra_Hour_Value
+                                                                            </label>
+                                                                            <br />
+
+                                                                            <label style="float: right; width: 100%; text-align: right">
+                                                                                <b> التفويض:</b>
+                                                                                <span id="InternalFeeTamm_@item.CR_Cas_Sup_Car_Serail_No">@item.CR_Cas_Car_Price_Basic_Internal_Fees_Tamm</span>
+                                                                                /
+                                                                                <span id="ExternalFeeTamm_@item.CR_Cas_Sup_Car_Serail_No">@item.CR_Cas_Car_Price_Basic_International_Fees_Tamm</span>
+                                                                            </label>
+
+                                                                            <br />
+                                                                            <label style="float: right; width: 100%; text-align: right">
+                                                                                <b> الضريبة:</b>
+                                                                                <span id="TAX_@item.CR_Cas_Sup_Car_Serail_No">
+                                                                                    @item.CR_Cas_Car_Price_Basic_Rental_Tax_Rate
+                                                                                </span><span>%</span>
+
+                                                                            </label>
+
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="btn-group" style="">
+                                                                    <button type="button" class="btn btn-primary btn-sm dropdown-toggle" style="float: right; border-radius: .15rem !important; color: #4A80B4; background-color: white; border-color: white;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                        <i class="fa fa-cog"></i>
+                                                                    </button>
+                                                                    <div class="dropdown-menu" style="width:235px;padding:25px; background: #ffeed5 !important;color:#000 !important">
+                                                                        <div style="height:80px;">
+
+                                                                            <label style="float: right;width:100%;text-align:right">
+                                                                                <b>العمر :</b>
+                                                                                @item.CR_Cas_Car_Price_Basic_Min_Age_Renter|@item.CR_Cas_Car_Price_Basic_Max_Age_Renter
+                                                                            </label>
+
+                                                                            <br />
+
+                                                                            <label style="float: right; width: 100%; text-align: right">
+                                                                                <b>كم الاضافية:</b>
+                                                                                @item.CR_Cas_Car_Price_Basic_No_Daily_Free_KM
+                                                                            </label>
+
+                                                                            <br />
+
+
+                                                                            <label style="float: right; width: 100%; text-align: right">
+                                                                                <b>ساعات مجانية:</b>
+                                                                                @item.CR_Cas_Car_Price_Basic_No_Free_Additional_Hours
+                                                                            </label>
+
+                                                                            <br />
+                                                                            <label style="float: right; width: 100%; text-align: right">
+                                                                                <b>الحد الأعلى للساعات المجانية:</b>
+                                                                                @item.CR_Cas_Car_Price_Basic_Hour_Max
+                                                                            </label>
+
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+
+                                                                <div class="btn-group">
+                                                                    <button type="button" onclick="GetCarDocs('@item.CR_Cas_Sup_Car_Serail_No');" class="btn btn-primary btn-sm dropdown-toggle" style="float: right; border-radius: .15rem !important; color: #4A80B4; background-color: white; border-color: white;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                        <i class="fa fa-file"></i>
+                                                                    </button>
+                                                                    <div class="dropdown-menu" id="carDocsForm_@item.CR_Cas_Sup_Car_Serail_No" style="width:300px;padding:25px; background: #ffeed5 !important;color:#000 !important">
+                                                                        <div style="height:150px;" id="cd">
+                                                                            <div id="Docs">
+                                                                                @{
+                                                                                    Html.RenderAction("CarsDocs");
+                                                                                }
+
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="btn-group" style=" ">
+                                                                    <button type="button" onclick="GetCarMaint('@item.CR_Cas_Sup_Car_Serail_No');" class="btn btn-primary btn-sm dropdown-toggle" style="float: right; border-radius: .15rem !important;color: #4A80B4; background-color: white; border-color: white;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                        <i class="fa fa-wrench"></i>
+                                                                    </button>
+                                                                    <div class="dropdown-menu" id="CarM_@item.CR_Cas_Sup_Car_Serail_No" style="width:335px;padding:25px; background: #ffeed5 !important;color:#000 !important">
+                                                                        <div style="height:180px;" id="CarMaintenance">
+
+
+                                                                            @{
+                                                                                Html.RenderAction("CarMaint");
+                                                                            }
+
+
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <br />
+                                                                <div class="" style="width:100%;margin-top:10px">
+
+                                                                    <center>
+                                                                        <a href="javascript:GetCar('@item.CR_Cas_Sup_Car_Serail_No');GetChoicesList('@item.CR_Cas_Car_Price_Basic_No');GetAdditionalList('@item.CR_Cas_Car_Price_Basic_No');GetCurrentMeter('@item.CR_Cas_Sup_Car_Serail_No');CalculateContract();GetCarDocsAuthority('@item.CR_Cas_Sup_Car_Serail_No');GetCarsMainAuthority('@item.CR_Cas_Sup_Car_Serail_No');" class="btn btn-secondary">إختر</a>
+                                                                    </center>
+                                                                </div>
+
+                                                                <div style="height:110px;" hidden>
+                                                                    <label style="font-size: 20px; font-weight: bold; float: right;  width: 100%; text-align: right; color:#4A80B4">
+                                                                        بنود اخرى
+                                                                    </label>
+
+                                                                    <br />
+
+                                                                    <label style="float: right;width:100%;text-align:right">
+                                                                        <b>العمر :</b>
+                                                                        @item.CR_Cas_Car_Price_Basic_Min_Age_Renter|@item.CR_Cas_Car_Price_Basic_Max_Age_Renter
+                                                                    </label>
+
+                                                                    <br />
+
+                                                                    <label style="float: right; width: 100%; text-align: right">
+                                                                        <b>كم الاضافية:</b>
+                                                                        @item.CR_Cas_Car_Price_Basic_No_Daily_Free_KM
+                                                                    </label>
+
+                                                                    <br />
+
+
+                                                                    <label style="float: right; width: 100%; text-align: right">
+                                                                        <b>ساعات مجانية:</b>
+                                                                        @item.CR_Cas_Car_Price_Basic_No_Free_Additional_Hours
+                                                                    </label>
+
+                                                                    <br />
+                                                                    <label style="float: right; width: 100%; text-align: right">
+                                                                        <b>الحد الأعلى للساعات المجانية:</b>
+                                                                        @item.CR_Cas_Car_Price_Basic_Hour_Max
+                                                                    </label>
+                                                                    <br />
+
+                                                                </div>
+
+                                                            </div>
+
+                                                        </div>
+                                                    </td>
+
+                                                </tr>
+                                            }
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+        </div>
+<!-- end col -->
+    </div>
+
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script>
+    $(document).on('click', 'ul li', function () {
+        $(this).addClass('woo-products active').siblings().removeClass('active')
+    })
+</script>
+
+
+@*<script>
+    function CheckAuthority(No) {
+        //alert();
+        var AuthTrafficLicense = "@Session["TrafficLicense"]";
+        var AuthContractInsurance = "@Session["ContractInsurance"]";
+        var AuthContractOperatingCard=  "@Session["ContractOperatingCard"]";
+        var AuthContractChkecUp = "@Session["ContractChkecUp"]";
+
+
+        var AuthContractTires = "@Session["ContractTires"]";
+        var AuthContractOil = "@Session["ContractOil"]";
+        var AuthContractMaintenance = "@Session["ContractMaintenance"]";
+        var AuthContractFBrakeMaintenance=  "@Session["ContractFBrakeMaintenance"]";
+        var AuthContractBBrakeMaintenance = "@Session["ContractBBrakeMaintenance"]";
+
+        var AllowPassDocs = document.getElementById('AllowPassDocs_'+No).value;
+        var AllowPassMain = document.getElementById('AllowPassMain_' + No).value;
+
+        if (AllowPassDocs != "True" || AllowPassMain != "True") {
+            if (AuthTrafficLicense == "True" && AuthContractInsurance == "True"
+                && AuthContractOperatingCard == "True" && AuthContractChkecUp == "True"
+                && AuthContractTires == "True" && AuthContractOil == "True" && AuthContractMaintenance == "True"
+                && AuthContractFBrakeMaintenance == "True" && AuthContractBBrakeMaintenance == "True") {
+                alert("True");
+                return true;
+            } else {
+                alert("False");
+                return false;
+            }
+        } else {
+            alert("True");
+            return true;
+        }
+    }
+</script>*@
+
+
+<script>
+    function GetCarDocsAuthority(SNo) {
+        $.ajax({
+            url: '@Url.Action("GetCarsDocsAuthority", "BasicContract")',
+            type: "GET",
+            data: { SerialNo: SNo },
+            success: function (result) {
+                if (result.TrafficLicenseError != "") {
+                    toastr.warning(result.TrafficLicenseError);
+                }
+                if (result.ContractInsuranceError != "") {
+                    toastr.warning(result.ContractInsuranceError);
+                }
+                if (result.ContractOperatingCardError != "") {
+                    toastr.warning(result.ContractOperatingCardError);
+                }
+                if (result.ContractChkecUpError != "") {
+                    toastr.warning(result.ContractChkecUpError);
+                }
+                if (result.PassCar == false) {
+                   // document.getElementById('CarsDocError_' + SNo).innerHTML = "لا يمكن تأجير السيارة الرجاء التأكد من الوثائق";
+                    //alert(result.PassCar);
+                    document.getElementById("nextBtn").disabled = true;
+                } else {
+                    document.getElementById("nextBtn").disabled = false;
+                   // document.getElementById('CarsDocError_' + SNo).innerHTML = "";
+                }
+
+
+            }
+        });
+    };
+
+
+
+    function GetCarsMainAuthority(SNo) {
+        //alert();
+        $.ajax({
+            url: '@Url.Action("GetCarsMainAuthority", "BasicContract")',
+            type: "GET",
+            data: { SerialNo: SNo },
+            success: function (result) {
+                if (result.ContractTires != "") {
+                    toastr.warning(result.ContractTires);
+                }
+                if (result.ContractOil != "") {
+                    toastr.warning(result.ContractOil);
+                }
+                if (result.ContractMaintenance != "") {
+                    toastr.warning(result.ContractMaintenance);
+                }
+                if (result.ContractFBrakeMaintenance != "") {
+                    toastr.warning(result.ContractFBrakeMaintenance);
+                }
+                if (result.ContractBBrakeMaintenance != "") {
+                    toastr.warning(result.ContractBBrakeMaintenance);
+                }
+                if (result.PassCar == false) {
+                   // document.getElementById('CarsMainError_' + SNo).innerHTML = "لا يمكن تأجير السيارة الرجاء التأكد من الصيانة";
+                    //alert(result.PassCar);
+                    document.getElementById("nextBtn").disabled = true;
+                } else {
+                    document.getElementById("nextBtn").disabled = false;
+                   // document.getElementById('CarsMainError_' + SNo).innerHTML = "";
+                }
+
+
+            }
+        });
+    };
+</script>
+
+
+<script>
+    function GetCarList(cat) {
+
+        $.ajax({
+            url: '@Url.Action("CarsList", "BasicContract")',
+            type: "GET",
+            data: { Sector: $("#CR_Cas_Contract_Basic_Sector").val(), Category: cat },
+            success: function (result) {
+                $('#thirdForm').html(result);
+            }
+        });
+
+
+        };
+</script>
+
+<script>
+        function GetCarDocs(SNo) {
+            $.ajax({
+                url: '@Url.Action("CarsDocs", "BasicContract")',
+                type: "GET",
+                data: { SerialNo: SNo },
+                success: function (result) {
+                   // alert(result);
+                    $('#carDocsForm_'+SNo).html(result);
+                    //$('#Docs').html(result);
+                    //$('#cd').html(result);
+                }
+            });
+        };
+
+</script>
+
+<script>
+        function GetCarMaint(SNo) {
+            $.ajax({
+                url: '@Url.Action("CarMaint", "BasicContract")',
+                type: "GET",
+                data: { SerialNo: SNo },
+                success: function (result) {
+                   // alert(result);
+                    $('#CarM_'+SNo).html(result);
+                    //$('#CarMaintenance').html(result);
+
+                }
+            });
+        };
+
+</script>
+
+
+<script>
+        function GetChoicesList(PriceNo) {
+            $.ajax({
+                url: '@Url.Action("ChoicesList", "BasicContract")',
+                type: "GET",
+                data: { No: PriceNo},
+                success: function (result) {
+                    $('#ChoicesList').html(result);
+                    CheckChoicesListNo();
+                }
+            });
+        };
+</script>
+
+
+<script>
+        function GetCurrentMeter(SerialNo) {
+            $.ajax({
+                url: '@Url.Action("GetCurrentMeter", "BasicContract")',
+                type: "GET",
+                data: { No: SerialNo},
+                success: function (result) {
+                    $('#CurrentMeter').val(result);
+                }
+            });
+        };
+</script>
+
+<script>
+        function GetAdditionalList(PriceNo) {
+
+                $.ajax({
+                    url: '@Url.Action("AdditionalList", "BasicContract")',
+                    type: "GET",
+
+                    data: { No: PriceNo},
+                    success: function (result) {
+                        $('#AdditionalList').html(result);
+                        CheckAdditionalListNo();
+                    }
+                });
+
+
+                };
+</script>
+
+<script type="text/javascript">
+    function CheckChoicesListNo() {
+        //Reference the Table.
+        var n = 0;
+        var grid = document.getElementById("ChoicesTable");
+
+        //Reference the CheckBoxes in Table.
+        var v = grid.getElementsByClassName("keyval");
+
+        //Loop through the CheckBoxes.
+        for (var i = 0; i < v.length; i++) {
+            if (v[i].id == "indexinput") {
+                n = n + 1;
+            }
+        }
+        if (n >= 1) {
+
+            return true;
+        }
+    }
+</script>
+
+
+<script type="text/javascript">
+    function CheckCarsListNo() {
+        //Reference the Table.
+        var n = 0;
+        var grid = document.getElementById("ListCars");
+
+        //Reference the CheckBoxes in Table.
+        var v = grid.getElementsByClassName("keyCarsListVal");
+
+        //Loop through the CheckBoxes.
+        for (var i = 0; i < v.length; i++) {
+            if (v[i].id == "CarsListIndex") {
+                n = n + 1;
+            }
+        }
+        //alert(n);
+        if (n >= 1) {
+            return true;
+        }
+    }
+</script>
+
+<script type="text/javascript">
+    function CheckAdditionalListNo() {
+        //Reference the Table.
+        var n = 0;
+        var grid = document.getElementById("AdditionalTable");
+
+        //Reference the CheckBoxes in Table.
+        var v = grid.getElementsByClassName("keyvalAdditional");
+
+        //Loop through the CheckBoxes.
+        for (var i = 0; i < v.length; i++) {
+            if (v[i].id == "AdditionalIndex") {
+                n = n + 1;
+            }
+        }
+        if (n >= 1) {
+            return true;
+        }
+    }
+</script>
+
+<script>
+    function GetCar(serial) {
+
+        RemoveSelected(serial);
+        
+        
+        if (document.getElementById("chk_" + serial).checked == true) {
+            
+            document.getElementById("chk_" + serial).checked = false;
+            document.getElementById("serialNo").val = "";
+            document.getElementById("MinAge").value = "";
+            document.getElementById("MaxAge_").value = "";
+
+        } else {
+            
+            document.getElementById("chk_" + serial).checked = true;
+            document.getElementById("serialNo").value = serial;
+            document.getElementById("back_" + serial).style.borderColor = "#EDA63C";
+            if (document.getElementById("MinAge_" + serial).value != null && document.getElementById("MinAge_" + serial).value != "") {
+                document.getElementById("MinAge").value = document.getElementById("MinAge_" + serial).value;
+            } else {
+                document.getElementById("MinAge").value = "";
+            }
+            //alert(document.getElementById("MaxAge_" + serial).value);
+            if (document.getElementById("MaxAge_" + serial).value != null && document.getElementById("MaxAge_" + serial).value != "") {
+                document.getElementById("MaxAge").value = document.getElementById("MaxAge_" + serial).value;
+            } else {
+                document.getElementById("MaxAge_").value = "";
+            }
+            if (document.getElementById("AllowAdditionalDriver_" + serial).checked == true) {
+                //document.getElementById("CR_Cas_Contract_Basic_is_Additional_Driver").checked = true;
+                document.getElementById("CR_Cas_Contract_Basic_is_Additional_Driver").style.display = "block";
+                document.getElementById("lblAdditionalDriver").style.display = "block";
+
+            } else {
+                document.getElementById("CR_Cas_Contract_Basic_is_Additional_Driver").checked = false;
+                document.getElementById("CR_Cas_Contract_Basic_is_Additional_Driver").style.display = "none";
+                document.getElementById("lblAdditionalDriver").style.display = "none";
+                document.getElementById('CR_Cas_Contract_Basic_Additional_Driver_Id').value = "";
+                document.getElementById('AdditionalDriverBirthDate').value = "";
+                document.getElementById('Additional_Driver_Mobile').value = "";
+                document.getElementById('Additional_Driver_Email').value = "";
+                document.getElementById('AdditionalDriverName').value = "";
+                document.getElementById('AdditionalDriverNationality').value = "";
+                document.getElementById('AdditionalDriverGender').value = "";
+                document.getElementById('AdditionalDriverJob').value = "";
+                document.getElementById('AdditionalDriver_Driving_License_Date').value = "";
+                document.getElementById('AdditionalDriverEmployer').value = "";
+                document.getElementById('AdditionalDriverAddress').value = "";
+
+            }
+            //var RAge = document.getElementById("RenterAge").value;
+            //var CarMaxAge = document.getElementById("MaxAge").value;
+            //var CarMinAge = document.getElementById("MinAge").value;
+
+            //var renterid = document.getElementById('CR_Cas_Contract_Basic_Renter_Id').value;
+            //var n = renterid.substring(0, 1);
+            
+            //if (n != 7) {
+            //    if (Number(RAge) < Number(CarMinAge) || Number(RAge) > Number(CarMaxAge)) {
+            //        toastr.info("سن المستأجر لا يخول له سياقة السيارة");
+            //    }
+            //}
+            
+            var IntAuth = document.getElementById('InternalFeeTamm_' + serial).innerHTML;
+            document.getElementById('InternalAuthValue').value = IntAuth.trim();
+        }
+
+
+    };
+</script>
+
+<script type="text/javascript">
+    function RemoveSelected() {
+        //Reference the Table.
+        var grid = document.getElementById("ListCars");
+
+        //Reference the CheckBoxes in Table.
+        
+        var checkBoxes = grid.getElementsByClassName("CLRadio");
+
+        //Loop through the CheckBoxes.
+        for (var i = 0; i < checkBoxes.length; i++) {
+            
+                checkBoxes[i].checked = false;
+
+        }
+
+
+        var t = grid.getElementsByTagName("TD");
+
+        for (var j = 0; j < t.length; j++) {
+            t[j].style.borderColor = "white";
+        }
+
+    }
+</script>
+

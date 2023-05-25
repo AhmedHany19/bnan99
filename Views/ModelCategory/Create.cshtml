@@ -1,0 +1,222 @@
+﻿@model RentCar.Models.CR_Mas_Sup_Car_Model_Category
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<style>
+    .texterr {
+        font-family: 'Times New Roman' !important;
+        font-size: 14px !important;
+        color: red !important;
+        margin-right: 40% !important;
+        height: 10px;
+    }
+
+    #asterisk {
+        color: red;
+        float: right;
+        font-size: 15px !important;
+        margin-right: 130px;
+        margin-top: 5px;
+        position: absolute;
+        font-family: 'Times New Roman';
+    }
+
+    .row {
+        margin-bottom: 10px;
+    }
+
+    .label_form {
+        width: 150px;
+    }
+
+    .input_form {
+        width: 200px !important;
+    }
+
+    input[type=file] {
+        border-radius: 0px !important;
+        width: 200px;
+        height: 30px;
+        padding-top: 3px;
+        border-color: #F3B161;
+        border-width: 2px;
+        font-family: 'Times New Roman';
+        font-size: 12px;
+        display: -webkit-inline-box !important;
+    }
+  
+    /*.zoom {
+        padding: 50px;
+        
+        transition: transform .2s;
+        width: 100px;
+        height: 100px;
+        
+    }
+
+        .zoom:hover {
+            -ms-transform: scale(1.5);*/ /* IE 9 */
+            /*-webkit-transform: scale(1.5);*/ /* Safari 3-8 */
+            /*transform: scale(1.5);
+        }*/
+</style>
+
+    <div class="corp_content">
+        <div class="title_corp"> تحديد البيانات /إضافة </div>
+        <div class="subtitle_corp">تمكن هذه الصفحة المستخدم من تحديد بيانات السيارات</div>
+        <div class="hr_60"></div>
+        <div class="hr_80"></div>
+        <div class="corp_page">
+            <div class="page_content" style=" margin-top: 10px; height:421px!important;">
+                @using (Html.BeginForm("Create", "ModelCategory", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)
+                    <div class="form-horizontal">
+                        <div>
+                            <img id="output" class="zoom" width="120" height="80" style="margin-top:-110px;float:left;margin-left:35px;width:120px; height:80px;" />
+                        </div>
+                        <div class="row" style="margin-top:20px;">
+                            <div class="col-md-6" style="float:right;">
+                                @Html.LabelFor(model => model.CR_Mas_Sup_Car_Model_Category_Code, "الطراز", htmlAttributes: new { @class = "label_form col-md-4", style = "float:right" })
+                                @Html.DropDownList("CR_Mas_Sup_Car_Model_Category_Code", null, htmlAttributes: new { @class = "input_form col-md-4", style = "float:right"@*onchange = @"form.submit();"*@ })
+                                <div class="texterr"></div>
+                                <div class="texterr" style="float:right">@ViewBag.LRExistAr</div>
+                            </div>
+
+                            <div class="col-md-6" style="float:right;">
+                                @Html.LabelFor(model => model.CR_Mas_Sup_Car_Model_Category_Year, htmlAttributes: new { @class = "label_form col-md-4", style = "float:right" })
+                                @Html.TextBoxFor(model => model.CR_Mas_Sup_Car_Model_Category_Year, htmlAttributes: new { @class = "input_form col-md-4", style = "float:right", oninput = "this.value=this.value.replace(/[^0-9]/g,'')", autocomplete = "off" })
+                                <div class="texterr" style="float:right">@ViewBag.LRExistyear</div>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-md-6" style="float:right;">
+                                @Html.LabelFor(model => model.CR_Mas_Sup_Car_Category_Code, "الفئة", htmlAttributes: new { @class = "label_form col-md-4", style = "float:right" })
+                                @Html.DropDownList("CR_Mas_Sup_Car_Category_Code", null, htmlAttributes: new { @class = "input_form col-md-4", style = "float:right" })
+                            </div>
+                            <div class="col-md-6" style="float:right;">
+                                @Html.LabelFor(model => model.CR_Mas_Sup_Car_Model_Category_Door_No, htmlAttributes: new { @class = "label_form col-md-4", style = "float:right" })
+                                @Html.TextBoxFor(model => model.CR_Mas_Sup_Car_Model_Category_Door_No, htmlAttributes: new { @class = "input_form col-md-4", style = "float:right", oninput = "this.value=this.value.replace(/[^0-9]/g,'')", autocomplete = "off" })
+                                <div id="asterisk">*</div>
+                                <div class="texterr" style="float:right">@ViewBag.LRExistDoor</div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6" style="float:right;">
+                                @Html.LabelFor(model => model.CR_Mas_Sup_Car_Model_Category_Bag_Bags, htmlAttributes: new { @class = "label_form col-md-4", style = "float:right" })
+                                @Html.TextBoxFor(model => model.CR_Mas_Sup_Car_Model_Category_Bag_Bags, htmlAttributes: new { @class = "input_form col-md-4", style = "float:right", oninput = "this.value=this.value.replace(/[^0-9]/g,'')", autocomplete = "off" })
+                                <div id="asterisk">*</div>
+                                <div class="texterr" style="float:right">@ViewBag.LRExistBigBags</div>
+                            </div>
+
+
+                            <div class="col-md-6" style="float:right;">
+                                @Html.LabelFor(model => model.CR_Mas_Sup_Car_Model_Category_Small_Bags, htmlAttributes: new { @class = "label_form col-md-4", style = "float:right" })
+                                @Html.TextBoxFor(model => model.CR_Mas_Sup_Car_Model_Category_Small_Bags, htmlAttributes: new { @class = "input_form col-md-4", style = "float:right", oninput = "this.value=this.value.replace(/[^0-9]/g,'')", autocomplete = "off" })
+                                <div id="asterisk">*</div>
+                                <div class="texterr" style="float:right">@ViewBag.LRExistSmallBags</div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6" style="float:right;">
+                                @Html.LabelFor(model => model.CR_Mas_Sup_Car_Model_Category_Passengers_No, htmlAttributes: new { @class = "label_form col-md-4", style = "float:right" })
+                                @Html.TextBoxFor(model => model.CR_Mas_Sup_Car_Model_Category_Passengers_No, htmlAttributes: new { @class = "input_form col-md-4", style = "float:right", oninput = "this.value=this.value.replace(/[^0-9]/g,'')", autocomplete = "off" })
+                                <div id="asterisk">*</div>
+                                <div class="texterr" style="float:right">@ViewBag.LRExistPassenger</div>
+                            </div>
+                            <div class="col-md-6" style="float:right;">
+                                @Html.LabelFor(model => model.CR_Mas_Sup_Car_Model_Category_Weight, htmlAttributes: new { @class = "label_form col-md-4", style = "float:right" })
+                                @Html.TextBoxFor(model => model.CR_Mas_Sup_Car_Model_Category_Weight, htmlAttributes: new { @class = "input_form col-md-4", style = "float:right", oninput = "this.value=this.value.replace(/[^0-9]/g,'')", autocomplete = "off" })
+                                <div id="asterisk">*</div>
+                                <div class="texterr" style="float:right">@ViewBag.LRExistWeight</div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6" style="float:right;">
+                                @Html.LabelFor(model => model.CR_Mas_Sup_Car_Model_Category_Clinder, htmlAttributes: new { @class = "label_form col-md-4", style = "float:right" })
+                                @Html.TextBoxFor(model => model.CR_Mas_Sup_Car_Model_Category_Clinder, htmlAttributes: new { @class = "input_form col-md-4", style = "float:right", oninput = "this.value=this.value.replace(/[^0-9]/g,'')", autocomplete = "off" })
+                                <div id="asterisk">*</div>
+                                <div class="texterr" style="float:right">@ViewBag.LRExistCylinder</div>
+                            </div>
+                            <div class="col-md-6" style="float:right;">
+                                @Html.LabelFor(model => model.CR_Mas_Sup_Car_Model_Category_Hourses, htmlAttributes: new { @class = "label_form col-md-4", style = "float:right" })
+                                @Html.TextBoxFor(model => model.CR_Mas_Sup_Car_Model_Category_Hourses, htmlAttributes: new { @class = "input_form col-md-4", style = "float:right", oninput = "this.value=this.value.replace(/[^0-9]/g,'')", autocomplete = "off" })
+                                <div id="asterisk">*</div>
+                                <div class="texterr" style="float:right">@ViewBag.LRExistHorses</div>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-md-6" style="float:right;">
+                                @Html.LabelFor(model => model.CR_Mas_Sup_Car_Model_Category_Payload, htmlAttributes: new { @class = "label_form col-md-4", style = "float:right" })
+                                @Html.TextBoxFor(model => model.CR_Mas_Sup_Car_Model_Category_Payload, htmlAttributes: new { @class = "input_form col-md-4", style = "float:right", oninput = "this.value=this.value.replace(/[^0-9]/g,'')", autocomplete = "off" })
+                                <div id="asterisk">*</div>
+                                <div class="texterr" style="float:right">@ViewBag.LRExistLoad</div>
+                            </div>
+                            <div class="col-md-6" style="float:right;">
+                                @Html.LabelFor(model => model.CR_Mas_Sup_Car_Model_Category_Picture, htmlAttributes: new { @class = "label_form col-md-4", style = "float:right" })
+                                <input type="file" name="img" class="form-control" style="float:right; object-fit: fill;" accept="image/*" id="file" onchange="loadFile(event)"/>
+                                <div id="asterisk">*</div>
+                                <div class="texterr" style="float:right">@ViewBag.LRExistpic</div>
+                            </div>
+                        </div>
+
+                        @*<div class="row">
+                    <div class="col-md-6" style="float:right;">
+                        @Html.LabelFor(model => model.CR_Mas_Sup_Car_Model_Category_Status, htmlAttributes: new { @class = "label_form col-md-4", style = "float:right" })
+                        @Html.EditorFor(model => model.CR_Mas_Sup_Car_Model_Category_Status, new { htmlAttributes = new { @class = "input_form col-md-4", style = "float:right", autocomplete = "off" } })
+                        <div id="asterisk">*</div>
+                        <div class="texterr">@ViewBag.LRExistAr</div>
+                    </div>
+                    <div class="col-md-6" style="float:right;">
+                        @Html.LabelFor(model => model.CR_Mas_Sup_Car_Model_Category_Reasons, htmlAttributes: new { @class = "label_form col-md-4", style = "float:right" })
+                        @Html.EditorFor(model => model.CR_Mas_Sup_Car_Model_Category_Reasons, new { htmlAttributes = new { @class = "input_form col-md-4", style = "float:right", autocomplete = "off" } })
+                        <div id="asterisk">*</div>
+                        <div class="texterr">@ViewBag.LRExistAr</div>
+                    </div>
+                </div>*@
+
+                    </div>
+                    <div class="col-md-6" style="margin-top:0px">
+                        <div style="height:60px;"></div>
+                        <a href="/ModelCategory/Index/" class="btn" style="font-family:'Times New Roman';float:left;font-size:15px!important;width: 70px !important;padding-top:4px;height:30px; background-color: #F3B161; padding-right: 22px; border-radius: 0px; color: white;">انهاء</a>
+                    </div>
+                    <div class="col-md-6" style="margin-top:0px;">
+                        <div style="height:60px;"></div>
+                        <input type="submit" class="submit_btn" name="save" value="حفظ" style="margin-right:10px;" />
+                    </div>
+                    <div class="col-md-6" id="Message" style="font-family:'Times New Roman';font-size:16px;color:red;margin-Top: 50px; margin-right: 330px;position:absolute;">@TempData["TempModel"]</div>
+                    <script type="text/javascript">
+                        $(document).ready(function () { setTimeout(function () { $("#Message").fadeOut(); }, 3000); });
+                    </script>
+                    <script>
+                        var loadFile = function (event) {
+                            var image = document.getElementById('output');
+                            image.src = URL.createObjectURL(event.target.files[0]);
+                        };
+                    </script>
+                    <script>
+                        window.onload = function () {
+                            var txtBox = document.getElementById("CR_Mas_Sup_Car_Category_Code");
+                            if (txtBox != null) {
+                                txtBox.focus();
+                            }
+                        };
+
+                    </script>
+                }
+            </div>
+    </div>
+</div>

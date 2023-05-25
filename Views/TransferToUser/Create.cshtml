@@ -1,0 +1,171 @@
+﻿@model RentCar.Models.CR_Cas_User_Information
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_CASLayout.cshtml";
+}
+
+<link href="~/BSys3Styles/CSS/style_form.css" rel="stylesheet" />
+<style>
+    .tooltip > .tooltip-inner {
+        background-color: #f00;
+    }
+
+    .tooltip > .tooltip-arrow {
+        border-top-color: #f00 !important;
+    }
+</style>
+<style>
+    #date_btn1 {
+        font-size: 0 !important;
+        background: url('../../BSys3Styles/Images/icone_calendre.png') center 3px no-repeat;
+        width: 30px;
+        border: none;
+        border-left: 0;
+        height: 27px;
+        position: absolute;
+        left: 17px;
+        margin-top: -29px;
+    }
+</style>
+<div class="content">
+    <!-- Start Content-->
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card-box table-responsive" style="height:79vh">
+                    <div class="title_corp"> <h3> الحسابات / تغذية الصندوق / إضافة</h3></div>
+                    <div class="subtitle_corp">     تمكنك الصفحة من عرض والبحث عن بيانات الموظفين لتغذية صندوق الموظف في الفرع </div>
+                    <div class="hr_60"></div>
+                    <div class="hr_80"></div>
+                    <div class="corp_page">
+                        <div class="page_content" style="float:left;width:100%;margin-top:15px">
+                            @using (Html.BeginForm())
+                            {
+                                @Html.AntiForgeryToken()
+                                @Html.HiddenFor(Model => Model.CR_Cas_User_Information_Lessor_Code)
+                                @Html.HiddenFor(Model => Model.CR_Cas_User_Information_Id)
+                                <div class="form-horizontal">
+
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                                    <div class="row mb-2">
+                                        <div class="col-md-6 offset-md-6 " style="height: 43px;">
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <label class="control-label padding_left_none">رقم التغذية</label>
+                                                </div>
+                                                <div class="col-md-5 padding_right_none">
+                                                    <input type="text" id="TracingNo" name="TracingNo" value="@ViewBag.Administrative_Procedures_No" class="form-control" readonly />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-2">
+                                        <div class="col-md-6 offset-md-6 " style="height: 43px;">
+                                            <div class="row">
+                                                <div class="col-md-3 padding_left_none">
+                                                    <label class="control-label">إسم الموظف</label>
+                                                </div>
+                                                <div class="col-md-5 padding_right_none">
+                                                    @Html.EditorFor(model => model.CR_Cas_User_Information_Ar_Name, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-2">
+                                        <div class="col-md-6 offset-md-6 " style="height: 43px;">
+                                            <div class="row">
+                                                <div class="col-md-3 padding_left_none">
+                                                    <label class="control-label">تاريخ التغذية</label><label id="asterisk">*</label>
+                                                </div>
+                                                <div class="col-md-5 padding_right_none">
+                                                    <input class="form-control text-box single-line" data-val="true" id="TransferDate" name="TransferDate" type="text" value="@ViewBag.TransferDate" data-inputmask="'alias': 'yyyy-mm-dd'" style="width:100%" onblur="affich_btn_1(event)" onchange="CheckDate(this.value)">
+                                                    <input name="b1" type="button"  onchange="CheckDate(this.value)" class="hijri-date-input2" id="date_btn1" onblur="affich_affich_1(event)"/>
+                                                    <div class="texterr" id="StDate" style="float:right;margin-top:0 !important"></div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    @*<div class="row">
+                                        <div class="col-md-6 offset-md-6 " style="margin-top:10px;">
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <label class="control-label">البنك</label><label id="asterisk">*</label>
+                                                </div>
+                                                <div class="col-md-5">
+                                                    @Html.DropDownList("CR_Cas_Sup_Bank_Mas_Code", null, htmlAttributes: new { @class = "form-control" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>*@
+
+                                    <div class="row">
+                                        <div class="col-md-6 offset-md-6 " style="height: 43px;">
+                                            <div class="row">
+                                                <div class="col-md-3 padding_left_none">
+                                                    <label class="control-label">مبلغ التغذية</label><label id="asterisk">*</label>
+                                                </div>
+                                                <div class="col-md-5 padding_right_none">
+                                                    <input type="text" name="TransferedVal" id="TransferedVal" min="1" maxlength="10" value="0" class="form-control" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6 offset-md-6" style="height: 43px;">
+                                            <div class="row">
+                                                <div class="col-md-3 padding_left_none">
+                                                    <label class="control-label">الملاحظات</label>
+                                                </div>
+                                                <div class="col-md-5 padding_right_none" >
+                                                    <input type="text" name="Reasons" id="Reasons" value="" class="form-control" maxlength="100"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+
+
+                                <div class="row" style="width:72%">
+                                    <div class="col-md-1 col-50" style="margin-top:180px;margin-bottom:10px;">
+                                        <input type="submit" name="save" value="حفظ" class="btn btn-primary waves-effect" style="float:right;" />
+                                    </div>
+                                    <div class="col-md-6 col-50" style="margin-top: 180px; margin-bottom: 10px;">
+                                        <a href="/TransferToUser/Index/" class="btn btn-primary waves-effect">انهاء</a>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+
+    function affich_affich_1(e) {
+        var date = e.target.value;
+        document.getElementById("TransferDate").value = date;
+    }
+    function affich_btn_1(e) {
+        var date = e.target.value;
+        document.getElementById("date_btn1").value = date;
+    }
+
+    function CheckDate(d) {
+        alert(d);
+    }
+
+   
+   
+</script>

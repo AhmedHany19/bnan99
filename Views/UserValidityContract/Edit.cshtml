@@ -1,0 +1,324 @@
+﻿@model RentCar.Models.CR_Cas_User_Validity_Contract
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_CASLayout.cshtml";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>CR_Cas_User_Validity_Contract</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.CR_Cas_User_Validity_Contract_User_Id)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CR_Cas_User_Validity_Contract_Admin, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CR_Cas_User_Validity_Contract_Admin, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CR_Cas_User_Validity_Contract_Admin, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CR_Cas_User_Validity_Contract_Register, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.CR_Cas_User_Validity_Contract_Register)
+                    @Html.ValidationMessageFor(model => model.CR_Cas_User_Validity_Contract_Register, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CR_Cas_User_Validity_Contract_Chamber_Commerce, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.CR_Cas_User_Validity_Contract_Chamber_Commerce)
+                    @Html.ValidationMessageFor(model => model.CR_Cas_User_Validity_Contract_Chamber_Commerce, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CR_Cas_User_Validity_Contract_Transfer_Permission, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.CR_Cas_User_Validity_Contract_Transfer_Permission)
+                    @Html.ValidationMessageFor(model => model.CR_Cas_User_Validity_Contract_Transfer_Permission, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CR_Cas_User_Validity_Contract_Licence_Municipale, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.CR_Cas_User_Validity_Contract_Licence_Municipale)
+                    @Html.ValidationMessageFor(model => model.CR_Cas_User_Validity_Contract_Licence_Municipale, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CR_Cas_User_Validity_Contract_Company_Address, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.CR_Cas_User_Validity_Contract_Company_Address)
+                    @Html.ValidationMessageFor(model => model.CR_Cas_User_Validity_Contract_Company_Address, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CR_Cas_User_Validity_Contract_Traffic_License, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.CR_Cas_User_Validity_Contract_Traffic_License)
+                    @Html.ValidationMessageFor(model => model.CR_Cas_User_Validity_Contract_Traffic_License, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CR_Cas_User_Validity_Contract_Insurance, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.CR_Cas_User_Validity_Contract_Insurance)
+                    @Html.ValidationMessageFor(model => model.CR_Cas_User_Validity_Contract_Insurance, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CR_Cas_User_Validity_Contract_Operating_Card, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.CR_Cas_User_Validity_Contract_Operating_Card)
+                    @Html.ValidationMessageFor(model => model.CR_Cas_User_Validity_Contract_Operating_Card, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CR_Cas_User_Validity_Contract_Chkec_Up, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.CR_Cas_User_Validity_Contract_Chkec_Up)
+                    @Html.ValidationMessageFor(model => model.CR_Cas_User_Validity_Contract_Chkec_Up, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CR_Cas_User_Validity_Contract_Id, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.CR_Cas_User_Validity_Contract_Id)
+                    @Html.ValidationMessageFor(model => model.CR_Cas_User_Validity_Contract_Id, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CR_Cas_User_Validity_Contract_Driving_License, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.CR_Cas_User_Validity_Contract_Driving_License)
+                    @Html.ValidationMessageFor(model => model.CR_Cas_User_Validity_Contract_Driving_License, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CR_Cas_User_Validity_Contract_Renter_Address, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.CR_Cas_User_Validity_Contract_Renter_Address)
+                    @Html.ValidationMessageFor(model => model.CR_Cas_User_Validity_Contract_Renter_Address, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CR_Cas_User_Validity_Contract_Employer, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.CR_Cas_User_Validity_Contract_Employer)
+                    @Html.ValidationMessageFor(model => model.CR_Cas_User_Validity_Contract_Employer, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CR_Cas_User_Validity_Contract_Tires, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.CR_Cas_User_Validity_Contract_Tires)
+                    @Html.ValidationMessageFor(model => model.CR_Cas_User_Validity_Contract_Tires, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CR_Cas_User_Validity_Contract_Oil, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.CR_Cas_User_Validity_Contract_Oil)
+                    @Html.ValidationMessageFor(model => model.CR_Cas_User_Validity_Contract_Oil, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CR_Cas_User_Validity_Contract_Maintenance, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.CR_Cas_User_Validity_Contract_Maintenance)
+                    @Html.ValidationMessageFor(model => model.CR_Cas_User_Validity_Contract_Maintenance, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CR_Cas_User_Validity_Contract_FBrake_Maintenance, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.CR_Cas_User_Validity_Contract_FBrake_Maintenance)
+                    @Html.ValidationMessageFor(model => model.CR_Cas_User_Validity_Contract_FBrake_Maintenance, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CR_Cas_User_Validity_Contract_BBrake_Maintenance, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.CR_Cas_User_Validity_Contract_BBrake_Maintenance)
+                    @Html.ValidationMessageFor(model => model.CR_Cas_User_Validity_Contract_BBrake_Maintenance, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CR_Cas_User_Validity_Contract_Extension, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.CR_Cas_User_Validity_Contract_Extension)
+                    @Html.ValidationMessageFor(model => model.CR_Cas_User_Validity_Contract_Extension, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CR_Cas_User_Validity_Contract_Age, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.CR_Cas_User_Validity_Contract_Age)
+                    @Html.ValidationMessageFor(model => model.CR_Cas_User_Validity_Contract_Age, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CR_Cas_User_Validity_Contract_Open_Amout_Rate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CR_Cas_User_Validity_Contract_Open_Amout_Rate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CR_Cas_User_Validity_Contract_Open_Amout_Rate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CR_Cas_User_Validity_Contract_Discount_Rate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CR_Cas_User_Validity_Contract_Discount_Rate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CR_Cas_User_Validity_Contract_Discount_Rate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CR_Cas_User_Validity_Contract_Km, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CR_Cas_User_Validity_Contract_Km, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CR_Cas_User_Validity_Contract_Km, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CR_Cas_User_Validity_Contract_Hour, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CR_Cas_User_Validity_Contract_Hour, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CR_Cas_User_Validity_Contract_Hour, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CR_Cas_User_Validity_Contract_Cancel, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.CR_Cas_User_Validity_Contract_Cancel)
+                    @Html.ValidationMessageFor(model => model.CR_Cas_User_Validity_Contract_Cancel, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CR_Cas_User_Validity_Contract_End, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.CR_Cas_User_Validity_Contract_End)
+                    @Html.ValidationMessageFor(model => model.CR_Cas_User_Validity_Contract_End, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CR_Cas_User_Validity_Contract_Close, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.CR_Cas_User_Validity_Contract_Close)
+                    @Html.ValidationMessageFor(model => model.CR_Cas_User_Validity_Contract_Close, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CR_Cas_User_Validity_Contract_Close_Amount_Rate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CR_Cas_User_Validity_Contract_Close_Amount_Rate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CR_Cas_User_Validity_Contract_Close_Amount_Rate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CR_Cas_User_Validity_Contract_Status, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CR_Cas_User_Validity_Contract_Status, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CR_Cas_User_Validity_Contract_Status, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CR_Cas_User_Validity_Contract_Reasons, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CR_Cas_User_Validity_Contract_Reasons, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CR_Cas_User_Validity_Contract_Reasons, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

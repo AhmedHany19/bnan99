@@ -1,0 +1,161 @@
+﻿@model IEnumerable<RentCar.Models.BranchCarsModel>
+
+
+<table id="myTable" class="table table-striped mb-0" style="cursor:pointer">
+    <thead>
+    <tr>
+        <th onclick="sortTable(0)" width="11%">
+            الفرع
+        </th>
+        <th onclick="sortTable(2)" width="23%">
+            المدينة
+        </th>
+
+        <th onclick="sortTable(3)" width="21%">
+            المدير
+        </th>
+        <th onclick="sortTable(4)" width="14%">
+            رقم الهاتف
+        </th>
+
+        <th onclick="sortTable(5)" width="14%">
+            رقم الجوال
+        </th>
+        <th onclick="sortTable(6)" width="10%">
+            عدد السيارات
+        </th>
+        <th onclick="sortTable(7)" width="7%">
+            الحالة
+        </th>
+
+    </tr>
+    </thead>
+    <tbody id="tbl">
+        @foreach (var item in Model)
+        {
+            if (item.CR_Cas_Sup_Branch_Status == "D" || item.CR_Cas_Sup_Branch_Status == "H")
+            {
+                <tr>
+                    <td width="11%">
+                        <a href="~/CasBranch/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Code)&id2=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Lessor_Code)&id3=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Government_No)"  style="color:red">
+                            @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Ar_Short_Name)
+                        </a>
+                    </td>
+
+                    <td width="23%">
+                        <a href="~/CasBranch/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Code)&id2=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Lessor_Code)&id3=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Government_No)"  style="color:red">
+                            @Html.DisplayFor(modelItem => item.Region)
+                            /
+                            @Html.DisplayFor(modelItem => item.cityName)
+                        </a>
+                    </td>
+
+
+                    <td width="21%">
+                        <a href="~/CasBranch/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Code)&id2=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Lessor_Code)&id3=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Government_No)"  style="color:red">
+                            @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Signature_Ar_Director_Name)
+                        </a>
+                    </td>
+                    <td align="center" width="14%">
+                        <a href="~/CasBranch/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Code)&id2=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Lessor_Code)&id3=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Government_No)"  style="color:red">
+                            @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Tel)
+                        </a>
+                    </td>
+                    <td align="center" width="14%">
+                        <a href="~/CasBranch/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Code)&id2=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Lessor_Code)&id3=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Government_No)"  style="color:red">
+                            @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Mobile)
+                        </a>
+                    </td>
+                    <td align="center" width="10%">
+                        <a href="~/CasBranch/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Code)&id2=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Lessor_Code)&id3=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Government_No)"  style="color:red">
+                            @Html.DisplayFor(modelItem => item.CarsNumber)
+                        </a>
+                    </td>
+                    <td align="center" width="7%">
+                        @if (item.CR_Cas_Sup_Branch_Status == "A")
+                        {
+                            <a href="~/CasBranch/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Code)&id2=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Lessor_Code)&id3=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Government_No)"  style="color:red">
+                                نشط
+                            </a>
+                        }
+                        else if (item.CR_Cas_Sup_Branch_Status == "H")
+                        {
+                            <a href="~/CasBranch/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Code)&id2=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Lessor_Code)&id3=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Government_No)"  style="color:red">
+                                موقوف
+                            </a>
+                        }
+                        else if (item.CR_Cas_Sup_Branch_Status == "D")
+                        {
+                            <a href="~/CasBranch/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Code)&id2=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Lessor_Code)&id3=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Government_No)" style="color:red">
+                                محذوف
+                            </a>
+                        }
+                    </td>
+                </tr>
+            }
+            else
+            {
+                <tr>
+                    <td width="11%">
+                        <a href="~/CasBranch/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Code)&id2=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Lessor_Code)&id3=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Government_No)">
+                            @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Ar_Short_Name)
+                        </a>
+                    </td>
+
+                    <td width="23%">
+                        <a href="~/CasBranch/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Code)&id2=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Lessor_Code)&id3=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Government_No)">
+                            @Html.DisplayFor(modelItem => item.Region)
+                            /
+                            @Html.DisplayFor(modelItem => item.cityName)
+                        </a>
+                    </td>
+
+
+                    <td width="21%">
+                        <a href="~/CasBranch/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Code)&id2=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Lessor_Code)&id3=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Government_No)">
+                            @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Signature_Ar_Director_Name)
+                        </a>
+                    </td>
+                    <td align="center" width="14%">
+                        <a href="~/CasBranch/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Code)&id2=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Lessor_Code)&id3=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Government_No)">
+                            @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Tel)
+                        </a>
+                    </td>
+                    <td align="center" width="14%">
+                        <a href="~/CasBranch/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Code)&id2=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Lessor_Code)&id3=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Government_No)">
+                            @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Mobile)
+                        </a>
+                    </td>
+                    <td align="center" width="10%">
+                        <a href="~/CasBranch/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Code)&id2=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Lessor_Code)&id3=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Government_No)">
+                            @Html.DisplayFor(modelItem => item.CarsNumber)
+                        </a>
+                    </td>
+                    <td align="center" width="7%">
+                        @if (item.CR_Cas_Sup_Branch_Status == "A")
+                        {
+                            <a href="~/CasBranch/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Code)&id2=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Lessor_Code)&id3=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Government_No)" style="color:green">
+                                نشط
+                            </a>
+                        }
+                        else if (item.CR_Cas_Sup_Branch_Status == "H")
+                        {
+                            <a href="~/CasBranch/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Code)&id2=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Lessor_Code)&id3=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Government_No)" style="color:darksalmon">
+                                موقوف
+                            </a>
+                        }
+                        else if (item.CR_Cas_Sup_Branch_Status == "D")
+                        {
+                            <a href="~/CasBranch/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Code)&id2=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Lessor_Code)&id3=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Government_No)">
+                                محذوف
+                            </a>
+                        }
+                    </td>
+
+
+                </tr>
+            }
+
+        }
+    </tbody>
+</table>

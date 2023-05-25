@@ -1,0 +1,42 @@
+﻿<div class="row" style="height:auto">
+
+    <div class="col-md-12">
+        <script src="~/Scripts/Chart.js"></script>
+
+        <canvas id="ChartPeriod" style="width:100%;max-width:895px;height:450px;"></canvas>
+
+        <script>
+            var xValues = ["من 1 إلى 3", "من 4 إلى 7", "من 8 إلى 10", "من 11 إلى 15", "من 16 إلى 25", "من 26 الى 30", "أكثر من 30" ];
+            var yValues = [@ViewBag.P1,@ViewBag.P2,@ViewBag.P3,@ViewBag.P4,@ViewBag.P5,@ViewBag.P6,@ViewBag.P7];
+            var barColors = [
+                "#b91d47",
+                "#00aba9",
+                "#2b5797",
+                "#e8c3b9",
+                "#FFB533",
+                "#D7BDE2",
+                "#45B39D"
+            ];
+
+            new Chart("ChartPeriod", {
+                type: "bar",
+                data: {
+                    labels: xValues,
+                    datasets: [{
+                        backgroundColor: barColors,
+                        data: yValues
+                    }]
+                },
+                options: {
+                    legend: { display: false },
+                    title: {
+                        display: true,
+                        text: "العقود  @ViewBag.NbrTot"
+                    }
+                }
+            });
+        </script>
+
+    </div>
+
+</div>

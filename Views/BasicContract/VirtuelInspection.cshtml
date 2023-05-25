@@ -1,0 +1,409 @@
+﻿@model IEnumerable<RentCar.Models.CR_Mas_Sup_Virtual_Inspection>
+<link href="~/BSys3Styles/CSS/style_app.css" rel="stylesheet" />
+<style>
+    #inputtext {
+        width: 250px;
+        height: 30px;
+        margin-right: 293px;
+        margin-left: -5px;
+        float: left;
+        margin-top: 5px;
+        border-color: #4A80B3;
+        border-radius: unset;
+    }
+
+    #SrchImg {
+        float: left;
+        margin-top: -5px;
+        margin-left: 0px;
+        margin-right: -35px;
+        position: relative;
+    }
+
+    td {
+        font-family: 'Times New Roman';
+        font-size: 14px;
+        padding: 5px 4px !important;
+        font-weight: 100;
+        color: #73A0C1;
+        border-color: #4A80B3;
+    }
+
+    th {
+        font-family: 'Times New Roman';
+        font-size: 16px;
+        font-weight: bold;
+        border-color: #4A80B3;
+        cursor: pointer;
+    }
+
+    .title_corp {
+        margin-top: -15px;
+    }
+
+    .table thead {
+        overflow-y: scroll;
+        flex-grow: 1;
+    }
+
+    .table tr a {
+        text-decoration: none;
+        color: black !important;
+        border-color: #4A80B3;
+    }
+
+    .table td {
+        color: #083555;
+        border-color: #4A80B3;
+    }
+
+    .table thead th {
+        color: #124f77;
+        border-color: #4A80B3;
+        text-align: center;
+        background: #D1EAFA;
+        position: sticky;
+        top: 0;
+    }
+
+    .title_corp {
+        font-family: 'Times New Roman';
+        font-size: 25px;
+    }
+
+    .subtitle_corp {
+        padding-top: 3px !important;
+        font-family: 'Times New Roman' !important;
+        color: #083555;
+    }
+
+    .table {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .input_td {
+        padding: 0 !important;
+    }
+
+        .input_td input {
+            width: 100%;
+            border: 0;
+            height: 35px;
+            outline: none;
+        }
+
+
+</style>
+<div class="row">
+    <div class="col-lg-6 col-md-12" style="margin-top:0px;">
+
+        <div class="table-responsive" style="width:100%; height:auto;overflow:auto;margin:auto;">
+
+            <table class="table table-bordered table-striped table-striped_width" id="InspectionTable" style="margin-bottom:0">
+                <thead>
+                    <tr>
+                        @*<th hidden>
+                            @Html.DisplayNameFor(model => model.CR_Mas_Sup_Virtual_Inspection_Code)
+                        </th>*@
+                        <th width="10%">
+                            بنود الفحص
+                        </th>
+                        @*<th hidden>
+                            @Html.DisplayNameFor(model => model.CR_Mas_Sup_Virtual_Inspection_En_Name)
+                        </th>
+                        <th hidden>
+                            @Html.DisplayNameFor(model => model.CR_Mas_Sup_Virtual_Inspection_Fr_Name)
+                        </th>
+                        <th hidden>
+                            @Html.DisplayNameFor(model => model.CR_Mas_Sup_Virtual_Inspection_Status)
+                        </th>
+                        <th hidden>
+                            @Html.DisplayNameFor(model => model.CR_Mas_Sup_Virtual_Inspection_Reasons)
+                        </th>*@
+                        <!--<th width="20%" hidden>
+                            حالة الفحص
+                        </th>-->
+                        <th width="30%">
+                            ملاحظات
+                        </th>
+                    </tr>
+                </thead>
+                <tbody id="tbl">
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            
+                            @*<td hidden>
+                                @Html.DisplayFor(modelItem => item.CR_Mas_Sup_Virtual_Inspection_Code)
+                            </td>*@
+                            @*<td style="vertical-align: middle;" width="70%">
+                                <input  type="checkbox" id="ChkInspection_@item.CR_Mas_Sup_Virtual_Inspection_Code" name="ChkInspection_@item.CR_Mas_Sup_Virtual_Inspection_Code" class="form-control chkInspection" style="height:10px;margin-top:2px;" />
+                                <span id="chkChoice_3600000001"> @Html.DisplayFor(modelItem => item.CR_Mas_Sup_Virtual_Inspection_Ar_Name)</span>
+                            </td>*@
+
+                            <td style="vertical-align: middle;" width="10%">
+                                        <input type="checkbox" id="ChkInspection_@item.CR_Mas_Sup_Virtual_Inspection_Code" name="ChkInspection_@item.CR_Mas_Sup_Virtual_Inspection_Code" class="form-control ChkChoicesList" style="height: 20px; width: 20px; float: right; margin-left: 10px;">
+                                        @Html.DisplayFor(modelItem => item.CR_Mas_Sup_Virtual_Inspection_Ar_Name)
+                             </td>
+                            @*<td align="center" width="20%" hidden>
+                                <input type="checkbox" id="ChkInspection_@item.CR_Mas_Sup_Virtual_Inspection_Code" name="ChkInspection_@item.CR_Mas_Sup_Virtual_Inspection_Code" class="form-control chkInspection" style="height:25px;margin-top:2px;" />
+                            </td>*@
+                            <td class="input_td" width="30%">
+                                <input type="text" id="Remark_@item.CR_Mas_Sup_Virtual_Inspection_Code" name="Remark_@item.CR_Mas_Sup_Virtual_Inspection_Code" />
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+        </div>
+
+    </div>
+
+    <div class="col-lg-6 col-md-12" style="float:right;margin-top:-10px">
+
+
+        <div class="row">
+            <div class="col-4">
+                <div class="form-group row mt-2">
+
+                    <label class="col-md-4 col-form-label" for="input3">القراءة الحالية</label>
+                    <div class="col-md-5">
+                        <input type="text" id="CurrentMeter" name="CurrentMeter" style="color:black !important" />
+                        <span id="CurrentMeterError" style="color: red; font-size: 12px; height: 30px; width: 300px; display:block "></span>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-4" style="float:right;">
+
+                        <div style="width:100%;float:left;">
+                            <div class="input-group">
+                                <span class="input-group-btn" style="width:100%">
+                                    <span class="btn btn-primary" onclick="$(this).parent().find('input[type=file]').click();" style="width:100%;height:25px;width:100%;line-height:10px;"> الصورة 1</span>
+                                    <input name="img1" type="file" class="form-control " style="display: none; float: right; object-fit: fill;" accept="image/*" id="file" onchange="loadImg1(event)">
+                                </span>
+                            </div>
+                        </div>
+                        <img id="img1" class="zoom" style="float:left;width:100%;height:77px;object-fit:cover" />
+                    </div>
+
+                    <div class="col-md-4" style="float:right;">
+                        <div style="width:100%;float:left;">
+                            <div class="input-group">
+                                <span class="input-group-btn" style="width:100%">
+                                    <span class="btn btn-primary" onclick="$(this).parent().find('input[type=file]').click();" style="width:100%;height:25px;width:100%;line-height:10px;"> الصورة 2</span>
+                                    <input name="img2" type="file" class="form-control " style="display: none; float: right; object-fit: fill;" accept="image/*" id="file" onchange="loadImg2(event)">
+                                </span>
+                            </div>
+                        </div>
+                        <img id="img2" class="zoom" style="float: left; width: 100%; height: 77px; object-fit: cover " />
+                    </div>
+                    <div class="col-md-4" style="float:right;">
+                        <div style="width:100%;float:left;">
+                            <div class="input-group">
+                                <span class="input-group-btn" style="width:100%">
+                                    <span class="btn btn-primary" onclick="$(this).parent().find('input[type=file]').click();" style="width:100%;height:25px;width:100%;line-height:10px;"> الصورة 3</span>
+                                    <input name="img3" type="file" class="form-control " style="display: none; float: right; object-fit: fill;" accept="image/*" id="file" onchange="loadImg3(event)">
+                                </span>
+                            </div>
+                        </div>
+                        <img id="img3" class="zoom" style="float: left; width: 100%; height: 77px; object-fit: cover " />
+
+                    </div>
+
+                    <div class="col-md-4" style="float:right;">
+                        <div style="width:100%;float:left;">                      
+                            <div class="input-group">
+                                <span class="input-group-btn" style="width:100%">
+                                    <span class="btn btn-primary" onclick="$(this).parent().find('input[type=file]').click();" style="width:100%;height:25px;width:100%;line-height:10px;"> الصورة 4</span>
+                                    <input name="img4" type="file" class="form-control " style="display: none; float: right; object-fit: fill;" accept="image/*" id="file" onchange="loadImg4(event)">
+                                </span>
+                            </div>
+                        </div>
+                        <img id="img4" class="zoom" style="float: left; width: 100%; height: 77px; object-fit: cover " />
+                    </div>
+                    <div class="col-md-4" style="float:right;">
+                        <div style="width:100%;float:left;">
+                            <div class="input-group">
+                                <span class="input-group-btn" style="width:100%">
+                                    <span class="btn btn-primary" onclick="$(this).parent().find('input[type=file]').click();" style="width:100%;height:25px;width:100%;line-height:10px;"> الصورة 5</span>
+                                    <input name="img5" type="file" class="form-control " style="display: none; float: right; object-fit: fill;" accept="image/*" id="file" onchange="loadImg5(event)">
+                                </span>
+                            </div>
+                        </div>
+                        <img id="img5" class="zoom" style="float: left; width: 100%; height: 77px; object-fit: cover " />
+                    </div>
+                    <div class="col-md-4" style="float:right;">
+                        <div style="width:100%;float:left;">
+                            <div class="input-group">
+                                <span class="input-group-btn" style="width:100%">
+                                    <span class="btn btn-primary" onclick="$(this).parent().find('input[type=file]').click();" style="width:100%;height:25px;width:100%;line-height:10px;"> الصورة 6</span>
+                                    <input name="img6" type="file" class="form-control " style="display: none; float: right; object-fit: fill;" accept="image/*" id="file" onchange="loadImg6(event)">
+                                </span>
+                            </div>
+                        </div>
+                        <img id="img6" class="zoom" style="float: left; width: 100%; height: 77px; object-fit: cover " />
+                    </div>
+                    <div class="col-md-4" style="float:right;">
+                        <div style="width:100%;float:left;">
+                            <div class="input-group">
+                                <span class="input-group-btn" style="width:100%">
+                                    <span class="btn btn-primary" onclick="$(this).parent().find('input[type=file]').click();" style="width:100%;height:25px;width:100%;line-height:10px;"> الصورة 7</span>
+                                    <input name="img7" type="file" class="form-control " style="display: none; float: right; object-fit: fill;" accept="image/*" id="file" onchange="loadImg7(event)">
+                                </span>
+                            </div>
+                        </div>
+                        <img id="img7" class="zoom" style="float: left; width: 100%; height: 77px; object-fit: cover " />
+                    </div>
+                    <div class="col-md-4" style="float:right;">
+                        <div style="width:100%;float:left;">
+                            <div class="input-group">
+                                <span class="input-group-btn" style="width:100%">
+                                    <span class="btn btn-primary" onclick="$(this).parent().find('input[type=file]').click();" style="width:100%;height:25px;width:100%;line-height:10px;"> الصورة 8</span>
+                                    <input name="img8" type="file" class="form-control " style="display: none; float: right; object-fit: fill;" accept="image/*" id="file" onchange="loadImg8(event)">
+                                </span>
+                            </div>
+                        </div>
+                        <img id="img8" class="zoom" style="float: left; width: 100%; height: 77px; object-fit: cover " />
+                    </div>
+                    <div class="col-md-4" style="float:right;">
+                        <div style="width:100%;float:left;">
+                            <div class="input-group">
+                                <span class="input-group-btn" style="width:100%">
+                                    <span class="btn btn-primary" onclick="$(this).parent().find('input[type=file]').click();" style="width:100%;height:25px;width:100%;line-height:10px;"> الصورة 9</span>
+                                    <input name="img9" type="file" class="form-control " style="display: none; float: right; object-fit: fill;" accept="image/*" id="file" onchange="loadImg9(event)">
+                                </span>
+                            </div>
+                        </div>
+                        <img id="img9" class="zoom" style="float: left; width: 100%; height: 77px; object-fit: cover " />
+                    </div>
+                </div>
+            </div>
+           
+        </div>
+    </div>
+</div>
+<div id="myModal1" class="modal1">
+    <span class="close">&times;</span>
+    <img class="modal-content1" id="img01">
+    <div id="caption"></div>
+</div>
+
+<script>
+    // Get the modal
+        var modal = document.getElementById("myModal1");
+
+        // Get the image and insert it inside the modal - use its "alt" text as a caption
+        var img = document.getElementById("img1");
+        var modalImg = document.getElementById("img01");
+        img.onclick = function () {
+            modal.style.display = "block";
+            modalImg.src = this.src;
+            captionText.innerHTML = this.alt;
+    }
+    // Get the image and insert it inside the modal - use its "alt" text as a caption
+    var img2 = document.getElementById("img2");
+    var modalImg2 = document.getElementById("img01");
+    img2.onclick = function () {
+        modal.style.display = "block";
+        modalImg2.src = this.src;
+        captionText.innerHTML = this.alt;
+    }
+    // Get the image and insert it inside the modal - use its "alt" text as a caption
+    var img3 = document.getElementById("img3");
+    var modalImg3 = document.getElementById("img01");
+    img3.onclick = function () {
+        modal.style.display = "block";
+        modalImg3.src = this.src;
+        captionText.innerHTML = this.alt;
+    }
+    // Get the image and insert it inside the modal - use its "alt" text as a caption
+    var img4 = document.getElementById("img4");
+    var modalImg4 = document.getElementById("img01");
+    img4.onclick = function () {
+        modal.style.display = "block";
+        modalImg4.src = this.src;
+        captionText.innerHTML = this.alt;
+    }
+    // Get the image and insert it inside the modal - use its "alt" text as a caption
+    var img5 = document.getElementById("img5");
+    var modalImg5 = document.getElementById("img01");
+    img5.onclick = function () {
+        modal.style.display = "block";
+        modalImg5.src = this.src;
+        captionText.innerHTML = this.alt;
+    }
+    // Get the image and insert it inside the modal - use its "alt" text as a caption
+    var img6 = document.getElementById("img6");
+    var modalImg6 = document.getElementById("img01");
+    img6.onclick = function () {
+        modal.style.display = "block";
+        modalImg6.src = this.src;
+        captionText.innerHTML = this.alt;
+    }
+    // Get the image and insert it inside the modal - use its "alt" text as a caption
+    var img7 = document.getElementById("img7");
+    var modalImg7 = document.getElementById("img01");
+    img7.onclick = function () {
+        modal.style.display = "block";
+        modalImg7.src = this.src;
+        captionText.innerHTML = this.alt;
+    }
+    // Get the image and insert it inside the modal - use its "alt" text as a caption
+    var img8 = document.getElementById("img8");
+    var modalImg8 = document.getElementById("img01");
+    img8.onclick = function () {
+        modal.style.display = "block";
+        modalImg8.src = this.src;
+        captionText.innerHTML = this.alt;
+    }
+    // Get the image and insert it inside the modal - use its "alt" text as a caption
+    var img9 = document.getElementById("img9");
+    var modalImg9 = document.getElementById("img01");
+    img9.onclick = function () {
+        modal.style.display = "block";
+        modalImg9.src = this.src;
+        captionText.innerHTML = this.alt;
+    }
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function () {
+        modal.style.display = "none";
+    }
+
+</script>
+<script>
+    $("#CurrentMeter").focusout(function () {
+
+        var SerialNo = document.getElementById("serialNo").value;
+        var OldCurrent = Number(document.getElementById('CurrentMeter_' + SerialNo).innerHTML);
+        var NewCurrentMeter = Number(document.getElementById('CurrentMeter').value);
+        if (NewCurrentMeter < OldCurrent) {
+            document.getElementById('CurrentMeterError').innerHTML = "لا يمكن أن يكون أقل من"+OldCurrent ;
+        } else {
+            document.getElementById('CurrentMeterError').innerHTML = "";
+        }
+    })
+
+    function CheckCashClosing() {
+        $.ajax({
+            url: '@Url.Action("CheckCashClosing", "BranchHome")',
+            type: "GET",
+            data: { LessorCode: LessorCode, Login: UserLogin, BranchCode:BranchCode },
+            success: function (result) {
+                if (parseFloat(result) >=1) {
+                    window.location.href = "@Url.Action("Create", "CashClosing")";
+                } else {
+                    toastr.info("عفواً ....... لا يوجد لديك عهدة مالية في الفرع ");
+                }
+            }
+        });
+    }
+</script>

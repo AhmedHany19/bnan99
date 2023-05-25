@@ -1,0 +1,54 @@
+﻿@model IEnumerable<RentCar.Models.CR_Cas_Sup_Branch>
+
+
+<div class="" style="margin-top:20px;">
+
+    <div class="table-responsive table-striped" style="width:20%; min-height:200px;overflow:hidden;margin-top:20px;">
+
+        <table class="table table-bordered " id="BranchTable">
+            <thead>
+                <tr>
+                    <th hidden>BranchCode</th>
+                    <th width="70%">
+                        الفروع
+                    </th>
+                </tr>
+            </thead>
+            <tbody id="tbl" style="height: 152px">
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td hidden>
+                            @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Code)
+                        </td>
+                        <td width="70%">
+                            <label class="checkbox_input">
+                                @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Ar_Short_Name)
+                                @Html.HiddenFor(modelItem => item.CR_Cas_Sup_Branch_Code)
+                                <input type="checkbox" id="chk_@item.CR_Cas_Sup_Branch_Code" name="chk_@item.CR_Cas_Sup_Branch_Code">
+                                <span class="checkmark"></span>
+                            </label>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+    <script type="text/javascript">
+        function UncheckBranchTable() {
+            //Reference the Table.
+            var grid = document.getElementById("BranchTable");
+
+            //Reference the CheckBoxes in Table.
+            var checkBoxes = grid.getElementsByTagName("INPUT");
+
+            //Loop through the CheckBoxes.
+            for (var i = 0; i < checkBoxes.length; i++) {
+                if (checkBoxes[i].checked) {
+                    checkBoxes[i].checked = false;
+                }
+            }
+        }
+    </script>
+</div>

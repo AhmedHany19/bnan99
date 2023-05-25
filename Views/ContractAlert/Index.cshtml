@@ -1,0 +1,244 @@
+﻿
+@model IEnumerable<RentCar.Models.CR_Cas_Sup_Follow_Up_Mechanism>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_CASLayout.cshtml";
+}
+
+<style>
+    .table td {
+        border: none;
+    }
+
+    .switch {
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        height: 24px;
+    }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #e81111;
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 17px;
+            width: 17px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+    input:checked + .slider {
+        background-color: #0ea60e;
+    }
+
+    input:focus + .slider {
+        box-shadow: 0 0 1px #0ea60e;
+    }
+
+    input:checked + .slider:before {
+        -webkit-transform: translateX(35px);
+        -ms-transform: translateX(35px);
+        transform: translateX(35px);
+    }
+
+    /* Rounded sliders */
+    .slider.round {
+        border-radius: 34px;
+    }
+
+        .slider.round:before {
+            border-radius: 50%;
+        }
+</style>
+
+<div class="content">
+
+    <!-- Start Content-->
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card-box table-responsive" style="height:79vh">
+                    <div class="title_corp"> تنبيهات العقود / عرض البيانات</div>
+                    <div class="subtitle_corp">.تمكنك الصفحة من التعديل على التنبيهات</div>
+                    <div class="hr_60"></div>
+                    <div class="hr_80"></div>
+                    <div class="corp_page" style=" padding-top: 20px;">
+                        <div class="page_content">
+                            <form method="post">
+                                <div class="form-horizontal" style="min-height:70%">
+
+                                    <div>
+                                        <div id="dtBasicExample_print">
+                                            <table class="table" style="" id="myTable">
+                                                <thead>
+                                                    <tr hidden="hidden">
+
+                                                        <th style="width:50%;">إسم المستند</th>
+
+                                                        <th style="width:10%;">تفعيل الخدمة</th>
+
+                                                        <th style="width:15%;">التنبيه قبل</th>
+
+                                                        <th style="width:40%;">الحد الإئتماني</th>
+
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="tbl" style="" class="body">
+                                                    @foreach (var item in Model)
+                                                    {
+                                                        <tr>
+                                                            <td align="right" style="width:17.5%;">
+                                                                @{
+                                                                    var id = item.CR_Cas_Sup_Follow_Up_Mechanism_Lessor_Code + "_" + item.CR_Cas_Sup_Follow_Up_Mechanism_Procedures_Code;
+                                                                }
+                                                                @Html.DisplayFor(modelItem => item.CR_Mas_Sup_Procedures.CR_Mas_Sup_Procedures_Ar_Name)
+
+                                                            </td>
+
+                                                            <td style="width:2.5%;">
+                                                                <label class="switch">
+                                                                    @*@Html.CheckBox(nameof(item.CR_Cas_Sup_Follow_Up_Mechanism_Activate_Service), item.CR_Cas_Sup_Follow_Up_Mechanism_Activate_Service.GetValueOrDefault(), new { @id = "ch_" + id, @class = "MyCheckBox" })*@
+                                                                    <input type="checkbox" id="ch_@id" name="CR_Cas_Sup_Follow_Up_Mechanism_Activate_Service" class="MyCheckBox" checked="@item.CR_Cas_Sup_Follow_Up_Mechanism_Activate_Service.GetValueOrDefault()">
+                                                                    <span class="slider round"></span>
+                                                                </label>
+                                                            </td>
+
+                                                            <td>
+                                                                <input class="form-control txt" data-val="true" data-val-number="The field CR_Cas_Sup_Follow_Up_Mechanism_Befor_Expire must be a number." id="ch_@id" name="item.CR_Cas_Sup_Follow_Up_Mechanism_Befor_Expire" type="number" value="@item.CR_Cas_Sup_Follow_Up_Mechanism_Befor_Expire" style="float:right;width:10%;margin-right:2.5%">
+                                                            @*</td>
+
+                                                            <td>*@
+                                                                <input class="form-control credit" data-val="true" data-val-number="The field CR_Cas_Sup_Follow_Up_Mechanism_Befor_Expire must be a number." id="ch_@id" name="item.CR_Cas_Sup_Follow_Up_Mechanism_Befor_Credit_Limit" type="number" value="@item.CR_Cas_Sup_Follow_Up_Mechanism_Befor_Credit_Limit" style="float: right; width: 10%; margin-right: 2.5%">
+                                                            </td>
+
+                                                        </tr>
+
+
+                                                    }
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+                <script>
+    $(document).ready(
+        function () {
+        $(".MyCheckBox").change(function () {
+            var CR_Cas_Sup_Follow_Up_Mechanism_Activate_Service = this.checked;
+            var CR_Cas_Sup_Follow_Up_Mechanism_Lessor_Code = this.id.split("_")[1];
+            var CR_Cas_Sup_Follow_Up_Mechanism_Procedures_Code = this.id.split("_")[2];
+
+            $.ajax({
+                url: '@Url.Action("CheckBoxChanged")',
+                type: "POST",
+                data: {
+                    "CR_Cas_Sup_Follow_Up_Mechanism_Activate_Service": CR_Cas_Sup_Follow_Up_Mechanism_Activate_Service,
+                    "CR_Cas_Sup_Follow_Up_Mechanism_Lessor_Code": CR_Cas_Sup_Follow_Up_Mechanism_Lessor_Code,
+                    "CR_Cas_Sup_Follow_Up_Mechanism_Procedures_Code": CR_Cas_Sup_Follow_Up_Mechanism_Procedures_Code
+                },
+                success: function (data) {
+
+                },
+                error: function (jqXHR, error, errorThrown) {
+
+                    alert("Something went wrong");
+                }
+            });
+        }
+        )
+        })
+
+
+    $(document).ready(
+        function () {
+        $(".txt").change(function () {
+            var CR_Cas_Sup_Follow_Up_Mechanism_Befor_Expire = this.value;
+            var CR_Cas_Sup_Follow_Up_Mechanism_Lessor_Code = this.id.split("_")[1];
+            var CR_Cas_Sup_Follow_Up_Mechanism_Procedures_Code = this.id.split("_")[2];
+
+            $.ajax({
+                url: '@Url.Action("InputChanged")',
+                type: "POST",
+                data: {
+                    "CR_Cas_Sup_Follow_Up_Mechanism_Befor_Expire": CR_Cas_Sup_Follow_Up_Mechanism_Befor_Expire,
+                    "CR_Cas_Sup_Follow_Up_Mechanism_Lessor_Code": CR_Cas_Sup_Follow_Up_Mechanism_Lessor_Code,
+                    "CR_Cas_Sup_Follow_Up_Mechanism_Procedures_Code": CR_Cas_Sup_Follow_Up_Mechanism_Procedures_Code
+                },
+                success: function (data) {
+
+                },
+                error: function (jqXHR, error, errorThrown) {
+
+                    alert("Something went wrong");
+                }
+            });
+        }
+        )
+        })
+
+
+    $(document).ready(
+        function () {
+        $(".credit").change(function () {
+            var CR_Cas_Sup_Follow_Up_Mechanism_Befor_Credit_Limit = this.value;
+            var CR_Cas_Sup_Follow_Up_Mechanism_Lessor_Code = this.id.split("_")[1];
+            var CR_Cas_Sup_Follow_Up_Mechanism_Procedures_Code = this.id.split("_")[2];
+
+            $.ajax({
+                url: '@Url.Action("CreditChanged")',
+                type: "POST",
+                data: {
+                    "CR_Cas_Sup_Follow_Up_Mechanism_Befor_Credit_Limit": CR_Cas_Sup_Follow_Up_Mechanism_Befor_Credit_Limit,
+                    "CR_Cas_Sup_Follow_Up_Mechanism_Lessor_Code": CR_Cas_Sup_Follow_Up_Mechanism_Lessor_Code,
+                    "CR_Cas_Sup_Follow_Up_Mechanism_Procedures_Code": CR_Cas_Sup_Follow_Up_Mechanism_Procedures_Code
+                },
+                success: function (data) {
+
+                },
+                error: function (jqXHR, error, errorThrown) {
+
+                    alert("Something went wrong");
+                }
+            });
+        }
+        )
+    })
+                </script>
+
+
+
+
+
+                @*https://www.aspsnippets.com/articles/mvc-inline-editing-implement-inline-editing-in-gridview-in-aspnet-mvc.aspx*@

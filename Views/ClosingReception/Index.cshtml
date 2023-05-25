@@ -1,0 +1,185 @@
+﻿
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_CASLayout.cshtml";
+}
+
+<div class="card-box table-responsive" style="height:79vh">
+    <div class="title_corp"><h3> الحسابات / استلام عهدة / عرض البيانات</h3></div>
+    <div class="subtitle_corp">
+        تمكنك الصفحة من عرض و البحث عن بيانات العهد المرسلة من الموظفين لإستالمها
+    </div>
+
+    <div class="hr_60"></div>
+    <div class="hr_80"></div>
+    <div class="corp_page" style=" float: left; width: 100%">
+        <div class="page_content">
+            <form method="post">
+                <div class="form_bg">
+                    <div class="href_layout">
+                        <a href="/CASHome/index" class="btn_form"><i class="fa fa-times" data-toggle="tooltip" data-placement="top" title="إغلاق"></i></a>
+
+                    </div>
+                    <div class="dataTables_filter">
+                        <label class="label_search_input">
+                            <img src="~/images/srch.png" id="SrchImg" />
+                            بحث:<input class="form-control form_search_input" type="text" id="inputtext" name="TxtSearch" style="width:50%" />
+                        </label>
+                    </div>
+                    <div class="row" style="width:100%;min-height:20px">
+                        <div class="col-md-7" style="float:right">
+
+                        </div>
+                        <div class="col-md-5">
+                            <div class="">
+
+                                <div class="radio_top">
+                                    <input type="radio" id="ShowUnder" name="Show" onclick="LoadData(); GetFilter()" style="float:right;margin-left:4px;width:13px;height:13px;">
+                                    <label for="javascript" style="float: left; font-size: 0.75rem"> مقبول</label>
+                                </div>
+
+                                <div class="radio_top">
+                                    <input type="radio" id="ShowActive" name="Show" onclick="LoadData(); GetFilter()" style="float:right;margin-left:4px;width:13px;height:13px;">
+                                    <label for="css" style="float: left; font-size: 0.75rem">نشط</label>
+                                </div>
+                                <div class="radio_top">
+                                    <input type="radio" id="ShowAll" name="Show" onclick="LoadData();GetFilter()" style="float:right;margin-left:4px;width:13px;height:13px;">
+                                    <label for="html" style="float: left; font-size: 0.75rem">الكل</label>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <div id="Table">
+                        @{
+                            Html.RenderAction("PartialIndex");
+                        }
+                    </div>
+                </div>
+
+
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<script>
+
+    // Get a reference to the HTML table
+    const table = document.getElementById('myTable');
+
+    // Specify the indexes of the columns to format (starting from 0)
+    const columnIndexes = [6]; // 6
+
+    // Loop through each row in the table
+    for (let i = 1; i < table.rows.length; i++) { // starting from row 1 to exclude the header row
+        // Loop through each column index in the list
+        for (let j = 0; j < columnIndexes.length; j++) {
+            // Get the cell in the current row for the specified column index
+            const cell = table.rows[i].cells[columnIndexes[j]];
+
+            // Check if the cell contains an <a> tag
+            if (cell.querySelector('a')) {
+                // If it does, get the inner text of the <a> tag and attempt to parse it as a number
+                const value = parseFloat(cell.querySelector('a').innerText);
+
+                // Check if the parsed value is a valid number
+                if (!isNaN(value) && isFinite(value)) {
+                    // Convert the parsed value to a string with thousand separators and decimal points
+                    const formattedValue = value.toLocaleString('en-US', { minimumFractionDigits: 2 });
+
+                    // Update the inner text of the <a> tag with the formatted value
+                    cell.querySelector('a').innerText = formattedValue;
+                }
+            } else {
+                // If the cell doesn't contain an <a> tag, attempt to parse the cell value as a number
+                const value = parseFloat(cell.innerHTML);
+
+                // Check if the parsed value is a valid number
+                if (!isNaN(value) && isFinite(value)) {
+                    // Convert the parsed value to a string with thousand separators and decimal points
+                    const formattedValue = value.toLocaleString('en-US', { minimumFractionDigits: 2 });
+
+                    // Update the cell's innerHTML property with the formatted value
+                    cell.innerHTML = formattedValue;
+                }
+            }
+        }
+    }
+</script>
+
+<script>
+
+
+    function GetFilter() {
+
+            if (document.getElementById('ShowAll').checked) {
+                $.ajax({
+                         url: '@Url.Action("PartialIndex", "ClosingReception")',
+                        type: "POST",
+                        data: { type: "All" },
+                        success: function (data) {
+                            $('#Table').html(data);
+                            $('#preloader').css('display', 'none');
+                        }
+                });
+            } else if (document.getElementById('ShowActive').checked) {
+
+                 $.ajax({
+                         url: '@Url.Action("PartialIndex", "ClosingReception")',
+                        type: "POST",
+                        data: { type: "I" },
+                        success: function (data) {
+                            $('#Table').html(data);
+                            $('#preloader').css('display', 'none');
+                        }
+                });
+            } else if (document.getElementById('ShowUnder').checked) {
+
+                 $.ajax({
+                        url: '@Url.Action("PartialIndex", "ClosingReception")',
+                        type: "POST",
+                        data: { type: "Q" },
+                        success: function (data) {
+                            $('#Table').html(data);
+                            $('#preloader').css('display', 'none');
+                        }
+                });
+            }
+            else {
+                $.ajax({
+                     url: '@Url.Action("PartialIndex", "ClosingReception")',
+                    type: "POST",
+                    data: { type: "" },
+                        success: function (data) {
+                            $('#Table').html(data);
+                            $('#preloader').css('display', 'none');
+                        }
+                });
+            }
+        }
+</script>
+
+<script>
+    function LoadData() {
+        //alert();
+        $('#preloader').css('display', 'block');
+        $('#status').css('display', 'block');
+    }
+
+</script>
+
+<style>
+    .radio_top {
+        float: left;
+        margin-right: 10px;
+        line-height: 0.8;
+    }
+</style>

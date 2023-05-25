@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b5149cd074f2499dbaf128253479c05c" Name="Diagram1" ZoomLevel="121">
+        <EntityTypeShape EntityType="RentCarDBModel.CR_Mas_Msg_Questions_Answer" Width="2.625" PointX="10.25" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="RentCarDBModel.CR_Mas_Sup_Additional" Width="2.125" PointX="0.5" PointY="15" IsExpanded="true" />
+        <EntityTypeShape EntityType="RentCarDBModel.CR_Mas_Sup_Brand" Width="2.375" PointX="2.875" PointY="33.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="RentCarDBModel.CR_Mas_Sup_Category" Width="2.375" PointX="1.125" PointY="17.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="RentCarDBModel.CR_Mas_Sup_Category_Car" Width="2.75" PointX="5.25" PointY="16.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="RentCarDBModel.CR_Mas_Sup_City" Width="2.375" PointX="6" PointY="24.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="RentCarDBModel.CR_Mas_Sup_Color" Width="2.5" PointX="3" PointY="24.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="RentCarDBModel.CR_Mas_Sup_Country" Width="4.625" PointX="11.25" PointY="33.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="RentCarDBModel.CR_Mas_Sup_Educational_Qualification" Width="2.25" PointX="3" PointY="27.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="RentCarDBModel.CR_Mas_Sup_Employer" Width="2" PointX="6" PointY="20.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="RentCarDBModel.CR_Mas_Sup_Features" Width="2.875" PointX="0.75" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="RentCarDBModel.CR_Mas_Sup_Gender" Width="2.625" PointX="6.875" PointY="34.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="RentCarDBModel.CR_Mas_Sup_Group" Width="2.375" PointX="0.5" PointY="23.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="RentCarDBModel.CR_Mas_Sup_Jobs" Width="2.625" PointX="3" PointY="38" IsExpanded="true" />
+        <EntityTypeShape EntityType="RentCarDBModel.CR_Mas_Sup_Membership" Width="2.5" PointX="3" PointY="41.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="RentCarDBModel.CR_Mas_Sup_Model" Width="3.375" PointX="6" PointY="29.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="RentCarDBModel.CR_Mas_Sup_Nationalities" Width="3.25" PointX="12.375" PointY="24.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="RentCarDBModel.CR_Mas_Sup_Regions" Width="2.5" PointX="3.125" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="RentCarDBModel.CR_Mas_Sup_Sector" Width="2.25" PointX="2.5" PointY="21.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="RentCarDBModel.CR_Mas_Sup_Social" Width="2.5" PointX="3.25" PointY="48.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="RentCarDBModel.CR_Mas_Sup_Specifications" Width="2.875" PointX="6.375" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="RentCarDBModel.CR_Mas_Sys_System_Name" Width="2.5" PointX="4.25" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="RentCarDBModel.CR_Mas_Sys_Tasks" Width="2.5" PointX="7.5" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="RentCarDBModel.CR_Mas_User_Information" Width="2.375" PointX="11" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="RentCarDBModel.CR_Mas_User_Main_Validation" Width="2.375" PointX="13.25" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="RentCarDBModel.CR_Mas_User_Sub_Validation" Width="3.125" PointX="13.25" PointY="8.875" IsExpanded="true" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Mas_Msg_Questions_Answer_CR_Mas_Sys_Tasks" ManuallyRouted="false" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Mas_Sup_Additional_CR_Mas_Sup_Group" ManuallyRouted="false" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Mas_Sup_Model_CR_Mas_Sup_Brand" ManuallyRouted="false" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Mas_Sup_Car_Model_Category_CR_Mas_Sup_Category_Car" ManuallyRouted="false" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Mas_Sup_Category_Car_CR_Mas_Sup_Group" ManuallyRouted="false" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Mas_Sup_Category_Car_CR_Mas_Sup_Model" ManuallyRouted="false" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Mas_Sup_City_CR_Mas_Sup_Group" ManuallyRouted="false" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Mas_Sup_City_CR_Mas_Sup_Regions" ManuallyRouted="false" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Mas_Sup_Color_CR_Mas_Sup_Group" ManuallyRouted="false" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Mas_Sup_Nationalities_CR_Mas_Sup_Country" ManuallyRouted="false" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Mas_Sup_Educational_Qualification_CR_Mas_Sup_Group" ManuallyRouted="false" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Mas_Sup_Employer_CR_Mas_Sup_Group" ManuallyRouted="false" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Mas_Sup_Employer_CR_Mas_Sup_Sector" ManuallyRouted="false" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Mas_Sup_Gender_CR_Mas_Sup_Group" ManuallyRouted="false" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Mas_Sup_Jobs_CR_Mas_Sup_Group" ManuallyRouted="false" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Mas_Sup_Membership_CR_Mas_Sup_Group" ManuallyRouted="false" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Mas_Sup_Model_CR_Mas_Sup_Group" ManuallyRouted="false" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Mas_Sup_Nationalities_CR_Mas_Sup_Group" ManuallyRouted="false" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Mas_Sup_Social_CR_Mas_Sup_Group" ManuallyRouted="false" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Mas_Sys_Tasks_CR_Mas_Sys_System_Name" ManuallyRouted="false" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Mas_User_Main_Validation_CR_Mas_Sys_Tasks" ManuallyRouted="false" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Mas_User_Main_Validation_CR_Mas_User_Information" ManuallyRouted="false" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Mas_User_Sub_Validation_CR_Mas_User_Information" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="RentCarDBModel.CR_Cas_Sup_Branch" Width="3.875" PointX="20.625" PointY="13.625" />
+        <EntityTypeShape EntityType="RentCarDBModel.CR_Mas_Sup_Choices" Width="2.75" PointX="3" PointY="45.125" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Mas_Sup_Choices_CR_Mas_Sup_Group" />
+        <EntityTypeShape EntityType="RentCarDBModel.CR_Cas_Sup_Beneficiary" Width="4" PointX="34.375" PointY="6.375" />
+        <EntityTypeShape EntityType="RentCarDBModel.CR_Cas_Sup_Follow_Up_Mechanism" Width="4.125" PointX="39" PointY="13" />
+        <EntityTypeShape EntityType="RentCarDBModel.CR_Cas_Sup_Owners" Width="3.875" PointX="39.875" PointY="22.75" />
+        <EntityTypeShape EntityType="RentCarDBModel.CR_Mas_Sup_Procedures" Width="3.875" PointX="39.875" PointY="8.375" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Cas_Sup_Follow_Up_Mechanism_CR_Mas_Sup_Procedures" />
+        <EntityTypeShape EntityType="RentCarDBModel.CR_Mas_Address" Width="3.25" PointX="8.25" PointY="17" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Mas_Address_CR_Mas_Sup_City" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Mas_Address_CR_Mas_Sup_Regions" />
+        <EntityTypeShape EntityType="RentCarDBModel.CR_Mas_Com_Supporting" Width="3" PointX="34.5" PointY="12" />
+        <EntityTypeShape EntityType="RentCarDBModel.CR_Mas_Sup_Service_Fee_Tamm" Width="3.125" PointX="46.625" PointY="6.375" />
+        <EntityTypeShape EntityType="RentCarDBModel.CR_Mas_Sup_Virtual_Inspection" Width="3.625" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="RentCarDBModel.CR_Cas_Sup_Car_Doc_Mainten" Width="3.5" PointX="44.5" PointY="1.625" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Cas_Sup_Car_Doc_Mainten_CR_Mas_Sup_Procedures" />
+        <EntityTypeShape EntityType="RentCarDBModel.CR_MAS_Renter_Addre" Width="3.75" PointX="13.125" PointY="17" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_MAS_Renter_Address_CR_Mas_Sup_City" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_MAS_Renter_Address_CR_Mas_Sup_Regions" />
+        <EntityTypeShape EntityType="RentCarDBModel.CR_Cas_Sup_Features" Width="2.875" PointX="52.625" PointY="18.75" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Cas_Sup_Features_Model_CR_Mas_Sup_Features" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Cas_Sup_Features_Model_CR_Mas_Sup_Model" />
+        <EntityTypeShape EntityType="RentCarDBModel.CR_Cas_Car_Price_Choices" Width="1.5" PointX="6.5" PointY="45.625" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Cas_Car_Price_Choices_CR_Mas_Sup_Choices" />
+        <EntityTypeShape EntityType="RentCarDBModel.CR_Cas_Car_Price_Features" Width="3" PointX="4.375" PointY="52.25" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Cas_Car_Price_Features_CR_Mas_Sup_Features" />
+        <EntityTypeShape EntityType="RentCarDBModel.CR_Cas_Car_Price_Additional" Width="3.125" PointX="3.375" PointY="55.5" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Cas_Car_Price_Additional_CR_Mas_Sup_Additional" />
+        <EntityTypeShape EntityType="RentCarDBModel.CR_Elm_Personal" Width="3.125" PointX="17.375" PointY="5.75" />
+        <EntityTypeShape EntityType="RentCarDBModel.CR_ELM_Address" Width="2.75" PointX="14.375" PointY="0.75" />
+        <EntityTypeShape EntityType="RentCarDBModel.CR_Cas_User_Branch_Validity" Width="2" PointX="29.125" PointY="6.75" />
+        <EntityTypeShape EntityType="RentCarDBModel.CR_Cas_Administrative_Procedures" Width="1.5" PointX="10.375" PointY="8.75" />
+        <EntityTypeShape EntityType="RentCarDBModel.CR_Cas_Car_Price_Basic" Width="1.5" PointX="17.375" PointY="10.75" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Cas_Car_Price_Basic_CR_Mas_Sup_Brand" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Cas_Car_Price_Basic_CR_Mas_Sup_Category" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Cas_Car_Price_Basic_CR_Mas_Sup_Model" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Cas_Car_Price_Basic_CR_Mas_Sup_Sector" />
+        <EntityTypeShape EntityType="RentCarDBModel.CR_Cas_Contract_Choices" Width="2.75" PointX="5.375" PointY="0.75" />
+        <EntityTypeShape EntityType="RentCarDBModel.CR_Cas_Contract_Additional" Width="1.5" PointX="6.375" PointY="12.75" />
+        <EntityTypeShape EntityType="RentCarDBModel.CR_Cas_Contract_Virtual_Inspection" Width="1.5" PointX="18.375" PointY="0.75" />
+        <EntityTypeShape EntityType="RentCarDBModel.CR_Mas_Sup_Registration_Car" Width="1.5" PointX="45.375" PointY="23.875" />
+        <EntityTypeShape EntityType="RentCarDBModel.CR_Cas_Sup_Branch_Documentation" Width="2.5" PointX="44.5" PointY="12.75" />
+        <EntityTypeShape EntityType="RentCarDBModel.CR_Mas_Basic_Contract" Width="2.5" PointX="35.75" PointY="20.625" />
+        <EntityTypeShape EntityType="RentCarDBModel.CR_Mas_Service_Tamm_Contract" Width="1.5" PointX="50.5" PointY="13.125" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Cas_Sup_Branch_Documentation_CR_Cas_Sup_Branch" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Cas_Sup_Branch_Documentation_CR_Mas_Sup_Procedures1" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Mas_Basic_Contract_CR_Mas_Sup_Sector" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Mas_Service_Tamm_Contract_CR_Mas_Sup_Service_Fee_Tamm" />
+        <EntityTypeShape EntityType="RentCarDBModel.CR_Cas_Company_Contract" Width="4" PointX="50.5" PointY="6.875" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Cas_Company_Contract_CR_Mas_Sup_Procedures" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Cas_Company_Contract_CR_Mas_Sup_Sector" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Mas_Service_Tamm_Contract_CR_Cas_Company_Contract" />
+        <EntityTypeShape EntityType="RentCarDBModel.CR_Cas_Sup_Membership_Conditions" Width="4.125" PointX="34.5" PointY="26.875" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Cas_Sup_Membership_Conditions_CR_Mas_Sup_Membership" />
+        <EntityTypeShape EntityType="RentCarDBModel.CR_Mas_Sup_Bank" Width="1.5" PointX="14.375" PointY="12.75" />
+        <EntityTypeShape EntityType="RentCarDBModel.CR_Mas_Sup_Main_Account" Width="1.5" PointX="20.375" PointY="1" />
+        <EntityTypeShape EntityType="RentCarDBModel.CR_Mas_Sup_Service_Fee_Tga" Width="1.5" PointX="21.375" PointY="7.75" />
+        <EntityTypeShape EntityType="RentCarDBModel.CR_Mas_Sup_Sub_Account" Width="1.5" PointX="22.625" PointY="1" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Mas_Sup_Sub_Account_CR_Mas_Sup_Main_Account" />
+        <EntityTypeShape EntityType="RentCarDBModel.CR_Cas_Sup_SalesPoint" Width="2.875" PointX="25.875" PointY="22.25" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Cas_Sup_SalesPoint_CR_Cas_Sup_Branch" ManuallyRouted="true" >
+          <ConnectorPoint PointX="24.5" PointY="18.371357351350525" />
+          <ConnectorPoint PointX="25.63028121515492" PointY="27.969558652413735" />
+          <ConnectorPoint PointX="25.807223230372305" PointY="25.180811307947678" />
+          <ConnectorPoint PointX="25.817776769627695" PointY="25.014479108458332" />
+          <ConnectorPoint PointX="25.875" PointY="24.112595338532408" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="RentCarDBModel.CR_Cas_User_Validity_Contract" Width="4.25" PointX="29.125" PointY="0.75" />
+        <EntityTypeShape EntityType="RentCarDBModel.CR_Mas_Sup_Membership_Group" Width="1.5" PointX="19.375" PointY="10.75" />
+        <EntityTypeShape EntityType="RentCarDBModel.CR_Cas_Sup_Main_Com_Account" Width="1.5" PointX="9.375" PointY="22.75" />
+        <EntityTypeShape EntityType="RentCarDBModel.CR_Cas_Sup_Sub_Com_Account" Width="1.5" PointX="16.375" PointY="22.75" />
+        <EntityTypeShape EntityType="RentCarDBModel.CR_Cas_Sup_Main_Brn_Account" Width="1.5" PointX="23.5" PointY="4.75" />
+        <EntityTypeShape EntityType="RentCarDBModel.CR_Cas_Sup_Sub_Brn_Account" Width="1.5" PointX="25.375" PointY="0.75" />
+        <EntityTypeShape EntityType="RentCarDBModel.CR_Cas_Account_Pay_Owed" Width="1.5" PointX="12.75" PointY="62" />
+        <EntityTypeShape EntityType="RentCarDBModel.CR_Cas_Account_Restrictions" Width="1.5" PointX="59.25" PointY="9.875" />
+        <EntityTypeShape EntityType="RentCarDBModel.CR_Cas_Account_TAMM_Owed" Width="1.5" PointX="25.25" PointY="42.625" />
+        <EntityTypeShape EntityType="RentCarDBModel.CR_Cas_Account_Tga_Owed" Width="1.5" PointX="28.25" PointY="38.625" />
+        <EntityTypeShape EntityType="RentCarDBModel.CR_Cas_Account_Transfers_Tenants" Width="1.5" PointX="59.25" PointY="39.625" />
+        <EntityTypeShape EntityType="RentCarDBModel.CR_Mas_Account_Data_Owed" Width="1.5" PointX="28.25" PointY="42.5" />
+        <EntityTypeShape EntityType="RentCarDBModel.CR_Mas_Account_License_Owed" Width="1.5" PointX="25.25" PointY="38.5" />
+        <EntityTypeShape EntityType="RentCarDBModel.CR_Mas_Account_Msg_Owed" Width="1.5" PointX="28.25" PointY="34.5" />
+        <EntityTypeShape EntityType="RentCarDBModel.CR_Mas_Account_Post_Owed" Width="1.5" PointX="25.25" PointY="33.5" />
+        <EntityTypeShape EntityType="RentCarDBModel.CR_Mas_Sup_Age" Width="1.5" PointX="3.625" PointY="71.375" />
+        <EntityTypeShape EntityType="RentCarDBModel.CR_Mas_Sup_Made_Year" Width="1.5" PointX="3.625" PointY="74" />
+        <EntityTypeShape EntityType="RentCarDBModel.CR_Mas_Sup_Service_Fee_Data" Width="1.5" PointX="25.375" PointY="4.75" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Cas_Account_TAMM_Owed_CR_Cas_Account_Pay_Owed" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Cas_Account_Tga_Owed_CR_Cas_Account_Pay_Owed" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Mas_Account_Data_Owed_CR_Cas_Account_Pay_Owed" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Mas_Account_License_Owed_CR_Cas_Account_Pay_Owed" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Mas_Account_Msg_Owed_CR_Cas_Account_Pay_Owed" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Mas_Account_Post_Owed_CR_Cas_Account_Pay_Owed" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Cas_Account_Restrictions_CR_Cas_Sup_Main_Brn_Account" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Cas_Account_Restrictions_CR_Cas_Sup_Main_Com_Account" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Cas_Account_Restrictions_CR_Cas_Sup_Sub_Brn_Account" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Cas_Account_Restrictions_CR_Cas_Sup_Sub_Com_Account" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Cas_Account_TAMM_Owed_CR_Cas_Sup_Branch" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Cas_Account_Tga_Owed_CR_Cas_Sup_Branch" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Cas_Car_Price_Choices_CR_Cas_Car_Price_Basic" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Cas_Car_Price_Features_CR_Cas_Car_Price_Basic" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Cas_Sup_Main_Brn_Account_CR_Cas_Sup_Branch" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Cas_Sup_Sub_Brn_Account_CR_Cas_Sup_Branch" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Mas_Account_Data_Owed_CR_Cas_Sup_Branch" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Mas_Account_License_Owed_CR_Cas_Sup_Branch" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Mas_Account_Msg_Owed_CR_Cas_Sup_Branch" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Mas_Account_Post_Owed_CR_Cas_Sup_Branch" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Cas_Sup_Main_Brn_Account_CR_Mas_Sup_Main_Account" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Cas_Sup_Main_Com_Account_CR_Mas_Sup_Main_Account" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Cas_Sup_Sub_Brn_Account_CR_Mas_Sup_Sub_Account" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Cas_Sup_Sub_Com_Account_CR_Mas_Sup_Sub_Account" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Mas_Sup_Age_CR_Mas_Sup_Group" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Mas_Sup_Made_Year_CR_Mas_Sup_Group" />
+        <EntityTypeShape EntityType="RentCarDBModel.CR_Mas_Service_Bnan_Contract" Width="1.5" PointX="23.375" PointY="8.75" />
+        <EntityTypeShape EntityType="RentCarDBModel.CR_Mas_Sup_Service_Fee_Bnan" Width="1.5" PointX="25.375" PointY="7.75" />
+        <EntityTypeShape EntityType="RentCarDBModel.CR_Cas_User_Information" Width="3.875" PointX="12.75" PointY="67.75" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Cas_Account_Restrictions_CR_Cas_User_Information" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Cas_User_Branch_Validity_CR_Cas_User_Information" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Cas_User_Validity_Contract_CR_Cas_User_Information" />
+        <EntityTypeShape EntityType="RentCarDBModel.CR_Mas_Sup_Payment_Method" Width="2.625" PointX="25.375" PointY="12" />
+        <EntityTypeShape EntityType="RentCarDBModel.CR_Cas_Account_Receipt" Width="1.5" PointX="62.25" PointY="35.875" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Cas_Account_Receipt_CR_Cas_Sup_Branch" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Cas_Account_Receipt_CR_Cas_Sup_SalesPoint" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Cas_Account_Receipt_CR_Cas_User_Information" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Cas_Account_Receipt_CR_Mas_Sup_Payment_Method" />
+        <EntityTypeShape EntityType="RentCarDBModel.CR_Cas_Renter_Lessor" Width="1.5" PointX="19.625" PointY="56.125" />
+        <EntityTypeShape EntityType="RentCarDBModel.CR_Mas_Com_Lessor" Width="1.5" PointX="5.5" PointY="77" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Cas_Account_Pay_Owed_CR_Mas_Com_Lessor" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Cas_Account_Receipt_CR_Cas_Renter_Lessor" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Cas_Account_Restrictions_CR_Cas_Renter_Lessor" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Cas_Account_Transfers_Tenants_CR_Cas_Renter_Lessor" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Cas_Account_Transfers_Tenants_CR_Mas_Com_Lessor" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Cas_Car_Price_Basic_CR_Mas_Com_Lessor" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Cas_Company_Contract_CR_Mas_Com_Lessor" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Cas_Renter_Lessor_CR_Mas_Com_Lessor" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Cas_Sup_Beneficiary_CR_Mas_Com_Lessor" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Cas_Sup_Branch_CR_Mas_Com_Lessor" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Cas_Sup_Features_Model_CR_Mas_Com_Lessor" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Cas_Sup_Follow_Up_Mechanism_CR_Mas_Com_Lessor" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Cas_Sup_Main_Com_Account_CR_Mas_Com_Lessor" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Cas_Sup_Membership_Conditions_CR_Mas_Com_Lessor" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Cas_Sup_Owners_CR_Mas_Com_Lessor" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Cas_Sup_SalesPoint_CR_Mas_Com_Lessor" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Cas_Sup_Sub_Com_Account_CR_Mas_Com_Lessor" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Cas_User_Information_CR_Mas_Com_Lessor" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Mas_Basic_Contract_CR_Mas_Com_Lessor" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Mas_Com_Lessor_CR_Mas_Sup_Sector" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Mas_Com_Supporting_CR_Mas_Com_Lessor" />
+        <EntityTypeShape EntityType="RentCarDBModel.CR_Mas_Renter_Information" Width="3" PointX="17.375" PointY="29" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Cas_Renter_Lessor_CR_Mas_Renter_Information" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Mas_Renter_Information_CR_Mas_Sup_Educational_Qualification" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Mas_Renter_Information_CR_Mas_Sup_Employer" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Mas_Renter_Information_CR_Mas_Sup_Gender" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Mas_Renter_Information_CR_Mas_Sup_Jobs" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Mas_Renter_Information_CR_Mas_Sup_Nationalities" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Mas_Renter_Information_CR_Mas_Sup_Sector" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Mas_Renter_Information_CR_Mas_Sup_Social" />
+        <EntityTypeShape EntityType="RentCarDBModel.CR_Cas_Sup_Car_Information" Width="1.5" PointX="47.625" PointY="41.875" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Cas_Account_Receipt_CR_Cas_Sup_Car_Information" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Cas_Account_Restrictions_CR_Cas_Sup_Car_Information" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Cas_Sup_Car_Information_CR_Cas_Sup_Beneficiary" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Cas_Sup_Car_Information_CR_Cas_Sup_Branch" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Cas_Sup_Car_Doc_Mainten_CR_Cas_Sup_Car_Information1" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Cas_Sup_Car_Information_CR_Cas_Sup_Owners" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Cas_Sup_Car_Information_CR_Mas_Com_Lessor" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Cas_Sup_Car_Information_CR_Mas_Sup_Brand" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Cas_Sup_Car_Information_CR_Mas_Sup_Category_Car" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Cas_Sup_Car_Information_CR_Mas_Sup_Color" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Cas_Sup_Car_Information_CR_Mas_Sup_Model" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Cas_Sup_Car_Information_CR_Mas_Sup_Registration_Car" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Cas_Sup_Features_CR_Cas_Sup_Car_Information" />
+        <EntityTypeShape EntityType="RentCarDBModel.CR_Cas_Contract_Basic" Width="1.5" PointX="49.875" PointY="39.5" />
+        <EntityTypeShape EntityType="RentCarDBModel.CR_Cas_Sup_Bank" Width="1.5" PointX="16.625" PointY="49" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Cas_Account_Receipt_CR_Cas_Sup_Bank" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Cas_Account_Restrictions_CR_Cas_Sup_Bank" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Cas_Account_Transfers_Tenants_CR_Cas_Sup_Bank" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Cas_Contract_Basic_CR_Cas_Car_Price_Basic" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Cas_Contract_Basic_CR_Cas_Sup_Car_Information" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Cas_Contract_Basic_CR_Mas_Com_Lessor" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Cas_Contract_Basic_CR_Mas_Renter_Information" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Cas_Contract_Basic_CR_Mas_Sup_Sector" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Cas_Sup_Bank_CR_Mas_Com_Lessor" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Cas_Sup_Bank_CR_Mas_Sup_Bank" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Cas_Sup_SalesPoint_CR_Cas_Sup_Bank" />
+        <EntityTypeShape EntityType="RentCarDBModel.CR_Cas_Account_Tax_Owed" Width="1.5" PointX="25.25" PointY="27.125" />
+        <AssociationConnector Association="RentCarDBModel.FK_CR_Cas_Account_Tax_Owed_CR_Cas_Sup_Branch" />
+        <EntityTypeShape EntityType="RentCarDBModel.CR_Cas_Account_Bnan_Owed" Width="2.75" PointX="21.375" PointY="23.75" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

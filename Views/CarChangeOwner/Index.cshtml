@@ -1,0 +1,153 @@
+﻿@model IEnumerable<RentCar.Models.CR_Cas_Sup_Car_Information>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_CASLayout.cshtml";
+}
+
+<div class="content">
+
+    <!-- Start Content-->
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card-box table-responsive" style="height:79vh">
+                    <div class="title_corp"><h3> السيارات /تغيير المالك / عرض البيانات</h3></div>
+                    <div class="subtitle_corp">
+                        تمكنك الصفحة من البحث عن بيانات السيارات لتغيير المالك
+                    </div>
+
+                    <div class="hr_60"></div>
+                    <div class="hr_80"></div>
+                    <div class="corp_page" style=" float: left; width: 100%">
+                        <div class="page_content">
+                            <form method="post">
+                                <div class="form_bg">
+                                    <div class="href_layout" style="margin-bottom:10px;">
+                                        <a href="/CASHome/index" class="btn_form"><i class="fa fa-times" data-toggle="tooltip" data-placement="top" title="إغلاق"></i></a>
+                                        @*<a href="/CasOwners/Create" class="btn_form"><i class="fa fa-plus" data-toggle="tooltip" data-placement="top" title="إضافة سجل جديد"></i></a>
+                                        <button type="submit" name="excelCall" title="ترحيل البيانات للإكسل" data-toggle="tooltip" data-placement="top" class="btn_form" value="Excel" style="padding-right:4px;">
+                                            <i class="fa fa-file-excel-o" aria-hidden="true" style=" margin-bottom: 3px; padding-left: 10px;"></i>
+                                        </button>
+                                        <a href="" class="btn_form" data-toggle="tooltip" data-placement="top" title="طباعة" onclick="printDiv()" style=""><i class="fa fa-print"></i></a>*@
+                                    </div>
+                                    <div class="dataTables_filter">
+                                        <label class="label_search_input">
+                                            <img src="~/images/srch.png" id="SrchImg" />
+                                            بحث:<input class="form-control form_search_input" type="text" id="inputtext" name="TxtSearch" />
+                                        </label>
+                                    </div>
+                                    
+                                    <div class="responsive-table-plugin">
+                                        <div class="table-rep-plugin">
+                                            <div class="table-responsive" data-pattern="priority-columns" style="border:none;">
+                                                <div id="dtBasicExample_print">
+                                                    <table id="myTable" class="table table-striped mb-0" style="cursor:pointer">
+                                                        <thead>
+                                                            <tr>
+                                                                <th width="13%">
+                                                                    @Html.DisplayNameFor(model => model.CR_Cas_Sup_Car_Serail_No)
+                                                                </th>
+                                                                <th width="20%">
+                                                                    المالك الحالي
+                                                                </th>
+                                                                @*<th>
+                                                                        @Html.DisplayNameFor(model => model.CR_Cas_Sup_Car_Location_Branch_Code)
+                                                                    </th>*@
+                                                                <th width="12%">
+                                                                    @Html.DisplayNameFor(model => model.CR_Cas_Sup_Car_Category_Code)
+                                                                </th>
+                                                                <th width="45%">
+                                                                    السيارة
+                                                                </th>
+
+                                                            </tr>
+                                                        </thead>
+
+                                                        <tbody id="tbl">
+                                                            @foreach (var item in Model)
+                                                            {
+                                                                <tr>
+                                                                    <td align="center" width="13%">
+                                                                        <a href="~/CarChangeOwner/Edit/?serialNo=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Serail_No)">
+                                                                            @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Serail_No)
+                                                                        </a>
+                                                                    </td>
+                                                                    <td width="20%">
+                                                                        <a href="~/CarChangeOwner/Edit/?serialNo=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Serail_No)">
+                                                                            @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Owners.CR_Cas_Sup_Owners_Ar_Long_Name)
+                                                                        </a>
+                                                                    </td>
+                                                                    @*<td>
+                                                                            <a href="~/TransferCars/Edit/@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Serail_No)">
+                                                                                @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch.CR_Cas_Sup_Branch_Ar_Short_Name)
+                                                                            </a>
+                                                                        </td>*@
+                                                                    <td width="12%">
+                                                                        <a href="~/CarChangeOwner/Edit/?serialNo=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Serail_No)">
+                                                                            @Html.DisplayFor(modelItem => item.CR_Mas_Sup_Category_Car.CR_Mas_Sup_Category.CR_Mas_Sup_Category_Ar_Name)
+                                                                        </a>
+                                                                    </td>
+                                                                    <td width="45%">
+                                                                        <a href="~/CarChangeOwner/Edit/?serialNo=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Serail_No)">
+                                                                            @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Collect_Ar_Name)
+                                                                        </a>
+                                                                    </td>
+
+                                                                   
+                                                                </tr>
+                                                            }
+                                                        </tbody>
+
+                                                    </table>
+                                                </div>
+                                                <iframe name="print_frame" width="0" height="0" frameborder="0" src="about:blank"></iframe>
+                                                <script>
+                                                    function printDiv() {
+                                                        window.frames["print_frame"].document.body.innerHTML = document.getElementById("dtBasicExample_print").innerHTML;
+                                                        window.frames["print_frame"].window.focus();
+                                                        window.frames["print_frame"].window.print();
+                                                    }
+                                                </script>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- end row -->
+
+
+        </div> <!-- container-fluid -->
+
+    </div> <!-- content -->
+</div>
+<script type="text/javascript">
+        window.addEventListener("load", function () {
+
+            if ('@TempData["TempModel"]'=="Added") {
+                toastr.success("تم الحفظ بنجاح");
+            }
+
+            if ('@TempData["TempModel"]'=="Saved") {
+                toastr.success("تم الحفظ بنجاح");
+            }
+
+            if ('@TempData["TempModel"]'=="Holded") {
+                toastr.success("تم التعطيل بنجاح");
+            }
+
+            if ('@TempData["TempModel"]'=="Deleted") {
+                toastr.success("تم الحذف بنجاح");
+            }
+
+            if ('@TempData["TempModel"]'=="Activated") {
+                toastr.success("تم التنشيط بنجاح");
+            }
+
+        });
+</script>

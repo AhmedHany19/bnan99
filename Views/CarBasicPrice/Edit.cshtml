@@ -1,0 +1,781 @@
+﻿@model RentCar.Models.CR_Cas_Car_Price_Basic
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/CarBasicPrice/_BasicPriceLayoutEdit.cshtml";
+}
+
+<style>
+    .label6 {
+        font-size: 14px;
+        font-weight: bold;
+        padding-left: 0
+    }
+
+    .row {
+        min-height: 32.5px;
+    }
+
+    .width_tab {
+        margin-bottom: 10px;
+    }
+    /* Mark input boxes that gets an error on validation: */
+    input.invalid {
+        background-color: #ffdddd;
+    }
+
+    /* Hide all steps by default: */
+    .tab {
+        display: none;
+    }
+
+    .step {
+        display: block !important;
+        color: #fff;
+        width: 100%;
+        height: 40px;
+        line-height: 40px;
+        background: #EDA63C;
+    }
+
+        .step:before {
+            content: "";
+            position: absolute;
+            right: 0px;
+            bottom: 0px;
+            width: 0;
+            height: 0;
+            border-right: 12px solid #fff;
+            border-top: 20px solid transparent;
+            border-bottom: 20px solid transparent;
+            background: #EDA63C;
+        }
+
+        .step:after {
+            content: "";
+            position: absolute;
+            left: 0px;
+            bottom: 0px;
+            width: 0;
+            height: 0;
+            border-right: 12px solid #EDA63C;
+            border-top: 20px solid transparent;
+            border-bottom: 20px solid transparent;
+            background: transparent;
+        }
+
+    .tab_price {
+        display: inline-block !important;
+    }
+
+    .step.active, .step.active:before {
+        background-color: #0288C7;
+    }
+
+        .step.active:after {
+            border-right: 12px solid #0288C7;
+        }
+    /* Mark the steps that are finished and valid: */
+    .step.finish {
+        background-color: none;
+    }
+
+    input.invalid {
+        background: none;
+        border: solid 1px red
+    }
+
+    .tab_price.first span:before {
+        border-right: none
+    }
+
+    .tab_price.last span:after {
+        border-right: none
+    }
+
+    .texterr {
+        position: absolute;
+        margin-top: 30px;
+        font-size: 12px !important
+    }
+</style>
+
+<div id="regForm" style="min-height:350px; white-space:nowrap">
+
+    <div style="min-height:67%">
+        <div class="tab">
+            <div style="min-height: 350px">
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                <!-- Circles which indicates the steps of the form: -->
+                <div class="row width_tab mb-2">
+                    <div class="col-md-3 tab_price first" style="z-index: 99999; margin-left: -8px;">
+                        <span class="step active">السعر الأساسي</span>
+                    </div>
+                    <div class="col-md-3 tab_price" style="z-index: 9999; margin-left: -8px;">
+                        <span class="step">أسعار المميزات</span>
+                    </div>
+                    <div class="col-md-3 tab_price" style="z-index: 999; margin-left: -8px;">
+                        <span class="step">أسعار الخيارات</span>
+                    </div>
+                    <div class="col-md-3 tab_price last" style="z-index:99;">
+                        <span class="step ">أسعار الاضافات</span>
+                    </div>
+                </div>
+
+                <div class="form-group row" style="margin-top:10px;">
+
+                    @Html.HiddenFor(Model => Model.CR_Cas_Car_Price_Basic_No)
+                    @Html.HiddenFor(Model => Model.CR_Cas_Car_Price_Basic_Date)
+                    @Html.HiddenFor(Model => Model.CR_Cas_Car_Price_Basic_Sector)
+                    @Html.HiddenFor(Model => Model.CR_Cas_Car_Price_Basic_Model_Code)
+                    @Html.HiddenFor(Model => Model.CR_Cas_Car_Price_Basic_Car_Year)
+
+                    <div class="col-md-4" style="float:right;">
+                        <div class="row">
+                            <div class="col-md-6 label6">
+                                تاريخ بدايته
+                            </div>
+                            <div class="col-md-6 input6">
+                                <input type="text" class="form-control text-box single-line" id="CR_Cas_Car_Price_Basic_Start_Date" name="CR_Cas_Car_Price_Basic_Start_Date" value="@ViewBag.StartDate" style="width:100%" readonly>
+                                <div class="texterr" id="StDate" style="float: right; margin-top: 0 !important"></div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-4" style="float:right;">
+                        <div class="row">
+                            <div class="col-md-6 label6">
+                                تاريخ نهايته
+                            </div>
+                            <div class="col-md-6 input6">
+                                <input class="form-control text-box single-line" id="CR_Cas_Car_Price_Basic_End_Date" name="CR_Cas_Car_Price_Basic_End_Date" type="text" value="@ViewBag.EndDate" style="width:100%" readonly>
+                                <div class="texterr" id="EnDate" style="float: right; margin-top: 0 !important"></div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="form-group row" style="">
+                    <div class="col-md-4" style="float:right;">
+                        <div class="row">
+                            <div class="col-md-6 label6">
+                                قيمة الإيجار اليومي
+                            </div>
+                            <div class="col-md-6 input6">
+                                @Html.TextBoxFor(model => model.CR_Cas_Car_Price_Basic_Daily_Rent, htmlAttributes: new { @class = "form-control ", style = "float:right;width:100%", onkeyup = "", autocomplete = "off", onpaste = "return false;", maxlength = "10", @readonly = "readonly" })
+                                <div class="texterr" id="DailyRent" style="float:right;"></div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="col-md-4" style="float:right;">
+                        <div class="row">
+                            <div class="col-md-6 label6">
+                                قيمة الإيجار الأسبوعي
+                            </div>
+                            <div class="col-md-6 input6">
+                                @Html.TextBoxFor(model => model.CR_Cas_Car_Price_Basic_Weekly_Rent, htmlAttributes: new { @class = "form-control ", style = "float:right;width:100%", onkeyup = "", autocomplete = "off", onpaste = "return false;", maxlength = "10", @readonly = "readonly" })
+                                <div class="texterr" id="WeeklyRent" style="float:right;"></div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="col-md-4" style="float:right;">
+                        <div class="row">
+                            <div class="col-md-6 label6">
+                                قيمة الإيجار الشهري
+                            </div>
+                            <div class="col-md-6 input6">
+                                @Html.TextBoxFor(model => model.CR_Cas_Car_Price_Basic_Monthly_Rent, htmlAttributes: new { @class = "form-control ", style = "float:right;width:100%", onkeyup = "movetoNext('CR_Cas_Sup_Branch_Tax_No')", autocomplete = "off", onpaste = "return false;", maxlength = "10", @readonly = "readonly" })
+                                <div class="texterr" id="MonthlyRent" style="float:right;"></div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="form-group row" style="">
+                    <div class="col-md-4" style="float:right;">
+                        <div class="row">
+                            <div class="col-md-6 label6">
+                                الكيلومترات المجانية
+                            </div>
+                            <div class="col-md-6 input6">
+                                @Html.TextBoxFor(model => model.CR_Cas_Car_Price_Basic_No_Daily_Free_KM, htmlAttributes: new { @class = "form-control ", style = "float:right;width:100%", onkeyup = "movetoNext('')", autocomplete = "off", oninput = "this.value=this.value.replace(/[^0-9]/g,'')", onpaste = "return false;", maxlength = "10", @readonly = "readonly" })
+                                <div class="texterr" id="Daily_Free_KM" style="float:right;"></div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-4" style="float:right;">
+                        <div class="row">
+                            <div class="col-md-6 label6">
+                                قيمة الكيلومتر الإضافي
+                            </div>
+                            <div class="col-md-6 input6">
+                                @Html.TextBoxFor(model => model.CR_Cas_Car_Price_Basic_Additional_KM_Value, htmlAttributes: new { @class = "form-control ", style = "float:right;width:100%", onkeyup = "movetoNext('CR_Cas_Sup_Branch_Tax_No')", autocomplete = "off", oninput = "this.value=this.value.replace(/[^0-9]/g,.'')", onpaste = "return false;", maxlength = "6", @readonly = "readonly" })
+                                <div class="texterr" id="Additional_KM_Value" style="float:right;"></div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="form-group row" style="margin-top:0px;">
+                    <div class="col-md-4" style="float:right;">
+                        <div class="row">
+                            <div class="col-md-6 label6">
+                                الساعات الإضافية المجانية
+                            </div>
+                            <div class="col-md-6 input6">
+                                @Html.TextBoxFor(model => model.CR_Cas_Car_Price_Basic_No_Free_Additional_Hours, htmlAttributes: new { @class = "form-control ", style = "float:right;width:100%", onkeyup = "movetoNext('')", autocomplete = "off", oninput = "this.value=this.value.replace(/[^0-9]/g,'')", onpaste = "return false;", maxlength = "10", @readonly = "readonly" })
+                                <div class="texterr" style="float:right;"></div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="col-md-4">
+                        <div class="row">
+                            <div class="col-md-6 label6">
+                                الحد الأعلى للساعات الإضافية
+                            </div>
+                            <div class="col-md-6 input6">
+                                @Html.TextBoxFor(model => model.CR_Cas_Car_Price_Basic_Hour_Max, htmlAttributes: new { @class = "form-control ", style = "margin-right:18px", onkeyup = "movetoNext('CR_Cas_Sup_Branch_Tax_No')", autocomplete = "off", oninput = "this.value=this.value.replace(/[^0-9]/g,'')", onpaste = "return false;", maxlength = "10", @readonly = "readonly" })
+                                <div class="texterr" style="float:right"></div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="col-md-4" style="float:right;">
+                        <div class="row">
+                            <div class="col-md-6 label6">
+                                قيمة الساعة الإضافية
+                            </div>
+                            <div class="col-md-6 input6">
+                                @Html.TextBoxFor(model => model.CR_Cas_Car_Price_Basic_Extra_Hour_Value, htmlAttributes: new { @class = "form-control ", style = "float:right;width:100%", onkeyup = "movetoNext('CR_Cas_Sup_Branch_Tax_No')", autocomplete = "off", oninput = "this.value=this.value.replace(/[^0-9]/g,.'')", onpaste = "return false;", maxlength = "6", @readonly = "readonly" })
+                                <div class="texterr" style="float:right"></div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="form-group row" style="margin-top:0px;">
+                    <div class="col-md-4" style="float:right;">
+                        <div class="row">
+                            <div class="col-md-6 label6">
+                                الحد الأدنى لعمر المستأجر
+                            </div>
+                            <div class="col-md-6 input6">
+                                @Html.TextBoxFor(model => model.CR_Cas_Car_Price_Basic_Min_Age_Renter, htmlAttributes: new { @class = "form-control ", style = "float:right;width:100%", onkeyup = "movetoNext('')", autocomplete = "off", oninput = "this.value=this.value.replace(/[^0-9]/g,'')", onpaste = "return false;", maxlength = "2", @readonly = "readonly" })
+                                <div class="texterr" style="float:right;"></div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="col-md-4" style="float:right;">
+                        <div class="row">
+                            <div class="col-md-6 label6">
+                                الحد الأعلى لعمر المستأجر
+                            </div>
+                            <div class="col-md-6 input6">
+                                @Html.TextBoxFor(model => model.CR_Cas_Car_Price_Basic_Max_Age_Renter, htmlAttributes: new { @class = "form-control ", style = "float:right;width:100%", onkeyup = "movetoNext('')", autocomplete = "off", oninput = "this.value=this.value.replace(/[^0-9]/g,'')", onpaste = "return false;", maxlength = "2", @readonly = "readonly" })
+                                <div class="texterr" style="float:right"></div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+
+                <div class="form-group row" style="margin-top:0px;">
+                    <div class="col-md-4" style="float:right;">
+                        <div class="row">
+                            <div class="col-md-6 label6">
+                                السماح بسائق اضافي
+                            </div>
+                            <div class="col-md-6 input6">
+                                @Html.CheckBox("CR_Cas_Car_Price_Basic_Additional_Driver", new { @class = "form-control", style = "width: 18%; height: 18px;" })
+                                <div class="texterr" id="Additional_Driver" style="float:right;"></div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="col-md-4" style="float:right;">
+                        <div class="row">
+                            <div class="col-md-6 label6">
+                                تكلفة السائق الاضافي
+                            </div>
+                            <div class="col-md-6 input6">
+                                @Html.TextBoxFor(model => model.CR_Cas_Car_Price_Basic_Additional_Driver_Value, htmlAttributes: new { @class = "form-control ", style = "float:right;width:100%", onkeyup = "movetoNext('')", autocomplete = "off", oninput = "this.value=this.value.replace(/[^0-9]/g,'')", onpaste = "return false;", maxlength = "10", @readonly = "readonly" })
+                                <div class="texterr" id="Additional_Driver_Value" style="float:right"></div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="form-group row" style="margin-top:0px;">
+                    <div class="col-md-4" style="float:right;">
+                        <div class="row">
+                            <div class="col-md-6 label6">
+                                رسوم التفويض الداخلي
+                            </div>
+                            <div class="col-md-6 input6">
+                                @Html.TextBoxFor(model => model.CR_Cas_Car_Price_Basic_Internal_Fees_Tamm, htmlAttributes: new { @class = "form-control ", style = "float:right;width:100%", onkeyup = "movetoNext('')", autocomplete = "off", oninput = "this.value=this.value.replace(/[^0-9]/g,'')", onpaste = "return false;", maxlength = "6", @readonly = "readonly" })
+                                <div class="texterr" id="Internal_Fees_Tamm" style="float:right;"></div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="col-md-4" style="float:right;">
+                        <div class="row">
+                            <div class="col-md-6 label6">
+                                رسوم التفويض الدولي
+                            </div>
+                            <div class="col-md-6 input6">
+                                @Html.TextBoxFor(model => model.CR_Cas_Car_Price_Basic_International_Fees_Tamm, htmlAttributes: new { @class = "form-control ", style = "float:right;width:100%", onkeyup = "movetoNext('')", autocomplete = "off", oninput = "this.value=this.value.replace(/[^0-9]/g,'')", onpaste = "return false;", maxlength = "6", @readonly = "readonly" })
+                                <div class="texterr" id="International_Fees_Tamm" style="float:right"></div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="form-group row" style="margin-top:0px;">
+
+                    <div class="col-md-4" style="float:right;">
+                        <div class="row">
+                            <div class="col-md-6 label6">
+                                نسبة الضريبة
+                            </div>
+                            <div class="col-md-6 input6">
+                                @Html.TextBoxFor(model => model.CR_Cas_Car_Price_Basic_Rental_Tax_Rate, htmlAttributes: new { @class = "form-control ", style = "float:right;width:100%", onkeyup = "movetoNext('')", autocomplete = "off", oninput = "this.value=this.value.replace(/[^0-9]/g,'')", onpaste = "return false;", maxlength = "5", @readonly = "readonly" })
+                                <div class="texterr" style="float:right;"></div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    @*<div class="col-md-4" style="float:right;">
+                            <div class="row">
+                                <div class="col-md-6 label6">
+                                    نسبة الحد الأدنى من المقدم
+                                </div>
+                                <div class="col-md-6 input6">
+                                    @Html.TextBoxFor(model => model.CR_Cas_Car_Price_Basic_Min_Percentage_Contract_Value, htmlAttributes: new { @class = "form-control ", style = "float:right;width:100%", onkeyup = "movetoNext('')", autocomplete = "off", oninput = "this.value=this.value.replace(/[^0-9]/g,'')", onpaste = "return false;", maxlength = "2" })
+                                    <div class="texterr" style="float:right"></div>
+                                </div>
+
+                            </div>
+
+                        </div>*@
+
+
+                    <!--<div class="col-md-4" style="float:right;">
+                    <div class="row">
+                        <div class="col-md-6 label6">
+                            هل يتطلب ائتمان مالي
+                        </div>
+                        <div class="col-md-6 input6">-->
+                    @*<div class="custom-control custom-switch">
+                            <input type="checkbox" class="custom-control-input" id="CR_Cas_Car_Price_Basic_Activation" name="CR_Cas_Car_Price_Basic_Activation">
+                            <label class="custom-control-label" for="CR_Cas_Car_Price_Basic_Activation"></label>
+                        </div>*@
+                    <!--@Html.CheckBox("CR_Cas_Car_Price_Basic_Activation", new { htmlAttributes = new { @class = "form-control" } })
+
+                                <div class="texterr" style="float:right;"></div>
+                            </div>
+
+                        </div>
+
+                    </div>-->
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+        <div class="tab">
+            <!-- Circles which indicates the steps of the form: -->
+            <div class="row" style="text-align: center; margin-bottom: 10px; width: 104.5%">
+                <div class="col-md-3 tab_price first" style="z-index: 99999; margin-left: -8px;">
+                    <span class="step ">السعر الأساسي</span>
+                </div>
+                <div class="col-md-3 tab_price" style="z-index: 9999; margin-left: -8px;">
+                    <span class="step active">أسعار المميزات</span>
+                </div>
+                <div class="col-md-3 tab_price" style="z-index: 999; margin-left: -8px;">
+                    <span class="step">أسعار الخيارات</span>
+                </div>
+                <div class="col-md-3 tab_price last" style="z-index:99;">
+                    <span class="step ">أسعار الاضافات</span>
+                </div>
+            </div>
+            <div>
+                @{
+                    @Html.Action("FeaturesListEdit", "CarBasicPrice", new { serialnumber = ViewBag.serialNumber })
+                }
+            </div>
+        </div>
+        <div class="tab" id="FeaturesList">
+            <!-- Circles which indicates the steps of the form: -->
+            <div class="row" style="text-align: center; margin-bottom: 10px; width: 104.5%">
+                <div class="col-md-3 tab_price first" style="z-index: 99999; margin-left: -8px;">
+                    <span class="step ">السعر الأساسي</span>
+                </div>
+                <div class="col-md-3 tab_price" style="z-index: 9999; margin-left: -8px;">
+                    <span class="step">أسعار المميزات</span>
+                </div>
+                <div class="col-md-3 tab_price" style="z-index: 999; margin-left: -8px;">
+                    <span class="step active">أسعار الخيارات</span>
+                </div>
+                <div class="col-md-3 tab_price last" style="z-index:99;">
+                    <span class="step ">أسعار الاضافات</span>
+                </div>
+            </div>
+            @{
+                @Html.Action("ChoicesListEdit", "CarBasicPrice", new { serialnumber = ViewBag.serialNumber })
+
+            }
+        </div>
+        <div class="tab">
+            <!-- Circles which indicates the steps of the form: -->
+            <div class="row" style="text-align:center;margin-bottom:10px;width:104.5%">
+                <div class="col-md-3 tab_price first" style="z-index: 99999; margin-left: -8px;">
+                    <span class="step ">السعر الأساسي</span>
+                </div>
+                <div class="col-md-3 tab_price" style="z-index: 9999; margin-left: -8px;">
+                    <span class="step">أسعار المميزات </span>
+                </div>
+                <div class="col-md-3 tab_price" style="z-index: 999; margin-left: -8px;">
+                    <span class="step">أسعار الخيارات</span>
+                </div>
+                <div class="col-md-3 tab_price last" style="z-index:99;">
+                    <span class="step active">أسعار الاضافات</span>
+                </div>
+            </div>
+            @{
+                @Html.Action("AdditionalListEdit", "CarBasicPrice", new { serialnumber = ViewBag.serialNumber })
+            }
+        </div>
+    </div>
+    <div style="margin-top:0px;float:left;width:100%;padding-bottom:15px;">
+        <div>
+            <button type="button" id="prevBtn" onclick="nextPrev(-1)" class="btn btn-primary waves-effect" style="float:right;margin-left:20px;">السابق</button>
+            <button type="button" id="nextBtn" onclick="nextPrev(1)" class="btn btn-primary waves-effect" style="float: right; margin-left: 20px;">التالي</button>
+            <input type="submit" name="Delete" class="btn btn-primary waves-effect" id="Delete" value="حذف" style="display: none; margin-left: 20px;" />
+
+            <a href="/CarBasicPrice/Index/" tabindex="" class="btn btn-primary waves-effect" style="float:left;">انهاء</a>
+        </div>
+    </div>
+
+</div>
+<script>
+
+
+</script>
+
+<script>
+
+</script>
+
+<script>
+
+    var currentTab = 0; // Current tab is set to be the first tab (0)
+    showTab(currentTab); // Display the current tab
+
+    function showTab(n) {
+        // This function will display the specified tab of the form...
+        var x = document.getElementsByClassName("tab");
+        x[n].style.display = "block";
+        //... and fix the Previous/Next buttons:
+        if (n == 0) {
+            document.getElementById("prevBtn").style.display = "none";
+        } else {
+            document.getElementById("prevBtn").style.display = "inline";
+        }
+        if (n == (x.length - 1)) {
+            //document.getElementById("nextBtn").innerHTML = "حفظ";
+            document.getElementById("nextBtn").style.display = "none";
+
+            if ($("#CR_Cas_Car_Price_Basic_Status").val() != "D") {
+                $("#Delete").css('display', 'inline');
+            }
+        } else {
+            document.getElementById("nextBtn").innerHTML = "التالي";
+        }
+        //... and run a function that will display the correct step indicator:
+        fixStepIndicator(n)
+    }
+
+    function nextPrev(n) {
+        if (!($('#FeaturesList1').find('tr').length > 1) && !($('#ChoicesList').find('tr').length > 1) && !($('#AdditionalList').find('tr').length > 1)) {
+            if (n > 0) {
+                
+                if ($("#CR_Cas_Car_Price_Basic_Status").val() != "D") {
+                    $("#Delete").css('display', 'inline');
+                }
+                toastr.info(" لا يوجد   مميزات    او خيارات  او   إضافات  ")
+                return;
+            }
+        }
+        if (currentTab == 1 && !($('#ChoicesList').find('tr').length > 1) && !($('#AdditionalList').find('tr').length > 1)) {
+            if (n > 0) {
+                toastr.info(" لا يوجد  خيارات او إضافات  ")
+                return;
+            }
+
+        }
+        if (currentTab == 2 && !($('#AdditionalList').find('tr').length > 1)) {
+            if (n > 0) {
+                toastr.info(" لا يوجد   إضافات  ")
+                return;
+            }
+        }
+   
+
+        // This function will figure out which tab to display
+        var x = document.getElementsByClassName("tab");
+        // Exit the function if any field in the current tab is invalid:
+        /*if (n == 1 && !validateForm()) return false;*/
+        // Hide the current tab:
+        x[currentTab].style.display = "none";
+
+        if (n > 0) {
+            if (currentTab == 0) {
+                if (!($(x[1]).find("table").find("tr").length > 2) && !($(x[2]).find("table").find("tr").length > 2)) {
+                    currentTab = 3
+                } else if (!($(x[1]).find("table").find("tr").length > 2)) {
+                    currentTab = 2
+                    if (!($(x[3]).find("table").find("tr").length > 2)) {
+                        if ($("#CR_Cas_Car_Price_Basic_Status").val() != "D") {
+                            $("#Delete").css('display', 'inline');
+                        }
+                        $("#nextBtn").css('display', 'block');
+                    }
+                } else {
+                    currentTab = 1
+                    if (!($(x[2]).find("table").find("tr").length > 2) && !($(x[3]).find("table").find("tr").length > 2)) {
+                        if ($("#CR_Cas_Car_Price_Basic_Status").val() != "D") {
+                            $("#Delete").css('display', 'inline');
+                        }
+                        $("#nextBtn").css('display', 'block');
+                    }
+                }
+            } else if (currentTab == 1) {
+                if (!($(x[2]).find("table").find("tr").length > 2) && !($(x[3]).find("table").find("tr").length > 2)) {
+                    if ($("#CR_Cas_Car_Price_Basic_Status").val() != "D") {
+                        $("#Delete").css('display', 'inline');
+                    }
+                    $("#nextBtn").css('display', 'block');
+                } else if (!($(x[2]).find("table").find("tr").length > 2)) {
+                    currentTab = 3
+                } else {
+                    currentTab = 2
+                    if (!($(x[3]).find("table").find("tr").length > 2)) {
+                        if ($("#CR_Cas_Car_Price_Basic_Status").val != "D") {
+                            $("#Delete").css('display', 'inline');
+                        }
+                        $("#nextBtn").css('display', 'block');
+
+                    }
+                }
+            } else if (currentTab == 2) {
+                if (!($(x[3]).find("table").find("tr").length > 2)) {
+                    if ($("#CR_Cas_Car_Price_Basic_Status").val() != "D") {
+                        $("#Delete").css('display', 'inline');
+                    }
+                    $("#nextBtn").css('display', 'block');
+
+                } else {
+                    currentTab = 3
+                }
+            }
+        } else if (n < 0) {
+            if (currentTab == 1) {
+                console.log(n)
+                currentTab = 0;
+                $("#Delete").css('display', 'none');
+                $("#nextBtn").css('display', 'block');
+            } else if (currentTab == 2) {
+                if (!($(x[1]).find("table").find("tr").length > 2)) {
+                    currentTab = 0;
+                    $("#Delete").css('display', 'none');
+                    $("#nextBtn").css('display', 'block');
+                }
+                else {
+                    currentTab = 1
+                }
+            } else if (currentTab == 3) {
+                if (!($(x[2]).find("table").find("tr").length > 2) && !($(x[1]).find("table").find("tr").length > 2)) {
+                    currentTab = 0;
+                    $("#Delete").css('display', 'none');
+                } else if (!($(x[2]).find("table").find("tr").length > 2)) {
+                    currentTab = 1;
+                    $("#Delete").css('display', 'none');
+                }
+                else {
+                    currentTab = 2
+                    if ($("#CR_Cas_Car_Price_Basic_Status").val() != "D") {
+                        $("#Delete").css('display', 'inline');
+                    }
+            
+                }
+            }
+        }
+
+
+
+
+        // if you have reached the end of the form...
+        if (currentTab >= x.length) {
+            // ... the form gets submitted:
+            document.getElementById("regForm").submit();
+            return false;
+        }
+        // Otherwise, display the correct tab:
+        showTab(currentTab);
+    }
+
+    /* function validateForm() {
+         // This function deals with validation of the form fields
+         var x, y, i, valid = true;
+         x = document.getElementsByClassName("tab");
+         y = x[currentTab].getElementsByTagName("input");
+         // A loop that checks every input field in the current tab:
+         for (i = 0; i < y.length; i++) {
+             // If a field is empty...
+             if (y[i].value == "") {
+                 // add an "invalid" class to the field:
+                 y[i].className += " invalid";
+                 // and set the current valid status to false
+                 valid = false;
+             }
+         }
+
+         var stdate = document.getElementById("CR_Cas_Car_Price_Basic_Start_Date").value;
+         var endate = document.getElementById("CR_Cas_Car_Price_Basic_End_Date").value;
+
+         if (stdate >= endate) {
+             //document.getElementById("StDate").style.display = "inline";
+             document.getElementById("StDate").innerHTML = "الرجاء التأكد من التاريخ";
+             document.getElementById("EnDate").innerHTML = "الرجاء التأكد من التاريخ";
+
+             valid = false;
+         }
+
+         var dailyrent = document.getElementById("CR_Cas_Car_Price_Basic_Daily_Rent").value;
+         var weeklyrent = document.getElementById("CR_Cas_Car_Price_Basic_Weekly_Rent").value;
+         var monthlylyrent = document.getElementById("CR_Cas_Car_Price_Basic_Monthly_Rent").value;
+         if (Number(dailyrent) < Number(weeklyrent) || Number(weeklyrent) < Number(monthlylyrent)) {
+
+             document.getElementById("DailyRent").innerHTML = "الرجاء التأكد من القيمة";
+             document.getElementById("WeeklyRent").innerHTML = "الرجاء التأكد من القيمة";
+             document.getElementById("MonthlyRent").innerHTML = "الرجاء التأكد من القيمة";
+             valid = false;
+         } else {
+             document.getElementById("DailyRent").innerHTML = "";
+             document.getElementById("WeeklyRent").innerHTML = "";
+             document.getElementById("MonthlyRent").innerHTML = "";
+         }
+
+         //valid = true;
+         //If the valid status is true, mark the step as finished and valid:
+         if (valid) {
+             document.getElementsByClassName("step")[currentTab].className += " finish";
+         }
+         return valid; // return the valid status
+     }
+ */
+
+
+
+
+
+
+
+    //function fixStepIndicator(n) {
+    //    // This function removes the "active" class of all steps...
+    //    var i, x = document.getElementsByClassName("step");
+    //    for (i = 0; i < x.length; i++) {
+    //        x[i].className = x[i].className.replace(" active", "");
+    //    }
+    //    //... and adds the "active" class on the current step:
+    //    x[n].className += " active";
+    //}
+</script>
+
+
+<script type="text/javascript">
+        $(function () {
+            $("#CR_Cas_Car_Price_Basic_Model_Code").change(function () {
+                $.ajax({
+                    url: '@Url.Action("FeaturesList", "CarBasicPrice")',
+                    type: "POST",
+                    dataType: "html",
+                    data: { year: $("#CR_Cas_Car_Price_Basic_Car_Year").val(), modelcode: $("#CR_Cas_Car_Price_Basic_Model_Code").val() },
+                    success: function (data) {
+                        $('#FeaturesList').html(data);
+                    },
+                });
+            });
+        });
+</script>
+<script>
+
+    window.addEventListener('load', (event) => {
+        document.getElementById("CR_Cas_Car_Price_Basic_Additional_Driver").disabled = true;
+    });
+</script>
+
+<style>
+    .form-group .row {
+        margin-bottom: 15px !important;
+    }
+</style>
+
+

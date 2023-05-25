@@ -1,0 +1,197 @@
+﻿@model IEnumerable<RentCar.Models.CR_Cas_Company_Contract>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/Bootstrap_Arabic/bootstrap.min.css" rel="stylesheet" />
+<link href="~/Bootstrap_Arabic/bootstrap-big-grid.min.css" rel="stylesheet" />
+<link href="~/Bootstrap_Arabic/jquery.dataTables.min.css" type="text/css" rel="stylesheet" />
+<link href="~/Bootstrap_Arabic/font-awesome.css" type="text/css" rel="stylesheet" />
+<script src="~/Bootstrap_Arabic/jquery-v1.11.2.js"></script>
+<script src="~/Bootstrap_Arabic/bootstrap.min.js"></script>
+<script src="~/Bootstrap_Arabic/bootstrap.min.js"></script>
+<script src="~/Bootstrap_Arabic/jquery.dataTables.min.js"></script>
+<script src="https://res.cloudinary.com/dxfq3iotg/raw/upload/v1569818907/jquery.table2excel.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+    #inputtext {
+        width: 250px;
+        height: 30px;
+        margin-right: 513px;
+        margin-left: -5px;
+        float: left;
+        margin-top: 5px;
+        border-color: #4A80B3;
+        border-radius: unset;
+    }
+
+    #SrchImg {
+        float: left;
+        margin-top: -5px;
+        margin-left: 0px;
+        margin-right: -35px;
+        position: relative;
+    }
+
+    td {
+        font-family: 'Times New Roman';
+        font-size: 14px;
+        padding: 5px 4px !important;
+        font-weight: 100;
+        color: #73A0C1;
+    }
+
+    th {
+        font-family: 'Times New Roman';
+        font-size: 16px;
+        font-weight: bold;
+        border-color: #4A80B3;
+        cursor: pointer;
+    }
+
+    .title_corp {
+        margin-top: -15px;
+    }
+
+    .table thead {
+        overflow-y: scroll;
+        flex-grow: 1;
+        border-color: #4A80B3;
+    }
+
+    .table tr a {
+        text-decoration: none;
+        color: black !important;
+    }
+
+    .table td {
+        border-color: #4A80B3;
+        color: #083555;
+    }
+
+    .table thead th {
+        color: #124f77;
+        border-color: #4A80B3;
+        text-align: center;
+        background: #D1EAFA;
+        position: sticky;
+        top: 0;
+    }
+
+    .title_corp {
+        font-family: 'Times New Roman';
+        font-size: 25px;
+    }
+
+    .subtitle_corp {
+        padding-top: 3px !important;
+        font-family: 'Times New Roman' !important;
+        color: #083555;
+    }
+    label {
+        float: none
+    }
+
+    .radio_top {
+        float: left;
+        margin-right: 10px;
+        line-height: 0.8
+    }
+</style>
+<div class="corp_content">
+    <div class="title_corp">  العقود / تقرير مستحقات العقود  /عرض البيانات </div>
+    <div class="subtitle_corp"> تمكنك الصفحة من البحث و الإطلاع على عقود الشركات و عرض المستحقات على الشركات التي تمت خلال الفترة المحددة المسددة و الغير مسددة</div>
+    <div class="hr_60"></div>
+    <div class="hr_80"></div>
+    <div class="corp_page">
+        <div class="page_content">
+            <form method="post">
+                <div class="form_bg">
+                    <div class="href_layout" style="margin-bottom:7px!important;">
+                        <a href="/Home/index" class="btn_form"><i class="fa fa-times" title="إغلاق"></i></a>
+
+                        <img src="~/images/srch.png" id="SrchImg" />
+                        <input class="form-control" type="text" id="inputtext" name="TxtSearch" placeholder="بحث..." />
+                        <script>
+                            $(document).ready(function () {
+                                $("#inputtext").on("keyup", function () {
+                                    var value = $(this).val().toLowerCase();
+                                    $("#tbl tr").filter(function () {
+                                        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                                    });
+                                });
+                            });
+                        </script>
+                        <div class="row" style="width: 100%; min-height: 20px; margin-right: 0px;">
+                            
+                            <div class="col-md-5" style="float:left">
+                                <div class="">
+                                   
+                                    <div class="radio_top">
+                                        <input type="radio" id="ShowExpired" name="Show" onclick="GetFilter()" style="float:right;margin-bottom:0px;margin-top:5px;margin-left:4px;width:13px;height:13px;">
+                                        <label for="javascript" style="float: left; margin-bottom: 0px; margin-top: 5px; font-size: 0.75rem">منتهي</label>
+                                    </div>
+                                    <div class="radio_top">
+                                        <input type="radio" id="ShowActive" name="Show" onclick="GetFilter()" style="float: right; margin-bottom: 0px; margin-top: 5px; margin-left: 4px; width: 13px; height: 13px;">
+                                        <label for="css" style="float: left; margin-bottom: 0px; margin-top: 5px; font-size: 0.75rem">نشط</label>
+                                    </div>
+                                    <div class="radio_top">
+                                        <input type="radio" id="ShowAll" name="Show" onclick="GetFilter()" style="float: right; margin-bottom: 0px; margin-top: 5px; margin-left: 4px; width: 13px; height: 13px;">
+                                        <label for="html" style="float: left; margin-bottom: 0px; margin-top: 5px; font-size: 0.75rem">الكل</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div id="Table">
+                        @{
+                            Html.RenderAction("TaxPartialView");
+                        }
+
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+
+function GetFilter() {
+
+            if (document.getElementById('ShowAll').checked) {
+                $.ajax({
+                url: '@Url.Action("TaxPartialView", "CompanyContractTaxOwed")',
+                type: "POST",
+                data: { type: "All" },
+                    success: function (data) {
+
+                        $('#Table').html(data);
+                }
+                });
+            } else if (document.getElementById('ShowActive').checked) {
+
+                 $.ajax({
+                         url: '@Url.Action("TaxPartialView", "CompanyContractTaxOwed")',
+                        type: "POST",
+                        data: { type: "A" },
+                        success: function (data) {
+                            $('#Table').html(data);
+                        }
+                });
+            } 
+            else {
+                $.ajax({
+                     url: '@Url.Action("TaxPartialView", "CompanyContractTaxOwed")',
+                    type: "POST",
+                    data: { type: "E" },
+                        success: function (data) {
+                            $('#Table').html(data);
+                        }
+                });
+            }
+        }
+</script>

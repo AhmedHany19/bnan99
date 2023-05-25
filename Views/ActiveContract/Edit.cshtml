@@ -1,0 +1,1051 @@
+﻿@model RentCar.Models.CR_Cas_Contract_Basic
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_LayoutSys3.cshtml";
+}
+
+<head>
+    <meta charset="utf-8" />
+    <title>Rent car</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
+    <meta content="Coderthemes" name="author" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    @*App favicon*@
+    <link rel="shortcut icon" href="~/BSys3 Styles/Images/favicon.ico">
+
+
+    <link href="~/BSys3 Styles/CSS/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/BSys3 Styles/CSS/icons.min.css" rel="stylesheet" />
+    <link href="~/BSys3 Styles/CSS/app-rtl.min.css" rel="stylesheet" />
+    <link href="~/BSys3Styles/CSS/style_app.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+
+    @*<link href="~/BSys3Styles/CSS/intlTelInput.css" rel="stylesheet" />
+        <script src="~/BSys3Styles/Js/jquery.min.js"></script>
+        <script src="~/BSys3Styles/Js/intlTelInput.js"></script>
+        <script src="~/BSys3Styles/Js/intlTelInput.min.js"></script>
+        <script src="~/BSys3Styles/Js/utils.js"></script>
+        <link href="~/BSys3Styles/CSS/telephone.css" rel="stylesheet" />*@
+
+
+</head>
+<body>
+
+    <style>
+        /* Mark input boxes that gets an error on validation: */
+        input.invalid {
+            background-color: #ffdddd;
+        }
+
+        .toast {
+            z-index: 999999999999999 !important
+        }
+        /* Hide all steps by default: */
+        .tab {
+            display: none;
+        }
+        /* Make circles that indicate the steps of the form: */
+        .step {
+            display: block !important;
+            color: #fff;
+            width: 100%;
+            height: 50px;
+            line-height: 50px;
+            background: #EDA63C;
+        }
+
+            .step:before {
+                content: "";
+                position: absolute;
+                right: 0px;
+                bottom: 0px;
+                width: 0;
+                height: 0;
+                border-right: 12px solid #fff;
+                border-top: 25px solid transparent;
+                border-bottom: 25px solid transparent;
+                background: #EDA63C;
+            }
+
+            .step:after {
+                content: "";
+                position: absolute;
+                left: 0px;
+                bottom: 0px;
+                width: 0;
+                height: 0;
+                border-right: 12px solid #EDA63C;
+                border-top: 25px solid transparent;
+                border-bottom: 25px solid transparent;
+                background: transparent;
+            }
+
+        .tab_price {
+            position: relative;
+            display: inline-block !important;
+            -webkit-box-flex: 0;
+            -ms-flex: 0 0 12.5% !important;
+            flex: 0 0 12.5% !important;
+            max-width: 12.5% !important;
+            padding-left: 12px;
+            padding-right: 12px;
+            height: 50px;
+            margin-left: -8px
+        }
+
+        .step.active, .step.active:before {
+            background-color: #0288C7;
+        }
+
+            .step.active:after {
+                border-right: 12px solid #0288C7;
+            }
+        /* Mark the steps that are finished and valid: */
+        .step.finish {
+            background-color: none;
+        }
+
+        input.invalid {
+            background: none;
+            border: solid 1px red
+        }
+
+        .tab_price.first span:before {
+            border-right: none
+        }
+
+        .tab_price.last span:after {
+            border-right: none
+        }
+
+        .texterr {
+            position: absolute;
+            margin-top: 30px;
+            font-size: 12px !important
+        }
+
+        #textErr {
+            float: right;
+            text-align: right;
+            height: 10px;
+            color: red;
+            font-size: 12px;
+            font-weight: bold;
+            width: 100%
+        }
+
+        label {
+            display: flex;
+            align-items: center;
+        }
+    </style>
+
+
+    <!--tabs amir start-->
+
+    <style>
+        /******* CSS *********/
+        .previous-tab,
+        .next-tab {
+            display: inline-block;
+            border: 1px solid #444348;
+            border-radius: 3px;
+            margin: 5px;
+            color: #444348;
+            font-size: 14px;
+            padding: 10px 15px;
+            cursor: pointer;
+        }
+    </style>
+    <style>
+        body {
+            background-color: transparent !important
+        }
+
+            body[data-layout=horizontal] .content-page {
+                padding: 110px 12px 0 12px !important;
+                background-color: transparent !important
+            }
+
+        .date_header {
+            padding-top: 15px;
+            color: #4a80b4;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        /*.card{min-height:570px;}*/
+        .langue_header {
+            margin-top: 15px;
+            color: #4a80b4;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+            .langue_header a, .reseau a {
+                color: #4a80b4;
+            }
+
+                .langue_header a:hover {
+                    color: #EDA63C
+                }
+
+                .reseau a i {
+                    color: #EDA63C;
+                    font-size: 24px;
+                    margin-top: 5px;
+                    margin-right: 5px;
+                    float: left
+                }
+
+                .reseau a:hover i {
+                    color: #4a80b4
+                }
+
+        .footer {
+            padding: 2px;
+            bottom: 0;
+        }
+
+        .enlarged .footer {
+            right: 0 !important;
+        }
+
+        .footer a, .footer .footer-links a, .footer {
+            color: #fff !important;
+            font-size: 16px;
+            line-height: 40px;
+        }
+
+        .footer-reseau a, .footer-reseau i {
+            color: #fff !important;
+            font-size: 24px;
+        }
+
+            .footer-reseau a:hover, .footer-reseau a:hover i, .footer a:hover, .footer .footer-links a:hover {
+                color: #EDA63C !important;
+            }
+
+        html {
+            background: url('/BSys3 Styles/Images/bg.jpg');
+        }
+
+        .nav-link {
+            padding: 0
+        }
+
+        .nav-pills .nav-link {
+            border-radius: 0
+        }
+
+        .nav-justified .nav-item a {
+            color: #fff !important;
+            font-weight: bold
+        }
+
+        .btn-secondary {
+            background-color: #EDA63C;
+            border-color: #EDA63C;
+        }
+
+            .btn-secondary:hover, .nav-pills .nav-link.active, .btn-secondary:not(:disabled):not(.disabled):active {
+                background-color: #4A80B4;
+                border-color: #4A80B4;
+            }
+
+        .form-control {
+            border-color: #4A80B4;
+            color: #4A80B4;
+        }
+
+        fieldset {
+            border: solid 2px #4A80B4;
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+
+        .btn-secondary1 {
+            background-color: #0288C7;
+            border-color: #0288C7;
+            color: #fff;
+        }
+
+            .btn-secondary1:hover {
+                background-color: #EDA63C;
+                border-color: #EDA63C;
+                color: #fff !important;
+            }
+
+        .nav-justified .nav-item {
+            position: relative;
+        }
+
+
+
+        .nav-justified .nav-item {
+            display: inline-block !important;
+            -webkit-box-flex: 0;
+            -ms-flex: 0 0 12.5% !important;
+            flex: 0 0 12.5% !important;
+            max-width: 12.5% !important;
+            padding-left: 12px;
+            padding-right: 12px;
+            height: 50px;
+            margin-left: -8px
+        }
+
+            .nav-justified .nav-item a {
+                display: block !important;
+                color: #fff;
+                width: 100%;
+                height: 50px;
+                line-height: 50px;
+                background: #EDA63C;
+            }
+
+                .nav-justified .nav-item a:after {
+                    content: "";
+                    position: absolute;
+                    right: 0px;
+                    bottom: 0px;
+                    width: 0;
+                    height: 0;
+                    border-right: 12px solid #fff;
+                    border-top: 25px solid transparent;
+                    border-bottom: 25px solid transparent;
+                    background: #EDA63C;
+                }
+
+                .nav-justified .nav-item a:before {
+                    content: "";
+                    position: absolute;
+                    left: 0px;
+                    bottom: 0px;
+                    width: 0;
+                    height: 0;
+                    border-right: 12px solid #EDA63C;
+                    border-top: 25px solid transparent;
+                    border-bottom: 25px solid transparent;
+                    background: transparent;
+                }
+
+                .nav-justified .nav-item a.active:before {
+                    border-right-color: #4A80B4 !important
+                }
+
+                .nav-justified .nav-item a.active:after {
+                    background: #4A80B4;
+                }
+
+            .nav-justified .nav-item:first-child a.active:after {
+                border-right-color: #4A80B4 !important
+            }
+
+        .col-form-label {
+            flex: 0;
+            width: 100px;
+            min-width: 100px;
+        }
+
+        .label6 {
+            text-align: right;
+        }
+
+        .form-group {
+            margin-bottom: 0.25rem !important
+        }
+
+        .fieldset {
+            padding-bottom: 0px;
+            padding-top: 0px;
+        }
+
+        .fildest51 {
+            height: 51vh;
+            overflow-x: hidden;
+            overflow-y: scroll
+        }
+    </style>
+    <div id="loader" hidden>
+        <div id="status">
+            <img src="~/BSys3Styles/Images/logo.png" style="width:150px;height:150px;margin:25px ;" />
+        </div>
+    </div>
+    <form id="RenewContract" class="form-horizontal" action="/ActiveContract/Create" enctype="multipart/form-data" method="post" data-parsley-validate="" novalidate="">
+
+        @Html.AntiForgeryToken()
+
+        <div class="content">
+
+            <!-- Start Content-->
+            <div class="container" style="margin-top: -100px;">
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card-box table-responsive" style="height:76vh;padding-bottom:0.5rem;padding-top:0.5rem;">
+                            <div class="title_corp"><h3> تمديد عقد </h3></div>
+                            <div class="subtitle_corp">تمكن هذه الصفحة المستخدم من تمديد عقد قائم</div>
+                            <div class="hr_60"></div>
+                            <div class="hr_80"></div>
+                            <div class="corp_page " style=" padding-top: 10px;">
+                                <div class="page_content">
+                                    <div class="form-horizontal">
+
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="text-center">
+
+                                                    @Html.HiddenFor(Model => Model.CR_Cas_Contract_Basic_Daily_Rent)
+                                                    @Html.HiddenFor(Model => Model.CR_Cas_Contract_Basic_Weekly_Rent)
+                                                    @Html.HiddenFor(Model => Model.CR_Cas_Contract_Basic_Monthly_Rent)
+                                                    @Html.HiddenFor(Model => Model.CR_Cas_Contract_Basic_Additional_Value)
+                                                    @Html.HiddenFor(Model => Model.CR_Cas_Contract_Basic_Choices_Value)
+                                                    @Html.HiddenFor(Model => Model.CR_Cas_Contract_Basic_Authorization_Value)
+                                                    @Html.HiddenFor(Model => Model.CR_Cas_Contract_Basic_Tax_Rate)
+                                                    @Html.HiddenFor(Model => Model.CR_Cas_Contract_Basic_Expected_Rental_Days)
+                                                    @Html.HiddenFor(Model => Model.CR_Cas_Contract_Basic_Value)
+                                                    @Html.HiddenFor(Model => Model.CR_Cas_Contract_Basic_End_Authorization)
+                                                    <input type="text" id="TotalChoices" name="TotalChoices" hidden />
+                                                    <input type="text" id="ContractET" name="ContractET" hidden />
+                                                    <input type="text" id="MaxRentalDays" name="MaxRentalDays" value="@ViewBag.MaxRentalDays" hidden />
+                                                    <style>
+                                                        legend {
+                                                            color: #000;
+                                                            text-align: right;
+                                                            background-color: #fff;
+                                                            padding-left: 15px;
+                                                            padding-right: 15px;
+                                                            width: auto;
+                                                            margin-bottom: 0 !important;
+                                                            padding-bottom: 0 !important;
+                                                            font-size: 20px;
+                                                        }
+
+                                                        fieldset {
+                                                            padding-top: 0 !important;
+                                                            padding-bottom: 0 !important
+                                                        }
+                                                    </style>
+                                                    <fieldset>
+                                                        <legend>العقد</legend>
+
+                                                        <div class="row mb-2 mt-1">
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <div class="row">
+                                                                        <label class="col-md-3 label6"> رقم العقد </label>
+                                                                        <div class="input6">
+                                                                            @Html.TextBoxFor(Model => Model.CR_Cas_Contract_Basic_No, new { @class = "form-control", style = "float:right;", @readonly = "readonly" })
+                                                                            <div class="texterr"></div>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4" hidden>
+                                                                <div class="form-group">
+                                                                    <div class="row">
+                                                                        <label class="col-md-4 label6"> تاريخ العقد </label>
+                                                                        <div class="col-md-8 input6">
+                                                                            <input class="form-control text-box single-line" data-val="true" placeholder="yyyy/MM/dd"
+                                                                                   data-val-date="The field CR_Cas_Contract_Basic_Date must be a date." id="CR_Cas_Contract_Basic_Date"
+                                                                                   name="CR_Cas_Contract_Basic_Date" type="date" value="@ViewBag.ContractDate" style="text-align:right!important" readonly>
+                                                                        </div>
+                                                                        <div class="texterr"></div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <div class="row">
+                                                                        <label class="label6" style=" margin-right: 10px;"> نهايته </label>
+                                                                        <div class=" input6" style="margin-right: 28px;">
+                                                                            <input class="form-control text-box single-line" data-val="true"
+                                                                                   data-val-date="The field CR_Cas_Contract_Basic_Expected_End_Date must be a date." id="CR_Cas_Contract_Basic_Expected_End_Date"
+                                                                                   name="CR_Cas_Contract_Basic_Expected_End_Date" type="text" value="@ViewBag.ContractEndDate" data-inputmask="'alias': 'yyyy/mm/dd'" style="text-align:right!important" readonly>
+                                                                            <div class="texterr"></div>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <div class="row">
+                                                                        <label class="label6" style=" margin-right: 10px;"> عدد الأيام </label>
+                                                                        <div class="input6" style=" margin-right: 15px;">
+                                                                            @Html.TextBoxFor(Model => Model.CR_Cas_Contract_Basic_Expected_Rental_Days, new { @class = "form-control", style = "float:right;", @readonly = "readonly" })
+                                                                            <div class="texterr"></div>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row mb-2">
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <div class="row">
+                                                                        <label class="label6" style=" margin-right: 10px;">اسم المستأجر</label>
+                                                                        <div class="input6 ms-3" style=" width: 68%;">
+                                                                            @Html.TextBoxFor(Model => Model.CR_Mas_Renter_Information.CR_Mas_Renter_Information_Ar_Name, new { @class = "form-control", style = "float:right;width:100%;", ReadOnly = "ReadOnly" })
+                                                                            <div class="texterr"></div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <div class="row">
+                                                                        <label class="label6" style=" margin-right: 10px;">نوع السيارة</label>
+                                                                        <div class="input6" style=" width: 78%;">
+                                                                            @Html.TextBoxFor(Model => Model.CR_Cas_Sup_Car_Information.CR_Cas_Sup_Car_Collect_Ar_Name, new { @class = "form-control", style = "float:right;width:300px;", ReadOnly = "ReadOnly" })
+                                                                            <div class="texterr"></div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <div class="row">
+                                                                        <label class="label6" style=" margin-right: 10px;"> نوع التفويض </label>
+                                                                        <div class="input6 ms-3" style=" margin-right: 15px;">
+                                                                            @Html.CheckBox("CR_Cas_Contract_Basic_Use_Within_Country", new { @class = "form-control", @disabled = "disabled", @hidden = "hidden" })
+                                                                            <label style="color:red;font-size:small;width:100%;text-align:right">@ViewBag.Auth</label>
+                                                                            <div class="texterr"></div>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4" hidden>
+                                                                <div class="form-group">
+                                                                    <div class="row">
+                                                                        <label class=" label6" style=" margin-right: 10px;"> نسبة الضريبة </label>
+                                                                        <div class="input6" style=" margin-right: 15px;">
+                                                                            @Html.TextBoxFor(Model => Model.CR_Cas_Contract_Basic_Tax_Rate, new { @class = "form-control", style = "float:right;", @readonly = "readonly" })
+                                                                            <div class="texterr"></div>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4" hidden>
+                                                                <div class="form-group">
+                                                                    <div class="row">
+                                                                        <label class="col-md-4 label6"> قيمة السائق الإضافي</label>
+                                                                        <div class="col-md-4 input6">
+                                                                            @Html.TextBoxFor(Model => Model.CR_Cas_Contract_Basic_Additional_Driver_Value, new { @class = "form-control", style = "float:right;", ReadOnly = "ReadOnly" })
+                                                                            <div class="texterr"></div>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row mb-2">
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <div class="row">
+                                                                        <label class="label6" style="margin-right: 12px; ">صافي العقد</label>
+                                                                        <div class="input6" style="margin-right: 8px; ">
+                                                                            @Html.TextBoxFor(Model => Model.CR_Cas_Contract_Basic_Net_Value, new { @class = "form-control", style = "float:right;", @readonly = "readonly" })
+                                                                            <div class="texterr"></div>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-md-4" hidden>
+                                                                <div class="form-group">
+                                                                    <div class="row">
+                                                                        <label class="col-md-4 label6"> نسية الخصم </label>
+                                                                        <div class="col-md-3 input6">
+                                                                            <input type="text" class="form-control" id="discount" name="discount" value="@ViewBag.discount" readonly />
+                                                                            <div class="texterr"></div>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <div class="row">
+                                                                        <label class="label6" style="margin-right: 10px;"> المدفوع </label>
+                                                                        <div class="input6">
+                                                                            @Html.TextBoxFor(Model => Model.CR_Cas_Contract_Basic_Payed_Value, new { @class = "form-control", style = "float:right;margin-right: 10px;", @readonly = "readonly" })
+                                                                            <div class="texterr"></div>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </fieldset>
+                                                    <fieldset>
+                                                        <legend>التمديد </legend>
+                                                        <div class="row mb-2 mt-1">
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <div class="row">
+                                                                        <label class="label6" style="margin-right: 10px; "> أيام التمديد </label>
+                                                                        <div class="input6">
+                                                                            <input type="text" class="form-control" id="ExpectedRentalDays" style="margin-right: 15px; width: 60px; height: 35px" name="ExpectedRentalDays" autocomplete="off" value="" oninput="this.value=this.value.replace(/[^0-9]/g,'')"/>
+                                                                            <div class="texterr" style="margin-top: 0px;">
+                                                                                <span id="ExpectedRentalDaysError" style="margin-right: 15px;">
+                                                                                </span>
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <div class="row">
+                                                                        <label class="label6" style="margin-right: 10px;"> تاريخ نهايته </label>
+                                                                        <div class="input6">
+                                                                            <input class="form-control text-box single-line"
+                                                                                   id="EndDate"
+                                                                                   name="EndDate" type="text" style="text-align: right !important; margin-right: 5px" readonly>
+                                                                            <div class="texterr"></div>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <div class="row">
+                                                                        <label class="label6" style="margin-right: 10px;"> إجمالي الأيام </label>
+                                                                        <div class="input6">
+                                                                            <input class="form-control text-box single-line" id="totalDays" name="totalDays" type="text" style="text-align:right!important;margin-right: 5px" readonly>
+                                                                            <div class="texterr"></div>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+
+
+                                                        <div class="row mb-2">
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <div class="row">
+                                                                        <label class="label6" style="margin-right: 10px;"> قيمة العقد</label>
+                                                                        <div class="col-md-5 input6">
+                                                                            <input type="text" class="form-control" name="ContractVal" id="ContractVal" readonly style="margin-right: -5px;">
+                                                                            <div class="texterr"></div>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <div class="row">
+                                                                        <label class="label6" style="margin-right: 10px;"> قيمة الخصم</label>
+                                                                        <div class="col-md-4 input6">
+                                                                            <input type="text" class="form-control" name="ContractDiscountVal" id="ContractDiscountVal" style="margin-right: -10px;" readonly>
+                                                                            <div class="texterr"></div>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <div class="row">
+                                                                        <label class="label6" style="margin-right: 10px;"> قيمة الضريبة</label>
+                                                                        <div class="col-md-4 input6">
+                                                                            <input type="text" class="form-control" style="margin-right: -10px;" name="TaxVal" id="TaxVal" readonly>
+                                                                            <div class="texterr"></div>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="row mb-2">
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <div class="row">
+                                                                        <label class="label6" style="margin-right: 10px;"> صافي العقد</label>
+                                                                        <div class="input6">
+                                                                            <input type="text" class="form-control" name="NetVal" id="NetVal" readonly required>
+                                                                            <div class="texterr"></div>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <div class="row">
+                                                                        <label class="label6" style="margin-right: 10px;"> رصيد سابق</label>
+                                                                        <div class="input6">
+                                                                            <input type="text" class="form-control" style=" margin-right: 10px; direction: ltr; text-align: right" name="CR_Cas_Contract_Basic_Previous_Balance" id="CR_Cas_Contract_Basic_Previous_Balance" value="@ViewBag.PreviousBalance" readonly oninput="this.value=this.value.replace(/[^0-9]/g,'')">
+                                                                            <div class="texterr"></div>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <div class="row">
+                                                                        <label class="label6" style="margin-right: 10px;"> المبلغ المطلوب</label>
+                                                                        <div class="col-md-5 input6">
+                                                                            <input type="text" class="form-control" style="direction: ltr; text-align: right; margin-right: -10px;" name="TotalToPay" id="TotalToPay" required readonly oninput="this.value=this.value.replace(/[^0-9]/g,'')">
+                                                                            <div class="texterr"></div>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+
+                                                        </div>
+
+
+                                                        <div class="row mb-2">
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <div class="row">
+                                                                        <label class=" label6" style=" margin-right: 5px; "> المبلغ المدفوع</label>
+                                                                        <div class="input6">
+                                                                            <input type="text" class="form-control" style="width: 100px; margin-right: 5px; height: 35px;" name="PayedVal" id="PayedVal" autocomplete="off" oninput="this.value=this.value.replace(/[^0-9]/g,'')">
+                                                                            <div class="texterr"></div>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <div class="row">
+                                                                        <label class="label6" style=" margin-right: 10px; "> طريقة الدفع</label>
+                                                                        <div class="input6">
+                                                                            @Html.DropDownList("PayType", null, " --رجاء إختر طريقة الدفع-- ", htmlAttributes: new { @class = "form-control ", style = "float:right;margin-right:15px;height:40px;width:190px;border: 1px solid #0288C7 !important", @Disabled = "disabled" })
+                                                                            <div class="texterr"></div>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-md-4">
+                                                                <div class="form-group">
+                                                                    <div class="row">
+                                                                        <label class="label6 " style=" margin-right: 10px; "> نقطة البيع</label>
+                                                                        <div class="input6">
+                                                                            @Html.DropDownList("CasherName", null, " --رجاء إختر نقطة البيع-- ", htmlAttributes: new { @class = "form-control ", style = "float:right;margin-right:15px;height:40px;width:250px;border: 1px solid #0288C7 !important", @Disabled = "disabled" })
+                                                                            <div class="texterr"></div>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="col-12 mt-2 mb-3">
+                                                            <div class="form-group row">
+                                                                <label> ملاحظات</label>
+                                                                <div class="" style="margin-right:10px;">
+                                                                    <input type="text" id="Reasons" name="Reasons" style="height: 35px; margin-right: 25px; width: 625px; " class="form-control" autocomplete="off" maxlength="100" />
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+
+
+
+                                                    </fieldset>
+
+                                                </div>
+                                            </div>
+                                            <!-- end col -->
+                                        </div>
+                                        <fieldset style="margin-top:50px">
+                                            <div class="form-group" style="padding-top:5px !important">
+                                                <div class="col-md-offset-2 col-md-12">
+                                                    <input type="submit" value="حفظ" class="btn btn-secondary" style="float:left;" id="save" />
+                                                    <a href="/ActiveContract/Index/" tabindex="" class="btn btn-secondary">انهاء</a>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- validation init -->
+        <script src="~/BSys3Styles/Js/vendor.min.js"></script>
+
+
+        <script src="~/BSys3Styles/Js/parsley_ar.min.js"></script>
+        <script src="~/BSys3Styles/Js/pages/form-validation.init.js"></script>
+        <link href="~/Bootstrap_Arabic/bootstrap-big-grid.min.css" rel="stylesheet" />
+        <link href="~/Bootstrap_Arabic/jquery.dataTables.min.css" type="text/css" rel="stylesheet" />
+        <script src="~/Scripts/toastr.min.js"></script>
+        <script src="~/Scripts/toastr.js"></script>
+        <script src="~/BSys3Styles/Js/app.min.js"></script>
+
+    </form>
+
+
+
+
+
+
+    @*///////////////////////////////////////////////Contract Calculation//////////////////////////////////////*@
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#ExpectedRentalDays').focusout(function () {
+                var MaxDays = document.getElementById('MaxRentalDays').value;
+                var CurrDays = document.getElementById('ExpectedRentalDays').value;
+                //alert(CurrDays);
+                //alert(MaxDays);
+                if (Number(CurrDays) > Number(MaxDays)) {
+                    document.getElementById('ExpectedRentalDaysError').innerHTML = "الحد الأعلى" + MaxDays;
+                    return;
+                } else {
+                    document.getElementById('ExpectedRentalDaysError').innerHTML = "";
+                }
+
+
+
+
+                var price = 0;
+                var nbrDays = document.getElementById('ExpectedRentalDays').value;
+                //alert(nbrDays);
+                var nbrDaysOld = document.getElementById('CR_Cas_Contract_Basic_Expected_Rental_Days').value;
+                //alert(nbrDaysOld);
+                var nbrtot = Number(nbrDays) + Number(nbrDaysOld);
+                //alert(nbrtot);
+
+                price = document.getElementById('CR_Cas_Contract_Basic_Daily_Rent').value;
+
+                //alert(price);
+                function addDays(date, days) {
+                    var result = new Date(date);
+                    result.setDate(date.getDate() + days);
+                    return result;
+                }
+
+                function formatDate(date) {
+                    return date.getFullYear() + '/' + (date.getMonth() + 1) + '/' + date.getDate();
+                }
+
+                var dateStr = document.getElementById('CR_Cas_Contract_Basic_Expected_End_Date').value;
+                var date = new Date(dateStr);
+
+                var correctDate = addDays(date, Number(nbrDays));
+
+                document.getElementById('EndDate').value = formatDate(correctDate);
+
+                document.getElementById('totalDays').value = nbrtot;
+                var price = document.getElementById('CR_Cas_Contract_Basic_Daily_Rent').value;
+                var oldContractVal = document.getElementById('CR_Cas_Contract_Basic_Value').value;
+                console.log(oldContractVal)
+                var Choices = document.getElementById('CR_Cas_Contract_Basic_Choices_Value').value;
+                var Additionals = document.getElementById('CR_Cas_Contract_Basic_Additional_Value').value;
+                var AdditionalDriverValue = document.getElementById('CR_Cas_Contract_Basic_Additional_Driver_Value').value;
+                var discount = document.getElementById('discount').value;
+                var NewDays = document.getElementById('ExpectedRentalDays').value;
+                var totalPrices = Number(price) * Number(NewDays);
+                var totalChoices = Number(NewDays) * Number(Choices);
+                document.getElementById('TotalChoices').value = totalChoices.toFixed(2);
+
+
+                var NewContractValue = totalPrices + totalChoices /*+ Number(Additionals)*/ /*+ Number(AdditionalDriverValue)*/;
+
+                // document.getElementById('ContractVal').value = NewContractValue.toFixed(2);
+                document.getElementById('ContractVal').value = (NewContractValue + Number(oldContractVal)).toFixed(2);
+                var discountVal = NewContractValue * (Number(discount) / 100);
+                document.getElementById('ContractET').value = (NewContractValue - discountVal).toFixed(2);
+                document.getElementById('ContractDiscountVal').value = discountVal.toFixed(2);
+                var Tax = document.getElementById('CR_Cas_Contract_Basic_Tax_Rate').value;
+                //var Taxvalue = document.getElementById('CR_Cas_Contract_Basic_Tax_Rate').value;
+               
+
+                var TaxVal = (Number(NewContractValue) - Number(discountVal)) * Number(Tax / 100);
+                document.getElementById('TaxVal').value = TaxVal.toFixed(2);
+                console.log(NewContractValue);
+                console.log(discountVal);
+                console.log(Number(Tax / 100));
+                console.log(TaxVal.toFixed(2))
+
+                var OldNetVal = document.getElementById('CR_Cas_Contract_Basic_Net_Value').value;
+                console.log("OldNetValue:" + OldNetVal);
+
+                var authval = document.getElementById('CR_Cas_Contract_Basic_Authorization_Value').value;
+                var NewContractNetVal = Number(NewContractValue) - Number(discountVal) + Number(TaxVal);
+                console.log("NewContractNetVal:" + NewContractNetVal);
+
+                document.getElementById('NetVal').value = (Number(NewContractNetVal) + Number(OldNetVal)).toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+
+
+                var NetVal = document.getElementById('NetVal').value;
+                console.log("NetVal:" + NetVal);
+
+                var PreviousBalance = document.getElementById('CR_Cas_Contract_Basic_Previous_Balance').value;
+                if (PreviousBalance == "") {
+                    document.getElementById('TotalToPay').value = parseFloat(NetVal);
+                    console.log(document.getElementById('TotalToPay').value);
+                } else {
+
+                    const netValueWithoutCommas = NetVal.replace(/,/g, "");
+                    const previousBalanceWithoutCommas = PreviousBalance.replace(/,/g, "");
+                    document.getElementById('TotalToPay').value = (parseFloat(netValueWithoutCommas) + parseFloat(previousBalanceWithoutCommas)).toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+                }
+            });
+        });
+
+
+
+
+    </script>
+
+
+    <script type="text/javascript">
+        window.addEventListener("load", function () {
+            this.document.getElementById('ExpectedRentalDays').focus();
+
+        });
+
+
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $("#PayType").change(function () {
+                $("#CasherName").empty();
+                $.get("/ActiveContract/GetSalesPoint", { PayCode: $("#PayType").val() }, function (data) {
+                    $.each(data, function (index, row) {
+                        $("#CasherName").append("<option value= '" + row.CR_Cas_Sup_SalesPoint_Code + "'>" + row.CR_Cas_Sup_SalesPoint_Ar_Name + "</option>")
+                    });
+                });
+            })
+        });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $("#PayedVal").focusout(function () {
+                var payed = document.getElementById('PayedVal').value;
+
+                if (Number(payed) > 0) {
+                    document.getElementById('PayType').disabled = false;
+                    document.getElementById('PayType').selectedIndex = 0;
+                    document.getElementById('CasherName').disabled = false;
+                    document.getElementById('CasherName').selectedIndex = 0;
+                } else {
+                    document.getElementById('PayType').disabled = true;
+                    document.getElementById('PayType').selectedIndex = 0;
+                    document.getElementById('CasherName').disabled = true;
+                    document.getElementById('CasherName').selectedIndex = 0;
+                }
+            })
+        });
+    </script>
+
+
+
+
+
+
+
+
+    @*<script>
+
+            $(document).ready(function () {
+                $("#ExpectedRentalDays, #PayedVal").on("input", function () {
+                    if (($("#ExpectedRentalDays").val() == "" || $("#ExpectedRentalDays").val() == 0)
+                        /*|| ($("#PayedVal").val() == "" || $("#PayedVal").val() == 0)*/)
+                       {
+                        $("#save").attr('disabled', 'disabled');
+                    } else {
+                        $("#save").removeAttr('disabled');
+                    }
+                });
+            });
+        </script>*@
+    <script>
+        $(document).ready(function () {
+            $('#RenewContract').submit(function (e) {
+                var fieldVal = $('#ExpectedRentalDays').val();
+
+                if (!fieldVal || fieldVal === '0') {
+                    toastr.info('الرجاء ادخال عدد ايام التمديد'); // show an alert message
+                    e.preventDefault(); // prevent the form from submitting normally
+                }
+                else {
+                    $("#loader").removeAttr("hidden");
+                    toastr.options.setTimeout = 99999;
+                    toastr.success("جــاري تمديد العقــد وارســالـه للمستــاجــر ......")
+                }
+            });
+        });
+    </script>
+
+    
+
+
+
+
+
+    @*<script>
+
+
+            //var myNumberElement2 = document.getElementById("CR_Cas_Contract_Basic_Payed_Value");
+            //var myNumber2 = parseFloat(myNumberElement2.value);
+            //myNumberElement2.value = myNumber2.toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+
+            var myNumberElement3 = document.getElementById("CR_Cas_Contract_Basic_Previous_Balance");
+            var myNumber3 = parseFloat(myNumberElement3.value);
+            myNumberElement3.value = myNumber3.toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+
+
+
+        </script>*@
+
+    @*<script>
+
+            const input1 = document.getElementById('ExpectedRentalDays');
+            //const input2 = document.getElementById('PayedVal');
+            //const select1 = document.getElementById('PayType');
+            //const select2 = document.getElementById('CasherName');
+            const saveButton = document.getElementById('save');
+
+            //function toggleSaveButton() {
+            //    if (input1.value.trim() && input2.value.trim() && select1.value !== ' --رجاء إختر طريقة الدفع-- ' && select2.value !== ' --رجاء إختر نقطة البيع-- ') {
+            //        saveButton.disabled = false;
+            //    } else {
+            //        saveButton.disabled = true;
+            //    }
+            //}
+
+            input1.addEventListener('input', toggleSaveButton);
+                //input2.addEventListener('input', toggleSaveButton);
+                //select1.addEventListener('change', toggleSaveButton);
+                //select2.addEventListener('change', toggleSaveButton);
+        </script>*@
+</body>

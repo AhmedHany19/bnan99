@@ -1,0 +1,377 @@
+﻿@model IEnumerable<RentCar.Models.CR_Cas_Contract_Basic>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CR_Cas_Contract_Basic_Year)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CR_Cas_Contract_Basic_Type)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CR_Cas_Contract_Basic_Owner_Branch)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CR_Cas_Contract_Basic_Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CR_Cas_Contract_Basic_Time)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CR_Cas_Contract_Basic_is_Renter_Driver)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CR_Cas_Contract_Basic_Driver_Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CR_Cas_Contract_Basic_is_Additional_Driver)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CR_Cas_Contract_Basic_Additional_Driver_Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CR_Cas_Contract_Basic_Start_Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CR_Cas_Contract_Basic_Start_Time)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CR_Cas_Contract_Basic_Expected_End_Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CR_Cas_Contract_Basic_Expected_End_Time)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CR_Cas_Contract_Basic_Expected_Rental_Days)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CR_Cas_Contract_Basic_Additional_Driver_Value)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CR_Cas_Contract_Basic_Authorization_Value)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CR_Cas_Contract_Basic_Use_Within_Country)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CR_Cas_Contract_Basic_End_Authorization)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CR_Cas_Contract_BasicAuthorization_Staus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CR_Cas_Contract_BasicAuthorization_No)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CR_Cas_Contract_Basic_Daily_Rent)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CR_Cas_Contract_Basic_Weekly_Rent)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CR_Cas_Contract_Basic_Monthly_Rent)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CR_Cas_Contract_Basic_CurrentMeters)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CR_Cas_Contract_Basic_Additional_Value)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CR_Cas_Contract_Basic_Choices_Value)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CR_Cas_Contract_Basic_Tax_Rate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CR_Cas_Contract_Basic_User_Discount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CR_Cas_Contract_Basic_Daily_Free_KM)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CR_Cas_Contract_Basic_Additional_KM_Value)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CR_Cas_Contract_Basic_Free_Additional_Hours)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CR_Cas_Contract_Basic_Hour_Max)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CR_Cas_Contract_Basic_Extra_Hour_Value)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CR_Cas_Contract_Basic_is_Km_Open)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CR_Cas_Contract_Basic_is_Receiving_Branch)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CR_Cas_Contract_Basic_Value)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CR_Cas_Contract_Basic_Discount_Value)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CR_Cas_Contract_Basic_After_Discount_Value)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CR_Cas_Contract_Basic_Tax_Value)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CR_Cas_Contract_Basic_Net_Value)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CR_Cas_Contract_Basic_Payed_Value)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CR_Cas_Contract_Basic_Previous_Balance)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CR_Cas_Contract_Basic_User_Insert)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CR_Cas_Contract_Basic_Hour_DateTime_Alert)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CR_Cas_Contract_Basic_Hour_MsgNo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CR_Cas_Contract_Basic_Day_DateTime_Alert)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CR_Cas_Contract_Basic_Day_MsgNo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CR_Cas_Contract_Basic_EndContract_MsgNo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CR_Cas_Contract_Basic_Alert_Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CR_Cas_Contract_Basic_CreateContract_Pdf)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CR_Cas_Contract_Basic_CloseContract_Pdf)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CR_Cas_Contract_Basic_Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CR_Cas_Car_Price_Basic.CR_Cas_Car_Price_Basic_Year)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CR_Cas_Sup_Car_Information.CR_Cas_Sup_Car_Lessor_Code)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CR_Mas_Com_Lessor.CR_Mas_Com_Lessor_Logo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CR_Mas_Renter_Information.CR_Mas_Renter_Information_Sector)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CR_Mas_Sup_Sector.CR_Mas_Sup_Sector_Ar_Name)
+            </th>
+            <th></th>
+        </tr>
+    
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CR_Cas_Contract_Basic_Year)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CR_Cas_Contract_Basic_Type)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CR_Cas_Contract_Basic_Owner_Branch)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CR_Cas_Contract_Basic_Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CR_Cas_Contract_Basic_Time)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CR_Cas_Contract_Basic_is_Renter_Driver)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CR_Cas_Contract_Basic_Driver_Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CR_Cas_Contract_Basic_is_Additional_Driver)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CR_Cas_Contract_Basic_Additional_Driver_Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CR_Cas_Contract_Basic_Start_Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CR_Cas_Contract_Basic_Start_Time)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CR_Cas_Contract_Basic_Expected_End_Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CR_Cas_Contract_Basic_Expected_End_Time)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CR_Cas_Contract_Basic_Expected_Rental_Days)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CR_Cas_Contract_Basic_Additional_Driver_Value)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CR_Cas_Contract_Basic_Authorization_Value)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CR_Cas_Contract_Basic_Use_Within_Country)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CR_Cas_Contract_Basic_End_Authorization)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CR_Cas_Contract_BasicAuthorization_Staus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CR_Cas_Contract_BasicAuthorization_No)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CR_Cas_Contract_Basic_Daily_Rent)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CR_Cas_Contract_Basic_Weekly_Rent)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CR_Cas_Contract_Basic_Monthly_Rent)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CR_Cas_Contract_Basic_CurrentMeters)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CR_Cas_Contract_Basic_Additional_Value)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CR_Cas_Contract_Basic_Choices_Value)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CR_Cas_Contract_Basic_Tax_Rate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CR_Cas_Contract_Basic_User_Discount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CR_Cas_Contract_Basic_Daily_Free_KM)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CR_Cas_Contract_Basic_Additional_KM_Value)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CR_Cas_Contract_Basic_Free_Additional_Hours)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CR_Cas_Contract_Basic_Hour_Max)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CR_Cas_Contract_Basic_Extra_Hour_Value)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CR_Cas_Contract_Basic_is_Km_Open)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CR_Cas_Contract_Basic_is_Receiving_Branch)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CR_Cas_Contract_Basic_Value)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CR_Cas_Contract_Basic_Discount_Value)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CR_Cas_Contract_Basic_After_Discount_Value)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CR_Cas_Contract_Basic_Tax_Value)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CR_Cas_Contract_Basic_Net_Value)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CR_Cas_Contract_Basic_Payed_Value)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CR_Cas_Contract_Basic_Previous_Balance)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CR_Cas_Contract_Basic_User_Insert)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CR_Cas_Contract_Basic_Hour_DateTime_Alert)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CR_Cas_Contract_Basic_Hour_MsgNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CR_Cas_Contract_Basic_Day_DateTime_Alert)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CR_Cas_Contract_Basic_Day_MsgNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CR_Cas_Contract_Basic_EndContract_MsgNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CR_Cas_Contract_Basic_Alert_Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CR_Cas_Contract_Basic_CreateContract_Pdf)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CR_Cas_Contract_Basic_CloseContract_Pdf)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CR_Cas_Contract_Basic_Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CR_Cas_Car_Price_Basic.CR_Cas_Car_Price_Basic_Year)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Information.CR_Cas_Sup_Car_Lessor_Code)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CR_Mas_Com_Lessor.CR_Mas_Com_Lessor_Logo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CR_Mas_Renter_Information.CR_Mas_Renter_Information_Sector)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CR_Mas_Sup_Sector.CR_Mas_Sup_Sector_Ar_Name)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+    }
+    
+    </table>
+</body>
+</html>

@@ -1,0 +1,196 @@
+﻿@model IEnumerable<RentCar.Models.CR_Cas_Account_Bnan_Owed>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/Bootstrap_Arabic/bootstrap.min.css" rel="stylesheet" />
+<link href="~/Bootstrap_Arabic/bootstrap-big-grid.min.css" rel="stylesheet" />
+<link href="~/Bootstrap_Arabic/jquery.dataTables.min.css" type="text/css" rel="stylesheet" />
+<link href="~/Bootstrap_Arabic/font-awesome.css" type="text/css" rel="stylesheet" />
+<script src="~/Bootstrap_Arabic/jquery-v1.11.2.js"></script>
+<script src="~/Bootstrap_Arabic/bootstrap.min.js"></script>
+<script src="~/Bootstrap_Arabic/bootstrap.min.js"></script>
+<script src="~/Bootstrap_Arabic/jquery.dataTables.min.js"></script>
+<script src="https://res.cloudinary.com/dxfq3iotg/raw/upload/v1569818907/jquery.table2excel.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+    #inputtext {
+        width: 250px;
+        height: 30px;
+        margin-right: 293px;
+        margin-left: -5px;
+        float: left;
+        margin-top: 5px;
+        border-color: #4A80B3;
+        border-radius: unset;
+    }
+
+    #SrchImg {
+        float: left;
+        margin-top: -5px;
+        margin-left: 0px;
+        margin-right: -35px;
+        position: relative;
+    }
+
+    td {
+        font-family: 'Times New Roman';
+        font-size: 14px;
+        padding: 5px 4px !important;
+        font-weight: 100;
+        color: #73A0C1;
+    }
+
+    th {
+        font-family: 'Times New Roman';
+        font-size: 16px;
+        font-weight: bold;
+        border-color: #4A80B3;
+        cursor: pointer;
+    }
+
+    .title_corp {
+        margin-top: -15px;
+    }
+
+    .table thead {
+        overflow-y: scroll;
+        flex-grow: 1;
+        border-color: #4A80B3;
+    }
+
+    .table tr a {
+        text-decoration: none;
+        color: black !important;
+    }
+
+    .table td {
+        border-color: #4A80B3;
+        color: #083555;
+    }
+
+    .table thead th {
+        color: #124f77;
+        border-color: #4A80B3;
+        text-align: center;
+        background: #D1EAFA;
+        position: sticky;
+        top: 0;
+    }
+
+    .title_corp {
+        font-family: 'Times New Roman';
+        font-size: 25px;
+    }
+
+    .subtitle_corp {
+        padding-top: 3px !important;
+        font-family: 'Times New Roman' !important;
+        color: #083555;
+    }
+</style>
+<div class="corp_content">
+    <div class="title_corp">  العقود / تسديد مستحقات بنان /عرض البيانات </div>
+    <div class="subtitle_corp"> تمكنك الصفحة من البحث و الإطلاع على عقود الشركات و عرض المستحقات على الشركات التي تمت خلال الفترة المحددة المسددة و الغير مسددة</div>
+    <div class="hr_60"></div>
+    <div class="hr_80"></div>
+    <div class="corp_page">
+        <div class="page_content">
+            <form id="form_validation" action="/MasPayTaxes/Create" enctype="multipart/form-data" method="post" data-parsley-validate novalidate>
+                @Html.AntiForgeryToken()
+                <div class="form_bg">
+                    <div class="href_layout" style="margin-bottom:7px!important;">
+                        <a href="/Home/index" class="btn_form"><i class="fa fa-times" title="إغلاق"></i></a>
+
+                    </div>
+                    <div class="col-md-6" style="float:right;">
+                        <label id="SystemName" class="control-label col-md-12">إسم الشركة</label>
+                        @Html.DropDownList("CompanyName", null, "", htmlAttributes: new { @class = "input_form col-md-6", style = "float:right"/*onchange = @"fetch_list(this.value)"*/})
+                        <div class="texterr" style="float:right"></div>
+                    </div>
+                    <div class="col-md-6" style="float:right;">
+                        <label id="SystemName" class="control-label col-md-12">رقم العقد</label>
+                        @Html.DropDownList("ContractNo", new SelectList(""), "", htmlAttributes: new
+                       {
+                           @class = "input_form col-md-6",
+                           style = "float:right",
+                                onchange = "GetContracts()"
+                       })
+                        <div class="texterr">@ViewBag.task</div>
+                    </div>
+                    <div>
+                        <div class="col-md-12" style="margin-top:10px;">
+                            <label class="label_form col-md-3" style="float:right">رقم تسديد مستحقات العقد</label>
+                            <input type="text" class="input_form col-md-6" id="PayNo" value="@ViewBag.PayNo" name="PayNo" style="float:right;width:25%" />
+                            <div class="texterr"></div>
+                        </div>
+                        <div class="col-md-12" style="margin-top:5px;">
+                            <label class="label_form col-md-3" style="float:right">تاريخ التسديد</label>
+                            <input class="input_form text-box single-line" data-val="true" style="width:20%"
+                                   id="PayDate" name="PayDate" type="date" value="@ViewBag.PayDate">
+                        </div>
+                        <div class="col-md-12" style="margin-top:5px;">
+                            <label class="label_form col-md-3" style="float:right">المبلغ المسدد</label>
+                            <input type="text" class="input_form col-md-6" id="PayedValue" value="@ViewBag.PayedValue" name="PayedValue" style="float:right;width:25%" />
+                            <div class="texterr"></div>
+                        </div>
+
+                        <div class="col-md-12" style="margin-top:5px;">
+                            <label class="label_form col-md-3" style="float:right">الملاحظات</label>
+                            <input type="text" class="input_form col-md-6" id="Reasons" value="@ViewBag.Reasons" name="Reasons" maxlength="100" style="float:right;width:55%" />
+                            <div class="texterr"></div>
+                        </div>
+                    </div>
+
+                </div>
+                <div id="Table">
+                    @{
+                        Html.RenderAction("PartialIndexTable");
+                    }
+
+                </div>
+                <div class="col-md-6" style="margin-top:30px;">
+                    <div style="height:110px;"></div>
+                    <a href="/MasPayTaxes/Index/" tabindex="" class="btn" style="font-family:'Times New Roman';float:left;font-size:15px!important;width: 70px !important;padding-top:4px;height:30px; background-color: #F3B161; padding-right: 22px; border-radius: 0px; color: white;">انهاء</a>
+                </div>
+                <div class="col-md-6" style="margin-top:30px;">
+                    <div style="height:110px;"></div>
+                    <input type="submit" tabindex="" name="add" class="submit_btn" id="add_btn" value="حفظ" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("#CompanyName").change(function () {
+            $.get("/MasPayTaxes/GetContractNo", { No: $("#CompanyName").val() }, function (data) {
+                $("#ContractNo").empty();
+                
+                $.each(data, function (index, row) {
+                    $("#ContractNo").append("<option value= '" + row.CR_Cas_Company_Contract_No + "'>" + row.CR_Cas_Company_Contract_No + "</option>")
+                });
+                var node = document.getElementById("tbl");
+                while (node.hasChildNodes()) {
+                    node.removeChild(node.lastChild);
+                }
+            });
+        })
+    });
+    function GetContracts() {
+        
+        $.ajax({
+            url: '@Url.Action("PartialIndexTable", "MasPayTaxes")',
+            type: "GET",
+            data: { ContractNo: document.getElementById('ContractNo').value },
+            success: function (result) {
+                //alert();
+                $('#Table').html(result);
+            }
+        });
+    };
+</script>
+

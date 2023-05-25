@@ -1,0 +1,162 @@
+﻿@{
+    ViewBag.Title = "BranchStat";
+    Layout = "~/Views/Shared/_LayoutSys3Home.cshtml";
+}
+<div>
+    <div class="col-md-12" style="background-color: white; height: 375px; font-family: Arial !important">
+
+        <div class="row" style="height:auto">
+            <div class="col-md-4">
+
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+
+                <canvas id="myChart" style="width: 100%; max-width: 235px; height: 290px;"></canvas>
+
+                <script>
+                    var xValues = [" مؤجرة", " متاحة"," غير متاحة"];
+                    var yValues = [@ViewBag.NbrRented,@ViewBag.NbrActive,@ViewBag.NbrNotActive];
+                    var barColors = [
+                        "#b91d47",
+                        "#00aba9",
+                        "#2b5797",
+                        "#e8c3b9",
+                        "#FFB533"
+                    ];
+
+                    new Chart("myChart", {
+                        type: "bar",
+                        data: {
+                            labels: xValues,
+                            datasets: [{
+                                backgroundColor: barColors,
+                                data: yValues
+                            }]
+                        },
+                        options: {
+                            legend: { display: false },
+                            title: {
+                                display: true,
+                                text: " عدد سيارات الفرع : @ViewBag.NbrTot"
+                            }
+                        }
+                    });
+                </script>
+
+            </div>
+            <div class="col-md-4">
+                <canvas id="myChart2" style="width: 100%; max-width: 225px; height: 270px;"></canvas>
+                <script>
+                    var xValues = ["تنتهي غدا", "قائمة", "تنتهي اليوم", "منتهية"];
+                    var yValues = [@ViewBag.NbrTexpiredContracts,@ViewBag.NbrActiveContracts, @ViewBag.NbrDexpiredContracts, @ViewBag.NbrexpiredContracts];
+                    var barColors = [
+                        "#00aba9",
+                        "#2b5797",
+                        "#e8c3b9",
+                        "#1e7145"
+                    ];
+
+                    new Chart("myChart2", {
+                        type: "doughnut",
+                        data: {
+                            labels: xValues,
+                            datasets: [{
+                                backgroundColor: barColors,
+                                data: yValues
+                            }]
+                        },
+                        options: {
+                            title: {
+                                display: true,
+                                text: " عدد العقود :@ViewBag.NbrContracts والمغلقة : @ViewBag.NbrClosedContracts",
+                            }
+                        }
+                    });
+                </script>
+            </div>
+
+
+            <!--For Test -->
+
+            <div class="col-md-4">
+
+                <canvas id="myChart3" style="width: 100%; max-width: 250px; height: 280px;"></canvas>
+
+                <script>
+                   var myChart = new Chart(myChart3, {
+                       type: 'horizontalBar',
+                       data: {
+                           labels: ['نقاط البيع', 'نقدا'],
+                           datasets: [{
+                               data: [@ViewBag.TotSalesPoint,@ViewBag.TotCash],
+                               backgroundColor: [
+                                   'rgba(255, 99, 132, 0.2)',
+                                   'rgba(54, 162, 235, 0.2)'
+                               ],
+                               borderColor: [
+                                   'rgba(255, 99, 132, 1)',
+                                   'rgba(54, 162, 235, 1)'
+                               ],
+                               borderWidth: 1
+                           }]
+                       },
+                       options: {
+                           title: {
+                               display: true,
+                               text: "   اجمالي العهدة المالية بالفرع :@ViewBag.TotReceipt"
+                           },
+                           scales: {
+                               xAxes: [{
+                                   ticks: {
+                                       beginAtZero: true
+                                   }
+                               }]
+                           },
+                           legend: {
+                               display: false
+                           }
+                       }
+                   });
+                </script>
+            </div>
+
+            <!--For Test -->
+
+
+
+            @*<div class="col-md-4">
+            <label style="width: 100%; text-align: center; font-size: 16px; font-weight: bold; padding-bottom: 10px;">الموجودات</label>
+            <div class="row col-md-12">
+                <div class="col-md-8">
+                    <label style="width:100%;font-size:12px;font-weight:bold"> الإجمالي</label>
+                </div>
+                <div class="col-md-4">
+                    <label>@ViewBag.TotReceipt</label>
+                </div>
+            </div>
+            <div class="row col-md-12">
+                <div class="col-md-8">
+                    <label style="width:100%;font-size:12px;font-weight:bold"> الصندوق النقدي</label>
+                </div>
+                <div class="col-md-4">
+                    <label>@ViewBag.TotCash</label>
+                </div>
+            </div>
+            <div class="row col-md-12">
+                <div class="col-md-8">
+                    <label style="width:100%;font-size:12px;font-weight:bold"> نقاط البيع</label>
+                </div>
+                <div class="col-md-4">
+                    <label>@ViewBag.TotSalesPoint</label>
+                </div>
+            </div>
+
+        </div>*@
+        </div>
+
+        <div class="row" style="padding-top:45px;padding-bottom:10px;">
+            <label style="width:100%;text-align:center;font-size:22px;font-weight:bold"> إحصائيات الفرع</label>
+        </div>
+
+    </div>
+</div>
+

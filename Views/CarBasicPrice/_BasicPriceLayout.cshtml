@@ -1,0 +1,368 @@
+﻿<!DOCTYPE html>
+
+@model RentCar.Models.CR_Cas_Car_Price_Basic
+@{
+    Layout = "~/Views/Shared/_CasLayout.cshtml";
+}
+
+
+
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" / >
+    <style>
+        img[src=""] {
+            display: none;
+        }
+        .form-control:disabled, .form-control[readonly] {
+            background-color:transparent;
+            border: solid 1px #4A80B4 !important;
+        }
+    </style>
+</head>
+
+@using (Html.BeginForm("Create", "CarBasicPrice", FormMethod.Post, new { enctype = "multipart/form-data" }))
+
+{
+    @Html.AntiForgeryToken()
+<body>
+    <link href="~/BSys3Styles/CSS/style_form.css" rel="stylesheet" />
+    <div class="content">
+
+        <!-- Start Content-->
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card-box table-responsive" style="height: 79vh; overflow-x: hidden">
+                        <div class="title_corp" style="padding-top:10px;"><h3> السيارات / أسعار السيارات / إضافة </h3></div>
+                        <div class="subtitle_corp"> تمكنك هذه الصفحة من إضافة سعر جديد</div>
+                        <div class="hr_60"></div>
+                        <div class="hr_80"></div>
+                        <div class="corp_page">
+                            <div class="page_content">
+                                <div class="form-group row" style="margin-top: 15px; width: 126%;">
+
+                                    @Html.HiddenFor(model => model.CR_Cas_Car_Price_Basic_Brand_Code, htmlAttributes: new { @class = "form-control ", style = "float:right;width:100%", onkeyup = "movetoNext('')", autocomplete = "off", onpaste = "return false;", maxlength = "20" })
+                                    @Html.HiddenFor(model => model.CR_Cas_Car_Price_Basic_Category_Code, htmlAttributes: new { @class = "form-control ", style = "float:right;width:100%", autocomplete = "off", onpaste = "return false;", maxlength = "20" })
+                                    <input type="text" name="FeaturesNbr" id="FeaturesNbr" class="form-control " style="float:right;width:100%" onpaste="return false" hidden value="">
+                                    <input type="text" id="cattemp" name="cattemp" hidden />
+
+                                    <div class="col-md-3" style="float:right;">
+                                        <div class="row">
+                                            <div class="col-md-6 label6">
+                                                الطراز
+                                            </div>
+                                            <div class="col-md-6 input6 p-0">
+                                                @Html.DropDownList("CR_Cas_Car_Price_Basic_Model_Code", null, "--الرجاء أختيار الطراز--", htmlAttributes: new { @class = "form-control", style = "float:right;width:100%; padding:0" })
+                                                <div class="texterr" id="ErrPrice" style="float:right;">@ViewBag.Price</div>
+                                                <div class="texterr" id="ErrCat" style="float:right"></div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="col-md-3" style="float:right;">
+                                        <div class="row">
+                                            <div class="col-md-6 label6">
+                                                سنة الصنع
+                                            </div>
+                                            <div class="col-md-6 input6 p-0">
+                                                @*@Html.TextBoxFor(model => model.CR_Cas_Car_Price_Basic_Car_Year, htmlAttributes: new { @class = "form-control ", onkeydown = "GetBrandCat()", onkeyup = "GetFeaturesList()", onfocusout = "GetBrandCat()", style = "float:right;width:100%", autocomplete = "off", oninput = "this.value=this.value.replace(/[^0-9]/g,'')", onpaste = "return false;", maxlength = "10" })*@
+                                                @Html.DropDownList("listyear", null, " --الرجاء أختيار سنة الصنع-- ", htmlAttributes: new { @class = "form-control p-0", style = "float:right; width: 119%;", @onchange = "GetBrandCat()" })
+                                                <div class="texterr" style="float:right"></div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3" style="float:right;">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <input type="text" id="BrandCategory" name="BrandCategory" class="form-control" ReadOnly="" style="float: right; width: 100%; border: none !important; margin-right: 62px;" tabindex="-1">
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="col-md-3" style="float:right;">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <img src="" id="carimgprice" width="200" height="130" style=" float: right; left: 0; position: absolute; object-fit: cover; left: 15px; margin-top: -60px;" />
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group row" style="margin-top:0px;">
+                                    <div class="col-md-4" style="float:right;" hidden>
+                                        <div class="row">
+                                            <div class="col-md-6 label6">
+                                                القطاع
+                                            </div>
+                                            <div class="col-md-6 input6">
+                                                @Html.DropDownList("CR_Cas_Car_Price_Basic_Sector", null, "", htmlAttributes: new { @class = "form-control", style = "float:right;width:100%" })
+                                                <div class="texterr" style="float:right"></div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-md-4" style="float:right;" hidden>
+                                        <div class="row">
+                                            <div class="col-md-6 label6">
+                                                الفئة
+                                            </div>
+                                            <div class="col-md-6 input6">
+                                                <div class="texterr" style="float:right"></div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="col-md-4" style="float:right;" hidden>
+                                        <div class="row">
+                                            <div class="col-md-6 label6">
+                                                عدد السيارات
+                                            </div>
+                                            <div class="col-md-6 input6">
+                                                <input type="text" name="CarsNumber" id="CarsNumber" class="form-control " style="float:right;width:100%" onpaste="return false" readonly="readonly">
+                                                <div class="texterr" style="float:right"></div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
+                                @RenderBody()
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        function GetBrandCat() {
+
+                $.ajax({
+                    url: '@Url.Action("GetBrandCat", "CarBasicPrice")',
+                    type: "GET",
+                    data: { year: $("#listyear").val(), ModelCode: $("#CR_Cas_Car_Price_Basic_Model_Code").val() },
+                    success: function (result) {
+                        $("#BrandCategory").val(result);
+                        GetBrandCatCode();
+                        var x = result.split("/")[1];
+
+                        if (x == " " || x == null) {
+
+                            document.getElementById("ErrCat").innerHTML = "عفواً ....لم يتم تحديد فئة";
+                            document.getElementById("cattemp").innerHTML = "عفواً ....لم يتم تحديد فئة";
+                        } else {
+                            document.getElementById("ErrCat").innerHTML = "";
+                            document.getElementById("cattemp").innerHTML = "";
+                        }
+
+                        CheckPrice();
+                    }
+                });
+
+        };
+
+    </script>
+
+
+    <script>
+        $(document).ready(function () {
+            $("#CR_Cas_Car_Price_Basic_Model_Code").change(function () {
+                $.ajax({
+                    url: '@Url.Action("GetBrandCat", "CarBasicPrice")',
+                    type: "GET",
+                    data: { year: $("#listyear").val(), ModelCode: $("#CR_Cas_Car_Price_Basic_Model_Code").val() },
+                    success: function (result) {
+                        $("#BrandCategory").val(result);
+                        GetBrandCatCode();
+                    }
+                });
+            })
+        });
+    </script>
+
+    <script>
+        function GetBrandCatCode() {
+
+                $.ajax({
+                    url: '@Url.Action("GetBrandCatCode", "CarBasicPrice")',
+                    type: "GET",
+                    data: { year: $("#listyear").val(), ModelCode: $("#CR_Cas_Car_Price_Basic_Model_Code").val() },
+                    success: function (result) {
+                        $("#CR_Cas_Car_Price_Basic_Brand_Code").val(result.split(",")[0]);
+                        $("#CR_Cas_Car_Price_Basic_Category_Code").val(result.split(",")[1]);
+                        $("#FeaturesNbr").val(result.split(",")[2]);
+                        var imagepath = result.split(",")[3];
+                        //alert(imagepath);
+                        if (imagepath != null) {
+                            $("img[id=carimgprice]").attr("src", imagepath);
+
+                        } else {
+                            $("img[id=carimgprice]").attr("src", "");
+                        }
+
+                        var x = result.split(",")[1];
+                        if (x == "" || x == null) {
+                            document.getElementById("ErrCat").innerHTML = "عفواً ....لم يتم تحديد فئة";
+                            document.getElementById("cattemp").value = "عفواً ....لم يتم تحديد فئة";
+
+                        } else {
+                            document.getElementById("ErrCat").innerHTML = "";
+                            document.getElementById("cattemp").value = "";
+                        }
+                    }
+                });
+
+            };
+
+
+
+            //////////////// disable auto validate on enter click ///////////////
+            $(document).keypress(function (e) {
+                if (e.keyCode === 13) {
+                    e.preventDefault();
+                    return false;
+                }
+            });
+                    ////////////////////////////////////////////////////////////////////
+    </script>
+
+
+    <script>
+    $(document).ready(function () {
+        $("#CR_Cas_Car_Price_Basic_Sector").change(function () {
+            $.ajax({
+                    url: '@Url.Action("CheckPriceExist", "CarBasicPrice")',
+                    type: "POST",
+                    dataType: "html",
+                data: { year: $("#listyear").val(), modelcode: $("#CR_Cas_Car_Price_Basic_Model_Code").val(), sector: $("#CR_Cas_Car_Price_Basic_Sector").val() },
+                    success: function (data) {
+                        var x = data;
+                        document.getElementById("ErrPrice").innerHTML = "";
+                        //debugger;
+                        //console.debug("x:", x);
+                        if (x=="true") {
+
+                            document.getElementById("ErrPrice").innerHTML = "عفواً ...... السعر مسجل من قبل";
+                        }
+
+                    },
+                });
+        });
+    });
+    </script>
+
+
+    <script>
+    $(document).ready(function () {
+        $("#CR_Cas_Car_Price_Basic_Model_Code").change(function () {
+            $.ajax({
+                    url: '@Url.Action("CheckPriceExist", "CarBasicPrice")',
+                    type: "POST",
+                    dataType: "html",
+                data: { year: $("#listyear").val(), modelcode: $("#CR_Cas_Car_Price_Basic_Model_Code").val(), sector: $("#CR_Cas_Car_Price_Basic_Sector").val() },
+                    success: function (data) {
+                        var x = data;
+                        document.getElementById("ErrPrice").innerHTML = "";
+                        //alert(x);
+                        if (x=="true") {
+                            //alert("t");
+                            document.getElementById("ErrPrice").innerHTML = "عفواً ...... السعر مسجل من قبل";
+                        }
+
+                    },
+                });
+        });
+    });
+    </script>
+
+    <script>
+        function CheckPrice() {
+
+                    $.ajax({
+                        url: '@Url.Action("CheckPriceExist", "CarBasicPrice")',
+                        type: "POST",
+                        dataType: "html",
+                        data: { year: $("#listyear").val(), modelcode: $("#CR_Cas_Car_Price_Basic_Model_Code").val(), sector: $("#CR_Cas_Car_Price_Basic_Sector").val() },
+                        success: function (data) {
+                            var x = data;
+                            document.getElementById("ErrPrice").innerHTML = "";
+                            //alert(x);
+                            if (x=="true") {
+                                //alert("t");
+                                document.getElementById("ErrPrice").innerHTML = "عفواً ...... السعر مسجل من قبل";
+                            }
+
+                        },
+                    });
+
+
+            };
+    </script>
+
+
+
+    @*<script>
+            $(".CR_Cas_Car_Price_Basic_Car_Year").on('keyup', function (e) {
+                if (e.key === 'Enter' || e.keyCode === 13 || e.keyCode === 9) {
+                    $.ajax({
+                        url: '@Url.Action("CheckPriceExist", "CarBasicPrice")',
+                        type: "POST",
+                        dataType: "html",
+                    data: { year: $("#CR_Cas_Car_Price_Basic_Car_Year").val(), modelcode: $("#CR_Cas_Car_Price_Basic_Model_Code").val(), sector: $("#CR_Cas_Car_Price_Basic_Sector").val() },
+                        success: function (data) {
+                            var x = data;
+                            document.getElementById("ErrPrice").innerHTML = "";
+                            alert(x);
+                            if (x=="true") {
+                                //alert("t");
+                                document.getElementById("ErrPrice").innerHTML = "عفواً ...... السعر مسجل من قبل";
+                            }
+
+                        },
+                    });
+                }
+            });
+        </script>*@
+
+
+    @*<script>
+            window.addEventListener("keydown", event => {
+                if (event.key == "13") {
+
+                }
+            });
+        </script>*@
+
+</body>
+
+}
+</html>
+<style>
+   #add_btn {
+        width: 100% !important;
+        float: right !important
+    }
+</style>

@@ -1,0 +1,149 @@
+﻿
+@{
+    ViewBag.Title = "BranchHome";
+    Layout = "~/Views/Shared/_LayoutSys3.cshtml";
+}
+
+    <div class="content">
+
+        <!-- Start Content-->
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col-md-3">
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <div class="card-box" style="min-height:69px;">
+                                <h4 class="header-title mt-0 mb-0" style="float:right;width:30%;line-height:35px;">الفرع</h4>
+                                @Html.DropDownList("BranchList", null, htmlAttributes: new { @class = "form-control", style = "float:right;width:70%;" })
+                            </div>
+                        </div><!-- end col -->
+
+                        <div class="col-xl-12 col-md-12">
+                            <div class="card-box widget-user" style="padding:20px;">
+                                <a href="~/BasicContract/Create" onclick="GetLessorInfo()">
+                                    <div class="text-center">
+                                        <h2 class="font-weight-normal text-primary"><img src="~/BSys3 Styles/Images/1-1.png" class="img-fluid rounded-circle" alt="user" style="height:54px"></h2>
+                                        <h5>إنشاء عقد</h5>
+                                    </div>
+                                </a>
+
+                            </div>
+                            <div class="card-box widget-user" style="padding:20px;margin-bottom:10px">
+                                <div class="text-center">
+                                    <h2 class="font-weight-normal text-primary"><img src="~/BSys3 Styles/Images/4-1.png" class="img-fluid rounded-circle" alt="user" style="height: 54px"></h2>
+                                    <h5>سند قبض</h5>
+
+                                </div>
+                            </div>
+                        </div><!-- end col -->
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div class="card-box" style="height:375px">
+                        <img src="~/BSys3 Styles/Images/car.jpg" style="float:left;height:300px;width: 100%;object-fit: contain;">
+                    </div>
+
+                </div>
+            </div>
+            <!-- end row -->
+
+            <div class="row">
+                <div class="col-xl-2 col-md-6">
+
+                    <div class="card-box widget-user">
+                        <div class="text-center">
+                            <h2 class="font-weight-normal text-primary"><img src="~/BSys3 Styles/Images/4-1.png" class="img-fluid rounded-circle" alt="user" style="height: 125px"></h2>
+                            <h5>سند صرف</h5>
+
+                        </div>
+                    </div>
+                </div><!-- end col -->
+
+                <div class="col-xl-2 col-md-6">
+                    <div class="card-box widget-user">
+                        <div class="text-center">
+                            @*<a href="~/CheckContract/CheckContract">*@
+                                <h2 class="font-weight-normal text-primary"><img src="~/BSys3 Styles/Images/10.png" class="img-fluid rounded-circle" alt="user" style="height: 125px"></h2>
+                                <h5>جولة افتراضية</h5>
+                            @*</a>*@
+                        </div>
+                    </div>
+                </div><!-- end col -->
+
+                <div class="col-xl-2 col-md-6">
+                    <div class="card-box widget-user">
+                        <div class="text-center">
+                            <a href="~/Sys3RenterLessor/index">
+                                <h2 class="font-weight-normal text-primary"><img src="~/BSys3 Styles/Images/2-3.png" class="img-fluid rounded-circle" alt="user" style="height: 125px"></h2>
+                                <h5>المستأجرين</h5>
+                            </a>
+
+                        </div>
+                    </div>
+                </div><!-- end col -->
+                <div class="col-xl-2 col-md-6">
+                    <div class="card-box widget-user">
+                        <a href="~/ActiveContract/Index">
+                            <div class="text-center">
+                                <h2 class="font-weight-normal text-primary"><img src="~/BSys3 Styles/Images/8.png" class="img-fluid rounded-circle" alt="user" style="height: 125px"></h2>
+                                <h5>العقود القائمة</h5>
+                            </div>
+                        </a>
+                    </div>
+                </div><!-- end col -->
+                <div class="col-xl-2 col-md-6">
+                    <div class="card-box widget-user">
+                        <div class="text-center">
+                            <h2 class="font-weight-normal text-primary"><img src="~/BSys3 Styles/Images/2-1.png" class="img-fluid rounded-circle" alt="user" style="height: 125px"></h2>
+                            <h5>تسوية عقد</h5>
+
+
+                        </div>
+                    </div>
+                </div><!-- end col -->
+                <div class="col-xl-2 col-md-6">
+                    <div class="card-box widget-user">
+                        
+                            <div class="text-center">
+                                <a href="~/BasicContract/AllContracts">
+                                <h2 class="font-weight-normal text-primary"><img src="~/BSys3 Styles/Images/8.png" class="img-fluid rounded-circle" alt="user" style="height: 125px"></h2>
+                                <h5>العقود</h5>
+                                </a>
+                            </div>
+                        
+                    </div>
+                </div><!-- end col -->
+            </div>
+
+        </div> <!-- container-fluid -->
+
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $("#BranchList").change(function () {
+                $.ajax({
+                    url: '@Url.Action("ChangeBranch", "BranchHome")',
+                    type: "GET",
+                    data: { BranchCode: $("#BranchList").val() },
+                    success: function (result) {
+
+                        //var logo = result.split("-")[0];
+                        var Name = result.split("-")[1];
+
+                        $("#BranchNameID").html(Name);
+                       
+                        //if (logo != null) {
+                        //    $("img[id=BranchLogoID]").attr("src", logo);
+
+                        //} else {
+                        //    $("img[id=BranchLogoID]").attr("src", "");
+                        //}
+
+                    }
+                });
+            })
+        });
+    </script>

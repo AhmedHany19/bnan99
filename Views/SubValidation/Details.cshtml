@@ -1,0 +1,83 @@
+﻿@model RentCar.Models.CR_Mas_User_Sub_Validation
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>CR_Mas_User_Sub_Validation</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CR_Mas_User_Sub_Validation_Insert)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CR_Mas_User_Sub_Validation_Insert)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CR_Mas_User_Sub_Validation_UpDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CR_Mas_User_Sub_Validation_UpDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CR_Mas_User_Sub_Validation_Delete)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CR_Mas_User_Sub_Validation_Delete)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CR_Mas_User_Sub_Validation_UnDelete)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CR_Mas_User_Sub_Validation_UnDelete)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CR_Mas_User_Sub_Validation_Hold)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CR_Mas_User_Sub_Validation_Hold)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CR_Mas_User_Sub_Validation_UnHold)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CR_Mas_User_Sub_Validation_UnHold)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CR_Mas_User_Sub_Validation_Print)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CR_Mas_User_Sub_Validation_Print)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CR_Mas_User_Information.CR_Mas_User_Information_PassWord)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CR_Mas_User_Information.CR_Mas_User_Information_PassWord)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

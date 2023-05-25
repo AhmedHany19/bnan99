@@ -1,0 +1,520 @@
+﻿@model IEnumerable<RentCar.Models.CR_Cas_Sup_Branch_Documentation>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_CASLayout.cshtml";
+}
+
+<style>
+    label {
+        float: none
+    }
+</style>
+<div class="content">
+
+    <!-- Start Content-->
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card-box table-responsive" style="height:79vh">
+                    <div class="title_corp"><h3> الشركة /العقود / عرض البيانات</h3></div>
+                    <div class="subtitle_corp"> تمكنك هذه الصفحة من تحديث بيانات العقود</div>
+                    <div class="hr_60"></div>
+                    <div class="hr_80"></div>
+                    <div class="corp_page">
+                        <div class="page_content">
+                            <form method="post">
+                                <div class="form_bg">
+                                    <div class="href_layout">
+                                        <a href="/Cashome/index" class="btn_form" data-toggle="tooltip" data-placement="top" title="إغلاق"><i class="fa fa-times"></i></a>
+                                        <button type="submit" name="excelCall" class="btn_form" value="Excel" style="padding-right:4px;" data-toggle="tooltip" data-placement="top" title="ترحيل البيانات للإكسل">
+                                            <i class="far fa-file-excel" aria-hidden="true" style=" margin-bottom: 3px; padding-left: 10px;"></i>
+                                        </button>
+                                        <a href="" class="btn_form" data-toggle="tooltip" data-placement="top" title="طباعة"><i class="fa fa-print"></i></a>
+                                    </div>
+                                    <div class="dataTables_filter ">
+                                        <label style="float: left;width: 100%;  text-align: left;line-height:30px">
+                                            <img src="~/images/srch.png" id="SrchImg" />
+                                            بحث:<input class="form-control" type="text" id="inputtext" name="TxtSearch" style=" float: left;width: 80%; text-align: right;margin-right: 10px;" />
+                                        </label>
+                                    </div>
+                                    
+                                    <div class="responsive-table-plugin">
+                                        <div class="table-rep-plugin">
+                                            <div class="table-responsive" data-pattern="priority-columns" style="border:none;">
+                                                <div id="dtBasicExample_print">
+                                                    <table id="myTable" class="table table-striped mb-0" style="cursor:pointer">
+                                                        <thead>
+                                                            <tr>
+                                                                <th hidden>
+                                                                    إسم الفرع
+                                                                </th>
+
+                                                                <th>
+                                                                    المستند
+                                                                </th>
+                                                                <th>
+                                                                    رقم العقد
+                                                                </th>
+                                                                <th>
+                                                                    @Html.DisplayNameFor(model => model.CR_Cas_Sup_Branch_Documentation_Date)
+                                                                </th>
+                                                                <th>
+                                                                    @Html.DisplayNameFor(model => model.CR_Cas_Sup_Branch_Documentation_Start_Date)
+                                                                </th>
+                                                                <th>
+                                                                    @Html.DisplayNameFor(model => model.CR_Cas_Sup_Branch_Documentation_End_Date)
+                                                                </th>
+                                                                <th hidden="hidden">
+                                                                    @Html.DisplayNameFor(model => model.CR_Cas_Sup_Branch_Documentation_Activation)
+                                                                </th>
+                                                                <th hidden="hidden">
+                                                                    @Html.DisplayNameFor(model => model.CR_Cas_Sup_Branch_Documentation_Credit_Limit)
+                                                                </th>
+                                                                <th hidden="hidden">
+                                                                    @Html.DisplayNameFor(model => model.CR_Cas_Sup_Branch_Documentation_About_To_Expire)
+                                                                </th>
+                                                                <th>
+                                                                    @Html.DisplayNameFor(model => model.CR_Cas_Sup_Branch_Documentation_Status)
+                                                                </th>
+                                                                <th hidden="hidden">
+                                                                    @Html.DisplayNameFor(model => model.CR_Cas_Sup_Procedures_Type)
+                                                                </th>
+
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody id="tbl">
+                                                            @foreach (var item in Model)
+                                                            {
+
+                                                                if (item.CR_Cas_Sup_Branch_Documentation_Code == "17")
+                                                                {
+                                                                    <tr>
+                                                                        <td hidden>
+                                                                            <a href="~/BasicTamContract/Create/?LessorCode=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Lessor_Code)
+                                                                                        &BranchCode=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Branch_Code)
+                                                                                        &ProcCode=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Code)">
+                                                                                @Html.DisplayFor(model => item.CR_Cas_Sup_Branch.CR_Cas_Sup_Branch_Ar_Name)
+                                                                            </a>
+                                                                        </td>
+
+                                                                        <td>
+
+                                                                            <a href="~/BasicTamContract/Create/?LessorCode=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Lessor_Code)
+                                                                                &BranchCode=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Branch_Code)
+                                                                                &ProcCode=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Code)">
+                                                                                @Html.DisplayFor(modelItem => item.CR_Mas_Sup_Procedures.CR_Mas_Sup_Procedures_Ar_Name)
+                                                                            </a>
+                                                                        </td>
+
+                                                                        <td>
+                                                                            <a href="~/BasicTamContract/Create/?LessorCode=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Lessor_Code)
+                                                                                        &BranchCode=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Branch_Code)
+                                                                                        &ProcCode=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Code)">
+                                                                                @Html.DisplayFor(model => item.CR_Cas_Sup_Branch_Documentation_No)
+                                                                            </a>
+                                                                        </td>
+                                                                        <td>
+                                                                            @if (item.CR_Cas_Sup_Branch_Documentation_Date != null)
+                                                                            {
+                                                                                <a href="~/BasicTamContract/Create/?LessorCode=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Lessor_Code)
+                                                                                        &BranchCode=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Branch_Code)
+                                                                                        &ProcCode=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Code)">
+                                                                                    @item.CR_Cas_Sup_Branch_Documentation_Date.Value.ToString("yyyy/MM/dd")
+                                                                                </a>
+                                                                            }
+                                                                        </td>
+
+                                                                        <td>
+                                                                            @if (item.CR_Cas_Sup_Branch_Documentation_Start_Date != null)
+                                                                            {
+                                                                                <a href="~/BasicTamContract/Create/?LessorCode=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Lessor_Code)
+                                                                                    &BranchCode=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Branch_Code)
+                                                                                    &ProcCode=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Code)">
+                                                                                    @item.CR_Cas_Sup_Branch_Documentation_Start_Date.Value.ToString("yyyy/MM/dd")
+                                                                                </a>
+                                                                            }
+                                                                        </td>
+                                                                        <td>
+                                                                            @if (item.CR_Cas_Sup_Branch_Documentation_End_Date != null)
+                                                                            {
+                                                                                <a href="~/BasicTamContract/Create/?LessorCode=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Lessor_Code)
+                                                                                    &BranchCode=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Branch_Code)
+                                                                                    &ProcCode=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Code)">
+                                                                                    @item.CR_Cas_Sup_Branch_Documentation_End_Date.Value.ToString("yyyy/MM/dd")
+                                                                                </a>
+                                                                            }
+                                                                        </td>
+                                                                        <td hidden="hidden">
+                                                                            @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Activation)
+                                                                        </td>
+                                                                        <td hidden="hidden">
+                                                                            @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Credit_Limit)
+                                                                        </td>
+                                                                        <td hidden="hidden">
+                                                                            @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_About_To_Expire)
+                                                                        </td>
+                                                                        <td style="text-align:center">
+
+                                                                            @if (item.CR_Cas_Sup_Branch_Documentation_Status == "N")
+                                                                            {
+
+                                                                                <a href="~/BasicTamContract/Create/?LessorCode=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Lessor_Code)
+                                                                                        &BranchCode=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Branch_Code)
+                                                                                        &ProcCode=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Code)">
+                                                                                    <label>لم يسجل</label>
+                                                                                </a>
+                                                                            }
+
+                                                                            @if (item.CR_Cas_Sup_Branch_Documentation_Status == "D")
+                                                                            {
+
+                                                                                <a href="~/BasicTamContract/Create/?LessorCode=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Lessor_Code)
+                                                                                    &BranchCode=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Branch_Code)
+                                                                                    &ProcCode=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Code)">
+                                                                                    <label>محذوف</label>
+                                                                                </a>
+                                                                            }
+                                                                            @if (item.CR_Cas_Sup_Branch_Documentation_Status == "A")
+                                                                            {
+
+                                                                                <a href="~/BasicTamContract/Create/?LessorCode=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Lessor_Code)
+                                                                                    &BranchCode=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Branch_Code)
+                                                                                    &ProcCode=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Code)">
+                                                                                    <label>نشط</label>
+                                                                                </a>
+                                                                            }
+                                                                            @if (item.CR_Cas_Sup_Branch_Documentation_Status == "E")
+                                                                            {
+
+                                                                                <a href="~/BasicTamContract/Create/?LessorCode=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Lessor_Code)
+                                                                                    &BranchCode=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Branch_Code)
+                                                                                    &ProcCode=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Code)">
+                                                                                    <label>منتهي</label>
+                                                                                </a>
+                                                                            }
+                                                                            @if (item.CR_Cas_Sup_Branch_Documentation_Status == "X")
+                                                                            {
+
+                                                                                <a href="~/BasicTamContract/Create/?LessorCode=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Lessor_Code)
+                                                                                    &BranchCode=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Branch_Code)
+                                                                                    &ProcCode=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Code)">
+                                                                                    <label style="color:crimson">على وشك الإنتهاء</label>
+                                                                                </a>
+                                                                            }
+
+                                                                        </td>
+                                                                        <td hidden="hidden">
+                                                                            @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Procedures_Type)
+                                                                        </td>
+
+                                                                    </tr>
+                                                                }
+                                                                else if (item.CR_Cas_Sup_Branch_Documentation_Code == "19")
+                                                                {
+                                                                    <tr>
+                                                                        <td hidden>
+                                                                            <a href="~/TransportAuthorityContract/Create/?LessorCode=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Lessor_Code)
+                                                                                        &BranchCode=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Branch_Code)
+                                                                                        &ProcCode=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Code)">
+                                                                                @Html.DisplayFor(model => item.CR_Cas_Sup_Branch.CR_Cas_Sup_Branch_Ar_Name)
+                                                                            </a>
+                                                                        </td>
+
+                                                                        <td>
+
+                                                                            <a href="~/TransportAuthorityContract/Create/?LessorCode=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Lessor_Code)
+                                                                                &BranchCode=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Branch_Code)
+                                                                                &ProcCode=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Code)">
+                                                                                @Html.DisplayFor(modelItem => item.CR_Mas_Sup_Procedures.CR_Mas_Sup_Procedures_Ar_Name)
+                                                                            </a>
+                                                                        </td>
+
+                                                                        <td>
+                                                                            <a href="~/TransportAuthorityContract/Create/?LessorCode=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Lessor_Code)
+                                                                                        &BranchCode=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Branch_Code)
+                                                                                        &ProcCode=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Code)">
+                                                                                @Html.DisplayFor(model => item.CR_Cas_Sup_Branch_Documentation_No)
+                                                                            </a>
+                                                                        </td>
+                                                                        <td>
+                                                                            @if (item.CR_Cas_Sup_Branch_Documentation_Date != null)
+                                                                            {
+                                                                                <a href="~/TransportAuthorityContract/Create/?LessorCode=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Lessor_Code)
+                                                                                        &BranchCode=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Branch_Code)
+                                                                                        &ProcCode=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Code)">
+                                                                                    @item.CR_Cas_Sup_Branch_Documentation_Date.Value.ToString("yyyy/MM/dd")
+                                                                                </a>
+                                                                            }
+                                                                        </td>
+
+                                                                        <td>
+                                                                            @if (item.CR_Cas_Sup_Branch_Documentation_Start_Date != null)
+                                                                            {
+                                                                                <a href="~/TransportAuthorityContract/Create/?LessorCode=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Lessor_Code)
+                                                                                    &BranchCode=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Branch_Code)
+                                                                                    &ProcCode=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Code)">
+                                                                                    @item.CR_Cas_Sup_Branch_Documentation_Start_Date.Value.ToString("yyyy/MM/dd")
+                                                                                </a>
+                                                                            }
+                                                                        </td>
+                                                                        <td>
+                                                                            @if (item.CR_Cas_Sup_Branch_Documentation_End_Date != null)
+                                                                            {
+                                                                                <a href="~/TransportAuthorityContract/Create/?LessorCode=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Lessor_Code)
+                                                                                    &BranchCode=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Branch_Code)
+                                                                                    &ProcCode=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Code)">
+                                                                                    @item.CR_Cas_Sup_Branch_Documentation_End_Date.Value.ToString("yyyy/MM/dd")
+                                                                                </a>
+                                                                            }
+                                                                        </td>
+                                                                        <td hidden="hidden">
+                                                                            @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Activation)
+                                                                        </td>
+                                                                        <td hidden="hidden">
+                                                                            @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Credit_Limit)
+                                                                        </td>
+                                                                        <td hidden="hidden">
+                                                                            @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_About_To_Expire)
+                                                                        </td>
+                                                                        <td style="text-align:center">
+
+                                                                            @if (item.CR_Cas_Sup_Branch_Documentation_Status == "N")
+                                                                            {
+
+                                                                                <a href="~/TransportAuthorityContract/Create/?LessorCode=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Lessor_Code)
+                                                                                        &BranchCode=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Branch_Code)
+                                                                                        &ProcCode=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Code)">
+                                                                                    <label>لم يسجل</label>
+                                                                                </a>
+                                                                            }
+
+                                                                            @if (item.CR_Cas_Sup_Branch_Documentation_Status == "D")
+                                                                            {
+
+                                                                                <a href="~/TransportAuthorityContract/Create/?LessorCode=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Lessor_Code)
+                                                                                    &BranchCode=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Branch_Code)
+                                                                                    &ProcCode=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Code)">
+                                                                                    <label>محذوف</label>
+                                                                                </a>
+                                                                            }
+                                                                            @if (item.CR_Cas_Sup_Branch_Documentation_Status == "A")
+                                                                            {
+
+                                                                                <a href="~/TransportAuthorityContract/Create/?LessorCode=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Lessor_Code)
+                                                                                    &BranchCode=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Branch_Code)
+                                                                                    &ProcCode=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Code)">
+                                                                                    <label>نشط</label>
+                                                                                </a>
+                                                                            }
+                                                                            @if (item.CR_Cas_Sup_Branch_Documentation_Status == "E")
+                                                                            {
+
+                                                                                <a href="~/TransportAuthorityContract/Create/?LessorCode=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Lessor_Code)
+                                                                                    &BranchCode=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Branch_Code)
+                                                                                    &ProcCode=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Code)">
+                                                                                    <label>منتهي</label>
+                                                                                </a>
+                                                                            }
+                                                                            @if (item.CR_Cas_Sup_Branch_Documentation_Status == "X")
+                                                                            {
+
+                                                                                <a href="~/TransportAuthorityContract/Create/?LessorCode=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Lessor_Code)
+                                                                                    &BranchCode=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Branch_Code)
+                                                                                    &ProcCode=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Code)">
+                                                                                    <label style="color:crimson">على وشك الإنتهاء</label>
+                                                                                </a>
+                                                                            }
+
+                                                                        </td>
+                                                                        <td hidden="hidden">
+                                                                            @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Procedures_Type)
+                                                                        </td>
+
+                                                                    </tr>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <tr hidden>
+                                                                        <td hidden>
+                                                                            <a href="~/CasDocumentationContract/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Lessor_Code)
+                                                    &id2=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Branch_Code)
+                                                    &id3=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Code)">
+                                                                                @Html.DisplayFor(model => item.CR_Cas_Sup_Branch.CR_Cas_Sup_Branch_Ar_Name)
+                                                                            </a>
+                                                                        </td>
+
+                                                                        <td>
+
+                                                                            <a href="~/CasDocumentationContract/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Lessor_Code)
+                                                    &id2=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Branch_Code)
+                                                    &id3=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Code)">
+                                                                                @Html.DisplayFor(modelItem => item.CR_Mas_Sup_Procedures.CR_Mas_Sup_Procedures_Ar_Name)
+                                                                            </a>
+                                                                        </td>
+
+                                                                        <td>
+                                                                            <a href="~/CasDocumentationContract/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Lessor_Code)
+                                                    &id2=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Branch_Code)
+                                                    &id3=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Code)">
+                                                                                @Html.DisplayFor(model => item.CR_Cas_Sup_Branch_Documentation_No)
+                                                                            </a>
+                                                                        </td>
+
+                                                                        <td>
+                                                                            @if (item.CR_Cas_Sup_Branch_Documentation_Date != null)
+                                                                            {
+                                                                            <a href="~/CasDocumentationContract/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Lessor_Code)
+                                                    &id2=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Branch_Code)
+                                                    &id3=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Code)">
+                                                                                @item.CR_Cas_Sup_Branch_Documentation_Date.Value.ToString("yyyy/MM/dd")
+                                                                            </a>
+                                                                            }
+                                                                        </td>
+
+                                                                        <td>
+                                                                            @if (item.CR_Cas_Sup_Branch_Documentation_Start_Date != null)
+                                                                            {
+                                                                            <a href="~/CasDocumentationContract/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Lessor_Code)
+                                                    &id2=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Branch_Code)
+                                                    &id3=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Code)">
+                                                                                @item.CR_Cas_Sup_Branch_Documentation_Start_Date.Value.ToString("yyyy/MM/dd")
+                                                                            </a>
+                                                                            }
+                                                                        </td>
+                                                                        <td>
+                                                                            @if (item.CR_Cas_Sup_Branch_Documentation_End_Date != null)
+                                                                            {
+                                                                            <a href="~/CasDocumentationContract/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Lessor_Code)
+                                                    &id2=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Branch_Code)
+                                                    &id3=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Code)">
+                                                                                @item.CR_Cas_Sup_Branch_Documentation_End_Date.Value.ToString("yyyy/MM/dd")
+                                                                            </a>
+                                                                            }
+                                                                        </td>
+                                                                        <td hidden="hidden">
+                                                                            @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Activation)
+                                                                        </td>
+                                                                        <td hidden="hidden">
+                                                                            @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Credit_Limit)
+                                                                        </td>
+                                                                        <td hidden="hidden">
+                                                                            @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_About_To_Expire)
+                                                                        </td>
+                                                                        <td style="text-align:center">
+
+                                                                            @if (item.CR_Cas_Sup_Branch_Documentation_Status == "N")
+                                                                            {
+
+                                                                                <a href="~/CasDocumentationContract/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Lessor_Code)
+                                                    &id2=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Branch_Code)
+                                                    &id3=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Code)">
+                                                                                    <label>لم يسجل</label>
+                                                                                </a>
+                                                                            }
+
+                                                                            @if (item.CR_Cas_Sup_Branch_Documentation_Status == "D")
+                                                                            {
+
+                                                                                <a href="~/CasDocumentationContract/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Lessor_Code)
+                                                    &id2=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Branch_Code)
+                                                    &id3=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Code)">
+                                                                                    <label>محذوف</label>
+                                                                                </a>
+                                                                            }
+                                                                            @if (item.CR_Cas_Sup_Branch_Documentation_Status == "A")
+                                                                            {
+
+                                                                                <a href="~/CasDocumentationContract/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Lessor_Code)
+                                                    &id2=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Branch_Code)
+                                                    &id3=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Code)">
+                                                                                    <label>نشط</label>
+                                                                                </a>
+                                                                            }
+                                                                            @if (item.CR_Cas_Sup_Branch_Documentation_Status == "E")
+                                                                            {
+
+                                                                                <a href="~/CasDocumentationContract/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Lessor_Code)
+                                                    &id2=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Branch_Code)
+                                                    &id3=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Code)">
+                                                                                    <label>منتهي</label>
+                                                                                </a>
+                                                                            }
+                                                                            @if (item.CR_Cas_Sup_Branch_Documentation_Status == "X")
+                                                                            {
+
+                                                                                <a href="~/CasDocumentationContract/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Lessor_Code)
+                                                    &id2=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Branch_Code)
+                                                    &id3=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Code)">
+                                                                                    <label style="color:crimson">على وشك الإنتهاء</label>
+                                                                                </a>
+                                                                            }
+
+                                                                        </td>
+                                                                        <td hidden="hidden">
+                                                                            @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Procedures_Type)
+                                                                        </td>
+
+                                                                    </tr>
+                                                                }
+
+                                                            }
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <iframe name="print_frame" width="0" height="0" frameborder="0" src="about:blank"></iframe>
+                                                <script>
+                                                    function printDiv() {
+                                                        window.frames["print_frame"].document.body.innerHTML = document.getElementById("dtBasicExample_print").innerHTML;
+                                                        window.frames["print_frame"].window.focus();
+                                                        window.frames["print_frame"].window.print();
+                                                    }
+                                                </script>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- end row -->
+
+
+        </div> <!-- container-fluid -->
+
+    </div> <!-- content -->
+</div>
+
+<script type="text/javascript">
+    window.addEventListener("load", function () {
+            if ('@TempData["TempModel"]' == "Added") {
+
+                toastr.success("تم الحفظ بنجاح");
+            }
+
+            if ('@TempData["TempModel"]' == "Saved") {
+
+                toastr.success("تم التعديل بنجاح");
+            }
+            if ('@TempData["TempModel"]'=="Holded") {
+                toastr.success("تم التعطيل بنجاح");
+            }
+
+            if ('@TempData["TempModel"]'=="Deleted") {
+                toastr.success("تم الحذف بنجاح");
+            }
+
+            if ('@TempData["TempModel"]'=="Activated") {
+                toastr.success("تم التنشيط بنجاح");
+            }
+            if ('@TempData["TempModel"]' == "Error") {
+
+                toastr.warning("نأسف لعدم نجاح عملية التعديل, الرجاء التواصل مع المطور");
+            }
+
+
+        });
+</script>

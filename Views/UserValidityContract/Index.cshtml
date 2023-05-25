@@ -1,0 +1,220 @@
+﻿@model IEnumerable<RentCar.Models.CR_Cas_User_Validity_Contract>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_CASLayout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CR_Cas_User_Validity_Contract_Admin)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CR_Cas_User_Validity_Contract_Register)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CR_Cas_User_Validity_Contract_Chamber_Commerce)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CR_Cas_User_Validity_Contract_Transfer_Permission)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CR_Cas_User_Validity_Contract_Licence_Municipale)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CR_Cas_User_Validity_Contract_Company_Address)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CR_Cas_User_Validity_Contract_Traffic_License)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CR_Cas_User_Validity_Contract_Insurance)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CR_Cas_User_Validity_Contract_Operating_Card)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CR_Cas_User_Validity_Contract_Chkec_Up)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CR_Cas_User_Validity_Contract_Id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CR_Cas_User_Validity_Contract_Driving_License)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CR_Cas_User_Validity_Contract_Renter_Address)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CR_Cas_User_Validity_Contract_Employer)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CR_Cas_User_Validity_Contract_Tires)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CR_Cas_User_Validity_Contract_Oil)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CR_Cas_User_Validity_Contract_Maintenance)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CR_Cas_User_Validity_Contract_FBrake_Maintenance)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CR_Cas_User_Validity_Contract_BBrake_Maintenance)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CR_Cas_User_Validity_Contract_Extension)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CR_Cas_User_Validity_Contract_Age)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CR_Cas_User_Validity_Contract_Open_Amout_Rate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CR_Cas_User_Validity_Contract_Discount_Rate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CR_Cas_User_Validity_Contract_Km)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CR_Cas_User_Validity_Contract_Hour)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CR_Cas_User_Validity_Contract_Cancel)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CR_Cas_User_Validity_Contract_End)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CR_Cas_User_Validity_Contract_Close)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CR_Cas_User_Validity_Contract_Close_Amount_Rate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CR_Cas_User_Validity_Contract_Status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CR_Cas_User_Validity_Contract_Reasons)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CR_Cas_User_Information.CR_Cas_User_Information_PassWord)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CR_Cas_User_Validity_Contract_Admin)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CR_Cas_User_Validity_Contract_Register)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CR_Cas_User_Validity_Contract_Chamber_Commerce)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CR_Cas_User_Validity_Contract_Transfer_Permission)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CR_Cas_User_Validity_Contract_Licence_Municipale)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CR_Cas_User_Validity_Contract_Company_Address)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CR_Cas_User_Validity_Contract_Traffic_License)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CR_Cas_User_Validity_Contract_Insurance)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CR_Cas_User_Validity_Contract_Operating_Card)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CR_Cas_User_Validity_Contract_Chkec_Up)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CR_Cas_User_Validity_Contract_Id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CR_Cas_User_Validity_Contract_Driving_License)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CR_Cas_User_Validity_Contract_Renter_Address)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CR_Cas_User_Validity_Contract_Employer)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CR_Cas_User_Validity_Contract_Tires)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CR_Cas_User_Validity_Contract_Oil)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CR_Cas_User_Validity_Contract_Maintenance)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CR_Cas_User_Validity_Contract_FBrake_Maintenance)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CR_Cas_User_Validity_Contract_BBrake_Maintenance)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CR_Cas_User_Validity_Contract_Extension)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CR_Cas_User_Validity_Contract_Age)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CR_Cas_User_Validity_Contract_Open_Amout_Rate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CR_Cas_User_Validity_Contract_Discount_Rate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CR_Cas_User_Validity_Contract_Km)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CR_Cas_User_Validity_Contract_Hour)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CR_Cas_User_Validity_Contract_Cancel)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CR_Cas_User_Validity_Contract_End)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CR_Cas_User_Validity_Contract_Close)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CR_Cas_User_Validity_Contract_Close_Amount_Rate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CR_Cas_User_Validity_Contract_Status)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CR_Cas_User_Validity_Contract_Reasons)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CR_Cas_User_Information.CR_Cas_User_Information_PassWord)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.CR_Cas_User_Validity_Contract_User_Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.CR_Cas_User_Validity_Contract_User_Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.CR_Cas_User_Validity_Contract_User_Id })
+        </td>
+    </tr>
+}
+
+</table>

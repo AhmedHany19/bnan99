@@ -1,0 +1,142 @@
+﻿@model IEnumerable<RentCar.Models.CR_Cas_Sup_Bank>
+
+<div class="responsive-table-plugin">
+    <div class="table-rep-plugin">
+        <div class="table-responsive" data-pattern="priority-columns" style="border:none;">
+            <div id="dtBasicExample_print">
+                <table id="myTable" class="table table-striped mb-0" style="cursor:pointer">
+                    <thead>
+                        <tr>
+                            <th width="17%">
+                                رقم الحساب
+                            </th>
+
+                            <th width="21%">
+                                إسم الحساب
+                            </th>
+
+                            <th width="20%">
+                                إسم البنك
+                            </th>
+                            <th width="35%">
+                                الملاحظات
+                            </th>
+                            <th width="7%">
+                                الحالة
+                            </th>
+                            @*<th>
+           الملاحظات
+        </th>*@
+
+                        </tr>
+                    </thead>
+                    <tbody id="tbl">
+                        @foreach (var item in Model)
+                        {
+                            if (item.CR_Cas_Sup_Bank_Status == "A")
+                            {
+                                <tr>
+                                    <td style="width:17%;text-align:center">
+                                        <a href="~/CasSupBank/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Bank_Code)">
+                                            @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Bank_Account_No)
+                                        </a>
+                                    </td>
+                                    <td width="21%">
+                                        <a href="~/CasSupBank/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Bank_Code)">
+                                            @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Bank_Ar_Name)
+                                        </a>
+                                    </td>
+                                    <td width="20%">
+                                        <a href="~/CasSupBank/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Bank_Code)">
+                                            @Html.DisplayFor(modelItem => item.CR_Mas_Sup_Bank.CR_Mas_Sup_Bank_Ar_Name)
+                                        </a>
+                                    </td>
+                                    <td width="35%">
+                                        <a href="~/CasSupBank/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Bank_Code)">
+                                            @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Bank_Reasons)
+                                        </a>
+                                    </td>
+                                    <td align="center" width="7%">
+                                        @if (item.CR_Cas_Sup_Bank_Status == "A")
+                                        {
+                                            <a href="~/CasSupBank/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Bank_Code)">
+                                                <label style="color:green">نشط</label>
+                                            </a>
+                                        }
+                                        else if (item.CR_Cas_Sup_Bank_Status == "H")
+                                        {
+                                            <a href="~/CasSupBank/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Bank_Code)">
+                                                <label style="color:crimson">موقوف</label>
+                                            </a>
+                                        }
+                                        else if (item.CR_Cas_Sup_Bank_Status == "D")
+                                        {
+                                            <a href="~/CasSupBank/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Bank_Code)">
+                                                <label style="color:red">محذوف</label>
+                                            </a>
+                                        }
+                                    </td>
+
+                                </tr>
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td style="width:17%;text-align:center">
+                                        <a href="~/CasSupBank/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Bank_Code)" >
+                                            @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Bank_Account_No)
+                                        </a>
+                                    </td>
+                                    <td width="21%">
+                                        <a href="~/CasSupBank/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Bank_Code)">
+                                            @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Bank_Ar_Name)
+                                        </a>
+                                    </td>
+                                    <td width="20%">
+                                        <a href="~/CasSupBank/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Bank_Code)">
+                                            @Html.DisplayFor(modelItem => item.CR_Mas_Sup_Bank.CR_Mas_Sup_Bank_Ar_Name)
+                                        </a>
+                                    </td>
+                                    <td width="35%">
+                                        <a href="~/CasSupBank/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Bank_Code)">
+                                            @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Bank_Reasons)
+                                        </a>
+                                    </td>
+                                    <td align="center" width="7%">
+                                        @if (item.CR_Cas_Sup_Bank_Status == "A")
+                                        {
+                                            <a href="~/CasSupBank/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Bank_Code)">
+                                                <label style="color:green">نشط</label>
+                                            </a>
+                                        }
+                                        else if (item.CR_Cas_Sup_Bank_Status == "H")
+                                        {
+                                            <a href="~/CasSupBank/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Bank_Code)">
+                                                <label style="color:crimson">موقوف</label>
+                                            </a>
+                                        }
+                                        else if (item.CR_Cas_Sup_Bank_Status == "D")
+                                        {
+                                            <a href="~/CasSupBank/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Bank_Code)">
+                                                <label style="color:red">محذوف</label>
+                                            </a>
+                                        }
+                                    </td>
+                                    @*<td>
+                        @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Bank_Reasons)
+                    </td>*@
+
+                                </tr>
+                            }
+
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <iframe name="print_frame" width="0" height="0" frameborder="0" src="about:blank"></iframe>
+
+
+
+        </div>
+    </div>
+</div>

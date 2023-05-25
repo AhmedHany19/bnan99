@@ -1,0 +1,523 @@
+﻿@model IEnumerable<RentCar.Models.CR_Mas_Com_Lessor>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/Bootstrap_Arabic/bootstrap.min.css" rel="stylesheet" />
+<link href="~/Bootstrap_Arabic/bootstrap-big-grid.min.css" rel="stylesheet" />
+<link href="~/Bootstrap_Arabic/jquery.dataTables.min.css" type="text/css" rel="stylesheet" />
+<link href="~/Bootstrap_Arabic/font-awesome.css" type="text/css" rel="stylesheet" />
+<script src="~/Bootstrap_Arabic/jquery-v1.11.2.js"></script>
+<script src="~/Bootstrap_Arabic/bootstrap.min.js"></script>
+<script src="~/Bootstrap_Arabic/bootstrap.min.js"></script>
+<script src="~/Bootstrap_Arabic/jquery.dataTables.min.js"></script>
+<script src="https://res.cloudinary.com/dxfq3iotg/raw/upload/v1569818907/jquery.table2excel.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+    #inputtext {
+        width: 250px;
+        height: 30px;
+        margin-right: 293px;
+        margin-left: -5px;
+        float: left;
+        margin-top: 5px;
+        border-color: #4A80B3;
+        border-radius: unset;
+    }
+
+    #SrchImg {
+        float: left;
+        margin-top: -5px;
+        margin-left: 0px;
+        margin-right: -35px;
+        position: relative;
+    }
+
+    td {
+        font-family: 'Times New Roman';
+        font-size: 14px;
+        padding: 5px 4px !important;
+        font-weight: 100;
+        color: #73A0C1;
+        border-color: #4A80B3;
+    }
+
+    th {
+        font-family: 'Times New Roman';
+        font-size: 16px;
+        font-weight: bold;
+        border-color: #4A80B3;
+        cursor: pointer;
+    }
+
+    .title_corp {
+        margin-top: -15px;
+    }
+
+    .table thead {
+        overflow-y: scroll;
+        flex-grow: 1;
+    }
+
+    .table tr a {
+        text-decoration: none;
+        color: black !important;
+        border-color: #4A80B3;
+    }
+
+    .table td {
+        color: #083555;
+        border-color: #4A80B3;
+    }
+
+    .table thead th {
+        color: #124f77;
+        border-color: #4A80B3;
+        text-align: center;
+        background: #D1EAFA;
+        position: sticky;
+        top: 0;
+    }
+
+    .title_corp {
+        font-family: 'Times New Roman';
+        font-size: 25px;
+    }
+
+    .subtitle_corp {
+        padding-top: 3px !important;
+        font-family: 'Times New Roman' !important;
+        color: #083555;
+    }
+
+   /* table {          
+        table-layout: fixed !important;                 to fix table column size
+        
+    }*/
+</style>
+<div class="corp_content">
+    <div class="title_corp"> الشركات المساندة / عرض البيانات </div>
+    <div class="subtitle_corp"> تمكنك الصفحة من البحث و إضافة سجل جديد و تعديل بيانات سجل</div>
+    <div class="hr_60"></div>
+    <div class="hr_80"></div>
+    <div class="corp_page">
+        <div class="page_content">
+            <form method="post">
+                <div class="form_bg">
+                    <div class="href_layout" style="margin-bottom:7px!important;">
+                        <a href="/Home/index" class="btn_form"><i class="fa fa-times" title="إغلاق"></i></a>
+                        @if (Session["ST_1402_insert"].ToString() == "true")
+                        {
+                            <a href="/Lessor/Create" class="btn_form"><i class="fa fa-plus" title="إضافة سجل جديد"></i></a>
+                        }
+                        else
+                        {
+                            <a href="" class="btn_form"><i class="fa fa-plus" title="إضافة سجل جديد" onclick="javascript:return false;" style="cursor:no-drop"></i></a>
+                        }
+                        @if (Session["ST_1402_print"].ToString()=="true")
+                        {
+                            <input type="submit" name="excelCall" title="ترحيل البيانات للإكسل" class="btn_form btn_exel" value="Excel" style="padding-right:4px;" />
+                            <a href="" class="btn_form" title="طباعة" onclick="printDiv()"><i class="fa fa-print"></i></a>
+                        }
+                        else
+                        {
+                            <input type="submit" name="excelCall" title="ترحيل البيانات للإكسل" class="btn_form btn_exel" value="Excel" style="padding-right:4px;cursor:no-drop;" onclick="javascript:return false;" disabled />
+                            <a href="" class="btn_form ii" title="طباعة" onclick="javascript:return false;" style="cursor:no-drop;"><i class="fa fa-print"></i></a>
+                        }
+
+                        @*<a href="/Lessor/Create" class="btn_form"><i class="fa fa-plus" title="إضافة سجل جديد"></i></a>
+                        <input type="submit" name="excelCall" title="ترحيل البيانات للإكسل" class="btn_form btn_exel" value="Excel" style="padding-right:4px;" />
+                        <a href="" class="btn_form" title="طباعة" onclick="printDiv()"><i class="fa fa-print"></i></a>*@
+
+                        <a href="" class="btn_form" title="بحث"><i class='fa fa-search'></i></a>
+                        <img src="~/images/srch.png" id="SrchImg" />
+                        <input class="form-control" type="text" id="inputtext" name="TxtSearch" placeholder="بحث..." />
+                        <script>
+                            $(document).ready(function () {
+                                $("#inputtext").on("keyup", function () {
+                                    var value = $(this).val().toLowerCase();
+                                    $("#tbl tr").filter(function () {
+                                        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                                    });
+                                });
+                            });
+                        </script>
+                    </div>
+                    <div class="table-responsive" style="width:99%; height:373px; overflow:auto;border: 1px solid #4A80B3;">
+                        <div id="dtBasicExample_print">
+                            <table class="table table-bordered table-striped " id="myTable">
+                                <thead>
+                                    <tr>
+                                        <th style="width:200px;"hidden="hidden"  onclick="sortTable(0)">
+                                            @Html.DisplayNameFor(model => model.CR_Mas_Com_Lessor_Logo)
+                                        </th>
+                                        <th style="width:5%;"  onclick="sortTable(29)">
+                                            @Html.DisplayNameFor(model => model.CR_Mas_Com_Lessor_Code)
+                                        </th>
+                                        <th style="width:200px;" hidden="hidden" onclick="sortTable(1)">
+                                            @Html.DisplayNameFor(model => model.CR_Mas_Com_Lessor_Ar_Long_Name)
+                                        </th>
+                                        <th style="width:10%;" onclick="sortTable(2)">
+                                            <label style="margin-bottom:0px!important">الشركة</label>
+                                        </th>
+                                        <th style="width:200px;" hidden="hidden" onclick="sortTable(3)">
+                                            @Html.DisplayNameFor(model => model.CR_Mas_Com_Lessor_En_Long_Name)
+                                        </th>
+                                        <th style="width:200px;"hidden="hidden" onclick="sortTable(4)">
+                                            @Html.DisplayNameFor(model => model.CR_Mas_Com_Lessor_En_Short_Name)
+                                        </th>
+                                        <th style="width:200px;"hidden="hidden" onclick="sortTable(5)">
+                                            @Html.DisplayNameFor(model => model.CR_Mas_Com_Lessor_Fr_Long_Name)
+                                        </th>
+                                        <th style="width:200px;"hidden="hidden" onclick="sortTable(6)">
+                                            @Html.DisplayNameFor(model => model.CR_Mas_Com_Lessor_Fr_Short_Name)
+                                        </th>
+                                        <th style="width:200px;"hidden="hidden" onclick="sortTable(7)">
+                                            @Html.DisplayNameFor(model => model.CR_Mas_Com_Lessor_Location_Coordinates)
+                                        </th>
+                                        <th style="width:200px;"hidden="hidden" onclick="sortTable(8)">
+                                            @Html.DisplayNameFor(model => model.CR_Mas_Com_Lessor_Commercial_Registration_No)
+                                        </th>
+                                        <th style="width:200px;"hidden="hidden" onclick="sortTable(9)">
+                                            @Html.DisplayNameFor(model => model.CR_Mas_Com_Lessor_Sector)
+                                        </th>
+                                        <th style="width:10%;" onclick="sortTable(10)">
+                                            @Html.DisplayNameFor(model => model.CR_Mas_Com_Lessor_Government_No)
+                                        </th>
+                                        <th style="width:200px;"hidden="hidden" onclick="sortTable(11)">
+                                            @Html.DisplayNameFor(model => model.CR_Mas_Com_Lessor_Tax_Number)
+                                        </th>
+                                        <th style="width:15%;" onclick="sortTable(12)">
+                                            <label style="margin-bottom:0px!important">الموظف</label>
+                                        </th>
+                                        <th style="width:200px;"hidden="hidden" onclick="sortTable(13)">
+                                            @Html.DisplayNameFor(model => model.CR_Mas_Com_Lessor_Communication_En_Officer_Name)
+                                        </th>
+                                        <th style="width:200px;"hidden="hidden" onclick="sortTable(14)">
+                                            @Html.DisplayNameFor(model => model.CR_Mas_Com_Lessor_Communication_Fr_Officer_Name)
+                                        </th>
+                                        <th style="width:200px;"hidden="hidden" onclick="sortTable(15)">
+                                            @Html.DisplayNameFor(model => model.CR_Mas_Com_Lessor_Communication_Officer_Emaile)
+                                        </th>
+                                        <th style="width:200px;"hidden="hidden" onclick="sortTable(16)">
+                                            @Html.DisplayNameFor(model => model.CR_Mas_Com_Lessor_Communication_Officer_Mobile)
+                                        </th>
+                                        <th style="width:200px;"hidden="hidden" onclick="sortTable(17)">
+                                            @Html.DisplayNameFor(model => model.CR_Mas_Com_Lessor_Tolk_Free)
+                                        </th>
+                                        <th style="width:200px;"hidden="hidden" onclick="sortTable(18)">
+                                            @Html.DisplayNameFor(model => model.CR_Mas_Com_Lessor_Email)
+                                        </th>
+                                        <th style="width:200px;"hidden="hidden" onclick="sortTable(19)">
+                                            @Html.DisplayNameFor(model => model.CR_Mas_Com_Lessor_Twiter)
+                                        </th>
+                                        <th style="width:200px;"hidden="hidden" onclick="sortTable(20)">
+                                            @Html.DisplayNameFor(model => model.CR_Mas_Com_Lessor_FaceBook)
+                                        </th>
+                                        <th style="width:200px;"hidden="hidden" onclick="sortTable(21)">
+                                            @Html.DisplayNameFor(model => model.CR_Mas_Com_Lessor_Instagram)
+                                        </th>
+                                        <th style="width:200px;"hidden="hidden" onclick="sortTable(22)">
+                                            @Html.DisplayNameFor(model => model.CR_Mas_Com_Lessor_Stamp)
+                                        </th>
+                                        <th style="width:200px;"hidden="hidden" onclick="sortTable(23)">
+                                            @Html.DisplayNameFor(model => model.CR_Mas_Com_Lessor_Signature_Director)
+                                        </th>
+                                        <th style="width:200px;"hidden="hidden" onclick="sortTable(24)">
+                                            @Html.DisplayNameFor(model => model.CR_Mas_Com_Lessor_Signature_Ar_Director_Name)
+                                        </th>
+                                        <th style="width:200px;"hidden="hidden" onclick="sortTable(25)">
+                                            @Html.DisplayNameFor(model => model.CR_Mas_Com_Lessor_Signature_En_Director_Name)
+                                        </th>
+                                        <th style="width:200px;"hidden="hidden" onclick="sortTable(26)">
+                                            @Html.DisplayNameFor(model => model.CR_Mas_Com_Lessor_Signature_Fr_Director_Name)
+                                        </th>
+                                        <th style="width:3%;" onclick="sortTable(27)">
+                                            @Html.DisplayNameFor(model => model.CR_Mas_Com_Lessor_Status)
+                                        </th>
+                                        <th style="width:30%" onclick="sortTable(28)">
+                                            @Html.DisplayNameFor(model => model.CR_Mas_Com_Lessor_Reasons)
+                                        </th>
+                                       
+                                    </tr>
+                                </thead>
+                                <tbody id="tbl">
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td style="text-align:center">
+                                            @*<a href="~/Lessor/edit/@Html.DisplayFor(modelItem => item.CR_Mas_Com_Lessor_Code)">
+                                                @Html.DisplayFor(modelItem => item.CR_Mas_Com_Lessor_Code)
+                                            </a>*@
+                                            @Html.ActionLink(item.CR_Mas_Com_Lessor_Code, "Edit", 
+                                           new { id1 = item.CR_Mas_Com_Lessor_Code, id2 = item.CR_Mas_Com_Lessor_Government_No })
+                                        </td>
+                                        @*<td hidden="hidden">
+                                            <a href="~/Lessor/edit/@Html.DisplayFor(modelItem => item.CR_Mas_Com_Lessor_Ar_Long_Name)">
+                                                @Html.DisplayFor(modelItem => item.CR_Mas_Com_Lessor_Ar_Long_Name)
+                                            </a>
+                                        </td>*@
+
+                                        <td>
+                                            <a href="~/Lessor/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Mas_Com_Lessor_Code)&id2=@Html.DisplayFor(modelItem => item.CR_Mas_Com_Lessor_Government_No)">
+                                                @Html.DisplayFor(modelItem => item.CR_Mas_Com_Lessor_Ar_Short_Name)
+                                            </a>
+                                        </td>
+                                        @*<td>
+                                            
+                                            <a href="~/Lessor/edit/@Html.DisplayFor(modelItem => item.CR_Mas_Com_Lessor_En_Long_Name)">
+                                                @Html.DisplayFor(modelItem => item.CR_Mas_Com_Lessor_Ar_Long_Name)
+                                            </a>
+                                        </td>
+                                        <td>
+                                            
+                                            <a href="~/Lessor/edit/@Html.DisplayFor(modelItem => item.CR_Mas_Com_Lessor_En_Short_Name)">
+                                                @Html.DisplayFor(modelItem => item.CR_Mas_Com_Lessor_En_Short_Name)
+                                            </a>
+                                        </td>
+                                        <td>
+                                            
+                                            <a href="~/Lessor/edit/@Html.DisplayFor(modelItem => item.CR_Mas_Com_Lessor_Fr_Long_Name)">
+                                                @Html.DisplayFor(modelItem => item.CR_Mas_Com_Lessor_Fr_Long_Name)
+                                            </a>
+                                        </td>
+                                        <td>
+                                            
+                                            <a href="~/Lessor/edit/@Html.DisplayFor(modelItem => item.CR_Mas_Com_Lessor_Fr_Short_Name)">
+                                                @Html.DisplayFor(modelItem => item.CR_Mas_Com_Lessor_Fr_Short_Name)
+                                            </a>
+                                        </td>
+                                        <td>
+                                            
+                                            <a href="~/Lessor/edit/@Html.DisplayFor(modelItem => item.CR_Mas_Com_Lessor_Location_Coordinates)">
+                                                @Html.DisplayFor(modelItem => item.CR_Mas_Com_Lessor_Location_Coordinates)
+                                            </a>
+                                        </td>*@
+                                        @*<td>
+                                            
+                                            <a href="~/Lessor/edit/@Html.DisplayFor(modelItem => item.CR_Mas_Com_Lessor_Commercial_Registration_No)">
+                                                @Html.DisplayFor(modelItem => item.CR_Mas_Com_Lessor_Commercial_Registration_No)
+                                            </a>
+                                        </td>*@
+                                        @*<td>
+                                            
+                                            <a href="~/Lessor/edit/@Html.DisplayFor(modelItem => item.CR_Mas_Com_Lessor_Sector)">
+                                                @Html.DisplayFor(modelItem => item.CR_Mas_Com_Lessor_Sector)
+                                            </a>
+                                        </td>*@
+                                        <td style="text-align:center">
+                                            
+                                            <a href="~/Lessor/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Mas_Com_Lessor_Code)&id2=@Html.DisplayFor(modelItem => item.CR_Mas_Com_Lessor_Government_No)">
+                                                @Html.DisplayFor(modelItem => item.CR_Mas_Com_Lessor_Government_No)
+                                            </a>
+                                        </td>
+                                        @*<td>
+                                            
+                                            <a href="~/Lessor/edit/@Html.DisplayFor(modelItem => item.CR_Mas_Com_Lessor_Tax_Number)">
+                                                @Html.DisplayFor(modelItem => item.CR_Mas_Com_Lessor_Tax_Number)
+                                            </a>
+                                        </td>*@
+                                        <td>
+                                            
+                                            <a href="~/Lessor/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Mas_Com_Lessor_Code)&id2=@Html.DisplayFor(modelItem => item.CR_Mas_Com_Lessor_Government_No)">
+                                                @Html.DisplayFor(modelItem => item.CR_Mas_Com_Lessor_Communication_Ar_Officer_Name)
+                                            </a>
+                                        </td>
+                                        @*<td>
+                                            
+                                            <a href="~/Lessor/edit/@Html.DisplayFor(modelItem => item.CR_Mas_Com_Lessor_Communication_En_Officer_Name)">
+                                                @Html.DisplayFor(modelItem => item.CR_Mas_Com_Lessor_Communication_En_Officer_Name)
+                                            </a>
+                                        </td>
+                                        <td>
+                                            
+                                            <a href="~/Lessor/edit/@Html.DisplayFor(modelItem => item.CR_Mas_Com_Lessor_Communication_Fr_Officer_Name)">
+                                                @Html.DisplayFor(modelItem => item.CR_Mas_Com_Lessor_Communication_Fr_Officer_Name)
+                                            </a>
+                                        </td>*@
+                                        @*<td>
+                                            
+                                            <a href="~/Lessor/edit/@Html.DisplayFor(modelItem => item.CR_Mas_Com_Lessor_Communication_Officer_Emaile)">
+                                                @Html.DisplayFor(modelItem => item.CR_Mas_Com_Lessor_Communication_Officer_Emaile)
+                                            </a>
+                                        </td>
+                                        <td>
+                                            
+                                            <a href="~/Lessor/edit/@Html.DisplayFor(modelItem => item.CR_Mas_Com_Lessor_Communication_Officer_Mobile)">
+                                                @Html.DisplayFor(modelItem => item.CR_Mas_Com_Lessor_Communication_Officer_Mobile)
+                                            </a>
+                                        </td>
+                                        <td>
+                                            
+                                            <a href="~/Lessor/edit/@Html.DisplayFor(modelItem => item.CR_Mas_Com_Lessor_Tolk_Free)">
+                                                @Html.DisplayFor(modelItem => item.CR_Mas_Com_Lessor_Tolk_Free)
+                                            </a>
+                                        </td>
+                                        <td>
+                                            
+                                            <a href="~/Lessor/edit/@Html.DisplayFor(modelItem => item.CR_Mas_Com_Lessor_Email)">
+                                                @Html.DisplayFor(modelItem => item.CR_Mas_Com_Lessor_Email)
+                                            </a>
+                                        </td>*@
+                                        @*<td>
+                                            
+                                            <a href="~/Lessor/edit/@Html.DisplayFor(modelItem => item.CR_Mas_Com_Lessor_Twiter)">
+                                                @Html.DisplayFor(modelItem => item.CR_Mas_Com_Lessor_Twiter)
+                                            </a>
+                                        </td>
+                                        <td>
+                                            
+                                            <a href="~/Lessor/edit/@Html.DisplayFor(modelItem => item.CR_Mas_Com_Lessor_FaceBook)">
+                                                @Html.DisplayFor(modelItem => item.CR_Mas_Com_Lessor_FaceBook)
+                                            </a>
+                                        </td>
+                                        <td>
+                                            
+                                            <a href="~/Lessor/edit/@Html.DisplayFor(modelItem => item.CR_Mas_Com_Lessor_Instagram)">
+                                                @Html.DisplayFor(modelItem => item.CR_Mas_Com_Lessor_Instagram)
+                                            </a>
+                                        </td>
+                                        <td>
+                                            
+                                            <a href="~/Lessor/edit/@Html.DisplayFor(modelItem => item.CR_Mas_Com_Lessor_Stamp)">
+                                                @Html.DisplayFor(modelItem => item.CR_Mas_Com_Lessor_Stamp)
+                                            </a>
+                                        </td>*@
+                                        @*<td>
+                                            
+                                            <a href="~/Lessor/edit/@Html.DisplayFor(modelItem => item.CR_Mas_Com_Lessor_Signature_Director)">
+                                                @Html.DisplayFor(modelItem => item.CR_Mas_Com_Lessor_Signature_Director)
+                                            </a>
+                                        </td>
+                                        <td>
+                                            
+                                            <a href="~/Lessor/edit/@Html.DisplayFor(modelItem => item.CR_Mas_Com_Lessor_Signature_Ar_Director_Name)">
+                                                @Html.DisplayFor(modelItem => item.CR_Mas_Com_Lessor_Signature_Ar_Director_Name)
+                                            </a>
+                                        </td>
+                                        <td>
+                                            
+                                            <a href="~/Lessor/edit/@Html.DisplayFor(modelItem => item.CR_Mas_Com_Lessor_Signature_En_Director_Name)">
+                                                @Html.DisplayFor(modelItem => item.CR_Mas_Com_Lessor_Signature_En_Director_Name)
+                                            </a>
+                                        </td>
+                                        <td>
+                                            
+                                            <a href="~/Lessor/edit/@Html.DisplayFor(modelItem => item.CR_Mas_Com_Lessor_Signature_Fr_Director_Name)">
+                                                @Html.DisplayFor(modelItem => item.CR_Mas_Com_Lessor_Signature_Fr_Director_Name)
+                                            </a>
+                                        </td>*@
+                                    <td style="text-align:center">
+                                        @if (item.CR_Mas_Com_Lessor_Status == "A")
+                                        {
+                                        <a href="~/Lessor/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Mas_Com_Lessor_Code)&id2=@Html.DisplayFor(modelItem => item.CR_Mas_Com_Lessor_Government_No)">
+                                            نشط
+                                        </a>
+                                        }
+                                        else if (item.CR_Mas_Com_Lessor_Status == "H")
+                                        {
+                                    <a href="~/Lessor/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Mas_Com_Lessor_Code)&id2=@Html.DisplayFor(modelItem => item.CR_Mas_Com_Lessor_Government_No)">
+                                        موقوف
+                                    </a>
+                                        }
+                                        else if(item.CR_Mas_Com_Lessor_Status=="D")
+                                        {
+                                    <a href="~/Lessor/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Mas_Com_Lessor_Code)&id2=@Html.DisplayFor(modelItem => item.CR_Mas_Com_Lessor_Government_No)">
+                                        محذوف
+                                    </a>
+                                        }
+
+                                    </td>
+                                        <td>
+                                            
+                                            <a href="~/Lessor/edit/@Html.DisplayFor(modelItem => item.CR_Mas_Com_Lessor_Code)/@Html.DisplayFor(modelItem => item.CR_Mas_Com_Lessor_Government_No)">
+                                                @Html.DisplayFor(modelItem => item.CR_Mas_Com_Lessor_Reasons)
+                                            </a>
+                                        </td>
+                                        @*<td>
+                                            @Html.ActionLink("Edit", "Edit", new { id = item.CR_Mas_Com_Lessor_Code }) |
+                                            @Html.ActionLink("Details", "Details", new { id = item.CR_Mas_Com_Lessor_Code }) |
+                                            @Html.ActionLink("Delete", "Delete", new { id = item.CR_Mas_Com_Lessor_Code })
+                                        </td>*@
+                                    </tr>
+                                }
+                                </tbody>
+                            </table>
+                        </div>
+                        <iframe name="print_frame" width="0" height="0" frameborder="0" src="about:blank"></iframe>
+                        <script>
+                            function printDiv() {
+                                window.frames["print_frame"].document.body.innerHTML = document.getElementById("dtBasicExample_print").innerHTML;
+                                window.frames["print_frame"].window.focus();
+                                window.frames["print_frame"].window.print();
+                            }
+                        </script>
+                        <script>
+                            $(document).ready(function () {
+                                $('#dtBasicExample').DataTable();
+                                $('.dataTables_length').addClass('bs-select');
+                            });
+                        </script>
+                        <script>
+                            function sortTable(n) {
+                                var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+                                table = document.getElementById("myTable");
+                                switching = true;
+                                // Set the sorting direction to ascending:
+                                dir = "asc";
+                                /* Make a loop that will continue until
+                                no switching has been done: */
+                                while (switching) {
+                                    // Start by saying: no switching is done:
+                                    switching = false;
+                                    rows = table.rows;
+                                    /* Loop through all table rows (except the
+                                    first, which contains table headers): */
+                                    for (i = 1; i < (rows.length - 1); i++) {
+                                        // Start by saying there should be no switching:
+                                        shouldSwitch = false;
+                                        /* Get the two elements you want to compare,
+                                        one from current row and one from the next: */
+                                        x = rows[i].getElementsByTagName("TD")[n];
+                                        y = rows[i + 1].getElementsByTagName("TD")[n];
+                                        /* Check if the two rows should switch place,
+                                        based on the direction, asc or desc: */
+                                        if (dir == "asc") {
+                                            if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                                                // If so, mark as a switch and break the loop:
+                                                shouldSwitch = true;
+                                                break;
+                                            }
+                                        } else if (dir == "desc") {
+                                            if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                                                // If so, mark as a switch and break the loop:
+                                                shouldSwitch = true;
+                                                break;
+                                            }
+                                        }
+                                    }
+                                    if (shouldSwitch) {
+                                        /* If a switch has been marked, make the switch
+                                        and mark that a switch has been done: */
+                                        rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                                        switching = true;
+                                        // Each time a switch is done, increase this count by 1:
+                                        switchcount++;
+                                    } else {
+                                        /* If no switching has been done AND the direction is "asc",
+                                        set the direction to "desc" and run the while loop again. */
+                                        if (switchcount == 0 && dir == "asc") {
+                                            dir = "desc";
+                                            switching = true;
+                                        }
+                                    }
+                                }
+                            }
+                        </script>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,135 @@
+﻿@model IEnumerable<RentCar.Models.CR_Cas_Contract_Basic>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_CASLayout.cshtml";
+}
+<script src="~/Scripts/Chart.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+<div class="content">
+
+
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card-box table-responsive" style="height:79vh">
+                    <div class="title_corp"><h3> التقارير/مؤشر إحصائيات السيارات</h3></div>
+                    <div class="subtitle_corp">
+                        في هذه الصفحة يمكن إستعراض المؤشرات الإحصائية للسيارات
+                    </div>
+
+                    <div class="hr_60"></div>
+                    <div class="hr_80"></div>
+                    <div class="corp_page" style=" float: left; width: 100%">
+                        <div class="page_content col-md-12">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <ul style="margin-top:33px">
+                                        <li class="woo-products">
+                                            <span class="stepli"><a href="javascript:GetCarsStatus();"> توزيع السيارات حسب الحالة </a></span>
+                                        </li>
+                                        <li class="woo-products">
+                                            <span class="stepli"><a href="javascript:GetBranch();">توزيع السيارات حسب الفروع </a></span>
+                                        </li>
+                                        <li class="woo-products">
+                                            <span class="stepli"> <a href="javascript:GetBrand();">توزيع السيارات حسب  الماركة </a></span>
+                                        </li>
+                                        <li class="woo-products">
+                                            <span class="stepli"><a href="javascript:GetYear();">توزيع السيارات حسب  سنة الصنع </a></span>
+                                        </li>
+                                        <li class="woo-products">
+                                            <span class="stepli"><a href="javascript:GetCategory();">توزيع السيارات حسب الفئة  </a></span>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <div id="Stat" class="col-md-8">
+                                    @{
+                                        Html.RenderAction("PartialCarsStatus");
+                                    }
+
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+
+</div>
+
+
+<script>
+
+
+    function GetCarsStatus() {
+           $.ajax({
+                url: '@Url.Action("PartialCarsStatus", "CasCarsStat")',
+                type: "GET",
+                data: {  },
+               success: function (result) {
+                   $('#Stat').html(result);
+                }
+            });
+
+    }
+
+    function GetBranch() {
+           $.ajax({
+                url: '@Url.Action("PartialCarsStatBranch", "CasCarsStat")',
+                type: "GET",
+                data: {  },
+               success: function (result) {
+                   $('#Stat').html(result);
+                }
+            });
+
+    }
+
+    function GetBrand() {
+           $.ajax({
+                url: '@Url.Action("PartialCarsStatBrand", "CasCarsStat")',
+                type: "GET",
+                data: {  },
+               success: function (result) {
+                   $('#Stat').html(result);
+                }
+            });
+
+     }
+
+
+    function GetYear() {
+           $.ajax({
+                url: '@Url.Action("PartialCarsStatYear", "CasCarsStat")',
+                type: "GET",
+                data: {  },
+               success: function (result) {
+                   $('#Stat').html(result);
+                }
+            });
+
+        }
+
+    function GetCategory() {
+           $.ajax({
+                url: '@Url.Action("PartialCarsStatCategory", "CasCarsStat")',
+                type: "GET",
+                data: {  },
+               success: function (result) {
+                   $('#Stat').html(result);
+                }
+            });
+
+        }
+
+</script>

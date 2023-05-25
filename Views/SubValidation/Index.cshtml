@@ -1,0 +1,538 @@
+﻿@model IEnumerable<RentCar.Models.CR_Mas_User_Sub_Validation>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    WebGrid webGrid = new WebGrid(source: Model, canPage: true, canSort: false, rowsPerPage: 999999999);
+    
+}
+
+<link href="~/Bootstrap_Arabic/bootstrap.min.css" rel="stylesheet" />
+<link href="~/Bootstrap_Arabic/bootstrap-big-grid.min.css" rel="stylesheet" />
+<link href="~/Bootstrap_Arabic/jquery.dataTables.min.css" type="text/css" rel="stylesheet" />
+<link href="~/Bootstrap_Arabic/font-awesome.css" type="text/css" rel="stylesheet" />
+<script src="~/Bootstrap_Arabic/jquery-v1.11.2.js"></script>
+<script src="~/Bootstrap_Arabic/bootstrap.min.js"></script>
+<script src="~/Bootstrap_Arabic/bootstrap.min.js"></script>
+<script src="~/Bootstrap_Arabic/jquery.dataTables.min.js"></script>
+<script src="https://res.cloudinary.com/dxfq3iotg/raw/upload/v1569818907/jquery.table2excel.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<style>
+    #inputtext {
+        width: 250px;
+        height: 30px;
+        margin-right: 293px;
+        margin-left: -5px;
+        float: left;
+        margin-top: 5px;
+        border-radius: unset;
+        border-color: #4A80B3;
+    }
+
+    #SrchImg {
+        float: left;
+        margin-top: -5px;
+        margin-left: 0px;
+        margin-right: -35px;
+        position: relative;
+    }
+
+    td {
+        font-family: 'Times New Roman';
+        font-size: 14px;
+        padding: 5px 4px !important;
+        font-weight: 100;
+        color: #73A0C1;
+    }
+
+    th {
+        font-family: 'Times New Roman';
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    .title_corp {
+        margin-top: -15px;
+    }
+
+    .table thead {
+        overflow-y: scroll;
+        flex-grow: 1;
+    }
+
+    .table tr a {
+        text-decoration: none;
+        color: black !important;
+    }
+
+    .table td {
+        border-color: #4A80B3;
+        color: #083555;
+    }
+
+    .table thead th {
+        color: #124f77;
+        border-color: #4A80B3;
+        text-align: center;
+        background: #D1EAFA;
+        position: sticky;
+        top: 0;
+    }
+
+    .title_corp {
+        font-family: 'Times New Roman';
+        font-size: 25px;
+    }
+
+    .subtitle_corp {
+        padding-top: 3px !important;
+        font-family: 'Times New Roman' !important;
+        color: #083555;
+    }
+    #Edit:hover {
+        background-color: #4F7DB1 !important;
+    }
+    #Cancel:hover {
+        background-color: #4F7DB1 !important;
+    }
+    #Update:hover {
+        background-color: #4F7DB1 !important;
+    }
+    
+    
+</style>
+
+<div class="corp_content">
+    <div class="title_corp"> الصلاحيات / عرض البيانات </div>
+    <div class="subtitle_corp"> تعرض هذه الصفحة صلاحيات المسنخدمين</div>
+    <div class="hr_60"></div>
+    <div class="hr_80"></div>
+    <div class="corp_page">
+        <div class="page_content">
+            <form method="post">
+                <div class="form_bg">
+                    <div class="href_layout" style="margin-bottom:7px!important;">
+                        <a href="/Home/index" class="btn_form"><i class="fa fa-times" title="إغلاق"></i></a>
+                        @if (Session["ST_1702_insert"].ToString() == "true")
+                        {
+                            <a href="/Subvalidation/Create" class="btn_form"><i class="fa fa-plus" title="إضافة سجل جديد"></i></a>
+                        }
+                        else
+                        {
+                            <a href="" class="btn_form"><i class="fa fa-plus" title="إضافة سجل جديد" onclick="javascript:return false;" style="cursor:no-drop;"></i></a>
+                        }
+                        @if (Session["ST_1702_print"].ToString()=="true")
+                        {
+                            <button type="submit" name="excelCall" title="ترحيل البيانات للإكسل" class="btn_form" value="Excel" style="padding-right:4px;">
+                                <span class="fa fa-file"></span>
+                            </button>
+                            <a href="" class="btn_form" title="طباعة" onclick="printDiv()"><i class="fa fa-print"></i></a>
+                        }
+                        else
+                        {
+                            <input type="submit" name="excelCall" title="ترحيل البيانات للإكسل" class="btn_form btn_exel" value="Excel" style="padding-right:4px;cursor:no-drop;" onclick="javascript:return false;" disabled />
+                            <a href="" class="btn_form ii" title="طباعة" onclick="javascript:return false;" style="cursor:no-drop;"><i class="fa fa-print"></i></a>
+                        }
+                        <a href="" class="btn_form" title="بحث"><i class='fa fa-search'></i></a>
+                        <img src="~/images/srch.png" id="SrchImg" />
+                        <input class="form-control" type="text" id="inputtext" name="TxtSearch" placeholder="بحث..." />
+                        @Html.DropDownList("CR_Mas_User_Sub_Validation_Code", null, "-- رجاء إختر المستخدم --", htmlAttributes: new { @class = "input_form", style = "float:right;margin-top:-26px; font-family:TimesNewRoman" })
+                        <script>
+                            $(document).ready(function () {
+                                $("#inputtext").on("keyup", function () {
+                                    var value = $(this).val().toLowerCase();
+                                    $("#tbl tr").filter(function () {
+                                        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                                    });
+                                });
+                            });
+                        </script>
+                    </div>
+                    <div class="table-responsive" style="width:99%; height:358px; overflow:auto;border: 1px solid #4A80B3;">
+                        <div id="dtBasicExample_print">
+                            <table class="table table-bordered table-striped " id="WebGrid">
+                                <thead>
+
+                                    <tr>
+                                        <th hidden="hidden">
+                                            <span>compteur</span>
+                                        </th>
+
+                                        <th hidden="hidden">
+                                            <span>codeuser</span>
+                                        </th>
+
+                                        <th hidden="hidden">
+                                            <span>taskcode</span>
+                                        </th>
+
+                                        <th style="width:20%;" onclick="sortTable(0)" hidden="hidden">
+                                            @Html.DisplayNameFor(model => model.CR_Mas_User_Information.CR_Mas_User_Information_Ar_Name)
+                                        </th>
+                                        <th fulltable-field-name="TaskName" style="width:35%;" onclick="sortTable(1)">
+                                            الشاشة
+                                        </th>
+
+                                        <th>
+                                            main
+                                        </th>
+
+                                        <th style="width:5%;">
+                                            @Html.DisplayNameFor(model => model.CR_Mas_User_Sub_Validation_Insert)
+                                        </th>
+                                        <th style="width: 5%;">
+                                            @Html.DisplayNameFor(model => model.CR_Mas_User_Sub_Validation_UpDate)
+                                        </th>
+                                        <th style="width: 5%;">
+                                            @Html.DisplayNameFor(model => model.CR_Mas_User_Sub_Validation_Delete)
+                                        </th>
+                                        <th style="width: 5%;">
+                                            @Html.DisplayNameFor(model => model.CR_Mas_User_Sub_Validation_UnDelete)
+                                        </th>
+                                        <th style="width: 5%;">
+                                            @Html.DisplayNameFor(model => model.CR_Mas_User_Sub_Validation_Hold)
+                                        </th>
+                                        <th style="width: 5%;">
+                                            @Html.DisplayNameFor(model => model.CR_Mas_User_Sub_Validation_UnHold)
+                                        </th>
+                                        <th style="width: 5%;">
+                                            @Html.DisplayNameFor(model => model.CR_Mas_User_Sub_Validation_Print)
+                                        </th>
+                                        <th style="width: 10%;" hidden="hidden">
+                                            menu
+                                        </th>
+
+                                    </tr>
+                                </thead>
+                                <tbody id="tbl" style="display:none">
+                                    @{
+                                        int k = 0;
+
+                                        foreach (var item in Model)
+                                        {
+                                            k = k + 1;
+                                            <tr>
+
+                                                <td class="kkk" hidden="hidden">
+                                                    <input class="kval" value="@k" id="indexinput" />
+                                                </td>
+
+                                                <td style="text-align:center;vertical-align:inherit " class="CR_Mas_User_Sub_Validation_Code" hidden="hidden">
+                                                    <span class="label"> @Html.DisplayFor(modelItem => item.CR_Mas_User_Sub_Validation_Code)</span>
+                                                </td>
+
+                                                <td style="text-align:center;vertical-align:inherit " class="CR_Mas_User_Sub_Validation_Tasks_Code" hidden="hidden">
+                                                    <span class="label">@Html.DisplayFor(modelItem => item.CR_Mas_User_Sub_Validation_Tasks_Code, new { @class = "label" })</span>
+                                                </td>
+
+
+                                                <td style="padding-right:10px!important;vertical-align:inherit " hidden="hidden">
+                                                    @Html.ActionLink(item.CR_Mas_User_Information.CR_Mas_User_Information_Ar_Name.ToString(), "Edit", new { id1 = item.CR_Mas_User_Sub_Validation_Code, id2 = item.CR_Mas_User_Sub_Validation_Tasks_Code, @class = "label" })
+                                                </td>
+
+                                                <td style="vertical-align:inherit ">
+                                                    @Html.ActionLink(item.CR_Mas_User_Information.CR_Mas_User_Main_Validation.
+                                                   FirstOrDefault(x => x.CR_Mas_User_Main_Validation_Tasks_Code ==
+                                                   item.CR_Mas_User_Sub_Validation_Tasks_Code &&
+                                                   x.CR_Mas_User_Main_Validation_Code == item.CR_Mas_User_Sub_Validation_Code)
+                                                   .CR_Mas_Sys_Tasks.CR_Mas_Sys_Tasks_Ar_Name.ToString(),
+                                                   "Edit", new
+                                                        {
+                                                            id1 = item.CR_Mas_User_Sub_Validation_Code,
+                                                            id2 =item.CR_Mas_User_Sub_Validation_Tasks_Code,
+                                                            @class = "label"
+                                                        })
+                                                </td>
+
+                                                <td style="text-align:center;vertical-align:inherit " class="CR_Mas_User_Main_Validation">
+
+                                                    @Html.CheckBox("CR_Mas_User_Sub_Validation_Insert8_" + @k, item.CR_Mas_User_Information.CR_Mas_User_Main_Validation.
+                                                   FirstOrDefault(x => x.CR_Mas_User_Main_Validation_Tasks_Code == item.CR_Mas_User_Sub_Validation_Tasks_Code
+                                                   && x.CR_Mas_User_Main_Validation_Code == item.CR_Mas_User_Sub_Validation_Code)
+                                                   .CR_Mas_User_Main_Validation1.GetValueOrDefault(), new { @class = "text", disabled = true })
+
+                                                </td>
+
+
+
+                                                <td style="text-align:center;vertical-align:inherit " class="CR_Mas_User_Sub_Validation_Insert">
+                                                    @Html.CheckBox("CR_Mas_User_Sub_Validation_Insert7_" + @k, item.CR_Mas_User_Sub_Validation_Insert.GetValueOrDefault(), new { @class = "text", disabled = true })
+
+                                                </td>
+                                                <td style="text-align:center;vertical-align:inherit " class="CR_Mas_User_Sub_Validation_UpDate">
+
+                                                    @Html.CheckBox("CR_Mas_User_Sub_Validation_Insert1_" + @k, item.CR_Mas_User_Sub_Validation_UpDate.GetValueOrDefault(), new { @class = "text", disabled = true })
+
+                                                </td>
+                                                <td style="text-align:center;vertical-align:inherit " class="CR_Mas_User_Sub_Validation_Delete">
+
+                                                    @Html.CheckBox("CR_Mas_User_Sub_Validation_Insert2_" + @k, item.CR_Mas_User_Sub_Validation_Delete.GetValueOrDefault(), new { @class = "text", disabled = true })
+
+                                                </td>
+                                                <td style="text-align:center;vertical-align:inherit " class="CR_Mas_User_Sub_Validation_UnDelete">
+
+                                                    @Html.CheckBox("CR_Mas_User_Sub_Validation_Insert3_" + @k, item.CR_Mas_User_Sub_Validation_UnDelete.GetValueOrDefault(), new { @class = "text", disabled = true })
+
+                                                </td>
+                                                <td style="text-align:center;vertical-align:inherit " class="CR_Mas_User_Sub_Validation_Hold">
+
+                                                    @Html.CheckBox("CR_Mas_User_Sub_Validation_Insert4_" + @k, item.CR_Mas_User_Sub_Validation_Hold.GetValueOrDefault(), new { @class = "text", disabled = true })
+
+                                                </td>
+                                                <td style="text-align:center;vertical-align:inherit " class="CR_Mas_User_Sub_Validation_UnHold">
+                                                    @Html.CheckBox("CR_Mas_User_Sub_Validation_Insert5_" + @k, item.CR_Mas_User_Sub_Validation_UnHold.GetValueOrDefault(), new { @class = "text", disabled = true })
+
+
+                                                </td>
+                                                <td style="text-align:center;vertical-align:inherit " class="CR_Mas_User_Sub_Validation_Print">
+                                                    @Html.CheckBox("CR_Mas_User_Sub_Validation_Insert6_" + @k, item.CR_Mas_User_Sub_Validation_Print.GetValueOrDefault(), new { @class = "text", disabled = true })
+
+
+                                                </td>
+                                                <td class="link">
+                                                    <a class="btn" id="Edit" href="javascript:;" style="font-family: 'Times New Roman'; float: left; font-size: 15px !important; width: 70px !important; padding-top: 0px; height: 20px; background-color: #F3B161; padding-right: 22px; border-radius: 0px; color: white!important;">Edit</a>
+                                                    <a class="btn" id="Update" href="javascript:;" style="display:none;font-family: 'Times New Roman'; float: left; font-size: 15px !important; width: 70px !important; padding-top: 0px; height: 20px; background-color: #00b33c; padding-right: 15px; border-radius: 0px; color: white!important;">Update</a>
+                                                    <a class="btn" id="Cancel" href="javascript:;" style="display:none;font-family: 'Times New Roman'; float: left; font-size: 15px !important; width: 70px !important; padding-top: 0px; height: 20px; background-color: #ff1a1a; padding-right: 15px; border-radius: 0px; color: white!important;">Cancel</a>
+                                                </td>
+
+                                            </tr>
+
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+
+
+                        </div>
+                        <iframe name="print_frame" width="0" height="0" frameborder="0" src="about:blank"></iframe>
+                        <script>
+                            function printDiv() {
+                                window.frames["print_frame"].document.body.innerHTML = document.getElementById("dtBasicExample_print").innerHTML;
+                                window.frames["print_frame"].window.focus();
+                                window.frames["print_frame"].window.print();
+                            }
+                        </script>
+                        @*<script>
+                            $(document).ready(function () {
+                                $('#dtBasicExample').DataTable();
+                                $('.dataTables_length').addClass('bs-select');
+                            });
+                        </script>*@
+                        <script>
+                            function sortTable(n) {
+                                var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+                                table = document.getElementById("myTable");
+                                switching = true;
+                                // Set the sorting direction to ascending:
+                                dir = "asc";
+                                /* Make a loop that will continue until
+                                no switching has been done: */
+                                while (switching) {
+                                    // Start by saying: no switching is done:
+                                    switching = false;
+                                    rows = table.rows;
+                                    /* Loop through all table rows (except the
+                                    first, which contains table headers): */
+                                    for (i = 1; i < (rows.length - 1); i++) {
+                                        // Start by saying there should be no switching:
+                                        shouldSwitch = false;
+                                        /* Get the two elements you want to compare,
+                                        one from current row and one from the next: */
+                                        x = rows[i].getElementsByTagName("TD")[n];
+                                        y = rows[i + 1].getElementsByTagName("TD")[n];
+                                        /* Check if the two rows should switch place,
+                                        based on the direction, asc or desc: */
+                                        if (dir == "asc") {
+                                            if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                                                // If so, mark as a switch and break the loop:
+                                                shouldSwitch = true;
+                                                break;
+                                            }
+                                        } else if (dir == "desc") {
+                                            if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                                                // If so, mark as a switch and break the loop:
+                                                shouldSwitch = true;
+                                                break;
+                                            }
+                                        }
+                                    }
+                                    if (shouldSwitch) {
+                                        /* If a switch has been marked, make the switch
+                                        and mark that a switch has been done: */
+                                        rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                                        switching = true;
+                                        // Each time a switch is done, increase this count by 1:
+                                        switchcount++;
+                                    } else {
+                                        /* If no switching has been done AND the direction is "asc",
+                                        set the direction to "desc" and run the while loop again. */
+                                        if (switchcount == 0 && dir == "asc") {
+                                            dir = "desc";
+                                            switching = true;
+                                        }
+                                    }
+                                }
+                            }
+                        </script>
+
+
+
+
+
+                        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+                        <script type="text/javascript" src="https://ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js"></script>
+                        <script type="text/javascript">
+                            //Edit event handler.
+                            $("body").on("click", "#WebGrid TBODY #Edit", function () {
+                                var row = $(this).closest("tr");
+                                $("td", row).each(function () {
+                                    if ($(this).find(".text").length > 0) {
+                                        $(this).find(".text").show();
+                                        var k = row.find(".kkk").find(".kval").val();
+                                        document.getElementById("CR_Mas_User_Sub_Validation_Insert1_" + k).disabled = false;
+                                        document.getElementById("CR_Mas_User_Sub_Validation_Insert2_" + k).disabled = false;
+                                        document.getElementById("CR_Mas_User_Sub_Validation_Insert3_" + k).disabled = false;
+                                        document.getElementById("CR_Mas_User_Sub_Validation_Insert4_" + k).disabled = false;
+                                        document.getElementById("CR_Mas_User_Sub_Validation_Insert5_" + k).disabled = false;
+                                        document.getElementById("CR_Mas_User_Sub_Validation_Insert6_" + k).disabled = false;
+                                        document.getElementById("CR_Mas_User_Sub_Validation_Insert7_" + k).disabled = false;
+                                        document.getElementById("CR_Mas_User_Sub_Validation_Insert8_" + k).disabled = false;
+                                    }
+                                });
+                                row.find("#Update").show();
+                                row.find("#Cancel").show();
+                                $(this).hide();
+                            });
+
+                            //Update event handler.
+                            $("body").on("click", "#WebGrid TBODY #Update", function () {
+                                var row = $(this).closest("tr");
+                                $("td", row).each(function () {
+
+                                    if ($(this).find(".text").length > 0) {
+                                        span = $(this).find(".label");
+
+                                        var k = row.find(".kkk").find(".kval").val();
+                                        document.getElementById("CR_Mas_User_Sub_Validation_Insert1_" + k).disabled = true;
+                                        document.getElementById("CR_Mas_User_Sub_Validation_Insert2_" + k).disabled = true;
+                                        document.getElementById("CR_Mas_User_Sub_Validation_Insert3_" + k).disabled = true;
+                                        document.getElementById("CR_Mas_User_Sub_Validation_Insert4_" + k).disabled = true;
+                                        document.getElementById("CR_Mas_User_Sub_Validation_Insert5_" + k).disabled = true;
+                                        document.getElementById("CR_Mas_User_Sub_Validation_Insert6_" + k).disabled = true;
+                                        document.getElementById("CR_Mas_User_Sub_Validation_Insert7_" + k).disabled = true;
+                                        document.getElementById("CR_Mas_User_Sub_Validation_Insert8_" + k).disabled = true;
+                                    }
+                                });
+                                row.find("#Edit").show();
+                                row.find("#Cancel").hide();
+                                $(this).hide();
+                                var CR_Mas_User_Sub_Validation = {};
+                                CR_Mas_User_Sub_Validation.CR_Mas_User_Sub_Validation_Code = row.find(".CR_Mas_User_Sub_Validation_Code").find(".label").html();
+                                CR_Mas_User_Sub_Validation.CR_Mas_User_Sub_Validation_Tasks_Code = row.find(".CR_Mas_User_Sub_Validation_Tasks_Code").find(".label").html();
+
+                                var k = row.find(".kkk").find(".kval").val();
+                                CR_Mas_User_Sub_Validation.CR_Mas_User_Sub_Validation_Insert = document.getElementById("CR_Mas_User_Sub_Validation_Insert7_" + k).checked;
+                                CR_Mas_User_Sub_Validation.CR_Mas_User_Sub_Validation_UpDate = document.getElementById("CR_Mas_User_Sub_Validation_Insert1_" + k).checked;
+                                CR_Mas_User_Sub_Validation.CR_Mas_User_Sub_Validation_Delete = document.getElementById("CR_Mas_User_Sub_Validation_Insert2_" + k).checked;
+                                CR_Mas_User_Sub_Validation.CR_Mas_User_Sub_Validation_UnDelete = document.getElementById("CR_Mas_User_Sub_Validation_Insert3_" + k).checked;
+                                CR_Mas_User_Sub_Validation.CR_Mas_User_Sub_Validation_Hold = document.getElementById("CR_Mas_User_Sub_Validation_Insert4_" + k).checked;
+                                CR_Mas_User_Sub_Validation.CR_Mas_User_Sub_Validation_UnHold = document.getElementById("CR_Mas_User_Sub_Validation_Insert5_" + k).checked;
+                                CR_Mas_User_Sub_Validation.CR_Mas_User_Sub_Validation_Print = document.getElementById("CR_Mas_User_Sub_Validation_Insert6_" + k).checked;
+                                CR_Mas_User_Sub_Validation.CR_Mas_User_Main_Validation1 = document.getElementById("CR_Mas_User_Sub_Validation_Insert8_" + k).checked;
+
+                                $.ajax({
+                                    type: "POST",
+                                    url: "/SubValidation/saveupdate",
+                                    data: '{CR_Mas_User_Sub_Validation:' + JSON.stringify(CR_Mas_User_Sub_Validation) + '}',
+                                    contentType: "application/json; charset=utf-8",
+                                    dataType: "json"
+                                });
+                            });
+
+                            //Cancel event handler.
+                            $("body").on("click", "#WebGrid TBODY #Cancel", function () {
+                                var row = $(this).closest("tr");
+                                $("td", row).each(function () {
+                                    if ($(this).find(".text").length > 0) {
+
+                                        var input = $(this).find(".text");
+
+                                        var k = row.find(".kkk").find(".kval").val();
+                                        document.getElementById("CR_Mas_User_Sub_Validation_Insert1_" + k).disabled = true;
+                                        document.getElementById("CR_Mas_User_Sub_Validation_Insert2_" + k).disabled = true;
+                                        document.getElementById("CR_Mas_User_Sub_Validation_Insert3_" + k).disabled = true;
+                                        document.getElementById("CR_Mas_User_Sub_Validation_Insert4_" + k).disabled = true;
+                                        document.getElementById("CR_Mas_User_Sub_Validation_Insert5_" + k).disabled = true;
+                                        document.getElementById("CR_Mas_User_Sub_Validation_Insert6_" + k).disabled = true;
+                                        document.getElementById("CR_Mas_User_Sub_Validation_Insert7_" + k).disabled = true;
+                                        document.getElementById("CR_Mas_User_Sub_Validation_Insert8_" + k).disabled = true;
+                                    }
+                                });
+                                row.find("#Edit").show();
+                                row.find("#Update").hide();
+                                $(this).hide();
+                            });
+                        </script>
+
+
+
+                        <script>
+                            //$(document).ready(function () {
+                            //    var k = 0;
+                            //    $("#CR_Mas_User_Sub_Validation_Code").change(function () {
+                            //        var a = $("#CR_Mas_User_Sub_Validation_Code option:selected").val(); // val for value // text for selected text
+                            //        //alert(a);
+                            //        $.get("/subvalidation/getuserslist", { validation_code: $("#CR_Mas_User_Sub_Validation_Code option:selected").val() }, function (data) {
+                            //            $("#tbl").empty();
+                            //            $.each(data, function (index, row) {
+                            //                k = k + 1;
+                            //                //alert(row.cr_mas_user_sub_validation_insert);
+                            //                var $tr = $('<tr>').append(
+                            //                    $('<td hidden="hidden">').text(k),
+                            //                    $('<td hidden="hidden">').text(row.cr_mas_user_sub_validation_code),
+                            //                    $('<td hidden="hidden">').text(row.cr_mas_user_sub_validation_tasks_code),
+                            //                    $('<td>').text(""),
+                            //                    $('<td>').text(""),
+                            //                    $('<td>').text(""),
+                            //                    $('<td>').text(row.cr_mas_user_sub_validation_insert),
+                            //                    $('<td>').text(row.cr_mas_user_sub_validation_update),
+                            //                    $('<td>').text(row.cr_mas_user_sub_validation_delete),
+                            //                    $('<td>').text(row.cr_mas_user_sub_validation_undelete),
+                            //                    $('<td>').text(row.cr_mas_user_sub_validation_hold),
+                            //                    $('<td>').text(row.cr_mas_user_sub_validation_unhold),
+                            //                    $('<td>').text(row.cr_mas_user_sub_validation_print)
+                            //                ).appendto('#tbl');
+                            //            });
+                            //        });
+                            //    })
+                            //});
+
+                            $(document).ready(function () {
+                                //var k = 0;
+                                $("#CR_Mas_User_Sub_Validation_Code").change(function () {
+                                    var a = $("#CR_Mas_User_Sub_Validation_Code option:selected").val(); // val for value // text for selected text
+                                    $("#tbl tr").filter(function () {
+                                        $(this).toggle($(this).text().toLowerCase().indexOf(a) > -1)
+                                    });
+                                    $("#tbl").show();
+                                })
+
+                               
+                            });
+
+                         
+                            
+
+                        </script>
+                       
+
+
+
+
+
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

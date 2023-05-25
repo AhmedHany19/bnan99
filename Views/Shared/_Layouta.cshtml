@@ -1,0 +1,1103 @@
+﻿
+<html>
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>RentCar</title>
+    <meta http-equiv="Page-Exit" content="progid:DXImageTransform.Microsoft.Fade(Duration=0.3)">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+   
+    <link href="~/main_files/style.ar.css" rel="stylesheet" />
+    <link href="~/main_files/style.css" rel="stylesheet" />
+    <link href="~/main_files/ratingar.css" rel="stylesheet" />
+
+    <link href="~/Bootstrap_Arabic/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Bootstrap_Arabic/bootstrap-big-grid.min.css" rel="stylesheet" />
+    <script src="~/Bootstrap_Arabic/jquery-v1.11.2.js"></script>
+    <script src="~/Bootstrap_Arabic/bootstrap.min.js"></script>
+
+
+</head>
+    <body class="mainBody" dir="rtl" onkeydown="return disableBackspace(event)" style="cursor: default;">
+        <form id="form1" runat="server" method="post">
+
+            <div>
+                <table style="height: 100%; margin: 0 auto;" cellspacing="0" cellpadding="0">
+                    <tbody>
+                        <tr>
+                            <td class="bodyBackGroundColor">
+                                <div class="containerar">
+                                    <div class="header">
+                                        <div id="j_id39">
+
+                                            <a class="logo" href="#" id="j_id39:theme1CmndLnk2" name="j_id39:theme1CmndLnk2" tabindex="1900">
+                                                @*<img src="../images/btn-menu.png" class="print" alt="">*@
+                                                <span class="noPrint logo-alinma-bank"></span>
+                                            </a>
+
+                                        </div>
+                                        <div style="position: relative; top: 100px; left: 20px;">
+                                            <span class="logo-alinma-internet"></span>
+                                            <div id="divSwitchLang" style="position: absolute; top: 22px; left: 240px; width: 40px; height: 24px;">
+                                                <div id="j_id43">
+                                                    <input type="hidden" name="j_id43" value="j_id43">
+                                                    
+                                                    <input type="submit" id="j_id43:langCmndLnk" class="switchLang" value="@Session["Lang"]" name="Lang" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="messagesIdar">
+
+                                        </div>
+                                    </div>
+
+                                    <div class="sidebar1ar">
+                                        <div class="firstcolblue">
+                                            <div id="navigationVerticalForm">
+                                                <input type="hidden" name="navigationVerticalForm" value="navigationVerticalForm">
+
+                                                <div id="AccordionContainer" class="AccordionContainer home-vm">
+                                                    <!-- االعقود -->
+                                                    <div class="vm-header" style="">
+                                                        <div class="AccordionTitle borderTop" style="#dededeb0;">
+                                                            @*<span class="vm-icon vm-accounts"></span>*@
+                                                            <a href="#Accordion2Content" data-toggle="collapse" tabindex="10">
+                                                                العقود
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                    <div id="Accordion2Content" class="AccordionContent">
+                                                        <ul style="">
+                                                            <li onclick="changeBackGroundColor(this)" style="">
+                                                                @if (RentCar.Controllers.AccountController.MT_1101 == true)
+                                                                {
+                                                                    <a href="#" id="navigationVerticalForm:account_accountList" name="navigationVerticalForm:account_accountList" tabindex="40">
+                                                                        تحرير عقد شركة تأجير سيارات
+                                                                    </a>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <a href="~/Home/index" style="color:grey!important;" id="navigationVerticalForm:account_accountList" name="navigationVerticalForm:account_accountList" tabindex="40">
+                                                                        تحرير عقد شركة تأجير سيارات
+                                                                    </a>
+                                                                }
+
+
+
+                                                            </li>
+                                                            <li onclick="changeBackGroundColor(this)" style="">
+
+                                                                @if (RentCar.Controllers.AccountController.MT_1102 == true)
+                                                                {
+                                                                    <a href="~/Brand/index" id="navigationVerticalForm:account_transactionHistory" name="navigationVerticalForm:account_transactionHistory" tabindex="70">
+                                                                        تحرير العقد التفصيلي لشركة تأجير السيارات
+                                                                    </a>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <a href="~/Home/index" style="color:grey!important;" id="navigationVerticalForm:account_transactionHistory" name="navigationVerticalForm:account_transactionHistory" tabindex="70">
+                                                                        تحرير العقد التفصيلي لشركة تأجير السيارات
+                                                                    </a>
+                                                                }
+
+                                                            </li>
+                                                            <li onclick="changeBackGroundColor(this)" style="">
+                                                                @if (RentCar.Controllers.AccountController.MT_1103 == true)
+                                                                {
+                                                                    <a href="#" id="navigationVerticalForm:account_onlineStatements" name="navigationVerticalForm:account_onlineStatements" tabindex="100">
+                                                                        عقود الشركات المساندة
+                                                                    </a>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <a href="~/Home/index" style="color:grey!important;" id="navigationVerticalForm:account_onlineStatements" name="navigationVerticalForm:account_onlineStatements" tabindex="100">
+                                                                        عقود الشركات المساندة
+                                                                    </a>
+                                                                }
+
+                                                            </li>
+                                                            <li onclick="changeBackGroundColor(this)" style="">
+                                                                @if (RentCar.Controllers.AccountController.MT_1104 == true)
+                                                                {
+                                                                    <a href="#" id="navigationVerticalForm:account_electronicAccountStatement" name="navigationVerticalForm:account_electronicAccountStatement" tabindex="130">
+                                                                        رسوم تبادل البيانات
+                                                                    </a>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <a href="~/Home/index" style="color:grey!important;" id="navigationVerticalForm:account_electronicAccountStatement" name="navigationVerticalForm:account_electronicAccountStatement" tabindex="130">
+                                                                        رسوم تبادل البيانات
+                                                                    </a>
+                                                                }
+                                                            </li>
+
+
+                                                        </ul>
+                                                    </div>
+                                                    <!-- التقارير -->
+                                                    <div class="vm-header" style="">
+                                                        <div class="AccordionTitle">
+                                                            @*<span class="vm-icon vm-services"></span>*@
+                                                            <a href="#Accordion3Content" data-toggle="collapse" tabindex="1490">
+                                                                التقارير
+                                                            </a>
+
+                                                        </div>
+                                                    </div>
+                                                    <div id="Accordion3Content" class="AccordionContent collapse">
+                                                        <ul style="">
+
+                                                            <li onclick="changeBackGroundColor(this)" style="">
+                                                                @if (RentCar.Controllers.AccountController.MT_1201 == true)
+                                                                {
+                                                                    <a href="#" id="navigationVerticalForm:account_transactionHistory" name="navigationVerticalForm:account_transactionHistory">
+                                                                        تقارير إدارية مختصرة
+                                                                    </a>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <a href="~/Home/index" style="color:grey!important;" id="navigationVerticalForm:account_transactionHistory" name="navigationVerticalForm:account_transactionHistory">
+                                                                        تقارير إدارية مختصرة
+                                                                    </a>
+                                                                }
+
+                                                            </li>
+
+                                                            <li onclick="changeBackGroundColor(this)" style="">
+                                                                @if (RentCar.Controllers.AccountController.MT_1202 == true)
+                                                                {
+                                                                    <a href="#" id="navigationVerticalForm:account_electronicAccountStatement" name="navigationVerticalForm:account_electronicAccountStatement">
+                                                                        تقارير مالية مختصرة
+                                                                    </a>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <a href="~/Home/index" style="color:grey!important;" id="navigationVerticalForm:account_electronicAccountStatement" name="navigationVerticalForm:account_electronicAccountStatement">
+                                                                        تقارير مالية مختصرة
+                                                                    </a>
+                                                                }
+
+                                                            </li>
+
+                                                            <li onclick="changeBackGroundColor(this)" style="">
+                                                                @if (RentCar.Controllers.AccountController.MT_1203 == true)
+                                                                {
+                                                                    <a href="#" id="navigationVerticalForm:account_onlineStatements" name="navigationVerticalForm:account_onlineStatements">
+                                                                        تقارير إدارية تفصيلية
+                                                                    </a>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <a href="~/Home/index" style="color:grey!important;" id="navigationVerticalForm:account_onlineStatements" name="navigationVerticalForm:account_onlineStatements">
+                                                                        تقارير إدارية تفصيلية
+                                                                    </a>
+                                                                }
+
+                                                            </li>
+
+                                                            <li onclick="changeBackGroundColor(this)" style="">
+                                                                @if (RentCar.Controllers.AccountController.MT_1204 == true)
+                                                                {
+                                                                    <a href="#" id="navigationVerticalForm:account_accountList" name="navigationVerticalForm:account_accountList">
+                                                                        تقارير مالية تفصيلية
+                                                                    </a>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <a href="~/Home/index" style="color:grey!important;" id="navigationVerticalForm:account_accountList" name="navigationVerticalForm:account_accountList">
+                                                                        تقارير مالية تفصيلية        
+                                                                    </a>
+                                                                }
+
+                                                            </li>
+
+                                                            <li onclick="changeBackGroundColor(this)" style="">
+                                                                @if (RentCar.Controllers.AccountController.MT_1205 == true)
+                                                                {
+                                                                    <a href="#" id="navigationVerticalForm:account_accountList" name="navigationVerticalForm:account_accountList">
+                                                                        تقارير إحصائية
+                                                                    </a>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <a href="~/Home/index" style="color:grey!important;" id="navigationVerticalForm:account_accountList" name="navigationVerticalForm:account_accountList">
+                                                                        تقارير إحصائية
+                                                                    </a>
+                                                                }
+
+                                                            </li>
+
+                                                        </ul>
+                                                    </div>
+
+                                                    <div class="vm-header" style="">
+                                                        <div class="AccordionTitle">
+                                                            @*<span class="vm-icon vm-services"></span>*@
+                                                            <a href="#Accordion4Content" data-toggle="collapse" tabindex="1490">
+                                                                المستأجرين
+                                                            </a>
+
+                                                        </div>
+                                                    </div>
+                                                    <div id="Accordion4Content" class="AccordionContent collapse">
+                                                        <ul style="">
+                                                            <li onclick="changeBackGroundColor(this)" style="">
+                                                                @if (RentCar.Controllers.AccountController.MT_1301 == true)
+                                                                {
+                                                                    <a href="~/Views/Account/Login.cshtml" id="navigationVerticalForm:account_accountList" name="navigationVerticalForm:account_accountList">
+                                                                        إظافة بيانات مستأجر
+                                                                    </a>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <a href="~/Home/index" style="color:grey!important;" id="navigationVerticalForm:account_accountList" name="navigationVerticalForm:account_accountList">
+                                                                        إظافة بيانات مستأجر
+                                                                    </a>
+                                                                }
+
+                                                            </li>
+                                                            <li onclick="changeBackGroundColor(this)" style="">
+                                                                @if (RentCar.Controllers.AccountController.MT_1302 == true)
+                                                                {
+                                                                    <a href="#" id="navigationVerticalForm:account_transactionHistory" name="navigationVerticalForm:account_transactionHistory">
+                                                                        تقرير بيانات تفصيلية لمستأجر
+                                                                    </a>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <a href="~/Home/index" style="color:grey!important;" id="navigationVerticalForm:account_transactionHistory" name="navigationVerticalForm:account_transactionHistory">
+                                                                        تقرير بيانات تفصيلية لمستأجر
+                                                                    </a>
+                                                                }
+
+                                                            </li>
+                                                            <li onclick="changeBackGroundColor(this)" style="">
+                                                                @if (RentCar.Controllers.AccountController.MT_1303 == true)
+                                                                {
+                                                                    <a href="#" id="navigationVerticalForm:account_onlineStatements" name="navigationVerticalForm:account_onlineStatements">
+                                                                        عقود المستأجرين
+                                                                    </a>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <a href="~/Home/index" style="color:grey!important;" id="navigationVerticalForm:account_onlineStatements" name="navigationVerticalForm:account_onlineStatements">
+                                                                        عقود المستأجرين
+                                                                    </a>
+                                                                }
+
+                                                            </li>
+                                                            <li onclick="changeBackGroundColor(this)" style="">
+                                                                @if (RentCar.Controllers.AccountController.MT_1304 == true)
+                                                                {
+                                                                    <a href="#" id="navigationVerticalForm:account_electronicAccountStatement" name="navigationVerticalForm:account_electronicAccountStatement">
+                                                                        تقرير عقود تفصيلية لمستأجر
+                                                                    </a>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <a href="~/Home/index" style="color:grey!important;" id="navigationVerticalForm:account_electronicAccountStatement" name="navigationVerticalForm:account_electronicAccountStatement">
+                                                                        تقرير عقود تفصيلية لمستأجر
+                                                                    </a>
+                                                                }
+
+                                                            </li>
+
+
+                                                        </ul>
+                                                    </div>
+
+
+                                                    <div class="vm-header" style="">
+                                                        <div class="AccordionTitle">
+                                                            @*<span class="vm-icon vm-services"></span>*@
+                                                            <a href="#Accordion5Content" data-toggle="collapse" tabindex="1490">
+                                                                بيانات الشركات
+                                                            </a>
+
+                                                        </div>
+                                                    </div>
+                                                    <div id="Accordion5Content" class="AccordionContent collapse">
+                                                        <ul style="">
+                                                            <li onclick="changeBackGroundColor(this)" style="">
+                                                                @if (RentCar.Controllers.AccountController.MT_1401 == true)
+                                                                {
+                                                                    <a href="#" id="navigationVerticalForm:account_accountList" name="navigationVerticalForm:account_accountList" tabindex="40">
+                                                                        شركات تأجير السيارات
+                                                                    </a>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <a href="~/Home/index" style="color:grey!important;" id="navigationVerticalForm:account_accountList" name="navigationVerticalForm:account_accountList" tabindex="40">
+                                                                        شركات تأجير السيارات
+                                                                    </a>
+                                                                }
+
+                                                            </li>
+                                                            <li onclick="changeBackGroundColor(this)" style="">
+                                                                @if (RentCar.Controllers.AccountController.MT_1402 == true)
+                                                                {
+                                                                    <a href="#" id="navigationVerticalForm:account_transactionHistory" name="navigationVerticalForm:account_transactionHistory" tabindex="70">
+                                                                        الشركات المساندة
+                                                                    </a>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <a href="~/Home/index" style="color:grey!important;" id="navigationVerticalForm:account_transactionHistory" name="navigationVerticalForm:account_transactionHistory" tabindex="70">
+                                                                        الشركات المساندة
+                                                                    </a>
+                                                                }
+
+                                                            </li>
+
+                                                        </ul>
+                                                    </div>
+
+
+                                                    <div class="vm-header" style="">
+                                                        <div class="AccordionTitle">
+                                                            @*<span class="vm-icon vm-services"></span>*@
+                                                            <a href="#Accordion6Content" data-toggle="collapse" tabindex="1490">
+                                                                بيانات السيارات
+                                                            </a>
+
+                                                        </div>
+                                                    </div>
+                                                    <div id="Accordion6Content" class="AccordionContent collapse">
+                                                        <ul style="">
+                                                           
+                                                            <li onclick="changeBackGroundColor(this)" style="">
+                                                                @if (RentCar.Controllers.AccountController.MT_1501 == true)
+                                                                {
+                                                                    <a href="~/Brand/index" id="navigationVerticalForm:account_transactionHistory" name="navigationVerticalForm:account_transactionHistory" tabindex="70">
+                                                                        الماركات
+                                                                    </a>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <a href="~/Home/index" style="color:grey!important;" id="navigationVerticalForm:account_transactionHistory" name="navigationVerticalForm:account_transactionHistory" tabindex="70">
+                                                                        الماركات
+                                                                    </a>
+                                                                }
+
+                                                            </li>
+                                                            <li onclick="changeBackGroundColor(this)" style="">
+                                                                @if (RentCar.Controllers.AccountController.MT_1502 == true)
+                                                                {
+                                                                    <a href="~/Model/index" id="navigationVerticalForm:account_transactionHistory" name="navigationVerticalForm:account_transactionHistory" tabindex="70">
+                                                                        الطراز
+                                                                    </a>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <a href="~/Home/index" style="color:grey!important;" id="navigationVerticalForm:account_transactionHistory" name="navigationVerticalForm:account_transactionHistory" tabindex="70">
+                                                                        الطراز
+                                                                    </a>
+                                                                }
+
+                                                            </li>
+                                                            <li onclick="changeBackGroundColor(this)" style="">
+                                                                @if (RentCar.Controllers.AccountController.MT_1503 == true)
+                                                                {
+                                                                    <a href="~/CategoryCar/index" id="navigationVerticalForm:account_transactionHistory" name="navigationVerticalForm:account_transactionHistory" tabindex="70">
+                                                                        الفئة
+                                                                    </a>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <a href="~/Home/index" style="color:grey!important;" id="navigationVerticalForm:account_transactionHistory" name="navigationVerticalForm:account_transactionHistory" tabindex="70">
+                                                                        الفئة
+                                                                    </a>
+                                                                }
+
+                                                            </li>
+
+                                                            <li onclick="changeBackGroundColor(this)" style="">
+                                                                @if (RentCar.Controllers.AccountController.MT_1504 == true)
+                                                                {
+                                                                    <a href="~/Color/index" id="navigationVerticalForm:account_transactionHistory" name="navigationVerticalForm:account_transactionHistory" tabindex="70">
+                                                                        اللون
+                                                                    </a>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <a href="~/Home/index" style="color:grey!important;" id="navigationVerticalForm:account_transactionHistory" name="navigationVerticalForm:account_transactionHistory" tabindex="70">
+                                                                        اللون
+                                                                    </a>
+                                                                }
+
+                                                            </li>
+                                                            <li onclick="changeBackGroundColor(this)" style="">
+                                                                @if (RentCar.Controllers.AccountController.MT_1505 == true)
+                                                                {
+                                                                    <a href="~/Features/index" id="navigationVerticalForm:account_transactionHistory" name="navigationVerticalForm:account_transactionHistory" tabindex="70">
+                                                                        المميزات
+                                                                    </a>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <a href="~/Home/index" style="color:grey!important;" id="navigationVerticalForm:account_transactionHistory" name="navigationVerticalForm:account_transactionHistory" tabindex="70">
+                                                                        المميزات
+                                                                    </a>
+                                                                }
+
+                                                            </li>
+
+                                                            <li onclick="changeBackGroundColor(this)" style="">
+                                                                @if (RentCar.Controllers.AccountController.MT_1506 == true)
+                                                                {
+                                                                    <a href="~/Specifications/index" id="navigationVerticalForm:account_transactionHistory" name="navigationVerticalForm:account_transactionHistory" tabindex="70">
+                                                                        المواصفات
+                                                                    </a>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <a href="~/Home/index" style="color:grey!important;" id="navigationVerticalForm:account_transactionHistory" name="navigationVerticalForm:account_transactionHistory" tabindex="70">
+                                                                        المواصفات
+                                                                    </a>
+                                                                }
+
+                                                            </li>
+
+                                                            <li onclick="changeBackGroundColor(this)" style="">
+                                                                @if (RentCar.Controllers.AccountController.MT_1507 == true)
+                                                                {
+                                                                    <a href="~/Specifications/index" id="navigationVerticalForm:account_transactionHistory" name="navigationVerticalForm:account_transactionHistory" tabindex="70">
+                                                                        الإضافات
+                                                                    </a>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <a href="~/Home/index" style="color:grey!important;" id="navigationVerticalForm:account_transactionHistory" name="navigationVerticalForm:account_transactionHistory" tabindex="70">
+                                                                        الإضافات
+                                                                    </a>
+                                                                }
+
+                                                            </li>
+
+                                                            <li onclick="changeBackGroundColor(this)" style="">
+                                                                @if (RentCar.Controllers.AccountController.MT_1508 == true)
+                                                                {
+                                                                    <a href="#" id="navigationVerticalForm:account_electronicAccountStatement" name="navigationVerticalForm:account_electronicAccountStatement">
+                                                                        تحديد الفئة
+                                                                    </a>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <a href="~/Home/index" style="color:grey!important;" id="navigationVerticalForm:account_electronicAccountStatement" name="navigationVerticalForm:account_electronicAccountStatement">
+                                                                        تحديد الفئة
+                                                                    </a>
+                                                                }
+
+                                                            </li>
+
+                                                            <li onclick="changeBackGroundColor(this)" style="">
+                                                                @if (RentCar.Controllers.AccountController.MT_1509 == true)
+                                                                {
+                                                                    <a href="#" id="navigationVerticalForm:account_electronicAccountStatement" name="navigationVerticalForm:account_electronicAccountStatement">
+                                                                        تحديد المواصفات
+                                                                    </a>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <a href="~/Home/index" style="color:grey!important;" id="navigationVerticalForm:account_electronicAccountStatement" name="navigationVerticalForm:account_electronicAccountStatement">
+                                                                        تحديد المواصفات
+                                                                    </a>
+                                                                }
+
+                                                            </li>
+
+                                                        </ul>
+                                                    </div>
+
+
+
+                                                    <!--<div class="vm-header" style="">
+                                                        <div class="AccordionTitle">-->
+                                                    @*<span class="vm-icon vm-services"></span>*@
+                                                    <!--<a href="#Accordion7Content" data-toggle="collapse" tabindex="1490">
+                                                                تصنيف البيانات
+                                                            </a>
+
+                                                        </div>
+                                                    </div>-->
+                                                    <!--<div id="Accordion7Content" class="AccordionContent collapse">
+                                                        <ul style="">-->
+                                                    @*<li onclick="changeBackGroundColor(this)" style="">
+                                                            <a href="~/Regions/ListRegion" id="navigationVerticalForm:account_accountList" name="navigationVerticalForm:account_accountList" tabindex="40">
+                                                                المناطق
+
+                                                            </a>
+                                                        </li>*@
+                                                    @*<li onclick="changeBackGroundColor(this)" style="">
+                                                            <a href="#" id="navigationVerticalForm:account_transactionHistory" name="navigationVerticalForm:account_transactionHistory" onclick="A4J.AJAX.Submit(&#39;navigationVerticalForm&#39;,event,{&#39;similarityGroupingId&#39;:&#39;navigationVerticalForm:account_transactionHistory&#39;,&#39;parameters&#39;:{&#39;navigationVerticalForm:account_transactionHistory&#39;:&#39;navigationVerticalForm:account_transactionHistory&#39;} } );return false;" tabindex="70">
+                                                                تصنيف الدول
+                                                            </a>
+                                                        </li>*@
+                                                    <!--<li onclick="changeBackGroundColor(this)" style="">
+                                                                <a href="#" id="navigationVerticalForm:account_onlineStatements" name="navigationVerticalForm:account_onlineStatements" onclick="A4J.AJAX.Submit(&#39;navigationVerticalForm&#39;,event,{&#39;similarityGroupingId&#39;:&#39;navigationVerticalForm:account_onlineStatements&#39;,&#39;parameters&#39;:{&#39;navigationVerticalForm:account_onlineStatements&#39;:&#39;navigationVerticalForm:account_onlineStatements&#39;} } );return false;" tabindex="100">
+                                                                    ماركات السيارات
+                                                                </a>
+                                                            </li>
+                                                            <li onclick="changeBackGroundColor(this)" style="">
+                                                                <a href="#" id="navigationVerticalForm:account_electronicAccountStatement" name="navigationVerticalForm:account_electronicAccountStatement" onclick="A4J.AJAX.Submit(&#39;navigationVerticalForm&#39;,event,{&#39;similarityGroupingId&#39;:&#39;navigationVerticalForm:account_electronicAccountStatement&#39;,&#39;parameters&#39;:{&#39;navigationVerticalForm:account_electronicAccountStatement&#39;:&#39;navigationVerticalForm:account_electronicAccountStatement&#39;} } );return false;" tabindex="130">
+                                                                    تصنيف جهات العمل
+                                                                </a>
+                                                            </li>
+
+                                                            <li onclick="changeBackGroundColor(this)" style="">
+                                                                <a href="#" id="navigationVerticalForm:account_electronicAccountStatement" name="navigationVerticalForm:account_electronicAccountStatement" onclick="A4J.AJAX.Submit(&#39;navigationVerticalForm&#39;,event,{&#39;similarityGroupingId&#39;:&#39;navigationVerticalForm:account_electronicAccountStatement&#39;,&#39;parameters&#39;:{&#39;navigationVerticalForm:account_electronicAccountStatement&#39;:&#39;navigationVerticalForm:account_electronicAccountStatement&#39;} } );return false;" tabindex="130">
+                                                                    فئات السيارات
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>-->
+
+
+
+
+
+                                                    <div class="vm-header" style="">
+                                                        <div class="AccordionTitle">
+                                                            @*<span class="vm-icon vm-services"></span>*@
+                                                            
+                                                                <a href="#Accordion8Content" data-toggle="collapse" tabindex="1490">
+                                                                    البيانات الشخصية
+                                                                </a>
+
+                                                        </div>
+                                                    </div>
+                                                    <div id="Accordion8Content" class="AccordionContent collapse">
+                                                        <ul style="">
+                                                            <li onclick="changeBackGroundColor(this)" style="">
+                                                                @if (RentCar.Controllers.AccountController.MT_1601 == true)
+                                                                {
+                                                                    <a href="#" id="navigationVerticalForm:account_accountList" name="navigationVerticalForm:account_accountList">
+                                                                        الجنسية
+                                                                    </a>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <a href="~/Home/index" style="color:grey!important;" id="navigationVerticalForm:account_accountList" name="navigationVerticalForm:account_accountList">
+                                                                        الجنسية
+                                                                    </a>
+                                                                }
+
+
+                                                            </li>
+                                                            @*<li onclick="changeBackGroundColor(this)" style="">
+                                                                    <a href="#" id="navigationVerticalForm:account_transactionHistory" name="navigationVerticalForm:account_transactionHistory" onclick="A4J.AJAX.Submit(&#39;navigationVerticalForm&#39;,event,{&#39;similarityGroupingId&#39;:&#39;navigationVerticalForm:account_transactionHistory&#39;,&#39;parameters&#39;:{&#39;navigationVerticalForm:account_transactionHistory&#39;:&#39;navigationVerticalForm:account_transactionHistory&#39;} } );return false;" tabindex="70">
+                                                                        الحالة الاجتماعية
+                                                                    </a>
+                                                                </li>*@
+                                                                                                                    @*<li onclick="changeBackGroundColor(this)" style="">
+                                                                    <a href="#" id="navigationVerticalForm:account_onlineStatements" name="navigationVerticalForm:account_onlineStatements" onclick="A4J.AJAX.Submit(&#39;navigationVerticalForm&#39;,event,{&#39;similarityGroupingId&#39;:&#39;navigationVerticalForm:account_onlineStatements&#39;,&#39;parameters&#39;:{&#39;navigationVerticalForm:account_onlineStatements&#39;:&#39;navigationVerticalForm:account_onlineStatements&#39;} } );return false;" tabindex="100">
+                                                                        المؤهل التعليمي
+                                                                    </a>
+                                                                </li>*@
+
+                                                            <li onclick="changeBackGroundColor(this)" style="">
+                                                                @if (RentCar.Controllers.AccountController.MT_1602 == true)
+                                                                {
+                                                                    <a href="#" id="navigationVerticalForm:account_electronicAccountStatement" name="navigationVerticalForm:account_electronicAccountStatement">
+                                                                        جهة العمل
+                                                                    </a>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <a href="~/Home/index" style="color:grey!important;" id="navigationVerticalForm:account_electronicAccountStatement" name="navigationVerticalForm:account_electronicAccountStatement">
+                                                                        جهة العمل
+                                                                    </a>
+                                                                }
+
+                                                            </li>
+
+
+                                                            <li onclick="changeBackGroundColor(this)" style="">
+                                                                @if (RentCar.Controllers.AccountController.MT_1603 == true)
+                                                                {
+                                                                    <a href="#" id="navigationVerticalForm:account_electronicAccountStatement" name="navigationVerticalForm:account_electronicAccountStatement">
+                                                                        المهن
+                                                                    </a>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <a href="~/Home/index" style="color:grey!important;" id="navigationVerticalForm:account_electronicAccountStatement" name="navigationVerticalForm:account_electronicAccountStatement">
+                                                                        المهن
+                                                                    </a>
+                                                                }
+
+                                                            </li>
+                                                            <li onclick="changeBackGroundColor(this)" style="">
+                                                                @if (RentCar.Controllers.AccountController.MT_1604 == true)
+                                                                {
+                                                                    <a href="#" id="navigationVerticalForm:account_electronicAccountStatement" name="navigationVerticalForm:account_electronicAccountStatement">
+                                                                        العضوية
+                                                                    </a>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <a href="~/Home/index" style="color:grey!important;" id="navigationVerticalForm:account_electronicAccountStatement" name="navigationVerticalForm:account_electronicAccountStatement">
+                                                                        العضوية
+                                                                    </a>
+                                                                }
+
+                                                            </li>
+
+                                                            <li onclick="changeBackGroundColor(this)" style="">
+                                                                @if (RentCar.Controllers.AccountController.MT_1605 == true)
+                                                                {
+                                                                    <a href="#" id="navigationVerticalForm:account_electronicAccountStatement" name="navigationVerticalForm:account_electronicAccountStatement">
+                                                                        المدن
+                                                                    </a>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <a href="~/Home/index" style="color:grey!important;" id="navigationVerticalForm:account_electronicAccountStatement" name="navigationVerticalForm:account_electronicAccountStatement">
+                                                                        المدن
+                                                                    </a>
+                                                                }
+
+                                                            </li>
+
+                                                        </ul>
+                                                    </div>
+
+
+                                                    <div class="vm-header" style="">
+                                                        <div class="AccordionTitle">
+                                                            @*<span class="vm-icon vm-accounts"></span>*@
+                                                            <a href="#Accordion9Content" data-toggle="collapse" tabindex="1490">
+                                                                المستخدمين
+                                                            </a>
+
+                                                        </div>
+                                                    </div>
+                                                    <div id="Accordion9Content" class="AccordionContent collapse">
+                                                        <ul style="">
+
+                                                            <li onclick="changeBackGroundColor(this)" style="">
+                                                                @if (RentCar.Controllers.AccountController.MT_1701 == true)
+                                                                {
+                                                                    <a href="~/User/Index" id="navigationVerticalForm:account_transactionHistory" name="navigationVerticalForm:account_transactionHistory" tabindex="70">
+                                                                        المستخدمين
+                                                                    </a>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <a href="~/Home/index" style="color:grey!important;" id="navigationVerticalForm:account_transactionHistory" name="navigationVerticalForm:account_transactionHistory" tabindex="70">
+                                                                        المستخدمين
+                                                                    </a>
+                                                                }
+
+                                                            </li>
+                                                            <li onclick="changeBackGroundColor(this)" style="">
+                                                                @if (RentCar.Controllers.AccountController.MT_1702 == true)
+                                                                {
+                                                                    <a href="#" id="navigationVerticalForm:account_onlineStatements" name="navigationVerticalForm:account_onlineStatements" tabindex="100">
+                                                                        الصلاحيات
+                                                                    </a>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <a href="~/Home/index" style="color:grey!important;" id="navigationVerticalForm:account_onlineStatements" name="navigationVerticalForm:account_onlineStatements" tabindex="100">
+                                                                        الصلاحيات
+                                                                    </a>
+                                                                }
+
+                                                            </li>
+                                                            <!--<li onclick="changeBackGroundColor(this)" style="">
+                                                            <a href="#" id="navigationVerticalForm:account_electronicAccountStatement" name="navigationVerticalForm:account_electronicAccountStatement" tabindex="130">
+                                                                تغيير كلمة السر
+                                                            </a>
+                                                            </li>-->
+
+
+                                                        </ul>
+                                                    </div>
+                                                    <style>
+                                                        .AccordionTitle a:hover, .AccordionTitle a:focus {
+                                                            color: #fff;
+                                                            outline: none;
+                                                        }
+                                                    </style>
+                                                    <div onclick="runAccordion(19)" class="vm-header" style="">
+                                                        <div class="AccordionTitle">
+                                                            @*<span class="vm-icon vm-services"></span>*@
+                                                            <a href="#Accordion15Content" data-toggle="collapse" tabindex="1490">
+                                                                الإجراءات
+                                                            </a>
+
+                                                        </div>
+                                                    </div>
+                                                    <div id="Accordion15Content" class="AccordionContent">
+                                                        <ul style="">
+                                                            <li onclick="changeBackGroundColor(this)" style="">
+                                                                @if (RentCar.Controllers.AccountController.MT_1801 == true)
+                                                                {
+                                                                    <a href="#" id="navigationVerticalForm:account_accountList" name="navigationVerticalForm:account_accountList" tabindex="40">
+                                                                        البنود المالية و الإدارية
+                                                                    </a>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <a href="~/Home/index" style="color:grey!important;" id="navigationVerticalForm:account_accountList" name="navigationVerticalForm:account_accountList" tabindex="40">
+                                                                        البنود المالية و الإدارية
+                                                                    </a>
+                                                                }
+
+                                                            </li>
+                                                            <li onclick="changeBackGroundColor(this)" style="">
+                                                                @if (RentCar.Controllers.AccountController.MT_1802 == true)
+                                                                {
+                                                                    <a href="#" id="navigationVerticalForm:account_transactionHistory" name="navigationVerticalForm:account_transactionHistory" tabindex="70">
+                                                                        بنود تبادل البيانات
+                                                                    </a>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <a href="~/Home/index" style="color:grey!important;" id="navigationVerticalForm:account_transactionHistory" name="navigationVerticalForm:account_transactionHistory" tabindex="70">
+                                                                        بنود تبادل البيانات
+                                                                    </a>
+                                                                }
+
+                                                            </li>
+                                                            @*<li onclick="changeBackGroundColor(this)" style="">
+                                                                <a href="#" id="navigationVerticalForm:account_onlineStatements" name="navigationVerticalForm:account_onlineStatements" tabindex="100">
+                                                                    بنود العقد الإضافية
+                                                                </a>
+                                                            </li>*@
+                                                        <li onclick="changeBackGroundColor(this)" style="">
+                                                            @if (RentCar.Controllers.AccountController.MT_1803 == true)
+                                                            {
+                                                                <a href="#" id="navigationVerticalForm:account_electronicAccountStatement" name="navigationVerticalForm:account_electronicAccountStatement" tabindex="130">
+                                                                    الفحص الظاهري
+                                                                </a>
+                                                            }
+                                                            else
+                                                            {
+                                                                <a href="~/Home/index" style="color:grey!important;" id="navigationVerticalForm:account_electronicAccountStatement" name="navigationVerticalForm:account_electronicAccountStatement" tabindex="130">
+                                                                    الفحص الظاهري
+                                                                </a>
+                                                            }
+
+                                                        </li>
+                                                        </ul>
+                                                    </div>
+                                                    @*<script>
+                                                            jQuery('#Accordion15Content').collapse({
+                                                                toggle: true
+                                                            })
+
+                                                        </script>*@
+
+
+                                                    <div class="vm-header" style="">
+                                                        <div class="AccordionTitle">
+                                                            @*<span class="vm-icon vm-services"></span>*@
+                                                            <a href="#Accordion10Content" data-toggle="collapse" tabindex="1490">
+                                                                الخدمات
+                                                            </a>
+
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div id="Accordion10Content" class="AccordionContent" style="">
+                                                        <ul style="">
+                                                            <li>
+                                                                @if (RentCar.Controllers.AccountController.MT_1901 == true)
+                                                                {
+                                                                    <a href="#" id="navigationVerticalForm:account_accountList" name="navigationVerticalForm:account_accountList" tabindex="40">
+                                                                        الأنظمة
+                                                                    </a>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <a href="~/Home/index" style="color:grey!important;" id="navigationVerticalForm:account_accountList" name="navigationVerticalForm:account_accountList" tabindex="40">
+                                                                        الأنظمة
+                                                                    </a>
+                                                                }
+
+                                                            </li>
+                                                            <li>
+                                                                @if (RentCar.Controllers.AccountController.MT_1902 == true)
+                                                                {
+                                                                    <a href="#" id="navigationVerticalForm:account_transactionHistory" name="navigationVerticalForm:account_transactionHistory" tabindex="70">
+                                                                        المهام
+                                                                    </a>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <a href="~/Home/index" style="color:grey!important;" id="navigationVerticalForm:account_transactionHistory" name="navigationVerticalForm:account_transactionHistory" tabindex="70">
+                                                                        المهام
+                                                                    </a>
+                                                                }
+
+                                                            </li>
+                                                            <li>
+                                                                @if (RentCar.Controllers.AccountController.MT_1903 == true)
+                                                                {
+                                                                    <a href="#" id="navigationVerticalForm:account_onlineStatements" name="navigationVerticalForm:account_onlineStatements" tabindex="100">
+                                                                        الرسائل الإرشادية للنظام
+                                                                    </a>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <a href="~/Home/index" style="color:grey!important;" id="navigationVerticalForm:account_onlineStatements" name="navigationVerticalForm:account_onlineStatements" tabindex="100">
+                                                                        الرسائل الإرشادية للنظام
+                                                                    </a>
+                                                                }
+
+                                                            </li>
+                                                            <li>
+                                                                @if (RentCar.Controllers.AccountController.MT_1903 == true)
+                                                                {
+                                                                    <a href="#" id="navigationVerticalForm:account_electronicAccountStatement" name="navigationVerticalForm:account_electronicAccountStatement" tabindex="130">
+                                                                        الأسئلة الأكثر شيوعا
+                                                                    </a>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <a href="~/Home/index" style="color:grey!important;" id="navigationVerticalForm:account_electronicAccountStatement" name="navigationVerticalForm:account_electronicAccountStatement" tabindex="130">
+                                                                        الأسئلة الأكثر شيوعا
+                                                                    </a>
+                                                                }
+
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    @*<script>
+                                                            jQuery('#Accordion10Content').collapse({
+                                                                toggle: true
+                                                            })
+
+                                                        </script>*@
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+
+                                    <div class="contentar">
+                                        <div id="menuH" class="menuH" style="position: relative;">
+                                            <!-- Menu Horizontal -->
+                                            <div id="navigationHorizontForm">
+                                                <input type="hidden" name="navigationHorizontForm" value="navigationHorizontForm">
+
+                                                <div class="welcomHeadBlockar" style="width:49% !important">
+                                                    <table cellpadding="0" cellspacing="0" style="margin-bottom : 10px;background-color:#c0c0c0d1; width:100%;height:35%;border: 1px solid #d2d2d2;">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>
+                                                                    <label class="lbl">
+                                                                        @Session["Hello"]
+                                                                    </label>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+
+
+
+                                                    <style>
+                                                        .btn_tophome {
+                                                            margin-top: 10px;
+                                                            height: 50px;
+                                                            /*width: 50px;*/
+                                                            padding-top: 10px;
+                                                            text-align: center;
+                                                            float: right !important;
+                                                            width: 9% !important;
+                                                            margin-left: 0.5%;
+                                                            margin-right: 0.5%;
+                                                            background: #0A4876;
+                                                            color: #fff;
+                                                            text-decoration: none;
+                                                            position: relative !important;
+                                                        }
+                                                    </style>
+                                                </div>
+                                            </div>
+
+
+                                            <div id="navigationHorizontForm">
+                                                <input type="hidden" name="navigationHorizontForm" value="navigationHorizontForm">
+
+                                                <div class="welcomHeadBlockar" style="width:49% !important;margin-right:2%;">
+                                                    <table cellpadding="0" cellspacing="0" style="margin-bottom : 10px;background-color:#c0c0c0d1; width:100%;height:35%;border: 1px solid #d2d2d2;">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>
+                                                                    <label>
+                                                                        مرحبا
+                                                                    </label>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+
+
+
+                                                    <style>
+                                                        .btn_tophome {
+                                                            margin-top: 10px;
+                                                            height: 50px;
+                                                            /*width: 50px;*/
+                                                            padding-top: 10px;
+                                                            text-align: center;
+                                                            float: right !important;
+                                                            width: 9% !important;
+                                                            margin-left: 0.5%;
+                                                            margin-right: 0.5%;
+                                                            background: #0A4876;
+                                                            color: #fff;
+                                                            text-decoration: none;
+                                                            position: relative !important
+                                                        }
+                                                    </style>
+                                                </div>
+
+
+                                            </div>
+
+
+
+
+                                            <div id="navigationHorizontForm">
+                                                <input type="hidden" name="navigationHorizontForm" value="navigationHorizontForm">
+
+                                                <div class="welcomHeadBlockar" style="width:100% !important; margin-top:20px;margin-bottom:20px;">
+                                                    <table cellpadding="0" cellspacing="0" style="margin-bottom : 10px">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>
+                                                                    <label>
+                                                                        المؤشرات
+                                                                    </label>
+                                                                </td>
+
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+
+                                                    <style>
+                                                        .btn_tophome {
+                                                            margin-top: 10px;
+                                                            height: 50px;
+                                                            /*width: 50px;*/
+                                                            padding-top: 10px;
+                                                            text-align: center;
+                                                            float: right !important;
+                                                            width: 9% !important;
+                                                            margin-left: 0.5%;
+                                                            margin-right: 0.5%;
+                                                            background: #0A4876;
+                                                            color: #fff;
+                                                            text-decoration: none;
+                                                            position: relative !important
+                                                        }
+                                                    </style>
+                                                    <a href="/Account/Login" class="btn_tophome">
+                                                        خروج
+                                                    </a>
+                                                    <a href="" class="btn_tophome">
+                                                        الشركات
+                                                    </a>
+                                                    <a href="" class="btn_tophome">
+                                                        العقود
+                                                    </a>
+                                                    <a href="" class="btn_tophome">
+                                                        العقود المنتهية
+                                                    </a>
+                                                    <a href="" class="btn_tophome">
+                                                        عقود على وشك الإنتهاء
+                                                    </a>
+                                                    <a href="" class="btn_tophome">
+                                                        السيارات
+                                                    </a>
+
+                                                    <a href="" class="btn_tophome">
+                                                        عقود التأجير
+                                                    </a>
+
+                                                    <a href="" class="btn_tophome">
+                                                        عقود تأجير منتهية
+                                                    </a>
+                                                    <a href="" class="btn_tophome">
+                                                        عقود تأجير قائمة
+                                                    </a>
+                                                    <a href="" class="btn_tophome">
+                                                        تغيير كلمة السر
+                                                    </a>
+
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                        <div class="print" style="height: 50px;"></div>
+
+                                        <div style="height: 20px;"></div>
+                                        <div id="divBody" style="margin-bottom: 20px; background: #e9e4de">
+
+                                            <div>
+                                                <input type="hidden" name="loadHomeForm" value="loadHomeForm">
+
+
+                                            </div>
+
+                                            <span id="pageBodyPanel">
+                                                <span id="_viewRoot:status">
+                                                    <span id="_viewRoot:status.start" style="display: none;">
+                                                        <img src="./ajax-loader.gif" style="position: absolute; right: 55%; top: 193px; z-index: 9999" alt="">
+                                                    </span>
+
+                                                    <span id="_viewRoot:status.stop" style=""></span>
+
+                                                </span>
+                                                <div id="contentDiv" style="border: none;">
+                                                    <div id="quesPrintVideoIcons" style="display: none; float: left; padding: 10px 10px 0 10px">
+                                                        <a href="#" id="helpQuest" onclick="pageHelp()">
+                                                            <img src="./quesar.gif" alt="مساعدة">
+                                                        </a>
+                                                    </div>
+                                                    <div id="defaultPageForm" style="background: #dededeb0;float:left;width:100%;border:1px solid #d2d2d2;box-shadow:-5px 5px 8px 3px grey;">
+                                                        <input type="hidden" name="defaultPageForm" value="defaultPageForm">
+
+                                                        @RenderBody()
+
+                                                    </div>
+                                                    <div style="height: 26px; float:left;width:100%; background: #124f77; position: relative; border: 1px solid #dededeb0; color: #ffffff;margin-top:20px;margin-bottom:10px;">
+                                                        <div style="float: right; padding: 0px 5px 0 5px">
+                                                            <span id="defaultPageForm:lastLoginDateLabel1" style="font: normal 14px Tahoma">آخر تسجيل دخول</span> : <span id="defaultPageForm:lastLoginDateOutput1" style="font: normal 13px Tahoma">07-10-2020 00:27:08</span>
+                                                        </div>
+                                                        <div style="float: left; padding: 0px 5px 0 5px;">
+                                                            <span id="defaultPageForm:todayDateLabel1" style="font: normal 14px Tahoma">تاريخ اليوم </span>: <span id="defaultPageForm:todayDateOutput1" style="font: normal 13px Tahoma">07-10-2020 00:36:47</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </span>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+        </form>
+
+    </body>
+</html>
+

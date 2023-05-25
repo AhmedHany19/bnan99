@@ -1,0 +1,609 @@
+﻿@model RentCar.Models.CR_Cas_Sup_Car_Information
+@*@using RentCar.Models
+    @model dynamic*@
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_CASLayout.cshtml";
+}
+
+<link href="~/BSys3Styles/CSS/style_form.css" rel="stylesheet" />
+<style>
+    /* The container */
+    .checkbox_input {
+        display: block;
+        position: relative;
+        padding-right: 35px;
+        margin-bottom: 12px;
+        cursor: pointer;
+        font-size:15px;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        text-align: right
+    }
+
+        /* Hide the browser's default checkbox */
+        .checkbox_input input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+            height: 0;
+            width: 0;
+        }
+
+    /* Create a custom checkbox */
+    .checkmark {
+        position: absolute;
+        top: 0;
+        right: 0;
+        height: 20px;
+        width: 20px;
+        background-color: #fff;
+        border: solid 2px #4980B2;
+    }
+
+    /* On mouse-over, add a grey background color */
+    .container:hover input ~ .checkmark {
+        background-color: #fff;
+        border: solid 2px #4980B2;
+        color: #4980B2
+    }
+
+    /* When the checkbox is checked, add a blue background */
+    .checkbox_input input:checked ~ .checkmark {
+        background-color: #fff;
+        border: solid 2px #4980B2;
+        color: #4980B2
+    }
+
+    /* Create the checkmark/indicator (hidden when not checked) */
+    .checkmark:after {
+        content: "";
+        position: absolute;
+        display: none;
+    }
+
+    /* Show the checkmark when checked */
+    .checkbox_input input:checked ~ .checkmark:after {
+        display: block;
+    }
+
+    /* Style the checkmark/indicator */
+    .checkbox_input .checkmark:after {
+        left: 6px;
+        top: 3px;
+        width: 5px;
+        height: 10px;
+        border: solid #4980B2;
+        border-width: 0 3px 3px 0;
+        -webkit-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        transform: rotate(45deg);
+    }
+    .parsley-errors-list > li {
+        margin-top: 38px;
+    }
+</style>
+<style>
+    #date_btn1 {
+        font-size: 0 !important;
+        background: url('../../BSys3Styles/Images/icone_calendre.png') center 3px no-repeat;
+        width: 30px;
+        border: none;
+        border-left: 0;
+        height: 27px;
+        position: absolute;
+        left: 17px;
+        margin-top: -29px;
+    }
+</style>
+<div class="content">
+
+    <!-- Start Content-->
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card-box table-responsive" style="height:79vh">
+                    <div class="title_corp"><h3> السيارات/بيانات السيارة /إضافة </h3></div>
+                    <div class="subtitle_corp">تمكنك هذه الصفحة من إضافة سيارة جديدة</div>
+                    <div class="hr_60"></div>
+                    <div class="hr_80"></div>
+                    <div class="corp_page">
+                        <div class="page_content" style="float:left;width:100%">
+                            @*@using (Html.BeginForm("Create", "CasCarInformation", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                {*@
+                            <form id="form_validation" action="/CasCarInformation/Create" enctype="multipart/form-data" method="post" data-parsley-validate="" novalidate="">
+                                @Html.AntiForgeryToken()
+
+                                <div class="form-horizontal" style="margin-top:15px;">
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                                    <div class="row">
+                                        <div class="col-lg-8 col-md-12" style="float:right;margin-bottom:0.5rem">
+                                            <div class="row">
+                                                <div class="col-md-6" style="float:right;margin-bottom:0.5rem">
+                                                    <div class="row">
+                                                        <div class="col-md-6 label6 padding_left_none ">
+                                                            @*@Html.LabelFor(model => model.CR_Cas_Sup_Branch_Ar_Short_Name, htmlAttributes: new { @class = "lbl col-md-6", style = "float:right" })*@
+                                                            <label id="" class="lbl  style = " float:right">@Html.LabelFor(model => model.CR_Cas_Sup_Car_Serail_No)<label id="asterisk">*</label></label>
+                                                        </div>
+                                                        <div class="col-md-6 input6 padding_right_none">
+                                                            @Html.TextBoxFor(model => model.CR_Cas_Sup_Car_Serail_No, htmlAttributes: new { @class = "form-control", style = "float:right;", onkeyup = "movetoNext('CR_Cas_Sup_Car_Customs_No')", autocomplete = "off", oninput = "this.value=this.value.replace(/[^0-9]/g,'')", onpaste = "return false;", maxlength = "10", required = "required" })
+                                                            <div class="texterr" style="float:right">@ViewBag.CarInfo</div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-md-6" style="float:right;margin-bottom:0.5rem">
+                                                    <div class="row">
+                                                        <div class="col-md-6 label6 padding_left_none">
+                                                            @*@Html.LabelFor(model => model.CR_Cas_Sup_Branch_Ar_Name, htmlAttributes: new { @class = "lbl col-md-3", style = "float:right" })*@
+                                                            <label id="" class="lbl" style=" float:right">@Html.LabelFor(model => model.CR_Cas_Sup_Car_Year)<label id="asterisk">*</label></label>
+                                                        </div>
+                                                        <div class="col-md-6 input6 padding_right_none">
+                                                            @*@Html.TextBoxFor(model => model.CR_Cas_Sup_Car_Year, htmlAttributes: new { @class = "form-control ", style = "float:right;", onkeydown = "getcarinfo()", onkeyup = "movetoNext('CR_Cas_Sup_Car_Out_Main_Color_Code')", autocomplete = "off", oninput = "this.value=this.value.replace(/[^0-9]/g,'')", onpaste = "return false;", maxlength = "4" })*@
+                                                            @Html.DropDownList("listyear", null, " --رجاء إختر السنة-- ", htmlAttributes: new { @class = "form-control ", style = "float:right;", @onchange = "getcarinfo()", required = "required" })
+                                                            <div class="texterr" style="float:right">@ViewBag.Year</div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-6" style="float:right;margin-bottom:0.5rem">
+                                                    <div class="row">
+                                                        <div class="col-md-6 label6 padding_left_none">
+                                                            @*@Html.LabelFor(model => model.CR_Cas_Sup_Branch_Ar_Name, htmlAttributes: new { @class = "lbl col-md-3", style = "float:right" })*@
+                                                            <label id="" class="lbl" style=" float:right">@Html.LabelFor(model => model.CR_Cas_Sup_Car_Model_Code)<label id="asterisk">*</label></label>
+                                                        </div>
+                                                        <div class="col-md-6 input6 padding_right_none">
+                                                            @Html.DropDownList("CR_Cas_Sup_Car_Model_Code", null, " --رجاء إختر الطراز-- ", htmlAttributes: new { @class = "form-control ", style = "float:right;", onkeyup = "movetoNext('CR_Cas_Sup_Branch_Tax_No')", required = "required" })
+                                                            <div class="texterr" style="float:right">@ViewBag.Carmodel</div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="col-md-6" style="float:right;margin-bottom:0.5rem">
+                                                    <div class="row">
+                                                        <div class="col-md-6 label6 padding_left_none">
+                                                            @*@Html.LabelFor(model => model.CR_Cas_Sup_Branch_Ar_Short_Name, htmlAttributes: new { @class = "lbl col-md-6", style = "float:right" })*@
+                                                            <label id="" class="lbl  style = " float:right">@Html.LabelFor(model => model.CR_Cas_Sup_Car_Brand_Code)</label><label> / </label> <label> @Html.LabelFor(model => model.CR_Cas_Sup_Car_Category_Code)</label>
+                                                        </div>
+                                                        <div class="col-md-6 input6 padding_right_none">
+                                                            @Html.TextBoxFor(model => model.CR_Cas_Sup_Car_Brand_Code, htmlAttributes: new { @class = "form-control ", style = "float:right;border:none;width:50%", onpaste = "return false;", @ReadOnly = "True" })
+                                                            <input type="text" id="BrandCode" name="BrandCode" hidden="hidden" />
+                                                            @Html.TextBoxFor(model => model.CR_Cas_Sup_Car_Category_Code, htmlAttributes: new { @class = "form-control ", style = "float:right;border:none;width:50%", onkeyup = "movetoNext('CR_Cas_Sup_Branch_Tel')", oninput = "this.value=this.value.replace(/[^0-9]/g,'')", onpaste = "return false;", @ReadOnly = "True" })
+                                                            <input type="text" id="CategoryCode" name="CategoryCode" hidden="hidden" />
+                                                            <div id="CarCatError" name="CarCatError" class="texterr" style="float:right">@ViewBag.CarCat</div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6" style="float:right;margin-bottom:0.5rem">
+                                                    <div class="row">
+                                                        <div class="col-md-6 label6 padding_left_none">
+                                                            <label id="CR_Cas_Sup_Car_Registration_Code" class="lbl" style=" float:right">@Html.LabelFor(model => model.CR_Cas_Sup_Car_Registration_Code)<label id="asterisk">*</label></label>
+                                                        </div>
+                                                        <div class="col-md-6 input6 padding_right_none">
+                                                            @Html.DropDownList("CR_Cas_Sup_Car_Registration_Code", null, "--رجاء إختر نوع التسجيل--", htmlAttributes: new { @class = "form-control ", style = "float:right;", onkeyup = "movetoNext('CR_Cas_Sup_Branch_Tax_No')", autocomplete = "off", oninput = "this.value=this.value.replace(/[^0-9]/g,'')", onpaste = "return false;", maxlength = "10", required = "required" })
+                                                            <div class="texterr" style="float:right">@ViewBag.Registration</div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-6" style="float:right;margin-bottom:0.5rem">
+                                            @if (ViewBag.Picturepath != null)
+                                            {
+                                                <img src="@ViewBag.Picturepath" id="carimg" width="250" height="150" style="left: 0; float: left; position: relative; object-fit: cover; margin-left: 0px; margin-top: -0px;border:solid 1px #e7e7e7; display: none" />
+                                                <input type="text" id="CarImage" name="CarImage" value="@ViewBag.Picturepath" hidden />
+                                            }
+                                            else
+                                            {
+                                                <img src="" id="carimg" width="250" height="150" style="left: 0; float: left; position: relative; object-fit: cover; margin-left: 0px; margin-top: 0px; border: solid 1px #e7e7e7; display: none" />
+                                                <input type="text" id="CarImage" name="CarImage" value="@ViewBag.Picturepath" hidden />
+                                            }
+
+                                        </div>
+                                    </div>
+
+
+                                    @*, onkeydown = "getcarinfo()"*@
+
+
+
+
+
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-6" style="float:right;margin-bottom:0.5rem" ">
+                                            <div class="row">
+                                                <div class="col-md-6 label6 padding_left_none">
+                                                    @*@Html.LabelFor(model => model.CR_Cas_Sup_Car_Plate_Ar_No, htmlAttributes: new { @class = "lbl", style = "float:right" })*@
+                                                    <label id="CR_Cas_Sup_Car_Plate_Ar_No" class="lbl  style = " float:right">@Html.LabelFor(model => model.CR_Cas_Sup_Car_Plate_Ar_No)<label id="asterisk">*</label></label>
+                                                </div>
+                                                <div class="col-md-6 input6 padding_right_none">
+                                                    @Html.TextBoxFor(model => model.CR_Cas_Sup_Car_Plate_Ar_No, htmlAttributes: new
+                                                    {
+                                                        @class = "form-control ",
+                                                        style = "float:right;",
+                                                        onkeyup = "movetoNext('CR_Cas_Sup_Car_Plate_En_No')",
+                                                        autocomplete = "off",
+                                                        onpaste = "return false;",
+                                                        maxlength = "10",
+                                                        required = "required"
+                                                    })
+                                                    <div class="texterr" style="float:right">@ViewBag.RegAr</div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="col-lg-4 col-md-6" style="float:right;margin-bottom:0.5rem">
+                                            <div class="row">
+                                                <div class="col-md-6 label6 padding_left_none">
+                                                    @*@Html.LabelFor(model => model.CR_Cas_Sup_Car_Plate_En_No, htmlAttributes: new { @class = "lbl", style = "float:right" })*@
+                                                    <label id="CR_Cas_Sup_Car_Plate_En_No" class="lbl  style = " float:right">@Html.LabelFor(model => model.CR_Cas_Sup_Car_Plate_En_No)<label id="asterisk">*</label></label>
+                                                </div>
+                                                <div class="col-md-6 input6 padding_right_none">
+                                                    @Html.TextBoxFor(model => model.CR_Cas_Sup_Car_Plate_En_No, htmlAttributes: new
+                                                   {
+                                                       @class = "form-control ",
+                                                       style = "float:right;text-transform:uppercase;",
+                                                       onkeyup = "movetoNext('CR_Cas_Sup_Car_No_Current_Meter')",
+                                                       autocomplete = "off",
+                                                       onpaste = "return false;",
+                                                       maxlength = "10",
+                                                       required = "required"
+                                                   })
+                                                    <div class="texterr" style="float:right">@ViewBag.RegEn</div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-6" style="float:right;margin-bottom:0.5rem" ">
+                                            <div class="row">
+                                                <div class="col-md-6 label6 padding_left_none">
+                                                    @*@Html.LabelFor(model => model.CR_Cas_Sup_Car_Out_Main_Color_Code, htmlAttributes: new { @class = "lbl", style = "float:right" })*@
+                                                    <label id="CR_Cas_Sup_Car_Out_Main_Color_Code" class="lbl  style = " float:right">@Html.LabelFor(model => model.CR_Cas_Sup_Car_Out_Main_Color_Code)<label id="asterisk">*</label></label>
+                                                </div>
+                                                <div class="col-md-6 input6 padding_right_none">
+                                                    @Html.DropDownList("CR_Cas_Sup_Car_Out_Main_Color_Code", null, "--رجاء إختر اللون--", htmlAttributes: new { @class = "form-control ", style = "float:right;", onkeyup = "movetoNext('CR_Cas_Sup_Branch_Tax_No')", autocomplete = "off", oninput = "this.value=this.value.replace(/[^0-9]/g,'')", onpaste = "return false;", maxlength = "10", required = "required" })
+                                                    <div class="texterr" style="float:right">@ViewBag.color</div>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                        <div class="col-lg-4 col-md-6" style="float:right;margin-bottom:0.5rem" ">
+                                            <div class="row">
+                                                <div class="col-md-6 label6 padding_left_none">
+                                                    @Html.LabelFor(model => model.CR_Cas_Sup_Car_Out_Secondary_Color_Code, htmlAttributes: new { @class = "lbl", style = "float:right" })
+                                                </div>
+                                                <div class="col-md-6 input6 padding_right_none">
+                                                    @Html.DropDownList("CR_Cas_Sup_Car_Out_Secondary_Color_Code", null, "--رجاء إختر اللون--", htmlAttributes: new { @class = "form-control ", style = "float:right;", onkeyup = "movetoNext('CR_Cas_Sup_Branch_Tax_No')", autocomplete = "off", oninput = "this.value=this.value.replace(/[^0-9]/g,'')", onpaste = "return false;", maxlength = "10" })
+                                                    <div class="texterr" style="float:right"></div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+
+                                        <div class="col-lg-4 col-md-6" style="float:right;margin-bottom:0.5rem">
+                                            <div class="row">
+                                                <div class="col-md-6 label6 padding_left_none">
+                                                    @Html.LabelFor(model => model.CR_Cas_Sup_Car_In_Main_Color_Code, htmlAttributes: new { @class = "lbl", style = "float:right" })
+                                                </div>
+                                                <div class="col-md-6 input6 padding_right_none">
+                                                    @Html.DropDownList("CR_Cas_Sup_Car_In_Main_Color_Code", null, "--رجاء إختر اللون--", htmlAttributes: new
+                                                    {
+                                                        @class = "form-control ",
+                                                        style = "float:right;",
+                                                   onkeyup = "movetoNext('CR_Cas_Sup_Branch_Tax_No')",
+                                                        autocomplete = "off",
+                                                        oninput = "this.value=this.value.replace(/[^0-9]/g,'')",
+                                                   onpaste = "return false;",
+                                                        maxlength = "10"
+                                                    })
+                                                    <div class="texterr" style="float:right"></div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="col-lg-4 col-md-6" style="float:right;margin-bottom:0.5rem">
+                                            <div class="row">
+                                                <div class="col-md-6 label6 padding_left_none">
+                                                    @Html.LabelFor(model => model.CR_Cas_Sup_Car_In_Secondary_Color_Code, htmlAttributes: new { @class = "lbl", style = "float:right" })
+                                                </div>
+                                                <div class="col-md-6 input6 padding_right_none">
+                                                    @Html.DropDownList("CR_Cas_Sup_Car_In_Secondary_Color_Code", null, "--رجاء إختر اللون--", htmlAttributes: new
+                                                    {
+                                                        @class = "form-control ",
+                                                        style = "float:right;" +
+                                                    "",
+                                                        onkeyup = "movetoNext('CR_Cas_Sup_Branch_Tax_No')",
+                                                        autocomplete = "off",
+                                                        oninput = "this.value=this.value.replace(/[^0-9]/g,'')",
+                                                   onpaste = "return false;",
+                                                        maxlength = "10"
+                                                    })
+                                                    <div class="texterr" style="float:right"></div>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+
+                                    </div>
+
+
+
+
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-6" style="float:right;margin-bottom:0.5rem">
+                                            <div class="row">
+                                                <div class="col-md-6 label6 padding_left_none">
+                                                    <label class="lbl" style="float: right">تاريخ  الإصدار</label>
+                                                </div>
+                                                <div class="col-md-6 input6 padding_right_none">
+                                                    @*<input class="form-control text-box single-line hijri-date-input" data-val="true" data-val-date="The field CR_Cas_Sup_Branch_Documentation_End_Date must be a date."
+                        id="CR_Cas_Sup_Branch_Documentation_Start_Date" name="CR_Cas_Sup_Branch_Documentation_Start_Date" type="text" value="@ViewBag.CarteEndDate">*@
+                                                    <input class="form-control text-box single-line" data-val="true" data-val-date="The field CR_Cas_Sup_Branch_Documentation_End_Date must be a date."
+                                                           id="CR_Cas_Sup_Branch_Documentation_Start_Date" name="CR_Cas_Sup_Branch_Documentation_Start_Date" value="@ViewBag.joined" type="text" data-inputmask="'alias': 'yyyy-mm-dd'" onblur="affich_btn_1(event)" required>
+                                                    <input type="button" class="hijri-date-input2" id="date_btn1" onblur="affich_affich_1(event)" />
+                                                    <input type="hidden" id="date_affich" class="form-control" />
+                                                    <div class="texterr" style="float:right">@ViewBag.StartDate</div>
+
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-lg-4 col-md-6" style="float:right;margin-bottom:0.5rem">
+                                            <div class="row">
+                                                <div class="col-md-6 label6 padding_left_none">
+
+                                                    @*<label id="CR_Cas_Sup_Car_Traffic_License_Img" class="lbl">@Html.LabelFor(model => model.CR_Cas_Sup_Car_Traffic_License_Img)</label>*@
+                                                </div>
+                                                <div class="col-md-6 input6 padding_right_none">
+
+                                                </div>
+
+
+                                            </div>
+                                            <div class="texterr" style="float:right"></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row" style="margin-top:5px;">
+
+                                        <div class="col-lg-4 col-md-6" style="float:right;">
+                                            <div class="row">
+                                                <div class="col-md-6 label6 padding_left_none">
+                                                    @Html.LabelFor(model => model.CR_Cas_Sup_Car_Customs_No, htmlAttributes: new { @class = "lbl", style = "float:right" })
+                                                </div>
+                                                <div class="col-md-6 input6 padding_right_none">
+                                                    @Html.TextBoxFor(model => model.CR_Cas_Sup_Car_Customs_No, htmlAttributes: new { @class = "form-control ", style = "float:right;", onkeyup = "movetoNext('CR_Cas_Sup_Car_Structure_No')", autocomplete = "off", oninput = "this.value=this.value.replace(/[^0-9]/g,'')", onpaste = "return false;", maxlength = "10" })
+                                                    <div class="texterr" style="float:right">@ViewBag.LRExistArSh</div>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                        <div class="col-lg-4 col-md-6" style="float:right;">
+                                            <div class="row">
+                                                <div class="col-md-6 label6 padding_left_none">
+                                                    @Html.LabelFor(model => model.CR_Cas_Sup_Car_Structure_No, htmlAttributes: new { @class = "lbl", style = "float:right" })
+                                                </div>
+                                                <div class="col-md-6 input6 padding_right_none">
+                                                    @Html.TextBoxFor(model => model.CR_Cas_Sup_Car_Structure_No, htmlAttributes: new { @class = "form-control ", style = "float:right;", onkeyup = "movetoNext('CR_Cas_Sup_Car_Lessor_Code')", onpaste = "return false;", maxlength = "50" })
+                                                    <div class="texterr" style="float:right">@ViewBag.LRExistArSh</div>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-8" style="float:right;">
+                                            <div class="row">
+                                                @Html.LabelFor(model => model.CR_Cas_Sup_Car_Reasons, htmlAttributes: new { @class = "lbl col-md-2 padding_left_none", style = "float:right;" })
+                                                <div class="col-md-10">
+                                                    @Html.EditorFor(model => model.CR_Cas_Sup_Car_Reasons, new { htmlAttributes = new { @class = "form-control",maxlength="100" } })
+                                                </div>
+                                            </div>
+                                            <div class="texterr" style="float:right">@ViewBag.LRExistEnSh</div>
+                                        </div>
+                                    </div>
+                                    @*<div class="row" hidden="hidden">
+
+            <div class="col-md-4" style="float:right;margin-bottom:0.5rem" ">
+                <div class="row">
+                    <div class="col-md-6 label6">
+                        @Html.LabelFor(model => model.CR_Cas_Sup_Car_Owner_Code, htmlAttributes: new { @class = "lbl", style = "float:right" })
+                    </div>
+                    <div class="col-md-6 input6">
+                        @Html.DropDownList("CR_Cas_Sup_Car_Owner_Code", null, "رجاء إختر المالك", htmlAttributes: new { @class = "form-control ", style = "", onkeyup = "movetoNext('CR_Cas_Sup_Branch_Tax_No')", autocomplete = "off", oninput = "this.value=this.value.replace(/[^0-9]/g,'')", onpaste = "return false;", maxlength = "10" })
+                        <div class="texterr" style="float:right"></div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>*@
+
+                                    @*<div class="row" style="margin-top:5px;" hidden>
+            <div class="col-md-5" style="float:right;">
+                <div class="row">
+                    <div class="col-md-8">
+                        @Html.DropDownList("CR_Cas_Sup_Car_Beneficiary_Code", null, "رجاء إختر المستفيد", htmlAttributes: new { @class = "form-control ", style = "float:right;width:250px;", onkeyup = "movetoNext('CR_Cas_Sup_Branch_Tax_No')", autocomplete = "off", oninput = "this.value=this.value.replace(/[^0-9]/g,'')", onpaste = "return false;", maxlength = "10" })
+                    </div>
+                    <div class="col-md-4">
+                        @Html.LabelFor(model => model.CR_Cas_Sup_Car_Beneficiary_Code, htmlAttributes: new { @class = "lbl", style = "float:right" })
+                    </div>
+                </div>
+                <div class="texterr" style="float:right"></div>
+            </div>
+        </div>*@
+
+
+
+                                    <div class="row">
+                                        <div class="col-md-4" style="float:right;" hidden="hidden">
+                                            <div class="row">
+                                                <div class=" col-md-6 label6">
+                                                    @Html.LabelFor(model => model.CR_Cas_Sup_Car_Joined_Fleet_Date, htmlAttributes: new { @class = "lbl", style = "float:right" })
+                                                    <label id="asterisk" class="col-md-3">*</label>
+                                                </div>
+                                                <div class=" col-md-6 input6">
+                                                    <input class="form-control text-box single-line" data-val="true" data-val-date="The field CR_Cas_Sup_Car_Joined_Fleet_Date must be a date."
+                                                           id="CR_Cas_Sup_Car_Joined_Fleet_Date" name="CR_Cas_Sup_Car_Joined_Fleet_Date" type="date" value="@ViewBag.Joined" onkeyup="movetoNext('CR_Cas_Sup_Car_Left_Fleet_Date')">
+                                                </div>
+                                            </div>
+                                            <div class="texterr" style="float:right">@ViewBag.GovNumber</div>
+                                        </div>
+
+                                        <div class="col-md-4" style="float:right;" hidden="hidden">
+                                            <div class="row">
+                                                <div>
+                                                    @Html.LabelFor(model => model.CR_Cas_Sup_Car_Left_Fleet_Date, htmlAttributes: new { @class = "lbl col-md-6", style = "float:right" })
+                                                    <label id="asterisk" class="col-md-3">*</label>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <input class="form-control text-box single-line" data-val="true" data-val-date="The field CR_Cas_Sup_Car_Left_Fleet_Date must be a date."
+                                                           id="CR_Cas_Sup_Car_Left_Fleet_Date" name="CR_Cas_Sup_Car_Left_Fleet_Date" type="date" value="@ViewBag.Left" onkeyup="movetoNext('CR_Cas_Sup_Branch_Documentation_End_Date')">
+                                                </div>
+                                            </div>
+                                            <div class="texterr" style="float:right"></div>
+                                        </div>
+
+
+                                    </div>
+
+                                    <div class="row">
+
+                                        <div class="col-lg-6 col-md-12" style="float:right;margin-bottom:0.5rem ">
+                                            <div class="input-group">
+                                                <span class="input-group-btn" style="width:100%">
+                                                    <span class="btn btn-primary" onclick="$(this).parent().find('input[type=file]').click();" style="width:100%;height:35px;width:100%;line-height:20px;">اختيار رخصة السير</span>
+
+                                                    <input name="imgLicence" type="file" class="form-control " style="display:none;float:right;width:100%; object-fit: fill;" accept="image/*" id="CR_Cas_Sup_Car_Traffic_License_Img"
+                                                           onchange="loadFilesLicence(event)" onkeyup="movetoNext('')">
+                                                </span>
+                                            </div>
+                                            <img id="imgLicence" class="zoom" style="margin-top: 0px; float: right; width: 100%; height: 215px; position: relative; object-fit: cover; border: solid 1px #e7e7e7;" />
+                                        </div>
+                                        <div class="col-lg-6 col-md-12" style="float:right;margin-bottom:0.5rem ">
+                                            @{
+                                                Html.RenderAction("_CarInfoFeatures");
+
+                                            }
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="row" style="margin-top:25px;" hidden="hidden">
+                                        <div class="col-md-6" style="float:right;">
+                                            <div class="row">
+                                                @Html.LabelFor(model => model.CR_Cas_Sup_Car_Documentation_Status, htmlAttributes: new { @class = "lbl col-md-3", style = "float:right" })
+                                                <div class="col-md-3">
+                                                    @*<input type="checkbox" id="CR_Cas_Sup_Car_Documentation_Status" name="CR_Cas_Sup_Car_Documentation_Status" />*@
+                                                    @Html.CheckBox("CR_Cas_Sup_Car_Documentation_Status", new { htmlAttributes = new { @class = "form-control" } })
+                                                </div>
+                                                <div class="texterr" style="float:right">@ViewBag.LRExistEnLng</div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6" style="float:right;" hidden="hidden">
+                                            <div class="row">
+                                                @Html.LabelFor(model => model.CR_Cas_Sup_Car_Maintenance_Status, htmlAttributes: new { @class = "lbl col-md-3", style = "float:right;" })
+                                                <div class="col-md-3">
+                                                    @*<input type="checkbox" id="CR_Cas_Sup_Car_Maintenance_Status" name="CR_Cas_Sup_Car_Maintenance_Status" />*@
+                                                    @Html.CheckBox("CR_Cas_Sup_Car_Maintenance_Status", new { htmlAttributes = new { @class = "form-control" } })
+                                                </div>
+                                            </div>
+                                            <div class="texterr" style="float:right">@ViewBag.LRExistEnSh</div>
+                                        </div>
+                                    </div>
+
+
+                                    @Html.HiddenFor(model => model.CR_Cas_Sup_Car_Status, new { htmlAttributes = new { @class = "form-control" } })
+
+
+
+
+
+                                    <div class="row">
+                                        <div class="col-md-6 col-50">
+
+                                            <input type="submit" name="add" class="btn btn-primary waves-effect" id="add_btn" value="حفظ" />
+                                        </div>
+                                        <div class="col-md-6 col-50">
+
+                                            <a href="/CasCarInformation/Index/" class="btn btn-primary waves-effect" style="float:left;">انهاء</a>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6" id="Message" style="font-family:'Times New Roman';font-size:16px;color:red;margin-Top: 60px;margin-right: 330px;position:absolute;">@TempData["TempModel"]</div>
+
+
+
+                                </div>
+                            </form>
+                            @*}*@
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+
+        function affich_affich_1(e) {
+            var date = e.target.value;
+            document.getElementById("CR_Cas_Sup_Branch_Documentation_Start_Date").value = date;
+        }
+        function affich_btn_1(e) {
+            var date = e.target.value;
+            document.getElementById("date_btn1").value = date;
+        }
+    </script>
+    <script type="text/javascript">
+        window.addEventListener("load", function () {
+            if ('@TempData["TempModel"]' == "Error") {
+
+                toastr.warning("نأسف لعدم نجاح عملية التعديل, الرجاء التواصل مع المطور");
+            }
+
+
+        });
+    </script>
+    <script type="text/javascript">
+        window.addEventListener("load", function () {
+
+            if ('@TempData["TempModel"]' =="Saved") {
+                toastr.success("تم الحفظ بنجاح");
+            }
+
+        });
+    </script>
+</div>

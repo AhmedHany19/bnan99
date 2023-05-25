@@ -1,0 +1,145 @@
+﻿@model IEnumerable<RentCar.Models.CAS.ClosingReceptionMD>
+
+<div class="responsive-table-plugin">
+    <div class="table-rep-plugin">
+        <div class="table-responsive" data-pattern="priority-columns" style="border:none; overflow:hidden">
+            <div id="dtBasicExample_print">
+                <table id="Table" class="table table-striped mb-0" style="cursor:pointer;margin-top:15px;">
+                    <thead>
+                        <tr>
+                            <th width="4%">
+                                م
+                            </th>
+                            <th width="12%">
+                                رقم تسليم العهدة
+                            </th>
+                            <th width="8%">
+                                التاريخ
+    
+                            </th>
+                            <th width="8%">
+                                من تاريخ
+                            </th>
+                            <th width="8%">
+                                إلى تاريخ
+                            </th>
+                            <th width="12%">
+                                نقطة البيع
+                            </th>
+                            <th width="7%">
+                                المبلغ
+                            </th>
+
+                            <th width="12%">
+                                الموظف
+                            </th>
+                            <th width="9%">
+                                الحاله
+
+                            </th>
+                            <th width="20%">
+                                الملاحظات
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbl" style="height:500px">
+
+                        @{
+                            int i = 1;
+                        }
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td width="4%" style="text-align:center">
+                                    <a href="~/ClosingReception/Create/?No=@Html.DisplayFor(modelItem => item.CR_Cas_Administrative_Procedures_No)
+                                                                           &Date=@Html.DisplayFor(modelItem => item.CR_Cas_Administrative_Procedures_Date)">
+                                        @i
+                                    </a>
+                                </td>
+                                <td width="12%">
+                                    <a href="~/ClosingReception/Create/?No=@Html.DisplayFor(modelItem => item.CR_Cas_Administrative_Procedures_No)
+                                                                           &Date=@Html.DisplayFor(modelItem => item.CR_Cas_Administrative_Procedures_Date)">
+                                        @Html.DisplayFor(modelItem => item.CR_Cas_Administrative_Procedures_No)
+                                    </a>
+                                </td>
+                                <td width="8%" style="text-align:center">
+                                    <a href="~/ClosingReception/Create/?No=@Html.DisplayFor(modelItem => item.CR_Cas_Administrative_Procedures_No)
+                                                                           &Date=@Html.DisplayFor(modelItem => item.CR_Cas_Administrative_Procedures_Date)">
+                                        @item.CR_Cas_Administrative_Procedures_Date.Value.ToString("yyyy/MM/dd")
+                                    </a>
+                                </td>
+                                <td width="8%" style="text-align:center">
+                                    <a href="~/ClosingReception/Create/?No=@Html.DisplayFor(modelItem => item.CR_Cas_Administrative_Procedures_No)
+                                                                           &Date=@Html.DisplayFor(modelItem => item.CR_Cas_Administrative_Procedures_Date)">
+                                        @item.CR_Cas_Administrative_Procedures_Doc_Start_Date.Value.ToString("yyyy/MM/dd")
+                                    </a>
+                                </td>
+                                <td width="8%" style="text-align:center">
+                                    <a href="~/ClosingReception/Create/?No=@Html.DisplayFor(modelItem => item.CR_Cas_Administrative_Procedures_No)
+                                                                           &Date=@Html.DisplayFor(modelItem => item.CR_Cas_Administrative_Procedures_Date)">
+                                        @item.CR_Cas_Administrative_Procedures_Doc_End_Date.Value.ToString("yyyy/MM/dd")
+                                    </a>
+                                </td>
+                                <td width="12%">
+                                    <a href="~/ClosingReception/Create/?No=@Html.DisplayFor(modelItem => item.CR_Cas_Administrative_Procedures_No)
+                                                                           &Date=@Html.DisplayFor(modelItem => item.CR_Cas_Administrative_Procedures_Date)">
+                                        @Html.DisplayFor(modelItem => item.CR_Cas_Sup_SalesPoint_Ar_Name)
+                                    </a>
+                                </td>
+                                <td width="7%">
+                                    <a href="~/ClosingReception/Create/?No=@Html.DisplayFor(modelItem => item.CR_Cas_Administrative_Procedures_No)
+                                                                           &Date=@Html.DisplayFor(modelItem => item.CR_Cas_Administrative_Procedures_Date)">
+                                        @Html.DisplayFor(modelItem => item.CR_Cas_Administrative_Procedures_Value)
+                                    </a>
+                                </td>
+                                <td width="12%">
+                                    <a href="~/ClosingReception/Create/?No=@Html.DisplayFor(modelItem => item.CR_Cas_Administrative_Procedures_No)
+                                                                           &Date=@Html.DisplayFor(modelItem => item.CR_Cas_Administrative_Procedures_Date)">
+                                        @Html.DisplayFor(modelItem => item.CR_Cas_User_Information_Ar_Name)
+                                    </a>
+                                </td>
+                                <td width="9%" class="text-center">
+                                    <a href="~/ClosingReception/Create/?No=@Html.DisplayFor(modelItem => item.CR_Cas_Administrative_Procedures_No)
+                                                                           &Date=@Html.DisplayFor(modelItem => item.CR_Cas_Administrative_Procedures_Date)">
+                                        @if (item.CR_Cas_Administrative_Procedures_Type == "I")
+                                        {
+                                            @Html.Raw("<span>نشط</span>");
+
+                                        }
+                                        else if (item.CR_Cas_Administrative_Procedures_Type == "Q")
+                                        {
+                                            @Html.Raw("<span style=\"color:green\">قبول</span>");
+                                        }
+
+
+                                    </a>
+                                </td>
+                                <td width="20%">
+                                    <a href="~/ClosingReception/Create/?No=@Html.DisplayFor(modelItem => item.CR_Cas_Administrative_Procedures_No)
+                                                                           &Date=@Html.DisplayFor(modelItem => item.CR_Cas_Administrative_Procedures_Date)">
+                                        @Html.DisplayFor(modelItem => item.CR_Cas_Administrative_Procedures_Reasons)
+                                    </a>
+                                </td>
+                            </tr>
+                            i++;
+                        }
+
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+<style>
+    #statOfBranch {
+        color: red;
+        margin-right: 4px !important;
+    }
+</style>

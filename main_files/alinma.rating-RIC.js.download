@@ -1,0 +1,403 @@
+var ratingValue = 0;
+var categoryDiv;
+var catsBoxs = [];
+var lang;
+var rateId;
+var serverMsgClass;
+var keysMap;
+var servletName;
+var divName;
+var isLatestRateReturned;
+var disclaimerFlag;
+var isValidfeedback = false;
+var textLimit = 300;
+ 
+(function($jselect2) {
+	$jselect2.widget('ui.rating', {
+	    _create: function() {
+	    	var self = this;
+			this.options.ltr = this.element.css('direction') != 'rtl';
+			lang = this.options.local ;
+			if(lang == 'ar') {
+			  this.options.ltr == false;
+			}
+			divName = this.options.div ;
+			keysMap = this.options.resourceKeysMap;
+			servletName = this.options.servletName;
+			isLatestRateReturned = false;
+			disclaimerFlag = this.options.disclaimerFlag;
+			getLatestRate(this.options.userID);
+			this.options.value = ratingValue;
+			this.element.addClass('rating');
+			this._container = $jselect2('<div class="rating-container"></div>').appendTo(this.element);
+			this._container.append($jselect2('<div></div>', {'class':'rating-component'}));
+			this._container.append($jselect2('<div class="rating-Comment" style="display:none;"></div>')) ;
+			$jselect2(".rating-component").append($jselect2('<div class="rating-title"></div>'));
+			$jselect2(".rating-component").append($jselect2('<div id="rating-loading" class="rating-loading" ></div>'));
+			$jselect2(".rating-component").append($jselect2('<div id="ratingRange" class="rating1 rating2">'));
+			$jselect2(".rating1.rating2").append('<a href="#" class="rating-star" data-value="5"><i class="fa fa-star"></i></a>');
+			$jselect2(".rating1.rating2").append('<a href="#" class="rating-star" data-value="4"><i class="fa fa-star"></i></a>');
+			$jselect2(".rating1.rating2").append('<a href="#" class="rating-star" data-value="3"><i class="fa fa-star"></i></a>');
+			$jselect2(".rating1.rating2").append('<a href="#" class="rating-star" data-value="2"><i class="fa fa-star"></i></a>');
+			$jselect2(".rating1.rating2").append('<a href="#" class="rating-star" data-value="1"><i class="fa fa-star"></i></a>');
+			$jselect2(".rating-component").append($jselect2('</div>'));
+			$jselect2("#ratingRange").prop('disabled', false);
+			$jselect2('.rating-star').bind('click.rating', function() {
+				if($jselect2(this).attr("data-value")) {
+					self.rate($jselect2(this).attr("data-value"));
+				}
+			}).bind('mousemove.rating', function(e) {
+	            self._hover(e);
+	        }).bind('mouseleave.rating', function(e) {
+	            self._blur(e);
+	        });
+			getRateCategories(this.options.servletName);
+		},
+		
+	    _hover: function(event) {
+	    	if($jselect2("#ratingRange").prop('disabled') == false) {
+	    		var starsList = $jselect2('#ratingRange').children();
+	    		$jselect2.each(starsList, function() {
+	    			$jselect2(this).removeClass("rating-selected");
+	    		});
+	    	} 
+	    },
+
+	    _blur: function( event ) {
+	    	setRatingOption('value', ratingValue);
+	    },
+    
+		rate: function(rating) {
+			var self = this;
+			self.options.value = rating;
+			self.element.val(rating);
+			ratingValue = rating;
+			if(isLatestRateReturned) {
+				$jselect2('.rating-title').html(keysMap["ratingProcessingTitleKey"]);  
+				$jselect2('#rating-loading').show();
+				addRate(this.options.userID, this.options.CIF, this.options.pageName, this.options.userName, this.options.alinmaId, this.options.mobile, this.options.company,rating);
+			}
+			enableDisableRating(true);
+		}
+	});
+})(jQuery);
+
+function enableDisableRating(value) {
+	$jselect2('#ratingRange').children().each(function() {
+		if(value == true) {
+			$jselect2(this).addClass("not-active");
+		} else {
+			$jselect2(this).removeClass("not-active");
+		}
+	});
+	if(value == true) {
+		$jselect2("#ratingRange").prop('disabled',true);
+	} else {
+		$jselect2("#ratingRange").prop('disabled',false);
+	}
+}
+
+function setRatingOption(key, value) {
+	if(key == "value"){
+		$jselect2('#' + divName).rating("option", key, value);
+		var starsList = $jselect2('#ratingRange').children();
+		var foundSelected = false;
+		$jselect2.each(starsList, function() {
+			$jselect2(this).removeClass("rating-selected");
+			if($jselect2(this).attr("data-value") == value || foundSelected == true) {
+				$jselect2(this).addClass("rating-selected");
+				foundSelected = true;
+			}
+		});
+	}
+}
+
+function addRate(userId, CIF, pageName, userName, alinmaId, mobile, company, rateValue) {
+	var context = window.location.pathname.split("/")[1];
+	$jselect2.ajax({		    	
+		type : "GET",
+		url : "/" + context+servletName,
+		contentType: "application/json;charset=UTF-8",
+		data : {
+			actionId : "1",					
+			userId : userId,
+			CIF : CIF,
+			userName : userName,
+			alinmaId : alinmaId,
+			mobile : mobile,
+			company : company,
+			pageName : pageName,
+			rateValue : rateValue
+		},
+		dataType : "json",
+		success : function(data, textStatus, jqXHR) {
+			$jselect2(".rating-Comment").empty();
+			$jselect2(".rating-Comment").show();
+			setRatingOption('value', rateValue);
+			for (var key in data) {						
+				if (data.hasOwnProperty(key)) {
+					if (key == "RateID") {								
+						rateId = data[key];
+						serverMsgClass = "rating-success-msg";
+						$jselect2(".rating-Comment").append($jselect2('<div id="errorMsgDiv" class="rating-alert-danger" style="display:none"></div>'));
+			    		$jselect2(".rating-Comment").append($jselect2('<h4 class="rating-inlineHead">' + keysMap["headerKey"] + '</h4>'));
+			    		$jselect2(".rating-Comment").append($jselect2(categoryDiv , {'class':'rating-category'}));
+			    		$jselect2(".rating-Comment").append($jselect2('<h4 class="rating-inlineHead">' + keysMap["descKey"] + '<span class="rating-comment-choice">' + keysMap["commentChoice"] + '</span></h4>'));
+			    		$jselect2(".rating-Comment").append($jselect2('<textarea id="commentTextId" class="feedbackText" rows="4" cols="40" maxlength="' + textLimit + '" onkeyup="countChar(this)"></textarea>'));
+			    		if (disclaimerFlag) {
+			    			$jselect2(".rating-Comment").append('<div class="ratting-disclaimer"><p id="disclaimerId">' + keysMap["commentDisclaimer"] + '</p></div>');
+			    		}
+			    		$jselect2(".rating-Comment").append($jselect2('<div class="rating-buttons"> <div id="rating-comment-loading" class="rating-comment-loading" style="display:none;"></div> <button id="sendCommentBtnId" type="button" class="rating-feedbackSubmit" onclick="updateRate();">' 
+			    				+ keysMap["submitCommentBtnKey"] + '</button> <button type="button" class="rating-feedbackClose" onclick=" clearCommentDiv(); ">' + keysMap["closeCommentBtnKey"] + '</button></div>')); 							
+			    		$jselect2('.rating-title').html(keysMap["sucessRatingMsgKey"]);
+			    		$jselect2('.rating-title').removeClass("rating-title-error");
+			    		$jselect2('.rating-title').addClass("rating-title-success");
+			    		$jselect2("#sendCommentBtnId").addClass("disabled-rating");
+					}
+					if (key == "StatusCode") {
+						$jselect2('.rating-title').html(keysMap["failRatingMsgKey"]);
+						$jselect2('.rating-title').addClass("rating-title-error");
+						$jselect2(".rating-Comment").hide();
+					} ;	
+				};
+			};	
+		},
+		error : function(jqXHR, textStatus, errorThrown) {
+			$jselect2('.rating-title').html(keysMap["failRatingMsgKey"]);
+			$jselect2('.rating-title').addClass("rating-title-error");
+			$jselect2(".rating-Comment").hide();
+		},
+		complete : function(jqXHR, textStatus) {
+			$jselect2(".rating-loading").css("display", "none"); 
+		}
+	});	
+}
+
+function getLatestRate(userId) {
+	var  context = window.location.pathname.split("/")[1];
+    $jselect2.ajax({  
+		type : "GET",
+		url : "/"+context+servletName,
+		contentType: "application/json;charset=UTF-8",
+		data : {
+			actionId : "4",
+			userId  : userId
+		},
+		dataType : "json",
+		success : function(data, textStatus, jqXHR) {
+			for ( var key in data) {				
+				if (data.hasOwnProperty(key)) {
+					if (key == "RateValue") {
+						 ratingValue = data[key];  
+						 if(ratingValue > 0){
+							 $jselect2('.rating-title').html(keysMap["re-evaluateTitleKey"]); 
+						 }else{
+							 $jselect2('.rating-title').html(keysMap["startTitleKey"]); 
+						 }
+						 setRatingOption('value', ratingValue);
+						 isLatestRateReturned = true;
+						 $jselect2("#rating-range").removeClass("disabled-rating");
+						 $jselect2('#rating-loading').hide();
+					}
+					if (key == "StatusCode") {
+						$jselect2('.rating-title').html(keysMap["failRatingMsgKey"]);
+						$jselect2('.rating-title').addClass("rating-title-error");
+						$jselect2('#rating-loading').hide();
+					}	
+				}
+			}	 			
+		},
+		error : function(jqXHR, textStatus, errorThrown) {
+		},
+		complete : function(jqXHR, textStatus) {
+		}
+	});	
+}
+
+function updateRate() {
+	$jselect2('#rating-comment-loading').show();
+	var errorFlag = false;
+	var errorMsgKey = "";
+	var catsId = '';	
+	for(var i = 0; i < catsBoxs.length; i++) {
+		if(document.getElementById(catsBoxs[i]).checked) {
+			catsId += document.getElementById(catsBoxs[i]).value;
+			catsId += ',';
+		}		
+	}
+	catsId = catsId.slice(0, -1);
+	var encodedText = $jselect2('<div/>').text($jselect2('#commentTextId').val()).html();
+	if($jselect2('#commentTextId').val() == "" && catsId.length == 0){
+		errorFlag = true;
+		errorMsgKey = "emptyCommentOrCategory";
+	}else{
+		if(encodedText.length > textLimit){
+			errorFlag = true;
+			errorMsgKey = "commentExceedsLimit";
+		}/*else{
+			if(encodedText != ""){
+				var regExp = new RegExp('^[A-Za-z0-9_\u0621-\u064A\u0660-\u0669 \\^&/*,=?#)}{(\u061F@\\.\\$j-]+$j');
+				if(!regExp.test(encodedText)){
+					errorFlag = true;
+					errorMsgKey = "noSpecialCharacters";
+				}
+			}
+		}*/
+	}
+	
+	if(errorFlag){
+		$jselect2('#errorMsgDiv').text(keysMap[errorMsgKey]);
+		$jselect2('#errorMsgDiv').show();
+		$jselect2('#rating-comment-loading').hide();
+		return;
+	}
+
+	var  context = window.location.pathname.split("/")[1];
+    $jselect2.ajax({ 	
+		type : "GET",
+		url : "/" + context+servletName,
+		contentType: "application/json;charset=UTF-8",
+		data : {
+			actionId : "2",
+			rateId : rateId,
+			rateComment :encodedText,
+			categoriesIdStr : catsId
+		},
+		dataType : "json",
+		success : function(data, textStatus, jqXHR) {
+			var serverTextMsg = '';
+			for (var key in data) {
+				if (data.hasOwnProperty(key)) {
+					if (key == "result") {
+						serverTextMsg = keysMap["sucessCommentKey0"]+'<span>' + keysMap["sucessCommentKey1"] + '</span>';
+						serverMsgClass = "rating-fb-success-msg" ;
+					}else if(key == "StatusCode"){
+						if(data[key] == "emptyInputs"){
+							serverTextMsg = keysMap["failCommentMsgKey"];
+						}else if(data[key] == "commentExceedsLimit"){
+							serverTextMsg = keysMap["commentExceedsLimit"];
+						}else if(data[key] == "noSpecialCharacters"){
+							serverTextMsg = keysMap["noSpecialCharacters"];
+						}
+						$jselect2('#errorMsgDiv').text(serverTextMsg);
+						$jselect2('#errorMsgDiv').show();
+						$jselect2('#rating-comment-loading').hide();
+						return;
+						serverMsgClass = "rating-fb-error-msg" ;
+					}	
+				}
+			}
+			drawServerMsg(serverTextMsg,serverMsgClass);
+		},
+		error : function(jqXHR, textStatus, errorThrown) {
+			serverTextMsg = keysMap["failCommentMsgKey"];
+			serverMsgClass = "rating-fb-error-msg" ;
+			drawServerMsg(serverTextMsg,serverMsgClass);
+		},
+		complete : function(jqXHR, textStatus) {
+			$jselect2('#rating-comment-loading').hide();
+			isValidfeedback = false;
+		}
+	});	
+}
+
+function clearCommentDiv() {
+	$jselect2(".rating-Comment").empty();
+	$jselect2(".rating-Comment").hide();
+	$jselect2('.rating-title').html(keysMap["re-evaluateTitleKey"]);  
+	$jselect2('.rating-title').removeClass("rating-title-success");
+	isValidfeedback = false;
+	enableDisableRating(false);
+}
+
+function getRateCategories() {
+	var context = window.location.pathname.split("/")[1];
+    $jselect2.ajax({
+		type : "GET",
+		url : "/" + context+servletName,
+		contentType: "application/json;charset=UTF-8",
+		data : {
+			actionId : "3",		
+		},
+		dataType : "json",
+		success : function(data, textStatus, jqXHR) {
+			for (var key in data) {
+				if (data.hasOwnProperty(key)) {	
+					if (key == "RateCategories") {
+					 drawCategoryDiv(data[key]);
+					}
+				}
+			}			
+		},
+		error : function(jqXHR, textStatus, errorThrown) {
+		},
+		complete : function(jqXHR, textStatus) {
+		}
+	});	
+}
+
+function drawCategoryDiv(catList) {
+	categoryDiv='<div class="rating-category clearfix">';
+	$jselect2.each(catList, function(index, category) {
+		if(!$jselect2.isEmptyObject(category)){
+			var categoryName = "";
+			if(lang == "en"){
+				categoryName = category.CategoryNameEn;				
+			}
+			else{
+				categoryName = category.CategoryNameAr;
+			}
+			categoryDiv +=	'<label><input type="checkbox" id="catCheckbox' + index + '" value="' + category.CategoryID + '" onchange = "toggleCommentButton();"><span>' + categoryName + '</span></label>';
+		}	
+		catsBoxs.push("catCheckbox" + index);
+	});
+	categoryDiv += "</div>";	
+}
+
+function drawServerMsg(serverTextMsg,serverMsgClass) {
+	$jselect2(".rating-Comment").empty();
+	$jselect2(".rating-Comment").append($jselect2('<div class="rating-fb-msg"></div>'));
+	$jselect2(".rating-fb-msg").append($jselect2('<div "><button type="button" class="rating-feedbackClose-x" onclick="clearCommentDiv(); ">&#215;</button></div>'));
+	$jselect2(".rating-fb-msg").append($jselect2('<div > <output name="serverMsg" class="serverMsg ' + serverMsgClass + '">' + serverTextMsg + '</output></div>'));
+}
+
+function countChar(textArea) {
+    var len = textArea.value.length;
+    if(len >= textLimit){
+  	  $jselect2("#commentTextId").val(textArea.value.substring(0, textLimit));
+  	  console.log(textArea.value.substring(0, textLimit));
+    }
+    len = textArea.value.length;
+	$jselect2('#charLengthId').text(textLimit - len);
+	toggleCommentButton();
+}
+  
+ function toggleCommentButton() {
+	var  disable = true;
+	for(var i = 0; i < catsBoxs.length; i++) {
+		if(document.getElementById(catsBoxs[i]).checked) {
+			disable = false;
+		}	
+	}
+	if(disable) {
+		$jselect2("#sendCommentBtnId").removeClass("disabled-rating");
+		isValidfeedback = true;
+		var len = $jselect2('#commentTextId').val().length;
+		if(len == 0){
+			$jselect2("#sendCommentBtnId").addClass("disabled-rating"); 
+			isValidfeedback = false;
+		}
+	} else {
+		isValidfeedback = true;
+		$jselect2("#sendCommentBtnId").removeClass("disabled-rating");
+	}
+ }
+ 
+ $(document).mouseup(function (e) {
+	 var ratingComponent = $jselect2(".rating-component");
+     var ratingComment = $jselect2(".rating-Comment");
+     if (!ratingComponent.is(e.target) && !ratingComment.is(e.target) && ratingComponent.has(e.target).length === 0 
+    		 && ratingComment.has(e.target).length === 0 && !isValidfeedback && ratingComment.is(":visible")){
+    	 clearCommentDiv();
+     }
+ });

@@ -1,0 +1,345 @@
+﻿@model IEnumerable<RentCar.Models.CR_Cas_Account_Tax_Owed>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_CASLayout.cshtml";
+}
+
+<style>
+    .radio_top {
+        float: left;
+        margin-right: 10px;
+        line-height: 0.8
+    }
+
+    .btn_form i {
+        width: 35px;
+        height: 35px;
+        line-height: 40px;
+        text-align: center;
+        color: #fff;
+        background: #4F7DB1;
+        float: right;
+        margin-left: 10px;
+        padding-right: 12px;
+        text-align: center
+    }
+
+    .btn_form {
+        float: right;
+        color: #F3B161;
+        font-weight: bold;
+        margin-left: 10px;
+        width: 45px;
+        height: 40px;
+        line-height: 37px;
+        text-align: center;
+        color: #fff;
+        background: #4F7DB1;
+        border: none;
+        float: right;
+        margin-left: 10px;
+    }
+
+    .btn_form2 i {
+        width: 30px;
+        height: 30px;
+        line-height: 30px;
+        text-align: center;
+        color: #fff;
+        background: #4F7DB1;
+        float: right;
+        font-size: 20px;
+        margin-left: 10px;
+        text-align: center
+    }
+
+    .btn_form2 {
+        float: right;
+        color: #F3B161;
+        font-weight: bold;
+        margin-left: 10px;
+        width: 30px;
+        height: 30px;
+        line-height: 30px;
+        text-align: center;
+        color: #fff;
+        background: #4F7DB1;
+        border: none;
+        float: right;
+        margin-left: 10px;
+    }
+</style>
+
+<div class="content">
+    <!-- Start Content-->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+
+                <div class="card-box table-responsive" style="height:79vh">
+                    <div class="title_corp"><h3> التقارير / مستحقات القيمة المضافة / عرض البيانات  </h3></div>
+                    <div class="subtitle_corp"> تمكنك الصفحة من الاطلاع و البحث عن جميع مستحقات القيمة المضافة للعقود التي تمت خلال الفترة المحددة المسددة و الغير مسددة </div>
+                    <div class="hr_60"></div>
+                    <div class="hr_80"></div>
+                    <div class="corp_page">
+                        <div class="page_content">
+                            <form method="post">
+                                <div class="form_bg" style="width:100%">
+
+                                    <div class="responsive-table-plugin">
+                                        <div class="table-rep-plugin">
+                                            <div class="table-responsive" data-pattern="priority-columns" style="border:none;">
+                                                <div class="href_layout">
+
+                                                    <div class="row">
+                                                        <div class="col-md-2" style="float:right">
+                                                            <a href="/CasHome/index" class="btn_form" data-toggle="tooltip" data-placement="top" title="إغلاق"><i class="fa fa-times"></i></a>
+                                                            <script>
+                                                                $(document).ready(function () {
+                                                                    $("#inputtext").on("keyup", function () {
+                                                                        var value = $(this).val().toLowerCase();
+                                                                        $("#tbl tr").filter(function () {
+                                                                            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                                                                        });
+                                                                    });
+                                                                });
+                                                            </script>
+                                                        </div>
+                                                        <div class="col-md-4" style="float:right">
+                                                            <div class="row">
+                                                                <div class="col-md-3" style="float:right">
+                                                                    <label>من</label>
+                                                                </div>
+                                                                <div class="col-md-9" style="float:right">
+                                                                    <input type="date" id="Startdate" onclick="GetDateFilter()" value="@ViewBag.Startdate" style="width:100%">
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4" style="float:right">
+                                                            <div class="row">
+                                                                <div class="col-md-3" style="float:right;padding-right:0px;">
+                                                                    <label>إلى</label>
+                                                                </div>
+                                                                <div class="col-md-9" style="float:right">
+                                                                    <input type="date" id="Enddate" onclick="GetDateFilter()" value="@ViewBag.Enddate" style="width:100%">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <a href="javascript:GetFilterDate();" class="btn_form2" data-toggle="tooltip" data-placement="top" title="بحث"><i class="fa fa-check-circle"></i></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div id="responsive-datatable_filter" class="dataTables_filter ">
+                                                    <label class="label_search_input">
+                                                        <img src="~/images/srch.png" id="SrchImg" />
+                                                        بحث:<input type="search" id="inputtext" class="form-control form_search_input" placeholder="" aria-controls="responsive-datatable" style="width:20%">
+                                                    </label>
+                                                </div>
+
+                                                <div class="row" style="width: 100%; min-height: 25px; height: 25px; ">
+
+                                                    <div class="col-md-7">
+
+                                                    </div>
+                                                    <div class="col-md-5" style="padding-right: 30px;">
+                                                        <div class="">
+
+                                                            <div class="radio_top">
+                                                                <input type="radio" id="ShowPayed" name="Show" onclick="GetFilter()" style="float:right;margin-left:4px;width:13px;height:13px;">
+                                                                <label for="javascript" style="float: left; font-size: 0.75rem">مسدد</label>
+                                                            </div>
+                                                            <div class="radio_top">
+                                                                <input type="radio" id="ShowNotPayed" name="Show" onclick="GetFilter()" style="float:right;margin-left:4px;width:13px;height:13px;">
+                                                                <label for="javascript" style="float: left; font-size: 0.75rem">غير مسدد</label>
+                                                            </div>
+                                                            <div class="radio_top">
+                                                                <input type="radio" id="ShowAll" name="Show" onclick="GetFilter()" style="float:right;margin-left:4px;width:13px;height:13px;">
+                                                                <label for="html" style="float: left; font-size: 0.75rem">الكل</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div id="Table">
+                                                    @{
+                                                        Html.RenderAction("PartialIndexTable");
+                                                    }
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div id="dtBasicExample_print">
+
+                                        <iframe name="print_frame" width="0" height="0" frameborder="0" src="about:blank"></iframe>
+                                        <script>
+                                            function printDiv() {
+                                                window.frames["print_frame"].document.body.innerHTML = document.getElementById("dtBasicExample_print").innerHTML;
+                                                window.frames["print_frame"].window.focus();
+                                                window.frames["print_frame"].window.print();
+                                            }
+                                        </script>
+                                        <script>
+                                            $(document).ready(function () {
+                                                $('#dtBasicExample').DataTable();
+                                                $('.dataTables_length').addClass('bs-select');
+                                            });
+                                        </script>
+                                        <script>
+                                            function sortTable(n) {
+                                                var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+                                                table = document.getElementById("myTable");
+                                                switching = true;
+                                                // Set the sorting direction to ascending:
+                                                dir = "asc";
+                                                /* Make a loop that will continue until
+                                                no switching has been done: */
+                                                while (switching) {
+                                                    // Start by saying: no switching is done:
+                                                    switching = false;
+                                                    rows = table.rows;
+                                                    /* Loop through all table rows (except the
+                                                    first, which contains table headers): */
+                                                    for (i = 1; i < (rows.length - 1); i++) {
+                                                        // Start by saying there should be no switching:
+                                                        shouldSwitch = false;
+                                                        /* Get the two elements you want to compare,
+                                                        one from current row and one from the next: */
+                                                        x = rows[i].getElementsByTagName("TD")[n];
+                                                        y = rows[i + 1].getElementsByTagName("TD")[n];
+                                                        /* Check if the two rows should switch place,
+                                                        based on the direction, asc or desc: */
+                                                        if (dir == "asc") {
+                                                            if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                                                                // If so, mark as a switch and break the loop:
+                                                                shouldSwitch = true;
+                                                                break;
+                                                            }
+                                                        } else if (dir == "desc") {
+                                                            if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                                                                // If so, mark as a switch and break the loop:
+                                                                shouldSwitch = true;
+                                                                break;
+                                                            }
+                                                        }
+                                                    }
+                                                    if (shouldSwitch) {
+                                                        /* If a switch has been marked, make the switch
+                                                        and mark that a switch has been done: */
+                                                        rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                                                        switching = true;
+                                                        // Each time a switch is done, increase this count by 1:
+                                                        switchcount++;
+                                                    } else {
+                                                        /* If no switching has been done AND the direction is "asc",
+                                                        set the direction to "desc" and run the while loop again. */
+                                                        if (switchcount == 0 && dir == "asc") {
+                                                            dir = "desc";
+                                                            switching = true;
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        </script>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- end row -->
+    </div> <!-- container-fluid -->
+    <script type="text/javascript">
+        window.addEventListener("load", function () {
+
+            if ('@TempData["TempModel"]' == "Saved") {
+
+                toastr.success("تم التعديل بنجاح");
+            }
+            if ('@TempData["TempModel"]'=="Holded") {
+                toastr.success("تم التعطيل بنجاح");
+            }
+
+            if ('@TempData["TempModel"]'=="Deleted") {
+                toastr.success("تم الحذف بنجاح");
+            }
+
+            if ('@TempData["TempModel"]'=="Activated") {
+                toastr.success("تم التنشيط بنجاح");
+            }
+            if ('@TempData["TempModel"]' == "Error") {
+
+                toastr.warning("نأسف لعدم نجاح عملية التعديل, الرجاء التواصل مع المطور");
+            }
+            if ('@TempData["TempModel"]' == "PasswordActivated") {
+
+                toastr.success("تم إسترجاع كلمة السر");
+            }
+
+
+
+        });
+    </script>
+    <script>
+
+        function GetFilterDate() {
+            var sd = document.getElementById('Startdate').value;
+            var ed = document.getElementById('Enddate').value;
+            document.getElementById('inputtext').value="";
+            $.ajax({
+                url: '@Url.Action("PartialIndexTable", "TaxOwed")',
+                type: "POST",
+                    data: { type: "Date", StartDate: sd, EndDate:ed },
+                    success: function (data) {
+
+                        $('#Table').html(data);
+                }
+            });
+        }
+
+
+       
+    </script>
+    <script>
+         function GetFilter() {
+             var sd = document.getElementById('Startdate').value;
+             var ed = document.getElementById('Enddate').value;
+            if (document.getElementById('ShowAll').checked) {
+                 $.ajax({
+                    url: '@Url.Action("PartialIndexTable", "TaxOwed")',
+                    type: "POST",
+                     data: { type: "All", StartDate: sd, EndDate:ed },
+                        success: function (data) {
+
+                            $('#Table').html(data);
+                    }
+                });
+            } else if (document.getElementById('ShowPayed').checked) {
+                $.ajax({
+                    url: '@Url.Action("PartialIndexTable", "TaxOwed")',
+                    type: "POST",
+                    data: { type: "P", StartDate: sd, EndDate:ed },
+                        success: function (data) {
+
+                            $('#Table').html(data);
+                    }
+                });
+            } else if (document.getElementById('ShowNotPayed').checked) {
+                 $.ajax({
+                    url: '@Url.Action("PartialIndexTable", "TaxOwed")',
+                    type: "POST",
+                     data: { type: "N", StartDate: sd, EndDate:ed },
+                        success: function (data) {
+
+                            $('#Table').html(data);
+                    }
+                });
+            }
+        }
+    </script>
+</div> <!-- content -->

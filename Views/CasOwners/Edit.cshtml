@@ -1,0 +1,398 @@
+﻿@model RentCar.Models.CR_Cas_Sup_Owners
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_CASLayout.cshtml";
+}
+<style>
+    .tooltip > .tooltip-inner {
+        background-color: #f00;
+    }
+
+    .tooltip > .tooltip-arrow {
+        border-top-color: #f00 !important;
+    }
+    .texterr {
+        margin-top:-2px;
+        font-family: 'Cairo', sans-serif !important;
+        position: absolute !important;
+        font-size: 11px !important;
+        font-weight: bold !important;
+    }
+</style>
+<div class="content">
+    <!-- Start Content-->
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card-box table-responsive" style="height:79vh">
+                    <div class="title_corp"> <h3>الشركة /الملاك /  تعديل  </h3></div>
+                    <div class="subtitle_corp"> تمكنك الصفحة من تعديل بيانات الملاك</div>
+                    <div class="hr_60"></div>
+                    <div class="hr_80"></div>
+                    <div class="corp_page">
+                        <div class="page_content" style="float:left;width:100%">
+
+                            @using (Html.BeginForm())
+                            {
+                                @Html.AntiForgeryToken()
+                                <div class="form-horizontal" style="margin-top:15px;min-height:50%">
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                                    <div class="row mb-2">
+                                        <div class="col-lg-7 offset-lg-5 col-md-12 " style="margin-top:0px;">
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <label>
+                                                        @Html.LabelFor(model => model.CR_Cas_Sup_Owners_Code, new { @class = "label_form", style = "float:right;" })
+                                                    </label>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    @Html.TextBoxFor(model => model.CR_Cas_Sup_Owners_Code, new { @class = "form-control", onkeyup = "movetoNext('CR_Cas_Sup_Beneficiary_Commercial_Registration_No')", minlength = "10", autocomplete = "off", htmlAttributes = new { tabindex = 1 }, @Readonly = "readonly" })
+                                                    <div class="texterr">@ViewBag.LRExistCode</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @Html.HiddenFor(model => model.CR_Cas_Sup_Owners_Lessor_Code)
+                                    @Html.HiddenFor(model => model.CR_Cas_Sup_Owners_Sector)
+
+                                    <div class="row mb-2"">
+                                        <div class="col-lg-7 offset-lg-5 col-md-12">
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <label>
+                                                        @Html.LabelFor(model => model.CR_Cas_Sup_Owners_Commercial_Registration_No, new { @class = "label_form " })
+                                                    </label>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    @Html.TextBoxFor(model => model.CR_Cas_Sup_Owners_Commercial_Registration_No, new { @class = "form-control", onkeyup = "movetoNext('CR_Cas_Sup_Beneficiary_Ar_Long_Name')", maxlength = "10", autocomplete = "off", htmlAttributes = new { tabindex = 2 } })
+                                                    <div class="texterr">@ViewBag.LRExistCommercial</div>
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-2"">
+                                        <div class="col-lg-7 offset-lg-5 col-md-12">
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <label>
+                                                        @Html.LabelFor(model => model.CR_Cas_Sup_Owners_Ar_Long_Name, new { @class = "label_form", style = "float:right" }) 
+                                                    </label>
+                                                </div>
+                                                <div class="col-md-9">
+                                                    @Html.TextBoxFor(model => model.CR_Cas_Sup_Owners_Ar_Long_Name, new { @class = "form-control", maxlength = "100", onkeyup = "movetoNext('CR_Cas_Sup_Beneficiary_En_Long_Name')", autocomplete = "off", onkeypress = "return CheckArabicCharactersOnly(event);", htmlAttributes = new { tabindex = 3 }, @Readonly = "Readonly" })
+                                                    <div class="texterr">@ViewBag.LRExistAr</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-2"">
+                                        <div class="col-lg-7 offset-lg-5 col-md-12">
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <label>
+                                                        @Html.LabelFor(model => model.CR_Cas_Sup_Owners_En_Long_Name, new { @class = "label_form", style = "float:right" }) 
+                                                    </label>
+                                                </div>
+                                                <div class="col-md-9">
+                                                    @Html.TextBoxFor(model => model.CR_Cas_Sup_Owners_En_Long_Name, new { @class = "form-control", maxlength = "100", onkeyup = "movetoNext('CR_Cas_Sup_Beneficiary_Reasons')", autocomplete = "off", oninput = "this.value=this.value.replace(/[^a-zA-Z\\s]/g,'')", htmlAttributes = new { tabindex = 4 }, @Readonly = "Readonly" })
+
+                                                    <div class="texterr">@ViewBag.LRExistEn</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group" hidden="hidden">
+                                        @Html.LabelFor(model => model.CR_Cas_Sup_Owners_Fr_Long_Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(model => model.CR_Cas_Sup_Owners_Fr_Long_Name, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.CR_Cas_Sup_Owners_Fr_Long_Name, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group" hidden="hidden">
+                                        @Html.LabelFor(model => model.CR_Cas_Sup_Owners_Status, htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(model => model.CR_Cas_Sup_Owners_Status, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.CR_Cas_Sup_Owners_Status, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="row mb-2"">
+                                        <div class="col-lg-7 offset-lg-5 col-md-12">
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <label>
+                                                        @Html.LabelFor(model => model.CR_Cas_Sup_Owners_Reasons, new { @class = "label_form", style = "float:right" })
+                                                    </label>
+                                                </div>
+                                                <div class="col-md-9">
+                                                    @Html.TextBoxFor(model => model.CR_Cas_Sup_Owners_Reasons, new { @class = "form-control", maxlength = "100", onkeyup = "movetoNext('add_btn')", autocomplete = "off", onkeypress = "return CheckArabicCharactersOnly(event);", htmlAttributes = new { tabindex = 4 } })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="">
+                                    <div style="width:58.2%">
+
+                                        <input type="button" name="hold" id="btn-Hold" class="btn btn-primary waves-effect" value="@ViewBag.h" style="margin-left: 20px; margin-top: 10px;" />
+                                        <input type="button" name="delete" class="btn btn-primary waves-effect" id="btn-confirm" value="@ViewBag.stat" style="margin-left: 20px; margin-top: 10px; " />
+                                        <input type="button" onclick="Save();" name="save" value="حفظ" class="btn btn-primary waves-effect" style=" float: right; margin-left: 20px;margin-top: 10px;" />
+                                        <input type="submit" name="save" id="save" value="حفظ" class="btn btn-primary waves-effect" style=" float: right; margin-left: 20px;margin-top: 10px;" hidden/>
+                                       
+                                        <div class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" id="mi-modal">
+                                            <div class="modal-dialog modal-dialog-centered">
+                                                <div class="modal-content">
+                                                    <div class="modal-body" style="padding: 35px;">
+                                                        <div style="width:75%;float:right;text-align:right;">
+                                                            <b style="color:red;">تأكيد الحذف ......</b><br />
+                                                            سيترتب على حذف بيانات المالك عدم التعامل معه و الاحتفاظ بجميع الإجراءات الإدارية السابقة
+                                                        </div>
+                                                        <div style="width:20%;margin-right:5%;float:right;">
+                                                            @if (ViewBag.delete == "D")
+                                                            {
+                                                                <input type="submit" name="delete" class="btn btn-primary waves-effect" value="@ViewBag.stat" id="modal-btn-si" style="float: left" />
+                                                            }
+                                                            else
+                                                            {
+                                                                <input type="submit" name="delete" class="btn btn-primary waves-effect" value="@ViewBag.stat" id="modal-btn-si" style="float: left" />
+                                                            }
+                                                        <button type="button" class="btn btn-primary waves-effect" id="modal-btn-no" style="float: left;margin-top:25px;">إلغاء الأمر</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" id="H-modal" >
+                                            <div class="modal-dialog modal-dialog-centered">
+                                                <div class="modal-content">
+                                                    <div class="modal-body" style="padding: 35px;">
+                                                        
+                                                            @if (Model.CR_Cas_Sup_Owners_Status == "H")
+                                                            {
+                                                                <div style="width:75%;float:right;text-align:right;">
+                                                                    <b style="color:red;">تأكيد إسترجاع الإيقاف ......</b><br />
+                                                                    سيترتب على استرجاع إيقاف بيانات المالك إلى تأجير سيارات المالك
+                                                                </div>
+                                                            }
+                                                            else
+                                                            {
+                                                                <div style="width:75%;float:right;text-align:right;">
+                                                                    <b style="color:red;">تأكيد الإيقاف ......</b><br />
+                                                                    سيترتب على إيقاف بيانات المالك إيقاف جميع تأجير سيارات المالك
+                                                                </div>
+                                                            }
+
+                                                                
+                                                        <div style="width:20%;margin-right:5%;float:right;">
+                                                            @if (Model.CR_Cas_Sup_Owners_Status == "H")
+                                                            {
+                                                                <input type="submit" name="hold" class="btn btn-primary waves-effect" id="HoldModal-btn-si" value="@ViewBag.h" style="float: left" />
+                                                            }
+                                                            else
+                                                            {
+                                                                <input type="submit" name="hold" class="btn btn-primary waves-effect" id="HoldModal-btn-si" value="@ViewBag.h" style="float: left" />
+                                                            }
+
+                                                        <button type="button" class="btn btn-primary" id="HoldModal-btn-no" style="float: left;margin-top:25px;">إلغاء الأمر</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <a href="/CasOwners/Index/" class="btn btn-primary waves-effect" style=" margin-top: 10px;">انهاء</a>
+
+                                    </div>
+                                </div>
+
+                                if (@ViewBag.LRExistCode == null && @ViewBag.LRExistAr == null && @ViewBag.LRExistEn == null && @ViewBag.LRExistCommercial == null)
+                                {
+                                    <script>document.getElementById('CR_Cas_Sup_Owners_Code').focus()</script>
+                                }
+                                else if (@ViewBag.LRExistCode != null)
+                                {
+                                    <script>document.getElementById('CR_Cas_Sup_Owners_Code').focus()</script>
+                                }
+                                else if (@ViewBag.LRExistCode == null && @ViewBag.LRExistCommercial != null)
+                                {
+                                    <script>document.getElementById('CR_Cas_Sup_Owners_Commercial_Registration_No').focus()</script>
+                                }
+                                else if (@ViewBag.LRExistCode == null && @ViewBag.LRExistCommercial == null && @ViewBag.LRExistAr != null)
+                                {
+                                    <script>document.getElementById('CR_Cas_Sup_Owners_Ar_Long_Name').focus()</script>
+                                }
+                                else if (@ViewBag.LRExistCode == null && @ViewBag.LRExistCommercial == null && @ViewBag.LRExistAr == null && @ViewBag.LRExistEn != null)
+                                {
+                                    <script>document.getElementById('CR_Cas_Sup_Owners_En_Long_Name').focus()</script>
+                                }
+                                else if (@ViewBag.LRExiLRExistCodestAr != null && @ViewBag.LRExistAr != null && @ViewBag.LRExistEn != null && @ViewBag.LRExistCommercial != null)
+                                {
+                                    <script>document.getElementById('CR_Cas_Sup_Owners_Code').focus()</script>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+        window.addEventListener("load", function () {
+
+            if ('@TempData["TempModel"]'=="Added") {
+                toastr.success("تم الحفظ بنجاح");
+            }
+
+            if ('@TempData["TempModel"]'=="Saved") {
+                toastr.success("تم الحفظ بنجاح");
+            }
+
+            if ('@TempData["TempModel"]'=="Holded") {
+                toastr.success("تم التعطيل بنجاح");
+            }
+
+            if ('@TempData["TempModel"]'=="Deleted") {
+                toastr.success("تم الحذف بنجاح");
+            }
+
+            if ('@TempData["TempModel"]' =="Activated") {
+                toastr.success("تم التنشيط بنجاح");
+            }
+
+        });
+</script>
+
+<script>
+
+    function Save() {
+        var st = '@Model.CR_Cas_Sup_Owners_Status';
+        if (st == 'A') {
+            document.getElementById("save").click();
+        } else if (st == 'D') {
+            toastr.info("لايمكن حفظ بيانات مالك محذوف");
+        } else if (st == 'H') {
+            toastr.info("لايمكن حفظ بيانات مالك موقوف");
+        }
+    }
+
+
+
+
+</script>
+<script>
+    var modalConfirm = function (callback) {
+        $("#btn-confirm").on("click", function () {
+            var st = '@Model.CR_Cas_Sup_Owners_Status';
+            var br = '@TempData["BranchCode"]';
+            if (st == 'A') {
+                var CarsNo = '@TempData["CarsNo"]';
+                var x = false;
+                if (br != "100")
+                {
+                    x = true;
+                }
+                else
+                {
+                    toastr.info("لايمكن حذف المالك الرئيسي");
+                    return;
+                }
+
+                if (CarsNo === "True") {
+                    toastr.info("لايمكن حذف مالك له سيارات");
+                    return;
+                } else {
+                    x = true;
+                }
+
+                if (x == true) {
+                    $("#mi-modal").modal('show');
+                }
+            } else if (st == 'D') {
+                $("#mi-modal").modal('show');
+            } else if (st == 'H') {
+                toastr.info("لايمكن حذف مالك موقوف");
+            }
+
+
+           // $("#mi-modal").modal('show');
+
+        });
+        $("#modal-btn-si").on("click", function () {
+            callback(true);
+            $("#mi-modal").modal('hide');
+        });
+        $("#modal-btn-no").on("click", function () {
+            callback(false);
+            $("#mi-modal").modal('hide');
+        });
+    };
+    modalConfirm(function (confirm) {
+        if (confirm) {
+            //Acciones si el usuario confirma
+            $("#form1").submit();
+        } else {
+            //Acciones si el usuario no confirma
+            $("#result").html("canceled");
+        }
+    });
+</script>
+<script>
+    var HoldModal = function (callback) {
+        $("#btn-Hold").on("click", function () {
+            var st = '@Model.CR_Cas_Sup_Owners_Status';
+            var br = '@TempData["BranchCode"]';
+            if (st == 'A') {
+                var CarsNo = '@TempData["CarsNo"]';
+                var x = false;
+                if (br != "100")
+                {
+                    x = true;
+                }
+                else
+                {
+                    toastr.info("لايمكن إيقاف المالك الرئيسي");
+                    return;
+                }
+
+                //if (CarsNo === "True") {
+                //    toastr.info("لايمكن إيقاف مالك له سيارات");
+                //    return;
+                //} else {
+                //    x = true;
+                //}
+
+                if (x == true) {
+                    $("#H-modal").modal('show');
+                }
+            } else if (st == 'H') {
+                $("#H-modal").modal('show');
+            } else if (st == 'D') {
+                toastr.info("لايمكن حذف مالك موقوف");
+            }
+
+        });
+        $("#HoldModal-btn-si").on("click", function () {
+            callback(true);
+            $("#H-modal").modal('hide');
+        });
+        $("#HoldModal-btn-no").on("click", function () {
+            callback(false);
+            $("#H-modal").modal('hide');
+        });
+    };
+    HoldModal(function (confirm) {
+        if (confirm) {
+            //Acciones si el usuario confirma
+            $("#form1").submit();
+        } else {
+            //Acciones si el usuario no confirma
+            $("#result").html("canceled");
+        }
+    });
+</script>

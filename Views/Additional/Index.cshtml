@@ -1,0 +1,317 @@
+﻿@model IEnumerable<RentCar.Models.CR_Mas_Sup_Additional>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Bootstrap_Arabic/bootstrap.min.css" rel="stylesheet" />
+<link href="~/Bootstrap_Arabic/bootstrap-big-grid.min.css" rel="stylesheet" />
+<link href="~/Bootstrap_Arabic/jquery.dataTables.min.css" type="text/css" rel="stylesheet" />
+<link href="~/Bootstrap_Arabic/font-awesome.css" type="text/css" rel="stylesheet" />
+<script src="~/Bootstrap_Arabic/jquery-v1.11.2.js"></script>
+<script src="~/Bootstrap_Arabic/bootstrap.min.js"></script>
+<script src="~/Bootstrap_Arabic/bootstrap.min.js"></script>
+<script src="~/Bootstrap_Arabic/jquery.dataTables.min.js"></script>
+<script src="https://res.cloudinary.com/dxfq3iotg/raw/upload/v1569818907/jquery.table2excel.min.js"></script>
+@*<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">*@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!--content page /**layout**/-->
+<style>
+    #inputtext {
+        width: 250px;
+        height: 30px;
+        margin-right: 293px;
+        margin-left: -5px;
+        float: left;
+        margin-top: 5px;
+        border-color: #4A80B3;
+        border-radius: unset;
+    }
+    #SrchImg {
+        float: left;
+        margin-top: -5px;
+        margin-left: 0px;
+        margin-right: -35px;
+        position: relative;
+    }
+    td {
+        font-family: 'Times New Roman';
+        font-size: 14px;
+        padding: 5px 4px !important;
+        font-weight: 100;
+        color: #73A0C1;
+        border-color: #4A80B3;
+    }
+    th {
+        font-family: 'Times New Roman';
+        font-size: 16px;
+        font-weight: bold;
+        border-color: #4A80B3;
+    }
+    .title_corp {
+        margin-top: -15px;
+    }
+    .table thead {
+        overflow-y: scroll;
+        flex-grow: 1;
+    }
+    .table tr a {
+        text-decoration: none;
+        color: black !important;
+        border-color: #4A80B3;
+    }
+    .table td {
+        color: #083555;
+        border-color: #4A80B3;
+    }
+    .table thead th {
+        color: #124f77;
+        border-color: #4A80B3;
+        text-align: center;
+        background: #D1EAFA;
+        position: sticky;
+        top: 0;
+    }
+    .title_corp {
+        font-family: 'Times New Roman';
+        font-size: 25px;
+    }
+    .subtitle_corp {
+        padding-top: 3px !important;
+        font-family: 'Times New Roman' !important;
+        color: #083555;
+    }
+</style>
+<div class="corp_content">
+    <div class="title_corp">الإضافات / عرض البيانات</div>
+    <div class="subtitle_corp">تمكنك الصفحة من البحث و إضافة سجل جديد و تعديل بيانات سجل</div>
+    <div class="hr_60"></div>
+    <div class="hr_80"></div>
+    <div class="corp_page">
+        <div class="page_content">
+            <form method="post">
+                <div class="form_bg">
+                    <div class="href_layout" style="margin-bottom:7px!important;">
+                        <a href="/Home/index" class="btn_form"><i class="fa fa-times" title="إغلاق"></i></a>
+                        @if (Session["ST_1507_insert"].ToString() == "true")
+                        {
+                            <a href="~/Additional/Create" class="btn_form"><i class="fa fa-plus" title="إضافة سجل جديد"></i></a>
+                        }
+                        else
+                        {
+                            <a href="" class="btn_form" style="cursor:no-drop;"><i class="fa fa-plus" title="إضافة سجل جديد" onclick="javascript:return false;"></i></a>
+                        }
+                        <!--<a id="exporttable" class="btn_form"><i class="fa fa-file"></i></a>-->
+
+                        @if (Session["ST_1507_print"].ToString() == "true")
+                        {
+                            <input type="submit" name="excelCall" title="ترحيل البيانات للإكسل" class="btn_form btn_
+                                   " value="Excel" style="padding-right:4px;" />
+                            <a href="" class="btn_form" title="طباعة" onclick="printDiv()" style=""><i class="fa fa-print"></i></a>
+                        }
+                        else
+                        {
+                            <input type="submit" name="excelCall" title="ترحيل البيانات للإكسل" class="btn_form btn_exel" value="Excel" style="padding-right:4px;cursor:no-drop;" disabled />
+                            <a href="" class="btn_form ii" style="cursor:no-drop;" title="طباعة" onclick="javascript:return false;"><i class="fa fa-print"></i></a>
+                        }
+                        <a href="" class="btn_form" title="بحث متقدم" onclick="javascript:return false;" style=""><i class='fa fa-search'></i></a>
+                        <img src="~/images/srch.png" id="SrchImg" />
+                        <input class="form-control" type="text" id="inputtext" name="TxtSearch" placeholder="بحث..." />
+                        <script>
+                            $(document).ready(function () {
+                                $("#inputtext").on("keyup", function () {
+                                    var value = $(this).val().toLowerCase();
+                                    $("#tbl tr").filter(function () {
+                                        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                                    });
+                                });
+                            });
+                        </script>
+                    </div>
+                    <div class="table-responsive" style="width:820px; height:373px; overflow:auto;border: 1px solid #4A80B3;">
+                        <div id="dtBasicExample_print">
+                            <table class="table table-bordered table-striped ">
+                                <thead>
+                                    <tr>
+                                        <th style="width:10%;">@Html.DisplayNameFor(model => model.CR_Mas_Sup_Additional_Code)</th>
+                                        @if (Session["Language"].ToString() == "1")
+                                        {
+                                            <th style="width:16%;">وصف البند الإضافي</th>
+                                        }
+                                        @if (Session["Language"].ToString() == "2")
+                                        {
+                                            <th style="width:16%;">Additional item description</th>
+                                        }
+                                        @if (Session["Language"].ToString() == "3")
+                                        {
+                                            <th style="width:16%;">Description supplémentaire de l'article</th>
+                                        }
+                                        <th style="width:8%;">@Html.DisplayNameFor(model => model.CR_Mas_Sup_Additional_Status)</th>
+                                        <th style="width:67%;">@Html.DisplayNameFor(model => model.CR_Mas_Sup_Additional_Reasons)</th>
+                                        @*<th>@Html.DisplayNameFor(model => model.CR_Mas_Sup_Group.CR_Mas_Sup_Group_Ar_Name)</th>*@
+                                    </tr>
+                                </thead>
+                                <tbody id="tbl">
+                                    @foreach (var item in Model)
+                                    {
+                                        if (Session["ST_1507_update"].ToString() == "true")
+                                        {
+                                            <tr>
+                                                <td align="center">
+                                                    <a href="~/Additional/edit/@Html.DisplayFor(modelItem => item.CR_Mas_Sup_Additional_Code)">
+                                                        @Html.DisplayFor(modelItem => item.CR_Mas_Sup_Additional_Code)
+                                                    </a>
+                                                </td>
+                                                @if (Session["Language"].ToString() == "1")
+                                                {
+                                                    <td style="padding-right:10px!important;">
+                                                        <a href="~/Additional/edit/@Html.DisplayFor(modelItem => item.CR_Mas_Sup_Additional_Code)">
+                                                            @Html.DisplayFor(modelItem => item.CR_Mas_Sup_Additional_Ar_Name)
+                                                        </a>
+                                                    </td>
+                                                }
+                                                @if (Session["Language"].ToString() == "2")
+                                                {
+                                                    <td style="padding-right:10px!important;">
+                                                        <a href="~/Additional/edit/@Html.DisplayFor(modelItem => item.CR_Mas_Sup_Additional_Code)">
+                                                            @Html.DisplayFor(modelItem => item.CR_Mas_Sup_Additional_En_Name)
+                                                        </a>
+                                                    </td>
+                                                }
+                                                @if (Session["Language"].ToString() == "3")
+                                                {
+                                                    <td style="padding-right:10px!important;">
+                                                        <a href="~/Additional/edit/@Html.DisplayFor(modelItem => item.CR_Mas_Sup_Additional_Code)">
+                                                            @Html.DisplayFor(modelItem => item.CR_Mas_Sup_Additional_Fr_Name)
+                                                        </a>
+                                                    </td>
+                                                }
+                                                <td align="center" style="padding-right:10px;">
+                                                    @*<a href="~/Brand/edit/@Html.DisplayFor(modelItem => item.CR_Mas_Sup_Brand_Code)">@Html.DisplayFor(modelItem => item.CR_Mas_Sup_Brand_Status)</a>*@
+
+                                                    @if (item.CR_Mas_Sup_Additional_Status == "A")
+                                                    {
+                                                        <a href="~/Additional/edit/@Html.DisplayFor(modelItem => item.CR_Mas_Sup_Additional_Code)">نشط</a>
+                                                    }
+                                                    @if (item.CR_Mas_Sup_Additional_Status == "H")
+                                                    {
+                                                        <a href="~/Additional/edit/@Html.DisplayFor(modelItem => item.CR_Mas_Sup_Additional_Code)">موقوف</a>
+                                                    }
+                                                    @if (item.CR_Mas_Sup_Additional_Status == "D")
+                                                    {
+                                                        <a href="~/Additional/edit/@Html.DisplayFor(modelItem => item.CR_Mas_Sup_Additional_Code)">محذوف</a>
+                                                    }
+                                                </td>
+                                                <td>
+                                                    <a href="~/Additional/edit/@Html.DisplayFor(modelItem => item.CR_Mas_Sup_Additional_Code)">
+                                                        @Html.DisplayFor(modelItem => item.CR_Mas_Sup_Additional_Reasons)
+                                                    </a>
+                                                </td>
+                                                @*<td>
+                                                        <a href="~/Additional/edit/@Html.DisplayFor(modelItem => item.CR_Mas_Sup_Additional_Code)">
+                                                            @Html.DisplayFor(modelItem => item.CR_Mas_Sup_Group.CR_Mas_Sup_Group_Ar_Name)
+                                                        </a>
+                                                    </td>*@
+                                                @*<td>
+                                                        @Html.ActionLink("Edit", "Edit", new { id = item.CR_Mas_Sup_Additional_Code }) |
+                                                        @Html.ActionLink("Details", "Details", new { id = item.CR_Mas_Sup_Additional_Code }) |
+                                                        @Html.ActionLink("Delete", "Delete", new { id = item.CR_Mas_Sup_Additional_Code })
+                                                    </td>*@
+                                            </tr>
+                                        }
+                                        else
+                                        {
+                                            <tr>
+                                                <td align="center">
+                                                    @Html.DisplayFor(modelItem => item.CR_Mas_Sup_Additional_Code)
+                                                </td>
+                                                @if (Session["Language"].ToString() == "1")
+                                                {
+                                                    <td style="padding-right:10px!important;">
+                                                        @Html.DisplayFor(modelItem => item.CR_Mas_Sup_Additional_Ar_Name)
+                                                    </td>
+                                                }
+                                                @if (Session["Language"].ToString() == "2")
+                                                {
+                                                    <td style="padding-right:10px!important;">
+                                                        @Html.DisplayFor(modelItem => item.CR_Mas_Sup_Additional_En_Name)
+                                                    </td>
+                                                }
+                                                @if (Session["Language"].ToString() == "3")
+                                                {
+                                                    <td style="padding-right:10px!important;">
+                                                        @Html.DisplayFor(modelItem => item.CR_Mas_Sup_Additional_Fr_Name)
+                                                    </td>
+                                                }
+                                                @if (item.CR_Mas_Sup_Additional_Status == "A")
+                                                {
+                                                    <td align="center" style="padding-right:10px;">
+                                                        نشط
+                                                    </td>
+                                                }
+                                                @if (item.CR_Mas_Sup_Additional_Status == "H")
+                                                {
+                                                    <td align="center" style="padding-right:10px;">
+                                                        موقوف
+                                                    </td>
+                                                }
+                                                @if (item.CR_Mas_Sup_Additional_Status == "D")
+                                                {
+                                                    <td align="center" style="padding-right:10px;">
+                                                        محذوف
+                                                    </td>
+                                                }
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.CR_Mas_Sup_Additional_Reasons)
+                                                </td>
+                                                @*<td>
+                                                        @Html.DisplayFor(modelItem => item.CR_Mas_Sup_Group.CR_Mas_Sup_Group_Ar_Name)
+                                                    </td>*@
+                                                @*<td>
+                                                        @Html.ActionLink("Edit", "Edit", new { id = item.CR_Mas_Sup_Additional_Code }) |
+                                                        @Html.ActionLink("Details", "Details", new { id = item.CR_Mas_Sup_Additional_Code }) |
+                                                        @Html.ActionLink("Delete", "Delete", new { id = item.CR_Mas_Sup_Additional_Code })
+                                                    </td>*@
+                                            </tr>
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        <iframe name="print_frame" width="0" height="0" frameborder="0" src="about:blank"></iframe>
+                        <script>
+                            function printDiv() {
+                                window.frames["print_frame"].document.body.innerHTML = document.getElementById("dtBasicExample_print").innerHTML;
+                                window.frames["print_frame"].window.focus();
+                                window.frames["print_frame"].window.print();
+                            }
+                        </script>
+                        <script>
+                            $(document).ready(function () {
+                                $('#dtBasicExample').DataTable();
+                                $('.dataTables_length').addClass('bs-select');
+                            });
+                            //////$(function () {
+                            //////    $("#exporttable").click(function (e) {
+                            //////        var table = $("#dtBasicExample");
+                            //////        if (table && table.length) {
+                            //////            $(table).table2excel({
+                            //////                exclude: ".noExl",
+                            //////                name: "Excel Document Name",
+                            //////                filename: "BBBootstrap" + new Date().toISOString().replace(/[\-\:\.]/g, "") + ".xls",
+                            //////                fileext: ".xls",
+                            //////                exclude_img: true,
+                            //////                exclude_links: true,
+                            //////                exclude_inputs: true,
+                            //////                preserveColors: false
+                            //////            });
+                            //////        }
+                            //////    });
+                            //////});
+                        </script>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,1157 @@
+﻿@model RentCar.Models.CR_Mas_Com_Lessor
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    #save-btn {
+        margin-right: 10px;
+        background-color: #5bc0de !important;
+        width: 80px;
+        margin-left: 20px;
+        margin-bottom: 10px;
+    }
+
+    #bttn {
+        float: right;
+        width: 80px;
+        background-color: #5bc0de !important;
+        margin-left: 20px;
+    }
+
+    #btn-confirm {
+        float: right;
+        width: 80px;
+        margin-left: 20px;
+    }
+
+    .lbl {
+        margin-right: 30px;
+        font-size: 16px;
+        font-family: 'Times New Roman';
+    }
+
+    .input_form {
+        width: 100% !important;
+    }
+
+    .hidden {
+        display: none
+    }
+
+    .text-danger {
+        font-size: 12px;
+        margin-right: 160px;
+        font-family: 'Times New Roman';
+    }
+
+    .a {
+        float: right;
+        background-color: #5bc0de;
+        width: 80px;
+        height: 25px;
+        padding-top: 5px;
+        padding-right: 10px;
+        font-size: 12px;
+        font-family: times new roman;
+    }
+
+    .texterr {
+        font-family: 'Times New Roman' !important;
+        font-size: 14px !important;
+        color: red !important;
+        margin-right: 40% !important;
+        height: 10px;
+        float: right;
+    }
+
+    #asterisk {
+        color: red;
+        float: right;
+        font-size: 15px !important;
+        margin-right: 130px;
+        margin-top: 5px;
+        position: absolute;
+        font-family: 'Times New Roman';
+    }
+
+    .row {
+        margin-bottom: 10px;
+    }
+
+    .label_form {
+        width: 150px;
+    }
+
+   
+
+    input[type=file] {
+        border-radius: 0px !important;
+        width: 200px;
+        height: 30px;
+        padding-top: 3px;
+        border-color: #F3B161;
+        border-width: 2px;
+        font-family: 'Times New Roman';
+        font-size: 12px;
+        display: -webkit-inline-box !important;
+    }
+
+
+    .zoom {
+        padding: 30px;
+        transition: transform .2s;
+        width: 150px;
+        height: 150px;
+        z-index: 100;
+        position: relative;
+    }
+
+        .zoom:hover {
+            -ms-transform: scale(1.5); /* IE 9 */
+            -webkit-transform: scale(1.5); /* Safari 3-8 */
+            transform: scale(1.5);
+        }
+</style>
+<div class="corp_content">
+    <div class="title_corp" style="margin-top:-15px;"> بيانات الشركات / تعديل</div>
+    <div class="subtitle_corp"> تمكن هذه الصفحة المستخدم من التعديل على بيانات الشركات</div>
+    <div style="float:left; margin-left:50px;margin-top:-85px;" class="zoom">
+
+    </div>
+    <div class="hr_60"></div>
+    <div class="hr_70"></div>
+    <div class="corp_page" style="margin-top:-40px;">
+        <div class="page_content" style="margin-top:10px;">
+            @using (Html.BeginForm("Edit", "Lessor", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-horizontal">
+                    <div>
+                        @if (Model.CR_Mas_Com_Lessor_Logo != null)
+                        {
+                            <img src="@Url.Content(Model.CR_Mas_Com_Lessor_Logo)" id="output" class="zoom" width="120" height="80" style="margin-top:-120px;float:left;margin-left:-25px;width:170px; height:130px;" />
+                        }
+                        else
+                        {
+                            <img id="output" class="zoom" width="120" height="80" style="margin-top:-120px;float:left;margin-left:-25px;width:170px; height:130px;" />
+                        }
+                    </div>
+
+
+                    <div class="row" style="margin-top:0px;">
+                        <div class="col-md-4" style="float:right;padding:0px">
+                            @Html.LabelFor(model => model.CR_Mas_Com_Lessor_Code, "الرمز", htmlAttributes: new { @class = "label_form col-md-2", style = "float:right;width:90px;" })
+                            @Html.TextBoxFor(model => model.CR_Mas_Com_Lessor_Code, htmlAttributes: new { @class = "input_form col-md-4", style = "float:right;margin-right:0px;width:90px!important;", oninput = "this.value=this.value.replace(/[^0-9]/g,'')", autocomplete = "off", @ReadOnly = "ReadOnly" })
+                            <div class="texterr" style="float:right"></div>
+                        </div>
+
+                        <div class="col-md-8" style="float:right;padding:0px;margin-right:0px;">
+                            @Html.LabelFor(model => model.CR_Mas_Com_Lessor_Logo, htmlAttributes: new { @class = "label_form col-md-2", style = "float:right" })
+                            @Html.TextBoxFor(model => model.CR_Mas_Com_Lessor_Logo, htmlAttributes: new { @class = "Hidden" })
+                            <input type="file" name="img" class="form-control" style="float:right;width:390px; object-fit: fill;" accept="image/*" id="file" onchange="loadFile(event)" />
+                            <div class="texterr" style="float:right"></div>
+                        </div>
+                    </div>
+
+
+                    <div class="row" style="margin-top:5px;">
+                        <div class="col-md-8" style="float:right;">
+                            <div class="row">
+                                @Html.LabelFor(model => model.CR_Mas_Com_Lessor_Ar_Long_Name, htmlAttributes: new { @class = "label_form col-md-12", style = "float:right" })
+                                <div class="col-md-12">
+                                    @Html.TextBoxFor(model => model.CR_Mas_Com_Lessor_Ar_Long_Name, htmlAttributes: new { @class = "input_form ", style = "float:right;", onkeyup = "movetoNext('CR_Mas_Com_Lessor_Ar_Short_Name')", autocomplete = "off", onkeypress = "return CheckArabicCharactersOnly(event);", onpaste = "return false;", maxlength = "100" })
+
+                                </div>
+                            </div>
+                            <div class="texterr" style="float:right">@ViewBag.LRExistArLng</div>
+                        </div>
+
+                        <div class="col-md-4" style="float:right;">
+                            <div class="row">
+                                @Html.LabelFor(model => model.CR_Mas_Com_Lessor_Ar_Short_Name, htmlAttributes: new { @class = "label_form col-md-12", style = "float:right;width:200px;" })
+                                <div class="col-md-12">
+                                    @Html.TextBoxFor(model => model.CR_Mas_Com_Lessor_Ar_Short_Name, htmlAttributes: new { @class = "input_form", style = "float:right;", onkeyup = "movetoNext('CR_Mas_Com_Lessor_En_Long_Name')", autocomplete = "off", onkeypress = "return CheckArabicCharactersOnly(event);", onpaste = "return false;", maxlength = "30" })
+                                    <div class="texterr" style="float:right">@ViewBag.LRExistArSh</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row" style="margin-top:5px;">
+                        <div class="col-md-8" style="float:right;">
+                            <div class="row">
+                                @Html.LabelFor(model => model.CR_Mas_Com_Lessor_En_Long_Name, htmlAttributes: new { @class = "label_form col-md-12", style = "float:right" })
+                                <div class="col-md-12">
+                                    @Html.TextBoxFor(model => model.CR_Mas_Com_Lessor_En_Long_Name, htmlAttributes: new { @class = "input_form ", style = "float:right;", onkeyup = "movetoNext('CR_Mas_Com_Lessor_En_Short_Name')", autocomplete = "off", onkeypress = "return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)", onpaste = "return false;", maxlength = "100" })
+
+                                    <div class="texterr" style="float:right">@ViewBag.LRExistEnLng</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4" style="float:right;">
+                            <div class="row">
+                                @Html.LabelFor(model => model.CR_Mas_Com_Lessor_En_Short_Name, htmlAttributes: new { @class = "label_form col-md-12", style = "float:right;" })
+                                <div class="col-md-12">
+                                    @Html.TextBoxFor(model => model.CR_Mas_Com_Lessor_En_Short_Name, htmlAttributes: new { @class = "input_form", style = "float:right;", onkeyup = "movetoNext('CR_Mas_Com_Lessor_Fr_Long_Name')", autocomplete = "off", onkeypress = "return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)", onpaste = "return false;", maxlength = "30" })
+                                    <div class="texterr" style="float:right">@ViewBag.LRExistEnSh</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row" style="margin-top:5px;">
+                        <div class="col-md-8" style="float:right;">
+                            <div class="row">
+                                @Html.LabelFor(model => model.CR_Mas_Com_Lessor_Fr_Long_Name, htmlAttributes: new { @class = "label_form col-md-12", style = "float:right" })
+                                <div class="col-md-12">
+                                    @Html.TextBoxFor(model => model.CR_Mas_Com_Lessor_Fr_Long_Name, htmlAttributes: new { @class = "input_form ", style = "float:right;", autocomplete = "off", oninput = "this.value=this.value.replace(/[^a-zA-Z0-9 àâäèéêëîïôœùûüÿçÀÂÄÈÉÊËÎÏÔŒÙÛÜŸÇ]/g,'')", onkeyup = "movetoNext('CR_Mas_Com_Lessor_Fr_Short_Name')", onpaste = "return false;", maxlength = "100" })
+
+                                    <div class="texterr" style="float:right">@ViewBag.LRExistFrLng</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4" style="float:right;">
+                            <div class="row">
+                                @Html.LabelFor(model => model.CR_Mas_Com_Lessor_Fr_Short_Name, htmlAttributes: new { @class = "label_form col-md-12", style = "float:right;" })
+                                <div class="col-md-12">
+                                    @Html.TextBoxFor(model => model.CR_Mas_Com_Lessor_Fr_Short_Name, htmlAttributes: new { @class = "input_form", style = "float:right;", onkeyup = "movetoNext('CR_Mas_Com_Lessor_Government_No')", autocomplete = "off", oninput = "this.value=this.value.replace(/[^a-zA-Z0-9 àâäèéêëîïôœùûüÿçÀÂÄÈÉÊËÎÏÔŒÙÛÜŸÇ]/g,'')", onpaste = "return false;", maxlength = "30" })
+                                    <div class="texterr" style="float:right">@ViewBag.LRExistFrSh</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
+                    <div class="row" style="margin-top:5px;">
+                        <div class="col-md-4" style="float:right;">
+                            <div class="row">
+                                @Html.LabelFor(model => model.CR_Mas_Com_Lessor_Government_No, htmlAttributes: new { @class = "label_form col-md-12", style = "float:right" })
+                                <div class="col-md-12">
+                                    @Html.TextBoxFor(model => model.CR_Mas_Com_Lessor_Government_No, htmlAttributes: new { @class = "input_form ", style = "float:right;width:250px;", onkeyup = "movetoNext('CR_Mas_Com_Lessor_Tax_Number')", autocomplete = "off", oninput = "this.value=this.value.replace(/[^0-9]/g,'')", onpaste = "return false;", maxlength = "10" })
+
+                                    <div class="texterr" style="float:right">@ViewBag.GovNumber</div>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                        <div class="col-md-4" style="float:right;">
+                            <div class="row">
+                                @Html.LabelFor(model => model.CR_Mas_Com_Lessor_Tax_Number, htmlAttributes: new { @class = "label_form col-md-12", style = "float:right" })
+                                <div class="col-md-12">
+                                    @Html.TextBoxFor(model => model.CR_Mas_Com_Lessor_Tax_Number, htmlAttributes: new { @class = "input_form ", style = "float:right;width:250px;", onkeyup = "movetoNext('CR_Mas_Com_Lessor_Commercial_Registration_No')", autocomplete = "off", onkeypress = "return CheckArabicCharactersOnly(event);", onpaste = "return false;", maxlength = "10" })
+
+                                    <div class="texterr" style="float:right"></div>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="col-md-4" style="float:right;">
+                            <div class="row">
+                                @Html.LabelFor(model => model.CR_Mas_Com_Lessor_Commercial_Registration_No, htmlAttributes: new { @class = "label_form col-md-12", style = "float:right" })
+                                <div class="col-md-12">
+                                    @Html.TextBoxFor(model => model.CR_Mas_Com_Lessor_Commercial_Registration_No, htmlAttributes: new { @class = "input_form ", style = "float:right;width:250px;", onkeyup = "movetoNext('CR_Mas_Com_Lessor_Tolk_Free')", autocomplete = "off", onkeypress = "return CheckArabicCharactersOnly(event);", onpaste = "return false;", maxlength = "10" })
+
+                                    <div class="texterr" style="float:right"></div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+
+
+                    <div class="row" style="margin-top:5px;">
+                        <div class="col-md-4" style="float:right;">
+                            <div class="row">
+                                @Html.LabelFor(model => model.CR_Mas_Com_Lessor_Tolk_Free, htmlAttributes: new { @class = "label_form col-md-12", style = "float:right;width:200px;" })
+                                <div class="col-md-12">
+                                    @Html.TextBoxFor(model => model.CR_Mas_Com_Lessor_Tolk_Free, htmlAttributes: new { @class = "input_form ", style = "float:right;", onkeyup = "movetoNext('CR_Mas_Com_Lessor_Email')", autocomplete = "off", onkeypress = "return CheckArabicCharactersOnly(event);", onpaste = "return false;", maxlength = "15" })
+
+                                    <div class="texterr" style="float:right"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-8" style="float:right;">
+                            <div class="row">
+                                @Html.LabelFor(model => model.CR_Mas_Com_Lessor_Email, htmlAttributes: new { @class = "label_form col-md-12", style = "float:right;width:200px;" })
+                                <div class="col-md-12">
+                                    @Html.TextBoxFor(model => model.CR_Mas_Com_Lessor_Email, htmlAttributes: new { @class = "input_form", style = "float:right;", onkeyup = "movetoNext('CR_Mas_Com_Lessor_Twiter')", autocomplete = "off", onpaste = "return false;", maxlength = "30" })
+                                    <div class="texterr" style="float:right"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                    <div class="row" style="margin-top:5px;">
+                        <div class="col-md-4" style="float:right;">
+                            <div class="row">
+                                @Html.LabelFor(model => model.CR_Mas_Com_Lessor_Twiter, htmlAttributes: new { @class = "label_form col-md-12", style = "float:right;width:200px;" })
+                                <div class="col-md-12">
+                                    @Html.TextBoxFor(model => model.CR_Mas_Com_Lessor_Twiter, htmlAttributes: new { @class = "input_form ", style = "float:right;width:250px;", onkeyup = "movetoNext('CR_Mas_Com_Lessor_FaceBook')", autocomplete = "off", onkeypress = "return CheckArabicCharactersOnly(event);", maxlength = "30" })
+
+                                    <div class="texterr" style="float:right"></div>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                        <div class="col-md-4" style="float:right;">
+                            <div class="row">
+                                @Html.LabelFor(model => model.CR_Mas_Com_Lessor_FaceBook, htmlAttributes: new { @class = "label_form col-md-12", style = "float:right;width:200px;" })
+                                <div class="col-md-12">
+                                    @Html.TextBoxFor(model => model.CR_Mas_Com_Lessor_FaceBook, htmlAttributes: new { @class = "input_form ", style = "float:right;width:250px;", onkeyup = "movetoNext('CR_Mas_Com_Lessor_Instagram')", autocomplete = "off", onkeypress = "return CheckArabicCharactersOnly(event);", maxlength = "30" })
+
+                                    <div class="texterr" style="float:right"></div>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="col-md-4" style="float:right;">
+                            <div class="row">
+                                @Html.LabelFor(model => model.CR_Mas_Com_Lessor_Instagram, htmlAttributes: new { @class = "label_form col-md-12", style = "float:right;width:200px;" })
+                                <div class="col-md-12">
+                                    @Html.TextBoxFor(model => model.CR_Mas_Com_Lessor_Instagram, htmlAttributes: new { @class = "input_form ", style = "float:right;width:250px;", onkeyup = "movetoNext('CR_Mas_Com_Lessor_Signature_Ar_Director_Name')", autocomplete = "off", onkeypress = "return CheckArabicCharactersOnly(event);", maxlength = "30" })
+
+                                    <div class="texterr" style="float:right"></div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                    <div class="row" style="margin-top:5px;">
+                        <div class="col-md-4" style="float:right;">
+                            <div class="row">
+                                @Html.LabelFor(model => model.CR_Mas_Com_Lessor_Signature_Ar_Director_Name, htmlAttributes: new { @class = "label_form col-md-12", style = "float:right;width:200px;" })
+                                <div class="col-md-12">
+                                    @Html.TextBoxFor(model => model.CR_Mas_Com_Lessor_Signature_Ar_Director_Name, htmlAttributes: new { @class = "input_form ", style = "float:right;width:250px;", onkeyup = "movetoNext('CR_Mas_Com_Lessor_Signature_En_Director_Name')", autocomplete = "off", onkeypress = "return CheckArabicCharactersOnly(event);", maxlength = "30" })
+
+                                    <div class="texterr" style="float:right"></div>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                        <div class="col-md-4" style="float:right;">
+                            <div class="row">
+                                @Html.LabelFor(model => model.CR_Mas_Com_Lessor_Signature_En_Director_Name, htmlAttributes: new { @class = "label_form col-md-12", style = "float:right;width:200px;" })
+                                <div class="col-md-12">
+                                    @Html.TextBoxFor(model => model.CR_Mas_Com_Lessor_Signature_En_Director_Name, htmlAttributes: new { @class = "input_form ", style = "float:right;width:250px;", onkeyup = "movetoNext('CR_Mas_Com_Lessor_Signature_Fr_Director_Name')", autocomplete = "off", onkeypress = "return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)", maxlength = "30" })
+
+                                    <div class="texterr" style="float:right"></div>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="col-md-4" style="float:right;">
+                            <div class="row">
+                                @Html.LabelFor(model => model.CR_Mas_Com_Lessor_Signature_Fr_Director_Name, htmlAttributes: new { @class = "label_form col-md-12", style = "float:right;width:200px;" })
+                                <div class="col-md-12">
+                                    @Html.TextBoxFor(model => model.CR_Mas_Com_Lessor_Signature_Fr_Director_Name, htmlAttributes: new { @class = "input_form ", style = "float:right;width:250px;", onkeyup = "movetoNext('CR_Mas_Com_Lessor_Communication_Ar_Officer_Name')", autocomplete = "off", oninput = "this.value=this.value.replace(/[^a-zA-Z0-9 àâäèéêëîïôœùûüÿçÀÂÄÈÉÊËÎÏÔŒÙÛÜŸÇ]/g,'')", maxlength = "30" })
+
+                                    <div class="texterr" style="float:right"></div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+
+                    <div class="row" style="margin-top:5px;">
+                        <div class="col-md-4" style="float:right;">
+                            <div class="row">
+                                @Html.LabelFor(model => model.CR_Mas_Com_Lessor_Communication_Ar_Officer_Name, htmlAttributes: new { @class = "label_form col-md-12", style = "float:right;width:200px;" })
+                                <div class="col-md-12">
+                                    @Html.TextBoxFor(model => model.CR_Mas_Com_Lessor_Communication_Ar_Officer_Name, htmlAttributes: new { @class = "input_form ", style = "float:right;width:250px;", onkeyup = "movetoNext('CR_Mas_Com_Lessor_Communication_En_Officer_Name')", autocomplete = "off", onkeypress = "return CheckArabicCharactersOnly(event);", maxlength = "30" })
+
+                                    <div class="texterr" style="float:right"></div>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                        <div class="col-md-4" style="float:right;">
+                            <div class="row">
+                                @Html.LabelFor(model => model.CR_Mas_Com_Lessor_Communication_En_Officer_Name, htmlAttributes: new { @class = "label_form col-md-12", style = "float:right;width:200px;" })
+                                <div class="col-md-12">
+                                    @Html.TextBoxFor(model => model.CR_Mas_Com_Lessor_Communication_En_Officer_Name, htmlAttributes: new { @class = "input_form ", style = "float:right;width:250px;", onkeyup = "movetoNext('CR_Mas_Com_Lessor_Communication_Fr_Officer_Name')", autocomplete = "off", onkeypress = "return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)", maxlength = "30" })
+
+                                    <div class="texterr" style="float:right"></div>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="col-md-4" style="float:right;">
+                            <div class="row">
+                                @Html.LabelFor(model => model.CR_Mas_Com_Lessor_Communication_Fr_Officer_Name, htmlAttributes: new { @class = "label_form col-md-12", style = "float:right;width:200px;" })
+                                <div class="col-md-12">
+                                    @Html.TextBoxFor(model => model.CR_Mas_Com_Lessor_Communication_Fr_Officer_Name, htmlAttributes: new { @class = "input_form ", style = "float:right;width:250px;", onkeyup = "movetoNext('CR_Mas_Com_Lessor_Communication_Officer_Mobile')", autocomplete = "off", oninput = "this.value=this.value.replace(/[^a-zA-Z0-9 àâäèéêëîïôœùûüÿçÀÂÄÈÉÊËÎÏÔŒÙÛÜŸÇ]/g,'')", maxlength = "30" })
+
+                                    <div class="texterr" style="float:right"></div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+
+
+                    <div class="row" style="margin-top:5px;">
+                        <div class="col-md-4" style="float:right;">
+                            <div class="row">
+                                @Html.LabelFor(model => model.CR_Mas_Com_Lessor_Communication_Officer_Mobile, htmlAttributes: new { @class = "label_form col-md-12", style = "float:right" })
+                                <div class="col-md-12">
+                                    @Html.TextBoxFor(model => model.CR_Mas_Com_Lessor_Communication_Officer_Mobile, htmlAttributes: new { @class = "input_form ", style = "float:right;", onkeyup = "movetoNext('CR_Mas_Com_Lessor_Communication_Officer_Emaile')", autocomplete = "off", oninput = "this.value=this.value.replace(/[^0-9]/g,'')", maxlength = "10" })
+
+                                    <div class="texterr" style="float:right"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-8" style="float:right;">
+                            <div class="row">
+                                @Html.LabelFor(model => model.CR_Mas_Com_Lessor_Communication_Officer_Emaile, htmlAttributes: new { @class = "label_form col-md-12", style = "float:right;width:200px;" })
+                                <div class="col-md-12">
+                                    @Html.TextBoxFor(model => model.CR_Mas_Com_Lessor_Communication_Officer_Emaile, htmlAttributes: new { @class = "input_form", style = "float:right;", onkeyup = "movetoNext('CR_MAS_SUP_City_Code')", autocomplete = "off", onkeypress = "return CheckArabicCharactersOnly(event);", maxlength = "30" })
+                                    <div class="texterr" style="float:right"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="row" style="margin-top:5px;">
+                        <div class="col-md-6" style="float:right;">
+                            <div class="row">
+                                @Html.LabelFor(model => model.CR_Mas_Com_Lessor_Stamp, htmlAttributes: new { @class = "label_form col-md-12", style = "float:right" })
+                                <div class="col-md-12">
+                                    @*@Html.TextBoxFor(model => model.CR_Mas_Com_Lessor_Stamp, htmlAttributes: new { @class = "input_form ", style = "float:right;", autocomplete = "off" })*@
+                                    @Html.TextBoxFor(model => model.CR_Mas_Com_Lessor_Stamp, htmlAttributes: new { @class = "Hidden" })
+                                    <input type="file" name="imgStamp" class="form-control" style="float:right;width:250px; object-fit: fill;" accept="image/*" id="file" onchange="loadFilestamp(event)" />
+                                    <div class="texterr" style="float:right"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+
+                            @if (Model.CR_Mas_Com_Lessor_Stamp != null)
+                            {
+                                <img src="@Url.Content(Model.CR_Mas_Com_Lessor_Stamp)" id="stamp" class="zoom" width="120" height="80" style="margin-top:-10px;float:right;margin-right:-160px;width:150px; height:120px;" />
+                            }
+                            else
+                            {
+                                <img id="stamp" class="zoom" width="120" height="80" style="margin-top:-10px;float:right;margin-right:-160px;width:150px; height:120px;" />
+                            }
+                        </div>
+
+
+                        <div class="col-md-6" style="float:right;">
+                            <div class="row">
+                                @Html.LabelFor(model => model.CR_Mas_Com_Lessor_Signature_Director, htmlAttributes: new { @class = "label_form col-md-12", style = "float:right;" })
+                                <div class="col-md-12">
+                                    @*@Html.TextBoxFor(model => model.CR_Mas_Com_Lessor_Signature_Director, htmlAttributes: new { @class = "input_form", style = "float:right;", autocomplete = "off" })*@
+                                    @Html.TextBoxFor(model => model.CR_Mas_Com_Lessor_Signature_Director, htmlAttributes: new { @class = "Hidden" })
+                                    <input type="file" name="imgDirector" class="form-control" style="float:right;width:250px; object-fit: fill;" accept="image/*" id="file" onchange="loadFilesignature(event)" />
+                                    <div class="texterr" style="float:right"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+
+                        @if (Model.CR_Mas_Com_Lessor_Signature_Director != null)
+                        {
+                            <img src="@Url.Content(Model.CR_Mas_Com_Lessor_Signature_Director)" id="signature" class="zoom" width="120" height="80" style="margin-top:-130px;float:left;margin-left:-10px;width:150px; height:120px;" />
+                        }
+                        else
+                        {
+                            <img id="signature" class="zoom" width="120" height="80" style="margin-top:-130px;float:left;margin-left:-10px;width:150px; height:120px;" />
+                        }
+                    </div>
+
+
+                    <div class="row" style="margin-top:5px;">
+                        <div class="col-md-6" style="float:right;">
+                            <div class="row">
+                                <label style="float: right" class="label_form col-md-12">كرت العقد</label>
+                                <div class="col-md-12">
+                                    @*@Html.TextBoxFor(model => model.CR_Mas_Com_Lessor_Stamp, htmlAttributes: new { @class = "input_form ", style = "float:right;", autocomplete = "off" })*@
+                                    @Html.TextBoxFor(model => model.CR_Mas_Com_Lessor_Contract_Card, htmlAttributes: new { @class = "Hidden" })
+                                    <input type="file" name="imgContractCard" class="form-control" style="float:right;width:250px; object-fit: fill;" accept="image/*" id="file" onchange="loadCard(event)" />
+                                    <div class="texterr" style="float:right"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+
+                            @if (Model.CR_Mas_Com_Lessor_Contract_Card != null)
+                            {
+                                <img src="@Url.Content(Model.CR_Mas_Com_Lessor_Contract_Card)" id="Card" class="zoom" width="120" height="80" style="margin-top:-10px;float:right;margin-right:-160px;width:150px; height:120px;" />
+                            }
+                            else
+                            {
+                                <img id="Card" class="zoom" width="120" height="80" style="margin-top:-10px;float:right;margin-right:-160px;width:150px; height:120px;" />
+                            }
+                        </div>
+
+
+                        <div class="col-md-6" style="float:right;">
+                            <div class="row">
+                                <label style="float: right" class="label_form col-md-12">شروط العقد</label>
+                                <div class="col-md-12">
+
+                                    @Html.TextBoxFor(model => model.CR_Mas_Com_Lessor_Contract_Conditions, htmlAttributes: new { @class = "Hidden" })
+                                    <input type="file" name="ImgContractConditions" class="form-control" style="float:right;width:250px; object-fit: fill;" accept="image/*" id="file" onchange="loadConditions(event)" />
+                                    <div class="texterr" style="float:right"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+
+                        @if (Model.CR_Mas_Com_Lessor_Contract_Conditions != null)
+                        {
+                            <img src="@Url.Content(Model.CR_Mas_Com_Lessor_Contract_Conditions)" id="Conditions" class="zoom" width="120" height="80" style="margin-top:-130px;float:left;margin-left:-10px;width:150px; height:120px;" />
+                        }
+                        else
+                        {
+                            <img id="Conditions" class="zoom" width="120" height="80" style="margin-top:-130px;float:left;margin-left:-10px;width:150px; height:120px;" />
+                        }
+                    </div>
+
+                    @*<div class="row" style="margin-top:0px;">
+                    <div class="col-md-8" style="float:right;">
+
+                        @Html.LabelFor(model => model.CR_Mas_Com_Lessor_Sector, htmlAttributes: new { @class = "label_form col-md-6", style = "float:right" })
+
+                        @Html.TextBoxFor(model => model.CR_Mas_Com_Lessor_Sector, htmlAttributes: new { @class = "input_form ", style = "float:right;width:250px;", autocomplete = "off" })
+
+                        <div class="texterr" style="float:right"></div>
+
+
+                    </div>
+                </div>*@
+
+                    <div class="row" style="margin-top:0px;" hidden="hidden">
+                        <div class="col-md-8" style="float:right;">
+
+                            @Html.LabelFor(model => model.CR_Mas_Com_Lessor_Location_Coordinates, htmlAttributes: new { @class = "label_form col-md-6", style = "float:right" })
+
+                            @Html.TextBoxFor(model => model.CR_Mas_Com_Lessor_Location_Coordinates, htmlAttributes: new { @class = "input_form ", style = "float:right;width:250px;", onkeyup = "movetoNext('CR_MAS_SUP_City_Code')", autocomplete = "off", onkeypress = "return CheckArabicCharactersOnly(event);" })
+
+                            <div class="texterr" style="float:right"></div>
+                            @*<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d463879.2652764867!2d46.542336072010976!3d24.724931561389457!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e2f03890d489399%3A0xba974d1c98e79fd5!2sRiyadh%2011564!5e0!3m2!1sen!2ssa!4v1610218629689!5m2!1sen!2ssa" width="100%" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>*@
+
+                        </div>
+                    </div>
+
+
+
+
+
+
+                    <div class="form-group" hidden="hidden">
+                        @Html.LabelFor(model => model.CR_Mas_Com_Lessor_Status, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.CR_Mas_Com_Lessor_Status, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.CR_Mas_Com_Lessor_Status, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group" hidden="hidden">
+                        @Html.LabelFor(model => model.CR_Mas_Com_Lessor_Reasons, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.CR_Mas_Com_Lessor_Reasons, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.CR_Mas_Com_Lessor_Reasons, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+
+                    <hr style="color:red;border-top:2px solid #88ACCE;padding-right:0px;margin-right:-20px;width:845px;" />
+
+
+
+
+
+                    <div class="row" style="margin-top:5px;">
+                        <div class="col-md-4" style="float:right;">
+                            <div class="row">
+                                <label class="label_form col-md-12" style="float:right;">مدينة مقر الشركة</label>
+                                <div class="col-md-12">
+                                    @Html.DropDownList("CR_MAS_SUP_City_Code", null, "--- الرجاء إختر المدينة ---", new { @class = "input_form", style = "float:right;width:250px", onkeyup = "movetoNext('CR_MAS_SUP_Region_Ar_Name')" })
+                                    <div class="texterr" style="float:right"></div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-4" style="float:right;">
+                            <div class="row">
+                                <label class="label_form col-md-12" style="float:right;"> إسم المنطقة</label>
+                                <div class="col-md-12">
+                                    <input autocomplete="no" class="input_form " id="CR_MAS_SUP_Region_Ar_Name" name="CR_MAS_SUP_Region_Ar_Name" onkeypress="return CheckArabicCharactersOnly(event);" onkeyup="movetoNext('CR_Mas_Address_Ar_District')" style="float:right; width:250px;" type="text" readonly="readonly" value="@ViewBag.Region" readonly>
+                                    <div class="texterr" style="float:right"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row" style="margin-top:5px;">
+                        <div class="col-md-4" style="float:right;">
+                            <div class="row">
+                                <label id="" name="" class="label_form col-md-12" style="float:right;width:200px;">إسم الحي عربي</label>
+                                <div class="col-md-12">
+                                    <input autocomplete="no" class="input_form " id="CR_Mas_Address_Ar_District" name="CR_Mas_Address_Ar_District" onkeypress="return CheckArabicCharactersOnly(event);" onkeyup="movetoNext('CR_Mas_Address_En_District')" style="float:right; width:250px;" type="text" value="@ViewBag.DistrictAr" readonly>
+                                    <div class="texterr" style="float:right">@ViewBag.ArDistrict</div>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                        <div class="col-md-4" style="float:right;">
+                            <div class="row">
+                                <label id="" name="" class="label_form col-md-12" style="float:right;width:200px;">إسم الحي إنجليزي</label>
+                                <div class="col-md-12">
+                                    <input autocomplete="no" class="input_form " id="CR_Mas_Address_En_District" name="CR_Mas_Address_En_District" onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)" onkeyup="movetoNext('CR_Mas_Address_Fr_District')" style="float:right; width:250px;" type="text" value="@ViewBag.DistrictEn" readonly>
+
+                                    <div class="texterr" style="float:right">@ViewBag.EnDistrict</div>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                        <div class="col-md-4" style="float:right;">
+                            <div class="row">
+                                <label id="" name="" class="label_form col-md-12" style="float:right;width:200px;">إسم الحي فرنسي</label>
+                                <div class="col-md-12">
+                                    <input autocomplete="no" class="input_form " id="CR_Mas_Address_Fr_District" name="CR_Mas_Address_Fr_District" oninput="this.value=this.value.replace(/[^a-zA-Z0-9 àâäèéêëîïôœùûüÿçÀÂÄÈÉÊËÎÏÔŒÙÛÜŸÇ]/g,'')" onkeyup="movetoNext('CR_Mas_Address_Ar_Street')" style="float:right; width:250px;" type="text" value="@ViewBag.DistrictFr" readonly>
+
+                                    <div class="texterr" style="float:right">@ViewBag.FrDistrict</div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+
+                    <div class="row" style="margin-top:5px;">
+                        <div class="col-md-4" style="float:right;">
+                            <div class="row">
+                                <label id="" name="" class="label_form col-md-12" style="float:right;width:200px;">إسم الشارع عربي</label>
+                                <div class="col-md-12">
+                                    <input autocomplete="no" class="input_form " id="CR_Mas_Address_Ar_Street" name="CR_Mas_Address_Ar_Street" onkeypress="return CheckArabicCharactersOnly(event);" onkeyup="movetoNext('CR_Mas_Address_En_Street')" style="float:right; width:250px;" type="text" value="@ViewBag.StreetAr" readonly>
+
+                                    <div class="texterr" style="float:right">@ViewBag.ArStreet</div>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                        <div class="col-md-4" style="float:right;">
+                            <div class="row">
+                                <label id="" name="" class="label_form col-md-12" style="float:right;width:200px;">إسم الشارع إنجليزي</label>
+                                <div class="col-md-12">
+                                    <input autocomplete="no" class="input_form " id="CR_Mas_Address_En_Street" name="CR_Mas_Address_En_Street" onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)" onkeyup="movetoNext('CR_Mas_Address_Fr_Street')" style="float:right; width:250px;" type="text" value="@ViewBag.StreetEn" readonly>
+
+
+                                    <div class="texterr" style="float:right">@ViewBag.EnStreet</div>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                        <div class="col-md-4" style="float:right;">
+                            <div class="row">
+                                <label id="" name="" class="label_form col-md-12" style="float:right;width:200px;">إسم الشارع فرنسي</label>
+                                <div class="col-md-12">
+                                    <input autocomplete="no" class="input_form " id="CR_Mas_Address_Fr_Street" name="CR_Mas_Address_Fr_Street" oninput="this.value=this.value.replace(/[^a-zA-Z0-9 àâäèéêëîïôœùûüÿçÀÂÄÈÉÊËÎÏÔŒÙÛÜŸÇ]/g,'')" onkeyup="movetoNext('CR_Mas_Address_Building')" style="float:right; width:250px;" type="text" value="@ViewBag.StreetFr" readonly>
+                                    <div class="texterr" style="float:right">@ViewBag.FrStreet</div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                    <div class="row" style="margin-top:5px;">
+                        <div class="col-md-4" style="float:right;">
+                            <div class="row">
+                                <label class="label_form col-md-12" style="float:right;">رقم المبنى</label>
+                                <div class="col-md-12">
+                                    <input autocomplete="no" class="input_form " id="CR_Mas_Address_Building" name="CR_Mas_Address_Building" oninput="this.value=this.value.replace(/[^0-9]/g,'')" onkeyup="movetoNext('CR_Mas_Address_Unit_No')" style="float:right; width:250px;" type="text" value="@ViewBag.BuildingNumber" readonly>
+                                    <div class="texterr" style="float:right">@ViewBag.BuildingNo</div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-4" style="float:right;">
+                            <div class="row">
+                                <label class="label_form col-md-12" style="float:right;"> رقم الوحدة</label>
+                                <div class="col-md-12">
+
+                                    <input autocomplete="no" class="input_form " id="CR_Mas_Address_Unit_No" name="CR_Mas_Address_Unit_No" oninput="this.value=this.value.replace(/[^0-9]/g,'')" onkeyup="movetoNext('CR_Mas_Address_Zip_Code')" style="float:right; width:250px;" type="text" value="@ViewBag.UnitNumber" readonly>
+                                    <div class="texterr" style="float:right"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="row" style="margin-top:5px;">
+                        <div class="col-md-4" style="float:right;">
+                            <div class="row">
+                                <label class="label_form col-md-12" style="float:right;">الرمز البريدي</label>
+                                <div class="col-md-12">
+
+                                    <input autocomplete="no" class="input_form " id="CR_Mas_Address_Zip_Code" name="CR_Mas_Address_Zip_Code" oninput="this.value=this.value.replace(/[^0-9]/g,'')" onkeyup="movetoNext('CR_Mas_Address_Additional_Numbers')" style="float:right; width:250px;" type="text" value="@ViewBag.ZipCode" readonly>
+                                    <div class="texterr" style="float:right"></div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-4" style="float:right;">
+                            <div class="row">
+                                <label class="label_form col-md-12" style="float:right;"> الرقم الإضافي</label>
+                                <div class="col-md-12">
+                                    <input autocomplete="no" class="input_form " id="CR_Mas_Address_Additional_Numbers" name="CR_Mas_Address_Additional_Numbers" oninput="this.value=this.value.replace(/[^0-9]/g,'')" onkeyup="movetoNext('add_btn')" style="float:right; width:250px;" type="text" value="@ViewBag.AdditionalNumber" readonly>
+
+                                    <div class="texterr" style="float:right"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @*<div class="row" style="margin-top:0px;">
+                    <div class="col-md-4" style="float:right;padding:0px">
+                        @Html.LabelFor(model => model.CR_Mas_Com_Lessor_Code, "الرمز", htmlAttributes: new { @class = "label_form col-md-2", style = "float:right;width:90px;" })
+                        @Html.TextBoxFor(model => model.CR_Mas_Com_Lessor_Code, htmlAttributes: new { @class = "input_form col-md-4", style = "float:right;margin-right:0px;width:90px!important;", oninput = "this.value=this.value.replace(/[^0-9]/g,'')", autocomplete = "off", @ReadOnly = "ReadOnly" })
+                        <div class="texterr" style="float:right"></div>
+                    </div>
+
+                    <div class="col-md-8" style="float:right;padding:0px;margin-right:0px;">
+                        @Html.LabelFor(model => model.CR_Mas_Com_Lessor_Logo, htmlAttributes: new { @class = "label_form col-md-2", style = "float:right" })
+                        <input type="file" name="img" class="form-control" style="float:right;width:390px; object-fit: fill;" accept="image/*" id="file" onchange="loadFile(event)" />
+                        <div class="texterr" style="float:right"></div>
+                    </div>
+                </div>
+
+                <div class="row" style="margin-top:5px;">
+                    <div class="col-md-8" style="float:right;">
+                        <div class="row">
+                            @Html.LabelFor(model => model.CR_Mas_Com_Lessor_Ar_Long_Name, htmlAttributes: new { @class = "label_form col-md-12", style = "float:right" })
+                            <div class="col-md-12">
+                                @Html.TextBoxFor(model => model.CR_Mas_Com_Lessor_Ar_Long_Name, htmlAttributes: new { @class = "input_form ", style = "float:right;", onkeyup = "movetoNext('CR_Mas_Com_Lessor_Ar_Short_Name')", autocomplete = "off", onkeypress = "return CheckArabicCharactersOnly(event);", onpaste = "return false;" })
+
+                            </div>
+                        </div>
+                        <div class="texterr" style="float:right">@ViewBag.LRExistArLng</div>
+                    </div>
+
+                    <div class="col-md-4" style="float:right;">
+                        <div class="row">
+                            @Html.LabelFor(model => model.CR_Mas_Com_Lessor_Ar_Short_Name, htmlAttributes: new { @class = "label_form col-md-12", style = "float:right;width:200px;" })
+                            <div class="col-md-12">
+                                @Html.TextBoxFor(model => model.CR_Mas_Com_Lessor_Ar_Short_Name, htmlAttributes: new { @class = "input_form", style = "float:right;", onkeyup = "movetoNext('CR_Mas_Com_Lessor_En_Long_Name')", autocomplete = "off", onkeypress = "return CheckArabicCharactersOnly(event);", onpaste = "return false;" })
+                                <div class="texterr" style="float:right">@ViewBag.LRExistArSh</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CR_Mas_Com_Lessor_En_Long_Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.CR_Mas_Com_Lessor_En_Long_Name, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.CR_Mas_Com_Lessor_En_Long_Name, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CR_Mas_Com_Lessor_En_Short_Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.CR_Mas_Com_Lessor_En_Short_Name, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.CR_Mas_Com_Lessor_En_Short_Name, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CR_Mas_Com_Lessor_Fr_Long_Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.CR_Mas_Com_Lessor_Fr_Long_Name, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.CR_Mas_Com_Lessor_Fr_Long_Name, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CR_Mas_Com_Lessor_Fr_Short_Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.CR_Mas_Com_Lessor_Fr_Short_Name, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.CR_Mas_Com_Lessor_Fr_Short_Name, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CR_Mas_Com_Lessor_Location_Coordinates, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.CR_Mas_Com_Lessor_Location_Coordinates, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.CR_Mas_Com_Lessor_Location_Coordinates, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CR_Mas_Com_Lessor_Commercial_Registration_No, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.CR_Mas_Com_Lessor_Commercial_Registration_No, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.CR_Mas_Com_Lessor_Commercial_Registration_No, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CR_Mas_Com_Lessor_Sector, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.CR_Mas_Com_Lessor_Sector, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.CR_Mas_Com_Lessor_Sector, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CR_Mas_Com_Lessor_Government_No, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.CR_Mas_Com_Lessor_Government_No, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.CR_Mas_Com_Lessor_Government_No, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CR_Mas_Com_Lessor_Tax_Number, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.CR_Mas_Com_Lessor_Tax_Number, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.CR_Mas_Com_Lessor_Tax_Number, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CR_Mas_Com_Lessor_Communication_Ar_Officer_Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.CR_Mas_Com_Lessor_Communication_Ar_Officer_Name, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.CR_Mas_Com_Lessor_Communication_Ar_Officer_Name, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CR_Mas_Com_Lessor_Communication_En_Officer_Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.CR_Mas_Com_Lessor_Communication_En_Officer_Name, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.CR_Mas_Com_Lessor_Communication_En_Officer_Name, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CR_Mas_Com_Lessor_Communication_Fr_Officer_Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.CR_Mas_Com_Lessor_Communication_Fr_Officer_Name, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.CR_Mas_Com_Lessor_Communication_Fr_Officer_Name, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CR_Mas_Com_Lessor_Communication_Officer_Emaile, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.CR_Mas_Com_Lessor_Communication_Officer_Emaile, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.CR_Mas_Com_Lessor_Communication_Officer_Emaile, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CR_Mas_Com_Lessor_Communication_Officer_Mobile, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.CR_Mas_Com_Lessor_Communication_Officer_Mobile, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.CR_Mas_Com_Lessor_Communication_Officer_Mobile, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CR_Mas_Com_Lessor_Tolk_Free, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.CR_Mas_Com_Lessor_Tolk_Free, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.CR_Mas_Com_Lessor_Tolk_Free, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CR_Mas_Com_Lessor_Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.CR_Mas_Com_Lessor_Email, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.CR_Mas_Com_Lessor_Email, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CR_Mas_Com_Lessor_Twiter, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.CR_Mas_Com_Lessor_Twiter, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.CR_Mas_Com_Lessor_Twiter, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CR_Mas_Com_Lessor_FaceBook, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.CR_Mas_Com_Lessor_FaceBook, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.CR_Mas_Com_Lessor_FaceBook, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CR_Mas_Com_Lessor_Instagram, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.CR_Mas_Com_Lessor_Instagram, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.CR_Mas_Com_Lessor_Instagram, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CR_Mas_Com_Lessor_Stamp, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.CR_Mas_Com_Lessor_Stamp, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.CR_Mas_Com_Lessor_Stamp, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CR_Mas_Com_Lessor_Signature_Director, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.CR_Mas_Com_Lessor_Signature_Director, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.CR_Mas_Com_Lessor_Signature_Director, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CR_Mas_Com_Lessor_Signature_Ar_Director_Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.CR_Mas_Com_Lessor_Signature_Ar_Director_Name, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.CR_Mas_Com_Lessor_Signature_Ar_Director_Name, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CR_Mas_Com_Lessor_Signature_En_Director_Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.CR_Mas_Com_Lessor_Signature_En_Director_Name, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.CR_Mas_Com_Lessor_Signature_En_Director_Name, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CR_Mas_Com_Lessor_Signature_Fr_Director_Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.CR_Mas_Com_Lessor_Signature_Fr_Director_Name, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.CR_Mas_Com_Lessor_Signature_Fr_Director_Name, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CR_Mas_Com_Lessor_Status, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.CR_Mas_Com_Lessor_Status, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.CR_Mas_Com_Lessor_Status, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CR_Mas_Com_Lessor_Reasons, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.CR_Mas_Com_Lessor_Reasons, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.CR_Mas_Com_Lessor_Reasons, "", new { @class = "text-danger" })
+                    </div>
+                </div>*@
+
+
+                </div>
+                <div>
+                    <div>
+
+                        @if (ViewBag.delete == "D")
+                        {
+
+                            <input type="submit" name="save" value="حفظ" class="submit_btn" style="float: right;margin-right:29px;margin-top:10px;cursor:no-drop;" onclick="javascript:return false;" disabled />
+                            <input type="submit" name="hold" class="submit_btn" value="@ViewBag.h" style=" margin-right: 20px; margin-top: 10px;cursor:no-drop;" onclick="javascript:return false;" disabled />
+                            <input type="button" name="delete" class="submit_btn" id="btn-confirm" value="@ViewBag.stat" style="margin-right: 20px; margin-top: 10px; background-color: #F3B161;" />
+
+                        }
+                        else
+                        {
+
+                            if (ViewBag.delete == "H")
+                            {
+
+                                <input type="submit" name="save" value="حفظ" class="submit_btn" style="float: right;margin-right:29px;margin-top:10px;cursor:no-drop;" onclick="javascript:return false;" disabled />
+                                <input type="submit" name="hold" class="submit_btn" value="@ViewBag.h" style=" margin-right: 20px; margin-top: 10px;" />
+                                <input type="button" name="delete" class="submit_btn" id="btn-confirm" value="@ViewBag.stat" style="margin-right: 20px; margin-top: 10px; background-color: #F3B161;cursor:no-drop;" onclick="javascript:return false;" disabled />
+
+                            }
+                            else
+                            {
+
+                                <input type="submit" name="save" value="حفظ" class="submit_btn" style="float: right;margin-right:29px;margin-top:10px;" />
+
+
+
+                                <input type="submit" name="hold" class="submit_btn" value="@ViewBag.h" style=" margin-right: 20px; margin-top: 10px;" />
+
+
+
+                                <input type="button" name="delete" class="submit_btn" id="btn-confirm" value="@ViewBag.stat" style="margin-right: 20px; margin-top: 10px; background-color: #F3B161;" />
+
+
+                            }
+                        }
+
+                        <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="mi-modal" style="margin-top:17%;">
+                            <div class="modal-dialog modal-sm">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title" id="myModalLabel" style=" margin-right: 10%;">تأكيد</h4>
+                                    </div>
+                                    <div class="modal-footer">
+                                        @if (ViewBag.delete == "D")
+                                        {
+                                            <input type="submit" name="delete" class="submit_btn" value="@ViewBag.stat" id="modal-btn-si" style="float:right;width:80px;height:40px;font:bold 14px Tahoma;margin-left:10px;color:white;background-color:#5cb85c;" />
+                                        }
+                                        else
+                                        {
+                                            <input type="submit" name="delete" class="submit_btn" value="@ViewBag.stat" id="modal-btn-si" style="float:right;width:80px;height:40px;font:bold 14px Tahoma;margin-left:10px;color:white;background-color:#d9534f;" />
+                                        }
+                                        <button type="button" class="btn btn-primary" id="modal-btn-no" style="float: left;width: 80px;height: 40px;font: bold 14px Tahoma">إلغاء</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <script>
+                            $(document).ready(function () {
+                                $("#CR_MAS_SUP_City_Code").change(function () {
+                                    $.get("/Lessor/GetCity", { CityCode: $("#CR_MAS_SUP_City_Code").val() }, function (data) {
+                                        $("#CR_MAS_SUP_Region_Ar_Name").empty();
+                                        $("#CR_MAS_SUP_Region_Ar_Name").val(data);
+                                    });
+                                })
+                            });
+                        </script>
+                        <script>
+                            var modalConfirm = function (callback) {
+
+                                $("#btn-confirm").on("click", function () {
+                                    $("#mi-modal").modal('show');
+                                });
+                                $("#modal-btn-si").on("click", function () {
+                                    callback(true);
+                                    $("#mi-modal").modal('hide');
+                                });
+                                $("#modal-btn-no").on("click", function () {
+                                    callback(false);
+                                    $("#mi-modal").modal('hide');
+                                });
+                            };
+                            modalConfirm(function (confirm) {
+                                if (confirm) {
+                                    //Acciones si el usuario confirma
+                                    $("#form1").submit();
+                                } else {
+                                    //Acciones si el usuario no confirma
+                                    $("#result").html("canceled");
+                                }
+                            });
+                        </script>
+                        <div class="col-md-6" style="margin-top:10px;margin-bottom:10px;">
+                            <a href="/Lessor/Index/" class="btn" style="color:white;background-color:#F3B161;width:80px!important;padding-right:27px;border-radius:unset;height:30px;padding-top:5px;float:left;font-size:15px!important;font-family:'Times New Roman';">انهاء</a>
+                        </div>
+                    </div>
+                </div>
+                <script type="text/javascript">
+                    $(document).ready(function () { setTimeout(function () { $("#Message").fadeOut(); }, 3000); });
+                </script>
+                <script>
+                    var loadFile = function (event) {
+                        var image = document.getElementById('output');
+                        image.src = URL.createObjectURL(event.target.files[0]);
+                    };
+                </script>
+
+                <script>
+                    var loadFilestamp = function (event) {
+                        var image = document.getElementById('stamp');
+                        image.src = URL.createObjectURL(event.target.files[0]);
+                    };
+                </script>
+
+
+                <script>
+                    var loadFilesignature = function (event) {
+                        var image = document.getElementById('signature');
+                        image.src = URL.createObjectURL(event.target.files[0]);
+                    };
+                </script>
+                <script>
+                    var loadCard = function (event) {
+                        var image = document.getElementById('Card');
+                        image.src = URL.createObjectURL(event.target.files[0]);
+                    };
+                </script>
+
+                <script>
+                    var loadConditions = function (event) {
+                        var image = document.getElementById('Conditions');
+                        image.src = URL.createObjectURL(event.target.files[0]);
+                    };
+                </script>
+            }
+        </div>
+    </div>
+</div>

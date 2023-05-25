@@ -1,0 +1,214 @@
+﻿@model RentCar.Models.CR_Mas_Com_Supporting
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<style>
+    .texterr {
+        font-family: 'Times New Roman' !important;
+        font-size: 12px !important;
+        font-weight:bold;
+        color: red !important;
+        margin-right: 50% !important;
+        height: 15px;
+    }
+
+    #asterisk {
+        color: red;
+        float: right;
+        font-size: 15px !important;
+        margin-right: 160px;
+        margin-top: 5px;
+        position: absolute;
+        font-family: 'Times New Roman';
+    }
+    .title_corp {
+        font-family: 'Times New Roman';
+        font-size: 25px;
+    }
+
+    .subtitle_corp {
+        padding-top: 3px !important;
+        font-family: 'Times New Roman' !important;
+        color: #083555;
+    }
+</style>
+<div class="corp_content">
+    <div class="title_corp"> الجهات المساندة / اضافة جهة </div>
+    <div class="subtitle_corp">من خلال هذه الصفحة يمكنك إضافة جهة مساندة </div>
+    <div class="hr_60"></div>
+    <div class="hr_80"></div>
+    <div class="corp_page">
+        <div class="page_content" style=" margin-top: 20px; margin-bottom :10px;">
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                <div>
+                    <div class="col-md-12 " style="margin-top:10px;">
+                        @Html.LabelFor(model => model.CR_Mas_Com_Supporting_Code, new { @class = "label_form col-md-3", style = "float:right" })
+                        @Html.TextBoxFor(model => model.CR_Mas_Com_Supporting_Code, new { @class = "input_form col-md-9", style = "float:right;width:10%", @readonly = "readonly" })
+                        <div class="texterr col-md-9"></div>
+                    </div>
+                    <div class="col-md-12">
+                        @Html.LabelFor(model => model.CR_Mas_Com_Supporting_Type, new { @class = "label_form col-md-3", style = "float:right" })
+                        @Html.DropDownList("list", ViewData["list"] as SelectList, new { @class = "input_form col-md-9", style = "float:right;width:30%;margin-left:-65px;" })
+                        <div id="asterisk">*</div>
+                        <div class="texterr col-md-9"></div>
+                    </div>
+                    <div class="col-md-12">
+                        @Html.LabelFor(model => model.CR_Mas_Com_Supporting_Ar_Long_Name, new { @class = "label_form col-md-3", style = "float:right" })
+                        @Html.TextBoxFor(model => model.CR_Mas_Com_Supporting_Ar_Long_Name, new { @class = "input_form col-md-9", maxlength = "100", onkeyup = "movetoNext('CR_Mas_Com_Supporting_Ar_Short_Name')", autocomplete = "off", onkeypress = "return CheckArabicCharactersOnly(event);", style = "margin-left: -5px;width:550px;float:right" })
+                        <div id="asterisk">*</div>
+
+                        <div class="texterr col-md-9">@ViewBag.LRExistArLng</div>
+                    </div>
+                    <div class="col-md-12">
+                        @Html.LabelFor(model => model.CR_Mas_Com_Supporting_Ar_Short_Name, new { @class = "label_form col-md-3", style = "float:right" })
+                        @Html.TextBoxFor(model => model.CR_Mas_Com_Supporting_Ar_Short_Name, new { @class = "input_form col-md-9", maxlength = "50", onkeyup = "movetoNext('CR_Mas_Com_Supporting_En_Long_Name')", autocomplete = "off", onkeypress = "return CheckArabicCharactersOnly(event);", style = "margin-left: -65px;width:150px;float:right" })
+                        <div id="asterisk">*</div>
+                        <div class="texterr col-md-9">@ViewBag.LRExistArSh</div>
+                    </div>
+                    <div class="col-md-12">
+                        @Html.LabelFor(model => model.CR_Mas_Com_Supporting_En_Long_Name, new { @class = "label_form col-md-3", style = "float:right" })
+                        @Html.TextBoxFor(model => model.CR_Mas_Com_Supporting_En_Long_Name, new { @class = "input_form col-md-9", maxlength = "100", onkeyup = "movetoNext('CR_Mas_Com_Supporting_En_Short_Name')", autocomplete = "off", onkeypress = "return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)", style = "margin-left:-65px;width:550px;float:right" })
+                        <div id="asterisk">*</div>
+                        <div class="texterr col-md-9">@ViewBag.LRExistEnLng</div>
+                    </div>
+                    <div class="col-md-12">
+                        @Html.LabelFor(model => model.CR_Mas_Com_Supporting_En_Short_Name, new { @class = "label_form col-md-3", style = "float:right" })
+                        @Html.TextBoxFor(model => model.CR_Mas_Com_Supporting_En_Short_Name, new { @class = "input_form col-md-9", maxlength = "50", onkeyup = "movetoNext('CR_Mas_Com_Supporting_Fr_Long_Name')", autocomplete = "off", onkeypress = "return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)", style = "margin-left:-65px;width:150px;float:right" })
+                        <div id="asterisk">*</div>
+                        <div class="texterr col-md-9">@ViewBag.LRExistEnSh</div>
+                    </div>
+
+                    <div class="col-md-12">
+                        @Html.LabelFor(model => model.CR_Mas_Com_Supporting_Fr_Long_Name, new { @class = "label_form col-md-3", style = "float:right" })
+                        @Html.TextBoxFor(model => model.CR_Mas_Com_Supporting_Fr_Long_Name, new { @class = "input_form col-md-9", maxlength = "100", onkeyup = "movetoNext('CR_Mas_Com_Supporting_Fr_Short_Name')", autocomplete = "off", onkeypress = "return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)", style = "margin-left:-65px;width:550px;float:right" })
+                        <div id="asterisk">*</div>
+                        <div class="texterr col-md-9">@ViewBag.LRExistFrLng</div>
+                    </div>
+                    <div class="col-md-12">
+                        @Html.LabelFor(model => model.CR_Mas_Com_Supporting_Fr_Short_Name, new { @class = "label_form col-md-3", style = "float:right" })
+                        @Html.TextBoxFor(model => model.CR_Mas_Com_Supporting_Fr_Short_Name, new { @class = "input_form col-md-9", maxlength = "50", onkeyup = "movetoNext('CR_Mas_Com_Supporting_Mobile_Number')", autocomplete = "off", onkeypress = "return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)", style = "margin-left:-65px;width:150px;float:right" })
+                        <div id="asterisk">*</div>
+                        <div class="texterr col-md-9">@ViewBag.LRExistFrSh</div>
+                    </div>
+
+                    <div class="col-md-12">
+                        @Html.LabelFor(model => model.CR_Mas_Com_Supporting_Mobile_Number, new { @class = "label_form col-md-3", style = "float:right" })
+                        @Html.TextBoxFor(model => model.CR_Mas_Com_Supporting_Mobile_Number, new { @class = "input_form col-md-9", maxlength = "40", autocomplete = "off", style = "margin-left:-65px;width:150px;float:right", oninput = "this.value=this.value.replace(/[^0-9]/g,'')" })
+                    </div>
+                    @Html.LabelFor(model => model.CR_Mas_Com_Supporting_Reasons, htmlAttributes: new { @class = "Hidden" })
+                    @Html.EditorFor(model => model.CR_Mas_Com_Supporting_Reasons, new { htmlAttributes = new { @class = "Hidden" } })
+
+                    @Html.LabelFor(model => model.CR_Mas_Com_Supporting_Status, htmlAttributes: new { @class = "hidden" })
+                    @Html.EditorFor(model => model.CR_Mas_Com_Supporting_Status, new { htmlAttributes = new { @class = "hidden" } })
+                </div>
+                <div class="col-md-6" style="margin-top:10px">
+                    <div style="height:40px;"></div>
+                    <a href="/Supporting/Index/" class="btn" style="font-family:'Times New Roman';float:left;font-size:15px!important;width: 70px !important;padding-top:4px;height:30px; background-color: #F3B161; padding-right: 22px; border-radius: 0px; color: white;">انهاء</a>
+                </div>
+                <div class="col-md-6" style="margin-top:10px;">
+                    <div style="height:40px;"></div>
+                    <input type="submit" name="add" class="submit_btn" id="add_btn" value="حفظ" />
+                </div>
+                <div class="col-md-6" id="Message" style="font-family:'Times New Roman';font-size:16px;color:red;margin-Top: 380px; margin-right: 330px;position:absolute;">@TempData["TempModel"]</div>
+
+                @*if (@ViewBag.LRExistAr == null && @ViewBag.LRExistEn == null && @ViewBag.LRExistFr == null)
+            { <script>document.getElementById('CR_Mas_Com_Supporting_Ar_Name').focus()</script> }
+            else if (@ViewBag.LRExistAr != null)
+            { <script>document.getElementById('CR_Mas_Com_Supporting_Ar_Name').focus()</script> }
+            else if (@ViewBag.LRExistAr == null && @ViewBag.LRExistEn != null)
+            { <script>document.getElementById('CR_Mas_Com_Supporting_En_Name').focus()</script> }
+            else if (@ViewBag.LRExistAr == null && @ViewBag.LRExistEn == null && @ViewBag.LRExistFr != null)
+            { <script>document.getElementById('CR_Mas_Com_Supporting_Fr_Name').focus()</script> }
+            else if (@ViewBag.LRExistAr != null && @ViewBag.LRExistEn != null && @ViewBag.LRExistFr != null)
+            { <script>document.getElementById('CR_Mas_Com_Supporting_Ar_Name').focus()</script> }*@
+
+                @*if (@ViewBag.LRExistFrSh != null && @ViewBag.LRExistFrLng != null && ViewBag.LRExistEnSh != null
+                && ViewBag.LRExistEnLng != null && ViewBag.LRExistArSh != null && ViewBag.LRExistArLng != null)
+                {
+                    <script>document.getElementById('CR_Mas_Com_Supporting_Ar_Long_Name').focus()</script>
+                }
+                else
+                    if (@ViewBag.LRExistArLng == null && ViewBag.LRExistArSh != null && ViewBag.LRExistEnLng != null
+                && ViewBag.LRExistEnSh != null && @ViewBag.LRExistFrSh != null && @ViewBag.LRExistFrLng != null)
+                {
+                    <script>document.getElementById('CR_Mas_Com_Supporting_Ar_Short_Name').focus()</script>
+                }
+                else
+                    if (@ViewBag.LRExistArLng == null && ViewBag.LRExistArSh == null && ViewBag.LRExistEnLng != null
+                && ViewBag.LRExistEnSh != null && @ViewBag.LRExistFrSh != null && @ViewBag.LRExistFrLng != null)
+                {
+                    <script>document.getElementById('CR_Mas_Com_Supporting_En_Long_Name').focus()</script>
+                }
+                else
+                    if (@ViewBag.LRExistArLng == null && ViewBag.LRExistArSh == null && ViewBag.LRExistEnLng == null
+                && ViewBag.LRExistEnSh != null && @ViewBag.LRExistFrSh != null && @ViewBag.LRExistFrLng != null)
+                {
+                    <script>document.getElementById('CR_Mas_Com_Supporting_En_Short_Name').focus()</script>
+                }
+                else
+                    if (@ViewBag.LRExistArLng == null && ViewBag.LRExistArSh == null && ViewBag.LRExistEnLng == null
+                && ViewBag.LRExistEnSh == null && @ViewBag.LRExistFrSh != null && @ViewBag.LRExistFrLng != null)
+                {
+                    <script>document.getElementById('CR_Mas_Com_Supporting_Fr_Long_Name').focus()</script>
+                }
+                else
+                    if (@ViewBag.LRExistArLng == null && ViewBag.LRExistArSh == null && ViewBag.LRExistEnLng == null
+                && ViewBag.LRExistEnSh == null && @ViewBag.LRExistFrSh != null && @ViewBag.LRExistFrLng == null)
+                {
+                    <script>document.getElementById('CR_Mas_Com_Supporting_Fr_Short_Name').focus()</script>
+                }
+                else
+                   
+                {
+                    <script>document.getElementById('CR_Mas_Com_Supporting_Ar_Long_Name').focus()</script>
+                }*@
+
+
+
+
+               
+
+
+                <script type="text/javascript">
+                    $(document).ready(function () { setTimeout(function () { $("#Message").fadeOut(); }, 4000); });
+                </script>
+                <script language="javascript" type="text/javascript">
+                    // Allow Arabic Characters only
+                    function CheckArabicCharactersOnly(e) {
+                        var unicode = e.charCode ? e.charCode : e.keyCode
+                        if (unicode != 8) { //if the key isn't the backspace key (which we should allow)
+                            if (unicode == 32)
+                                return true;
+                            else {
+                                if ((unicode > 48 || unicode < 57) && (unicode < 0x0600 || unicode > 0x06FF)) //if not a number or arabic
+                                    return false; //disable key press
+                            }
+                        }
+                    }
+                    function movetoNext(nextFieldID) {
+                        if (event.keyCode == 13) {
+                            document.getElementById(nextFieldID).focus();
+                        }
+                    };
+                </script>
+
+                @*<script>
+                    window.onload = function () {
+                        var txtBox = document.getElementById('list');
+                        if (txtBox != null) {
+                            txtBox.focus();
+                        }
+                    };
+
+
+                </script>*@
+            }
+        </div>
+    </div>
+</div>

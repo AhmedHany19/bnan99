@@ -1,0 +1,357 @@
+﻿
+@{
+    ViewBag.Title = "NotFound";
+    Layout = "~/Views/Shared/_LayoutSys3.cshtml";
+}
+
+<head>
+    <meta charset="utf-8" />
+    <title>Rent car</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
+    <meta content="Coderthemes" name="author" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    @*App favicon*@
+    <link rel="shortcut icon" href="~/BSys3 Styles/Images/favicon.ico">
+
+
+    <link href="~/BSys3 Styles/CSS/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/BSys3 Styles/CSS/icons.min.css" rel="stylesheet" />
+    <link href="~/BSys3 Styles/CSS/app-rtl.min.css" rel="stylesheet" />
+    <link href="~/BSys3Styles/CSS/style_app.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+
+    @*<link href="~/BSys3Styles/CSS/intlTelInput.css" rel="stylesheet" />
+        <script src="~/BSys3Styles/Js/jquery.min.js"></script>
+        <script src="~/BSys3Styles/Js/intlTelInput.js"></script>
+        <script src="~/BSys3Styles/Js/intlTelInput.min.js"></script>
+        <script src="~/BSys3Styles/Js/utils.js"></script>
+        <link href="~/BSys3Styles/CSS/telephone.css" rel="stylesheet" />*@
+
+
+</head>
+<body>
+
+    <style>
+        /* Mark input boxes that gets an error on validation: */
+        input.invalid {
+            background-color: #ffdddd;
+        }
+
+        .toast {
+            z-index: 999999999999999 !important
+        }
+        /* Hide all steps by default: */
+        .tab {
+            display: none;
+        }
+        /* Make circles that indicate the steps of the form: */
+        .step {
+            display: block !important;
+            color: #fff;
+            width: 100%;
+            height: 50px;
+            line-height: 50px;
+            background: #EDA63C;
+        }
+
+            .step:before {
+                content: "";
+                position: absolute;
+                right: 0px;
+                bottom: 0px;
+                width: 0;
+                height: 0;
+                border-right: 12px solid #fff;
+                border-top: 25px solid transparent;
+                border-bottom: 25px solid transparent;
+                background: #EDA63C;
+            }
+
+            .step:after {
+                content: "";
+                position: absolute;
+                left: 0px;
+                bottom: 0px;
+                width: 0;
+                height: 0;
+                border-right: 12px solid #EDA63C;
+                border-top: 25px solid transparent;
+                border-bottom: 25px solid transparent;
+                background: transparent;
+            }
+
+        .tab_price {
+            position: relative;
+            display: inline-block !important;
+            -webkit-box-flex: 0;
+            -ms-flex: 0 0 12.5% !important;
+            flex: 0 0 12.5% !important;
+            max-width: 12.5% !important;
+            padding-left: 12px;
+            padding-right: 12px;
+            height: 50px;
+            margin-left: -8px
+        }
+
+        .step.active, .step.active:before {
+            background-color: #0288C7;
+        }
+
+            .step.active:after {
+                border-right: 12px solid #0288C7;
+            }
+        /* Mark the steps that are finished and valid: */
+        .step.finish {
+            background-color: none;
+        }
+
+        input.invalid {
+            background: none;
+            border: solid 1px red
+        }
+
+        .tab_price.first span:before {
+            border-right: none
+        }
+
+        .tab_price.last span:after {
+            border-right: none
+        }
+
+        .texterr {
+            position: absolute;
+            margin-top: 30px;
+            font-size: 12px !important
+        }
+    </style>
+
+
+    <!--tabs amir start-->
+
+    <style>
+        /******* CSS *********/
+        .previous-tab,
+        .next-tab {
+            display: inline-block;
+            border: 1px solid #444348;
+            border-radius: 3px;
+            margin: 5px;
+            color: #444348;
+            font-size: 14px;
+            padding: 10px 15px;
+            cursor: pointer;
+        }
+    </style>
+    <style>
+        body {
+            background-color: transparent !important
+        }
+
+            body[data-layout=horizontal] .content-page {
+                padding: 110px 12px 0 12px !important;
+                background-color: transparent !important
+            }
+
+        .date_header {
+            padding-top: 15px;
+            color: #4a80b4;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        /*.card{min-height:570px;}*/
+        .langue_header {
+            margin-top: 15px;
+            color: #4a80b4;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+            .langue_header a, .reseau a {
+                color: #4a80b4;
+            }
+
+                .langue_header a:hover {
+                    color: #EDA63C
+                }
+
+                .reseau a i {
+                    color: #EDA63C;
+                    font-size: 24px;
+                    margin-top: 5px;
+                    margin-right: 5px;
+                    float: left
+                }
+
+                .reseau a:hover i {
+                    color: #4a80b4
+                }
+
+        .footer {
+            padding: 2px;
+            bottom: 0;
+        }
+
+        .enlarged .footer {
+            right: 0 !important;
+        }
+
+        .footer a, .footer .footer-links a, .footer {
+            color: #fff !important;
+            font-size: 16px;
+            line-height: 40px;
+        }
+
+        .footer-reseau a, .footer-reseau i {
+            color: #fff !important;
+            font-size: 24px;
+        }
+
+            .footer-reseau a:hover, .footer-reseau a:hover i, .footer a:hover, .footer .footer-links a:hover {
+                color: #EDA63C !important;
+            }
+
+        html {
+            background: url('/BSys3 Styles/Images/bg.jpg');
+        }
+
+        .nav-link {
+            padding: 0
+        }
+
+        .nav-pills .nav-link {
+            border-radius: 0
+        }
+
+        .nav-justified .nav-item a {
+            color: #fff !important;
+            font-weight: bold
+        }
+
+        .btn-secondary {
+            background-color: #EDA63C;
+            border-color: #EDA63C;
+        }
+
+            .btn-secondary:hover, .nav-pills .nav-link.active, .btn-secondary:not(:disabled):not(.disabled):active {
+                background-color: #4A80B4;
+                border-color: #4A80B4;
+            }
+
+        .form-control {
+            border-color: #4A80B4;
+            color: #4A80B4;
+        }
+
+        fieldset {
+            border: solid 2px #4A80B4;
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+
+        .btn-secondary1 {
+            background-color: #0288C7;
+            border-color: #0288C7;
+            color: #fff;
+        }
+
+            .btn-secondary1:hover {
+                background-color: #EDA63C;
+                border-color: #EDA63C;
+                color: #fff !important;
+            }
+
+        .nav-justified .nav-item {
+            position: relative;
+        }
+
+
+
+        .nav-justified .nav-item {
+            display: inline-block !important;
+            -webkit-box-flex: 0;
+            -ms-flex: 0 0 12.5% !important;
+            flex: 0 0 12.5% !important;
+            max-width: 12.5% !important;
+            padding-left: 12px;
+            padding-right: 12px;
+            height: 50px;
+            margin-left: -8px
+        }
+
+            .nav-justified .nav-item a {
+                display: block !important;
+                color: #fff;
+                width: 100%;
+                height: 50px;
+                line-height: 50px;
+                background: #EDA63C;
+            }
+
+                .nav-justified .nav-item a:after {
+                    content: "";
+                    position: absolute;
+                    right: 0px;
+                    bottom: 0px;
+                    width: 0;
+                    height: 0;
+                    border-right: 12px solid #fff;
+                    border-top: 25px solid transparent;
+                    border-bottom: 25px solid transparent;
+                    background: #EDA63C;
+                }
+
+                .nav-justified .nav-item a:before {
+                    content: "";
+                    position: absolute;
+                    left: 0px;
+                    bottom: 0px;
+                    width: 0;
+                    height: 0;
+                    border-right: 12px solid #EDA63C;
+                    border-top: 25px solid transparent;
+                    border-bottom: 25px solid transparent;
+                    background: transparent;
+                }
+
+                .nav-justified .nav-item a.active:before {
+                    border-right-color: #4A80B4 !important
+                }
+
+                .nav-justified .nav-item a.active:after {
+                    background: #4A80B4;
+                }
+
+            .nav-justified .nav-item:first-child a.active:after {
+                border-right-color: #4A80B4 !important
+            }
+
+        .col-form-label {
+            flex: 0;
+            width: 100px;
+            min-width: 100px;
+        }
+
+        .label6 {
+            text-align: right;
+        }
+
+        .form-group {
+            margin-bottom: 0.5rem !important
+        }
+
+        .fieldset {
+            padding-bottom: 0px;
+            padding-top: 0px;
+        }
+
+        .fildest51 {
+            height: 51vh;
+            overflow-x: hidden;
+            overflow-y: scroll
+        }
+    </style>
+
+    <h2 style="text-align:center;vertical-align:middle">الملف غير موجود</h2>
+    </body>

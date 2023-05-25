@@ -1,0 +1,13 @@
+﻿@model IEnumerable<RentCar.Models.CR_Mas_Sup_Category>
+
+
+
+   
+@foreach (var item in Model) {
+    <tr>
+        <li class="woo-products">
+            <a href="javascript:GetCarList('@item.CR_Mas_Sup_Category_Ar_Name');">@Html.DisplayFor(modelItem => item.CR_Mas_Sup_Category_Ar_Name, new { @class = "woo-products" })</a>
+        </li>
+
+    </tr>
+}

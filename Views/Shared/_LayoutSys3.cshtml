@@ -1,0 +1,390 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Rent car</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
+    <meta content="Coderthemes" name="author" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- App favicon -->
+
+
+    <link rel="shortcut icon" href="~/BSys3 Styles/Images/favicon.ico">
+    <script src="~/Bootstrap_Arabic/jquery.js"></script>
+
+    @*<link href="~/BSys3Styles/CSS/bootstrap.css" rel="stylesheet" />*@
+    <link href="~/BSys3Styles/CSS/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/BSys3Styles/CSS/bootstrap-datetimepicker.css" rel="stylesheet" />
+    <link href="~/BSys3Styles/CSS/icons.min.css" rel="stylesheet" />
+    <link href="~/BSys3Styles/CSS/app-rtl.min.css" rel="stylesheet" />
+    <link rel="icon" type="image/x-icon" href="/BSys3 Styles/Images/favicon.ico" />
+    <link href="~/BSys3Styles/CSS/style_app.css" rel="stylesheet" />
+    <script src="~/Bootstrap_Arabic/jquery-v1.11.2.js"></script>
+    <script src="~/Bootstrap_Arabic/bootstrap.min.js"></script>
+    <link href="~/Bootstrap_Arabic/font-awesome.css" type="text/css" rel="stylesheet" />
+    <link href="~/Content/toastr.css" rel="stylesheet" />
+
+
+</head>
+
+<body data-layout="horizontal" data-topbar="dark" >
+    <!-- Begin page -->
+    <div id="wrapper">
+        <div id="preloader">
+            <div id="status">
+                <img src="~/BSys3Styles/Images/logo.png" style="width:150px;height:150px;margin:25px" />
+            </div>
+        </div>
+        <!-- Navigation Bar<header id="topnav">-->
+        <header id="">
+            <!-- Topbar Start -->
+            <div class="header_top">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="d-flex">
+                                <!-- LOGO -->
+                                <div class="col-md-2" style="padding-left: 0;">
+                                    <a href="" class="logo logo-light text-center">
+                                        <img src="/images/Company/5002/LOGO/Logo-5.png" id="BranchLogoID" alt="" height="70" style="margin-top:10px">
+                                    </a>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="date_header">
+                                        <span style="vertical-align:middle!important">
+                                            @Session["CompName"].ToString()
+                                        </span>
+                                    </div>
+                                    <div >
+                                        <span style="vertical-align:middle!important;color:#4a80b4;font-size:16px;" id="BranchNameID">
+                                            @{ 
+                                                string string_with_html = Session["BranchName"] as string;
+                                            }
+                                            @Html.Raw(string_with_html)
+
+                                        </span>
+                                        <div>
+                                            <span style="vertical-align:middle!important;color:#4a80b4;font-size:16px; " id="BranchNameID">
+                                                @Session["UserName"].ToString()
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <ul class="">
+
+                                <li class="d-sm-block">
+                                    <div class="reseau">
+                                        <div style="float:left;margin-right:10px;" data-toggle="tooltip" data-placement="left" title="" data-original-title="خروج">
+                                            <a href="~/Account/CloseSession">
+                                                <i class="fa fa-lock"></i>
+                                            </a>
+                                        </div>
+                                        <div style="float: left; margin-right: 10px;" data-toggle="tooltip" data-placement="left" title="" data-original-title="حسابي" z-index="99999999999999">
+                                            <a href="~/AccountInformation/EditBranchAccount">
+                                                <i class="fa fa-user"></i>
+                                            </a>
+                                        </div>
+                                        <div style="float: left; margin-right: 10px;" class="dropdown " data-toggle="tooltip" data-placement="left" title="" data-original-title="الإشعارات" id="tooltip_notif">
+                                            <a class="dropdown-toggle " data-toggle="dropdown" role="button" aria-haspopup="false" aria-expanded="false" id="drop_notif">
+                                                <i class="fa fa-bell"></i>
+                                                <span class="badge badge-danger rounded-circle noti-icon-badge" style="top: 0px; left: 12px; position: absolute;">@(Session["BranchAlertsNbr"])</span>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right dropdown-lg" style="width: 350px;">
+
+                                                <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 290px;">
+                                                    <div class="slimscroll noti-scroll" style="max-height: 290px !important; height: 290px; overflow: hidden; width: auto;">
+
+                                                        <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                                            <p class="notify-details" style="text-align:right;margin-right:0">
+                                                                <span style="float:right">مستندات الفرع</span>
+                                                                <small class="text-muted" style="float:left;color:green!important" title="مستندات الفرع النشطه">@(Session["BranchdocsN"])</small>
+                                                                <small class="text-muted" style="float:left;margin-left:15px;color:orange!important" title="مستندات الفرع  على وشك الإنتهاء ">@(Session["BranchdocsX"])</small>
+                                                                <small class="text-muted" style="float:left;margin-left:15px;color:red!important" title="مستندات الفرع  المنتهيه ">@(Session["BranchdocsE"])</small>
+                                                            </p>
+                                                        </a>
+
+                                                        <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                                            <p class="notify-details" style="text-align:right;margin-right:0">
+                                                                <span style="float:right"> وثائق السيارات</span>
+                                                                <small class="text-muted" style="float:left;color:green!important" title="وثائق السيارات النشطه ">@(Session["BranchCarsDocN"])</small>
+                                                                <small class="text-muted" style="float:left;margin-left:15px;color:orange!important " title="وثائق السيارات  على وشك الإنتهاء ">@(Session["BranchCarsDocX"])</small>
+                                                                <small class="text-muted" style="float:left;margin-left:15px;color:red!important" title="وثائق السيارات المنتهيه ">@(Session["BranchCarsDocE"])</small>
+                                                            </p>
+                                                        </a>
+                                                        <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                                            <p class="notify-details" style="text-align:right;margin-right:0">
+                                                                <span style="float:right"> صيانةالسيارات</span>
+                                                                <small class="text-muted" style="float:left;color:green!important" title="صيانةالسيارات النشطه ">@(Session["BranchCarsMaintenanceN"])</small>
+                                                                <small class="text-muted" style="float:left;margin-left:15px;color:orange!important" title="صيانةالسيارات على وشك الإنتهاء ">@(Session["BranchCarsMaintenanceX"])</small>
+                                                                <small class="text-muted" style="float:left;margin-left:15px;color:red!important" title="صيانةالسيارات المنتهيه ">@(Session["BranchCarsMaintenanceE"])</small>
+                                                            </p>
+                                                        </a>
+                                                        <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                                            <p class="notify-details" style="text-align:right;margin-right:0">
+                                                                <span style="float:right"> أسعارالسيارة</span>
+                                                                <small class="text-muted" style="float:left;color:green!important"  title="أسعارالسيارات النشطه ">@(Session["BranchPricesN"])</small>
+                                                                <small class="text-muted" style="float:left;margin-left:15px;color:orange!important"  title="أسعارالسيارات على وشك الإنتهاء ">@(Session["BranchPricesX"])</small>
+                                                                <small class="text-muted" style="float:left;margin-left:15px;color:red!important"  title="صيانةالسياراالمنتهيه ">@(Session["BranchPricesE"])</small>
+                                                            </p>
+                                                        </a>
+
+                                                    </div><div class="slimScrollBar" style="background: rgb(158, 165, 171); width: 8px; position: absolute; top: 0px; opacity: 0.4; display: block; border-radius: 7px; z-index: 99; right: 1px;"></div><div class="slimScrollRail" style="width: 8px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(51, 51, 51); opacity: 0.2; z-index: 90; right: 1px;"></div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div style="float:left" data-toggle="tooltip" data-placement="left" title="" data-original-title="الصفحة الرئيسية">
+                                            <a href="~/BranchHome/BranchStat">
+                                                <i class="fas fa-home"></i>
+                                            </a>
+                                        </div>
+                                        <div style="float:left" data-toggle="tooltip" data-placement="left" title="" data-original-title="الادارة">
+                                            <a href="~/CasHome/index">
+                                                <i class="fas fa-arrow-circle-down"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div> <!-- end container-fluid-->
+                </div>
+                <!-- end Topbar -->
+            </div>
+        </header>
+        <!-- End Navigation Bar-->
+        <!-- ============================================================== -->
+        <!-- Start Page Content here -->
+        <!-- ============================================================== -->
+
+        <div class="content-page">
+            @RenderBody()
+        </div> <!-- content -->
+        <!-- Footer Start -->
+        @*  <footer class="footer">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-md-6">
+                        <div class="text-md-left footer-links  d-sm-block">
+                            <a href="javascript:void(0);">من نحن؟</a>
+                            <a href="javascript:void(0);">الأسئلة الأكثر شيوعا</a>
+                            <a href="javascript:void(0);">سياسة الخوصصة</a>
+                            <a href="javascript:void(0);">شروط الإحكام</a>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="text-md-right footer-reseau d-sm-block">
+                            <i class="fab fa-facebook-square"></i>
+                            <i class="fab fa-linkedin"></i>
+                            <i class="fab fa-twitter-square"></i>
+                            <i class="fab fa-youtube-square"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>*@
+        <!-- end Footer -->
+
+    </div>
+
+    <!-- ============================================================== -->
+    <!-- End Page content -->
+    <!-- ============================================================== -->
+    <!-- END wrapper -->
+    <!-- Right Sidebar -->
+    <div class="right-bar">
+        <div class="rightbar-title" style="background:#EDA63C;">
+            <a href="javascript:void(0);" class="right-bar-toggle float-right">
+                <i class="mdi mdi-close"></i>
+            </a>
+            <h4 class="font-16 m-0 text-white">قم بتقييمنا</h4>
+        </div>
+        <div class="slimscroll-menu">
+
+            <div class="p-3">
+                <div class="custom-control mb-3">
+                    <label class="custom-control-label" for="light-mode-switch">الرابط 1</label>
+                </div>
+                <div class="custom-control mb-3">
+                    <label class="custom-control-label" for="light-mode-switch">الرابط 2</label>
+                </div>
+            </div>
+        </div> <!-- end slimscroll-menu-->
+    </div>
+    <!-- /Right-bar -->
+    <!-- Right bar overlay-->
+    <div class="rightbar-overlay"></div>
+
+    @*<a href="javascript:void(0);" class="right-bar-toggle demos-show-btn" style="background-color:#EDA63C">
+            <i class="mdi mdi-cog-outline mdi-spin"></i> &nbsp; قم بتقييمنا
+        </a>*@
+
+    <!-- validation init -->
+    <script src="~/BSys3Styles/Js/vendor.min.js"></script>
+    <script src="~/BSys3Styles/Js/momentjs.js"></script>
+    <script src="~/BSys3Styles/Js/moment-with-locales.js"></script>
+    <script src="~/BSys3Styles/Js/moment-hijri.js"></script>
+    <script src="~/BSys3Styles/Js/bootstrap-hijri-datetimepicker.js"></script>
+    <script src="~/BSys3Styles/Js/jquery.inputmask.bundle.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("input").inputmask();
+        });
+    </script>
+    @*date hijri*@
+    <script type="text/javascript">
+
+        $(function () {
+
+            initHijrDatePicker();
+
+            //initHijrDatePickerDefault();
+
+            $('.disable-date').hijriDatePicker({
+
+                minDate: "2020-01-01",
+                maxDate: "2021-01-01",
+                viewMode: "years",
+                hijri: true,
+                debug: true
+            });
+
+        });
+
+        function initHijrDatePicker() {
+            $(".hijri-date-input2").hijriDatePicker({
+                locale: "ar-sa",
+                format: "YYYY-MM-DD",
+                hijriFormat: "YYYY-MM-DD",
+                dayViewHeaderFormat: "MMMM YYYY",
+                hijriDayViewHeaderFormat: "iMMMM iYYYY",
+                showSwitcher: true,
+                allowInputToggle: false,
+                showTodayButton: false,
+                useCurrent: false,
+                isRTL: false,
+                viewMode: 'days',
+                keepOpen: false,
+                hijri: false,
+                debug: false,
+                showClear: true,
+                showTodayButton: true,
+                showClose: true
+            });
+            $(".hijri-date-input").hijriDatePicker({
+                locale: "ar-sa",
+                format: "MM-DD-YYYY",
+                hijriFormat: "MM-DD-YYYY",
+                dayViewHeaderFormat: "MMMM YYYY",
+                hijriDayViewHeaderFormat: "iMMMM iYYYY",
+                showSwitcher: true,
+                allowInputToggle: true,
+                showTodayButton: false,
+                useCurrent: false,
+                isRTL: false,
+                viewMode: 'days',
+                keepOpen: false,
+                hijri: false,
+                debug: true,
+                showClear: true,
+                showTodayButton: true,
+                showClose: true
+            });
+        }
+
+        function initHijrDatePickerDefault() {
+
+            $(".hijri-date-input").hijriDatePicker();
+        }
+        function intPart(floatNum) {
+            if (floatNum < -0.0000001) {
+                return Math.ceil(floatNum - 0.0000001)
+            }
+            return Math.floor(floatNum + 0.0000001)
+        }
+
+        function convertToGreg(d, m, y) {
+            d = parseInt(d)
+            m = parseInt(m)
+            y = parseInt(y)
+
+            jd = intPart((11 * y + 3) / 30) + 354 * y + 30 * m - intPart((m - 1) / 2) + d + 1948440 - 385
+            if (jd > 2299160) {
+                l = jd + 68569
+                n = intPart((4 * l) / 146097)
+                l = l - intPart((146097 * n + 3) / 4)
+                i = intPart((4000 * (l + 1)) / 1461001)
+                l = l - intPart((1461 * i) / 4) + 31
+                j = intPart((80 * l) / 2447)
+                d = l - intPart((2447 * j) / 80)
+                l = intPart(j / 11)
+                m = j + 2 - 12 * l
+                y = 100 * (n - 49) + i + l
+            }
+            else {
+                j = jd + 1402
+                k = intPart((j - 1) / 1461)
+                l = j - 1461 * k
+                n = intPart((l - 1) / 365) - intPart(l / 1461)
+                i = l - 365 * n + 30
+                j = intPart((80 * i) / 2447)
+                d = i - intPart((2447 * j) / 80)
+                i = intPart(j / 11)
+                m = j + 2 - 12 * i
+                y = 4 * k + n + i - 4716
+            }
+            /*document.getElementById('<%=this.txtGregDay.ClientID%>').value = d;
+            document.getElementById('<%=this.txtGregMonth.ClientID%>').value = m;
+            document.getElementById('<%=this.txtGregYear.ClientID%>').value = y;
+
+            document.getElementById('<%=this.hidGregDay.ClientID%>').value = d;
+            document.getElementById('<%=this.hidGregMonth.ClientID%>').value = m;
+            document.getElementById('<%=this.hidGregYear.ClientID%>').value = y;*/
+            if (d < 10) d = '0' + d;
+            if (m < 10) m = '0' + m;
+            return m + '-' + d + '-' + y;
+
+        }
+        function affich_date(e) {
+            var date = e.target.value;
+            var dateparts = date.split("-");
+            affichdate = dateparts[0] + '-' + dateparts[1] + '-' + dateparts[2];
+            if (dateparts[2] < 1900) {
+                //affichdate = convertToGreg(01, 09, 1443);
+                affichdate = dateparts[0] + '-' + dateparts[1] + '-' + dateparts[2];;
+            }
+            document.getElementById("date_affich").value = affichdate;
+        }
+
+
+
+
+    </script>
+
+    @*plugins js*@
+
+    <script src="~/bsys3 styles/js/jquery.bootstrap.wizard.min.js"></script>
+
+    @*init js*@
+    <script src="~/bsys3 styles/js/form-wizard.init.js"></script>
+
+    <script src="~/BSys3 Styles/Js/app.min.js"></script>
+    <script src="~/Scripts/toastr.js"></script>
+    @*<script src="~/BSys3 Styles/Js/app.min.js"></script>*@
+    <script type="text/javascript">
+        $(window).load(function () {
+            $(".loader").fadeOut("1000");
+        })
+    </script>
+
+
+</body>
+
+</html>

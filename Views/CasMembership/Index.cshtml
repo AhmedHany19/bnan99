@@ -1,0 +1,82 @@
+﻿@model IEnumerable<RentCar.Models.CR_Cas_Sup_Conditions_Membership>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CR_Cas_Sup_Conditions_Membership_Insert)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CR_Cas_Sup_Conditions_Membership_KM)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CR_Cas_Sup_Conditions_Membership_Link_1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CR_Cas_Sup_Conditions_Membership_Amount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CR_Cas_Sup_Conditions_Membership_Link_2)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CR_Cas_Sup_Conditions_Membership_Contract_No)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CR_Cas_Sup_Conditions_Membership_Link_3)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CR_Cas_Sup_Conditions_Membership_Day_No)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CR_Mas_Com_Lessor.CR_Mas_Com_Lessor_Logo)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Conditions_Membership_Insert)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Conditions_Membership_KM)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Conditions_Membership_Link_1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Conditions_Membership_Amount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Conditions_Membership_Link_2)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Conditions_Membership_Contract_No)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Conditions_Membership_Link_3)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Conditions_Membership_Day_No)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CR_Mas_Com_Lessor.CR_Mas_Com_Lessor_Logo)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>

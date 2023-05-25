@@ -1,0 +1,81 @@
+﻿@model RentCar.Models.CR_Mas_Sup_Regions
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>CR_Mas_Sup_Regions</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CR_Mas_Sup_Regions_Ar_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CR_Mas_Sup_Regions_Ar_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CR_Mas_Sup_Regions_En_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CR_Mas_Sup_Regions_En_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CR_Mas_Sup_Regions_Fr_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CR_Mas_Sup_Regions_Fr_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CR_Mas_Sup_Regions_L1_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CR_Mas_Sup_Regions_L1_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CR_Mas_Sup_Regions_L2_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CR_Mas_Sup_Regions_L2_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CR_Mas_Sup_Regions_Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CR_Mas_Sup_Regions_Status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CR_Mas_Sup_Regions_Reasons)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CR_Mas_Sup_Regions_Reasons)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

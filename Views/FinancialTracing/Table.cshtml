@@ -1,0 +1,58 @@
+﻿@model IEnumerable<RentCar.Models.TracingMD>
+
+<table id="myTable" class="table table-striped mb-0" style="cursor:pointer">
+    <thead>
+
+        <tr>
+            <th style="width:5%">م</th>
+            <th style="width:10%">
+                تاريخ الإجراء
+            </th>
+            <th style="width:30%">
+                الإجراء
+            </th>
+            <th style="width:9%">
+                نوع الإجراء
+            </th>
+            <th style="width:16%">
+                منفذ الإجراء
+            </th>
+            <th style="width:30%">
+                الملاحظات
+            </th>
+
+        </tr>
+    </thead>
+    <tbody id="tbl">
+        @{
+            int i = 0;
+            foreach (var item in Model)
+            {
+                i++;
+                <tr>
+                    <td hidden>@item.CR_Cas_Administrative_Int_Procedures_Code</td>
+                    <td style="width:5%">
+                        @i
+                    </td>
+                    <td align="center" style="width:10%">
+                        @item.CR_Cas_Administrative_Procedures_Date.Date.ToString("yyyy/MM/dd")
+                    </td>
+                    <td style="width:30%">
+                        @Html.DisplayFor(modelItem => item.ProcedureName)
+                    </td>
+                    <td align="center" style="width:9%">
+                        @Html.DisplayFor(modelItem => item.Type)
+                    </td>
+                    <td style="width:16%">
+                        @Html.DisplayFor(modelItem => item.UserUpdate)
+                    </td>
+                    <td style="width:30%">
+                        @Html.DisplayFor(modelItem => item.CR_Cas_Administrative_Procedures_Reasons)
+                    </td>
+                </tr>
+            }
+
+        }
+
+    </tbody>
+</table>

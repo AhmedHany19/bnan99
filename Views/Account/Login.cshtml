@@ -1,0 +1,621 @@
+﻿
+@{
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+@if (Session["Language"].ToString() == "1")
+{
+    <head runat="server">
+        <title>بنان لإدارة شركات تأجير السيارات</title>
+        <link rel="icon" type="image/x-icon" href="~/BSys3 Styles/Images/favicon.ico" />
+        <meta http-equiv="Page-Exit" content="progid:DXImageTransform.Microsoft.Fade(Duration=0.3)" />
+        <link type="text/css" rel="stylesheet" href="~/css/min/richfaces1814.css?v=200930164155" />
+
+        <link type="image/x-icon" rel="shortcut icon" href="images/w.png" />
+
+        <!--<link href="~/css/min/style.css" rel="stylesheet" />
+        <link href="~/css/min/style.ar1814.css" rel="stylesheet" />
+        <link href="~/css/min/style1814.css" rel="stylesheet" />-->
+        <link href="~/BSys3Styles/CSS/bootstrap.min.css" id="bootstrap-stylesheet" rel="stylesheet" type="text/css" />
+
+        <link href="~/BSys3Styles/CSS/icons.min.css" rel="stylesheet" />
+        <link href="~/BSys3Styles/CSS/style_app.css" rel="stylesheet" />
+        <link href="~/BSys3Styles/CSS/app-rtl.min.css" id="bootstrap-stylesheet" rel="stylesheet" type="text/css" />
+
+        <link href="~/Bootstrap_Arabic/font-awesome.css" type="text/css" rel="stylesheet">
+        <style>
+            .authentication-bg {
+                padding-bottom: 0
+            }
+
+            input {
+                text-align: right
+            }
+
+            label {
+                float: right
+            }
+
+            .parsley-errors-list {
+                font-size: 14px
+            }
+
+            .error_span {
+                font-size: 14px;
+                font-family: Roboto,sans-serif;
+                color: #ff5b5b;
+                padding-right: 0px;
+                float: right;
+            }
+            /*.error_span:before {
+                left: auto;
+                right: 38px;
+                content: "\F0159";
+                font-family: "Material Design Icons";
+                position: absolute;
+            }*/
+        </style>
+    </head>
+    <body class="authentication-bg">
+        <!-- Page Loader -->
+        @*<div id="preloader">
+                <div id="status">
+                    <img src="~/BSys3Styles/Images/logo.png" style="width:150px;height:150px;margin:25px" />
+                </div>
+            </div><div id="loader-wrapper">
+                    <div id="loader"></div>
+
+                    <div class="loader-section section-left"></div>
+                    <div class="loader-section section-right"></div>
+
+                </div>*@
+        <div class="account-pages mt-1 mb-1">
+            <div class="container">
+                <div class="row justify-content-center">
+                    @*<div class="col-md-8 col-lg-6 col-xl-6 " style="border-bottom:solid 1px #EDA63C">*@
+                    <div style="border-bottom:solid 1px #EDA63C;width:580px">
+                        <div class="row">
+
+                            <div class="col-md-12">
+                                <img src="~/BSys3Styles/Images/logo.png" style="height:30px; margin:0 auto;display:block" />
+                            </div>
+                            @*<div class="col-md-8 mb-1 mt-1" style="color:#5292C3;float:left;text-align:left;">
+                                    <a href="#" style="color:#5292C3"><b>عربي</b></a> |
+                                    <a href="#" style="color:#5292C3"><b>English</b></a> |
+                                    <a href="#" style="color:#5292C3"><b>Francais</b></a>
+
+                                </div>*@
+                        </div>
+                    </div>
+                </div>
+                <div class="row justify-content-center" style="margin-top:7vh;">
+                    <div class="col-md-8 col-lg-6 col-xl-6">
+
+                        <center>
+                            <h2 style="color:#5292C3">
+                                بنان لإدارة تأجير السيارات
+                            </h2>
+                        </center>
+                        <div class="card" style="margin-top:7vh;">
+
+                            <div class="card-body p-4">
+
+                                <div class="text-center mb-4">
+                                    <h4 class="text-uppercase mt-0">تسجيل الدخول</h4>
+                                </div>
+
+                                <form id="form_validation form" runat="server" method="post" data-parsley-validate="" novalidate="">
+
+                                    <div class="form-group mb-3">
+                                        <label for="emailaddress"><b>إسم المستخدم</b></label>
+                                        <input type="text" class="form-control" name="txtusername" id="txtuserlogin" autocomplete="off" required />
+
+                                    </div>
+                                    <script>
+                                        window.onload = function () {
+                                            var txtBox = document.getElementById("txtuserlogin");
+                                            if (txtBox != null) {
+                                                txtBox.focus();
+                                            }
+                                        };
+
+
+                                    </script>
+                                    <div class="form-group mb-3">
+                                        <label for="password"><b>كلمة السر</b></label>
+                                        <input type="password" class="form-control" name="txtpassword" required />
+                                        <span class="error_span">@ViewBag.LoginError</span>
+                                    </div>
+
+                                    <div class="form-group mb-3">
+                                        <div class="custom-control custom-checkbox" style="padding-left:0 ">
+                                            <input type="checkbox" class="custom-control-input" id="checkbox-signin" checked="">
+                                            <label class="custom-control-label" for="checkbox-signin">تذكرنى</label>
+                                            <a href="#" style="float:left;" class="text-muted ml-1"><i class="fa fa-lock mr-1"></i>نسيت كلمة المرور؟</a>
+                                        </div>
+
+                                    </div>
+                                    <div class="form-group mb-0 text-center">
+                                        <div>
+                                            <input type="submit" name="LogEnter" value="الدخول" class="btn btn-primary btn-block" />
+                                        </div>
+                                    </div>
+
+                                </form>
+
+                            </div> <!-- end card-body -->
+                        </div>
+
+                        <!-- end card -->
+                        <!--<div class="row mt-3">
+                            <div class="col-12 text-center">
+                                <p> <a href="pages-recoverpw.html" class="text-muted ml-1"><i class="fa fa-lock mr-1"></i>Forgot your password?</a></p>
+                                <p class="text-muted">Don't have an account? <a href="pages-register.html" class="text-dark ml-1"><b>Sign Up</b></a></p>
+                            </div>
+                        </div>-->
+                        <!-- end row -->
+                        <style>
+
+                            .reseau i {
+                                color: #EDA63C;
+                                font-size: 24px;
+                                margin-top: 5px;
+                                margin-right: 5px;
+                                float: left
+                            }
+
+                            .footer-reseau a {
+                                margin-right: 5px
+                            }
+
+                            .footer a, .footer-links a, .footer {
+                                color: #fff !important;
+                                font-size: 16px;
+                            }
+
+                            .footer-reseau a, .footer-reseau i {
+                                color: #fff !important;
+                                font-size: 24px;
+                            }
+
+                            .footer-links a {
+                                padding-left: 10px;
+                                padding-right: 10px;
+                                float: right
+                            }
+                        </style>
+         @*               <div class="row" style="        position: fixed;
+        width: 580px;display:inline-block;
+        bottom: 0;
+        border-top: solid 1px #EDA63C;
+        background: #0288C7;
+        color: #fff;
+        height: 5vh;
+        padding: 0 15px;
+        line-height: 5vh;margin-left:-15px">
+
+                            <div class="">
+                                <div class="text-md-right footer-reseau d-none d-sm-block" style="float:left;margin-top:0px;">
+                                    <a href="javascript:void(0);"><i class="fa fa-facebook-square"></i></a>
+                                    <a href="javascript:void(0);"> <i class="fa fa-linkedin-square"></i></a>
+                                    <a href="javascript:void(0);"><i class="fa fa-twitter-square"></i></a>
+                                    <a href="javascript:void(0);"><i class="fa fa-youtube-square"></i></a>
+                                </div>
+                                <div class="text-md-left footer-links d-none d-sm-block" style="float:right;width:75%">
+                                    <a href="javascript:void(0);">من نحن</a>
+                                    <a href="javascript:void(0);">الأكثر شيوعا</a>
+                                    <a href="javascript:void(0);">سياسة الخصوصية</a>
+                                    <a href="javascript:void(0);">الشروط والاحكام</a>
+                                </div>
+
+                            </div>
+                        </div>*@
+                    </div> <!-- end col -->
+
+                </div>
+
+
+                <!-- end row -->
+            </div>
+            <!-- end container -->
+        </div>
+        <!-- end page -->
+        <!-- Vendor js -->
+        <script src="~/BSys3 Styles/Js/vendor.min.js"></script>
+        @*<script>
+                $(document).ready(function () {
+
+                    setTimeout(function () {
+                        $('body').addClass('loaded');
+                        $('h1').css('color', '#222222')
+                    }, 1000);
+
+                });
+            </script>*@
+        <!-- App js -->
+        <script src="~/BSys3Styles/Js/parsley_ar.min.js"></script>
+        <script src="~/BSys3Styles/Js/pages/form-validation.init.js"></script>
+        <script src="~/BSys3Styles/Js/app.min.js"></script>
+
+    </body>
+
+}
+
+
+
+
+
+
+
+
+
+
+
+@*******************************Page in english*********************@
+@if (Session["Language"].ToString() == "2")
+{
+    <head runat="server">
+        <title>Rent Car</title>
+        <meta http-equiv="Page-Exit" content="progid:DXImageTransform.Microsoft.Fade(Duration=0.3)" />
+        <link type="text/css" rel="stylesheet" href="~/css/min/richfaces1814.css?v=200930164155" />
+
+        <link type="image/x-icon" rel="shortcut icon" href="images/w.png" />
+
+        <link href="~/css/min/style.css" rel="stylesheet" />
+        <link href="~/css/min/style.ar1814.css" rel="stylesheet" />
+        <link href="~/css/min/style1814.css" rel="stylesheet" />
+
+        <style type="text/css">
+            .part {
+                height: 2%;
+            }
+
+            .container {
+                height: 240px;
+            }
+
+            .MainTable {
+                background-image: url('../../images/RentCar/BackGround.png');
+            }
+
+            #logo {
+                position: absolute;
+                margin-top: 30px;
+                z-index: 1;
+                width: 350px;
+                height: 310px;
+                margin-top: 150px;
+                margin-right: 320px;
+            }
+
+            #lbltitle {
+                font-family: 'Times New Roman', Times, serif;
+                font-size: 50px;
+                color: #4a80b4;
+            }
+
+            input[type=text], input[type=password] {
+                margin-right: 23%;
+                /*margin-top: 8%;*/
+                width: 45%;
+                border-radius: 10px;
+                height: 15%;
+                padding: 12px 20px;
+                border: 2px solid #fbb03b !important;
+                /*-webkit-transition: 0.5s;*/
+                /*transition: 0.5s;*/
+                outline: none;
+                font-size: 16px;
+            }
+
+            input[type=submit] {
+                margin-right: 37%;
+                /*margin-top: 8%;*/
+                width: 25%;
+                height: 10%;
+                padding: 12px 20px;
+                border-radius: 6px;
+                font-family: 'Times New Roman';
+                font-size: 20px;
+                background-color: #79acd7 !important;
+                color: #1B1464;
+                transition-duration: 0.4s;
+            }
+
+                input[type=submit]:hover {
+                    background-color: #EDA63C !important;
+                    color: white;
+                }
+        </style>
+
+    </head>
+    <body class="mainBody" dir="rtl">
+        <form id="form" runat="server" method="post">
+            <div class="container">
+                <table class="MainTable" style="position:relative;top:20px;right:200px;">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div style="height:10px;"> </div>
+                                <hr style="height:1.5px;border-width:0;color:#e0af69;background-color:#e0af69;width:1130px;">
+                                <div style="height:5px;"> </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <img id="logo" src="~/images/RentCar/Logo.png" />
+                            <td id="parent" style="background-color: rgba(252, 244, 233,0.5); height:550px;z-index: -1;">
+
+                                <div style="height:5px;">
+                                    <div>
+
+                                        <table style="height:400px;margin-top:80px;margin-right:115px;width:900px;">
+                                            <tbody>
+                                                <tr>
+                                                    <td style="position:static;top:20px;right:0px; width:450px;">
+
+                                                        <div style="height:200px;"></div>
+                                                        <div style="height:140px;text-align:center;"></div>
+                                                        <div style="height:50px;">
+                                                            <span style="font-family:'Times New Roman', Times, serif;font-size:28px;color:#245277">النظام الالي لادارة شركات تأجير السيارات</span>
+                                                        </div>
+                                                    </td>
+
+                                                    <td id="child" style="width:450px;background-color: white;border-radius:15px;box-shadow:5px 5px 10px #b5b5b5;">
+                                                        <div>
+                                                            <div style="margin-top:20px;width:100%;text-align:center;">
+                                                                <label id="lbltitle">تسجيل الدخول</label>
+                                                            </div>
+
+                                                            <div style="height:90px;">
+                                                                <input type="text" name="txtusername" id="txtuserlogin" placeholder="إسم المستخدم" style="margin-top:8%;" autocomplete="off" />
+
+                                                            </div>
+
+                                                            <script>
+                                                                window.onload = function () {
+                                                                    var txtBox = document.getElementById("txtuserlogin");
+                                                                    if (txtBox != null) {
+                                                                        txtBox.focus();
+                                                                    }
+                                                                };
+
+
+                                                            </script>
+                                                            <div style="height:25px;margin-top:-10px; margin-right:105px;"><span style="font-size:15px;font-family:'Times New Roman';color:red;">@ViewBag.Login</span></div>
+                                                            <div style="height:86px;">
+                                                                <input type="password" name="txtpassword" placeholder="كلمة السر" />
+                                                            </div>
+                                                            <div style="height:0px;margin-top:3px; margin-right:105px;">
+                                                                <span style="font-size:15px;font-family:'Times New Roman';color:red;">@ViewBag.Password</span>
+                                                                <span style="font-size:15px;font-family:'Times New Roman';color:red;">@ViewBag.LoginError</span>
+                                                            </div>
+
+                                                            <div>
+                                                                <input type="submit" name="LogEnter" value="الدخول" />
+                                                            </div>
+                                                            <div>
+                                                                <input type="submit" name="lang" value="Français" style="margin-top:3%;" @*onclick="location.href='@Url.Action("Login", "Account")'*@ />
+                                                            </div>
+
+
+
+                                                        </div>
+                                                    </td>
+
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </td>
+
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <div style="height:5px;"> </div>
+                                <hr style="height:2px;border-width:0;color:#e0af69;background-color:#e0af69;width:1130px;">
+                                <div style="height:12px;"> </div>
+                                <div style="background-color: #FFCE94; height:100px;"> </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </form>
+    </body>
+}
+
+
+
+
+
+
+
+@*******************************Page in French*********************@
+@if (Session["Language"].ToString() == "3")
+{
+    <head runat="server">
+        <title>Rent Car</title>
+        <meta http-equiv="Page-Exit" content="progid:DXImageTransform.Microsoft.Fade(Duration=0.3)" />
+        <link type="text/css" rel="stylesheet" href="~/css/min/richfaces1814.css?v=200930164155" />
+
+        <link type="image/x-icon" rel="shortcut icon" href="images/w.png" />
+
+        <link href="~/css/min/style.css" rel="stylesheet" />
+        <link href="~/css/min/style.ar1814.css" rel="stylesheet" />
+        <link href="~/css/min/style1814.css" rel="stylesheet" />
+
+        <style type="text/css">
+            .part {
+                height: 2%;
+            }
+
+            .container {
+                height: 240px;
+            }
+
+            .MainTable {
+                background-image: url('../../images/RentCar/BackGround.png');
+            }
+
+            #logo {
+                position: absolute;
+                margin-top: 30px;
+                z-index: 1;
+                width: 350px;
+                height: 310px;
+                margin-top: 120px;
+                margin-left: 100px;
+            }
+
+            #lbltitle {
+                font-family: 'Times New Roman', Times, serif;
+                font-size: 40px;
+                color: #4a80b4;
+                margin-top: 20px;
+            }
+
+            input[type=text], input[type=password] {
+                margin-left: 23%;
+                /*margin-top: 8%;*/
+                width: 45%;
+                border-radius: 10px;
+                height: 15%;
+                padding: 12px 20px;
+                border: 2px solid #fbb03b !important;
+                /*-webkit-transition: 0.5s;*/
+                /*transition: 0.5s;*/
+                outline: none;
+                font-size: 16px;
+            }
+
+            input[type=submit] {
+                margin-left: 37%;
+                /*margin-top: 8%;*/
+                width: 25%;
+                height: 10%;
+                padding: 12px 20px;
+                border-radius: 6px;
+                font-family: 'Times New Roman';
+                font-size: 20px;
+                background-color: #79acd7 !important;
+                color: #1B1464;
+                transition-duration: 0.4s;
+            }
+
+                input[type=submit]:hover {
+                    background-color: #EDA63C !important;
+                    color: white;
+                }
+        </style>
+
+    </head>
+    <body class="mainBody" dir="ltr">
+        <form id="form3" runat="server" method="post">
+            <div class="container">
+                <table class="MainTable" style="position:relative;top:20px;left:200px;">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div style="height:10px;"> </div>
+                                <hr style="height:1.5px;border-width:0;color:#e0af69;background-color:#e0af69;width:1130px;">
+                                <div style="height:5px;"> </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+
+                            <td id="parent" style="background-color: rgba(252, 244, 233,0.5); height:550px;z-index: -1;">
+                                <div style="position:relative;float:right;width:550px;height:550px;">
+
+
+
+
+                                    <div id="child" style="width:450px;margin-right:100px;margin-top:100px;background-color: white;border-radius:15px;box-shadow:5px 5px 10px #b5b5b5;height:380px;">
+                                        <div>
+                                            <div style="margin-top: 20px; width: 100%; text-align: center;">
+                                                <label id="lbltitle">S'identifier</label>
+                                            </div>
+
+                                            <div style="height:90px;">
+                                                <input type="text" name="txtusername" id="txtuserlogin" placeholder="Nom d'utilisateur" style="margin-top:8%;" autocomplete="off" />
+
+                                            </div>
+
+                                            <script>
+                                                window.onload = function () {
+                                                    var txtBox = document.getElementById("txtuserlogin");
+                                                    if (txtBox != null) {
+                                                        txtBox.focus();
+                                                    }
+                                                };
+
+
+                                            </script>
+                                            <div style="height:25px;margin-top:-10px; margin-left:105px;"><span style="font-size:15px;font-family:'Times New Roman';color:red;">@ViewBag.Login</span></div>
+                                            <div>
+                                                <input type="password" name="txtpassword" placeholder="Mot de passe" />
+                                            </div>
+                                            <div style="height:40px;margin-top:3px; margin-left:105px;">
+                                                <span style="font-size:15px;font-family:'Times New Roman';color:red;">@ViewBag.Password</span>
+                                                <span style="font-size:15px;font-family:'Times New Roman';color:red;">@ViewBag.LoginError</span>
+                                            </div>
+
+                                            <div>
+                                                <input type="submit" name="LogEnter" value="Entrer" />
+                                            </div>
+                                            <div>
+                                                <input type="submit" name="lang" value="عربي" style="margin-top:3%;" @*onclick="location.href='@Url.Action("Login", "Account")'*@ />
+                                            </div>
+
+
+
+                                        </div>
+                                    </div>
+
+
+
+
+
+                                </div>
+                                <div style="position:relative;float:right;width:550px;height:550px;">
+                                    <div style="height:450px;"><img id="logo" src="~/images/RentCar/Logo.png" /></div>
+                                    <div style="height:100px;">
+                                        <span style="font-family:'Times New Roman', Times, serif;font-size:20px;color:#245277;align-content:center;width:550px;float:left">Système automatisé de gestion des sociétés de location de voitures</span>
+                                    </div>
+
+                                </div>
+                            </td>
+
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <div style="height:5px;"> </div>
+                                <hr style="height:2px;border-width:0;color:#e0af69;background-color:#e0af69;width:1130px;">
+                                <div style="height:12px;"> </div>
+                                <div style="background-color: #FFCE94; height:100px;"> </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </form>
+    </body>
+}
+
+
+
+
+
+
+
+
+
+</html>

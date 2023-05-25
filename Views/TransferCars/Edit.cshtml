@@ -1,0 +1,182 @@
+﻿@model RentCar.Models.CR_Cas_Sup_Car_Information
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_CASLayout.cshtml";
+}
+
+<link href="~/BSys3Styles/CSS/style_form.css" rel="stylesheet" />
+<style>
+    .tooltip > .tooltip-inner {
+        background-color: #f00;
+    }
+
+    .tooltip > .tooltip-arrow {
+        border-top-color: #f00 !important;
+    }
+</style>
+<div class="content">
+    <!-- Start Content-->
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card-box table-responsive" style="height:79vh">
+                    <div class="title_corp"> <h3> السيارات /نقل السيارة / تعديل </h3></div>
+                    <div class="subtitle_corp"> تمكنك الصفحة من تعديل بيانات السيارات للنقل إلى فرع آخر </div>
+                    <div class="hr_60"></div>
+                    <div class="hr_80"></div>
+                    <div class="corp_page">
+                        <div class="page_content" style="float:left;width:100%">
+
+                            @using (Html.BeginForm())
+                            {
+                                @Html.AntiForgeryToken()
+
+                                <div class="form-horizontal" style="margin-top:15px;min-height:70%">
+                                    @Html.HiddenFor(Model => Model.CR_Cas_Sup_Car_Lessor_Code)
+                                    @Html.HiddenFor(Model => Model.CR_Cas_Sup_Car_Owner_Branch_Code)
+                                    @Html.HiddenFor(Model => Model.CR_Cas_Sup_Car_Owner_Code)
+                                    @Html.HiddenFor(Model => Model.CR_Cas_Sup_Car_Beneficiary_Code)
+                                    @Html.HiddenFor(Model => Model.CR_Cas_Sup_Car_Customs_No)
+                                    @Html.HiddenFor(Model => Model.CR_Cas_Sup_Car_Structure_No)
+                                    @Html.HiddenFor(Model => Model.CR_Cas_Sup_Car_Registration_Code)
+                                    @Html.HiddenFor(Model => Model.CR_Cas_Sup_Car_Brand_Code)
+                                    @Html.HiddenFor(Model => Model.CR_Cas_Sup_Car_Model_Code)
+                                    @Html.HiddenFor(Model => Model.CR_Cas_Sup_Car_Year)
+                                    @Html.HiddenFor(Model => Model.CR_Cas_Sup_Car_Category_Code)
+                                    @Html.HiddenFor(Model => Model.CR_Cas_Sup_Car_In_Main_Color_Code)
+                                    @Html.HiddenFor(Model => Model.CR_Cas_Sup_Car_Out_Main_Color_Code)
+                                    @Html.HiddenFor(Model => Model.CR_Cas_Sup_Car_Out_Secondary_Color_Code)
+                                    @Html.HiddenFor(Model => Model.CR_Cas_Sup_Car_In_Secondary_Color_Code)
+                                    @Html.HiddenFor(Model => Model.CR_Cas_Sup_Car_Plate_Ar_No)
+                                    @Html.HiddenFor(Model => Model.CR_Cas_Sup_Car_Plate_En_No)
+                                    @Html.HiddenFor(Model => Model.CR_Cas_Sup_Car_Collect_Ar_Name)
+                                    @Html.HiddenFor(Model => Model.CR_Cas_Sup_Car_Collect_Ar_Short_Name)
+                                    @Html.HiddenFor(Model => Model.CR_Cas_Sup_Car_Collect_En_Name)
+                                    @Html.HiddenFor(Model => Model.CR_Cas_Sup_Car_Collect_En_Short_Name)
+                                    @Html.HiddenFor(Model => Model.CR_Cas_Sup_Car_Collect_Fr_Name)
+                                    @Html.HiddenFor(Model => Model.CR_Cas_Sup_Car_Collect_Fr_Short_Name)
+                                    @Html.HiddenFor(Model => Model.CR_Cas_Sup_Car_No_Current_Meter)
+                                    @Html.HiddenFor(Model => Model.CR_Cas_Sup_Car_Traffic_License_Img)
+                                    @Html.HiddenFor(Model => Model.CR_Cas_Sup_Car_Joined_Fleet_Date)
+                                    @Html.HiddenFor(Model => Model.CR_Cas_Sup_Car_Left_Fleet_Date)
+                                    @Html.HiddenFor(Model => Model.CR_Cas_Sup_Car_Documentation_Status)
+                                    @Html.HiddenFor(Model => Model.CR_Cas_Sup_Car_Maintenance_Status)
+                                    @Html.HiddenFor(Model => Model.CR_Cas_Sup_Car_Price_Status)
+                                    @Html.HiddenFor(Model => Model.CR_Cas_Sup_Car_Status)
+                                    @Html.HiddenFor(Model => Model.CR_Cas_Sup_Car_Reasons)
+                                    <input type="text" name="OldBranch" id="OldBranch" value="@ViewBag.OldBranch" hidden/>
+                                    @*<hr />*@
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                                    <div class="row">
+                                        <div class="col-lg-6 offset-lg-6 col-md-12 " style="margin-top:0px;">
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    @Html.LabelFor(model => model.CR_Cas_Sup_Car_Serail_No, htmlAttributes: new { @class = "control-label" })<label id="asterisk">*</label>
+                                                </div>
+                                                <div class="col-md-5">
+                                                    @Html.EditorFor(model => model.CR_Cas_Sup_Car_Serail_No, new { htmlAttributes = new { @class = "form-control", @Readonly = "readonly" } })
+                                                    @Html.ValidationMessageFor(model => model.CR_Cas_Sup_Car_Location_Branch_Code, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-6 offset-lg-6 col-md-12 " style="margin-top:0px;">
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    @Html.LabelFor(model => model.CR_Cas_Sup_Car_Collect_Ar_Name, htmlAttributes: new { @class = "control-label" })<label id="asterisk">*</label>
+                                                </div>
+                                                <div class="col-md-9">
+                                                    @Html.EditorFor(model => model.CR_Cas_Sup_Car_Collect_Ar_Name, new { htmlAttributes = new { @class = "form-control", @Readonly = "readonly" } })
+                                                    @Html.ValidationMessageFor(model => model.CR_Cas_Sup_Car_Collect_Ar_Name, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-6 offset-lg-6 col-md-12 " style="margin-top:0px;">
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <label>الفرع الحالي</label><label id="asterisk">*</label>
+                                                </div>
+                                                <div class="col-md-7">
+                                                    @Html.EditorFor(model => model.CR_Cas_Sup_Branch.CR_Cas_Sup_Branch_Ar_Short_Name, new { htmlAttributes = new { @class = "form-control", @Readonly = "readonly" } })
+                                                    @Html.ValidationMessageFor(model => model.CR_Cas_Sup_Car_Location_Branch_Code, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-6 offset-lg-6 col-md-12 " style="margin-top:0px;">
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <label>الفرع الجديد</label>
+                                                </div>
+                                                <div class="col-md-7">
+                                                    @Html.DropDownList("Location_Branch_Code", null, "--  اختر الفرع  --", htmlAttributes: new { @class = "form-control" })
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-6 offset-lg-6 col-md-12 " style="margin-top:0px;">
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <label>الملاحظات</label>
+                                                </div>
+                                                <div class="col-md-9">
+                                                    <input type="text" name="Reasons" id="Reasons" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 col-50" style="margin-top:20px;margin-bottom:10px;">
+                                        <input type="submit" name="save" value="حفظ" class="btn btn-primary waves-effect" style="float:right;" />
+                                    </div>
+                                    <div class="col-md-6 col-50" style="margin-top:20px;margin-bottom:10px;">
+                                        <a href="/TransferCars/Index/" class="btn btn-primary waves-effect" style="float:left;">انهاء</a>
+                                    </div>
+                                </div>
+
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+        window.addEventListener("load", function () {
+
+            if ('@TempData["TempModel"]'=="Added") {
+                toastr.success("تم الحفظ بنجاح");
+            }
+
+            if ('@TempData["TempModel"]'=="Saved") {
+                toastr.success("تم الحفظ بنجاح");
+            }
+
+            if ('@TempData["TempModel"]'=="Holded") {
+                toastr.success("تم التعطيل بنجاح");
+            }
+
+            if ('@TempData["TempModel"]'=="Deleted") {
+                toastr.success("تم الحذف بنجاح");
+            }
+
+            if ('@TempData["TempModel"]'=="Activated") {
+                toastr.success("تم التنشيط بنجاح");
+            }
+
+        });
+</script>

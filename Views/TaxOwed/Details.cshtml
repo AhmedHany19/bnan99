@@ -1,0 +1,83 @@
+﻿@model RentCar.Models.CR_Cas_Account_Tax_Owed
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_CASLayout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>CR_Cas_Account_Tax_Owed</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CR_Cas_Account_Tax_Owed_Contract_Value)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CR_Cas_Account_Tax_Owed_Contract_Value)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CR_Cas_Account_Tax_Owed_Percentage)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CR_Cas_Account_Tax_Owed_Percentage)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CR_Cas_Account_Tax_Owed_Value)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CR_Cas_Account_Tax_Owed_Value)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CR_Cas_Account_Tax_Owed_Due_Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CR_Cas_Account_Tax_Owed_Due_Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CR_Cas_Account_Tax_Owed_Is_Paid)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CR_Cas_Account_Tax_Owed_Is_Paid)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CR_Cas_Account_Tax_Owed_Pay_Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CR_Cas_Account_Tax_Owed_Pay_Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CR_Cas_Account_Tax_Owed_Pay_No)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CR_Cas_Account_Tax_Owed_Pay_No)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CR_Cas_Sup_Branch.CR_Cas_Sup_Branch_Ar_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CR_Cas_Sup_Branch.CR_Cas_Sup_Branch_Ar_Name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.CR_Cas_Account_Tax_Owed_Contract_No }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

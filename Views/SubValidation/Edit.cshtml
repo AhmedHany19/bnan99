@@ -1,0 +1,284 @@
+﻿@model RentCar.Models.CR_Mas_User_Sub_Validation
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+
+
+<style>
+    /*#list{display:none}*/
+
+    .texterr {
+        font-family: 'Times New Roman' !important;
+        font-size: 14px !important;
+        color: red !important;
+        margin-right: 50% !important;
+        height: 20px;
+    }
+
+    #asterisk {
+        color: red;
+        float: right;
+        font-size: 15px !important;
+        margin-right: 112px;
+        margin-top: 5px;
+        position: absolute;
+        font-family: 'Times New Roman';
+    }
+
+
+    /* The switch - the box around the slider */
+    .switch {
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        height: 34px;
+    }
+
+        /* Hide default HTML checkbox */
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+    /* The slider */
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+    input:checked + .slider {
+        background-color: lightgreen;
+    }
+
+    input:focus + .slider {
+        box-shadow: 0 0 1px #2196F3;
+    }
+
+    input:checked + .slider:before {
+        -webkit-transform: translateX(26px);
+        -ms-transform: translateX(26px);
+        transform: translateX(26px);
+    }
+
+    /* Rounded sliders */
+    .slider.round {
+        border-radius: 34px;
+    }
+
+        .slider.round:before {
+            border-radius: 50%;
+        }
+
+
+
+
+</style>
+<div class="corp_content">
+    <div class="title_corp"> الفئات / اضافة</div>
+    <div class="subtitle_corp">تمكن هذه الصفحة المستخدم من إظافة فئة جديدة</div>
+    <div class="hr_60"></div>
+    <div class="hr_80"></div>
+    <div class="corp_page">
+        <div class="page_content" style=" margin-top: 10px; height:421px!important;">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-horizontal">
+
+
+
+                    <div class="form-group">
+                        <label id="SystemName" class="control-label col-md-2" style="float: right;">صلاحيات الشاشة</label>
+                        <div class="col-md-10">
+                            <div class="checkbox">
+                                @if (ViewBag.mainauthority == true)
+                                {
+                                    @Html.CheckBox("CR_Mas_User_Main_Validation", htmlAttributes: new { style = "margin-right:-30px;margin-top:5px;", @checked = true })
+                                    <!-- Rounded switch -->
+                                    <label class="switch">
+                                        <input type="checkbox">
+                                        <span class="slider round"></span>
+                                    </label>
+                                }
+                                else
+                                {
+                                    @Html.CheckBox("CR_Mas_User_Main_Validation", new { style = "margin-right:-30px;margin-top:5px;" })
+                                }
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <div class="col-md-10" style="margin-top:0px;">
+                            <div class="checkbox">
+                                @Html.CheckBox("CR_Mas_User_Sub_Validation_Insert", new { style = "margin-right:-30px;margin-top:3px;" })
+                            </div>
+                        </div>
+                        @Html.LabelFor(model => model.CR_Mas_User_Sub_Validation_Insert, htmlAttributes: new { @class = "control-label col-md-2", style = "float:right;margin-top:3px;" })
+                    </div>
+
+                    <div class="form-group">
+
+                        <div class="col-md-10" style="margin-top:0px;">
+                            <div class="checkbox">
+                                @Html.CheckBox("CR_Mas_User_Sub_Validation_UpDate", new { style = "margin-right:-30px;margin-top:3px;" })
+                            </div>
+                        </div>
+                        @Html.LabelFor(model => model.CR_Mas_User_Sub_Validation_UpDate, htmlAttributes: new { @class = "control-label col-md-2", style = "float:right;margin-top:3px;" })
+                    </div>
+
+                    <div class="form-group">
+
+                        <div class="col-md-10" style="margin-top:0px;">
+                            <div class="checkbox">
+                                @Html.CheckBox("CR_Mas_User_Sub_Validation_Delete", new { @onclick = "checkdelete();", style = "margin-right:-30px;margin-top:3px;" })
+                            </div>
+                        </div>
+                        @Html.LabelFor(model => model.CR_Mas_User_Sub_Validation_Delete, htmlAttributes: new { @class = "control-label col-md-2", style = "float:right;margin-top:3px;" })
+                    </div>
+
+
+                    <div class="form-group" hidden="hidden">
+
+                        <div class="col-md-10" style="margin-top:0px;">
+                            <div class="checkbox">
+                                @Html.CheckBox("CR_Mas_User_Sub_Validation_UnDelete", new { style = "margin-right:-30px;margin-top:3px;", @hidden = true })
+                            </div>
+                        </div>
+                        @Html.LabelFor(model => model.CR_Mas_User_Sub_Validation_UnDelete, htmlAttributes: new { @class = "control-label col-md-2", style = "float:right;margin-top:3px;", @hidden = true })
+                    </div>
+
+                    <div class="form-group">
+
+                        <div class="col-md-10" style="margin-top:0px;">
+                            <div class="checkbox">
+                                @Html.CheckBox("CR_Mas_User_Sub_Validation_Hold", new { @onclick = "checkhold();", style = "margin-right:-30px;margin-top:3px;" })
+                            </div>
+                        </div>
+                        @Html.LabelFor(model => model.CR_Mas_User_Sub_Validation_Hold, htmlAttributes: new { @class = "control-label col-md-2", style = "float:right;margin-top:3px;" })
+                    </div>
+
+                    <div class="form-group" hidden="hidden">
+
+                        <div class="col-md-10" style="margin-top:0px;">
+                            <div class="checkbox">
+                                @Html.CheckBox("CR_Mas_User_Sub_Validation_UnHold", new { style = "margin-right:-30px;margin-top:3px;", @hidden = true })
+                            </div>
+                        </div>
+                        @Html.LabelFor(model => model.CR_Mas_User_Sub_Validation_UnHold, htmlAttributes: new { @class = "control-label col-md-2", style = "float:right;margin-top:3px;", @hidden = true })
+                    </div>
+
+                    <div class="form-group">
+
+                        <div class="col-md-10" style="margin-top:0px;">
+                            <div class="checkbox">
+                                @Html.CheckBox("CR_Mas_User_Sub_Validation_Print", new { style = "margin-right:-30px;margin-top:3px;" })
+                            </div>
+                        </div>
+                        @Html.LabelFor(model => model.CR_Mas_User_Sub_Validation_Print, htmlAttributes: new { @class = "control-label col-md-2", style = "float:right;margin-top:3px;" })
+                    </div>
+
+
+
+                </div>
+                <div class="col-md-6" style="margin-top:0px">
+                    <div style="height:60px;"></div>
+                    <a href="/Subvalidation/Index/" class="btn" style="font-family:'Times New Roman';float:left;font-size:15px!important;width: 70px !important;padding-top:4px;height:30px; background-color: #F3B161; padding-right: 22px; border-radius: 0px; color: white;">انهاء</a>
+                </div>
+                <div class="col-md-6" style="margin-top:0px;">
+                    <div style="height:60px;"></div>
+                    <input type="submit" class="submit_btn" name="save" value="حفظ" style="margin-right:10px;" />
+                </div>
+                <div class="col-md-6" id="Message" style="font-family:'Times New Roman';font-size:16px;color:red;margin-Top: 50px; margin-right: 330px;position:absolute;">@TempData["TempModel"]</div>
+            }
+
+
+            <script>
+                //function fetch_list(val) {
+                //    alert("xxx" + val);
+                //    $.ajax({
+                //        type: 'post',
+                //        url: 'List_select/' + val,
+                //        data: {
+                //            get_option: val
+                //        },
+                //        success: function (response) {
+                //            alert("yyyy" + val);
+                //            document.getElementById("list").style.display = "block";
+                //            document.getElementById("list").innerHTML = response;
+                //        }
+                //    });
+
+                //}
+
+                $(document).ready(function () {
+                    $("#CR_Mas_Sup_System_Code").change(function () {
+                        $.get("/SubValidation/GetTaskList", { SystemCode: $("#CR_Mas_Sup_System_Code").val() }, function (data) {
+                            $("#CR_Mas_User_Sub_Validation_Tasks_Code").empty();
+                            $.each(data, function (index, row) {
+                                $("#CR_Mas_User_Sub_Validation_Tasks_Code").append("<option value= '" + row.CR_Mas_Sys_Tasks_Code + "'>" + row.CR_Mas_Sys_Tasks_Ar_Name + "</option>")
+                            });
+                        });
+                    })
+                });
+
+
+
+                function checkdelete() {
+                    if (document.getElementById('CR_Mas_User_Sub_Validation_Delete').checked) {
+                        $('#CR_Mas_User_Sub_Validation_UnDelete').prop('checked', true);
+                    } else {
+                        $('#CR_Mas_User_Sub_Validation_UnDelete').prop('checked', false);
+                    }
+                }
+
+
+                function checkhold() {
+                    if (document.getElementById('CR_Mas_User_Sub_Validation_Hold').checked) {
+                        $('#CR_Mas_User_Sub_Validation_UnHold').prop('checked', true);
+                    } else {
+                        $('#CR_Mas_User_Sub_Validation_UnHold').prop('checked', false);
+                    }
+                }
+
+
+              
+            </script>
+            @*@section Scripts {
+                    @Scripts.Render("~/bundles/jqueryval")
+                }*@
+        </div>
+    </div>
+</div>

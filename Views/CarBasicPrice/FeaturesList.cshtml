@@ -1,0 +1,187 @@
+﻿@model IEnumerable<RentCar.Models.MasCasFeaturesModel>
+
+<style>
+    #inputtext {
+        width: 250px;
+        height: 30px;
+        margin-right: 293px;
+        margin-left: -5px;
+        float: left;
+        margin-top: 5px;
+        border-color: #4A80B3;
+        border-radius: unset;
+    }
+
+    #SrchImg {
+        float: left;
+        margin-top: -5px;
+        margin-left: 0px;
+        margin-right: -35px;
+        position: relative;
+    }
+
+    td {
+        font-family: 'Times New Roman';
+        font-size: 14px;
+        padding: 5px 4px !important;
+        font-weight: 100;
+        color: #73A0C1;
+        border-color: #4A80B3;
+    }
+
+    th {
+        font-family: 'Times New Roman';
+        font-size: 16px;
+        font-weight: bold;
+        border-color: #4A80B3;
+        cursor: pointer;
+    }
+
+    .title_corp {
+        margin-top: -15px;
+    }
+
+    .table thead {
+        overflow-y: scroll;
+        flex-grow: 1;
+    }
+
+    .table tr a {
+        text-decoration: none;
+        color: black !important;
+        border-color: #4A80B3;
+    }
+
+    .table td {
+        color: #083555;
+        border-color: #4A80B3;
+    }
+
+    .table thead th {
+        color: #124f77;
+        border-color: #4A80B3;
+        text-align: center;
+        background: #D1EAFA;
+        position: sticky;
+        top: 0;
+    }
+
+    .title_corp {
+        font-family: 'Times New Roman';
+        font-size: 25px;
+    }
+
+    .subtitle_corp {
+        padding-top: 3px !important;
+        font-family: 'Times New Roman' !important;
+        color: #083555;
+    }
+
+    .table {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    #myTable td {
+        padding: 0 !important;
+    }
+</style>
+<div class="row" style="text-align:center;margin-bottom:25px;width:104.5%">
+    <div class="col-md-3 tab_price first" style="z-index:4;margin-left:-8px;">
+        <span class="step ">السعر الأساسي</span>
+    </div>
+    <div class="col-md-3 tab_price" style="z-index: 3; margin-left: -8px;">
+        <span class="step active">أسعار المميزات</span>
+    </div>
+    <div class="col-md-3 tab_price" style="z-index: 2; margin-left: -8px;">
+        <span class="step">أسعار الخيارات</span>
+    </div>
+    <div class="col-md-3 tab_price last" style="z-index:1;">
+        <span class="step">أسعار الاضافات</span>
+    </div>
+</div>
+<div class="" style="margin-top:20px;">
+
+    <div class="table-responsive" style="width:50%; height:300px;overflow:hidden;margin:auto;margin-top:25px;">
+
+        <table class="table table-bordered table-striped " id="myTable">
+            <thead>
+                <tr>
+                    <th hidden>
+                        @Html.DisplayNameFor(model => model.CR_Cas_Sup_Features_Model_Year)
+                    </th>
+                    <th hidden>
+                        @Html.DisplayNameFor(model => model.CR_Cas_Sup_Features_Lessor_Code)
+                    </th>
+                    <th hidden>
+                        @Html.DisplayNameFor(model => model.CR_Cas_Sup_Features_Code)
+                    </th>
+                    <th width="70%">
+                        الميزة
+                    </th>
+                    <th hidden>
+                        @Html.DisplayNameFor(model => model.CR_Cas_Sup_Features_Model_Code)
+                    </th>
+                    <th width="30%">
+                        القيمة
+                    </th>
+                </tr>
+            </thead>
+            <tbody id="tblF" style="height:230px">
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td hidden>
+                            @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Features_Model_Year)
+                        </td>
+                        <td hidden>
+                            @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Features_Lessor_Code)
+                        </td>
+                        <td hidden>
+                            @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Features_Code)
+                        </td>
+                        <td width="70%">
+                            @Html.DisplayFor(modelItem => item.CR_Mas_Sup_Features_Name)
+                        </td>
+                        <td hidden>
+                            @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Features_Model_Code)
+                        </td>
+                        <td width="30%">
+                            @Html.HiddenFor(modelItem => item.CR_Cas_Sup_Features_Code)
+                            <input type="text" id="@item.CR_Cas_Sup_Features_Code" name="F_@item.CR_Cas_Sup_Features_Code" style="width:100%;" class="input_form" autocomplete="off" oninput="this.value=this.value.replace(/[^0-9\.]/g,'')" onkeydown="inputChange()" onpaste="return false;" maxlength="6" value="0" />
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+
+</div>
+
+<script>
+    (function ($) {
+        $.fn.inputFilter = function (inputFilter) {
+            alert();
+            return this.on("input keydown keyup mousedown mouseup select contextmenu drop", function () {
+                if (inputFilter(this.value)) {
+                    this.oldValue = this.value;
+                    this.oldSelectionStart = this.selectionStart;
+                    this.oldSelectionEnd = this.selectionEnd;
+                } else if (this.hasOwnProperty("oldValue")) {
+                    this.value = this.oldValue;
+                    this.setSelectionRange(this.oldSelectionStart, this.oldSelectionEnd);
+                } else {
+                    this.value = "";
+                }
+            });
+        };
+    }(jQuery));
+
+    function inputChange(){
+        var id = document.activeElement.id;
+        id = '\"' + id + '\"';
+        document.getElementById(id).inputFilter(function (value) { return /^-?\d*[.]?\d{0,2}$/.test(value) && (value === "" || parseInt(value) <= 1000); });
+
+    }
+</script>

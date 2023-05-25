@@ -1,0 +1,153 @@
+﻿@model RentCar.Models.CR_Cas_Sup_Bank
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_CASLayout.cshtml";
+}
+
+<link href="~/BSys3Styles/CSS/style_form.css" rel="stylesheet" />
+<style>
+    .tooltip > .tooltip-inner {
+        background-color: #f00;
+    }
+
+    .tooltip > .tooltip-arrow {
+        border-top-color: #f00 !important;
+    }
+
+
+    #textErr {
+        position:absolute;
+        margin-top:-3px;
+        font-family:'Cairo';
+        color: red;
+        font-size: 11px;
+        font-weight: bold;
+    }
+</style>
+<div class="content">
+    <!-- Start Content-->
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card-box table-responsive" style="height:79vh">
+                    <div class="title_corp"> <h3>  الخدمات / بنوك / اضافة</h3></div>
+                    <div class="subtitle_corp"> تمكنك الصفحة من إضافة حساب بنكي جديد</div>
+                    <div class="hr_60"></div>
+                    <div class="hr_80"></div>
+                    <div class="corp_page">
+                        <div class="page_content" style="float:left;width:100%">
+
+                            @using (Html.BeginForm())
+                            {
+                                @Html.AntiForgeryToken()
+
+                                <div class="form-horizontal" style="margin-top:15px;min-height:35%">
+
+                                    <div class="row">
+                                        <div class="col-lg-5 offset-lg-7 col-md-12" style="height: 43px;" >
+                                            <div class="row">
+                                                <div class="col-md-4 padding_left_none">
+                                                    <label class="control-label">البنك</label><label id="asterisk">*</label>
+                                                </div>
+                                                <div class="col-md-6 padding_right_none">
+                                                    @Html.DropDownList("CR_Cas_Sup_Bank_Mas_Code", null, htmlAttributes: new { @class = "form-control" })
+                                                    @Html.ValidationMessageFor(model => model.CR_Cas_Sup_Bank_Mas_Code, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-5 offset-lg-7 col-md-12" style="height: 43px;">
+                                            <div class="row">
+                                                <div class="col-md-4 padding_left_none">
+                                                    <label class="control-label">رقم الحساب البنكي</label><label id="asterisk">*</label>
+                                                </div>
+                                                <div class="col-md-6 padding_right_none">
+                                                    @Html.EditorFor(model => model.CR_Cas_Sup_Bank_Account_No, new { htmlAttributes = new { @class = "form-control", maxlength = "50", autocomplete = "off", oninput = "this.value=this.value.replace(/[^a-zA-Z-0-9]/g,'')", style = "text-transform:uppercase;" } })
+                                                    <div><span id="textErr">@ViewBag.AccountNo</span></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="row">
+                                        <div class="col-lg-5 offset-lg-7 col-md-12" style="height:43px;">
+                                            <div class="row">
+                                                <div class="col-md-4 padding_left_none">
+                                                    <label class="control-label">وصف الحساب عربي</label><label id="asterisk">*</label>
+                                                </div>
+                                                <div class="col-md-8 padding_right_none">
+                                                    @Html.EditorFor(model => model.CR_Cas_Sup_Bank_Ar_Name, new { htmlAttributes = new { @class = "form-control", maxlength = "50", autocomplete = "off" } })
+                                                    @Html.ValidationMessageFor(model => model.CR_Cas_Sup_Bank_Ar_Name, "", new { @class = "text-danger" })
+                                                    <div><span id="textErr">@ViewBag.ArbName</span></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-5 offset-lg-7 col-md-12" style="height: 43px;">
+                                            <div class="row">
+                                                <div class="col-md-4 padding_left_none">
+                                                    <label class="control-label">وصف الحساب إنجليزي</label><label id="asterisk">*</label>
+                                                </div>
+                                                <div class="col-md-8 padding_right_none">
+                                                    @Html.EditorFor(model => model.CR_Cas_Sup_Bank_En_Name, new { htmlAttributes = new { @class = "form-control", maxlength = "50", autocomplete = "off", oninput = "this.value=this.value.replace(/[^a-zA-Z\\s]/g,'')" } })
+                                                    @Html.ValidationMessageFor(model => model.CR_Cas_Sup_Bank_En_Name, "", new { @class = "text-danger" })
+                                                    <div><span id="textErr">@ViewBag.EngName</span></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-8 offset-lg-4 col-md-12" style="height: 43px;">
+                                            <div class="row">
+                                                <div class="col-md-3 padding_left_none">
+                                                    <label class="control-label">الملاحظات</label>
+                                                </div>
+                                                <div class="col-md-8 padding_right_none" style="margin-right:7px;">
+                                                    @Html.EditorFor(model => model.CR_Cas_Sup_Bank_Reasons, new { htmlAttributes = new { @class = "form-control", maxlength = "100", autocomplete = "off" } })
+                                                    @Html.ValidationMessageFor(model => model.CR_Cas_Sup_Bank_Reasons, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    @*<div class="form-group">
+                                            <div class="col-md-offset-2 col-md-10">
+                                                <input type="submit" value="Create" class="btn btn-default" />
+                                            </div>
+                                        </div>*@
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 col-50" style="margin-top:170px;margin-bottom:0px;">
+                                        <input type="submit" name="save" value="حفظ" class="btn btn-primary waves-effect" style="float:right;" />
+                                    </div>
+                                    <div class="col-md-6 col-50" style="margin-top:170px;margin-bottom:0px;">
+                                        <a href="/CasSupBank/Index/" class="btn btn-primary waves-effect" style="float:left;">انهاء</a>
+                                    </div>
+                                </div>
+                            }
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+        window.addEventListener("load", function () {
+
+            if ('@TempData["TempModel"]'!="") {
+                toastr.success("تم الحفظ بنجاح");
+            }
+
+        });
+</script>

@@ -1,0 +1,195 @@
+﻿@model IEnumerable<RentCar.Models.CR_Cas_Company_Contract>
+
+<link href="~/Bootstrap_Arabic/bootstrap.min.css" rel="stylesheet" />
+<link href="~/Bootstrap_Arabic/bootstrap-big-grid.min.css" rel="stylesheet" />
+<link href="~/Bootstrap_Arabic/jquery.dataTables.min.css" type="text/css" rel="stylesheet" />
+<link href="~/Bootstrap_Arabic/font-awesome.css" type="text/css" rel="stylesheet" />
+<script src="~/Bootstrap_Arabic/jquery-v1.11.2.js"></script>
+<script src="~/Bootstrap_Arabic/bootstrap.min.js"></script>
+<script src="~/Bootstrap_Arabic/bootstrap.min.js"></script>
+<script src="~/Bootstrap_Arabic/jquery.dataTables.min.js"></script>
+<script src="https://res.cloudinary.com/dxfq3iotg/raw/upload/v1569818907/jquery.table2excel.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+    
+    td {
+        font-family: 'Times New Roman';
+        font-size: 14px;
+        padding: 5px 4px !important;
+        font-weight: 100;
+        color: #73A0C1;
+    }
+
+    th {
+        font-family: 'Times New Roman';
+        font-size: 16px;
+        font-weight: bold;
+        border-color: #4A80B3;
+        cursor: pointer;
+    }
+
+    .title_corp {
+        margin-top: -15px;
+    }
+
+    .table thead {
+        overflow-y: scroll;
+        flex-grow: 1;
+        border-color: #4A80B3;
+    }
+
+    .table tr a {
+        text-decoration: none;
+        color: black !important;
+    }
+
+    .table td {
+        border-color: #4A80B3;
+        color: #083555;
+    }
+
+    .table thead th {
+        color: #124f77;
+        border-color: #4A80B3;
+        text-align: center;
+        background: #D1EAFA;
+        position: sticky;
+        top: 0;
+    }
+
+    .title_corp {
+        font-family: 'Times New Roman';
+        font-size: 25px;
+    }
+
+    .subtitle_corp {
+        padding-top: 3px !important;
+        font-family: 'Times New Roman' !important;
+        color: #083555;
+    }
+
+</style>
+<div class="table-responsive" style="width:99%; height:373px; overflow:auto;border: 1px solid #4A80B3;">
+    <div id="dtBasicExample_print">
+        <table class="table table-bordered table-striped " id="myTable">
+            <thead>
+                <tr>
+                    <th width="20%">
+                        رقم العقد
+                    </th>
+                    <th>
+                        إسم الشركة
+                    </th>
+                    <th width="10%">
+                        تاريخه
+                    </th>
+                    <th width="10%">
+                        بدايته
+                    </th>
+                    <th width="10%">
+                        نهايته
+                    </th>
+                    <th width="10%">
+                        الحالة
+                    </th>
+
+                </tr>
+            </thead>
+            <tbody id="tbl">
+                @foreach (var item in Model)
+                {
+                    if (item.CR_Cas_Company_Contract_Status == "A")
+                    {
+                        <tr>
+                            <td>
+                                <a href="~/CompanyContractTaxOwed/details/@Html.DisplayFor(modelItem => item.CR_Cas_Company_Contract_No)">
+                                    @Html.DisplayFor(modelItem => item.CR_Cas_Company_Contract_No)
+                                </a>
+                            </td>
+                            <td>
+                                <a href="~/CompanyContractTaxOwed/details/@Html.DisplayFor(modelItem => item.CR_Cas_Company_Contract_No)">
+                                    @Html.DisplayFor(modelItem => item.CR_Mas_Com_Lessor.CR_Mas_Com_Lessor_Ar_Short_Name)
+                                </a>
+                            </td>
+                            <td>
+                                <a href="~/CompanyContractTaxOwed/details/@Html.DisplayFor(modelItem => item.CR_Cas_Company_Contract_No)">
+                                    @item.CR_Cas_Company_Contract_Date.Value.ToString("yyyy/MM/dd")
+                                </a>
+                            </td>
+                            <td>
+                                <a href="~/CompanyContractTaxOwed/details/@Html.DisplayFor(modelItem => item.CR_Cas_Company_Contract_No)">
+                                    @item.CR_Cas_Company_Contract_Start_Date.Value.ToString("yyyy/MM/dd")
+                                </a>
+                            </td>
+                            <td>
+                                <a href="~/CompanyContractTaxOwed/details/@Html.DisplayFor(modelItem => item.CR_Cas_Company_Contract_No)">
+                                    @item.CR_Cas_Company_Contract_End_Date.Value.ToString("yyyy/MM/dd")
+                                </a>
+                            </td>
+
+                            <td>
+
+                                <a href="~/CompanyContractTaxOwed/details/@Html.DisplayFor(modelItem => item.CR_Cas_Company_Contract_No)">
+                                    <label>نشط</label>
+                                </a>
+
+                            </td>
+                        </tr>
+                    }
+                    else if (item.CR_Cas_Company_Contract_Status == "E")
+                    {
+                        <tr>
+                            <td>
+                                <a href="~/CompanyContractTaxOwed/details/@Html.DisplayFor(modelItem => item.CR_Cas_Company_Contract_No)" style="color:red">
+                                    @Html.DisplayFor(modelItem => item.CR_Cas_Company_Contract_No)
+                                </a>
+                            </td>
+                            <td>
+                                <a href="~/CompanyContractTaxOwed/details/@Html.DisplayFor(modelItem => item.CR_Cas_Company_Contract_No)" style="color:red">
+                                    @Html.DisplayFor(modelItem => item.CR_Mas_Com_Lessor.CR_Mas_Com_Lessor_Ar_Short_Name)
+                                </a>
+                            </td>
+                            <td>
+                                <a href="~/CompanyContractTaxOwed/details/@Html.DisplayFor(modelItem => item.CR_Cas_Company_Contract_No)" style="color:red">
+                                    @if (item.CR_Cas_Company_Contract_Date != null)
+                                    {
+                                        @item.CR_Cas_Company_Contract_Date.Value.ToString("yyyy/MM/dd")
+                                    }
+                                   
+                                </a>
+                            </td>
+                            <td>
+                                <a href="~/CompanyContractTaxOwed/details/@Html.DisplayFor(modelItem => item.CR_Cas_Company_Contract_No)" style="color:red">
+                                    @if (item.CR_Cas_Company_Contract_Start_Date != null)
+                                    {
+                                        @item.CR_Cas_Company_Contract_Start_Date.Value.ToString("yyyy/MM/dd")
+                                    }
+
+                                </a>
+                            </td>
+                            <td>
+                                <a href="~/CompanyContractTaxOwed/details/@Html.DisplayFor(modelItem => item.CR_Cas_Company_Contract_No)" style="color:red">
+                                    @if (item.CR_Cas_Company_Contract_End_Date != null)
+                                    {
+                                        @item.CR_Cas_Company_Contract_End_Date.Value.ToString("yyyy/MM/dd")
+                                    }
+
+                                </a>
+                            </td>
+
+                            <td>
+
+                                <a href="~/CompanyContractTaxOwed/details/@Html.DisplayFor(modelItem => item.CR_Cas_Company_Contract_No)" style="color:red">
+                                    <label>منتهي</label>
+                                </a>
+
+                            </td>
+                        </tr>
+                    }
+
+                }
+            </tbody>
+        </table>
+    </div>
+
+</div>

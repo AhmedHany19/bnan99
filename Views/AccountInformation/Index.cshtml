@@ -1,0 +1,112 @@
+﻿@model IEnumerable<RentCar.Models.CR_Cas_User_Information>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_CASLayout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CR_Cas_User_Information_PassWord)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CR_Cas_User_Information_Auth_Branch)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CR_Cas_User_Information_Auth_System)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CR_Cas_User_Information_Branch_Code)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CR_Cas_User_Information_Ar_Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CR_Cas_User_Information_En_Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CR_Cas_User_Information_Fr_Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CR_Cas_User_Information_Mobile)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CR_Cas_User_Information_Signature)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CR_Cas_User_Information_Emaile)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CR_Cas_User_Information_Status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CR_Cas_User_Information_Reasons)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CR_Cas_User_Information_Image)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CR_Mas_Com_Lessor.CR_Mas_Com_Lessor_Logo)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CR_Cas_User_Information_PassWord)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CR_Cas_User_Information_Auth_Branch)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CR_Cas_User_Information_Auth_System)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CR_Cas_User_Information_Branch_Code)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CR_Cas_User_Information_Ar_Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CR_Cas_User_Information_En_Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CR_Cas_User_Information_Fr_Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CR_Cas_User_Information_Mobile)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CR_Cas_User_Information_Signature)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CR_Cas_User_Information_Emaile)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CR_Cas_User_Information_Status)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CR_Cas_User_Information_Reasons)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CR_Cas_User_Information_Image)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CR_Mas_Com_Lessor.CR_Mas_Com_Lessor_Logo)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.CR_Cas_User_Information_Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.CR_Cas_User_Information_Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.CR_Cas_User_Information_Id })
+        </td>
+    </tr>
+}
+
+</table>

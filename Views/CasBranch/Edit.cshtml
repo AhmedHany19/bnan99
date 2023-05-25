@@ -1,0 +1,910 @@
+﻿@model RentCar.Models.CR_Cas_Sup_Branch
+
+@{
+    Layout = "~/Views/Shared/_CASLayout.cshtml";
+}
+<link href="~/BSys3Styles/CSS/style_form.css" rel="stylesheet" />
+<style>
+    .tooltip > .tooltip-inner {
+        background-color: #f00;
+    }
+
+    .tooltip > .tooltip-arrow {
+        border-top-color: #f00 !important;
+    }
+</style>
+
+<div class="content">
+
+    <!-- Start Content-->
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card-box table-responsive">
+                    <div class="title_corp"><h3> الشركة / الفروع / تعديل</h3></div>
+                    <div class="subtitle_corp">
+                        تمكنك هذه الصفحة من تعديل بيانات فرع
+                    </div>
+                    <div class="hr_60"></div>
+                    <div class="hr_80"></div>
+                    <div class="corp_page " style=" padding-top: 20px;">
+                        <div class="page_content">
+                            @*@using (Html.BeginForm("Edit", "CasBranch", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                {*@
+                            <form id="BranchEditForm" action="/CasBranch/Edit" enctype="multipart/form-data" method="post" novalidate data-parsley-validate>
+                                @Html.AntiForgeryToken()
+
+                                <div class="form-horizontal">
+
+                                    <input type="text" name="SignDirector" id="SignDirector" value="@ViewBag.path" hidden>
+
+                                    <div class="form-group" hidden="hidden">
+                                        @Html.LabelFor(model => model.CR_Cas_Sup_Branch_Code, htmlAttributes: new { @class = "label_form col-md-2" })
+
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(model => model.CR_Cas_Sup_Branch_Code, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.CR_Cas_Sup_Branch_Code, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group" hidden="hidden">
+                                        @Html.LabelFor(model => model.CR_Cas_Sup_Lessor_Code, "CR_Cas_Sup_Lessor_Code", htmlAttributes: new { @class = "label_form col-md-2" })
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(model => model.CR_Cas_Sup_Lessor_Code, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.CR_Cas_Sup_Lessor_Code, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-8 col-md-12" style="float:right;">
+                                            <div class="form-group row">
+                                                <div class="col-md-3 col-md-6 col-form-label labelresp6 padding_left_none">
+                                                    <label id="" class="lbl" style=" float:right">@Html.LabelFor(model => model.CR_Cas_Sup_Branch_Ar_Name)<label id="asterisk">*</label></label>
+                                                </div>
+                                                <div class="col-md-9 col-md-6 inputresp6 padding_right_none">
+                                                    @Html.TextBoxFor(model => model.CR_Cas_Sup_Branch_Ar_Name, htmlAttributes: new { @class = "form-control ", style = "float:right;", onkeypress = "return CheckArabicCharactersOnly(event);", onkeyup = "movetoNext('CR_Cas_Sup_Branch_Ar_Short_Name')", onpaste = "return false;", maxlength = "100", ReadOnly = "ReadOnly" })
+
+                                                </div>
+
+
+                                            </div>
+                                            <div class="texterr" style="float:right">@ViewBag.LRExistArLng</div>
+                                        </div>
+
+                                        <div class="col-lg-4 col-md-12" style="float:right;">
+                                            <div class="form-group row">
+                                                <div class="col-md-6 label6 padding_left_none">
+                                                    <label class="lbl" style=" float:right">@Html.LabelFor(model => model.CR_Cas_Sup_Branch_Ar_Short_Name)<label id="asterisk">*</label></label>
+                                                </div>
+                                                <div class="col-md-6 input6 padding_right_none">
+                                                    @Html.TextBoxFor(model => model.CR_Cas_Sup_Branch_Ar_Short_Name, htmlAttributes: new { @class = "form-control", style = "float:right;", onkeyup = "movetoNext('CR_Cas_Sup_Branch_En_Name')", onkeypress = "return CheckArabicCharactersOnly(event);", onpaste = "return false;", maxlength = "15", ReadOnly = "ReadOnly" })
+
+                                                </div>
+                                            </div>
+                                            <div class="texterr" style="float:right">@ViewBag.LRExistArSh</div>
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="row" style="">
+                                        <div class="col-lg-8 col-md-12" style="float:right;">
+                                            <div class="form-group row">
+                                                <div class="col-md-3 col-md-6 col-form-label labelresp6 padding_left_none">
+                                                    <label class="lbl" style=" float:right">@Html.LabelFor(model => model.CR_Cas_Sup_Branch_En_Name)<label id="asterisk">*</label></label>
+                                                </div>
+                                                <div class="col-md-9 col-md-6 inputresp6 padding_right_none">
+                                                    <input type="text" id="CR_Cas_Sup_Branch_En_Name" name="CR_Cas_Sup_Branch_En_Name" class="form-control" style="float:right;" onkeyup="movetoNext('CR_Cas_Sup_Branch_En_Short_Name')" oninput="this.value=this.value.replace(/[^a-zA-Z\s]/g,'')" autocomplete="off" onpaste="return false;" readonly maxlength="100" value="@ViewBag.CR_Cas_Sup_Branch_En_Name">
+                                                </div>
+                                            </div>
+                                            <div class="texterr" style="float:right">@ViewBag.LRExistEnLng</div>
+                                        </div>
+
+                                        <div class="col-lg-4 col-md-12" style="float:right;">
+                                            <div class="form-group row">
+                                                <div class="col-md-6 label6 padding_left_none">
+                                                    <label class="lbl" style=" float:right">@Html.LabelFor(model => model.CR_Cas_Sup_Branch_En_Short_Name)<label id="asterisk">*</label></label>
+                                                </div>
+                                                <div class="col-md-6 input6 padding_right_none">
+                                                    <input type="text" id="CR_Cas_Sup_Branch_En_Short_Name" name="CR_Cas_Sup_Branch_En_Short_Name" class="form-control" style="float:right;" onkeyup="movetoNext('CR_Cas_Sup_Branch_Government_No')" oninput="this.value=this.value.replace(/[^a-zA-Z\s]/g,'')" autocomplete="off" onpaste="return false;" readonly maxlength="30" value="@ViewBag.CR_Cas_Sup_Branch_En_Short_Name">
+                                                </div>
+
+                                            </div>
+                                            <div class="texterr" style="float:right">@ViewBag.LRExistEnSh</div>
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="row" style="">
+                                        <div class="col-lg-4 col-md-12" style="float:right;">
+                                            <div class="row">
+                                                <div class="col-md-6 label6 padding_left_none">
+                                                    <label id="" class="lbl" style=" float:right">@Html.LabelFor(model => model.CR_Cas_Sup_Branch_Government_No)<label id="asterisk">*</label></label>
+
+                                                </div>
+                                                <div class="col-md-6 input6 padding_right_none">
+                                                    @Html.TextBoxFor(model => model.CR_Cas_Sup_Branch_Government_No, htmlAttributes: new { @class = "form-control ", style = "float:right;width:100%;", onkeyup = "movetoNext('CR_Cas_Sup_Branch_Commercial_Registration_No')", autocomplete = "off", oninput = "this.value=this.value.replace(/[^0-9]/g,'')", onpaste = "return false;", ReadOnly = "ReadOnly" })
+                                                    @*@Html.TextBoxFor(model => model.CR_Cas_Sup_Branch_Government_No, htmlAttributes: new { @class = "form-control ", style = "float:right;width:100%;", onkeyup = "movetoNext('CR_Cas_Sup_Branch_Commercial_Registration_No')", autocomplete = "off", oninput = "this.value=this.value.replace(/[^0-9]/g,'')", onpaste = "return false;", maxlength = "10", minlength = "10", ReadOnly = "ReadOnly" })*@
+                                                </div>
+
+
+                                            </div>
+                                            <div class="texterr" style="float:right">@ViewBag.GovNumber</div>
+                                        </div>
+
+
+                                        <div class="col-lg-4 col-md-12" style="float:right;">
+                                            <div class="row">
+                                                <div class="col-md-6 label6 padding_left_none">
+                                                    <label id="" class="lbl" style=" float:right">@Html.LabelFor(model => model.CR_Cas_Sup_Branch_Commercial_Registration_No)</label>
+
+                                                </div>
+                                                <div class="col-md-6 input6 padding_right_none">
+                                                    @Html.TextBoxFor(model => model.CR_Cas_Sup_Branch_Commercial_Registration_No, htmlAttributes: new { @class = "form-control ", style = "float:right;width:100%", onkeyup = "movetoNext('CR_Cas_Sup_Branch_Tax_No')", autocomplete = "off", oninput = "this.value=this.value.replace(/[^0-9]/g,'')", onpaste = "return false;", maxlength = "10" })
+                                                </div>
+
+
+                                            </div>
+                                            <div class="texterr" style="float:right"></div>
+                                        </div>
+
+
+                                        <div class="col-lg-4 col-md-12" style="float:right;">
+                                            <div class="row">
+                                                <div class="col-md-6 label6 padding_left_none">
+                                                    @*@Html.LabelFor(model => model.CR_Cas_Sup_Branch_Tax_No, htmlAttributes: new { @class = "lbl col-md-6", style = "float:right" })*@
+                                                    <label id="" class="lbl" style=" float:right">@Html.LabelFor(model => model.CR_Cas_Sup_Branch_Tax_No)<label id="asterisk">*</label></label>
+
+                                                </div>
+                                                <div class="col-md-6 input6 padding_right_none">
+                                                    @Html.TextBoxFor(model => model.CR_Cas_Sup_Branch_Tax_No, htmlAttributes: new { @class = "form-control ", style = "float:right;width:100%;", onkeyup = "movetoNext('CR_Cas_Sup_Branch_Tel')", autocomplete = "off", oninput = "this.value=this.value.replace(/[^0-9]/g,'')", onpaste = "return false;", ReadOnly = "ReadOnly" })
+                                                    @*@Html.TextBoxFor(model => model.CR_Cas_Sup_Branch_Tax_No, htmlAttributes: new { @class = "form-control ", style = "float:right;width:100%;", onkeyup = "movetoNext('CR_Cas_Sup_Branch_Tel')", autocomplete = "off", oninput = "this.value=this.value.replace(/[^0-9]/g,'')", onpaste = "return false;", maxlength = "15", minlength = "15", ReadOnly = "ReadOnly" })*@
+                                                </div>
+
+
+                                            </div>
+                                            <div class="texterr" style="float:right"></div>
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="row" style="">
+                                        <div class="col-lg-4 col-md-12" style="float:right;">
+                                            <div class="row">
+                                                <div class="col-md-6 label6 padding_left_none">
+                                                    <label id="" class="lbl" style=" float:right">@Html.LabelFor(model => model.CR_Cas_Sup_Branch_Tel)</label>
+                                                </div>
+                                                <div class="col-md-6 input6 padding_right_none">
+                                                    @Html.TextBoxFor(model => model.CR_Cas_Sup_Branch_Tel, htmlAttributes: new { @class = "form-control ", style = "float:right;width:100%;", onkeyup = "movetoNext('CR_Cas_Sup_Branch_Mobile')", autocomplete = "off", oninput = "this.value=this.value.replace(/[^0-9]/g,'')", onpaste = "return false;", maxlength = "15" })
+                                                </div>
+
+
+                                            </div>
+                                            <div class="texterr" style="float:right"></div>
+                                        </div>
+
+
+                                        <div class="col-lg-4 col-md-12" style="float:right;">
+                                            <div class="row">
+                                                <div class="col-md-6 label6 padding_left_none">
+                                                    <label id="" class="lbl" style=" float:right">@Html.LabelFor(model => model.CR_Cas_Sup_Branch_Mobile)</label>
+                                                </div>
+                                                <div class="col-md-6 input6 padding_right_none">
+                                                    @Html.TextBoxFor(model => model.CR_Cas_Sup_Branch_Mobile, htmlAttributes: new { @class = "form-control ", style = "float:right;width:100%;", onkeyup = "movetoNext('CR_Cas_Sup_Branch_Signature_Ar_Director_Name')", autocomplete = "off", oninput = "this.value=this.value.replace(/[^0-9]/g,'')", onpaste = "return false;", maxlength = "15" })
+                                                </div>
+
+                                            </div>
+                                            <div class="texterr" style="float:right"></div>
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="row" style="">
+                                        <div class="col-lg-4 col-md-12" style="float:right;">
+                                            <div class="row">
+                                                <div class="col-md-6 label6 padding_left_none">
+                                                    @*@Html.LabelFor(model => model.CR_Cas_Sup_Branch_Signature_Ar_Director_Name, htmlAttributes: new { @class = "lbl col-md-12", style = "float:right" })*@
+                                                    <label id="" class="lbl" style=" float:right">@Html.LabelFor(model => model.CR_Cas_Sup_Branch_Signature_Ar_Director_Name)<label id="asterisk">*</label></label>
+                                                </div>
+                                                <div class="col-md-6 input6 padding_right_none">
+                                                    @Html.TextBoxFor(model => model.CR_Cas_Sup_Branch_Signature_Ar_Director_Name, htmlAttributes: new { @class = "form-control ", style = "float:right;width:100%;", onkeyup = "movetoNext('CR_Cas_Sup_Branch_Signature_En_Director_Name')", autocomplete = "off", onkeypress = "return CheckArabicCharactersOnly(event);", onpaste = "return false;", maxlength = "30" })
+                                                </div>
+
+
+                                            </div>
+                                            <div class="texterr" style="float:right"></div>
+                                        </div>
+
+
+                                        <div class="col-lg-4 col-md-12" style="float:right;">
+                                            <div class="row">
+                                                <div class="col-md-6 label6 padding_left_none">
+                                                    @*@Html.LabelFor(model => model.CR_Cas_Sup_Branch_Signature_En_Director_Name, htmlAttributes: new { @class = "lbl col-md-12", style = "float:right" })*@
+                                                    <label id="" class="lbl" style=" float:right">@Html.LabelFor(model => model.CR_Cas_Sup_Branch_Signature_En_Director_Name)<label id="asterisk">*</label></label>
+                                                </div>
+                                                <div class="col-md-6 input6 padding_right_none">
+                                                    <input type="text" id="CR_Cas_Sup_Branch_Signature_En_Director_Name" name="CR_Cas_Sup_Branch_Signature_En_Director_Name" class="form-control" style="float:right;width:100%;" onkeyup="movetoNext('CR_Cas_Sup_Branch_Stamp')" oninput="this.value=this.value.replace(/[^a-zA-Z\s]/g,'')" autocomplete="off" onpaste="return false;" maxlength="30" required value="@ViewBag.directorEnName">
+                                                </div>
+
+
+                                            </div>
+                                            <div class="texterr" style="float:right"></div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="row" style="margin-bottom:10px;margin-top:10px;">
+
+
+                                        <div class="col-md-6 label6" style="float:right;">
+                                            <div class="row">
+
+                                                <div class="col-lg-4 col-md-12" style=" float:right">
+                                                    @*@Html.LabelFor(model => model.CR_Cas_Sup_Branch_Signature_Director, htmlAttributes: new { @class = "lbl col-md-12", style = "float:right;" })*@
+                                                    <label id="" class="lbl " style=" float:right">@Html.LabelFor(model => model.CR_Cas_Sup_Branch_Signature_Director)<label id="asterisk">*</label></label>
+                                                </div>
+                                                <div class="col-lg-4 col-md-12" style=" float:right">
+                                                    @*@Html.TextBoxFor(model => model.CR_Mas_Com_Lessor_Signature_Director, htmlAttributes: new { @class = "form-control", style = "float:right;", autocomplete = "off" })*@
+                                                    @*<input type="file" name="imgDirector" class="form-control" style="float:right;width:100%; object-fit: fill;" accept="image/*" id="CR_Cas_Sup_Branch_Signature_Director" onchange="loadFilesignature(event)" onkeyup="movetoNext('CR_Cas_Sup_Branch_Start_Day')" />*@
+                                                    <div class="input-group">
+                                                        <span class="input-group-btn" style="width:100%">
+                                                            <span class="btn btn-primary" onclick="$(this).parent().find('input[type=file]').click();" style="width:100%;height:35px;width:100%;line-height:20px;">اختيار توقيع المدير</span>
+                                                            <input name="imgDirector" type="file" class="form-control " style="display:none;float:right;width:100%; object-fit: fill;" accept="image/*" id="CR_Cas_Sup_Branch_Signature_Director" onchange="loadFilesignature(event)" onkeyup="movetoNext('CR_Cas_Sup_Branch_Start_Day')">
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <div>
+
+                                                    @if (Model.CR_Cas_Sup_Branch_Signature_Director != null && ViewBag.path != "")
+                                                    {
+                                                        <img src="@Url.Content(Model.CR_Cas_Sup_Branch_Signature_Director)" id="signature" class="zoom" width="120" height="60" style="margin-top: -7px; float: right; margin-left: 0px; width: 120px; height: 60px; border: solid 1px #e7e7e7" />
+                                                    }
+                                                    else
+                                                    {
+                                                        <img id="signature" class="zoom" width="120" height="60" style="margin-top: -7px; float: right; margin-left: 0px; width: 120px; height: 60px;object-fit:cover;border:solid 1px #e7e7e7" />
+                                                    }
+
+
+                                                </div>
+                                            </div>
+                                            <div class="texterr" style="float:right"></div>
+                                        </div>
+                                    </div>
+
+
+
+
+                                    <div class="row" style="margin-top:25px;" hidden>
+                                        <div class="col-lg-4 col-md-12">
+                                            <div class="row">
+                                                <div class="col-md-6 label6 padding_left_none">
+                                                    @*@Html.LabelFor(model => model.CR_Cas_Sup_Branch_Start_Day, "بداية الأسبوع", htmlAttributes: new { @class = "lbl col-md-12", style = "float:right" })*@
+                                                    <label id="" class="lbl" style=" float:right">بداية الأسبوع<label id="asterisk">*</label></label>
+                                                </div>
+                                                <div class="col-md-6 input6 padding_right_none">
+                                                    @*@Html.TextBoxFor(model => model.CR_Cas_Sup_Branch_Start_Day, htmlAttributes: new { @class = "form-control ", style = "float:right;", onkeyup = "movetoNext('CR_Cas_Sup_Branch_End_Day')", autocomplete = "off", oninput = "this.value=this.value.replace(/[^0-9]/g,'')", onpaste = "return false;", maxlength = "100" })*@
+                                                    @Html.DropDownList("listStart", ViewData["listStart"] as SelectList, new { @class = "form-control", style = "float:right" })
+                                                    <div class="texterr" style="float:right"></div>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-12">
+                                            <div class="row">
+                                                <div class="col-md-6 label6 padding_left_none">
+                                                    @*@Html.LabelFor(model => model.CR_Cas_Sup_Branch_End_Day, "نهاية الأسبوع", htmlAttributes: new { @class = "lbl col-md-12", style = "float:right;width:200px;" })*@
+                                                    <label id="" class="lbl" style=" float:right">نهاية الأسبوع<label id="asterisk">*</label></label>
+                                                </div>
+                                                <div class="col-md-6 input6 padding_right_none">
+                                                    @* @Html.TextBoxFor(model => model.CR_Cas_Sup_Branch_End_Day, htmlAttributes: new { @class = "form-control", style = "float:right;", onkeyup = "movetoNext('CR_Cas_Sup_Branch_Duration_One_Start_Time')", autocomplete = "off", oninput = "this.value=this.value.replace(/[^0-9]/g,'')", onpaste = "return false;", maxlength = "30" })*@
+                                                    @Html.DropDownList("listEnd", ViewData["listEnd"] as SelectList, new { @class = "form-control", style = "float:right" })
+                                                    <div class="texterr" style="float:right"></div>
+                                                </div>
+
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+
+                                    <div class="row" style="" hidden>
+                                        <div class="col-lg-4 col-md-12" style="float:right;">
+                                            <div class="row">
+                                                <div class="col-md-6 label6">
+                                                    @*@Html.LabelFor(model => model.CR_Cas_Sup_Branch_Duration_One_Start_Time, "", htmlAttributes: new { @class = "lbl col-md-12", style = "float:right" })*@
+                                                    <label id="" class="lbl" style=" float:right">بداية الدوام الأول<label id="asterisk">*</label></label>
+                                                </div>
+                                                <div class="col-md-6 input6">
+                                                    <input type="time" id="CR_Cas_Sup_Branch_Duration_One_Start_Time" name="CR_Cas_Sup_Branch_Duration_One_Start_Time" class="form-control" style="float:right; text-align:center" onkeyup="movetoNext('CR_Cas_Sup_Branch_Duration_One_End_Time')" autocomplete="off" onpaste="return false;" maxlength="100" value="@ViewBag.CR_Cas_Sup_Branch_Duration_One_Start_Time">
+                                                </div>
+
+
+                                            </div>
+                                            <div class="texterr" style="float:right"></div>
+                                        </div>
+
+                                        <div class="col-lg-4 col-md-12" style="float:right;">
+                                            <div class="row">
+                                                <div class="col-md-6 label6 padding_left_none">
+                                                    @*@Html.LabelFor(model => model.CR_Cas_Sup_Branch_Duration_One_End_Time, "نهاية الدوام", htmlAttributes: new { @class = "lbl col-md-12", style = "float:right;width:200px;" })*@
+                                                    <label id="" class="lbl" style=" float:right">نهاية الدوام<label id="asterisk">*</label></label>
+                                                </div>
+                                                <div class="col-md-6 input6">
+                                                    <input type="time" id="CR_Cas_Sup_Branch_Duration_One_End_Time" name="CR_Cas_Sup_Branch_Duration_One_End_Time" class="form-control" style="float:right; text-align:center" onkeyup="movetoNext('CR_Cas_Sup_Branch_Duration_Tow_Start_Time')" autocomplete="off" onpaste="return false;" maxlength="100" value="@ViewBag.CR_Cas_Sup_Branch_Duration_One_End_Time">
+                                                </div>
+
+                                            </div>
+                                            <div class="texterr" style="float:right"></div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="row" style="" hidden>
+                                        <div class="col-lg-4 col-md-12" style="float:right;">
+                                            <div class="row">
+                                                <div class="col-md-6 label6">
+                                                    @*@Html.LabelFor(model => model.CR_Cas_Sup_Branch_Duration_Tow_Start_Time, "بداية الدوام الثاني", htmlAttributes: new { @class = "lbl col-md-12", style = "float:right" })*@
+                                                    <label id="" class="lbl" style=" float:right">بداية الدوام الثاني</label>
+                                                </div>
+                                                <div class="col-md-6 input6">
+                                                    <input type="time" id="CR_Cas_Sup_Branch_Duration_Tow_Start_Time" name="CR_Cas_Sup_Branch_Duration_Tow_Start_Time" class="form-control" style="float:right; text-align:center" onkeyup="movetoNext('CR_Cas_Sup_Branch_Duration_Tow_End_Time')" autocomplete="off" onpaste="return false;" maxlength="100" value="@ViewBag.CR_Cas_Sup_Branch_Duration_Tow_Start_Time">
+                                                </div>
+
+
+                                            </div>
+                                            <div class="texterr" style="float:right"></div>
+                                        </div>
+
+                                        <div class="col-lg-4 col-md-12" style="float:right;">
+                                            <div class="row">
+                                                <div class="col-md-6 label6">
+                                                    @*@Html.LabelFor(model => model.CR_Cas_Sup_Branch_Duration_Tow_End_Time, "نهاية الدوام", htmlAttributes: new { @class = "lbl col-md-12", style = "float:right;width:200px;" })*@
+                                                    <label id="" class="lbl" style=" float:right">نهاية الدوام</label>
+                                                </div>
+                                                <div class="col-md-6 input6">
+                                                    <input type="time" id="CR_Cas_Sup_Branch_Duration_Tow_End_Time" name="CR_Cas_Sup_Branch_Duration_Tow_End_Time" class="form-control" style="float:right; text-align:center" onkeyup="movetoNext('CR_Cas_Sup_Branch_Duration_Three_Start_Time')" autocomplete="off" onpaste="return false;" maxlength="100" value="@ViewBag.CR_Cas_Sup_Branch_Duration_Tow_End_Time">
+                                                </div>
+
+
+                                            </div>
+                                            <div class="texterr" style="float:right"></div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="row" style="" hidden>
+                                        <div class="col-lg-4 col-md-12" style="float:right;">
+                                            <div class="row">
+                                                <div class="col-md-6 label6">
+                                                    @*@Html.LabelFor(model => model.CR_Cas_Sup_Branch_Duration_Three_Start_Time, "بداية الدوام الثالث", htmlAttributes: new { @class = "lbl col-md-12", style = "float:right" })*@
+                                                    <label id="" class="lbl" style=" float:right">بداية الدوام الثالث</label>
+                                                </div>
+                                                <div class="col-md-6 input6">
+                                                    <input type="time" id="CR_Cas_Sup_Branch_Duration_Three_Start_Time" name="CR_Cas_Sup_Branch_Duration_Three_Start_Time" class="form-control" style="float:right; text-align:center" onkeyup="movetoNext('CR_Cas_Sup_Branch_Duration_Three_End_Time')" autocomplete="off" onpaste="return false;" maxlength="100" value="@ViewBag.CR_Cas_Sup_Branch_Duration_Three_Start_Time">
+                                                </div>
+
+
+                                            </div>
+                                            <div class="texterr" style="float:right"></div>
+                                        </div>
+
+                                        <div class="col-lg-4 col-md-12" style="float:right;">
+                                            <div class="row">
+                                                <div class="col-md-6 label6">
+                                                    @*@Html.LabelFor(model => model.CR_Cas_Sup_Branch_Duration_Three_End_Time, "نهاية الدوام", htmlAttributes: new { @class = "lbl col-md-12", style = "float:right;width:200px;" })*@
+                                                    <label id="" class="lbl" style=" float:right">نهاية الدوام</label>
+                                                </div>
+                                                <div class="col-md-6 input6">
+                                                    <input type="time" id="CR_Cas_Sup_Branch_Duration_Three_End_Time" name="CR_Cas_Sup_Branch_Duration_Three_End_Time" class="form-control" style="float:right; text-align:center" onkeyup="movetoNext('CR_MAS_SUP_City_Code')" autocomplete="off" onpaste="return false;" maxlength="100" value="@ViewBag.CR_Cas_Sup_Branch_Duration_Three_End_Time">
+                                                </div>
+
+                                            </div>
+                                            <div class="texterr" style="float:right"></div>
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="form-group" hidden="hidden">
+                                        @Html.LabelFor(model => model.CR_Cas_Sup_Branch_Status, htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(model => model.CR_Cas_Sup_Branch_Status, new { htmlAttributes = new { @class = "form-control" } })
+                                        </div>
+                                    </div>
+
+                                    <div class="row" style="">
+                                        <div class="col-lg-4 col-md-12" style="float:right;">
+                                            <div class="row">
+                                                <label class="lbl col-md-6 label6 padding_left_none" style="float:right;">إسم المدينة</label>
+                                                <div class="col-md-6 input6 padding_right_none">
+                                                    @Html.DropDownList("CR_MAS_SUP_City_Code", null, "--- الرجاء إختر المدينة ---", new { @class = "form-control", style = "float:right;width:100%", onkeyup = "movetoNext('CR_MAS_SUP_Region_Ar_Name')", @disabled = "disabled" })
+
+                                                </div>
+                                            </div>
+                                            <div class="texterr" style="float:right"></div>
+                                        </div>
+
+
+                                        <div class="col-lg-4 col-md-12" style="float:right;">
+                                            <div class="row">
+                                                <label class="lbl col-md-6 label6 padding_left_none" style="float:right;"> إسم المنطقة</label>
+                                                <div class="col-md-6 input6 padding_right_none">
+                                                    <input autocomplete="no" class="form-control " id="CR_MAS_SUP_Region_Ar_Name" name="CR_MAS_SUP_Region_Ar_Name"
+                                                           onkeypress="return CheckArabicCharactersOnly(event);" onkeyup="movetoNext('CR_Mas_Address_Ar_District')"
+                                                           style="float:right; width:100%;" type="text" readonly="readonly" value="@ViewBag.Region">
+
+                                                </div>
+                                            </div>
+                                            <div class="texterr" style="float:right"></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row" style="">
+                                        <div class="col-lg-4 col-md-12" style="float:right;">
+                                            <div class="row">
+                                                <div class="col-md-6 label6 padding_left_none">
+                                                    <label id="" name="" class="lbl ">إسم الحي عربي<label id="asterisk">*</label></label>
+
+                                                </div>
+
+                                                <div class="col-md-6 input6 padding_right_none">
+                                                    <input autocomplete="no" class="form-control " id="CR_Mas_Address_Ar_District" name="CR_Mas_Address_Ar_District" value="@ViewBag.DistrictAr" onkeypress="return CheckArabicCharactersOnly(event);" onkeyup="movetoNext('CR_Mas_Address_En_District')" type="text" required onPaste="return false;" maxlength="50">
+                                                </div>
+
+                                            </div>
+                                            <div class="texterr" style="float:right">@ViewBag.ArDistrict</div>
+                                        </div>
+
+
+                                        <div class="col-lg-4 col-md-12" style="float:right;">
+                                            <div class="row">
+                                                <div class="col-md-6 label6 padding_left_none">
+                                                    <label id="" name="" class="lbl ">إسم الحي إنجليزي<label id="asterisk">*</label></label>
+                                                </div>
+                                                <div class="col-md-6 input6 padding_right_none">
+                                                    <input autocomplete="no" class="form-control " id="CR_Mas_Address_En_District" name="CR_Mas_Address_En_District" value="@ViewBag.DistrictEn" oninput="this.value=this.value.replace(/[^a-zA-Z\s]/g,'')" onkeyup="movetoNext('CR_Mas_Address_Fr_District')" type="text" required onPaste="return false;" maxlength="50">
+                                                </div>
+
+                                            </div>
+                                            <div class="texterr" style="float:right">@ViewBag.EnDistrict</div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="row" style="">
+                                        <div class="col-lg-4 col-md-12" style="float:right;">
+                                            <div class="row">
+                                                <div class="col-md-6 label6 padding_left_none">
+                                                    <label id="" name="" class="lbl " style="float:right;">إسم الشارع عربي<label id="asterisk">*</label></label>
+
+                                                </div>
+                                                <div class="col-md-6 input6 padding_right_none">
+                                                    <input autocomplete="no" class="form-control " id="CR_Mas_Address_Ar_Street" name="CR_Mas_Address_Ar_Street" value="@ViewBag.StreetAr" onkeypress="return CheckArabicCharactersOnly(event);" onkeyup="movetoNext('CR_Mas_Address_En_Street')" type="text" required onPaste="return false;" maxlength="50">
+                                                </div>
+
+
+                                            </div>
+                                            <div class="texterr" style="float:right">@ViewBag.ArStreet</div>
+                                        </div>
+
+
+                                        <div class="col-lg-4 col-md-12" style="float:right;">
+                                            <div class="row">
+
+                                                <div class=" col-md-6 label6 padding_left_none">
+                                                    <label id="" name="" class="lbl" style="float:right;">إسم الشارع إنجليزي<label id="asterisk">*</label></label>
+                                                </div>
+                                                <div class="col-md-6 input6 padding_right_none">
+                                                    <input autocomplete="no" class="form-control " id="CR_Mas_Address_En_Street" name="CR_Mas_Address_En_Street" value="@ViewBag.Streeten" oninput="this.value=this.value.replace(/[^a-zA-Z\s]/g,'')" onkeyup="movetoNext('CR_Mas_Address_Fr_Street')" type="text" required onPaste="return false;" maxlength="50">
+                                                </div>
+
+                                            </div>
+                                            <div class="texterr" style="float:right">@ViewBag.EnStreet</div>
+                                        </div>
+
+                                    </div>
+
+
+
+                                    <div class="row" style="">
+                                        <div class="col-lg-4 col-md-12" style="float:right;">
+                                            <div class="row">
+                                                <div class="col-md-6 label6 padding_left_none">
+                                                    <label class="lbl " style="float:right;">رقم المبنى</label>
+
+                                                </div>
+                                                <div class="col-md-6 input6 padding_right_none">
+                                                    <input autocomplete="no" class="form-control " id="CR_Mas_Address_Building" name="CR_Mas_Address_Building" value="@ViewBag.BuildingNumber" oninput="this.value=this.value.replace(/[^0-9]/g,'')" onkeyup="movetoNext('CR_Mas_Address_Unit_No')" type="text" onPaste="return false;" maxlength="4">
+                                                </div>
+
+
+                                            </div>
+                                            <div class="texterr" style="float:right">@ViewBag.BuildingNo</div>
+                                        </div>
+
+
+                                        <div class="col-lg-4 col-md-12" style="float:right;">
+                                            <div class="row">
+                                                <label class="lbl col-md-6 label6 padding_left_none" style="float:right;">رقم الوحدة</label>
+                                                <div class="col-md-6 input6 padding_right_none">
+                                                    <input autocomplete="no" class="form-control " id="CR_Mas_Address_Unit_No" name="CR_Mas_Address_Unit_No" value="@ViewBag.UnitNumber" onkeyup="movetoNext('CR_Mas_Address_Zip_Code')" type="text" onPaste="return false;" maxlength="10">
+                                                </div>
+
+                                            </div>
+                                            <div class="texterr" style="float:right"></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row" style="">
+                                        <div class="col-lg-4 col-md-12" style="float:right;">
+                                            <div class="row">
+                                                <label class="lbl col-md-6 label6 padding_left_none" style="float:right;">الرمز البريدي</label>
+                                                <div class="col-md-6 input6 padding_right_none">
+                                                    <input autocomplete="no" class="form-control " id="CR_Mas_Address_Zip_Code" name="CR_Mas_Address_Zip_Code" value="@ViewBag.ZipCode" oninput="this.value=this.value.replace(/[^0-9]/g,'')" onkeyup="movetoNext('CR_Mas_Address_Additional_Numbers')" type="text" onPaste="return false;" maxlength="5">
+                                                </div>
+
+
+                                            </div>
+                                            <div class="texterr" style="float:right"></div>
+                                        </div>
+
+
+                                        <div class="col-lg-4 col-md-12" style="float:right;">
+                                            <div class="row">
+                                                <label class="lbl col-md-6 label6 padding_left_none" style="float:right;"> الرقم الإضافي</label>
+                                                <div class="col-md-6 input6 padding_right_none">
+                                                    <input autocomplete="no" class="form-control " id="CR_Mas_Address_Additional_Numbers" name="CR_Mas_Address_Additional_Numbers" value="@ViewBag.AdditionalNumber" oninput="this.value=this.value.replace(/[^0-9]/g,'')" onkeyup="movetoNext('add_btn')" type="text" onPaste="return false;" maxlength="5">
+                                                </div>
+
+
+                                            </div>
+                                            <div class="texterr" style="float:right"></div>
+                                        </div>
+                                    </div>
+                                    <div class="row" style="">
+                                        <div class="col-lg-8 col-md-12" style="float:right;">
+                                            <div class="row">
+
+                                                <div class="col-md-3 padding_left_none">
+                                                    @*@Html.LabelFor(model => model.CR_Cas_Sup_Branch_Ar_Name, htmlAttributes: new { @class = "lbl col-md-3", style = "float:right" })*@
+                                                    <label id="CR_Cas_Sup_Branch_Reasons" class="lbl" style=" float:right">ملاحظات</label>
+
+                                                </div>
+                                                <div class="col-md-9 padding_right_none">
+                                                    @Html.TextBoxFor(model => model.CR_Cas_Sup_Branch_Reasons, htmlAttributes: new { @class = "form-control ", style = "float:right;", onkeyup = "movetoNext('CR_Cas_Sup_Branch_Ar_Short_Name')", autocomplete = "off", onkeypress = "return CheckArabicCharactersOnly(event);", onpaste = "return false;", maxlength = "100" })
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="form-group" hidden="hidden">
+                                        @Html.LabelFor(model => model.CR_Cas_Sup_Branch_LogoMap, htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(model => model.CR_Cas_Sup_Branch_LogoMap, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.CR_Cas_Sup_Branch_LogoMap, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div>
+                                    <div>
+
+                                        <div class="row" style="margin-bottom:25px">
+                                            <div class="col-md-6">
+
+                                                <input type="button" onclick="Save();" name="save" value="حفظ" class="btn btn-primary waves-effect" style="margin-left:20px;margin-top:10px;" />
+                                                <input type="submit" id="save" name="save" value="حفظ" class="btn btn-primary waves-effect" style="margin-left:20px;margin-top:10px;" hidden />
+                                                @* <input type="button" name="hold" data-toggle="modal" data-target="#myModalhold" class="btn btn-primary waves-effect" value="@ViewBag.h" style=" margin-left: 20px; margin-top: 10px;" />
+        <input type="button" name="delete" data-toggle="modal" data-target="#myModaldelete" class="btn btn-primary waves-effect" value="@ViewBag.stat" style=" margin-left: 20px; margin-top: 10px;" />*@
+                                                <input type="button" name="hold" id="btnHold" class="btn btn-primary waves-effect" value="@ViewBag.h" style=" margin-left: 20px; margin-top: 10px;" />
+                                                <input type="button" name="delete" class="btn btn-primary waves-effect" id="btn-confirm" value="@ViewBag.stat" style="margin-left: 20px; margin-top: 10px;" />
+                                                <a href="/CasBranch/Index/" class="btn btn-primary waves-effect" style=" margin-left: 20px; margin-top: 10px;">انهاء</a>
+
+                                            </div>
+                                  
+
+                                </div>
+
+
+                                <!-- Modal hold -->
+
+                                <div class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" id="mi-modal" style="z-index: 999999;">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-body" style="padding: 35px;">
+                                                @if (ViewBag.delete == "D")
+                                                {
+                                                <div style="width:75%;float:right;text-align:right;">
+                                                    <b style="color:red;">تأكيد إسترجاع الحذف ......</b><br />
+                                                    سيترتب على استرجاع بيانات الفرع إضافة جميع مستندات الفرع  وحالتها لم تسجل و نقاط البيع المرتبطة بالفرع أن وجدت
+                                                </div>
+                                                }
+                                                else
+                                                {
+                                                    <div style="width:75%;float:right;text-align:right;">
+                                                        <b style="color:red;">تأكيد الحذف ......</b><br />
+                                                        سيترتب على حذف بيانات الفرع حذف جميع المستندات و نقاط البيع المرتبطة بالفرع مع الاحتفاظ بجميع الإجراءات الإدارية و المالية السابقة
+                                                    </div>
+                                                }
+                                                <div style="width:20%;margin-right:5%;float:right;">
+                                                    @if (ViewBag.delete == "D")
+                                                    {
+                                                        <input type="submit" name="delete" class="btn btn-primary waves-effect" value="@ViewBag.stat" id="modal-btn-si" style="float: left;" />
+                                                    }
+                                                    else
+                                                    {
+                                                        <input type="submit" name="delete" class="btn btn-primary waves-effect" value="@ViewBag.stat" id="modal-btn-si" style="float:left;" />
+                                                    }
+                                                    <button type="button" class="btn btn-primary" id="modal-btn-no" style="float: left; margin-top: 25px;">إلغاء الأمر</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" id="H-modal" style="z-index: 999999;">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-body" style="padding: 35px;">
+                                                @if (ViewBag.Delete == "H")
+                                                {
+                                                <div style="width:75%;float:right;text-align:right;">
+                                                    <b style="color:red;">تأكيد إسترجاع الإيقاف ......</b><br />
+                                                    سيترتب على استرجاع إيقاف بيانات الفرع تأجير سيارات الفرع و كذلك استرجاع عملية الدفع بنقاط البيع المرتبطة بالفرع
+                                                </div>
+                                                }
+                                                else
+                                                {
+                                            <div style="width:75%;float:right;text-align:right;">
+                                                <b style="color:red;">تأكيد الإيقاف ......</b><br />
+                                                        سيترتب على إيقاف بيانات الفرع إيقاف تأجير سيارات الفرع و كذلك إيقاف عملية الدفع بنقاط البيع المرتبطة بالفرع
+                                            </div>
+                                                }
+
+                                                <div style="width:20%;margin-right:5%;float:right;">
+                                                    @if (ViewBag.Delete == "H")
+                                                    {
+                                                        <input type="submit" name="hold" class="btn btn-primary waves-effect" id="HoldModal-btn-si" value="@ViewBag.h" style="float:left;" />
+                                                    }
+                                                    else
+                                                    {
+                                                    <input type="submit" name="hold" class="btn btn-primary waves-effect" id="HoldModal-btn-si" value="@ViewBag.h" style="float:left;" />
+                                                
+                                                    }
+                                                    <button type="button" class="btn btn-primary waves-effect" data-dismiss="modal" style="float:left;margin-top:25px;">إلغاء الأمر</button>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                        @*<script type="text/javascript">
+                                $(document).ready(function () { setTimeout(function () { $("#Message").fadeOut(); }, 3000); });
+                            </script>*@
+
+
+
+</form>
+                        </div>
+                    </div>
+                </div>
+
+                @*////////////////////Send information to user//////////////////*@
+                @*<script type="text/javascript">
+                        window.addEventListener("load", function () {
+                            if ('@TempData["DeleteBranch"]' != "") {
+                                toastr.info("لايمكن حذف الفرع الرئيسي أو فرع به سيارات");
+                            }
+                        });
+                    </script>*@
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script type="text/javascript">
+        window.addEventListener("load", function () {
+
+            if ('@TempData["TempModel"]'=="Added") {
+                toastr.success("تم الحفظ بنجاح");
+            }
+
+            if ('@TempData["TempModel"]'=="Saved") {
+                toastr.success("تم الحفظ بنجاح");
+            }
+
+            if ('@TempData["TempModel"]'=="Holded") {
+                toastr.success("تم التعطيل بنجاح");
+            }
+
+            if ('@TempData["TempModel"]'=="Deleted") {
+                toastr.success("تم الحذف بنجاح");
+            }
+
+            if ('@TempData["TempModel"]'=="Activated") {
+                toastr.success("تم التنشيط بنجاح");
+            }
+
+        });
+
+</script>
+
+<script>
+
+    function Save() {
+        var st = '@Model.CR_Cas_Sup_Branch_Status';
+        if (st == 'A') {
+            document.getElementById("save").click();
+        } else if (st == 'D') {
+            toastr.info("لايمكن حفظ بيانات فرع محذوف");
+        } else if (st == 'H') {
+            toastr.info("لايمكن حفظ بيانات فرع موقوف");
+        }
+    }
+
+    @*jQuery('form#BranchEditForm').submit(function (e) {
+        var st = '@Model.CR_Cas_Sup_Branch_Status';
+        if (st == 'D') {
+            toastr.info("لايمكن حفظ بيانات فرع محذوف");
+            e.preventDefault();
+        } else if (st == 'H') {
+            toastr.info("لايمكن حفظ بيانات فرع موقوف");
+            e.preventDefault();
+        }
+    })*@
+
+
+    var modalConfirm = function (callback) {
+        $("#btn-confirm").on("click", function () {
+            var st = '@Model.CR_Cas_Sup_Branch_Status';
+            if (st == 'A') {
+                var CarsNo = '@TempData["CarsNo"]';
+                var SalesPointNo = '@TempData["SalesPointNo"]';
+
+                var x = false;
+
+
+                if (@Model.CR_Cas_Sup_Branch_Code != "100")
+                {
+                    x = true;
+                }
+                else
+                {
+                    toastr.info("لايمكن حذف الفرع الرئيسي");
+                    return;
+                }
+
+                if (CarsNo === "True") {
+                    toastr.info("لايمكن حذف فرع به سيارات");
+                    return;
+                } else {
+                    x = true;
+                }
+
+                if (@Model.CR_Cas_Sup_SalesPoint.Where(l=>l.CR_Cas_Sup_SalesPoint_Status != "D").Count() > 0) {
+                    toastr.info("لايمكن حذف فرع به نقاط بيع");
+                    return;
+
+                } else {
+                    x = true;
+                }
+
+                if (x == true) {
+                    $("#mi-modal").modal('show');
+                }
+            } else if (st == 'D') {
+                $("#mi-modal").modal('show');
+            } else if (st == 'H') {
+                toastr.info("لايمكن حذف فرع موقوف");
+            }
+
+
+           // $("#mi-modal").modal('show');
+
+        });
+        $("#modal-btn-si").on("click", function () {
+            callback(true);
+            $("#mi-modal").modal('hide');
+        });
+        $("#modal-btn-no").on("click", function () {
+            callback(false);
+            $("#mi-modal").modal('hide');
+        });
+    };
+    modalConfirm(function (confirm) {
+        if (confirm) {
+            //Acciones si el usuario confirma
+            $("#form1").submit();
+        } else {
+            //Acciones si el usuario no confirma
+            $("#result").html("canceled");
+        }
+    });
+</script>
+<script>
+    var HoldModal = function (callback) {
+        $("#btnHold").on("click", function () {
+            var st = '@Model.CR_Cas_Sup_Branch_Status';
+            if (st == 'A') {
+                var CarsNo = '@TempData["CarsNo"]';
+                //var SalesPointNo = '@TempData["SalesPointNo"]';
+                var x = false;
+                if (@Model.CR_Cas_Sup_Branch_Code != "100")
+                {
+                    x = true;
+                }
+                else
+                {
+                    toastr.info("لايمكن إيقاف الفرع الرئيسي");
+                    return;
+                }
+
+                //if (CarsNo === "True") {
+                //    toastr.info("لايمكن إيقاف فرع به سيارات");
+                //    return;
+                //} else {
+                //    x = true;
+                //}
+
+                //if (SalesPointNo === "True") {
+                //    toastr.info("لايمكن إيقاف فرع به نقاط بيع");
+                //    return;
+                //} else {
+                //    x = true;
+                //}
+
+                if (x == true) {
+                    $("#H-modal").modal('show');
+                }
+            } else if (st == 'H') {
+                $("#H-modal").modal('show');
+            } else if (st == 'D') {
+                toastr.info("لايمكن إيقاف فرع محذوف");
+            }
+            
+        });
+        $("#HoldModal-btn-si").on("click", function () {
+            callback(true);
+            $("#H-modal").modal('hide');
+        });
+        $("#HoldModal-btn-no").on("click", function () {
+            callback(false);
+            $("#H-modal").modal('hide');
+        });
+    };
+    HoldModal(function (confirm) {
+        if (confirm) {
+            //Acciones si el usuario confirma
+            $("#form1").submit();
+        } else {
+            //Acciones si el usuario no confirma
+            $("#result").html("canceled");
+        }
+    });
+</script>
+
+<style>
+    select {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        text-indent: 1px;
+        text-overflow: '';
+    }
+</style>

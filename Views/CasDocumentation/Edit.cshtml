@@ -1,0 +1,429 @@
+﻿@model RentCar.Models.CR_Cas_Sup_Branch_Documentation
+
+@{
+    Layout = "~/Views/Shared/_CASLayout.cshtml";
+}
+
+
+<style>
+    #date_btn1, #date_btn2, #date_btn3 {
+        font-size: 0 !important;
+        background: url('../../BSys3Styles/Images/icone_calendre.png') center 3px no-repeat;
+        width: 30px;
+        border: none;
+        border-left: 0;
+        height: 27px;
+        position: absolute;
+        left: 17px;
+        margin-top: -29px;
+    }
+</style>
+
+<div class="content">
+
+    <!-- Start Content-->
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card-box table-responsive" style="height:79vh">
+                    <div class="title_corp"><h3> الشركة / المستندات / تعديل</h3></div>
+                    <div class="subtitle_corp"> تمكن هذه الصفحة المستخدم من التعديل على المستندات</div>
+                    <div style="float:left; margin-left:50px;margin-top:-85px;" class="zoom">
+                        @*@if (Model.CR_Mas_Sup_Category_Car_Picture != null)
+                            {
+                                <img src="@Url.Content(Model.CR_Mas_Sup_Category_Car_Picture)" id="output" width="110" height="80" />
+                            }*@
+                    </div>
+                    <div class="hr_60"></div>
+                    <div class="hr_80" style=""></div>
+                    <div class="corp_page" style="">
+                        <div class="page_content" style="float:left;width:100%">
+                            @using (Html.BeginForm())
+                            {
+                                @Html.AntiForgeryToken()
+
+                                <div class="form-horizontal" style="margin-top:15px;min-height:58%">
+
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+                                    <div class=" " hidden="hidden">
+                                        <div class="col-lg-4 col-md-12 ">
+                                            <div class="row">
+                                                <label class="col-md-6 col-form-label label6">رقم الإجراء</label>
+                                                <div class="col-md-6 input6">
+                                                    <input type="text" value="@ViewBag.No" class="form-control" />
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group ">
+                                        <div class="col-lg-4 col-md-12" hidden="hidden">
+                                            <div class="row">
+                                                <label class="col-lg-5 col-md-12" style="float:right;"> رمز الشركة <span class="asterisk">*</span></label>
+                                                <div class="col-lg-7 col-md-12">
+                                                    @Html.TextBoxFor(model => model.CR_Cas_Sup_Branch_Documentation_Lessor_Code, new { @class = "form-control", style = "float:right;", @readonly = "readonly" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-8 col-md-12 " style="height:50px" hidden="hidden">
+                                            <div class="row">
+                                                <label class="col-lg-2 col-md-12" style="float:right;">رمز الفرع <span class="asterisk">*</span></label>
+                                                <div class="col-lg-3 offset-lg-7 col-md-12">
+                                                    @Html.TextBoxFor(model => model.CR_Cas_Sup_Branch_Documentation_Branch_Code, new { @class = "form-control", style = "float:right;", @readonly = "readonly" })
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="">
+                                        <div class="col-md-8" style="float:right;" hidden="hidden">
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    <label id="" class="lbl" style=" float:right"> رقم الإجراء<span class="asterisk">*</span></label>
+                                                </div>
+                                                <div class="col-md-9">
+                                                    @Html.TextBoxFor(model => model.CR_Cas_Sup_Branch_Documentation_Code, new { @class = "form-control ", style = "float:right;", @readonly = "readonly" })
+                                                   
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-2">
+                                        <div class="col-lg-4 col-md-12">
+                                            <div class="row">
+                                                <label class="col-md-6 col-form-label label6 padding_left_none">نوع المستند</label>
+                                                <div class="col-md-6 input6 padding_right_none">
+                                                    @*@Html.EditorFor(model => model.CR_Mas_Sup_Procedures.CR_Mas_Sup_Procedures_Ar_Name, new { htmlAttributes = new { @class = "form-control", @Readonly = "Readonly" } })*@
+                                                    <input type="text" name="CR_Mas_Sup_Procedures_Ar_Name" value="@ViewBag.CR_Mas_Sup_Procedures_Ar_Name" class="form-control" readonly/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-2">
+                                        <div class="col-lg-4 col-md-12">
+                                            <div class="row">
+                                                <label class="col-md-6 col-form-label label6 padding_left_none">رقم المستند</label>
+                                                <div class="col-md-6 input6 padding_right_none">
+                                                    @Html.EditorFor(model => model.CR_Cas_Sup_Branch_Documentation_No, new { htmlAttributes = new { @class = "form-control", required = "required", @maxlength = "25" } })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+
+
+                                    <!--<div class="form-group">
+                                    <div class="col-md-8 offset-md-4" hidden="hidden">
+                                        <div class="row">
+                                            <label class="col-md-2" style="float:right;">نوع الوثيقة</label>-->
+                                    @*@Html.LabelFor(model => model.CR_Cas_Sup_Procedures_Type, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                                    <!--<div class="col-md-10">
+                                    @Html.EditorFor(model => model.CR_Mas_Sup_Procedures.CR_Mas_Sup_Procedures_Ar_Name, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })-->
+                                    @*@Html.DropDownList("CR_Cas_Sup_Procedures_Type", null, "--- الرجاء إختر نوع الوثيقة ---", new { @class = "form-control", style = "float:right;width:250px" })*@
+                                    <!--</div>
+                                            </div>
+                                        </div>
+                                    </div>-->
+                                    <div class="row mb-2">
+                                        <div class="col-lg-4 col-md-12">
+                                            <div class="row">
+                                                <label class="col-md-6 col-form-label label6 padding_left_none">تاريخ المستند <label id="asterisk">*</label></label>
+                                                <div class="col-md-6 input6 padding_right_none">
+                                                    <input class="form-control text-box single-line " data-val="true" data-val-date="The field CR_Cas_Sup_Branch_Documentation_Date must be a date." id="CR_Cas_Sup_Branch_Documentation_Date" required name="CR_Cas_Sup_Branch_Documentation_Date" type="text" data-inputmask="'alias': 'yyyy-mm-dd'" value="@ViewBag.DocDate" onblur="affich_btn_1(event)">
+                                                    <input type="button" class="hijri-date-input2" id="date_btn1" onblur="affich_affich_1(event)" />
+                                                    <div class="texterr">@ViewBag.Doc</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-2">
+                                        <div class="col-lg-4 col-md-12 mb-2">
+                                            <div class="row">
+                                                <label class="col-md-6 col-form-label label6 padding_left_none">بدايته <label id="asterisk">*</label></label>
+                                                <div class="col-md-6 input6 padding_right_none">
+                                                    <input class="form-control text-box single-line" data-val="true" data-val-date="The field CR_Cas_Sup_Branch_Documentation_Date must be a date." id="CR_Cas_Sup_Branch_Documentation_Start_Date" required name="CR_Cas_Sup_Branch_Documentation_Start_Date" data-inputmask="'alias': 'yyyy-mm-dd'" value="@ViewBag.StartDate" onblur="affich_btn_2(event)">
+                                                    <input type="button" class="hijri-date-input2" id="date_btn2" onblur="affich_affich_2(event)" />
+                                                    <div class="texterr ">@ViewBag.DocStartDateError</div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-4 col-md-12  mb-2">
+                                            <div class="row">
+                                                <label class="col-md-6 col-form-label label6 padding_left_none">نهايته <label id="asterisk">*</label></label>
+                                                <div class="col-md-6 input6 padding_right_none">
+                                                    <input class="form-control text-box single-line" data-val="true" data-val-date="The field CR_Cas_Sup_Branch_Documentation_Date must be a date." id="CR_Cas_Sup_Branch_Documentation_End_Date" required name="CR_Cas_Sup_Branch_Documentation_End_Date" data-inputmask="'alias': 'yyyy-mm-dd'" value="@ViewBag.EndDate" onblur="affich_btn_3(event)">
+                                                    <input type="button" class="hijri-date-input2" id="date_btn3" onblur="affich_affich_3(event)" />
+                                                    <div class="texterr">@ViewBag.DocEndDateError</div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-8" hidden="hidden">
+                                            <div class="row">
+                                                <label class="col-lg-4 col-md-12  mb-2" style="float:right;">رمز الفرع</label>
+                                                @*@Html.LabelFor(model => model.CR_Cas_Sup_Branch_Documentation_Activation, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                                                <div class="col-md-8 padding_right_none">
+                                                    <div class="checkbox">
+                                                        @Html.EditorFor(model => model.CR_Cas_Sup_Branch_Documentation_Activation)
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-lg-4 col-md-12 offset-md-8" hidden="hidden">
+                                            <div class="row">
+                                                <label class="col-lg-4 col-md-12" style="float:right;">السقف الإئتماني</label>
+                                                @*@Html.LabelFor(model => model.CR_Cas_Sup_Branch_Documentation_Credit_Limit, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                                                <div class="col-md-8">
+                                                    @Html.EditorFor(model => model.CR_Cas_Sup_Branch_Documentation_Credit_Limit, new { htmlAttributes = new { @class = "form-control" } })
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8" hidden="hidden">
+                                            <div class="row">
+                                                <label class="col-md-3" style="float:right;">تاريخ إنتهاء الصلاحية</label>
+                                                @*@Html.LabelFor(model => model.CR_Cas_Sup_Branch_Documentation_About_To_Expire, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                                                <div class="col-md-9">
+                                                    @Html.EditorFor(model => model.CR_Cas_Sup_Branch_Documentation_About_To_Expire, new { htmlAttributes = new { @class = "form-control" } })
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group" hidden="hidden">
+                                        <div class="col-lg-4 col-md-12 offset-md-8">
+                                            <div class="row">
+                                                <label class="col-lg-4 col-md-12" style="float:right;">الحالة</label>
+                                                @*@Html.LabelFor(model => model.CR_Cas_Sup_Branch_Documentation_Status, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                                                <div class="col-md-8">
+                                                    @Html.HiddenFor(model => model.CR_Cas_Sup_Branch_Documentation_Status, new { htmlAttributes = new { @class = "form-control", @hidden = "hidden" } })
+                                                    <label name="label" id="label" style="color:red">@ViewBag.State</label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="" hidden="hidden">
+                                        <div class="col-lg-4 col-md-12">
+                                            <div class="row">
+                                                <label class="col-md-6 col-form-label label6">الضريبة</label>
+                                                <div class="col-md-6 input6">
+                                                    <input type="text" class="form-control" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-12">
+                                            <div class="row">
+                                                <label class="col-md-6 col-form-label label6">قيمته</label>
+                                                <div class="col-md-6 input6">
+                                                    <input type="text" class="form-control" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-8 col-md-12">
+                                            <div class="row">
+                                                <label class="col-md-3 padding_left_none">الملاحظات</label>
+                                                <div class="col-md-9 padding_right_none">
+                                                    <input type="text" id="Reasons" name="Reasons" value="@ViewBag.Reason" class="form-control" maxlength="100" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div>
+                                    <div class="row">
+
+                                        <div class="col-md-3 col-70" style="margin-top:10px;margin-bottom:10px;">
+
+                                            @if (ViewBag.Status == "D")
+                                            {
+                                                <input type="submit" name="save" value="حفظ" class="btn btn-primary waves-effect" style="float: right;margin-right:10px;margin-top:10px;cursor:no-drop;" onclick="javascript:return false;" disabled />
+                                                <input type="button" name="delete" class="btn btn-primary waves-effect" id="btn-confirm" value="@ViewBag.stat" style="margin-right: 20px; margin-top: 10px; " />
+                                                <a href="/CasDocumentation/Index/" class="btn btn-primary waves-effect" style="margin-right:10px;margin-top:10px;">انهاء</a>
+
+                                            }
+                                            else if (ViewBag.Status == "N" || ViewBag.Status == "X")
+                                            {
+                                                <input type="submit" name="save" value="حفظ" class="btn btn-primary waves-effect" style="float: right;margin-right:10px;margin-top:10px;" />
+                                                <input type="button" name="delete" class="btn btn-primary waves-effect" id="btn-confirm" value="@ViewBag.stat" style="margin-right: 20px; margin-top: 10px; background-color: #F3B161;cursor:no-drop;" onclick="javascript:return false;" disabled />
+                                                <a href="/CasDocumentation/Index/" class="btn btn-primary waves-effect" style="margin-right:10px;margin-top:10px;">انهاء</a>
+
+                                            }
+                                            else if (ViewBag.Status == "A")
+                                            {
+                                                <input type="submit" name="save" value="حفظ" class="btn btn-primary waves-effect" style="float: right;margin-right:10px;margin-top:10px;cursor:no-drop;" onclick="javascript:return false;" disabled />
+                                                <input type="button" name="delete" class="btn btn-primary waves-effect" id="btn-confirm" value="@ViewBag.stat" style="margin-right: 20px; margin-top: 10px; " />
+                                                <a href="/CasDocumentation/Index/" class="btn btn-primary waves-effect" style="margin-right:10px;margin-top:10px;">انهاء</a>
+
+                                            }
+
+                                            else
+                                            {
+                                                <input type="submit" name="save" value="حفظ" class="btn btn-primary waves-effect" style="float: right;margin-right:10px;margin-top:10px;" />
+                                                <input type="button" name="delete" class="btn btn-primary waves-effect" id="btn-confirm" value="@ViewBag.stat" style="margin-right: 20px; margin-top: 10px; " />
+                                                <a href="/CasDocumentation/Index/" class="btn btn-primary waves-effect" style="margin-right:10px;margin-top:10px;">انهاء</a>
+
+                                            }
+
+                                            <div class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" id="mi-modal">
+                                                <div class="modal-dialog  modal-dialog-centered">
+                                                    <div class="modal-content">
+                                                        <div class="modal-body" style="padding: 35px;">
+                                                            <div style="width:75%;float:right;text-align:right;">
+                                                                <b style="color:red;">تأكيد الحذف ......</b><br />
+                                                                سيترتب على حذف بيانات المستند حذف ارجاع حالته إلى لم يسجل مع الاحتفاظ بجميع الإجراءات الإدارية السابقة
+                                                            </div>
+                                                            <div style="width:20%;margin-right:5%;float:right;">
+                                                                @if (ViewBag.Status == "D")
+                                                                {
+                                                                    <input type="submit" name="delete" class="btn btn-primary waves-effect" value="@ViewBag.stat" id="modal-btn-si" style="float:left;" />
+
+                                                                }
+                                                                else
+                                                                {
+                                                                    <input type="submit" name="delete" class="btn btn-primary waves-effect" value="@ViewBag.stat" id="modal-btn-si" style="float:left;" />
+                                                                }
+                                                                <button type="button" class="btn btn-primary waves-effect" id="modal-btn-no" style="float: left;margin-top:25px;">إلغاء الأمر</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <script>
+                                                var modalConfirm = function (callback) {
+
+                                                    $("#btn-confirm").on("click", function () {
+                                                        $("#mi-modal").modal('show');
+                                                    });
+                                                    $("#modal-btn-si").on("click", function () {
+                                                        callback(true);
+                                                        $("#mi-modal").modal('hide');
+                                                    });
+                                                    $("#modal-btn-no").on("click", function () {
+                                                        callback(false);
+                                                        $("#mi-modal").modal('hide');
+                                                    });
+                                                };
+                                                modalConfirm(function (confirm) {
+                                                    if (confirm) {
+                                                        //Acciones si el usuario confirma
+                                                        $("#form1").submit();
+                                                    } else {
+                                                        //Acciones si el usuario no confirma
+                                                        $("#result").html("canceled");
+                                                    }
+                                                });
+                                            </script>
+
+
+                                            @*<script type="text/javascript">
+
+            function reply_click(clicked_id) {
+                alert(clicked_id)
+            }
+
+        </script>*@
+
+                                        </div>
+                                        <div class="col-md-0 col-30" style="margin-top:20px;margin-bottom:10px;">
+                                        </div>
+                                    </div>
+                                </div>
+
+                            }
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    label{
+        text-align:center !important
+    }
+    .parsley-errors-list{
+        margin-top: 1px !important;
+    }
+</style>
+
+<script type="text/javascript">
+
+    function affich_affich_1(e) {
+        var date = e.target.value;
+        document.getElementById("CR_Cas_Sup_Branch_Documentation_Date").value = date;
+    }
+    function affich_btn_1(e) {
+        var date = e.target.value;
+        document.getElementById("date_btn1").value = date;
+    }
+    function affich_affich_2(e) {
+        var date = e.target.value;
+        document.getElementById("CR_Cas_Sup_Branch_Documentation_Start_Date").value = date;
+    }
+    function affich_btn_2(e) {
+        var date = e.target.value;
+        document.getElementById("date_btn2").value = date;
+    }
+    function affich_affich_3(e) {
+        var date = e.target.value;
+        document.getElementById("CR_Cas_Sup_Branch_Documentation_End_Date").value = date;
+    }
+    function affich_btn_3(e) {
+        var date = e.target.value;
+        document.getElementById("date_btn3").value = date;
+    }
+</script>
+<script type="text/javascript">
+        window.addEventListener("load", function () {
+
+            if ('@TempData["TempModel"]'=="Added") {
+                toastr.success("تم الحفظ بنجاح");
+            }
+
+            if ('@TempData["TempModel"]'=="Saved") {
+                toastr.success("تم الحفظ بنجاح");
+            }
+
+            if ('@TempData["TempModel"]'=="Holded") {
+                toastr.success("تم التعطيل بنجاح");
+            }
+
+            if ('@TempData["TempModel"]'=="Deleted") {
+                toastr.success("تم الحذف بنجاح");
+            }
+
+            if ('@TempData["TempModel"]'=="Activated") {
+                toastr.success("تم التنشيط بنجاح");
+            }
+
+        });
+</script>

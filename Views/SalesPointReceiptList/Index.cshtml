@@ -1,0 +1,294 @@
+﻿@model IEnumerable<RentCar.Models.CAS.SalesPointReceiptMD>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_CASLayout.cshtml";
+}
+
+<style>
+    label {
+        float: none
+    }
+
+    .radio_top {
+        float: left;
+        margin-right: 10px;
+        line-height: 0.8
+    }
+</style>
+<div class="content">
+    <!-- Start Content-->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+
+                <div class="card-box table-responsive" style="height:79vh">
+                    <div class="title_corp"><h3> التقارير / الحركة المالية لنقاط البيع / عرض البيانات  </h3></div>
+                    <div class="subtitle_corp"> تمكنك الصفحة من البحث و عرض  بيانات  الحركة المالية لنقاط البيع</div>
+                    <div class="hr_60"></div>
+                    <div class="hr_80"></div>
+                    <div class="corp_page">
+                        <div class="page_content">
+                            <form method="post">
+                                <div class="form_bg" style="width:100%">
+
+                                    <div class="responsive-table-plugin">
+                                        <div class="table-rep-plugin">
+                                            <div class="table-responsive" data-pattern="priority-columns" style="border:none;">
+                                                <div class="href_layout">
+                                                    <a href="/CasHome/index" class="btn_form" data-toggle="tooltip" data-placement="top" title="إغلاق"><i class="fa fa-times"></i></a>
+                                                    <script>
+                                                        $(document).ready(function () {
+                                                            $("#inputtext").on("keyup", function () {
+                                                                var value = $(this).val().toLowerCase();
+                                                                $("#tbl tr").filter(function () {
+                                                                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                                                                });
+                                                            });
+                                                        });
+                                                    </script>
+                                                </div>
+                                                <div id="responsive-datatable_filter" class="dataTables_filter">
+                                                    <label class="label_search_input">
+                                                        <img src="~/images/srch.png" id="SrchImg" />
+                                                        بحث:<input type="search" id="inputtext" class="form-control form_search_input" placeholder="" aria-controls="responsive-datatable" style="width:33%">
+                                                    </label>
+                                                </div>
+
+                                            </div>
+                                            <table id="myTable" class="table table-striped mb-0" style="cursor:pointer:!important;margin-top:10px">
+                                                <thead>
+                                                    <tr>
+                                                        <th style="width:5%;">
+                                                            م
+                                                        </th>
+                                                        <th style="width:15%;">
+                                                            رقم نقطة البيع
+                                                        </th>
+                                                        <th style="width:20%;">
+                                                            نقطة البيع
+                                                        </th>
+                                                        <th style="width:17%;">
+                                                            الفرع
+                                                        </th>
+                                                        <th style="width:12%;">
+                                                            الحساب
+                                                        </th>
+                                                        <th style="width:11%;">
+                                                            البنك
+                                                        </th>
+                                                        <th style="width:10%;">
+                                                            الرصيد
+                                                        </th>
+                                                        <th style="width:8%;">
+                                                            القبض
+                                                        </th>
+                                                        <th style="width:8%;">
+                                                            الصرف
+                                                        </th>
+
+                                                    </tr>
+                                                </thead>
+                                                @{
+                                                    int i = 1;
+
+                                                }
+                                                <tbody id="tbl" class="text-center">
+                                                    @foreach (var item in Model)
+                                                    {
+                                                        <tr>
+                                                            <td style="width:5%;">
+                                                                <a href="~/SalesPointReceiptList/SalesPointMovementSheet/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_SalesPoint_Code)">
+                                                                    @i
+                                                                </a>
+                                                            </td>
+                                                            <td style="width:15%;">
+                                                                <a href="~/SalesPointReceiptList/SalesPointMovementSheet/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_SalesPoint_Code)">
+                                                                    @Html.DisplayFor(modelItem => item.CR_Cas_Sup_SalesPoint_Bank_No)
+                                                                </a>
+                                                            </td>
+                                                            <td style="width:20%;">
+                                                                <a href="~/SalesPointReceiptList/SalesPointMovementSheet/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_SalesPoint_Code)">
+                                                                    @Html.DisplayFor(modelItem => item.CR_Cas_Sup_SalesPoint_Ar_Name)
+                                                                </a>
+                                                            </td>
+                                                            <td style="width:17%;">
+                                                                <a href="~/SalesPointReceiptList/SalesPointMovementSheet/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_SalesPoint_Code)">
+                                                                    @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch.CR_Cas_Sup_Branch_Ar_Name)
+                                                                    @if (item.CR_Cas_Sup_Branch.CR_Cas_Sup_Branch_Status == "H")
+                                                                    {
+                                                                        <span id="statOfBranch"> (الفرع موقوف) </span>
+                                                                    }
+                                                                </a>
+                                                            </td>
+                                                            <td style="width:12%;">
+                                                                <a href="~/SalesPointReceiptList/SalesPointMovementSheet/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_SalesPoint_Code)">
+                                                                    @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Bank.CR_Cas_Sup_Bank_Ar_Name)
+                                                                </a>
+                                                            </td>
+                                                            <td style="width:11%;">
+                                                                <a href="~/SalesPointReceiptList/SalesPointMovementSheet/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_SalesPoint_Code)">
+                                                                    @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Bank.CR_Mas_Sup_Bank.CR_Mas_Sup_Bank_Ar_Name)
+                                                                </a>
+                                                            </td>
+                                                            <td style="width:10%;">
+                                                                <a href="~/SalesPointReceiptList/SalesPointMovementSheet/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_SalesPoint_Code)">
+                                                                    @Html.DisplayFor(modelItem => item.CR_Cas_Sup_SalesPoint_Balance)
+                                                                </a>
+                                                            </td>
+                                                            <td style="width:8%;">
+                                                                <a href="~/SalesPointReceiptList/SalesPointMovementSheet/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_SalesPoint_Code)">
+                                                                    @Html.DisplayFor(modelItem => item.ReceiptCreditCount)
+                                                                </a>
+                                                            </td>
+                                                            <td style="width:8%;">
+                                                                <a href="~/SalesPointReceiptList/SalesPointMovementSheet/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_SalesPoint_Code)">
+                                                                    @Html.DisplayFor(modelItem => item.ReceiptDebitCount)
+                                                                </a>
+                                                            </td>
+
+                                                        </tr>
+                                                        i++;
+                                                    }
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div id="dtBasicExample_print">
+
+                                    <iframe name="print_frame" width="0" height="0" frameborder="0" src="about:blank"></iframe>
+                                    <script>
+                                        function printDiv() {
+                                            window.frames["print_frame"].document.body.innerHTML = document.getElementById("dtBasicExample_print").innerHTML;
+                                            window.frames["print_frame"].window.focus();
+                                            window.frames["print_frame"].window.print();
+                                        }
+                                    </script>
+                                    <script>
+                                        $(document).ready(function () {
+                                            $('#dtBasicExample').DataTable();
+                                            $('.dataTables_length').addClass('bs-select');
+                                        });
+                                    </script>
+                                    <script>
+                                        function sortTable(n) {
+                                            var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+                                            table = document.getElementById("myTable");
+                                            switching = true;
+                                            // Set the sorting direction to ascending:
+                                            dir = "asc";
+                                            /* Make a loop that will continue until
+                                            no switching has been done: */
+                                            while (switching) {
+                                                // Start by saying: no switching is done:
+                                                switching = false;
+                                                rows = table.rows;
+                                                /* Loop through all table rows (except the
+                                                first, which contains table headers): */
+                                                for (i = 1; i < (rows.length - 1); i++) {
+                                                    // Start by saying there should be no switching:
+                                                    shouldSwitch = false;
+                                                    /* Get the two elements you want to compare,
+                                                    one from current row and one from the next: */
+                                                    x = rows[i].getElementsByTagName("TD")[n];
+                                                    y = rows[i + 1].getElementsByTagName("TD")[n];
+                                                    /* Check if the two rows should switch place,
+                                                    based on the direction, asc or desc: */
+                                                    if (dir == "asc") {
+                                                        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                                                            // If so, mark as a switch and break the loop:
+                                                            shouldSwitch = true;
+                                                            break;
+                                                        }
+                                                    } else if (dir == "desc") {
+                                                        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                                                            // If so, mark as a switch and break the loop:
+                                                            shouldSwitch = true;
+                                                            break;
+                                                        }
+                                                    }
+                                                }
+                                                if (shouldSwitch) {
+                                                    /* If a switch has been marked, make the switch
+                                                    and mark that a switch has been done: */
+                                                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                                                    switching = true;
+                                                    // Each time a switch is done, increase this count by 1:
+                                                    switchcount++;
+                                                } else {
+                                                    /* If no switching has been done AND the direction is "asc",
+                                                    set the direction to "desc" and run the while loop again. */
+                                                    if (switchcount == 0 && dir == "asc") {
+                                                        dir = "desc";
+                                                        switching = true;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    </script>
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- end row -->
+</div> <!-- container-fluid -->
+
+<style>
+    #statOfBranch {
+        color: red;
+        margin-right: 4px !important;
+    }
+</style>
+
+
+
+<script>
+
+    // Get a reference to the HTML table
+    const table = document.getElementById('myTable');
+
+    // Specify the indexes of the columns to format (starting from 0)
+    const columnIndexes = [6, 7]; // for example, format columns  4,5
+
+    // Loop through each row in the table
+    for (let i = 1; i < table.rows.length; i++) { // starting from row 1 to exclude the header row
+        // Loop through each column index in the list
+        for (let j = 0; j < columnIndexes.length; j++) {
+            // Get the cell in the current row for the specified column index
+            const cell = table.rows[i].cells[columnIndexes[j]];
+
+            // Check if the cell contains an <a> tag
+            if (cell.querySelector('a')) {
+                // If it does, get the inner text of the <a> tag and attempt to parse it as a number
+                const value = parseFloat(cell.querySelector('a').innerText);
+
+                // Check if the parsed value is a valid number
+                if (!isNaN(value) && isFinite(value)) {
+                    // Convert the parsed value to a string with thousand separators and decimal points
+                    const formattedValue = value.toLocaleString('en-US', { minimumFractionDigits: 2 });
+
+                    // Update the inner text of the <a> tag with the formatted value
+                    cell.querySelector('a').innerText = formattedValue;
+                }
+            } else {
+                // If the cell doesn't contain an <a> tag, attempt to parse the cell value as a number
+                const value = parseFloat(cell.innerHTML);
+
+                // Check if the parsed value is a valid number
+                if (!isNaN(value) && isFinite(value)) {
+                    // Convert the parsed value to a string with thousand separators and decimal points
+                    const formattedValue = value.toLocaleString('en-US', { minimumFractionDigits: 2 });
+
+                    // Update the cell's innerHTML property with the formatted value
+                    cell.innerHTML = formattedValue;
+                }
+            }
+        }
+    }
+</script>   

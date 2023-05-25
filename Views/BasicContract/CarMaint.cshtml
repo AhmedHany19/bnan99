@@ -1,0 +1,53 @@
+﻿@model IEnumerable<RentCar.Models.CR_Cas_Sup_Car_Doc_Mainten>
+
+
+<table class="table">
+    <tr hidden>
+
+        <th>
+            الحالة
+        </th>
+        <th>
+            نوع الوثيقة
+        </th>
+
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td style="border-top:none;color:#000 !important">
+                @if (item.CR_Cas_Sup_Car_Doc_Mainten_End_Date != null)
+                {
+                    if (item.CR_Cas_Sup_Car_Doc_Mainten_Status == "A")
+                    {
+                        @item.CR_Cas_Sup_Car_Doc_Mainten_End_Date.Value.ToString("yyyy/MM/dd")
+                        <label>ينهتي بتاريخ</label>
+                        @item.CR_Cas_Sup_Car_Doc_Mainten_End_KM
+                        <label>ينهتي بعد كم</label>
+
+                    }
+                    if (item.CR_Cas_Sup_Car_Doc_Mainten_Status == "E")
+                    {
+                        @item.CR_Cas_Sup_Car_Doc_Mainten_End_Date.Value.ToString("yyyy/MM/dd")
+                        <label style="color:white;">إنتهى بتاريخ </label>
+                    }
+                    if (item.CR_Cas_Sup_Car_Doc_Mainten_Status == "E")
+                    {
+                        @item.CR_Cas_Sup_Car_Doc_Mainten_End_Date.Value.ToString("yyyy/MM/dd")
+                        <label >على وشك الإنتهاء</label>
+                    }
+                    if (item.CR_Cas_Sup_Car_Doc_Mainten_Status == "N")
+                    {
+                        <label>لم يسجل</label>
+                    }
+
+                }
+            </td>
+            <td style="border-top:none;">
+                @Html.DisplayFor(modelItem => item.CR_Mas_Sup_Procedures.CR_Mas_Sup_Procedures_Ar_Name)
+            </td>
+        </tr>
+    }
+
+</table>

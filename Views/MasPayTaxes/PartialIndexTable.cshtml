@@ -1,0 +1,110 @@
+﻿@model IEnumerable<RentCar.Models.CR_Cas_Account_Bnan_Owed>
+
+<div class="table-responsive" style="width:99%; height:300px; overflow:auto;border: 1px solid #4A80B3;">
+    <table id="myTable" class="table table-striped mb-0" style="cursor:default">
+        <thead style="overflow-y: scroll; flex-grow: 1;">
+            <tr>
+                <th width="5%">
+                    إختر
+                </th>
+                <th style="width:15%;">
+                    رقم العقد
+                </th>
+                <th style="width:12%;">
+                    تاريخ الإستحقاق
+                </th>
+                <th style="width:9%;">
+                    قيمة العقد
+                </th>
+                <th style="width:14%;">
+                    قيمة الإجار اليومي
+                </th>
+                <th style="width:11%;">
+                    مستحقات العقد قبل الخصم
+                </th>
+                <th style="width:11%;">
+                    مستحقات العقد بعد الخصم
+                </th>
+                <th style="width:11%;">
+                    القيمة المضافة
+                </th>
+                <th style="width:11%;">
+                    صافي قيمة الخدمة
+                </th>
+            </tr>
+        </thead>
+        <tbody id="tbl">
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td class="keyPayTaxes" hidden="hidden">
+                        <input class="keyValPayTaxes" value="@item.CR_Cas_Account_Bnan_Owed_Contract_No" id="Index" />
+                    </td>
+                    <td align="center" style="width:5%">
+                        <input type="checkbox" id="Chk_@item.CR_Cas_Account_Bnan_Owed_Contract_No" name="Chk_@item.CR_Cas_Account_Bnan_Owed_Contract_No" class="form-control ChkListTaxOwed" style="height:25px;margin-top:2px;" />
+                    </td>
+                    <td style="width:15%;">
+                        @Html.DisplayFor(modelItem => item.CR_Cas_Account_Bnan_Owed_Contract_No)
+                    </td>
+                    <td style="width:12%;">
+                        @if (item.CR_Cas_Account_Bnan_Owed_Due_Date != null)
+                        {
+                            @item.CR_Cas_Account_Bnan_Owed_Due_Date.Value.ToString("yyyy/MM/dd")
+                        }
+                    </td>
+                    <td style="width:9%;text-align:center">
+                        @Html.DisplayFor(modelItem => item.CR_Cas_Account_Bnan_Owed_Value)
+                    </td>
+                    <td style="width:14%;">
+                        @Html.DisplayFor(modelItem => item.CR_Cas_Account_Bnan_Owed_Daily_Value)
+                    </td>
+                    <td style="width:11%;">
+                        @Html.DisplayFor(modelItem => item.CR_Cas_Account_Bnan_Owed_Before_Due_Amount)
+                    </td>
+                    <td style="width:11%;">
+                        @Html.DisplayFor(modelItem => item.CR_Cas_Account_Bnan_Owed_After_Due_Amount)
+                    </td>
+                    <td style="width:11%;">                                      
+                        @Html.DisplayFor(modelItem => item.CR_Cas_Account_Bnan_Owed_Tax_Value)
+                    </td>
+                    <td style="width:10%" hidden>
+                        @Html.DisplayFor(modelItem => item.CR_Cas_Account_Bnan_Owed_Due_Amount_After_Tax_Value)
+                        <input type="text" name="ValPayTaxes_@item.CR_Cas_Account_Bnan_Owed_Contract_No" id="ValPayTaxes_@item.CR_Cas_Account_Bnan_Owed_Contract_No" value="@item.CR_Cas_Account_Bnan_Owed_Due_Amount_After_Tax_Value" />
+                    </td>
+                </tr>
+
+            }
+        </tbody>
+    </table>
+</div>
+
+<script>
+    $(document).ready(
+        function () {
+            $(".ChkListTaxOwed").change(function () {
+                var sum = 0;
+                $("#Tbl TR").each(function () {
+
+                    var chk = $(this).find('input[type="checkbox"]').is(':checked');
+                    if (chk == true) {
+
+                        var k = $(this).find(".keyPayTaxes").find(".keyValPayTaxes").val();
+                        //alert(k);
+                        var rs = $("#ValPayTaxes_" + k).val();
+                        //alert(rs);
+                        sum = parseFloat(sum) + parseFloat(rs);
+                        //alert(sum);
+                    }
+
+                });
+
+                if (sum > 0) {
+                    document.getElementById('PayedValue').value = sum.toFixed(2);
+                } else {
+                    document.getElementById('PayedValue').value = "0.00";
+                }
+            })
+
+        });
+</script>
+

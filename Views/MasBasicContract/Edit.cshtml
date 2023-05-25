@@ -1,0 +1,302 @@
+﻿@model RentCar.Models.CR_Mas_Basic_Contract
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    #save-btn {
+        margin-right: 10px;
+        background-color: #5bc0de !important;
+        width: 80px;
+        margin-left: 20px;
+        margin-bottom: 10px;
+    }
+
+    #bttn {
+        float: right;
+        width: 80px;
+        background-color: #5bc0de !important;
+        margin-left: 20px;
+    }
+
+    #btn-confirm {
+        float: right;
+        width: 80px;
+        margin-left: 20px;
+    }
+
+    .lbl {
+        margin-right: 30px;
+        font-size: 16px;
+        font-family: 'Times New Roman';
+    }
+
+    .hidden {
+        display: none
+    }
+
+    .text-danger {
+        font-size: 12px;
+        margin-right: 160px;
+        font-family: 'Times New Roman';
+    }
+
+    .a {
+        float: right;
+        background-color: #5bc0de;
+        width: 80px;
+        height: 25px;
+        padding-top: 5px;
+        padding-right: 10px;
+        font-size: 12px;
+        font-family: times new roman;
+    }
+
+    .texterr {
+        font-family: 'Times New Roman' !important;
+        font-size: 14px !important;
+        color: red !important;
+        margin-right: 50% !important;
+        height: 40px;
+    }
+
+    #asterisk {
+        color: red;
+        float: right;
+        font-size: 15px !important;
+        margin-right: 112px;
+        margin-top: 5px;
+        position: absolute;
+    }
+
+    .corp_content {
+        height: 525px !important;
+    }
+
+    .title_corp {
+        font-family: 'Times New Roman';
+        font-size: 25px;
+    }
+
+    .subtitle_corp {
+        padding-top: 3px !important;
+        font-family: 'Times New Roman' !important;
+        color: #083555;
+    }
+</style>
+<div class="corp_content">
+    <div class="title_corp" style="margin-top:-15px;"> العقود</div>
+    <div class="subtitle_corp"> تمكن هذه الصفحة المستخدم من التعديل على العقود</div>
+    <div style="float:left; margin-left:50px;margin-top:-85px;" class="zoom">
+        @*@if (Model.CR_Mas_Sup_Category_Car_Picture != null)
+            {
+                <img src="@Url.Content(Model.CR_Mas_Sup_Category_Car_Picture)" id="output" width="110" height="80" />
+            }*@
+    </div>
+    <div class="hr_60"></div>
+    <div class="hr_80" style=""></div>
+    <div class="corp_page" style="">
+        <div class="page_content" style="margin-top:10px;">
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-horizontal">
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.CR_Mas_Basic_Contract_No, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.HiddenFor(model => model.CR_Mas_Basic_Contract_Year, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.HiddenFor(model => model.CR_Mas_Basic_Contract_Sector, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.HiddenFor(model => model.CR_Mas_Basic_Contract_Code, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.HiddenFor(model => model.CR_Mas_Basic_Contract_Com_Code, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.HiddenFor(model => model.CR_Mas_Basic_Contract_Status, new { htmlAttributes = new { @class = "form-control" } })
+
+                    <div class="form-group">
+                        <div class="col-md-6 offset-md-6 " style="margin-bottom:20px;">
+                            <label style="float:right;" class="col-md-3">الشركة</label>
+                            @Html.DropDownList("CR_Mas_Basic_Contract_Lessor", null, htmlAttributes: new { @class = "input_form col-md-9", style = "float:right;width:50%;", @readonly = "readonly" })
+                            <div class="texterr"></div>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            <div class="row">
+                                <label class="col-md-4" style="float:right;"> نهايته </label>
+                                <div class="col-md-8">
+                                    <input class="input_form text-box single-line" data-val="true" data-val-date="The field CR_Cas_Sup_Branch_Documentation_Date must be a date." id="CR_Mas_Basic_Contract_End_Date" name="CR_Mas_Basic_Contract_End_Date" type="date" value="@ViewBag.EndDate">
+                                </div>
+                                <div class="texterr">@ViewBag.DocEndDateError</div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="row">
+                                <label class="col-md-4" style="float:right;"> بدايته </label>
+                                <div class="col-md-8" style="padding-right:0px!important;">
+                                    <input class="input_form text-box single-line" data-val="true" data-val-date="The field CR_Cas_Sup_Branch_Documentation_Date must be a date." id="CR_Mas_Basic_Contract_Start_Date" name="CR_Mas_Basic_Contract_Start_Date" type="date" value="@ViewBag.StartDate">
+                                </div>
+                                <div class="texterr">@ViewBag.DocStartDateError</div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="row">
+                                <label class="col-md-4" style="float:right;padding-left:15px;">تاريخ المستند</label>
+                                <div class="col-md-8">
+                                    <input class="input_form text-box single-line" data-val="true" data-val-date="The field CR_Cas_Sup_Branch_Documentation_Date must be a date." id="CR_Mas_Basic_Contract_Date" name="CR_Mas_Basic_Contract_Date" type="date" value="@ViewBag.DocDate">
+                                </div>
+                                <div class="texterr">@ViewBag.DocDateError</div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            <div class="row">
+                                @Html.LabelFor(model => model.CR_Mas_Basic_Contract_Tax_Rate, htmlAttributes: new { @class = "col-md-4", style = "float:right;" })
+                                <div class="col-md-8">
+                                    @Html.EditorFor(model => model.CR_Mas_Basic_Contract_Tax_Rate, new { htmlAttributes = new { @class = "input_form", style = "width:100%;", maxlength = "10", autocomplete = "off" } })
+                                    <div class="texterr"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="row">
+                                @Html.LabelFor(model => model.CR_Mas_Basic_Contract_Discount_Rate, htmlAttributes: new { @class = "col-md-4", style = "float:right;" })
+                                <div class="col-md-8" style="padding-right:0px!important;">
+                                    @Html.EditorFor(model => model.CR_Mas_Basic_Contract_Discount_Rate, new { htmlAttributes = new { @class = "input_form", style = "width:100%;", maxlength = "10", autocomplete = "off" } })
+                                </div>
+                                <div class="texterr"></div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="row">
+                                @Html.LabelFor(model => model.CR_Mas_Basic_Contract_Annual_Fees, htmlAttributes: new { @class = "col-md-4", style = "float:right;" })
+                                <div class="col-md-8">
+                                    @Html.EditorFor(model => model.CR_Mas_Basic_Contract_Annual_Fees, new { htmlAttributes = new { @class = "input_form", style = "width:100%;", maxlength = "10", autocomplete = "off" } })
+                                </div>
+                                <div class="texterr"></div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <div class="row">
+                                @Html.LabelFor(model => model.CR_Mas_Basic_Contract_Reasons, htmlAttributes: new { @class = "col-md-2", style = "float:right;" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.CR_Mas_Basic_Contract_Reasons, new { htmlAttributes = new { @class = "input_form", style = "width:100%;", maxlength = "100", autocomplete = "off" } })
+                                </div>
+                                <div class="texterr"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <div style="">
+
+                            @if (ViewBag.delete == "D")
+                            {
+
+                                <input type="submit" name="save" value="حفظ" class="submit_btn" style="float: right;margin-right:29px;margin-top:150px;cursor:no-drop;" onclick="javascript:return false;" disabled />
+                                <input type="submit" name="hold" class="submit_btn" value="@ViewBag.h" style=" margin-right: 20px; margin-top: 150px;cursor:no-drop;" onclick="javascript:return false;" disabled />
+                                <input type="button" name="delete" class="submit_btn" id="btn-confirm" value="@ViewBag.stat" style="margin-right: 20px; margin-top: 150px; background-color: #F3B161;" />
+
+                            }
+                            else
+                            {
+
+                                if (ViewBag.delete == "H")
+                                {
+
+                                    <input type="submit" name="save" value="حفظ" class="submit_btn" style="float: right;margin-right:29px;margin-top:150px;cursor:no-drop;" onclick="javascript:return false;" disabled />
+                                    <input type="submit" name="hold" class="submit_btn" value="@ViewBag.h" style=" margin-right: 20px; margin-top: 150px;" />
+                                    <input type="button" name="delete" class="submit_btn" id="btn-confirm" value="@ViewBag.stat" style="margin-right: 20px; margin-top: 150px; background-color: #F3B161;cursor:no-drop;" onclick="javascript:return false;" disabled />
+
+                                }
+                                else
+                                {
+
+                                    <input type="submit" name="save" value="حفظ" class="submit_btn" style="float: right;margin-right:29px;margin-top:150px;" />
+
+
+
+                                    <input type="submit" name="hold" class="submit_btn" value="@ViewBag.h" style=" margin-right: 20px; margin-top: 150px;" />
+
+
+
+                                    <input type="button" name="delete" class="submit_btn" id="btn-confirm" value="@ViewBag.stat" style="margin-right: 20px; margin-top:150px; background-color: #F3B161;" />
+
+
+                                }
+                            }
+
+                            <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="mi-modal" style="margin-top:17%;">
+                                <div class="modal-dialog modal-sm">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title" id="myModalLabel" style=" margin-right: 10%;">تأكيد</h4>
+                                        </div>
+                                        <div class="modal-footer">
+                                            @if (ViewBag.delete == "D")
+                                            {
+                                                <input type="submit" name="delete" class="submit_btn" value="@ViewBag.stat" id="modal-btn-si" style="float:right;width:80px;height:40px;font:bold 14px Tahoma;margin-left:10px;color:white;background-color:#5cb85c;" />
+                                            }
+                                            else
+                                            {
+                                                <input type="submit" name="delete" class="submit_btn" value="@ViewBag.stat" id="modal-btn-si" style="float:right;width:80px;height:40px;font:bold 14px Tahoma;margin-left:10px;color:white;background-color:#d9534f;" />
+                                            }
+                                            <button type="button" class="btn btn-primary" id="modal-btn-no" style="float: left;width: 80px;height: 40px;font: bold 14px Tahoma">إلغاء</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <script>
+                                var modalConfirm = function (callback) {
+
+                                    $("#btn-confirm").on("click", function () {
+                                        $("#mi-modal").modal('show');
+                                    });
+                                    $("#modal-btn-si").on("click", function () {
+                                        callback(true);
+                                        $("#mi-modal").modal('hide');
+                                    });
+                                    $("#modal-btn-no").on("click", function () {
+                                        callback(false);
+                                        $("#mi-modal").modal('hide');
+                                    });
+                                };
+                                modalConfirm(function (confirm) {
+                                    if (confirm) {
+                                        //Acciones si el usuario confirma
+                                        $("#form1").submit();
+                                    } else {
+                                        //Acciones si el usuario no confirma
+                                        $("#result").html("canceled");
+                                    }
+                                });
+                            </script>
+
+
+                            <div class="col-md-6" style="margin-top:150px;margin-bottom:10px;">
+                                <a href="/MasBasicContract/Index/" class="btn" style="color:white;background-color:#F3B161;width:80px!important;padding-right:27px !important;border-radius:unset;height:30px;padding-top:5px;float:left;font-size:16px!important;font-family:'Sakkal Majalla';font-weight:bold!important;">انهاء</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            }
+
+        </div>
+    </div>
+</div>

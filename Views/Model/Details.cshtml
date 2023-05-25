@@ -1,0 +1,83 @@
+﻿@model RentCar.Models.CR_Mas_Sup_Model
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>CR_Mas_Sup_Model</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CR_Mas_Sup_Model_Ar_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CR_Mas_Sup_Model_Ar_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CR_Mas_Sup_Model_En_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CR_Mas_Sup_Model_En_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CR_Mas_Sup_Model_Fr_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CR_Mas_Sup_Model_Fr_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CR_Mas_Sup_Model_Counter)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CR_Mas_Sup_Model_Counter)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CR_Mas_Sup_Model_Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CR_Mas_Sup_Model_Status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CR_Mas_Sup_Model_Reasons)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CR_Mas_Sup_Model_Reasons)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CR_Mas_Sup_Brand.CR_Mas_Sup_Brand_Ar_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CR_Mas_Sup_Brand.CR_Mas_Sup_Brand_Ar_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CR_Mas_Sup_Group.CR_Mas_Sup_Group_Ar_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CR_Mas_Sup_Group.CR_Mas_Sup_Group_Ar_Name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.CR_Mas_Sup_Model_Code }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

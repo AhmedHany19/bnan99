@@ -1,0 +1,107 @@
+/**
+* @author aagaber
+*/
+@font-face {
+	font-family: 'Conv_AlinmaTheSans-Bold';
+	src: url('https://online.alinma.com/ibweb/font/AlinmaTheSans-Bold.eot');
+	src: local('?'), url('https://online.alinma.com/ibweb/font/AlinmaTheSans-Bold.woff') format('woff'), url('https://online.alinma.com/ibweb/font/AlinmaTheSans-Bold.ttf') format('truetype'), url('https://online.alinma.com/ibweb/font/AlinmaTheSans-Bold.svg') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'Conv_AlinmaTheSans-Plain';
+	src: url('https://online.alinma.com/ibweb/font/AlinmaTheSans-Plain.eot');
+	src: local('?'), url('https://online.alinma.com/ibweb/font/AlinmaTheSans-Plain.woff') format('woff'), url('https://online.alinma.com/ibweb/font/AlinmaTheSans-Plain.ttf') format('truetype'), url('https://online.alinma.com/ibweb/font/AlinmaTheSans-Plain.svg') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@media screen and (max-width: 768px) {
+	.main-container{width:100%;padding:0px;}
+	.alinma-logo{background-position: center;margin:25px 0;}
+	.error-500{background-size: 320px;}
+	.error-404{background-size: 320px;}
+	.error-404-msg{background-size: 320px;}
+	.contacts-container{width:100%;text-align:center;height:auto;margin: 100px auto 50px auto;}
+	.contacts-box {width: 90%;}
+	.contacts-box-en{float:none;margin:0 auto;}
+	.contacts-box-ar{float:none;margin:10px auto;}
+}
+
+body {
+	font-family:'Conv_AlinmaTheSans-Plain',Sans-Serif;
+}
+.main-container{
+	width: 1220px;
+    padding: 20px;
+	margin: 0 auto;
+	background:#f4f2f0;
+	border: 1px solid #000;
+}
+.alinma-logo {
+	background: url("../../public/error-404.html") no-repeat right;
+	height:72px;
+}
+.error-404 {
+	background: url("../../images/error/error-404.png") no-repeat center;
+	height:213px;
+	text-align:center;
+}
+.error-404-msg {
+	background: url("../../images/error/error-404-msg.png") no-repeat center;
+	height:125px;
+	text-align:center;
+}
+.error-500 {
+	background: url("../../images/error/error-500.png") no-repeat center;
+	height:213px;
+	text-align:center;
+}
+.error-500-msg {
+	background: url("../../images/error/error-500-msg.png") no-repeat center;
+	height:125px;
+	text-align:center;
+}
+.contacts-container {
+	width: 750px;
+    margin: 110px auto 50px auto;
+    height: 110px;
+}
+.contacts-box {
+	background:#fff;
+	width: 333px;
+	border: 1px solid #cfcbc8;
+	font-size:14px;
+	color:#522d25;
+	padding: 12px 15px;
+	line-height: 14pt;
+}
+.contacts-box-en {
+	direction:ltr;
+	float: left;
+}
+.contacts-box-ar {
+	direction:rtl;
+	float: right;
+}
+.contact-info {
+	direction:ltr;
+	color:#70126b;
+	display: inline-block;
+	font-family:'Conv_AlinmaTheSans-Bold',Sans-Serif;
+	text-decoration:none;
+}
+.btn {
+    display: inline-block;
+    width: 111px;
+    height: 30px;
+	margin-top: 12px;
+	cursor: pointer;
+	border: 0;
+}
+.btn-index-en {
+    background: url("../../images/en/btn-index.png") no-repeat center;
+}
+.btn-index-ar {
+    background: url("../../images/ar/btn-index.png") no-repeat center;
+}

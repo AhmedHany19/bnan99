@@ -1,0 +1,262 @@
+﻿@model IEnumerable<RentCar.Models.CR_Cas_Renter_Lessor>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutSys3.cshtml";
+}
+
+<style>
+    label {
+        float: none
+    }
+
+    .radio_top {
+        float: left;
+        margin-right: 10px;
+        line-height: 0.8
+    }
+</style>
+<div class="content">
+    <!-- Start Content-->
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+
+                <div class="card-box table-responsive">
+                    <div class="title_corp"><h3> عرض بيانات المستأجرين  </h3></div>
+                    <div class="subtitle_corp">  تمكنك الصفحة من البحث عن المستأجرين و الإطلاع على عقودهم</div>
+                    <div class="hr_60"></div>
+                    <div class="hr_80"></div>
+                    <div class="corp_page">
+                        <div class="page_content">
+                            <form method="post">
+                                <div class="form_bg" style="width:100%">
+
+                                    <div class="responsive-table-plugin">
+                                        <div class="table-rep-plugin">
+                                            <div class="table-responsive" data-pattern="priority-columns" style="border:none;">
+                                                <div class="href_layout" style="width:50%;float:right;margin-top:15px;margin-bottom:10px;">
+                                                    <a href="/BranchHome/BranchStat" class="btn_form" data-toggle="tooltip" data-placement="top" title="إغلاق"><i class="fa fa-times"></i></a>
+
+                                                    <script>
+                                                        $(document).ready(function () {
+                                                            $("#inputtext").on("keyup", function () {
+                                                                var value = $(this).val().toLowerCase();
+                                                                $("#tbl tr").filter(function () {
+                                                                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                                                                });
+                                                            });
+                                                        });
+                                                    </script>
+                                                </div>
+                                                <div id="responsive-datatable_filter" class="dataTables_filter" style="        float: right;right: 0;width: 50%;margin-top: 15px;">
+                                                    <label style="float: left;width: 100%; text-align: left;line-height:30px">
+                                                        <img src="~/images/srch.png" id="SrchImg" />
+                                                        بحث:<input type="search" id="inputtext" class="form-control" placeholder="" aria-controls="responsive-datatable" style=" float: left;width: 80%; text-align: right;margin-right: 10px;">
+                                                    </label>
+                                                </div>
+                                                <div class="row" style="width:100%;min-height:20px">
+                                                    <div class="col-md-7" style="float:right">
+
+                                                    </div>
+                                                    <div class="col-md-5" style="float:right">
+                                                        <div class="">
+                                                            <div class="radio_top">
+                                                                <input type="radio" id="ShowHolded" name="Show" onclick="GetFilter()" style="float:right;margin-left:4px;width:13px;height:13px;">
+                                                                <label for="javascript" style="float: left; font-size: 0.75rem">محضور</label>
+                                                            </div>
+
+                                                            <div class="radio_top">
+                                                                <input type="radio" id="ShowRenter" name="Show" onclick="GetFilter()" style="float:right;margin-left:4px;width:13px;height:13px;">
+                                                                <label for="css" style="float: left; font-size: 0.75rem">مستأجر</label>
+                                                            </div>
+                                                            <div class="radio_top">
+                                                                <input type="radio" id="ShowActive" name="Show" onclick="GetFilter()" style="float:right;margin-left:4px;width:13px;height:13px;">
+                                                                <label for="css" style="float: left; font-size: 0.75rem">نشط</label>
+                                                            </div>
+                                                            <div class="radio_top">
+                                                                <input type="radio" id="ShowAll" name="Show" onclick="GetFilter()" style="float:right;margin-left:4px;width:13px;height:13px;">
+                                                                <label for="html" style="float: left; font-size: 0.75rem">الكل</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div id="Table">
+                                                    @{
+                                                        Html.RenderAction("PartialIndex");
+                                                    }
+
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div id="dtBasicExample_print">
+
+                                        <iframe name="print_frame" width="0" height="0" frameborder="0" src="about:blank"></iframe>
+                                        <script>
+                                            function printDiv() {
+                                                window.frames["print_frame"].document.body.innerHTML = document.getElementById("dtBasicExample_print").innerHTML;
+                                                window.frames["print_frame"].window.focus();
+                                                window.frames["print_frame"].window.print();
+                                            }
+                                        </script>
+                                        <script>
+                                            $(document).ready(function () {
+                                                $('#dtBasicExample').DataTable();
+                                                $('.dataTables_length').addClass('bs-select');
+                                            });
+                                        </script>
+                                        <script>
+                                            function sortTable(n) {
+                                                var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+                                                table = document.getElementById("myTable");
+                                                switching = true;
+                                                // Set the sorting direction to ascending:
+                                                dir = "asc";
+                                                /* Make a loop that will continue until
+                                                no switching has been done: */
+                                                while (switching) {
+                                                    // Start by saying: no switching is done:
+                                                    switching = false;
+                                                    rows = table.rows;
+                                                    /* Loop through all table rows (except the
+                                                    first, which contains table headers): */
+                                                    for (i = 1; i < (rows.length - 1); i++) {
+                                                        // Start by saying there should be no switching:
+                                                        shouldSwitch = false;
+                                                        /* Get the two elements you want to compare,
+                                                        one from current row and one from the next: */
+                                                        x = rows[i].getElementsByTagName("TD")[n];
+                                                        y = rows[i + 1].getElementsByTagName("TD")[n];
+                                                        /* Check if the two rows should switch place,
+                                                        based on the direction, asc or desc: */
+                                                        if (dir == "asc") {
+                                                            if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                                                                // If so, mark as a switch and break the loop:
+                                                                shouldSwitch = true;
+                                                                break;
+                                                            }
+                                                        } else if (dir == "desc") {
+                                                            if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                                                                // If so, mark as a switch and break the loop:
+                                                                shouldSwitch = true;
+                                                                break;
+                                                            }
+                                                        }
+                                                    }
+                                                    if (shouldSwitch) {
+                                                        /* If a switch has been marked, make the switch
+                                                        and mark that a switch has been done: */
+                                                        rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                                                        switching = true;
+                                                        // Each time a switch is done, increase this count by 1:
+                                                        switchcount++;
+                                                    } else {
+                                                        /* If no switching has been done AND the direction is "asc",
+                                                        set the direction to "desc" and run the while loop again. */
+                                                        if (switchcount == 0 && dir == "asc") {
+                                                            dir = "desc";
+                                                            switching = true;
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        </script>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- end row -->
+    </div> <!-- container-fluid -->
+    <!-- validation init -->
+    <script src="~/BSys3Styles/Js/vendor.min.js"></script>
+
+
+    <script src="~/BSys3Styles/Js/parsley_ar.min.js"></script>
+    <script src="~/BSys3Styles/Js/pages/form-validation.init.js"></script>
+    <link href="~/Bootstrap_Arabic/bootstrap-big-grid.min.css" rel="stylesheet" />
+    <link href="~/Bootstrap_Arabic/jquery.dataTables.min.css" type="text/css" rel="stylesheet" />
+    <script src="~/Scripts/toastr.min.js"></script>
+    <script src="~/Scripts/toastr.js"></script>
+    <script src="~/BSys3Styles/Js/app.min.js"></script>
+    <script type="text/javascript">
+        window.addEventListener("load", function () {
+
+            if ('@TempData["TempModel"]' == "Saved") {
+
+                toastr.success("تم التعديل بنجاح");
+            }
+            if ('@TempData["TempModel"]'=="Holded") {
+                toastr.success("تم الحضر بنجاح");
+            }
+
+            if ('@TempData["TempModel"]'=="Deleted") {
+                toastr.success("تم الحذف بنجاح");
+            }
+
+            if ('@TempData["TempModel"]'=="Activated") {
+                toastr.success("تم التنشيط بنجاح");
+            }
+            if ('@TempData["TempModel"]' == "Error") {
+
+                toastr.warning("نأسف لعدم نجاح عملية التعديل, الرجاء التواصل مع المطور");
+            }
+
+
+        });
+
+
+
+
+        function GetFilter() {
+
+            if (document.getElementById('ShowActive').checked) {
+
+                 $.ajax({
+                         url: '@Url.Action("PartialIndex", "CasRenterLessor")',
+                        type: "POST",
+                        data: { type: "A" },
+                        success: function (data) {
+                            $('#Table').html(data);
+                        }
+                });
+            } else if (document.getElementById('ShowHolded').checked) {
+
+                 $.ajax({
+                        url: '@Url.Action("PartialIndex", "CasRenterLessor")',
+                        type: "POST",
+                        data: { type: "K" },
+                        success: function (data) {
+                            $('#Table').html(data);
+                        }
+                });
+            }     else if (document.getElementById('ShowRenter').checked) {
+
+                 $.ajax({
+                        url: '@Url.Action("PartialIndex", "CasRenterLessor")',
+                        type: "POST",
+                        data: { type: "R" },
+                        success: function (data) {
+                            $('#Table').html(data);
+                        }
+                });
+            }
+            else {
+                $.ajax({
+                     url: '@Url.Action("PartialIndex", "CasRenterLessor")',
+                    type: "POST",
+                    data: { type: "All" },
+                        success: function (data) {
+                            $('#Table').html(data);
+                        }
+                });
+            }
+        }
+    </script>
+</div> <!-- content -->

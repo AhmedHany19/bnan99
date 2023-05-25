@@ -1,0 +1,152 @@
+﻿@model IEnumerable<RentCar.Models.CR_Mas_Sup_Virtual_Inspection>
+<link href="~/BSys3Styles/CSS/style_app.css" rel="stylesheet" />
+<style>
+    #inputtext {
+        width: 250px;
+        height: 30px;
+        margin-right: 293px;
+        margin-left: -5px;
+        float: left;
+        margin-top: 5px;
+        border-color: #4A80B3;
+        border-radius: unset;
+    }
+
+    #SrchImg {
+        float: left;
+        margin-top: -5px;
+        margin-left: 0px;
+        margin-right: -35px;
+        position: relative;
+    }
+
+    td {
+        font-family: 'Times New Roman';
+        font-size: 14px;
+        padding: 5px 4px !important;
+        font-weight: 100;
+        color: #73A0C1;
+        border-color: #4A80B3;
+    }
+
+    th {
+        font-family: 'Times New Roman';
+        font-size: 16px;
+        font-weight: bold;
+        border-color: #4A80B3;
+        cursor: pointer;
+    }
+
+    .title_corp {
+        margin-top: -15px;
+    }
+
+    .table thead {
+        overflow-y: scroll;
+        flex-grow: 1;
+    }
+
+    .table tr a {
+        text-decoration: none;
+        color: black !important;
+        border-color: #4A80B3;
+    }
+
+    .table td {
+        color: #083555;
+        border-color: #4A80B3;
+    }
+
+    .table thead th {
+        color: #124f77;
+        border-color: #4A80B3;
+        text-align: center;
+        background: #D1EAFA;
+        position: sticky;
+        top: 0;
+    }
+
+    .title_corp {
+        font-family: 'Times New Roman';
+        font-size: 25px;
+    }
+
+    .subtitle_corp {
+        padding-top: 3px !important;
+        font-family: 'Times New Roman' !important;
+        color: #083555;
+    }
+
+    .table {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .input_td {
+        padding: 0 !important;
+    }
+
+        .input_td input {
+            width: 100%;
+            border: 0;
+            height: 35px;
+            outline: none;
+        }
+</style>
+
+
+<div class="table-responsive" style="width:100%; height:auto;overflow:auto;margin:auto;">
+
+    <table class="table table-bordered table-striped table-striped_width" id="InspectionTable" style="margin-bottom:0">
+        <thead>
+            <tr>
+                <th hidden>
+                    @Html.DisplayNameFor(model => model.CR_Mas_Sup_Virtual_Inspection_Code)
+                </th>
+                <th width="30%">
+                    بنود الفحص
+                </th>
+                <th hidden>
+                    @Html.DisplayNameFor(model => model.CR_Mas_Sup_Virtual_Inspection_En_Name)
+                </th>
+                <th hidden>
+                    @Html.DisplayNameFor(model => model.CR_Mas_Sup_Virtual_Inspection_Fr_Name)
+                </th>
+                <th hidden>
+                    @Html.DisplayNameFor(model => model.CR_Mas_Sup_Virtual_Inspection_Status)
+                </th>
+                <th hidden>
+                    @Html.DisplayNameFor(model => model.CR_Mas_Sup_Virtual_Inspection_Reasons)
+                </th>
+                <th width="20%">
+                    حالة الفحص
+                </th>
+                <th width="50%">
+                    ملاحظات
+                </th>
+            </tr>
+        </thead>
+        <tbody id="tbl">
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td hidden>
+                        @Html.DisplayFor(modelItem => item.CR_Mas_Sup_Virtual_Inspection_Code)
+                    </td>
+                    <td width="30%">
+                        @Html.DisplayFor(modelItem => item.CR_Mas_Sup_Virtual_Inspection_Ar_Name)
+                    </td>
+                    <td align="center" width="20%">
+                        <input type="checkbox" id="ChkInspection_@item.CR_Mas_Sup_Virtual_Inspection_Code" name="ChkInspection_@item.CR_Mas_Sup_Virtual_Inspection_Code" class="form-control chkInspection" style="height:25px;margin-top:2px;" />
+                    </td>
+                    <td class="input_td" width="50%">
+                        <input type="text" id="Remark_@item.CR_Mas_Sup_Virtual_Inspection_Code" name="Remark_@item.CR_Mas_Sup_Virtual_Inspection_Code" />
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
+
+   

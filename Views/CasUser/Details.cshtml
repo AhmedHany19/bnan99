@@ -1,0 +1,123 @@
+﻿@model RentCar.Models.CR_Cas_User_Information
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>CR_Cas_User_Information</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CR_Cas_User_Information_PassWord)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CR_Cas_User_Information_PassWord)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CR_Cas_User_Information_Auth_Branch)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CR_Cas_User_Information_Auth_Branch)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CR_Cas_User_Information_Auth_System)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CR_Cas_User_Information_Auth_System)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CR_Cas_User_Information_Branch_Code)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CR_Cas_User_Information_Branch_Code)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CR_Cas_User_Information_Ar_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CR_Cas_User_Information_Ar_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CR_Cas_User_Information_En_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CR_Cas_User_Information_En_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CR_Cas_User_Information_Fr_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CR_Cas_User_Information_Fr_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CR_Cas_User_Information_Mobile)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CR_Cas_User_Information_Mobile)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CR_Cas_User_Information_Signature)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CR_Cas_User_Information_Signature)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CR_Cas_User_Information_Emaile)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CR_Cas_User_Information_Emaile)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CR_Cas_User_Information_Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CR_Cas_User_Information_Status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CR_Cas_User_Information_Reasons)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CR_Cas_User_Information_Reasons)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CR_Mas_Com_Lessor.CR_Mas_Com_Lessor_Logo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CR_Mas_Com_Lessor.CR_Mas_Com_Lessor_Logo)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.CR_Cas_User_Information_Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

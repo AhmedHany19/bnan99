@@ -1,0 +1,200 @@
+﻿@model IEnumerable<RentCar.Models.CR_Cas_Sup_Branch_Documentation>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_CASLayout.cshtml";
+}
+
+
+<style>
+    label {
+        float: none
+    }
+    .radio_top {
+        float: left;
+        margin-right: 10px;
+        line-height: 0.8
+    }
+</style>
+<div class="content">
+    <!-- Start Content-->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card-box table-responsive" style="height:79vh">
+                    <div class="title_corp"><h3> الشركة / المستندات / عرض البيانات </h3></div>
+                    <div class="subtitle_corp"> تمكنك هذه الصفحة من تحديث بيانات المستندات</div>
+                    <div class="hr_60"></div>
+                    <div class="hr_80"></div>
+                    <div class="corp_page">
+                        <div class="page_content">
+                            <form method="post">
+                                <div class="form_bg" style="width:100%">
+                                    <div class="href_layout">
+                                        <a href="/CasHome/index" class="btn_form" style=" float: right;"><i class="fa fa-times" data-toggle="tooltip" data-placement="top" title="إغلاق"></i></a>
+                                        <button type="submit" name="excelCall" class="btn_form" value="Excel" style="padding-right:4px;" data-toggle="tooltip" data-placement="top" title="ترحيل البيانات للإكسل" hidden>
+                                            <i class="far fa-file-excel" aria-hidden="true" style=" margin-bottom: 3px; padding-left: 10px;"></i>
+                                        </button>
+                                        <a href="" class="btn_form" data-toggle="tooltip" data-placement="top" title="طباعة" hidden><i class="fa fa-print"></i></a>
+                                    </div>
+                                    <div class="dataTables_filter ">
+                                        <label class="label_search_input">
+                                            <img src="~/images/srch.png" id="SrchImg" />
+                                            بحث:<input class="form-control form_search_input" type="text" id="inputtext" name="TxtSearch" style="width: 388px" />
+                                        </label>
+                                    </div>
+                                    
+                                    <div class="row" style="width:100%;min-height:20px">
+                                        <div class="col-md-7" style="float:right">
+
+                                        </div>
+                                        <div class="col-md-5" >
+                                            <div class="">
+                                                <div class="radio_top">
+                                                    <input type="radio" id="ShowExpired" name="Show" onclick="GetFilter()" style="float:right;margin-left:4px;width:13px;height:13px;">
+                                                    <label for="javascript" style="float: left; font-size: 0.75rem">منتهي</label>
+                                                </div>
+                                                <div class="radio_top">
+                                                    <input type="radio" id="ShowAboutExpire" name="Show" onclick="GetFilter()" style="float:right;margin-left:4px;width:13px;height:13px;">
+                                                    <label for="javascript" style="float: left; font-size: 0.75rem">على وشك الإنتهاء</label>
+                                                </div>
+                                                <div class="radio_top">
+                                                    <input type="radio" id="ShowUnder" name="Show" onclick="GetFilter()" style="float:right;margin-left:4px;width:13px;height:13px;">
+                                                    <label for="javascript" style="float: left; font-size: 0.75rem">لم يسجل</label>
+                                                </div>
+                                                <div class="radio_top" hidden>
+                                                    <input type="radio" id="ShowDeleted" name="Show" onclick="GetFilter()" style="float:right;margin-left:4px;width:13px;height:13px;">
+                                                    <label for="javascript" style="float: left; font-size: 0.75rem">محذوف</label>
+                                                </div>
+                                                <div class="radio_top">
+                                                    <input type="radio" id="ShowActive" name="Show" onclick="GetFilter()" style="float:right;margin-left:4px;width:13px;height:13px;">
+                                                    <label for="css" style="float: left; font-size: 0.75rem">نشط</label>
+                                                </div>
+                                                <div class="radio_top">
+                                                    <input type="radio" id="ShowAll" name="Show" onclick="GetFilter()" style="float:right;margin-left:4px;width:13px;height:13px;">
+                                                    <label for="html" style="float: left; font-size: 0.75rem">الكل</label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div id="Table">
+                                        @{
+                                            Html.RenderAction("PartialIndex");
+                                        }
+
+                                    </div>
+
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- end row -->
+        </div> <!-- container-fluid -->
+    </div> <!-- content -->
+</div>
+<script type="text/javascript">
+        window.addEventListener("load", function () {
+
+            if ('@TempData["TempModel"]' == "Saved") {
+
+                toastr.success("تم التعديل بنجاح");
+            }
+            if ('@TempData["TempModel"]'=="Holded") {
+                toastr.success("تم التعطيل بنجاح");
+            }
+
+            if ('@TempData["TempModel"]'=="Deleted") {
+                toastr.success("تم الحذف بنجاح");
+            }
+
+            if ('@TempData["TempModel"]'=="Activated") {
+                toastr.success("تم التنشيط بنجاح");
+            }
+            if ('@TempData["TempModel"]' == "Error") {
+
+                toastr.warning("نأسف لعدم نجاح عملية التعديل, الرجاء التواصل مع المطور");
+            }
+
+
+        });
+
+
+
+    function GetFilter() {
+
+            if (document.getElementById('ShowAll').checked) {
+                $.ajax({
+                url: '@Url.Action("PartialIndex", "CasDocumentation")',
+                type: "POST",
+                data: { type: "All" },
+                    success: function (data) {
+
+                        $('#Table').html(data);
+                }
+                });
+            } else if (document.getElementById('ShowActive').checked) {
+
+                 $.ajax({
+                         url: '@Url.Action("PartialIndex", "CasDocumentation")',
+                        type: "POST",
+                        data: { type: "A" },
+                        success: function (data) {
+                            $('#Table').html(data);
+                        }
+                });
+            } else if (document.getElementById('ShowDeleted').checked) {
+
+                 $.ajax({
+                        url: '@Url.Action("PartialIndex", "CasDocumentation")',
+                        type: "POST",
+                        data: { type: "D" },
+                        success: function (data) {
+                            $('#Table').html(data);
+                        }
+                });
+            } else if (document.getElementById('ShowUnder').checked) {
+
+                 $.ajax({
+                        url: '@Url.Action("PartialIndex", "CasDocumentation")',
+                        type: "POST",
+                        data: { type: "U" },
+                        success: function (data) {
+                            $('#Table').html(data);
+                        }
+                });
+            } else if (document.getElementById('ShowExpired').checked) {
+
+                 $.ajax({
+                        url: '@Url.Action("PartialIndex", "CasDocumentation")',
+                        type: "POST",
+                        data: { type: "E" },
+                        success: function (data) {
+                            $('#Table').html(data);
+                        }
+                });
+            } else if (document.getElementById('ShowAboutExpire').checked) {
+
+                 $.ajax({
+                        url: '@Url.Action("PartialIndex", "CasDocumentation")',
+                        type: "POST",
+                        data: { type: "X" },
+                        success: function (data) {
+                            $('#Table').html(data);
+                        }
+                });
+            }
+            else {
+                $.ajax({
+                     url: '@Url.Action("PartialIndex", "CasDocumentation")',
+                    type: "POST",
+                    data: { type: "" },
+                        success: function (data) {
+                            $('#Table').html(data);
+                        }
+                });
+            }
+        }
+</script>

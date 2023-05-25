@@ -1,0 +1,376 @@
+﻿
+<html>
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>RentCar</title>
+    <meta http-equiv="Page-Exit" content="progid:DXImageTransform.Microsoft.Fade(Duration=0.3)">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+   
+    @*<link href="~/main_files/style.ar.css" rel="stylesheet" />
+    <link href="~/main_files/style.css" rel="stylesheet" />
+    <link href="~/main_files/ratingar.css" rel="stylesheet" />*@
+
+    <link href="~/Bootstrap_Arabic/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Bootstrap_Arabic/bootstrap-big-grid.min.css" rel="stylesheet" />
+    <script src="~/Bootstrap_Arabic/jquery-v1.11.2.js"></script>
+    <script src="~/Bootstrap_Arabic/bootstrap.min.js"></script>
+
+    <style>
+        .DivHeader {
+            background-color: #FFCE94;
+            width:80%;
+            height:12%;
+            margin-right:10%;
+        }
+
+        .DivContent {
+            
+            width: 80%;
+            height: 76%;
+            margin-right: 10%;
+        }
+
+        .DivFooter {
+            background-color: #FFCE94;
+            width: 80%;
+            height: 12%;
+            margin-right: 10%;
+        }
+
+        #MenuAccordion{
+            float:right;
+            width:20%;
+            height:100%;
+            background-color:white;
+        }
+
+        #SharedForm {
+            float: left;
+            width: 79%;
+            height: 100%;
+            
+            margin-top:1%;
+        }
+        #SharedFormHeader{
+            height:19%;
+            width:100%;
+            
+        }
+        #SharedFormContent{
+            margin-top:0.5%;
+            height: 78%;
+            width: 100%;
+            
+        }
+
+        
+
+
+        /*\\\\\\\\\\\\\\\\\\\\\\\\\Accordion//////////////////////*/
+        .wrapper {
+            height:97%;
+            width:100%;
+            margin-top:3%;
+        }
+
+        .mainMenu {
+            width: 100%;
+            display: block;
+            overflow: hidden;
+        }
+
+        .item {
+            border-top: 1px solid #4F83B5;
+            overflow: hidden;
+            list-style: none;
+        }
+
+        .btn {
+            display: block;
+            padding: 7px 20px;
+            color: #003756;
+            position: relative;
+            text-align: right;
+            font-family:'Times New Roman';
+            font-size:18px;
+            font-weight:bold;
+        }
+
+            .btn:before {
+                content: '';
+                position: absolute;
+                width: 0;
+                height: 0;
+                border-left: 8px solid transparent;
+                border-right: 8px solid transparent;
+               /* border-top: 10px solid #ff6f61;*/
+                right: 15px;
+                bottom: -10px;
+                z-index: 9;
+            }
+
+
+
+        .subMenu {
+            background: #D1EAFA;
+            overflow: hidden;
+            transition: max-height 0.7s;
+            max-height: 0%;
+        }
+
+            .subMenu a {
+                display: block;
+                padding: 2px 2px;
+                color: #252470;
+                font-family: 'Times New Roman';
+                font-size: 15px;
+                /*border-bottom: 1px solid #394c7f;*/
+                position: relative;
+                text-align: right;
+            }
+
+                .subMenu a:before {
+                    content: '';
+                    opacity: 0;
+                    transition: opacity 0.3s;
+                }
+
+                .subMenu a:hover:before {
+                    content: '';
+                    position: absolute;
+                    height: 0;
+                    width: 6px;
+                    left: 0;
+                    top: 0;
+                    opacity: 1;
+                    border-top: 24px solid transparent;
+                    border-left: 11px solid #EEA63C;
+                    border-bottom: 24px solid transparent;
+                }
+
+                .subMenu a:after {
+                    content: '';
+                    opacity: 0;
+                    transition: opacity 0.3s;
+                }
+
+                .subMenu a:hover:after {
+                    content: '';
+                    position: absolute;
+                    height: 0;
+                    width: 6px;
+                    right: 0px;
+                    top: 0;
+                    opacity: 1;
+                    border-top: 24px solid transparent;
+                    border-right: 11px solid #EEA63C;
+                    border-bottom: 24px solid transparent;
+                    
+                }
+
+                .subMenu a:hover {
+                    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#273057', endColorstr='#394c7f',GradientType=0 );
+                    transition: all 0.3s;
+                    border-bottom: 1px solid #4A80B4;
+                    border-top: 1px solid #4A80B4;
+                }
+
+                .subMenu a:last-child {
+                    border: none;
+                }
+
+        .item:target .subMenu {
+            max-height: 20em;
+        }
+        /*End Accordion*/
+
+
+
+        #logo{
+            width:100px;
+            height:89px;
+            float:left;
+            margin-left:20px;
+        }
+        #sharedBtn {
+            width: 25px;
+            height: 25px;
+            float: left;
+            margin-left: 20px;
+        }
+        hr {
+            border-top: 1px solid #B6CAE1;
+            margin-top:-5px;
+        }
+        #btnshared{
+
+        }
+        
+    </style>
+
+
+</head>
+    <body class="mainBody" dir="rtl" onkeydown="return disableBackspace(event)" style="cursor: default;">
+        <form id="form1" runat="server" method="post">
+
+            <div>
+                <header>
+                    <div class="DivHeader">
+                        <div>
+                            <img id="logo" src="~/images/RentCar/Logo.png" />
+                        </div>
+                       
+                    </div>
+                </header>
+
+                <content>
+                    <div class="DivContent">
+                        <div id="MenuAccordion">
+                            <div class="wrapper">
+                                <ui class="mainMenu">
+                                    <li class="item" id="Contract">
+                                        <a href="#Contract" class="btn">العقود</a>
+                                        <div class="subMenu">
+                                            <a href="" style="padding-right: 30px;">تحرير عقد شركة تأجير سيارات</a>
+                                            <a href="" style="padding-right: 30px;"> تحرير العقد التفصيلي لشركة تأجير السيارات</a>
+                                            <a href="" style="padding-right: 30px;">عقود الشركات المساندة</a>
+                                            <a href="" style="padding-right: 30px;">رسوم تبادل البيانات</a>
+                                        </div>
+                                    </li>
+                                    <li class="item" id="Reports">
+                                        <a href="#Reports" class="btn">التقارير</a>
+                                        <div class="subMenu">
+                                            <a href="" style="padding-right: 30px;">تقارير إدارية مختصرة</a>
+                                            <a href="" style="padding-right: 30px;">تقارير مالية مختصرة</a>
+                                            <a href="" style="padding-right: 30px;">تقارير إدارية تفصيلية</a>
+                                            <a href="" style="padding-right: 30px;">تقارير مالية تفصيلية</a>
+                                            <a href="" style="padding-right: 30px;">تقارير إحصائية</a>
+                                        </div>
+                                    </li>
+                                    <li class="item" id="TheTenants">
+                                        <a href="#TheTenants" class="btn">المستأجرين</a>
+                                        <div class="subMenu">
+                                            <a href="" style="padding-right: 30px;">إظافة بيانات مستأجر</a>
+                                            <a href="" style="padding-right: 30px;">تقرير بيانات تفصيلية لمستأجر</a>
+                                            <a href="" style="padding-right: 30px;">عقود المستأجرين</a>
+                                            <a href="" style="padding-right: 30px;">تقرير عقود تفصيلية لمستأجر</a>
+
+                                        </div>
+                                    </li>
+
+                                    <li class="item" id="Companies">
+                                        <a href="#Companies" class="btn">بيانات الشركات</a>
+                                        <div class="subMenu">
+                                            <a href="" style="padding-right: 30px;">شركات تأجير السيارات</a>
+                                            <a href="" style="padding-right: 30px;">الشركات المساندة</a>
+                                            <a href="" style="padding-right: 30px;">بيانات السيارات</a>
+
+                                        </div>
+                                    </li>
+
+                                    <li class="item" id="Cars">
+                                        <a href="#Cars" class="btn">بيانات السيارات</a>
+                                        <div class="subMenu">
+                                            <a href="" style="padding-right: 30px;">الماركات</a>
+                                            <a href="" style="padding-right: 30px;">الطراز</a>
+                                            <a href="" style="padding-right: 30px;">الفئة</a>
+                                            <a href="" style="padding-right: 30px;">اللون</a>
+                                            <a href="" style="padding-right: 30px;">المميزات</a>
+                                            <a href="" style="padding-right: 30px;">المواصفات</a>
+                                            <a href="" style="padding-right: 30px;">الإضافات</a>
+                                            <a href="" style="padding-right: 30px;">تحديد الفئة</a>
+                                            <a href="" style="padding-right: 30px;">تحديد المواصفات</a>
+                                        </div>
+                                    </li>
+
+                                    <li class="item" id="UserInfo">
+                                        <a href="#UserInfo" class="btn">البيانات الشخصية</a>
+                                        <div class="subMenu">
+                                            <a href="" style="padding-right: 30px;">الجنسية</a>
+                                            <a href="" style="padding-right: 30px;">جهة العمل</a>
+                                            <a href="" style="padding-right: 30px;">المهن</a>
+                                            <a href="" style="padding-right: 30px;">العضوية</a>
+                                            <a href="" style="padding-right: 30px;">المدن</a>
+
+                                        </div>
+                                    </li>
+
+                                    <li class="item" id="Users">
+                                        <a href="#Users" class="btn">المستخدمين</a>
+                                        <div class="subMenu">
+                                            <a href="" style="padding-right: 30px;">المستخدمين</a>
+                                            <a href="" style="padding-right: 30px;">الصلاحيات</a>
+
+                                        </div>
+                                    </li>
+
+                                    <li class="item" id="Measures">
+                                        <a href="#Measures" class="btn">الإجراءات</a>
+                                        <div class="subMenu">
+                                            <a href="" style="padding-right: 30px;">البنود المالية و الإدارية</a>
+                                            <a href="" style="padding-right: 30px;">بنود تبادل البيانات</a>
+                                            <a href="" style="padding-right: 30px;">الفحص الظاهري</a>
+                                            
+                                        </div>
+                                    </li>
+
+                                    <li class="item" id="Services">
+                                        <a href="#Services" class="btn" style="border-bottom: 1px solid ;">الخدمات</a>
+                                        <div class="subMenu">
+                                            <a href="" style="padding-right: 30px;">الأنظمة</a>
+                                            <a href="" style="padding-right: 30px;">المهام</a>
+                                            <a href="" style="padding-right: 30px;">الرسائل الإرشادية للنظام</a>
+                                            <a href="" style="padding-right: 30px;">الأسئلة الأكثر شيوعا</a>
+
+                                        </div>
+                                    </li>
+
+                                </ui>
+                            </div>
+                        </div>
+                        <div id="SharedForm">
+                            <div id="SharedFormHeader" style="background-color:white;">
+                                <div style="margin-top:-7px;">
+                                    <text style="margin-top:-7px;color:#4A80B3; font-family:'Times New Roman';font-size:22px;margin-right:10px;">مرحبا</text>
+                                    <a href="" title="خروج"><img id="sharedBtn" src="~/images/RentCar/exit.png" /></a>
+                                    <a href="" title="تغيير كلمة السر"><img id="sharedBtn" src="~/images/RentCar/changePass.png" /></a>
+                                    <a href="" title="اللغة"><img id="sharedBtn" src="~/images/RentCar/language.png" /></a>
+                                    <hr style="width:100%;margin-left:0px;margin-top:-5px;" />
+                                    <hr style="width:70%;margin-left:0px;margin-top:-12px;" />
+                                    <hr style="width:85%;margin-left:0px;margin-top:-12px;" />
+                                    <hr style="width:50%;margin-left:0px;margin-top:-12px;" />
+
+                                    <div style="margin-top: -16px !important;background-color:white;">
+                                        <div>
+                                            <text style="color:#4A80B3; font-family:'Times New Roman';font-size:22px;margin-right:10px">مؤشرات</text>
+                                        </div>
+                                        <div>
+                                            <hr style="width:100%;margin-left:0px;" />
+                                            <hr style="width:70%;margin-left:0px;margin-top:-12px;" />
+                                            <hr style="width:85%;margin-left:0px;margin-top:-12px;" />
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                               
+                            </div>
+
+                            <div id="SharedFormContent" style="background-color:lightblue;">
+                                @RenderBody()
+                            </div>
+                        </div>
+                    </div>
+                </content>
+
+                <footer>
+                    <div class="DivFooter">
+
+                    </div>
+                </footer>                               
+            </div>
+        </form>
+
+    </body>
+</html>
+

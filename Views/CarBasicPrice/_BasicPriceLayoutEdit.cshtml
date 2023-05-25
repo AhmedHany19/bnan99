@@ -1,0 +1,155 @@
+﻿
+@model RentCar.Models.CR_Cas_Car_Price_Basic
+@{
+    Layout = "~/Views/Shared/_CasLayout.cshtml";
+}
+
+
+
+@using (Html.BeginForm("Edit", "CarBasicPrice", FormMethod.Post, new { enctype = "multipart/form-data" }))
+
+{
+    @Html.AntiForgeryToken()
+
+    <div class="content">
+
+        <!-- Start Content-->
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card-box table-responsive" style="height: 79vh; overflow-x: hidden">
+                        <div class="title_corp"><h3>                                                                                        السيارات / أسعار السيارات / تعديل</h3></div>
+                        <div class="subtitle_corp"> تمكنك هذه الصفحة من عرض بينات السيارة</div>
+                        <div class="hr_60"></div>
+                        <div class="hr_80"></div>
+                        <div class="corp_page">
+                            <div class="page_content">
+                                <div class="form-group row" style="margin-top:15px;">
+
+                                    @Html.HiddenFor(model => model.CR_Cas_Car_Price_Basic_Brand_Code, htmlAttributes: new { @class = "form-control ", style = "float:right;width:100%", onkeyup = "movetoNext('')", autocomplete = "off", onpaste = "return false;", maxlength = "20" })
+                                    @Html.HiddenFor(model => model.CR_Cas_Car_Price_Basic_Category_Code, htmlAttributes: new { @class = "form-control ", style = "float:right;width:100%", autocomplete = "off", onpaste = "return false;", maxlength = "20" })
+                                    @Html.HiddenFor(model => model.CR_Cas_Car_Price_Basic_Status, htmlAttributes: new { @class = "form-control ", style = "float:right;width:100%", autocomplete = "off", onpaste = "return false;", maxlength = "20" })
+
+
+                                    <div class="col-md-4" style="float:right;">
+                                        <div class="row">
+                                            <label class="col-md-6 label6"> الطراز</label>
+                                            <div class="col-md-6 input6">
+                                                @Html.DropDownList("CR_Cas_Car_Price_Basic_Model_Code", null, htmlAttributes: new { @class = "form-control", style = "float:right;width:100%", @disabled = "disabled" })
+                                                <div class="texterr" id="ErrPrice" style="float: right; position: relative">@ViewBag.Price</div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="col-md-4" style="float:right;">
+                                        <div class="row">
+                                            <label class="col-md-5 col-form-label label6">
+                                                سنة الصنع
+                                            </label>
+                                            <div class="col-md-6 input6">
+                                                @Html.TextBoxFor(model => model.CR_Cas_Car_Price_Basic_Car_Year, htmlAttributes: new { @class = "form-control ", onkeydown = "GetBrandCat()", onkeyup = "GetFeaturesList()", style = "float:right;width:100%", autocomplete = "off", oninput = "this.value=this.value.replace(/[^0-9]/g,'')", onpaste = "return false;", maxlength = "10", @disabled = "disabled" })
+                                                <div class="texterr" style="float: right;"></div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="col-md-4" style="float:right;">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <img src="" id="carimg" width="150" height="65" style=" float: right; position: absolute; object-fit: cover;border:solid 1px #e7e7e7;display:none" />
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                                @RenderBody()
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        function GetBrandCat() {
+            if (event.keyCode === 13) {
+                $.ajax({
+                    url: '@Url.Action("GetBrandCat", "CarBasicPrice")',
+                    type: "GET",
+                    data: { year: $("#CR_Cas_Car_Price_Basic_Car_Year").val(), ModelCode: $("#CR_Cas_Car_Price_Basic_Model_Code").val() },
+                    success: function (result) {
+                        $("#BrandCategory").val(result);
+                        GetBrandCatCode();
+                    }
+                });
+            }
+        };
+
+    </script>
+
+
+    <script>
+        $(document).ready(function () {
+            $("#CR_Cas_Car_Price_Basic_Model_Code").change(function () {
+                $.ajax({
+                    url: '@Url.Action("GetBrandCat", "CarBasicPrice")',
+                    type: "GET",
+                    data: { year: $("#CR_Cas_Car_Price_Basic_Car_Year").val(), ModelCode: $("#CR_Cas_Car_Price_Basic_Model_Code").val() },
+                    success: function (result) {
+                        $("#BrandCategory").val(result);
+                        GetBrandCatCode();
+                    }
+                });
+            })
+        });
+    </script>
+
+    <script>
+        function GetBrandCatCode() {
+
+            $.ajax({
+                url: '@Url.Action("GetBrandCatCode", "CarBasicPrice")',
+                type: "GET",
+                data: { year: $("#CR_Cas_Car_Price_Basic_Car_Year").val(), ModelCode: $("#CR_Cas_Car_Price_Basic_Model_Code").val() },
+                success: function (result) {
+                    $("#CR_Cas_Car_Price_Basic_Brand_Code").val(result.split(",")[0]);
+                    $("#CR_Cas_Car_Price_Basic_Category_Code").val(result.split(",")[1]);
+                    $("#CarsNumber").val(result.split(",")[2]);
+                }
+            });
+
+        };
+
+            //////////////// disable auto validate on enter click ///////////////
+            $(document).keypress(function (e) {
+                if (e.keyCode === 13) {
+                    e.preventDefault();
+                    return false;
+                }
+            });
+                    ////////////////////////////////////////////////////////////////////
+    </script>
+
+    <style>
+        select {
+            /* Remove default arrow */
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            
+        }
+    </style>
+}

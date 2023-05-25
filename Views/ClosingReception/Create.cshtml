@@ -1,0 +1,329 @@
+﻿@model IEnumerable<RentCar.Models.CR_Cas_Account_Receipt>
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_CASLayout.cshtml";
+}
+
+<div class="content">
+    <!-- Start Content-->
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card-box table-responsive" style="height:79vh">
+                    <div class="title_corp"><h3> الحسابات/إستلام عهدة/قبول أو رفض</h3></div>
+                    <div class="subtitle_corp">تمكنك الصفحة عرض بيانات استلام العهدة من الموظف و قبول أو رفض الاستلام</div>
+                    <div class="hr_60"></div>
+                    <div class="hr_80"></div>
+                    <div class="corp_page">
+                        <div class="page_content" style="float:left;width:100%">
+                            <form id="form_validation" action="/Closingreception/Create" enctype="multipart/form-data" method="post" data-parsley-validate novalidate>
+
+                                @Html.AntiForgeryToken()
+
+                                <div class="form-horizontal" style="margin-top:15px;min-height:50%">
+
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                                    <div class="row mb-2">
+                                        <div class="col-lg-6  col-md-12">
+                                            <div class="row">
+                                                <div class="col-lg-3 col-md-4">
+
+                                                    <label class="label_form" style="float:right;">رقم تسليم العهدة</label>
+                                                </div>
+                                                <div class="col-lg-5 col-md-4">
+                                                    <input type="text" class="form-control" name="TracingNo" value="@ViewBag.ProcNo" readonly />
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-lg-6 col-md-12 " style="margin-top:0px;">
+                                            <div class="row">
+                                                <div class="col-lg-3 col-md-4">
+
+                                                    <label class="label_form" style="float:right;">تاريخ التسليم</label>
+                                                </div>
+                                                <div class="col-lg-4 col-md-4">
+                                                    <input class="form-control"
+                                                           id="Date" name="Date" type="text" value="@ViewBag.Date" readonly>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="row  mb-2">
+                                        <div class="col-lg-6  col-md-12">
+                                    
+                                            <div class="row">
+                                                <div class="col-lg-3 col-md-4 label4">
+                                                    <label>إسم نقطه البيع </label>
+                                                </div>
+                                                <div class="col-lg-5 col-md-4 input4">
+                                                    <input class="form-control" type="text" value="@Model.FirstOrDefault().CR_Cas_Sup_SalesPoint.CR_Cas_Sup_SalesPoint_Ar_Name" readonly>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6  col-md-12">
+                                            <div class="row">
+                                                <div class="col-lg-3 col-md-4">
+
+                                                    <label class="label_form" style="float:right;">رصيد نقطه البيع </label>
+                                                </div>
+                                                <div class="col-lg-4 col-md-4">
+                                                    <input class="form-control t1"
+                                                           id="Date" name="Date" type="text" value="@Model.FirstOrDefault().CR_Cas_Sup_SalesPoint.CR_Cas_Sup_SalesPoint_Balance" readonly>
+                                                </div>
+                                            </div>
+
+                                        </div>  
+                                    </div>
+
+                                    <div class="row mb-2">
+                                        <div class="col-lg-6  col-md-12" style="white-space: nowrap;">
+                                            <div class="row">
+                                                <div class="col-lg-3 col-md-4">
+
+                                                    <label class="label_form" style="float:right;">مجموع الدائن</label>
+                                                </div>
+                                                <div class="col-lg-4 col-md-4">
+                                                    <input type="text" class="form-control totalCreditor t1" readonly />
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-lg-6  col-md-12">
+                                            <div class="row" style="white-space: nowrap;">
+                                                <div class="col-lg-3 col-md-4 nowrap">
+
+                                                    <label class="label_form">مجموع المدين </label>
+                                                </div>
+                                                <div class="col-lg-3 col-md-4">
+                                                    <input class="form-control totaldebtor t1" type="text" readonly>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+
+                                    </div>
+
+                                  
+                                    <div class="row  mb-2">
+                                        <div class="col-lg-12 col-md-12">
+                                            <div class="row">
+                                                <div class="col-md-1" style="margin-left: 52px;">
+                                                    <label class="label_form">ملاحظات</label>
+                                                </div>
+                                                <div class="col-lg-10 col-md-10" style="padding:0">
+                                                    <input type="text" class="form-control" name="reason" value="@Model.FirstOrDefault().CR_Cas_Account_Receipt_Reasons" style="width:450px" />
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+
+                                    <div id="Table" class="mt-4 tableT">
+
+
+                                        <div class="responsive-table-plugin">
+                                            <div class="table-rep-plugin">
+                                                <div class="table-responsive" data-pattern="priority-columns" style="border:none;">
+                                                    <div id="dtBasicExample_print">
+                                                        <table id="myTable" class="table table-striped" style="cursor:pointer;">
+                                                            <thead>
+                                                                <tr>
+
+                                                                    <th style="width:15%">
+                                                                        رقم القيد
+                                                                    </th>
+                                                                    <th style="width:9%">
+                                                                        تاريخ القيد
+                                                                    </th>
+                                                                    <th style="width:15%">
+                                                                        رقم المرجع
+                                                                    </th>
+                                                                    <th style="width:10%">
+                                                                        نوع المرجع
+                                                                    </th>
+                                                                    <th style="width:20%">
+                                                                        طريقة الدفع
+                                                                    </th>
+                                                                    <th style="width:8%">
+                                                                        دائن
+                                                                    </th>
+                                                                    <th style="width:8%">
+                                                                        مدين
+                                                                    </th>
+
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody id="TblCashClosing" style="cursor:auto;height:340px!important">
+
+                                                                @foreach (var item in Model)
+                                                                {
+
+                                                                    <tr>
+
+                                                                        <td style="width:15%">
+                                                                            @Html.DisplayFor(modelItem => item.CR_Cas_Account_Receipt_No)
+                                                                        </td>
+                                                                        <td style="width:9%">
+                                                                            @item.CR_Cas_Account_Receipt_Date.Value.ToString("yyyy/MM/dd")
+                                                                        </td>
+                                                                        <td style="width:15%">
+                                                                            @Html.DisplayFor(modelItem => item.CR_Cas_Account_Receipt_Contract_Operation)
+                                                                        </td>
+                                                                        <td style="width:10%">
+                                                                            @Html.DisplayFor(modelItem => item.CR_Cas_Account_Receipt_Reference_Type)
+                                                                        </td>
+                                                                        <td style="width:20%">
+                                                                            @Html.DisplayFor(modelItem => item.CR_Mas_Sup_Payment_Method.CR_Mas_Sup_Payment_Method_Ar_Name)
+                                                                        </td>
+                                                                        <td style="width:8%" class="Creditor">
+                                                                            @Html.DisplayFor(modelItem => item.CR_Cas_Account_Receipt_Payment)
+                                                                        </td>
+                                                                        <td style="width:8%" class="debtor">
+                                                                            @Html.DisplayFor(modelItem => item.CR_Cas_Account_Receipt_Receipt )
+                                                                        </td>
+
+                                                                    </tr>
+                                                                }
+
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-3 col-50">
+                                            <input type="submit" name="Save" class="btn btn-primary waves-effect" id="add_btn" value="قبول" style=" margin-left: 18px;" />
+                                            <input type="submit" name="Cancel" class="btn btn-primary waves-effect" id="CancelBtn" value="رفض" style=" margin-left: 18px;" />
+                                            <a href="/ClosingReception/index" tabindex="" class="btn btn-primary waves-effect">انهاء</a>
+                                        </div>
+
+
+                                        @* <div class="col-md-1 col-50" style="margin-top:50px;">
+                                                <div></div>
+                                            </div>*@
+
+                                    </div>
+
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .row{
+        align-items:center
+    }
+</style>
+
+
+
+<script>
+
+    // Get a reference to the HTML table
+    const table = document.getElementById('myTable');
+
+    // Specify the indexes of the columns to format (starting from 0)
+    const columnIndexes = [5,6]; // for example, format columns  5, 6    
+
+    // Loop through each row in the table
+    for (let i = 1; i < table.rows.length; i++) { // starting from row 1 to exclude the header row
+        // Loop through each column index in the list
+        for (let j = 0; j < columnIndexes.length; j++) {
+            // Get the cell in the current row for the specified column index
+            const cell = table.rows[i].cells[columnIndexes[j]];
+
+            // Check if the cell contains an <a> tag
+            if (cell.querySelector('a')) {
+                // If it does, get the inner text of the <a> tag and attempt to parse it as a number
+                const value = parseFloat(cell.querySelector('a').innerText);
+
+                // Check if the parsed value is a valid number
+                if (!isNaN(value) && isFinite(value)) {
+                    // Convert the parsed value to a string with thousand separators and decimal points
+                    const formattedValue = value.toLocaleString('en-US', { minimumFractionDigits: 2 });
+
+                    // Update the inner text of the <a> tag with the formatted value
+                    cell.querySelector('a').innerText = formattedValue;
+                }
+            } else {
+                // If the cell doesn't contain an <a> tag, attempt to parse the cell value as a number
+                const value = parseFloat(cell.innerHTML);
+
+                // Check if the parsed value is a valid number
+                if (!isNaN(value) && isFinite(value)) {
+                    // Convert the parsed value to a string with thousand separators and decimal points
+                    const formattedValue = value.toLocaleString('en-US', { minimumFractionDigits: 2 });
+
+                    // Update the cell's innerHTML property with the formatted value
+                    cell.innerHTML = formattedValue;
+                }
+            }
+        }
+    }
+</script>
+
+
+<script>
+    $(document).ready(function () {
+        formatInputNumber($(".t1"));
+    });
+        
+    function formatInputNumber(input) {
+        let num = parseFloat(input.val()); // Get the value of the input and parse it as a float
+        num = num.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'); // Format the number with commas
+        input.val(num); // Set the formatted number as the value of the input
+    }
+</script>
+
+<script>
+        $(document).ready(function () {
+            var total = 0;
+            $('.Creditor').each(function () {
+                var price = parseFloat($(this).text().replace(/,/g, ''));
+                if (!isNaN(price)) {
+                    total += price;
+                } 
+            });
+            console.log(total)
+            $('.totalCreditor').val(total.toFixed(2).toLocaleString('en-US'));
+        }); 
+
+        $(document).ready(function () {
+            var total = 0;
+            $('.debtor').each(function () {
+                var price = parseFloat($(this).text().replace(/,/g, ''));
+                if (!isNaN(price)) {
+                    total += price;
+                }
+            });
+            $('.totaldebtor').val(total.toFixed(2).toLocaleString('en-US'));
+        }); 
+
+
+    $(document).ready(function () {
+        $('.t1').each(function () {
+            var value = $(this).val().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            $(this).val(value);
+        });
+    });
+</script>
+

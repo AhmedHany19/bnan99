@@ -1,0 +1,172 @@
+﻿@model IEnumerable<RentCar.Models.CR_Cas_Car_Price_Choices>
+
+<style>
+    #inputtext {
+        width: 250px;
+        height: 30px;
+        margin-right: 293px;
+        margin-left: -5px;
+        float: left;
+        margin-top: 5px;
+        border-color: #4A80B3;
+        border-radius: unset;
+    }
+
+    #SrchImg {
+        float: left;
+        margin-top: -5px;
+        margin-left: 0px;
+        margin-right: -35px;
+        position: relative;
+    }
+
+    td {
+        font-family: 'Times New Roman';
+        font-size: 14px;
+        padding: 5px 4px !important;
+        font-weight: 100;
+        color: #73A0C1;
+        border-color: #4A80B3;
+    }
+
+    th {
+        font-family: 'Times New Roman';
+        font-size: 16px;
+        font-weight: bold;
+        border-color: #4A80B3;
+        cursor: pointer;
+    }
+
+    .title_corp {
+        margin-top: -15px;
+    }
+
+    .table thead {
+        overflow-y: scroll;
+        flex-grow: 1;
+    }
+
+    .table tr a {
+        text-decoration: none;
+        color: black !important;
+        border-color: #4A80B3;
+    }
+
+    .table td {
+        color: #083555;
+        border-color: #4A80B3;
+    }
+
+    .table thead th {
+        color: #124f77;
+        border-color: #4A80B3;
+        text-align: center;
+        background: #D1EAFA;
+        position: sticky;
+        top: 0;
+    }
+
+    .title_corp {
+        font-family: 'Times New Roman';
+        font-size: 25px;
+    }
+
+    .subtitle_corp {
+        padding-top: 3px !important;
+        font-family: 'Times New Roman' !important;
+        color: #083555;
+    }
+
+    .table {
+        margin-left: auto;
+        margin-right: auto;
+    }
+</style>
+
+<div class="" style="margin-top:20px;">
+
+    <div class="table-responsive" style="width:50%; height:320px;overflow:auto;margin:auto;margin-top:25px;">
+
+        <table class="table table-bordered table-striped table-striped_width" id="ChoicesTable">
+            <thead>
+                <tr>
+                    <th width="70%">
+                        الخيارات
+                    </th>
+                    <th width="30%">
+                        القيمة
+                    </th>
+                </tr>
+            </thead>
+            <tbody id="tblChoices">
+                @{
+                    int k = 0;
+                    foreach (var item in Model)
+                    {
+                        k++;
+                        <tr>
+                            <td class="key" hidden="hidden">
+                                <input class="keyval" value="@k" id="indexinput" />
+                            </td>
+                            <td style="vertical-align: middle;" width="70%">
+                                @Html.HiddenFor(modelItem => item.CR_Cas_Car_Price_Choices_Code)
+                                <input type="checkbox" id="chkChoice_@item.CR_Cas_Car_Price_Choices_Code" name="chkChoice_@item.CR_Cas_Car_Price_Choices_Code" class="form-control ChkChoicesList"
+                                       style="height: 20px; width: 20px; float: right; margin-left: 10px;" />
+
+                                <input type="text" id="ValChoices_@item.CR_Cas_Car_Price_Choices_Code" name="ValChoices_@item.CR_Cas_Car_Price_Choices_Code" value="@item.CR_Cas_Car_Price_Choices_Value" hidden />
+
+                                @Html.DisplayFor(modelItem => item.CR_Mas_Sup_Choices.CR_Mas_Sup_Choices_Ar_Name)
+                            </td>
+                            <td align="center" style="vertical-align: middle;" width="30%">
+                                <span class="v" id="ValChoices_@k">
+                                    @Html.DisplayFor(modelItem => item.CR_Cas_Car_Price_Choices_Value)
+
+                                </span>
+
+                            </td>
+
+                        </tr>
+
+                    }
+                    <tr>
+                        <td style="vertical-align: middle;font-size:18px;" width="70%">
+                            المجموع
+                        </td>
+
+                        <td align="center" width="30%">
+                            <span id="TotalChoices"></span>
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+
+<script>
+    $(document).ready(
+        function () {
+            $(".ChkChoicesList").change(function () {
+                var s = 0;
+                $("#tblChoices TR").each(function () {
+                   
+                    var chk = $(this).find('input[type="checkbox"]').is(':checked');
+                    if (chk == true) {
+                        var k = $(this).find(".key").find(".keyval").val();
+                        var ChoiceVal = $("#ValChoices_" + k).html().trim();                     
+                        s = parseFloat(s) + parseFloat(ChoiceVal);
+                    }
+
+                });
+                if (s > 0) {
+                    document.getElementById('TotalChoices').innerHTML = s.toFixed(2);
+                } else {
+                    document.getElementById('TotalChoices').innerHTML = "0.00";
+                }
+            })
+        });
+</script>
+

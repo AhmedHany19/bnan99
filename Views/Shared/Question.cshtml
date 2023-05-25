@@ -1,0 +1,64 @@
+﻿@model IEnumerable <RentCar.Models.CR_Mas_Msg_Questions_Answer>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<style>
+    .title_corp {
+        font-family: 'Times New Roman';
+        font-size: 25px;
+    }
+
+    .subtitle_corp {
+        padding-top: 3px !important;
+        font-family: 'Times New Roman' !important;
+        color: #083555;
+    }
+    #btt {
+        margin-top: 230px;
+        margin-right: 710px;
+        font-family: 'Times New Roman';
+        font-size: 15px !important;
+        width: 70px !important;
+        background-color: #F3B161;
+        border-radius: 0px;
+        color: white;
+        padding-right:20px!important;
+    }
+    .qst {
+        height: 50px;
+        font-size: 20px;
+        font-family: 'Times New Roman' !important;
+        color: black;
+    }
+    .rep {
+        font-size: 15px;
+        font-family: 'Times New Roman' !important;
+        color: black;
+    }
+</style>
+<div class="corp_content">
+    <div class="title_corp">@ViewBag.titre</div>
+    <div class="subtitle_corp">تمكنك الصفحة من عرض الأسئلة الأكثر شيوعا</div>
+    <div class="hr_60"></div>
+    <div class="hr_80"></div>
+    <div class="corp_page">
+        <div class="page_content" style=" margin-top: 10px; height:421px!important;">
+            @using (Html.BeginForm())
+            {
+            <table style="border-color:transparent">
+                @foreach (var item in Model)
+                {
+                    <tr class="qst"><td> <ul><li>@Html.DisplayFor(modelItem => item.CR_Mas_Msg_Ar_Questions)</li></ul></td></tr>
+                    <tr class="rep"><td>@Html.DisplayFor(modelItem => item.CR_Mas_Msg_Ar_Answer)</td></tr>
+                }
+            </table>
+            <div>          
+                @Html.ActionLink("انهاء", "Question", "Shared", new { @class="btn", id= "btt" })              
+            </div>
+            }
+        </div>
+    </div>
+</div>

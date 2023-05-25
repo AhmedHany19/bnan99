@@ -1,0 +1,320 @@
+﻿
+@model RentCar.Models.CR_Cas_User_Information
+
+@{
+    ViewBag.Title = "EditBranchAccount";
+    Layout = "~/Views/Shared/_LayoutSys3.cshtml";
+}
+
+
+<link href="~/BSys3Styles/CSS/style_form.css" rel="stylesheet" />
+<head>
+
+    @*<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+        <script src="~/Scripts/toastr.min.js"></script>
+        <script src="~/Scripts/toastr.js"></script>*@
+
+</head>
+<style>
+
+    #textErr {
+        color: red;
+        font-size: 12px;
+        font-weight: bold;
+    }
+</style>
+<div class="content">
+
+    <!-- Start Content-->
+    <div class="container">
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card-box table-responsive" style="height:78vh">
+                    <div class="title_corp"><h3>  حسابي </h3></div>
+                    <div class="subtitle_corp">تمكنك هذه الصفحة من تعديل حساب المستخدم </div>
+                    <div class="hr_60"></div>
+                    <div class="hr_80"></div>
+                    <div class="corp_page " style=" padding-top: 20px;">
+                        <div class="page_content">
+
+                            <form id="form_validation" action="/AccountInformation/EditBranchAccount" enctype="multipart/form-data" method="post" data-parsley-validate novalidate style="width:100%">
+
+                                @Html.AntiForgeryToken()
+                                <div class="responsive-table-plugin">
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    @Html.HiddenFor(Model => Model.CR_Cas_User_Information_Lessor_Code)
+                                    @Html.HiddenFor(Model => Model.CR_Cas_User_Information_Id)
+                                    @Html.HiddenFor(Model => Model.CR_Cas_User_Information_PassWord)
+                                    <div class="row">
+                                        <div class="col-md-4" style="float:right;">
+                                            <div class="form-group row">
+                                                <div class="col-md-6 label6">
+                                                    <label>كلمة السر الحالية</label>
+                                                </div>
+                                                <div class="col-md-6 input6">
+                                                    <input type="text" id="OldPassword" name="OldPassword" class="form-control" autocomplete="off" maxlength="10" />
+                                                    <div id="textErr" style="height:15px;"><span id="OldPasswordError"></span></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row" hidden>
+                                        <div class="col-md-4" style="float:right;">
+                                            <div class="form-group row">
+                                                <div class="col-md-6 label6">
+                                                    <label>   رقم المستخدم<label id="asterisk">*</label></label>
+                                                </div>
+                                                <div class="col-md-6 input6">
+                                                    @Html.TextBoxFor(model => model.CR_Cas_User_Information_Id,
+                                                   htmlAttributes: new { @class = "form-control ", style = "float:right;", onpaste = "return false;", maxlength = "10", oninput = "this.value=this.value.replace(/[^0-9]/g,'')", Readonly = "true" })
+                                                    <div><span id="textErr"></span></div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row" hidden>
+                                        <div class="col-md-8" style="float:right;">
+                                            <div class="form-group row">
+                                                <div class="col-md-3">
+                                                    <label>إسم المستخدم عربي<label id="asterisk">*</label></label>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    @Html.TextBoxFor(model => model.CR_Cas_User_Information_Ar_Name,
+                                                   htmlAttributes: new { @class = "form-control ", style = "float:right;", onpaste = "return false;", onkeypress = "return CheckArabicCharactersOnly(event);", maxlength = "50", Readonly = "true" })
+                                                    <div><span id="textErr"></span></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-4" style="float:right;">
+                                            <div class="form-group row">
+                                                <div class="col-md-6 label6">
+                                                    <label>رقم الجوال</label>
+                                                </div>
+                                                <div class="col-md-6 input6">
+                                                    @Html.TextBoxFor(model => model.CR_Cas_User_Information_Mobile,
+                                                   htmlAttributes: new { @class = "form-control ", style = "float:right;", onpaste = "return false;", maxlength = "15", oninput = "this.value=this.value.replace(/[^0-9]/g,'')" })
+                                                    <div><span id="textErr"></span></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4" style="float:right;margin-bottom:10px;">
+                                            <div class="form-group row">
+                                                <div class="col-md-6 label6">
+                                                    <label>البريد الإلكتروني</label>
+                                                </div>
+                                                <div class="col-md-6 input6">
+                                                    @Html.TextBoxFor(model => model.CR_Cas_User_Information_Emaile,
+                                                   htmlAttributes: new { @class = "form-control ", style = "float:right;", onpaste = "return false;", oninput = "this.value=this.value.replace(/[^a-zA-Z0-9 àâäèéêëîïôœùûüÿçÀÂÄÈÉÊËÎÏÔŒÙÛÜŸÇ]/g,'')", maxlength = "30" })
+                                                    <div><span id="textErr"></span></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-4" style="float:right;">
+                                            <div class="form-group row">
+                                                <div class="col-md-6 label6">
+
+                                                    <div class="input-group">
+                                                        <span class="input-group-btn" style="width:100%">
+                                                            <span class="btn btn-primary" onclick="$(this).parent().find('input[type=file]').click();" style="width:100%;height:35px;width:100%;line-height:20px;">التوقيع </span>
+                                                            <input name="BranchUserSignatureFile" type="file" class="form-control " style="display: none; float: right; width: 100%; object-fit: fill;"
+                                                                   accept="image/*" id="BranchUserSignatureFile" onchange="LoadBranchUserSignature(event)">
+                                                        </span>
+                                                    </div>
+                                                    <div><span id="textErr">@ViewBag.UserSign</span></div>
+                                                </div>
+                                                <div class="col-md-6 input6">
+                                                    @if (ViewBag.UserSignPath != null)
+                                                    {
+                                                        <img src="@Url.Content(Model.CR_Cas_User_Information_Signature)" id="BranchUserSignature" class="zoom" width="120" height="80" style="margin-top: -14px; float: right; margin-right: 0; width: 120px; height: 80px; position: relative; object-fit: cover; border: solid 1px #e7e7e7 " />
+                                                        <input type="text" id="BranchUserSignaturePath" name="BranchUserSignaturePath" value="@ViewBag.UserSignPath" hidden />
+                                                    }
+                                                    else
+                                                    {
+                                                        <img src="" id="BranchUserSignature" class="zoom" width="120" height="80" style="display: none; margin-top: -14px; float: right; margin-right: 0; width: 120px; height: 80px; position: relative; object-fit: cover; border: solid 1px #e7e7e7" />
+                                                        <input type="text" id="BranchUserSignaturePath" name="BranchUserSignaturePath" value="@ViewBag.UserSignPath" hidden />
+                                                    }
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4" style="float:right;">
+                                            <div class="form-group row">
+                                                <div class="col-md-6 label6">
+                                                    <div class="input-group">
+                                                        <span class="input-group-btn" style="width:100%">
+                                                            <span class="btn btn-primary" onclick="$(this).parent().find('input[type=file]').click();" style="width:100%;height:35px;width:100%;line-height:20px;">الصورة</span>
+                                                            <input name="BranchUserImgFile" type="file" class="form-control " style="display:none;float:right;width:100%; object-fit: fill;"
+                                                                   accept="image/*" id="BranchUserImgFile" onchange="LoadBranchUserImg(event)">
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 input6">
+                                                    @if (ViewBag.UserImgPath != null)
+                                                    {
+                                                        <img src="@Url.Content(Model.CR_Cas_User_Information_Image)" id="BranchUserImg" class="zoom" width="120" height="80" style="margin-top:-14px;float:right;margin-right:0;width:120px; height:80px;position:relative;object-fit:cover;border:solid 1px #e7e7e7" />
+                                                        <input type="text" id="BranchUserImgagePath" name="BranchUserImgagePath" value="@ViewBag.UserImgPath" hidden />
+                                                    }
+                                                    else
+                                                    {
+                                                        <img src="" id="BranchUserImg" class="zoom" width="120" height="80" style="display: none; margin-top: -14px; float: right; margin-right: 0; width: 120px; height: 80px; position: relative; object-fit: cover; border: solid 1px #e7e7e7" />
+                                                        <input type="text" id="BranchUserImgagePath" name="BranchUserImgagePath" value="@ViewBag.UserImgPath" hidden />
+                                                    }
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="row">
+                                        <div class="col-md-4" style="float:right;margin-top:10px;">
+                                            <div class="form-group row">
+                                                <div class="col-md-6 label6">
+                                                    <label>كلمة السر الجديدة</label>
+                                                </div>
+                                                <div class="col-md-6 input6">
+                                                    <input type="text" id="NewPassword" name="NewPassword" class="form-control" autocomplete="off" maxlength="10" />
+                                                    <div><span id="textErr">@ViewBag.NewPasswordError</span></div>
+                                                    <div><span id="textErr"></span></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-4" style="float:right;">
+                                            <div class="form-group row">
+                                                <div class="col-md-6 label6">
+                                                    <label>كلمة السر مرة أخرى</label>
+                                                </div>
+                                                <div class="col-md-6 input6">
+                                                    <input type="text" id="CheckPassword" name="CheckPassword" class="form-control" autocomplete="off" maxlength="10" />
+                                                    <div><span id="textErr">@ViewBag.CheckPasswordError</span></div>
+                                                    <div id="textErr"><span id="CheckPasswordError"></span></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row" style="margin-top:0px">
+                                    <div style="width:100%;padding-left:15px;padding-right:15px;">
+
+                                        <div class="row" style="margin-bottom:0px">
+                                            <div class="col-md-6">
+
+                                                <input type="submit" id="save" name="save" value="حفظ" class="btn btn-primary waves-effect" style="float: right; margin-left: 20px; margin-top: 10px;" />
+
+                                            </div>
+                                            <div class="col-md-6" style="margin-top:10px;margin-bottom:10px;">
+                                                <a href="~/BranchHome/BranchStat/" class="btn btn-primary waves-effect" style="float: left;">انهاء</a>
+                                            </div>
+
+                                        </div>
+
+
+
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    $(document).ready(
+        function () {
+            var ModelOldPassword = @Html.Raw(Json.Encode(Model.CR_Cas_User_Information_PassWord));
+            $("#OldPassword").keyup(function () {
+                var OldPassWord = document.getElementById('OldPassword').value;
+                var NewPassWord = document.getElementById('NewPassword').value;
+                var CheckPassword = document.getElementById('CheckPassword').value;
+
+                if (ModelOldPassword != OldPassWord && OldPassWord!="") {
+                    document.getElementById('OldPasswordError').innerHTML = "الرجاء التأكد من كلمة السر الحالية";
+                    //document.getElementById('save').setAttribute('disabled', true);
+                    return;
+                } else {
+                    document.getElementById('OldPasswordError').innerHTML = "";
+                    if (NewPassWord == CheckPassword) {
+                       document.getElementById('save').removeAttribute("disabled");
+                    }
+                }
+            })
+
+            $("#CheckPassword").keyup(function () {
+                var NewPassWord = document.getElementById('NewPassword').value;
+                var CheckPassword = document.getElementById('CheckPassword').value;
+                var OldPassWord = document.getElementById('OldPassword').value;
+                if (CheckPassword != "") {
+                    if (NewPassWord != CheckPassword) {
+                        document.getElementById('CheckPasswordError').innerHTML = "الرجاء التأكد من كلمة السر الحالية";
+                        document.getElementById('save').setAttribute('disabled', true);
+                        return;
+                    } else {
+                        document.getElementById('CheckPasswordError').innerHTML = "";
+                        if (ModelOldPassword == OldPassWord) {
+                            document.getElementById('save').removeAttribute("disabled");
+                        }
+                    }
+                }
+                else
+                {
+                    return;
+                }
+
+            })
+
+            $("#NewPassword").keyup(function () {
+                //alert("2");
+                var NewPassWord = document.getElementById('NewPassword').value;
+                var CheckPassword = document.getElementById('CheckPassword').value;
+                var OldPassWord = document.getElementById('OldPassword').value;
+                if (CheckPassword != "" && NewPassWord == CheckPassword) {
+                    document.getElementById('CheckPasswordError').innerHTML = "";
+                    document.getElementById('save').removeAttribute("disabled");
+
+                } else {
+                    if (NewPassWord != "") {
+                        document.getElementById('CheckPasswordError').innerHTML = "الرجاء التأكد من كلمة السر الحالية";
+                        document.getElementById('save').setAttribute('disabled', true);
+                    }
+
+                }
+            })
+
+        });
+</script>
+
+<script>
+    var LoadBranchUserSignature = function (event) {
+        document.getElementById("BranchUserSignature").style.display = "block";
+        var image = document.getElementById('BranchUserSignature');
+        image.src = URL.createObjectURL(event.target.files[0]);
+
+    };
+</script>
+
+<script>
+    var LoadBranchUserImg = function (event) {
+        document.getElementById("BranchUserImg").style.display = "block";
+        var image = document.getElementById('BranchUserImg');
+        image.src = URL.createObjectURL(event.target.files[0]);
+
+    };
+</script>

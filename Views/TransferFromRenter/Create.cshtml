@@ -1,0 +1,226 @@
+﻿@model RentCar.Models.CR_Cas_Renter_Lessor
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_CASLayout.cshtml";
+}
+
+<style>
+    .tooltip > .tooltip-inner {
+        background-color: #f00;
+    }
+
+    .tooltip > .tooltip-arrow {
+        border-top-color: #f00 !important;
+    }
+</style>
+<style>
+    #date_btn1 {
+        font-size: 0 !important;
+        background: url('../../BSys3Styles/Images/icone_calendre.png') center 3px no-repeat;
+        width: 30px;
+        border: none;
+        border-left: 0;
+        height: 27px;
+        position: absolute;
+        left: 17px;
+        margin-top: -29px;
+    }
+</style>
+<div class="content">
+    <!-- Start Content-->
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card-box table-responsive" style="height:79vh">
+                    <div class="title_corp"> <h3> الحسابات / تحويل من مستأجر / تعديل</h3></div>
+                    <div class="subtitle_corp">  تمكنك الصفحة من تعديل أمر تحويل من مستأجر </div>
+                    <div class="hr_60"></div>
+                    <div class="hr_80"></div>
+                    <div class="corp_page">
+                        <div class="page_content" style="float:left;width:100%">
+                            @using (Html.BeginForm())
+                            {
+                                @Html.AntiForgeryToken()
+                                @Html.HiddenFor(Model => Model.CR_Cas_Renter_Lessor_Id)
+                                <div class="form-horizontal">
+
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    <div class="row">
+                                        <div class="col-md-6 offset-md-6 " style="margin-top: 15px; height: 43px;">
+                                            <div class="row">
+                                                <div class="col-md-4 padding_left_none">
+                                                    <label class="control-label">رمز الإجراء</label>
+                                                </div>
+                                                <div class="col-md-5">
+                                                    <input type="text" id="TracingNo" name="TracingNo" value="@ViewBag.Administrative_Procedures_No" class="form-control" readonly />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 offset-md-6 " style="height: 43px;">
+                                            <div class="row">
+                                                <div class="col-md-4 padding_left_none">
+                                                    <label class="control-label">إسم المستأجر</label>
+                                                </div>
+                                                <div class="col-md-5">
+                                                    @Html.EditorFor(model => model.CR_Mas_Renter_Information.CR_Mas_Renter_Information_Ar_Name, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 offset-md-6 " style="height: 43px;">
+                                            <div class="row">
+                                                <div class="col-md-4 padding_left_none">
+                                                    <label class="control-label">رقم حساب المستأجر</label>
+                                                </div>
+                                                <div class="col-md-4 padding_right_none">
+                                                    @*@Html.EditorFor(model => model.CR_Mas_Renter_Information.CR_Mas_Renter_Information_Iban, new { htmlAttributes = new { @class = "form-control" } })*@
+                                                    <input type="text" id="Iban" name="Iban" class = "form-control" value="@ViewBag.IBAN"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                     <div class="row">
+                                        <div class="col-md-6 offset-md-6 " style="height: 43px;">
+                                            <div class="row">
+                                                <div class="col-md-4 padding_left_none">
+                                                    <label class="control-label">بنك المستأجر</label>
+                                                </div>
+                                                <div class="col-md-5 padding_right_none">
+                                                    @Html.DropDownList("CR_Mas_Sup_Bank", null,"", htmlAttributes: new { @class = "form-control" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 offset-md-6 " style="height: 43px;">
+                                            <div class="row">
+                                                <div class="col-md-4 padding_left_none">
+                                                    <label class="control-label">تاريخ التحويل</label><label id="asterisk">*</label>
+                                                </div>
+                                                <div class="col-md-5 padding_right_none">
+                                                    <input class="form-control text-box single-line" data-val="true" id="TransferDate" name="TransferDate" type="text" value="@ViewBag.TransferDate" data-inputmask="'alias': 'yyyy-mm-dd'" style="width:100%" onblur="affich_btn_1(event)">
+                                                    <input name="b1" type="button" class="hijri-date-input2" id="date_btn1" onblur="affich_affich_1(event)" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6 offset-md-6 " style="height: 43px;">
+                                            <div class="row">
+                                                <div class="col-md-4 padding_left_none">
+                                                    <label class="control-label">الى حساب</label><label id="asterisk">*</label>
+                                                </div>
+                                                <div class="col-md-5 padding_right_none">
+                                                    @Html.DropDownList("CR_Cas_Sup_Bank_Code", null, "", htmlAttributes: new { @class = "form-control", @Required = "Required" })
+                                                    <div id="textErr"><span id="AccountError"></span></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 offset-md-6 " style="height: 43px;">
+                                            <div class="row">
+                                                <div class="col-md-4 padding_left_none">
+                                                    <label class="control-label">البنك</label><label id="asterisk">*</label>
+                                                </div>
+                                                <div class="col-md-5 padding_right_none">
+                                                    @Html.DropDownList("CR_Cas_Sup_Bank_Mas_Code", new SelectList(""), htmlAttributes: new { @class = "form-control" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6 offset-md-6 " style="height: 43px;">
+                                            <div class="row">
+                                                <div class="col-md-4 padding_left_none">
+                                                    <label class="control-label">المبلغ المحول</label><label id="asterisk">*</label>
+                                                </div>
+                                                <div class="col-md-5 padding_right_none">
+                                                    <input type="text" name="TransferedVal" id="TransferedVal" value="0" maxlength="10" class="form-control" />
+                                                    <div id="textErr"><span id="TransferedValError"></span></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12" style="height: 43px;">
+                                            <div class="row">
+                                                <div class="col-md-2 padding_left_none">
+                                                    <label class="control-label">الملاحظات</label>
+                                                </div>
+                                                <div class="col-md-8 padding_right_none">
+                                                    <input type="text" name="Reasons" id="Reasons" maxlength="100" value="" class="form-control" style=" width: 30%;" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+
+
+                                <div class="row"style="width:72%">
+                                    <div class="col-md-1 col-50" style="margin-top:20px;margin-bottom:0px;">
+                                        <input type="submit" name="save" value="حفظ" class="btn btn-primary waves-effect"  onclick="return CheckRequired();" style="float:right;" />
+                                    </div>
+                                    <div class="col-md-6 col-50" style="margin-top:20px;margin-bottom:0px;">
+                                        <a href="/TransferFromRenter/Index/" class="btn btn-primary waves-effect">انهاء</a>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+
+    function affich_affich_1(e) {
+        var date = e.target.value;
+        document.getElementById("TransferDate").value = date;
+    }
+    function affich_btn_1(e) {
+        var date = e.target.value;
+        document.getElementById("date_btn1").value = date;
+    }
+
+
+    $(document).ready(function () {
+        $("#CR_Cas_Sup_Bank_Code").change(function () {
+            $.get("/TransferFromRenter/GetBankName", { code: $("#CR_Cas_Sup_Bank_Code").val() }, function (data) {
+                $("#CR_Cas_Sup_Bank_Mas_Code").empty();
+                $.each(data, function (index, row) {
+                    $("#CR_Cas_Sup_Bank_Mas_Code").append("<option value= '" + row.CR_Mas_Sup_Bank_Code + "'>" + row.CR_Mas_Sup_Bank_Ar_Name + "</option>")
+                });
+            });
+        })
+    });
+
+    function CheckRequired() {
+        var v = document.getElementById('TransferedVal').value;
+        var CR_Cas_Sup_Bank_Code = document.getElementById('CR_Cas_Sup_Bank_Code').value;
+        if (parseFloat(v) > 0) {
+            return true;
+        } else {
+            document.getElementById('TransferedValError').innerHTML = "الرجاء التأكد من المبلغ المحول";
+            return false;
+        }
+
+        if (CR_Cas_Sup_Bank_Code != null) {
+            return true;
+        } else {
+            document.getElementById('AccountError').innerHTML = "الرجاء إختيار الحساب";
+            return false;
+        }
+    }
+
+</script>

@@ -1,0 +1,311 @@
+﻿@model RentCar.Models.CR_Mas_Basic_Contract
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<style>
+    .texterr {
+        font-family: 'Times New Roman' !important;
+        font-size: 14px !important;
+        color: red !important;
+        margin-right: 0% !important;
+        height: 20px;
+    }
+
+    #asterisk {
+        color: red;
+        float: right;
+        font-size: 15px !important;
+        /*margin-right: 130px;*/
+        margin-top: 5px;
+        position: absolute;
+        font-family: 'Times New Roman';
+        padding-right: 0px !important;
+        margin-right: -30px;
+    }
+
+    .row {
+        margin-bottom: 0px;
+    }
+
+    .input_form {
+        width: 100%;
+        border-color: #F3B161 !important;
+    }
+
+    .label_form {
+        width: 150px;
+    }
+
+    input[type=file] {
+        border-radius: 0px !important;
+        width: 200px;
+        height: 30px;
+        padding-top: 3px;
+        border-color: #F3B161;
+        border-width: 2px;
+        font-family: 'Times New Roman';
+        font-size: 12px;
+        display: -webkit-inline-box !important;
+    }
+
+    .title_corp {
+        font-family: 'Sakkal Majalla';
+        font-size: 25px;
+    }
+
+    .subtitle_corp {
+        padding-top: 3px !important;
+        font-family: 'Sakkal Majalla' !important;
+        color: #083555;
+    }
+
+    .lbl {
+        color: black !important;
+        float: right !important;
+        font-family: Sakkal Majalla !important;
+        font-size: 16px;
+    }
+    /*.zoom {
+        padding: 50px;
+
+        transition: transform .2s;
+        width: 100px;
+        height: 100px;
+
+    }
+
+        .zoom:hover {
+            -ms-transform: scale(1.5);*/ /* IE 9 */
+    /*-webkit-transform: scale(1.5);*/ /* Safari 3-8 */
+    /*transform: scale(1.5);
+        }*/
+</style>
+
+<div class="corp_content">
+    <div class="title_corp"> عقد شركة مساندة /إضافة </div>
+    <div class="subtitle_corp">من خلال هذه الصفحة يتم إضافة عقد جديد </div>
+    <div class="hr_60"></div>
+    <div class="hr_80"></div>
+    <div class="corp_page">
+        <div class="page_content" style=" margin-top: 10px; height:520px!important;">
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+
+                <div class="col-md-12">
+                    <div class="row">
+                        @Html.LabelFor(model => model.CR_Mas_Basic_Contract_No, htmlAttributes: new { @class = "col-md-2", style = "float:right;padding-right:0px!important;" })
+                        <div class="col-md-4 offset-md-6">
+                            @Html.EditorFor(model => model.CR_Mas_Basic_Contract_No, new { htmlAttributes = new { @class = "input_form", @Readonly = "True" } })
+                            <div class="texterr"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="row">
+                        <label>رقم العقد</label>
+                        <div class="col-md-4 offset-md-6">
+                            <input class="input_form text-box single-line" id="no" name="no" type="text" value="">
+                            <div class="texterr"></div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-md-12">
+                    <div class="row">
+                        <label>الشركة</label>
+                        <div class="col-md-4 offset-md-6">
+                            @Html.DropDownList("CR_Mas_Basic_Contract_Com_Code", null, htmlAttributes: new { @class = "input_form" })
+                            <div class="texterr"></div>
+                        </div>
+                    </div>
+                </div>
+
+                @Html.HiddenFor(model => model.CR_Mas_Basic_Contract_Year, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.HiddenFor(model => model.CR_Mas_Basic_Contract_Code, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.HiddenFor(model => model.CR_Mas_Basic_Contract_Com_Code, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.HiddenFor(model => model.CR_Mas_Basic_Contract_Service_Fees, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.HiddenFor(model => model.CR_Mas_Basic_Contract_Status, new { htmlAttributes = new { @class = "form-control" } })
+
+
+
+
+
+
+                <div class="form-group">
+                    <div class="col-md-4">
+                        <div class="row">
+                            <label class="col-md-4" style="float:right;"> نهايته </label>
+                            <div class="col-md-8">
+                                <input class="input_form text-box single-line" onkeyup="movetoNext('CR_Mas_Basic_Contract_Annual_Fees')" data-val="true" data-val-date="The field CR_Cas_Sup_Branch_Documentation_Date must be a date." id="CR_Mas_Basic_Contract_End_Date" name="CR_Mas_Basic_Contract_End_Date" type="date" value="@ViewBag.EndDate">
+                                <div class="texterr">@ViewBag.DocEndDateError</div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="row">
+                            <label class="col-md-4" style="float:right;"> بدايته </label>
+                            <div class="col-md-8" style="padding-right:0px!important;">
+                                <input class="input_form text-box single-line" onkeyup="movetoNext('CR_Mas_Basic_Contract_End_Date')" data-val="true" data-val-date="The field CR_Cas_Sup_Branch_Documentation_Date must be a date." id="CR_Mas_Basic_Contract_Start_Date" name="CR_Mas_Basic_Contract_Start_Date" type="date" value="@ViewBag.StartDate">
+                                <div class="texterr" style="margin-right:50px;">@ViewBag.DocStartDateError</div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="row">
+                            <label class="col-md-4" style="float:right;padding-left:15px;">تاريخ المستند</label>
+                            <div class="col-md-8">
+                                <input class="input_form text-box single-line" onkeyup="movetoNext('CR_Mas_Basic_Contract_Start_Date')" data-val="true" data-val-date="The field CR_Cas_Sup_Branch_Documentation_Date must be a date." id="CR_Mas_Basic_Contract_Date" name="CR_Mas_Basic_Contract_Date" type="date" value="@ViewBag.DocDate">
+                                <div class="texterr">@ViewBag.DocDateError</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-4">
+                        <div class="row">
+                            @Html.LabelFor(model => model.CR_Mas_Basic_Contract_Tax_Rate, htmlAttributes: new { @class = "col-md-4", style = "float:right;" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.CR_Mas_Basic_Contract_Tax_Rate, new { htmlAttributes = new { @class = "input_form", onkeyup = "movetoNext('CR_Mas_Basic_Contract_Reasons')", @Autocomplete = "off", maxlength = "6", oninput = "this.value=this.value.replace(/[^a-zA-Z0-9 ,]/g,'')" } })
+                                <div class="texterr"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="row">
+                            @Html.LabelFor(model => model.CR_Mas_Basic_Contract_Discount_Rate, htmlAttributes: new { @class = "col-md-4", style = "float:right;" })
+                            <div class="col-md-8" style="padding-right:0px!important;">
+                                @Html.EditorFor(model => model.CR_Mas_Basic_Contract_Discount_Rate, new { htmlAttributes = new { @class = "input_form", onkeyup = "movetoNext('CR_Mas_Basic_Contract_Tax_Rate')", @Autocomplete = "off", maxlength = "6", oninput = "this.value=this.value.replace(/[^a-zA-Z0-9 ,]/g,'')" } })
+                            </div>
+                            <div class="texterr"></div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="row">
+                            @Html.LabelFor(model => model.CR_Mas_Basic_Contract_Annual_Fees, htmlAttributes: new { @class = "col-md-4", style = "float:right;" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.CR_Mas_Basic_Contract_Annual_Fees, new { htmlAttributes = new { @class = "input_form", onkeyup = "movetoNext('CR_Mas_Basic_Contract_Discount_Rate')", @Autocomplete = "off", maxlength = "12", oninput = "this.value=this.value.replace(/[^a-zA-Z0-9 ,]/g,'')" } })
+                            </div>
+                            <div class="texterr"></div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+
+                <div class="form-group">
+
+                    <div class="col-md-6">
+                        <div class="row">
+                            <label class="col-md-2" style="float:right">البنك</label>
+                            <div class="col-md-8">
+                                <input class="input_form text-box single-line" id="no" name="no" type="text" value="">
+                                <div class="texterr"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row">
+                            <label class="col-md-2" style="float:right">طريقة الدفع</label>
+                            <div class="col-md-8">
+                                <input class="input_form text-box single-line" id="no" name="no" type="text" value="">
+                                <div class="texterr"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+               
+
+
+
+                <div class="form-group" style="margin-top:0px;">
+                    <div class="col-md-12">
+                        <div class="row">
+                            @Html.LabelFor(model => model.CR_Mas_Basic_Contract_Reasons, htmlAttributes: new { @class = "col-md-2", style = "float:right;" })
+                            <div class="col-md-10 ">
+                                @Html.EditorFor(model => model.CR_Mas_Basic_Contract_Reasons, new { htmlAttributes = new { @class = "input_form", @Autocomplete = "off", maxlength = "6", onkeypress = "return CheckArabicCharactersOnly(event);" } })
+                            </div>
+                            <div class="texterr"></div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div style="margin-top:70px;">
+
+                </div>
+
+
+                <div class="col-md-6" style="margin-top:40px;">
+
+                    <a href="/MASsupportingContract/Index/" tabindex="" class="btn" style="font-family:'Times New Roman';float:left;font-size:15px!important;width: 70px !important;padding-top:4px;height:30px; background-color: #F3B161; padding-right: 22px; border-radius: 0px; color: white;">انهاء</a>
+                </div>
+                <div class="col-md-6" style="margin-top:40px;">
+
+                    <input type="submit" tabindex="" name="add" class="submit_btn" id="add_btn" value="حفظ" />
+                </div>
+
+                <div class="col-md-6" id="Message" style="font-family:'Times New Roman';font-size:16px;color:red;margin-Top: 30px; margin-right: 330px;position:absolute;">@TempData["TempModel"]</div>
+
+
+                <script type="text/javascript">
+                    $(document).ready(function () { setTimeout(function () { $("#Message").fadeOut(); }, 4000); });
+                </script>
+                <script language="javascript" type="text/javascript">
+                    // Allow Arabic Characters only
+                    function CheckArabicCharactersOnly(e) {
+                        var unicode = e.charCode ? e.charCode : e.keyCode
+                        if (unicode != 8) { //if the key isn't the backspace key (which we should allow)
+                            if (unicode == 32)
+                                return true;
+                            else {
+                                if ((unicode > 48 || unicode < 57) && (unicode < 0x0600 || unicode > 0x06FF)) //if not a number or arabic
+                                    return false; //disable key press
+                            }
+                        }
+                    }
+                    function movetoNext(nextFieldID) {
+                        if (event.keyCode === 13) {
+                            document.getElementById(nextFieldID).focus();
+                        }
+                    };
+
+
+                    //////////////// disable auto validate on enter click ///////////////
+                    $(document).keypress(function (e) {
+                        if (e.keyCode === 13) {
+                            e.preventDefault();
+                            return false;
+                        }
+                    });
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ////////////////////////////////////////////////////////////////////
+                </script>
+
+
+
+
+            </div>
+                }
+
+
+            </div>
+    </div>
+</div>

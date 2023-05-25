@@ -1,0 +1,93 @@
+html, body {
+    height: 100%;
+}
+.select-with-search {
+    width: 100%;
+	color: #522D24;
+}
+.select2-container--default .select2-selection--single,
+.select2-container--default .select2-search--dropdown .select2-search__field {
+    font-size: 11px;
+    height: 20px;
+    border-radius: 0;
+    border-color: #bdbdbd;
+    color: #522d24;
+    outline: none;
+    font: normal 11px Trebuchet MS;
+}
+.select2-selection.select2-selection--single:hover {
+    border-color: #7f7f7f;
+}
+.select2-container--default .select2-selection--single .select2-selection__arrow b {
+	border-color: #522d24 transparent transparent transparent;
+	border-width: 6px 3px 0 3px;
+}
+.select2-container--default.select2-container--open .select2-selection--single .select2-selection__arrow b {
+	border-color: #522d24 transparent transparent transparent;
+    border-width: 6px 3px 0 3px;
+}
+.select2-container--default .select2-selection--single .select2-selection__rendered,
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+    height: 18px;
+    line-height: 18px;
+}
+
+.select2-dropdown {
+    font-size: 11px;
+    border-color: #d2d2d2;
+    border-radius: 0;
+}
+
+.select2-container--default .select2-results__option--highlighted[aria-selected] {
+	background-color: #ade1f5;
+}
+/*.select2-container--default .select2-results__option[aria-selected=true] {
+	color: #522D24;
+	background-color: transparent;
+}*/
+
+.select2-results__option {
+	padding: 2px 6px;
+}
+
+.select2-container--default.select2-container--disabled .select2-selection--single {
+    background-color: #ebebe4;
+    cursor: pointer;
+    outline: none;
+    border-color: #a9a9a9;
+}
+
+.select2-search{
+	position:relative;
+}
+
+.select2-search::before{
+	content: "";
+    background-image: url(../../images/icons/searchIcon.png);
+    background-repeat: no-repeat;
+    width: 14px;
+    height: 14px;
+    position: absolute;
+    top: 7px;
+    right: 7px;
+    z-index: 9;
+    background-size: 14px 14px;
+}
+
+
+/***** RTL *****/
+.select2-container[dir="rtl"] .select2-selection--single .select2-selection__rendered {
+	padding-right: 4px;
+    padding-left: 20px;
+}
+.select2-container[dir="rtl"] .select2-selection--single,
+.select2-container[dir="rtl"] .select2-search--dropdown .select2-search__field,
+.select2-results__option {
+	font: normal 11px Tahoma;
+}
+.select2-dropdown[dir="rtl"] .select2-search::before{
+	left:7px;
+	-webkit-transform:scaleX(-1);
+	transform:scaleX(-1);
+	right: auto;
+}

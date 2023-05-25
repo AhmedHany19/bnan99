@@ -1,0 +1,131 @@
+﻿@model RentCar.Models.CR_Cas_Renter_Lessor
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_CASLayout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>CR_Cas_Renter_Lessor</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CR_Cas_Renter_Lessor_Date_First_Interaction)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CR_Cas_Renter_Lessor_Date_First_Interaction)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CR_Cas_Renter_Lessor_Date_Last_Interaction)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CR_Cas_Renter_Lessor_Date_Last_Interaction)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CR_Cas_Renter_Lessor_Contract_Number)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CR_Cas_Renter_Lessor_Contract_Number)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CR_Cas_Renter_Lessor_Days)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CR_Cas_Renter_Lessor_Days)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CR_Cas_Renter_Lessor_Interaction_Amount_Value)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CR_Cas_Renter_Lessor_Interaction_Amount_Value)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CR_Cas_Renter_Lessor_KM)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CR_Cas_Renter_Lessor_KM)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CR_Cas_Renter_Lessor_Balance)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CR_Cas_Renter_Lessor_Balance)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CR_Cas_Renter_Rating)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CR_Cas_Renter_Rating)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CR_Cas_Renter_Membership_Code)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CR_Cas_Renter_Membership_Code)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CR_Cas_Renter_Admin_Membership_Code)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CR_Cas_Renter_Admin_Membership_Code)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CR_Cas_Renter_Lessor_Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CR_Cas_Renter_Lessor_Status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CR_Cas_Renter_Lessor_Reasons)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CR_Cas_Renter_Lessor_Reasons)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CR_Mas_Renter_Information.CR_Mas_Renter_Information_Sector)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CR_Mas_Renter_Information.CR_Mas_Renter_Information_Sector)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CR_Mas_Com_Lessor.CR_Mas_Com_Lessor_Logo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CR_Mas_Com_Lessor.CR_Mas_Com_Lessor_Logo)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

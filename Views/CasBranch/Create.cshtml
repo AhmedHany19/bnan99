@@ -1,0 +1,417 @@
+﻿@model RentCar.Models.CR_Cas_Sup_Branch
+
+@{
+    Layout = "~/Views/Shared/_CASLayout.cshtml";
+}
+
+
+<style>
+    #signature {
+        display: none
+    }
+
+    #textErr {
+        color: red;
+        font-size: 12px;
+        font-weight: bold;
+    }
+</style>
+<div class="content">
+
+    <!-- Start Content-->
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card-box table-responsive" style="height:79vh">
+                    <div class="title_corp"><h3> الشركة / الفروع /إضافة </h3></div>
+                    <div class="subtitle_corp">تمكن هذه الصفحة المستخدم من إضافة فرع جديد</div>
+                    <div class="hr_60"></div>
+                    <div class="hr_80"></div>
+                    <div class="corp_page " style=" padding-top: 20px;">
+                        <div class="page_content">
+                            @*data - parsley - validate novalidate*@
+                            @*using (Html.BeginForm("Create", "CasBranch", FormMethod.Post, new { enctype = "multipart/form-data", id = "form_validation", novalidate = "" }))*@
+
+                            <form id="form_validation" action="/CasBranch/Create" enctype="multipart/form-data" method="post" data-parsley-validate novalidate>
+
+                                @Html.AntiForgeryToken()
+                                <div class="form-horizontal">
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+                                    <div class="form-group" hidden="hidden">
+                                        @Html.LabelFor(model => model.CR_Cas_Sup_Branch_Code, htmlAttributes: new { @class = "label_form col-md-2" })
+
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(model => model.CR_Cas_Sup_Branch_Code, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.CR_Cas_Sup_Branch_Code, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group" hidden="hidden">
+                                        @Html.LabelFor(model => model.CR_Cas_Sup_Lessor_Code, "CR_Cas_Sup_Lessor_Code", htmlAttributes: new { @class = "label_form col-md-2" })
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(model => model.CR_Cas_Sup_Lessor_Code, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.CR_Cas_Sup_Lessor_Code, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-8 col-md-12">
+                                            <div class="form-group row">
+                                                <label class="col-lg-3 col-md-6 col-form-label labelresp6 padding_left_none" for="CR_Cas_Sup_Branch_Ar_Name">إسم الفرع عربي<label id="asterisk">*</label></label>
+                                                <div class="col-lg-9 col-md-6 inputresp6 padding_right_none">
+                                                    <input type="text" value="@ViewBag.B_Ar_Name" class="form-control " id="CR_Cas_Sup_Branch_Ar_Name" autocomplete="off" name="CR_Cas_Sup_Branch_Ar_Name" maxlength="100" required="" onkeypress="return CheckArabicCharactersOnly(event);" onkeyup="movetoNext('CR_Cas_Sup_Branch_Ar_Short_Name')" onpaste="return false;">
+                                                    <div><span id="textErr">@ViewBag.LRExistArLng</span></div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-4 col-md-12">
+                                            <div class="form-group row">
+                                                <label class="col-md-6 col-form-label label6 labelresp6 padding_left_none" for="CR_Cas_Sup_Branch_Ar_Short_Name">إسم الفرع مختصر<label id="asterisk">*</label></label>
+                                                <div class="col-md-6 input6 padding_right_none">
+                                                    <input type="text" value="@ViewBag.B_Ar_Sh_Name" class="form-control" id="CR_Cas_Sup_Branch_Ar_Short_Name" autocomplete="off" name="CR_Cas_Sup_Branch_Ar_Short_Name" maxlength="15" required="" onkeypress="return CheckArabicCharactersOnly(event);" onkeyup="movetoNext('CR_Cas_Sup_Branch_En_Name')" onpaste="return false;">
+                                                    <div><span id="textErr">@ViewBag.LRExistArSh</span></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-8 col-md-12">
+                                            <div class="form-group row">
+                                                <label class="col-md-3 col-md-6 col-form-label labelresp6 padding_left_none" for="CR_Cas_Sup_Branch_En_Name">إسم الفرع أنجليزي<label id="asterisk">*</label></label>
+                                                <div class="col-md-9 col-md-6 inputresp6 padding_right_none">
+                                                    <input type="text" value="@ViewBag.B_En_Name" class="form-control" id="CR_Cas_Sup_Branch_En_Name" autocomplete="off" name="CR_Cas_Sup_Branch_En_Name" maxlength="100" required="" oninput="this.value=this.value.replace(/[^a-zA-Z\s]/g,'')" onkeyup="movetoNext('CR_Cas_Sup_Branch_En_Short_Name')" onpaste="return false;">
+                                                    <div><span id="textErr">@ViewBag.LRExistEnLng</span></div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-4 col-md-12">
+                                            <div class="form-group row">
+                                                <label class="col-md-6 col-form-label label6 labelresp6 padding_left_none" for="CR_Cas_Sup_Branch_En_Short_Name">إسم الفرع مختصر<label id="asterisk">*</label></label>
+                                                <div class="col-md-6 input6 padding_right_none">
+                                                    <input type="text" value="@ViewBag.B_En_Sh_Name" class="form-control" id="CR_Cas_Sup_Branch_En_Short_Name" autocomplete="off" name="CR_Cas_Sup_Branch_En_Short_Name" maxlength="15" required="" oninput="this.value=this.value.replace(/[^a-zA-Z\s]/g,'')" onkeyup="movetoNext('CR_Cas_Sup_Branch_Government_No')" onpaste="return false;">
+                                                    <div><span id="textErr">@ViewBag.LRExistEnSh</span></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-12">
+                                            <div class="form-group row">
+                                                <label class="col-md-6 col-form-label label6 labelresp6 padding_left_none" for="CR_Cas_Sup_Branch_Government_No">الرقم الحكومي<label id="asterisk">*</label></label>
+                                                <div class="col-md-6 input6 padding_right_none">
+                                                    <input type="text" value="@ViewBag.Gov" class="form-control" id="CR_Cas_Sup_Branch_Government_No" autocomplete="off" name="CR_Cas_Sup_Branch_Government_No" maxlength="10" minlength="10" required="" oninput="this.value=this.value.replace(/[^0-9]/g,'')" onkeyup="movetoNext('CR_Cas_Sup_Branch_Commercial_Registration_No')" onpaste="return false;">
+                                                    <div><span id="textErr">@ViewBag.ExistGov</span></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-12">
+                                            <div class="form-group row">
+                                                <label class="col-md-6 col-form-label label6 labelresp6 padding_left_none" for="CR_Cas_Sup_Branch_Commercial_Registration_No">السجل التجاري</label>
+                                                <div class="col-md-6 input6 padding_right_none">
+                                                    <input type="text" value="@ViewBag.RegNo" class="form-control" id="CR_Cas_Sup_Branch_Commercial_Registration_No" autocomplete="off" name="CR_Cas_Sup_Branch_Commercial_Registration_No" maxlength="10" oninput="this.value=this.value.replace(/[^0-9]/g,'')" onkeyup="movetoNext('CR_Cas_Sup_Branch_Tax_No')" onpaste="return false;">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-12">
+                                            <div class="form-group row">
+                                                <label class="col-md-6 col-form-label label6 labelresp6 padding_left_none" for="CR_Cas_Sup_Branch_Tax_No">الرقم الضريبي<label id="asterisk">*</label></label>
+                                                <div class="col-md-6 input6 padding_right_none">
+                                                    <input type="text" value="@ViewBag.tax" class="form-control" id="CR_Cas_Sup_Branch_Tax_No" name="CR_Cas_Sup_Branch_Tax_No" autocomplete="off"  minlength="15" maxlength="15" required="" oninput="this.value=this.value.replace(/[^0-9]/g,'')" onkeyup="movetoNext('CR_Cas_Sup_Branch_Tel')" onpaste="return false;">
+                                                    <div><span id="textErr">@ViewBag.ExistTax</span></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-12">
+                                            <div class="form-group row">
+                                                <label class="col-md-6 col-form-label label6 labelresp6 padding_left_none" for="CR_Cas_Sup_Branch_Tel">رقم الهاتف</label>
+                                                <div class="col-md-6 input6 padding_right_none">
+                                                    <input type="text" value="@ViewBag.Tel" class="form-control" id="CR_Cas_Sup_Branch_Tel" name="CR_Cas_Sup_Branch_Tel" autocomplete="off" oninput="this.value=this.value.replace(/[^0-9]/g,'')" maxlength="15" onkeyup="movetoNext('CR_Cas_Sup_Branch_Mobile')" onpaste="return false;">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-12">
+                                            <div class="form-group row">
+                                                <label class="col-md-6 col-form-label label6 labelresp6 padding_left_none" for="CR_Cas_Sup_Branch_Mobile">رقم الجوال</label>
+                                                <div class="col-md-6 input6 padding_right_none">
+                                                    <input type="text" value="@ViewBag.Mobile" class="form-control" id="CR_Cas_Sup_Branch_Mobile" name="CR_Cas_Sup_Branch_Mobile" autocomplete="off" oninput="this.value=this.value.replace(/[^0-9]/g,'')" maxlength="15" onkeyup="movetoNext('CR_Cas_Sup_Branch_Signature_Ar_Director_Name')" onpaste="return false;">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-12">
+                                            <div class="form-group row">
+                                                <label class="col-md-6 col-form-label label6 labelresp6 padding_left_none" for="CR_Cas_Sup_Branch_Signature_Ar_Director_Name">إسم المدير عربي<label id="asterisk">*</label></label>
+                                                <div class="col-md-6 input6 padding_right_none">
+                                                    <input type="text" value="@ViewBag.B_Director_Ar_Name" class="form-control" id="CR_Cas_Sup_Branch_Signature_Ar_Director_Name" autocomplete="off" name="CR_Cas_Sup_Branch_Signature_Ar_Director_Name" maxlength="30" required onkeypress="return CheckArabicCharactersOnly(event);" onkeyup="movetoNext('CR_Cas_Sup_Branch_Signature_En_Director_Name')" onpaste="return false;">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-12">
+                                            <div class="form-group row">
+                                                <label class="col-md-6 col-form-label label6 labelresp6 padding_left_none" for="CR_Cas_Sup_Branch_Signature_En_Director_Name">أسم المدير إنجليزي<label id="asterisk">*</label></label>
+                                                <div class="col-md-6 input6 padding_right_none">
+                                                    <input type="text" value="@ViewBag.B_Director_Name" class="form-control" id="CR_Cas_Sup_Branch_Signature_En_Director_Name" autocomplete="off" name="CR_Cas_Sup_Branch_Signature_En_Director_Name" maxlength="30" required oninput="this.value=this.value.replace(/[^a-zA-Z\s]/g,'')" onkeyup="movetoNext('CR_Cas_Sup_Branch_Signature_Director')" onpaste="return false;">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row" style="height:80px">
+
+                                        <div class="col-lg-4 col-md-6" style="float:right;">
+                                            <div class="row">
+
+                                                @*<div class="col-md-6 label6" style=" float:right">
+
+                                                    <label id="CR_Cas_Sup_Branch_Signature_Director" class="lbl " style=" float:right">@Html.LabelFor(model => model.CR_Cas_Sup_Branch_Signature_Director)<label id="asterisk">*</label></label>
+                                                </div>*@
+                                                <div class="col-md-6 input6" style=" float:right">
+                                                    <div class="input-group padding_right_none">
+                                                        <span class="input-group-btn" style="width:100%">
+                                                            <span class="btn btn-primary" onclick="$(this).parent().find('input[type=file]').click();" style="width:100%;height:35px;width:100%;line-height:20px;">توقيع المدير</span>
+                                                            <input name="imgDirector" type="file" class="form-control " style="display:none;float:right;width:100%; object-fit: fill;" accept="image/*" id="CR_Cas_Sup_Branch_Signature_Director" onchange="loadFilesignature(event)" onkeyup="movetoNext('CR_Cas_Sup_Branch_Start_Day')">
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="texterr" style="float:right"></div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-6 padding_right_none" style="float:right;">
+                                            <img id="signature" class="zoom" width="120" height="60" style="margin-top: -14px; float: right; margin-right: 0; width: 120px; height: 60px; position: relative; object-fit: cover; border: solid 1px transparent" />
+                                        </div>
+                                    </div>
+
+                                    <div class="row" hidden>
+                                        <div class="col-lg-4 col-md-12">
+                                            <div class="form-group row">
+                                                <label class="col-md-6 col-form-label label6 labelresp6 padding_left_none" for="CR_Cas_Sup_Branch_Signature_Ar_Director_Name">بداية الأسبوع</label>
+                                                <div class="col-md-6 input6 padding_right_none">
+                                                    @Html.DropDownList("listStart", ViewData["listStart"] as SelectList, new { @class = "form-control", style = "float:right", Required = "Required" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-12">
+                                            <div class="form-group row">
+                                                <label class="col-md-6 col-form-label label6 padding_left_none" for="CR_Cas_Sup_Branch_Start_Day">نهاية الأسبوع</label>
+                                                <div class="col-md-6 input6 padding_right_none">
+                                                    @Html.DropDownList("listEnd", ViewData["listEnd"] as SelectList, new { @class = "form-control", style = "float:right", Required = "Required" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="row" hidden>
+                                        <div class="col-lg-4 col-md-12">
+                                            <div class="form-group row">
+                                                <label class="col-md-6 col-form-label label6 padding_left_none" for="CR_Cas_Sup_Branch_Duration_One_Start_Time">بداية الدوام الأول<label id="asterisk">*</label></label>
+                                                <div class="col-md-6 input6 padding_right_none">
+                                                    <input type="time" class="form-control" id="CR_Cas_Sup_Branch_Duration_One_Start_Time" name="CR_Cas_Sup_Branch_Duration_One_Start_Time"  onkeyup="movetoNext('CR_Cas_Sup_Branch_Duration_One_End_Time')" value="@ViewBag.ST1">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-12">
+                                            <div class="form-group row">
+                                                <label class="col-md-6 col-form-label label6 padding_left_none" for="CR_Cas_Sup_Branch_Duration_One_End_Time">نهاية الدوام<label id="asterisk">*</label></label>
+                                                <div class="col-md-6 input6 padding_right_none">
+                                                    <input type="time" class="form-control" id="CR_Cas_Sup_Branch_Duration_One_End_Time" name="CR_Cas_Sup_Branch_Duration_One_End_Time"  onkeyup="movetoNext('CR_Cas_Sup_Branch_Duration_Tow_Start_Time')" value="@ViewBag.ET1">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row" hidden>
+                                        <div class="col-lg-4 col-md-12">
+                                            <div class="form-group row">
+                                                <label class="col-md-6 col-form-label label6 padding_left_none" for="CR_Cas_Sup_Branch_Duration_Tow_Start_Time">بداية الدوام الثاني</label>
+                                                <div class="col-md-6 input6 padding_right_none">
+                                                    <input type="time" class="form-control" id="CR_Cas_Sup_Branch_Duration_Tow_Start_Time" name="CR_Cas_Sup_Branch_Duration_Tow_Start_Time" onkeyup="movetoNext('CR_Cas_Sup_Branch_Duration_Tow_End_Time')" value="@ViewBag.ST2">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-12">
+                                            <div class="form-group row">
+                                                <label class="col-md-6 col-form-label label6 padding_left_none" for="CR_Cas_Sup_Branch_Duration_Tow_End_Time">نهاية الدوام</label>
+                                                <div class="col-md-6 input6 padding_right_none">
+                                                    <input type="time" class="form-control" id="CR_Cas_Sup_Branch_Duration_Tow_End_Time" name="CR_Cas_Sup_Branch_Duration_Tow_End_Time" onkeyup="movetoNext('CR_Cas_Sup_Branch_Duration_Three_Start_Time')" value="@ViewBag.ET2">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row" hidden>
+                                        <div class="col-lg-4 col-md-12">
+                                            <div class="form-group row">
+                                                <label class="col-md-6 col-form-label label6 padding_left_none" for="CR_Cas_Sup_Branch_Duration_Three_Start_Time">بداية الدوام الثالث</label>
+                                                <div class="col-md-6 input6 padding_right_none">
+                                                    <input type="time" class="form-control" id="CR_Cas_Sup_Branch_Duration_Three_Start_Time" name="CR_Cas_Sup_Branch_Duration_Three_Start_Time" onkeyup="movetoNext('CR_Cas_Sup_Branch_Duration_Three_End_Time')" value="@ViewBag.ST3">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-12">
+                                            <div class="form-group row">
+                                                <label class="col-md-6 col-form-label label6 padding_left_none" for="CR_Cas_Sup_Branch_Duration_Three_End_Time">نهاية الدوام</label>
+                                                <div class="col-md-6 input6 padding_right_none">
+                                                    <input type="time" class="form-control" id="CR_Cas_Sup_Branch_Duration_Three_End_Time" name="CR_Cas_Sup_Branch_Duration_Three_End_Time" onkeyup="movetoNext('CR_MAS_SUP_City_Code')" value="@ViewBag.ET3">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    @*<hr style="color:red;border-top:2px solid #88ACCE;padding-right:0px;margin-right:-20px;width:845px;" />*@
+
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-12" style="float:right;">
+                                            <div class="row">
+                                                <label class="lbl col-md-6 label6 padding_left_none" style="float:right;">إسم المدينة<label id="asterisk">*</label></label>
+                                                <div class="col-md-6 input6 select_error padding_right_none">
+                                                    @Html.DropDownList("CR_MAS_SUP_City_Code", null, "--- الرجاء إختر المدينة ---", new { @class = "form-control", style = "float:right;width:100%", onkeyup = "movetoNext('CR_MAS_SUP_Region_Ar_Name')", required="required" })
+
+                                                </div>
+                                            </div>
+                                            <div class="texterr" style="float:right">@ViewBag.CityCode</div>
+                                        </div>
+
+
+                                        <div class="col-lg-4 col-md-12" style="float:right;">
+                                            <div class="row">
+                                                <label class="lbl col-md-6 label6 padding_left_none" style="float:right;"> إسم المنطقة</label>
+                                                <div class="col-md-6 input6 padding_right_none">
+                                                   <input class="form-control " id="CR_MAS_SUP_Region_Ar_Name" autocomplete="off" name="CR_MAS_SUP_Region_Ar_Name" onkeypress="return CheckArabicCharactersOnly(event);"
+                                                           onkeyup="movetoNext('CR_Mas_Address_Ar_District')" style="float:right; width:100%;" type="text" readonly value="@ViewBag.RegionName">
+
+                                                </div>
+                                            </div>
+                                            <div class="texterr" style="float:right"></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-12">
+                                            <div class="form-group row">
+                                                <label class="col-md-6 col-form-label label6 padding_left_none" for="CR_Mas_Address_Ar_District">إسم الحي عربي<label id="asterisk">*</label></label>
+                                                <div class="col-md-6 input6 padding_right_none">
+                                                    <input type="text" class="form-control" id="CR_Mas_Address_Ar_District" autocomplete="off" name="CR_Mas_Address_Ar_District" maxlength="50" required="" onkeypress="return CheckArabicCharactersOnly(event);" onkeyup="movetoNext('CR_Mas_Address_En_District')" onpaste="return false;" value="@ViewBag.DistrictAr">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-12">
+                                            <div class="form-group row">
+                                                <label class="col-md-6 col-form-label label6 padding_left_none" for="CR_Mas_Address_En_District">إسم الحي إنجليزي<label id="asterisk">*</label></label>
+                                                <div class="col-md-6 input6 padding_right_none">
+                                                    <input type="text" class="form-control" id="CR_Mas_Address_En_District" autocomplete="off" name="CR_Mas_Address_En_District" maxlength="50" required="" oninput="this.value=this.value.replace(/[^a-zA-Z\s]/g,'')" onkeyup="movetoNext('CR_Mas_Address_Ar_Street')" onpaste="return false;" value="@ViewBag.DistrictEn">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-12">
+                                            <div class="form-group row">
+                                                <label class="col-md-6 col-form-label label6 padding_left_none" for="CR_Mas_Address_Ar_Street">إسم الشارع عربي<label id="asterisk">*</label></label>
+                                                <div class="col-md-6 input6 padding_right_none">
+                                                    <input type="text" class="form-control" id="CR_Mas_Address_Ar_Street" autocomplete="off" name="CR_Mas_Address_Ar_Street" maxlength="50" required="" onkeypress="return CheckArabicCharactersOnly(event);" onkeyup="movetoNext('CR_Mas_Address_En_Street')" onpaste="return false;" value="@ViewBag.StreetAr">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-12">
+                                            <div class="form-group row">
+                                                <label class="col-md-6 col-form-label label6 padding_left_none" for="CR_Mas_Address_En_Street">إسم الشارع إنجليزي<label id="asterisk">*</label></label>
+                                                <div class="col-md-6 input6 padding_right_none">
+                                                    <input type="text" class="form-control" id="CR_Mas_Address_En_Street" autocomplete="off" name="CR_Mas_Address_En_Street" maxlength="50" required="" oninput="this.value=this.value.replace(/[^a-zA-Z\s]/g,'')" onkeyup="movetoNext('CR_Mas_Address_Building')" onpaste="return false;" value="@ViewBag.StreetEn">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-12">
+                                            <div class="form-group row">
+                                                <label class="col-md-6 col-form-label label6 padding_left_none" for="CR_Mas_Address_Building">رقم المبنى</label>
+                                                <div class="col-md-6 input6 padding_right_none">
+                                                    <input type="text" class="form-control" id="CR_Mas_Address_Building" autocomplete="off" name="CR_Mas_Address_Building" maxlength="4" oninput="this.value=this.value.replace(/[^0-9]/g,'')" onkeyup="movetoNext('CR_Mas_Address_Unit_No')" onpaste="return false;" value="@ViewBag.Bno">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-12">
+                                            <div class="form-group row">
+                                                <label class="col-md-6 col-form-label label6 padding_left_none" for="CR_Mas_Address_Unit_No">رقم الوحدة</label>
+                                                <div class="col-md-6 input6 padding_right_none">
+                                                    <input type="text" class="form-control" id="CR_Mas_Address_Unit_No" autocomplete="off" name="CR_Mas_Address_Unit_No" maxlength="5" onkeyup="movetoNext('CR_Mas_Address_Zip_Code')" onpaste="return false;" value="@ViewBag.UnitNo">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-12">
+                                            <div class="form-group row"> 
+                                                <label class="col-md-6 col-form-label label6 padding_left_none" for="CR_Mas_Address_Zip_Code">الرمز البريدي</label>
+                                                <div class="col-md-6 input6 padding_right_none">
+                                                    <input type="text" class="form-control" id="CR_Mas_Address_Zip_Code" autocomplete="off" name="CR_Mas_Address_Zip_Code" oninput="this.value=this.value.replace(/[^0-9]/g,'')" maxlength="5" onkeyup="movetoNext('CR_Mas_Address_Additional_Numbers')" onpaste="return false;" value="@ViewBag.ZipCode">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-12">
+                                            <div class="form-group row">
+                                                <label class="col-md-6 col-form-label label6 padding_left_none" for="CR_Mas_Address_Additional_Numbers">الرقم الإضافي</label>
+                                                <div class="col-md-6 input6 padding_right_none">
+                                                    <input type="text" class="form-control" id="CR_Mas_Address_Additional_Numbers" autocomplete="off" name="CR_Mas_Address_Additional_Numbers" oninput="this.value=this.value.replace(/[^0-9]/g,'')" maxlength="5" value="@ViewBag.AdditionalNo">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="form-group" hidden="hidden">
+                                        @Html.LabelFor(model => model.CR_Cas_Sup_Branch_LogoMap, htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(model => model.CR_Cas_Sup_Branch_LogoMap, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.CR_Cas_Sup_Branch_LogoMap, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="row" style="margin-bottom:25px">
+
+                                        <div class="col-lg-1 col-sm-6 col-xs-6 col-50">
+                                            <input type="submit" name="add" class="btn btn-primary waves-effect" id="add_btn" value="حفظ">
+                                        </div>
+                                        <div class="col-lg-1 col-sm-6 col-xs-6 col-50">
+                                            <a href="/CasBranch/Index/" class="btn btn-primary waves-effect" style="float:left">انهاء</a>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+
+                                
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        window.addEventListener("load", function () {
+
+            if ('@TempData["TempModel"]'!="") {
+                toastr.success("تم الحفظ بنجاح");
+            }
+
+        });
+    </script>
+</div>

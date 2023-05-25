@@ -1,0 +1,250 @@
+﻿@model IEnumerable<RentCar.Models.CR_Cas_Account_Receipt>
+
+@{
+    ViewBag.Title = "ReceiptList";
+    Layout = "~/Views/Shared/_CASLayout.cshtml";
+}
+<style>
+    label {
+        float: none
+    }
+
+    .radio_top {
+        float: left;
+        margin-right: 10px;
+        line-height: 0.8
+    }
+</style>
+<div class="content">
+    <!-- Start Content-->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+
+                <div class="card-box table-responsive" style="height:79vh">
+                    <div class="title_corp"><h3> التقارير/ الحركة المالية للموظفين /عرض البيانات/ تفاصيل القيود  </h3></div>
+                    <div class="subtitle_corp">تمكنك الصفحة من عرض و بحث عن القيود المالية للموظف </div>
+                    <div class="hr_60"></div>
+                    <div class="hr_80"></div>
+                    <div class="corp_page">
+                        <div class="page_content">
+                            <form method="post">
+                                <div class="form_bg" style="width:100%">
+                                    <div class="responsive-table-plugin">
+                                        <div class="table-rep-plugin">
+                                            <div class="table-responsive" data-pattern="priority-columns" style="border:none;">
+                                                <div class="href_layout" style="width:15%;float:right;margin-top:15px;margin-bottom:10px;">
+                                                    <a href="~/CasUserReceipt/Index" class="btn_form" data-toggle="tooltip" data-placement="top" title=""><i class="fa fa-arrow-circle-left"></i></a>
+                                                    <script>
+                                                        $(document).ready(function () {
+                                                            $("#inputtext").on("keyup", function () {
+                                                                var value = $(this).val().toLowerCase();
+                                                                $("#tbl tr").filter(function () {
+                                                                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                                                                });
+                                                            });
+                                                        });
+                                                    </script>
+                                                </div>
+                                                <div style="width: 50%; float: right;margin-top:15px;">
+                                                    <div style="float:right;width:30%;">
+                                                        إسم الموظف
+                                                    </div>
+                                                    <div style="float:right;width:70%;">
+                                                        <input type="text" name="UserName" id="UserName" value="@ViewBag.UserName" class="form-control" />
+                                                    </div>
+                                                </div>
+                                                <div id="responsive-datatable_filter" class="dataTables_filter" style="width:35%;float:right;margin-top:15px;margin-bottom:10px;">
+                                                    <label class="label_search_input">
+                                                        <img src="~/images/srch.png" id="SrchImg" />
+                                                        بحث:<input type="search" id="inputtext" class="form-control form_search_input" placeholder="" aria-controls="responsive-datatable" style="width:50%">
+                                                    </label>
+                                                </div>
+                                                <div style="width:100%;float:left;"></div>
+
+
+                                            </div>
+                                                <table class="table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>
+                                                                رقم القيد
+                                                            </th>
+                                                            <th>
+                                                                تاريخ القيد
+                                                            </th>
+                                                            <th hidden>
+                                                                رقم المرجع
+                                                            </th>
+                                                            <th>
+                                                                نوع المرجع
+                                                            </th>
+                                                            <th>
+                                                                طريقة الدفع
+                                                            </th>
+                                                            <th>
+                                                                نقطة البيع
+                                                            </th>
+                                                            <th>
+                                                                دائن
+                                                            </th>
+                                                            <th>
+                                                                مدين
+                                                            </th>
+                                                            <th>
+                                                                رصيد سابق
+                                                            </th>
+                                                            <th>
+                                                                حالة العهدة
+                                                            </th>
+                                                            <th hidden>
+                                                                تاريخ الترحيل
+                                                            </th>
+                                                            <th hidden>
+                                                                المستلم
+                                                            </th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="tbl">
+                                                        @foreach (var item in Model)
+                                                        {
+                                                            <tr>
+                                                                <td>
+                                                                    @Html.DisplayFor(modelItem => item.CR_Cas_Account_Receipt_No)
+                                                                </td>
+                                                                <td>
+                                                                    @item.CR_Cas_Account_Receipt_Date.Value.ToString("yyyy/MM/dd")
+                                                                </td>
+                                                                <td hidden>
+                                                                    @Html.DisplayFor(modelItem => item.CR_Cas_Account_Receipt_Contract_Operation)
+                                                                </td>
+                                                                <td>
+                                                                    @Html.DisplayFor(modelItem => item.CR_Cas_Account_Receipt_Reference_Type)
+                                                                </td>
+                                                                <td>
+                                                                    @Html.DisplayFor(modelItem => item.CR_Mas_Sup_Payment_Method.CR_Mas_Sup_Payment_Method_Ar_Name)
+                                                                </td>
+                                                                <td>
+                                                                    @Html.DisplayFor(modelItem => item.CR_Cas_Sup_SalesPoint.CR_Cas_Sup_SalesPoint_Ar_Name)
+                                                                </td>
+                                                                <td>
+                                                                    @Html.DisplayFor(modelItem => item.CR_Cas_Account_Receipt_Payment)
+                                                                </td>
+                                                                <td>
+                                                                    @Html.DisplayFor(modelItem => item.CR_Cas_Account_Receipt_Receipt)
+                                                                </td>
+                                                                <td>
+                                                                    @Html.DisplayFor(modelItem => item.CR_Cas_Account_Receipt_User_Previous_Balance)
+                                                                </td>
+                                                                <td>
+                                                                    @if (item.CR_Cas_Account_Receipt_Is_Passing == "2")
+                                                                    {
+                                                                        <label>مرحل</label>
+                                                                    }
+                                                                    @if (item.CR_Cas_Account_Receipt_Is_Passing == "3")
+                                                                    {
+                                                                        <label>محجوز</label>
+                                                                    }
+                                                                    @if (item.CR_Cas_Account_Receipt_Is_Passing == "1")
+                                                                    {
+                                                                        <label>عهدة</label>
+                                                                    }
+                                                                </td>
+                                                                <td hidden>
+                                                                    @Html.DisplayFor(modelItem => item.CR_Cas_Account_Receipt_Passing_Date)
+                                                                </td>
+
+                                                                <td hidden>
+                                                                    @Html.DisplayFor(modelItem => item.CR_Cas_Account_Receipt_User_Passing)
+                                                                </td>
+                                                            </tr>
+                                                        }
+                                                    </tbody>
+
+                                                </table>
+                                            </div>
+
+                                    </div>
+                                </div>
+                                <div id="dtBasicExample_print">
+
+                                    <iframe name="print_frame" width="0" height="0" frameborder="0" src="about:blank"></iframe>
+                                    <script>
+                                        function printDiv() {
+                                            window.frames["print_frame"].document.body.innerHTML = document.getElementById("dtBasicExample_print").innerHTML;
+                                            window.frames["print_frame"].window.focus();
+                                            window.frames["print_frame"].window.print();
+                                        }
+                                    </script>
+                                    <script>
+                                        $(document).ready(function () {
+                                            $('#dtBasicExample').DataTable();
+                                            $('.dataTables_length').addClass('bs-select');
+                                        });
+                                    </script>
+                                    <script>
+                                        function sortTable(n) {
+                                            var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+                                            table = document.getElementById("myTable");
+                                            switching = true;
+                                            // Set the sorting direction to ascending:
+                                            dir = "asc";
+                                            /* Make a loop that will continue until
+                                            no switching has been done: */
+                                            while (switching) {
+                                                // Start by saying: no switching is done:
+                                                switching = false;
+                                                rows = table.rows;
+                                                /* Loop through all table rows (except the
+                                                first, which contains table headers): */
+                                                for (i = 1; i < (rows.length - 1); i++) {
+                                                    // Start by saying there should be no switching:
+                                                    shouldSwitch = false;
+                                                    /* Get the two elements you want to compare,
+                                                    one from current row and one from the next: */
+                                                    x = rows[i].getElementsByTagName("TD")[n];
+                                                    y = rows[i + 1].getElementsByTagName("TD")[n];
+                                                    /* Check if the two rows should switch place,
+                                                    based on the direction, asc or desc: */
+                                                    if (dir == "asc") {
+                                                        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                                                            // If so, mark as a switch and break the loop:
+                                                            shouldSwitch = true;
+                                                            break;
+                                                        }
+                                                    } else if (dir == "desc") {
+                                                        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                                                            // If so, mark as a switch and break the loop:
+                                                            shouldSwitch = true;
+                                                            break;
+                                                        }
+                                                    }
+                                                }
+                                                if (shouldSwitch) {
+                                                    /* If a switch has been marked, make the switch
+                                                    and mark that a switch has been done: */
+                                                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                                                    switching = true;
+                                                    // Each time a switch is done, increase this count by 1:
+                                                    switchcount++;
+                                                } else {
+                                                    /* If no switching has been done AND the direction is "asc",
+                                                    set the direction to "desc" and run the while loop again. */
+                                                    if (switchcount == 0 && dir == "asc") {
+                                                        dir = "desc";
+                                                        switching = true;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    </script>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- end row -->
+</div> <!-- container-fluid -->

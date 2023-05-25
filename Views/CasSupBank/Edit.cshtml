@@ -1,0 +1,333 @@
+﻿@model RentCar.Models.CR_Cas_Sup_Bank
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_CASLayout.cshtml";
+}
+
+<link href="~/BSys3Styles/CSS/style_form.css" rel="stylesheet" />
+<style>
+    .tooltip > .tooltip-inner {
+        background-color: #f00;
+    }
+
+    .tooltip > .tooltip-arrow {
+        border-top-color: #f00 !important;
+    }
+    
+</style>
+<div class="content">
+    <!-- Start Content-->
+    <div class="container-fluid">
+
+        <div class="row mb">
+            <div class="col-12">
+                <div class="card-box table-responsive" style="height:79vh">
+                    <div class="title_corp"> <h3> الخدمات / بنوك / تعديل </h3></div>
+                    <div class="subtitle_corp"> تمكنك هذا الصفحة من إيقاف أو حذف بيانات الحساب البنكي </div>
+                    <div class="hr_60"></div>
+                    <div class="hr_80"></div>
+                    <div class="corp_page">
+                        <div class="page_content" style="float:left;width:100%">
+
+                            @using (Html.BeginForm())
+                            {
+                                @Html.AntiForgeryToken()
+
+                                <div class="form-horizontal" style="margin-top:15px;min-height:35%">
+                                    @Html.HiddenFor(model => model.CR_Cas_Sup_Bank_Com_Code)
+                                    @Html.HiddenFor(model => model.CR_Cas_Sup_Bank_Mas_Code)
+                                    @Html.HiddenFor(model => model.CR_Cas_Sup_Bank_Status)
+                                    @Html.HiddenFor(model => model.CR_Cas_Sup_Bank_Code)
+                                    <div class="row mb-3">
+                                        <div class="col-lg-5 offset-lg-7 col-md-12" style="height: 43px;">
+                                            <div class="row ">
+                                                <div class="col-md-4 padding_left_none">
+                                                    <label class="control-label">رمز البنك</label><label id="asterisk">*</label>
+                                                </div>
+                                                <div class="col-md-5 padding_right_none">
+                                                    @Html.DropDownList("CR_Cas_Sup_Bank_Mas_Code", null, htmlAttributes: new { @class = "form-control", @disabled = "disabled" })
+                                                    @Html.ValidationMessageFor(model => model.CR_Cas_Sup_Bank_Mas_Code, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <div class="col-lg-5 offset-lg-7 col-md-12" style="height: 43px;">
+                                            <div class="row">
+                                                <div class="col-md-4 padding_left_none">
+                                                    <label class="control-label">رقم الحساب البنكي</label><label id="asterisk">*</label>
+                                                </div>
+                                                <div class="col-md-5 padding_right_none">
+                                                    @Html.EditorFor(model => model.CR_Cas_Sup_Bank_Account_No, new { htmlAttributes = new { @class = "form-control", maxlength = "50", @readonly = "readonly" } })
+                                                    @Html.ValidationMessageFor(model => model.CR_Cas_Sup_Bank_Account_No, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="row mb-3">
+                                        <div class="col-lg-5 offset-lg-7 col-md-12" style="height: 43px;">
+                                            <div class="row">
+                                                <div class="col-md-4 padding_left_none">
+                                                    <label class="control-label">وصف الحساب عربي</label><label id="asterisk">*</label>
+                                                </div>
+                                                <div class="col-md-8 padding_right_none">
+                                                    @Html.EditorFor(model => model.CR_Cas_Sup_Bank_Ar_Name, new { htmlAttributes = new { @class = "form-control", maxlength = "50", @readOnly = "readonly" } })
+                                                    @Html.ValidationMessageFor(model => model.CR_Cas_Sup_Bank_Ar_Name, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <div class="col-lg-5 offset-lg-7 col-md-12" style="height: 43px;">
+                                            <div class="row">
+                                                <div class="col-md-4 padding_left_none">
+                                                    <label class="control-label">وصف الحساب إنجليزي</label><label id="asterisk">*</label>
+                                                </div>
+                                                <div class="col-md-8 padding_right_none">
+                                                    @Html.EditorFor(model => model.CR_Cas_Sup_Bank_En_Name, new { htmlAttributes = new { @class = "form-control", maxlength = "50", @readOnly = "readonly" } })
+                                                    @Html.ValidationMessageFor(model => model.CR_Cas_Sup_Bank_En_Name, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-lg-8 offset-lg-4 col-md-12" style="height: 43px;">
+                                            <div class="row">
+                                                <div class="col-md-3 padding_left_none">
+                                                    <label class="control-label">الملاحظات</label>
+                                                </div>
+                                                <div class="col-md-8 padding_right_none" style="margin-right:7px;">
+                                                    @Html.EditorFor(model => model.CR_Cas_Sup_Bank_Reasons, new { htmlAttributes = new { @class = "form-control", maxlength = "100" } })
+                                                    @Html.ValidationMessageFor(model => model.CR_Cas_Sup_Bank_Reasons, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="row mb-3" style="margin-top:70px;margin-bottom:0px;">
+                                    <div style="width:100%;padding-left:15px;padding-right:15px;">
+                                        <div class="row" style="margin-bottom:0px">
+                                            <div class="col-md-6 col-70">
+
+                                                <input type="button" onclick="Save();" name="save" value="حفظ" class="btn btn-primary waves-effect" style="float: right; margin-left: 20px; margin-top: 10px;" />
+                                                <input type="submit" name="save" id="save" value="حفظ" class="btn btn-primary waves-effect" style="float: right; margin-left: 20px; margin-top: 10px;" hidden />
+
+                                                <input type="button" name="hold" id="btn-Hold" class="btn btn-primary waves-effect" value="@ViewBag.h" style="float: right; margin-left: 20px; margin-top: 10px;" />
+                                                <input type="button" name="delete" class="btn btn-primary waves-effect" id="btn-confirm" value="@ViewBag.stat" style="float: right; margin-left: 20px; margin-top: 10px;" />
+
+                                                <a href="/CasSupBank/Index/" class="btn btn-primary waves-effect"  style=" margin-left: 20px; margin-top: 10px;">انهاء</a>
+
+                                            </div>
+                                            
+
+                                        </div>
+                                        <div class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" id="mi-modal">
+                                            <div class="modal-dialog  modal-dialog-centered">
+                                                <div class="modal-content">
+                                                    <div class="modal-body" style="padding: 35px;">
+                                                        @*<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>*@
+                                                        @if (ViewBag.delete == "D")
+                                                        {
+                                                        <div style="width:75%;float:right;text-align:right;">
+                                                            <b style="color:red;">تأكيد إسترجاع الحذف ......</b><br />
+                                                            سيترتب على استرجاع بيانات الحساب البنكي استرجاع جميع  نقاط البيع المرتبطة بالحساب البنكي
+                                                        </div>
+                                                        }
+                                                        else
+                                                        {
+                                                            <div style="width:75%;float:right;text-align:right;">
+                                                                <b style="color:red;">تأكيد الحذف ......</b><br />
+                                                                سيترتب على حذف بيانات الحساب البنكي حذف جميع  نقاط البيع المرتبطة بالحساب البنكي مع الاحتفاظ بجميع الإجراءات الإدارية و المالية السابقة
+                                                            </div>
+                                                        }
+
+                                                        <div style="width:20%;margin-right:5%;float:right;">
+                                                            @if (ViewBag.delete == "D")
+                                                            {
+                                                                <input type="submit" name="delete" class="btn btn-primary waves-effect" value="@ViewBag.stat" id="modal-btn-si" style="float: left;" />
+                                                            }
+                                                            else
+                                                            {
+                                                                <input type="submit" name="delete" class="btn btn-primary waves-effect" value="@ViewBag.stat" id="modal-btn-si" style="float: left;" />
+                                                            }
+                                                            <button type="button" class="btn btn-primary" id="modal-btn-no" style="float: left;;margin-top:25px;">إلغاء الأمر</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" id="H-modal">
+                                            <div class="modal-dialog  modal-dialog-centered">
+                                                <div class="modal-content">
+                                                    <div class="modal-body" style="padding: 35px;">
+                                                        @if (Model.CR_Cas_Sup_Bank_Status == "H")
+                                                        {
+                                                            <div style="width:75%;float:right;text-align:right;">
+                                                                <b style="color:red;">تأكيد إسترجاع الإيقاف ......</b><br />
+                                                                سيترتب على استرجاع إيقاف بيانات الحساب البنكي استرجاع نقاط البيع المرتبطة بالحساب البنكي  
+                                                            </div>
+                                                        }
+                                                        else
+                                                        {
+                                                            <div style="width:75%;float:right;text-align:right;">
+                                                                <b style="color:red;">تأكيد الإيقاف ......</b><br />
+                                                                سيترتب على إيقاف بيانات الحساب البنكي إيقاف جميع  عمليات الدفع بنقاط البيع المرتبطة بالحساب البنكي
+                                                            </div>
+                                                        }
+
+                                                        <div style="width:20%;margin-right:5%;float:right;">
+                                                            @if (Model.CR_Cas_Sup_Bank_Status == "H")
+                                                            {
+                                                                <input type="submit" name="hold" class="btn btn-primary waves-effect" id="HoldModal-btn-si" value="@ViewBag.h" style="float: left;" />
+                                                            }
+                                                            else
+                                                            {
+                                                                <input type="submit" name="hold" class="btn btn-primary waves-effect" id="HoldModal-btn-si" value="@ViewBag.h" style="float: left;" />
+                                                            }
+
+                                                            <button type="button" class="btn btn-primary" id="HoldModal-btn-no" style="float: left;margin-top:25px;">إلغاء الأمر</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            }
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    select {
+        appearance: none;
+    }
+</style>
+<script type="text/javascript">
+        window.addEventListener("load", function () {
+
+            if ('@TempData["TempModel"]'!="") {
+                toastr.success("تم الحفظ بنجاح");
+            }
+
+        });
+</script>
+
+<script>
+
+    function Save() {
+        var st = '@Model.CR_Cas_Sup_Bank_Status';
+       // alert(st);
+        if (st == 'A') {
+            document.getElementById("save").click();
+        } else if (st == 'D') {
+            toastr.info("لايمكن حفظ بيانات بنك محذوف");
+        } else if (st == 'H') {
+            toastr.info("لايمكن حفظ بيانات بنك موقوف");
+        }
+    }
+</script>
+
+<script>
+    var modalConfirm = function (callback) {
+        $("#btn-confirm").on("click", function () {
+            var st = '@Model.CR_Cas_Sup_Bank_Status';
+
+            if (st == 'A') {
+                var SalesPointNo = '@TempData["SalesPointNo"]';
+                var x = false;
+                if (SalesPointNo == "T")
+                {
+                    toastr.info("لا يمكن حذف بنك له نقاط بيع");
+                    return;
+                }
+                else
+                {
+                    x = true;
+                }
+                if (x == true) {
+                    $("#mi-modal").modal('show');
+                }
+            } else if (st == 'D') {
+                $("#mi-modal").modal('show');
+            } else if (st == 'H') {
+                toastr.info("لايمكن حذف بنك موقوف");
+            }
+        });
+        $("#modal-btn-si").on("click", function () {
+            callback(true);
+            $("#mi-modal").modal('hide');
+        });
+        $("#modal-btn-no").on("click", function () {
+            callback(false);
+            $("#mi-modal").modal('hide');
+        });
+    };
+    modalConfirm(function (confirm) {
+        if (confirm) {
+            //Acciones si el usuario confirma
+            $("#form1").submit();
+        } else {
+            //Acciones si el usuario no confirma
+            $("#result").html("canceled");
+        }
+    });
+</script>
+<script>
+    var HoldModal = function (callback) {
+        $("#btn-Hold").on("click", function () {
+            var st = '@Model.CR_Cas_Sup_Bank_Status';
+
+            if (st == 'A') {
+                var SalesPointNo = '@TempData["SalesPointNo"]';
+                var x = true;
+                if (SalesPointNo === "T") {
+                   toastr.info("لايمكن إيقاف بنك له نقاط بيع");
+                   return;
+                } else {
+                   x = true;
+                }
+
+                if (x == true) {
+                    $("#H-modal").modal('show');
+                }
+            } else if (st == 'H') {
+                $("#H-modal").modal('show');
+            } else if (st == 'D') {
+                toastr.info("لايمكن إيقاف بنك محذوف");
+            }
+
+        });
+        $("#HoldModal-btn-si").on("click", function () {
+            callback(true);
+            $("#H-modal").modal('hide');
+        });
+        $("#HoldModal-btn-no").on("click", function () {
+            callback(false);
+            $("#H-modal").modal('hide');
+        });
+    };
+    HoldModal(function (confirm) {
+        if (confirm) {
+            //Acciones si el usuario confirma
+            $("#form1").submit();
+        } else {
+            //Acciones si el usuario no confirma
+            $("#result").html("canceled");
+        }
+    });
+</script>

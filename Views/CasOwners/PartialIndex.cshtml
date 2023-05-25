@@ -1,0 +1,175 @@
+﻿@model IEnumerable<RentCar.Models.OwnerCarsModel>
+
+<div class="responsive-table-plugin">
+    <div class="table-rep-plugin">
+        <div class="table-responsive" data-pattern="priority-columns" style="border:none;">
+            <div id="dtBasicExample_print">
+                <table id="myTable" class="table table-striped mb-0" style="cursor:pointer">
+                    <thead>
+                        <tr>
+                            <th style="width:10%;">
+                                هوية المالك
+                            </th>
+                            <th style="width:20%;">
+                                إسم المالك
+                            </th>
+                            <th style="width:12%;">
+                                السجل التجاري
+                            </th>
+                            <th hidden="hidden">
+                                @Html.DisplayNameFor(model => model.CR_Cas_Sup_Owners_Sector)
+                            </th>
+
+                            <th style="width:10%;">
+                                عدد السيارات
+                            </th>
+
+
+                            <th style="width:7%;">
+                                الحالة
+                            </th>
+                            <th style="width:41%;">
+                                ملاحظات
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbl">
+                        @foreach (var item in Model)
+                        {
+                            if (item.CR_Cas_Sup_Owners_Status == "H" || item.CR_Cas_Sup_Owners_Status == "D")
+                            {
+                                <tr>
+                                    <td align="center" valign="middle" style="width:10%;">
+                                        <a href="~/CasOwners/Edit/?LessorCode=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Owners_Lessor_Code)
+                                                                                &BeneficiaryCode=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Owners_Code)" style="color:red">
+                                            @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Owners_Code)
+                                        </a>
+                                    </td>
+                                    <td style="width: 20%;">
+                                        <a href="~/CasOwners/Edit/?LessorCode=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Owners_Lessor_Code)
+                                                                            &BeneficiaryCode=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Owners_Code)"style="color:red">
+                                            @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Owners_Ar_Long_Name)
+                                        </a>
+                                    </td>
+                                    <td align="center" style="width:12%;">
+                                        <a href="~/CasOwners/Edit/?LessorCode=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Owners_Lessor_Code)
+                                                                            &BeneficiaryCode=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Owners_Code)"style="color:red">
+                                            @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Owners_Commercial_Registration_No)
+                                        </a>
+                                    </td>
+
+                                    <td hidden="hidden">
+                                        @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Owners_Sector)
+                                    </td>
+
+                                    <td align="center" style="width:10%;">
+                                        <a href="~/CasOwners/Edit/?LessorCode=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Owners_Lessor_Code)
+                                                                            &BeneficiaryCode=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Owners_Code)"style="color:red">
+                                            @Html.DisplayFor(modelItem => item.CarsNumber)
+                                        </a>
+                                    </td>
+
+
+                                    <td align="center" style="width:7%">
+                                        @*<a href="~/Brand/edit/@Html.DisplayFor(modelItem => item.CR_Mas_Sup_Brand_Code)">@Html.DisplayFor(modelItem => item.CR_Mas_Sup_Brand_Status)</a>*@
+                                        @if (item.CR_Cas_Sup_Owners_Status == "A")
+                                        {
+                                            <a href="~/CasOwners/Edit/?LessorCode=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Owners_Lessor_Code)
+                                                                            &BeneficiaryCode=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Owners_Code)" style="color:red">نشط</a>
+                                        }
+                                        @if (item.CR_Cas_Sup_Owners_Status == "H")
+                                        {
+                                            <a href="~/CasOwners/Edit/?LessorCode=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Owners_Lessor_Code)
+                                                                                        &BeneficiaryCode=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Owners_Code)" style="color:red">موقوف</a>
+                                        }
+                                        @if (item.CR_Cas_Sup_Owners_Status == "D")
+                                        {
+                                            <a href="~/CasOwners/Edit/?LessorCode=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Owners_Lessor_Code)
+                                                                                         &BeneficiaryCode=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Owners_Code)" style="color:red">محذوف</a>
+                                        }
+                                    </td>
+                                    <td style="width:41%;">
+                                        <a href="~/CasOwners/Edit/?LessorCode=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Owners_Lessor_Code)
+                                                                                         &BeneficiaryCode=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Owners_Code)" style="color:red">
+                                            @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Owners_Reasons)
+                                            </a>
+                                    </td>
+
+                                </tr>
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td align="center" valign="middle" style="width:10%;">
+                                        <a href="~/CasOwners/Edit/?LessorCode=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Owners_Lessor_Code)
+                                                                                &BeneficiaryCode=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Owners_Code)">
+                                            @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Owners_Code)
+                                        </a>
+                                    </td>
+                                    <td style="width:20%;">
+                                        <a href="~/CasOwners/Edit/?LessorCode=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Owners_Lessor_Code)
+                                                                            &BeneficiaryCode=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Owners_Code)">
+                                            @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Owners_Ar_Long_Name)
+                                        </a>
+                                    </td>
+                                    <td align="center" style="width:12%;">
+                                        <a href="~/CasOwners/Edit/?LessorCode=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Owners_Lessor_Code)
+                                                                            &BeneficiaryCode=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Owners_Code)">
+                                            @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Owners_Commercial_Registration_No)
+                                        </a>
+                                    </td>
+
+                                    <td hidden="hidden">
+                                        @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Owners_Sector)
+                                    </td>
+
+                                    <td align="center" style="width:10%;">
+                                        <a href="~/CasOwners/Edit/?LessorCode=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Owners_Lessor_Code)
+                                                                            &BeneficiaryCode=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Owners_Code)">
+                                            @Html.DisplayFor(modelItem => item.CarsNumber)
+                                        </a>
+                                    </td>
+
+
+                                    <td align="center" style="width:7%">
+                                        @*<a href="~/Brand/edit/@Html.DisplayFor(modelItem => item.CR_Mas_Sup_Brand_Code)">@Html.DisplayFor(modelItem => item.CR_Mas_Sup_Brand_Status)</a>*@
+                                        @if (item.CR_Cas_Sup_Owners_Status == "A")
+                                        {
+                                            <a href="~/CasOwners/Edit/?LessorCode=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Owners_Lessor_Code)
+                                                                            &BeneficiaryCode=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Owners_Code)" style="color:green">نشط</a>
+                                        }
+                                        @if (item.CR_Cas_Sup_Owners_Status == "H")
+                                        {
+                                            <a href="~/CasOwners/Edit/?LessorCode=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Owners_Lessor_Code)
+                                                                                        &BeneficiaryCode=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Owners_Code)" style="color:salmon">موقوف</a>
+                                        }
+                                        @if (item.CR_Cas_Sup_Owners_Status == "D")
+                                        {
+                                            <a href="~/CasOwners/Edit/?LessorCode=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Owners_Lessor_Code)
+                                                                                         &BeneficiaryCode=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Owners_Code)" style="color:red;">محذوف</a>
+                                        }
+                                    </td>
+                                    <td style="width:41%;">
+                                        <a href="~/CasOwners/Edit/?LessorCode=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Owners_Lessor_Code)
+                                                                                         &BeneficiaryCode=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Owners_Code)">
+                                            @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Owners_Reasons)   </a>
+                                    </td>
+
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <iframe name="print_frame" width="0" height="0" frameborder="0" src="about:blank"></iframe>
+            <script>
+                                                    function printDiv() {
+                                                        window.frames["print_frame"].document.body.innerHTML = document.getElementById("dtBasicExample_print").innerHTML;
+                                                        window.frames["print_frame"].window.focus();
+                                                        window.frames["print_frame"].window.print();
+                                                    }
+            </script>
+
+        </div>
+    </div>
+</div>

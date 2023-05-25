@@ -1,0 +1,65 @@
+﻿@model IEnumerable<RentCar.Models.BranchValidityModel>
+
+
+<div class="" style="margin-top:20px;">
+
+    <div class="table-responsive" style="width:20%; height:250px;overflow:hidden;margin-top:20px;">
+
+        <table class="table table-bordered table-striped example "  id="BranchTable" style="display: block;">
+            <thead>
+                <tr>
+                    <th hidden>BranchCode</th>
+                    <th width="70%">
+                        الفروع
+                    </th>
+                </tr>
+            </thead>
+            <tbody id="tbl" style="height:152px">
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td hidden>
+                            @Html.DisplayFor(modelItem => item.CR_Cas_User_Branch_Validity_Branch)
+                        </td>
+                        <td>
+                            
+                            <label class="checkbox_input">
+                                @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Ar_Short_Name)
+                                <input type="checkbox" id="chk_@item.CR_Cas_Sup_Branch_Code" name="chk_@item.CR_Cas_Sup_Branch_Code" checked="@item.check.GetValueOrDefault()">
+                                <span class="checkmark"></span>
+                            </label>
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+    <script type="text/javascript">
+        function UncheckBranchTable() {
+            //Reference the Table.
+            var grid = document.getElementById("BranchTable");
+
+            //Reference the CheckBoxes in Table.
+            var checkBoxes = grid.getElementsByTagName("INPUT");
+
+            //Loop through the CheckBoxes.
+            for (var i = 0; i < checkBoxes.length; i++) {
+                if (checkBoxes[i].checked) {
+                    checkBoxes[i].checked = false;
+                }
+            }
+        }
+
+
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $('.example').DataTable({
+                scrollX: true,
+            });
+        });
+    </script>
+</div>

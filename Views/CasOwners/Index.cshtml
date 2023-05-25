@@ -1,0 +1,184 @@
+﻿@model IEnumerable<RentCar.Models.OwnerCarsModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_CASLayout.cshtml";
+}
+<style>
+    label {
+        float: none
+    }
+
+    .radio_top {
+        float: left;
+        margin-right: 10px;
+        line-height: 0.8
+    }
+</style>
+<div class="content">
+
+    <!-- Start Content-->
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card-box table-responsive" style="height:79vh">
+                    <div class="title_corp"><h3> الشركة /الملاك / عرض البيانات</h3></div>
+                    <div class="subtitle_corp">
+                        تمكنك الصفحة من البحث و طباعة و تعديل بيانات الملاك  و إضافة مالك جديد
+                    </div>
+
+                    <div class="hr_60"></div>
+                    <div class="hr_80"></div>
+                    <div class="corp_page" style=" float: left; width: 100%">
+                        <div class="page_content">
+                            <form method="post">
+                                <div class="form_bg">
+                                    <div class="href_layout">
+                                        <a href="/CASHome/index" class="btn_form"><i class="fa fa-times" data-toggle="tooltip" data-placement="top" title="إغلاق"></i></a>
+                                        <a href="/CasOwners/Create" class="btn_form"><i class="fa fa-plus" data-toggle="tooltip" data-placement="top" title="إضافة سجل جديد"></i></a>
+                                        <button type="submit" name="excelCall" title="ترحيل البيانات للإكسل" data-toggle="tooltip" data-placement="top" class="btn_form" value="Excel" style="padding-right:4px;"hidden>
+                                            <i class="fa fa-file-excel-o" aria-hidden="true" style=" margin-bottom: 3px; padding-left: 10px;"></i>
+                                        </button>
+                                        <a href="" class="btn_form" data-toggle="tooltip" data-placement="top" title="طباعة" onclick="printDiv()" style="" hidden><i class="fa fa-print"></i></a>
+                                    </div>
+                                    <div class="dataTables_filter">
+                                        <label class="label_search_input">
+                                            <img src="~/images/srch.png" id="SrchImg" />
+                                            بحث:<input class="form-control form_search_input" type="text" id="inputtext" name="TxtSearch" style="width:240px" />
+                                        </label>
+                                    </div>
+                                    
+                                    <div class="row" style="width: 100%; min-height: 20px">
+                                        <div class="col-md-7" style="float:right">
+
+                                        </div>
+                                        <div class="col-md-5" style="float:right;">
+                                            <div class="">
+                                                <div class="radio_top">
+
+                                                    <input type="radio" id="ShowHolded" name="Show" onclick="GetFilter()" style="float:right;margin-left:4px;width:13px;height:13px;">
+                                                    <label for="javascript" style="float: left; font-size: 0.75rem">موقوف</label>
+                                                </div>
+
+                                                <div class="radio_top">
+
+                                                    <input type="radio" id="ShowDeleted" name="Show" onclick="GetFilter()" style="float:right;margin-left:4px;width:13px;height:13px;">
+                                                    <label for="javascript" style="float: left; font-size: 0.75rem">محذوف</label>
+                                                </div>
+                                                <div class="radio_top">
+
+                                                    <input type="radio" id="ShowActive" name="Show" onclick="GetFilter()" style="float:right;margin-left:4px;width:13px;height:13px;">
+                                                    <label for="css" style="float: left; font-size: 0.75rem">نشط</label>
+                                                </div>
+                                                <div class="radio_top">
+
+                                                    <input type="radio" id="ShowAll" name="Show" onclick="GetFilter()" style="float:right;margin-left:4px;width:13px;height:13px;">
+                                                    <label for="html" style="float: left; font-size: 0.75rem">الكل</label>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div id="OwnersList">
+                                        @{
+                                            Html.RenderAction("PartialIndex");
+                                        }
+
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- end row -->
+
+
+        </div> <!-- container-fluid -->
+
+    </div> <!-- content -->
+</div>
+
+<script type="text/javascript">
+        window.addEventListener("load", function () {
+
+             if ('@TempData["TempModif"]'=="Added") {
+                toastr.success("تم الحفظ بنجاح");
+            }
+
+            if ('@TempData["TempModif"]'=="Saved") {
+                toastr.success("تم الحفظ بنجاح");
+            }
+
+            if ('@TempData["TempModif"]'=="Holded") {
+                toastr.success("تم التعطيل بنجاح");
+            }
+
+            if ('@TempData["TempModif"]'=="Deleted") {
+                toastr.success("تم الحذف بنجاح");
+            }
+
+            if ('@TempData["TempModif"]' =="Activated") {
+                toastr.success("تم التنشيط بنجاح");
+            }
+            if ('@TempData["TempModif"]' == "Error") {
+
+                toastr.warning("نأسف لعدم نجاح عملية التعديل, الرجاء التواصل مع المطور");
+            }
+
+            var message = '@TempData["Delete"]';
+            if (message != "") {
+                toastr.warning(message);
+            }
+        });
+
+
+
+
+    function GetFilter() {
+       // alert();
+        if (document.getElementById('ShowAll').checked) {
+            $.ajax({
+                url: '@Url.Action("PartialIndex", "CasOwners")',
+                type: "POST",
+                data: { type: "All" },
+                success: function (data) {
+
+                    $('#OwnersList').html(data);
+                }
+            });
+        } else if (document.getElementById('ShowActive').checked) {
+
+            $.ajax({
+                url: '@Url.Action("PartialIndex", "CasOwners")',
+                type: "POST",
+                data: { type: "A" },
+                success: function (data) {
+                    $('#OwnersList').html(data);
+                }
+            });
+        } else if (document.getElementById('ShowDeleted').checked) {
+
+            $.ajax({
+                url: '@Url.Action("PartialIndex", "CasOwners")',
+                type: "POST",
+                data: { type: "D" },
+                success: function (data) {
+                    $('#OwnersList').html(data);
+                }
+            });
+        } else if (document.getElementById('ShowHolded').checked) {
+
+            $.ajax({
+                url: '@Url.Action("PartialIndex", "CasOwners")',
+                type: "POST",
+                data: { type: "H" },
+                success: function (data) {
+                    $('#OwnersList').html(data);
+                }
+            });
+        }
+    }
+
+</script>

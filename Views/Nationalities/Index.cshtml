@@ -1,0 +1,345 @@
+﻿@model IEnumerable<RentCar.Models.CR_Mas_Sup_Nationalities>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Bootstrap_Arabic/bootstrap.min.css" rel="stylesheet" />
+<link href="~/Bootstrap_Arabic/bootstrap-big-grid.min.css" rel="stylesheet" />
+<link href="~/Bootstrap_Arabic/jquery.dataTables.min.css" type="text/css" rel="stylesheet" />
+<link href="~/Bootstrap_Arabic/font-awesome.css" type="text/css" rel="stylesheet" />
+<script src="~/Bootstrap_Arabic/jquery-v1.11.2.js"></script>
+<script src="~/Bootstrap_Arabic/bootstrap.min.js"></script>
+<script src="~/Bootstrap_Arabic/bootstrap.min.js"></script>
+<script src="~/Bootstrap_Arabic/jquery.dataTables.min.js"></script>
+<script src="https://res.cloudinary.com/dxfq3iotg/raw/upload/v1569818907/jquery.table2excel.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+    #inputtext {
+        width: 250px;
+        height: 30px;
+        margin-right: 293px;
+        margin-left: -5px;
+        float: left;
+        margin-top: 5px;
+        border-color: #4A80B3;
+        border-radius: unset;
+    }
+
+    #SrchImg {
+        float: left;
+        margin-top: -5px;
+        margin-left: 0px;
+        margin-right: -35px;
+        position: relative;
+    }
+
+    td {
+        font-family: 'Times New Roman';
+        font-size: 14px;
+        padding: 5px 4px !important;
+        font-weight: 100;
+        color: #73A0C1;
+    }
+
+    th {
+        font-family: 'Times New Roman';
+        font-size: 16px;
+        font-weight: bold;
+        border-color: #4A80B3;
+        cursor: pointer;
+    }
+
+    .title_corp {
+        margin-top: -15px;
+    }
+
+    .table thead {
+        overflow-y: scroll;
+        flex-grow: 1;
+        border-color: #4A80B3;
+    }
+
+    .table tr a {
+        text-decoration: none;
+        color: black !important;
+    }
+
+    .table td {
+        border-color: #4A80B3;
+        color: #083555;
+    }
+
+    .table thead th {
+        color: #124f77;
+        border-color: #4A80B3;
+        text-align: center;
+        background: #D1EAFA;
+        position: sticky;
+        top: 0;
+    }
+
+    .title_corp {
+        font-family: 'Times New Roman';
+        font-size: 25px;
+    }
+
+    .subtitle_corp {
+        padding-top: 3px !important;
+        font-family: 'Times New Roman' !important;
+        color: #083555;
+    }
+</style>
+<div class="corp_content">
+    <div class="title_corp"> الجنسيات / عرض البيانات</div>
+    <div class="subtitle_corp"> تمكنك الصفحة من البحث و إضافة سجل جديد و تعديل بيانات سجل</div>
+    <div class="hr_60"></div>
+    <div class="hr_80"></div>
+    <div class="corp_page">
+        <div class="page_content">
+            <form method="post">
+                <div class="form_bg">
+                    <div class="href_layout" style="margin-bottom:7px!important;">
+                        <a href="/Home/index" class="btn_form"><i class="fa fa-times" title="إغلاق"></i></a>
+                        @if (Session["ST_1601_insert"].ToString() == "true")
+                        {
+                            <a href="/Nationalities/Create" class="btn_form"><i class="fa fa-plus" title="إضافة سجل جديد"></i></a>
+                        }
+                        else
+                        {
+                            <a href="" class="btn_form" style="cursor:no-drop;"><i class="fa fa-plus" title="إضافة سجل جديد" onclick="javascript:return false;"></i></a>
+                        }
+                        @if (Session["ST_1601_print"].ToString()=="true")
+                        {
+                            <input type="submit" name="excelCall" title="ترحيل البيانات للإكسل" class="btn_form btn_exel" value="Excel" style="padding-right:4px;" />
+                            <a href="" class="btn_form" title="طباعة" onclick="printDiv()"><i class="fa fa-print"></i></a>
+                        }
+                        else
+                        {
+                            <input type="submit" name="excelCall" title="ترحيل البيانات للإكسل" class="btn_form btn_exel" value="Excel" style="padding-right:4px;cursor:no-drop;" disabled />
+                            <a href="" class="btn_form ii" title="طباعة" onclick="javascript:return false;" style="cursor:no-drop;"><i class="fa fa-print"></i></a>
+                        }
+                        <a href="" class="btn_form" title="بحث"><i class='fa fa-search'></i></a>
+                        <img src="~/images/srch.png" id="SrchImg" />
+                        <input class="form-control" type="text" id="inputtext" name="TxtSearch" placeholder="بحث..." />
+                        <script>
+                            $(document).ready(function () {
+                                $("#inputtext").on("keyup", function () {
+                                    var value = $(this).val().toLowerCase();
+                                    $("#tbl tr").filter(function () {
+                                        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                                    });
+                                });
+                            });
+                        </script>
+                    </div>
+                    <div class="table-responsive" style="width:99%; height:373px; overflow:auto;border: 1px solid #4A80B3;">
+                        <div id="dtBasicExample_print">
+                            <table class="table table-bordered table-striped " id="myTable">
+                                <thead>
+                                    <tr>
+                                        <th style="width:10%;" onclick="sortTable(0)">@Html.DisplayNameFor(model => model.CR_Mas_Sup_Nationalities_Code)</th>
+                                        <th style="width:21%;" onclick="sortTable(1)">التصنيف</th>
+                                        @if (Session["Language"].ToString() == "1")
+                                        {
+                                            <th style="width:10%;" onclick="sortTable(2)">الجنسية</th>
+                                        }
+                                        @if (Session["Language"].ToString() == "2")
+                                        {
+                                            <th style="width:10%;" onclick="sortTable(2)">@Html.DisplayNameFor(model => model.CR_Mas_Sup_Nationalities_En_Name)</th>
+                                        }
+                                        @if (Session["Language"].ToString() == "3")
+                                        {
+                                            <th style="width:10%;" onclick="sortTable(2)">@Html.DisplayNameFor(model => model.CR_Mas_Sup_Nationalities_Fr_Name)</th>
+                                        }
+                                        @*<th style="width:10%;" onclick="sortTable(3)">@Html.DisplayNameFor(model => model.CR_Mas_Sup_Nationalities_Counter)</th>*@
+                                        <th style="width:8%;" onclick="sortTable(4)">@Html.DisplayNameFor(model => model.CR_Mas_Sup_Nationalities_Status)</th>
+                                        <th style="width:51%;">@Html.DisplayNameFor(model => model.CR_Mas_Sup_Nationalities_Reasons)</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tbl">
+                                    @foreach (var item in Model)
+                                    {
+                                        if (Session["ST_1601_update"].ToString()=="true")
+                                        {
+                                        <tr>
+                                            <td align="center">
+                                                <a href="~/Nationalities/edit/@Html.DisplayFor(modelItem => item.CR_Mas_Sup_Nationalities_Code)">
+                                                    @Html.DisplayFor(modelItem => item.CR_Mas_Sup_Nationalities_Code)
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <a href="~/Nationalities/edit/@Html.DisplayFor(modelItem => item.CR_Mas_Sup_Nationalities_Code)">
+                                                    @Html.DisplayFor(modelItem => item.CR_Mas_Sup_Country.CR_Mas_Sup_Country_Ar_Name)
+                                                </a>
+                                            </td>
+                                            @if (Session["Language"].ToString() == "1")
+                                            {
+                                                <td style="padding-right: 10px !important;">
+                                                    <a href="~/Nationalities/edit/@Html.DisplayFor(modelItem => item.CR_Mas_Sup_Nationalities_Code)">
+                                                        @Html.DisplayFor(modelItem => item.CR_Mas_Sup_Nationalities_Ar_Name)
+                                                    </a>
+                                                </td>
+                                            }
+                                            @if (Session["Language"].ToString() == "2")
+                                            {
+                                                <td style="padding-right: 10px !important;">
+                                                    <a href="~/Nationalities/edit/@Html.DisplayFor(modelItem => item.CR_Mas_Sup_Nationalities_Code)">
+                                                        @Html.DisplayFor(modelItem => item.CR_Mas_Sup_Nationalities_En_Name)
+                                                    </a>
+                                                </td>
+                                            }
+                                            @if (Session["Language"].ToString() == "3")
+                                            {
+                                                <td style="padding-right: 10px !important;">
+                                                    <a href="~/Nationalities/edit/@Html.DisplayFor(modelItem => item.CR_Mas_Sup_Nationalities_Code)">
+                                                        @Html.DisplayFor(modelItem => item.CR_Mas_Sup_Nationalities_Fr_Name)
+                                                    </a>
+                                                </td>
+                                            }
+                                            @*<td style="padding-right: 10px !important;">
+                                                <a href="~/Nationalities/edit/@Html.DisplayFor(modelItem => item.CR_Mas_Sup_Nationalities_Code)">
+                                                    @Html.DisplayFor(modelItem => item.CR_Mas_Sup_Nationalities_Counter)
+                                                </a>
+                                            </td>*@
+                                            <td align="center">
+                                                @*<a href="~/Model/edit/@Html.DisplayFor(modelItem => item.CR_Mas_Sup_Model_Code)">@Html.DisplayFor(modelItem => item.CR_Mas_Sup_Model_Status)</a>*@
+                                                @if (item.CR_Mas_Sup_Nationalities_Status == "A")
+                                                {
+                                                    <a href="~/Nationalities/edit/@Html.DisplayFor(modelItem => item.CR_Mas_Sup_Nationalities_Code)">نشط</a>
+                                                }
+                                                @if (item.CR_Mas_Sup_Nationalities_Status == "D")
+                                                {
+                                                    <a href="~/Nationalities/edit/@Html.DisplayFor(modelItem => item.CR_Mas_Sup_Nationalities_Code)">محذوف</a>
+                                                }
+                                                @if (item.CR_Mas_Sup_Nationalities_Status == "H")
+                                                {
+                                                    <a href="~/Nationalities/edit/@Html.DisplayFor(modelItem => item.CR_Mas_Sup_Nationalities_Code)">موقوف</a>
+                                                }
+                                            </td>
+                                            <td>
+                                                <a href="~/Nationalities/edit/@Html.DisplayFor(modelItem => item.CR_Mas_Sup_Nationalities_Code)">
+                                                    @Html.DisplayFor(modelItem => item.CR_Mas_Sup_Nationalities_Reasons)
+                                                </a>
+                                            </td>
+                                            @*<td>
+                                                <a href="~/Nationalities/edit/@Html.DisplayFor(modelItem => item.CR_Mas_Sup_Nationalities_Code)">
+                                                    @Html.DisplayFor(modelItem => item.CR_Mas_Sup_Group.CR_Mas_Sup_Group_Ar_Name)
+                                                </a>
+                                            </td>*@
+                                        </tr>
+                                        }
+                                        else
+                                        {
+                                            <tr>
+                                                <td align="center">@Html.DisplayFor(modelItem => item.CR_Mas_Sup_Nationalities_Code)</td>
+                                                <td>@Html.DisplayFor(modelItem => item.CR_Mas_Sup_Country.CR_Mas_Sup_Country_Ar_Name)</td>
+                                                @if (Session["Language"].ToString() == "1")
+                                                {
+                                                    <td style="padding-right: 10px !important;">@Html.DisplayFor(modelItem => item.CR_Mas_Sup_Nationalities_Ar_Name)</td>
+                                                }
+                                                @if (Session["Language"].ToString() == "2")
+                                                {
+                                                    <td style="padding-right: 10px !important;">@Html.DisplayFor(modelItem => item.CR_Mas_Sup_Nationalities_En_Name)</td>
+                                                }
+                                                @if (Session["Language"].ToString() == "3")
+                                                {
+                                                    <td style="padding-right: 10px !important;">@Html.DisplayFor(modelItem => item.CR_Mas_Sup_Nationalities_Fr_Name)</td>
+                                                }
+                                                @*<td align="center">@Html.DisplayFor(modelItem => item.CR_Mas_Sup_Nationalities_Counter)</td>*@
+                                                <td align="center">
+                                                    @if (item.CR_Mas_Sup_Nationalities_Status == "A")
+                                                    {
+                                                        <a href="~/Nationalities/edit/@Html.DisplayFor(modelItem => item.CR_Mas_Sup_Nationalities_Code)">نشط</a>
+                                                    }
+                                                    @if (item.CR_Mas_Sup_Nationalities_Status == "D")
+                                                    {
+                                                        <a href="~/Nationalities/edit/@Html.DisplayFor(modelItem => item.CR_Mas_Sup_Nationalities_Code)">موقوف</a>
+                                                    }
+                                                    @if (item.CR_Mas_Sup_Nationalities_Status == "H")
+                                                    {
+                                                        <a href="~/Nationalities/edit/@Html.DisplayFor(modelItem => item.CR_Mas_Sup_Nationalities_Code)">محذوف</a>
+                                                    }
+                                                </td>
+                                                <td>@Html.DisplayFor(modelItem => item.CR_Mas_Sup_Nationalities_Reasons)</td>
+                                                @*<td>@Html.DisplayFor(modelItem => item.CR_Mas_Sup_Group.CR_Mas_Sup_Group_Ar_Name)</td>*@
+                                            </tr>
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        <iframe name="print_frame" width="0" height="0" frameborder="0" src="about:blank"></iframe>
+                        <script>
+                            function printDiv() {
+                                window.frames["print_frame"].document.body.innerHTML = document.getElementById("dtBasicExample_print").innerHTML;
+                                window.frames["print_frame"].window.focus();
+                                window.frames["print_frame"].window.print();
+                            }
+                        </script>
+                        <script>
+                            $(document).ready(function () {
+                                $('#dtBasicExample').DataTable();
+                                $('.dataTables_length').addClass('bs-select');
+                            });
+                        </script>
+                        <script>
+                            function sortTable(n) {
+                                var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+                                table = document.getElementById("myTable");
+                                switching = true;
+                                // Set the sorting direction to ascending:
+                                dir = "asc";
+                                /* Make a loop that will continue until
+                                no switching has been done: */
+                                while (switching) {
+                                    // Start by saying: no switching is done:
+                                    switching = false;
+                                    rows = table.rows;
+                                    /* Loop through all table rows (except the
+                                    first, which contains table headers): */
+                                    for (i = 1; i < (rows.length - 1); i++) {
+                                        // Start by saying there should be no switching:
+                                        shouldSwitch = false;
+                                        /* Get the two elements you want to compare,
+                                        one from current row and one from the next: */
+                                        x = rows[i].getElementsByTagName("TD")[n];
+                                        y = rows[i + 1].getElementsByTagName("TD")[n];
+                                        /* Check if the two rows should switch place,
+                                        based on the direction, asc or desc: */
+                                        if (dir == "asc") {
+                                            if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                                                // If so, mark as a switch and break the loop:
+                                                shouldSwitch = true;
+                                                break;
+                                            }
+                                        } else if (dir == "desc") {
+                                            if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                                                // If so, mark as a switch and break the loop:
+                                                shouldSwitch = true;
+                                                break;
+                                            }
+                                        }
+                                    }
+                                    if (shouldSwitch) {
+                                        /* If a switch has been marked, make the switch
+                                        and mark that a switch has been done: */
+                                        rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                                        switching = true;
+                                        // Each time a switch is done, increase this count by 1:
+                                        switchcount++;
+                                    } else {
+                                        /* If no switching has been done AND the direction is "asc",
+                                        set the direction to "desc" and run the while loop again. */
+                                        if (switchcount == 0 && dir == "asc") {
+                                            dir = "desc";
+                                            switching = true;
+                                        }
+                                    }
+                                }
+                            }
+                        </script>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

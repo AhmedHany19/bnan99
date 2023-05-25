@@ -1,0 +1,336 @@
+﻿@model RentCar.Models.CR_Cas_User_Information
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_CASLayout.cshtml";
+}
+<style>
+  
+    #textErr {
+        color: red;
+        font-size: 12px;
+        font-weight: bold;
+    }
+</style>
+<style>
+    .title_corp h3 {
+        margin-top: 0 !important;
+    }
+    .title_corp h3 {
+        font-family: 'Cairo', sans-serif !important;
+        font-weight: 700;
+        color: #323232;
+    }
+
+    .subtitle_corp {
+        font-family: 'Cairo', sans-serif !important;
+        font-weight: 700;
+        color: #323232;
+    }
+    /* The container */
+    .checkbox_input {
+        display: block;
+        position: relative;
+        padding-right: 35px;
+        margin-bottom: 12px;
+        cursor: pointer;
+        font-size: 15px;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        text-align: right
+    }
+
+        /* Hide the browser's default checkbox */
+        .checkbox_input input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+            height: 0;
+            width: 0;
+        }
+
+    /* Create a custom checkbox */
+    .checkmark {
+        position: absolute;
+        top: 0;
+        right: 0;
+        height: 20px;
+        width: 20px;
+        background-color: #fff;
+        border: solid 2px #4980B2;
+    }
+
+    /* On mouse-over, add a grey background color */
+    .container:hover input ~ .checkmark {
+        background-color: #fff;
+        border: solid 2px #4980B2;
+        color: #4980B2
+    }
+
+    /* When the checkbox is checked, add a blue background */
+    .checkbox_input input:checked ~ .checkmark {
+        background-color: #fff;
+        border: solid 2px #4980B2;
+        color: #4980B2
+    }
+
+    /* Create the checkmark/indicator (hidden when not checked) */
+    .checkmark:after {
+        content: "";
+        position: absolute;
+        display: none;
+    }
+
+    /* Show the checkmark when checked */
+    .checkbox_input input:checked ~ .checkmark:after {
+        display: block;
+    }
+
+    /* Style the checkmark/indicator */
+    .checkbox_input .checkmark:after {
+        left: 6px;
+        top: 3px;
+        width: 5px;
+        height: 10px;
+        border: solid #4980B2;
+        border-width: 0 3px 3px 0;
+        -webkit-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        transform: rotate(45deg);
+    }
+    .parsley-errors-list{margin-top:23px !important;}
+</style>
+<div class="content">
+
+    <!-- Start Content-->
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card-box table-responsive" style="height:79vh">
+                    <div class="title_corp"><h3> المستخدمين / المستخدمين / إضافة </h3></div>
+                    <div class="subtitle_corp">تمكنك هذه الصفحة من إضافة مستخدم جديد</div>
+                    <div class="hr_60"></div>
+                    <div class="hr_80"></div>
+                    <div class="corp_page " style=" padding-top: 20px;">
+                        <div class="page_content">
+
+                            <form id="form_validation" action="/CasUser/Create" enctype="multipart/form-data" method="post" data-parsley-validate="" novalidate="">
+
+                                @Html.AntiForgeryToken()
+                                <div class="form-horizontal" style="min-height:70%">
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-12" style="float:right;">
+                                            <div class="form-group row">
+                                                <div class="col-md-4 padding_left_none">
+                                                    <label>رقم المستخدم<label id="asterisk">*</label></label>
+                                                </div>
+                                                <div class="col-md-4 padding_right_none">
+                                                    @Html.TextBoxFor(model => model.CR_Cas_User_Information_Id,
+                                                   htmlAttributes: new { @class = "form-control ", style = "float:right;", onpaste = "return false;", maxlength = "10", oninput = "this.value=this.value.replace(/[^0-9]/g,'')", required = "required" })
+                                                    <div id="textErr">@ViewBag.UserID</div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-12" style="float:right;">
+                                            <div class="form-group row">
+                                                <div class="col-md-4 padding_left_none">
+                                                    <label>إسم المستخدم عربي<label id="asterisk">*</label></label>
+                                                </div>
+                                                <div class="col-md-8 padding_right_none">
+                                                    @Html.TextBoxFor(model => model.CR_Cas_User_Information_Ar_Name,
+                                                   htmlAttributes: new { @class = "form-control ", style = "float:right;", onpaste = "return false;", onkeypress = "return CheckArabicCharactersOnly(event);", maxlength = "50",required="required" })
+                                                    <div><span id="textErr">@ViewBag.UserArName</span></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-6 col-md-12" style="float:right;">
+                                            <div class="form-group row">
+                                                <div class="col-md-4 padding_left_none">
+                                                    <label>إسم المستخدم إنجليزي<label id="asterisk">*</label></label>
+                                                </div>
+                                                <div class="col-md-8 padding_right_none">
+                                                    @Html.TextBoxFor(model => model.CR_Cas_User_Information_En_Name,
+                                                   htmlAttributes: new { @class = "form-control ", style = "float:right;", onpaste = "return false;", oninput = "this.value=this.value.replace(/[^a-zA-Z0-9 àâäèéêëîïôœùûüÿçÀÂÄÈÉÊËÎÏÔŒÙÛÜŸÇ]/g,'')", maxlength = "50", required = "required" })
+                                                    <div><span id="textErr">@ViewBag.UserEnName</span></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-12" style="float:right;">
+                                            <div class="form-group row">
+                                                <div class="col-md-6 padding_left_none">
+                                                    <label>رقم الجوال</label>
+                                                </div>
+                                                <div class="col-md-6 padding_right_none">
+                                                    @Html.TextBoxFor(model => model.CR_Cas_User_Information_Mobile,
+                                                   htmlAttributes: new { @class = "form-control ", style = "float:right;", onpaste = "return false;", maxlength = "15", oninput = "this.value=this.value.replace(/[^0-9]/g,'')" })
+                                                    <div><span id="textErr"></span></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-12" style="float:right;">
+                                            <div class="form-group row">
+                                                <div class="col-md-6 padding_left_none">
+                                                    <label>البريد الإلكتروني</label>
+                                                </div>
+                                                <div class="col-md-6 padding_right_none">
+                                                    @Html.TextBoxFor(model => model.CR_Cas_User_Information_Emaile,
+                                                   htmlAttributes: new { @class = "form-control ", style = "float:right;", maxlength = "30" })
+                                                    <div><span id="textErr"></span></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-12" style="float:right;">
+                                            <div class="form-group row">
+                                                <div class="col-md-6 padding_left_none">
+                                                    <label>صلاحية الإدارة</label>
+                                                </div>
+                                                <div class="col-md-6 padding_right_none">
+                                                    @Html.CheckBox("CR_Cas_User_Information_Auth_System", new { htmlAttributes = new { @class = "form-control" }, style = "width:25px;height:25px;" })
+                                                    <div><span id="textErr"></span></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-12" style="float:right;" hidden>
+                                            <div class="form-group row">
+                                                <div class="col-md-6 padding_left_none">
+                                                    <label>صلاحية الفروع</label>
+                                                </div>
+                                                <div class="col-md-6 padding_right_none">
+                                                    @Html.CheckBox("CR_Cas_User_Information_Auth_Branch", new { @onclick = "hideTable();", htmlAttributes = new { @class = "form-control" }, style = "width:25px;height:25px;" })
+                                                    <div><span id="textErr"></span></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-12" style="float:right;">
+                                            <div class="form-group row">
+                                                <div class="col-md-6 padding_left_none">
+                                                    <label>صلاحية الملاك</label>
+                                                </div>
+                                                <div class="col-md-6 padding_right_none">
+                                                    @Html.CheckBox("CR_Cas_User_Information_Auth_Owners", new { htmlAttributes = new { @class = "form-control" }, style = "width:25px;height:25px;" })
+                                                    <div><span id="textErr"></span></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                        <div class="row">
+                                            <div class="col-md-3 input3" style=" float:right">
+                                                @*<input type="file" name="UserSignatureFile" class="form-control " style="float:right;width:100%; object-fit: fill;"
+                    accept="image/*" id="UserSignatureFile" onchange="LoadUserSignature(event)" />*@
+                                                <div class="input-group">
+                                                    <span class="input-group-btn" style="width:100%">
+                                                        <span class="btn btn-primary" onclick="$(this).parent().find('input[type=file]').click();" style="width:100%;height:35px;width:100%;line-height:20px;"> التوقيع </span>
+                                                        <input name="UserSignatureFile" type="file" class="form-control " style="display: none; float: right; width: 100%; object-fit: fill; "
+                                                               accept="image/*" id="UserSignatureFile" onchange="LoadUserSignature(event)">
+                                                    </span>
+                                                </div>
+                                                <div><span id="textErr">@ViewBag.UserSign</span></div>
+                                            </div>
+
+                                            <div class="col-md-2" style="float:right;">
+                                                @if (ViewBag.UserSignPath != null)
+                                                {
+                                                    <img src="@ViewBag.UserSignPath" id="UserSignature" class="zoom" width="120" height="80" style="margin-top: -14px; float: right; margin-right: 0; width: 120px; height: 80px; position: relative; object-fit: cover; border: solid 1px #e7e7e7" />
+                                                    <input type="text" id="UserSignaturePath" name="CarImage" value="@ViewBag.UserSignPath" hidden />
+                                                }
+                                                else
+                                                {
+                                                    <img src="" id="UserSignature" class="zoom" width="120" height="80" style="display:none;margin-top: -14px; float: right; margin-right: 0; width: 120px; height: 80px; position: relative; object-fit: cover; border: solid 1px #e7e7e7" />
+                                                    <input type="text" id="UserSignaturePath" name="CarImage" value="@ViewBag.UserSignPath" hidden />
+                                                }
+
+                                            </div>
+                                            <div class="col-md-3 input3" style=" float:right">
+                                                @*<input type="file" name="UserImgFile" class="form-control " style="float:right;width:100%; object-fit: fill;"
+                    accept="image/*" id="UserImgFile" onchange="LoadUserImg(event)" />*@
+                                                <div class="input-group">
+                                                    <span class="input-group-btn" style="width:100%">
+                                                        <span class="btn btn-primary" onclick="$(this).parent().find('input[type=file]').click();" style="width:100%;height:35px;width:100%;line-height:20px;"> الصورة </span>
+                                                        <input name="UserImgFile" type="file" class="form-control " style="display:none;float:right;width:100%; object-fit: fill;"
+                                                               accept="image/*" id="UserImgFile" onchange="LoadUserImg(event)">
+                                                    </span>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-2" style="float:right;">
+                                                @if (ViewBag.UserImgPath != null)
+                                                {
+                                                    <img src="@ViewBag.UserImgPath" id="UserImg" class="zoom" width="120" height="80" style="margin-top: -14px; float: right; margin-right: 0; width: 120px; height: 80px; position: relative; object-fit: cover; border: solid 1px #e7e7e7" />
+                                                    <input type="text" id="UserImgagePath" name="CarImage" value="@ViewBag.UserImgPath" hidden />
+                                                }
+                                                else
+                                                {
+                                                    <img src="" id="UserImg" class="zoom" width="120" height="80" style="display: none; margin-top: -14px; float: right; margin-right: 0; width: 120px; height: 80px; position: relative; object-fit: cover; border: solid 1px #e7e7e7 " />
+                                                    <input type="text" id="UserImgagePath" name="CarImage" value="@ViewBag.UserImgPath" hidden />
+                                                }
+
+                                            </div>
+                                        </div>
+
+                                        @{
+                                            Html.RenderAction("BranchList");
+                                        }
+
+
+
+                                    </div>
+
+                                    <div class="row" style="margin-top:25px">
+
+                                        <div class="col-md-6 col-50">
+                                            <input type="submit" name="add" class="btn btn-primary waves-effect" id="add_btn" value="حفظ">
+                                        </div>
+                                        <div class="col-md-6 col-50">
+                                            <a href="/CasUser/Index/" class="btn btn-primary waves-effect" style="float:left">انهاء</a>
+                                        </div>
+                                    </div>
+                                </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        window.addEventListener("load", function () {
+
+            if ('@TempData["TempModel"]'=="Added") {
+                toastr.success("تم الحفظ بنجاح");
+            }
+
+        });
+    </script>
+
+    @*<script>
+        function hideTable() {
+            var checkBox = document.getElementById("CR_Cas_User_Information_Auth_Branch");
+            if (checkBox.checked == true) {
+                document.getElementById("BranchTable").style.display = "block";
+            } else {
+                document.getElementById("BranchTable").style.display = "none";
+            }
+            UncheckBranchTable();
+        }
+    </script>*@
+</div>

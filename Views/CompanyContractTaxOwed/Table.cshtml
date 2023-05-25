@@ -1,0 +1,153 @@
+﻿@model IEnumerable<RentCar.Models.CR_Cas_Account_Bnan_Owed>
+
+<div class="table-responsive" style="width:99%; height:300px; overflow:auto;border: 1px solid #4A80B3;">
+    <div id="dtBasicExample_print">
+        <table class="table table-bordered table-striped " id="myTable">
+            <thead>
+                <tr>
+                    <th width="20%">
+                        رقم العقد
+                    </th>
+                    <th width="10%">
+                        تاريخ الإستحقاق
+                    </th>
+                    <th width="10%">
+                        قيمة العقد
+                    </th>
+                    <th width="10%">
+                        قيمة الإجار اليومي
+                    </th>
+                    <th width="10%">
+                        مستحقات بنان قبل الخصم
+                    </th>
+                    <th width="10%">
+                        مستحقات بنان بعد الخصم
+                    </th>
+                    <th width="10%">
+                        القيمة المضافة
+                    </th>
+                    <th width="10%">
+                        إجمالي خدمة العقد
+                    </th>
+                    <th width="10%">
+                        الحالة
+                    </th>
+                    <th width="10%">
+                        تاريخ التسديد
+                    </th>
+                    <th width="10%">
+                        رقم التسديد
+                    </th>
+                </tr>
+            </thead>
+            <tbody id="tbl">
+                @foreach (var item in Model)
+                {
+
+                    if (item.CR_Cas_Account_Bnan_Owed_Is_Paid == true)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CR_Cas_Account_Bnan_Owed_Contract_No)
+                            </td>
+                            <td>
+                                @if (item.CR_Cas_Account_Bnan_Owed_Due_Date != null)
+                                {
+                                    @item.CR_Cas_Account_Bnan_Owed_Due_Date.Value.ToString("yyyy/MM/dd")
+                                }
+
+                            </td>
+                            <td>
+                                @item.CR_Cas_Account_Bnan_Owed_Value
+                            </td>
+                            <td>
+                                @item.CR_Cas_Account_Bnan_Owed_Daily_Value
+                            </td>
+                            <td>
+                                @item.CR_Cas_Account_Bnan_Owed_Before_Due_Amount
+                            </td>
+
+                            <td>
+                                @item.CR_Cas_Account_Bnan_Owed_After_Due_Amount
+                            </td>
+                            <td>
+                                @item.CR_Cas_Account_Bnan_Owed_Tax_Value
+                            </td>
+                            <td>
+                                @item.CR_Cas_Account_Bnan_Owed_Due_Amount_After_Tax_Value
+                            </td>
+
+                            <td>
+                               
+                                    <label>مسدد</label>
+                               
+                            </td>
+                            <td>
+                                @if (item.CR_Cas_Account_Bnan_Owed_Pay_Date != null)
+                                {
+                                    @item.CR_Cas_Account_Bnan_Owed_Pay_Date.Value.ToString("yyyy/MM/dd")
+                                }
+
+                            </td>
+                            <td>
+                                @item.CR_Cas_Account_Bnan_Owed_Pay_No
+                            </td>
+                        </tr>
+                    }
+                    else
+                    {
+                        <tr>
+                            <td style="color:red">
+                                @Html.DisplayFor(modelItem => item.CR_Cas_Account_Bnan_Owed_Contract_No)
+                            </td>
+                            <td style="color:red">
+                                @if (item.CR_Cas_Account_Bnan_Owed_Due_Date != null)
+                                {
+                                    @item.CR_Cas_Account_Bnan_Owed_Due_Date.Value.ToString("yyyy/MM/dd")
+                                }
+
+                            </td>
+                            <td style="color:red">
+                                @item.CR_Cas_Account_Bnan_Owed_Value
+                            </td>
+                            <td style="color:red">
+                                @item.CR_Cas_Account_Bnan_Owed_Daily_Value
+                            </td>
+                            <td style="color:red">
+                                @item.CR_Cas_Account_Bnan_Owed_Before_Due_Amount
+                            </td>
+
+                            <td style="color:red">
+                                @item.CR_Cas_Account_Bnan_Owed_After_Due_Amount
+                            </td>
+                            <td style="color:red">
+                                @item.CR_Cas_Account_Bnan_Owed_Tax_Value
+                            </td>
+                            <td style="color:red">
+                                @item.CR_Cas_Account_Bnan_Owed_Due_Amount_After_Tax_Value
+                            </td>
+
+                            <td style="color:red">
+                                
+                                    <label>غير مسدد</label>
+                              
+                            </td>
+                            <td style="color:red">
+                                @if (item.CR_Cas_Account_Bnan_Owed_Pay_Date != null)
+                                {
+                                    @item.CR_Cas_Account_Bnan_Owed_Pay_Date.Value.ToString("yyyy/MM/dd")
+                                }
+
+                            </td>
+                            <td>
+                                @item.CR_Cas_Account_Bnan_Owed_Pay_No
+                            </td>
+                        </tr>
+                    }
+
+                }
+            </tbody>
+        </table>
+    </div>
+
+</div>

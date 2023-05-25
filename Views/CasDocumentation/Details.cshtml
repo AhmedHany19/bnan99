@@ -1,0 +1,99 @@
+﻿@model RentCar.Models.CR_Cas_Sup_Branch_Documentation
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_CASLayout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>CR_Cas_Sup_Branch_Documentation</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CR_Cas_Sup_Branch_Documentation_No)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CR_Cas_Sup_Branch_Documentation_No)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CR_Cas_Sup_Branch_Documentation_Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CR_Cas_Sup_Branch_Documentation_Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CR_Cas_Sup_Branch_Documentation_Start_Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CR_Cas_Sup_Branch_Documentation_Start_Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CR_Cas_Sup_Branch_Documentation_End_Date)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CR_Cas_Sup_Branch_Documentation_End_Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CR_Cas_Sup_Branch_Documentation_Activation)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CR_Cas_Sup_Branch_Documentation_Activation)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CR_Cas_Sup_Branch_Documentation_Credit_Limit)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CR_Cas_Sup_Branch_Documentation_Credit_Limit)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CR_Cas_Sup_Branch_Documentation_About_To_Expire)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CR_Cas_Sup_Branch_Documentation_About_To_Expire)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CR_Cas_Sup_Branch_Documentation_Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CR_Cas_Sup_Branch_Documentation_Status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CR_Cas_Sup_Procedures_Type)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CR_Cas_Sup_Procedures_Type)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CR_Mas_Com_Lessor.CR_Mas_Com_Lessor_Logo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CR_Mas_Com_Lessor.CR_Mas_Com_Lessor_Logo)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

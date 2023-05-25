@@ -1,0 +1,182 @@
+﻿@model IEnumerable<RentCar.Models.CR_Cas_Contract_Basic>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_CASLayout.cshtml";
+}
+<div class="content">
+
+    
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-12">
+                    <div class="card-box table-responsive" style="height:79vh">
+                    <div class="title_corp"><h3> التقارير/مؤشر إحصائيات العقود</h3></div>
+                    <div class="subtitle_corp">
+                        في هذه الصفحة يمكن إستعراض المؤشرات الإحصائية للعقود
+                    </div>
+
+                    <div class="hr_60"></div>
+                    <div class="hr_80"></div>
+                    <div class="corp_page" style=" float: left; width: 100%">
+                        <div class="page_content col-md-12">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <ul style="margin-top: 33px;">
+                                        <li class="woo-products">
+                                            <span class="stepli"><a href="javascript:GetSt();">توزيع العقود حسب حالة العقود  </a></span>
+                                        </li>
+                                        <li class="woo-products">
+                                            <span class="stepli"><a href="javascript:GetRegion();">توزيع العقود حسب المناطق  </a></span>
+                                        </li>
+                                        <li class="woo-products">
+                                            <span class="stepli"><a href="javascript:GetCity();">توزيع العقود حسب المدينة  </a></span>
+                                        </li>
+                                        <li class="woo-products">
+                                            <span class="stepli"><a href="javascript:GetBranch();">توزيع العقود حسب الفروع  </a></span>
+                                        </li>
+                                        <li class="woo-products">
+                                            <span class="stepli"> <a href="javascript:GetDays();">توزيع العقود حسب الأيام  </a></span>
+                                        </li>
+                                        <li class="woo-products">
+                                            <span class="stepli"><a href="javascript:GetPeriod();">توزيع العقود حسب المدة </a></span>
+                                        </li>
+                                        <li class="woo-products">
+                                            <span class="stepli"><a href="javascript:GetAge();">توزيع العقود حسب العمر </a></span>
+                                        </li>
+                                        <li class="woo-products">
+                                            <span class="stepli"><a href="javascript:GetKm();">توزيع العقود حسب معدل المسافة المقطوعة باليوم </a></span>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <div id="Stat" class="col-md-8">
+                                    @{
+                                        Html.RenderAction("PartialContractStatus");
+                                    }
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+
+
+        </div> 
+
+    </div> 
+   
+    
+
+</div>
+
+
+<script>
+        function GetSt() {
+           $.ajax({
+            url: '@Url.Action("PartialContractStatus", "CasContractStat")',
+            type: "GET",
+            data: {  },
+            success: function (result) {
+                $('#Stat').html(result);
+            }
+        });
+
+        }
+</script>
+
+
+    <script>
+        function GetRegion() {
+           $.ajax({
+            url: '@Url.Action("PartialContractStat", "CasContractStat")',
+            type: "GET",
+            data: {  },
+            success: function (result) {
+                $('#Stat').html(result);
+            }
+        });
+
+        }
+    </script>
+
+
+
+
+
+    <script>
+
+    function GetCity() {
+           $.ajax({
+                url: '@Url.Action("PartialContractStatCity", "CasContractStat")',
+                type: "GET",
+                data: {  },
+               success: function (result) {
+                   $('#Stat').html(result);
+                }
+            });
+
+        }
+
+
+        function GetBranch() {
+           $.ajax({
+                url: '@Url.Action("PartialContractStatBranch", "CasContractStat")',
+                type: "GET",
+                data: {  },
+               success: function (result) {
+                   $('#Stat').html(result);
+                }
+            });
+
+        }
+
+        function GetDays() {
+            $.ajax({
+                url: '@Url.Action("PartialContractStatDays", "CasContractStat")',
+                type: "GET",
+                data: {},
+                success: function (result) {
+                    $('#Stat').html(result);
+                }
+            });
+
+        }
+
+        function GetPeriod() {
+            $.ajax({
+                url: '@Url.Action("PartialContractStatPeriod", "CasContractStat")',
+                type: "GET",
+                data: {},
+                success: function (result) {
+                    $('#Stat').html(result);
+                }
+            });
+
+        }
+
+        function GetKm() {
+            $.ajax({
+                url: '@Url.Action("PartialContractStatKm", "CasContractStat")',
+                type: "GET",
+                data: {},
+                success: function (result) {
+                    $('#Stat').html(result);
+                }
+            });
+
+        }
+        function GetAge() {
+            $.ajax({
+                url: '@Url.Action("PartialContractStatAge", "CasContractStat")',
+                type: "GET",
+                data: {},
+                success: function (result) {
+                    $('#Stat').html(result);
+                }
+            });
+
+        }
+    </script>

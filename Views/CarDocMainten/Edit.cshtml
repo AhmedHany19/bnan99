@@ -1,0 +1,221 @@
+﻿@model RentCar.Models.CR_Cas_Sup_Car_Doc_Mainten
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_CASLayout.cshtml";
+}
+<div class="content">
+
+    <!-- Start Content-->
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card-box table-responsive" style="height:79vh">
+                    <div class="title_corp"><h3> السيارات / الوثائق / تعديل</h3></div>
+                    <div class="subtitle_corp">
+                        تمكنك هذه الصفحة من  تعديل صيانة السيارة
+                    </div>
+                    <div class="hr_60"></div>
+                    <div class="hr_80"></div>
+                    <div class="corp_page " style="float:left;width:100%">
+                        @using (Html.BeginForm())
+                        {
+                            @Html.AntiForgeryToken()
+
+                            <div class="form-horizontal" style="margin-top:15px;min-height:70%">
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+                                @Html.HiddenFor(model => model.CR_Cas_Sup_Car_Doc_Mainten_Code, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.HiddenFor(model => model.CR_Cas_Sup_Car_Doc_Mainten_Activation)
+                                @Html.HiddenFor(model => model.CR_Cas_Sup_Car_Doc_Mainten_Limit_KM, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.HiddenFor(model => model.CR_Cas_Sup_Car_Doc_Mainten_About_To_Expire, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.HiddenFor(model => model.CR_Cas_Sup_Car_Doc_Mainten_Default_KM, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.HiddenFor(model => model.CR_Cas_Sup_Car_Doc_Mainten_Status, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.HiddenFor(model => model.CR_Cas_Sup_Car_Doc_Mainten_Type, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.HiddenFor(model => model.CR_Cas_Sup_Car_Doc_Mainten_Lessor_Code, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.HiddenFor(model => model.CR_Cas_Sup_Car_Doc_Mainten_Branch_Code, new { htmlAttributes = new { @class = "form-control" } })
+
+
+
+                                <div class="row mb-2">
+                                    <div class="col-lg-8 col-md-12" style="margin-top:0px;">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <label>نوع الصيانة</label>
+                                            </div>
+                                            <div class="col-md-5">
+                                                @Html.EditorFor(model => model.CR_Mas_Sup_Procedures.CR_Mas_Sup_Procedures_Ar_Name, new { htmlAttributes = new { @class = "form-control", @Readonly = "true" } })
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-lg-8 col-md-12" style="margin-top:0px;">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <label>الرقم التسلسلي</label>
+                                            </div>
+                                            <div class="col-md-5">
+                                                @Html.EditorFor(model => model.CR_Cas_Sup_Car_Doc_Mainten_Serail_No, new { htmlAttributes = new { @class = "form-control", @Readonly = "true" } })
+                                                @Html.ValidationMessageFor(model => model.CR_Cas_Sup_Car_Doc_Mainten_Serail_No, "", new { @class = "text-danger" })
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-lg-8 col-md-12" style="margin-top:0px;">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <label>السيارة</label>
+                                            </div>
+                                            <div class="col-md-8">
+                                                @Html.EditorFor(model => model.CR_Cas_Sup_Car_Information.CR_Cas_Sup_Car_Collect_Ar_Name, new { htmlAttributes = new { @class = "form-control", @Readonly = "true" } })
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-2">
+                                    <div class="col-lg-8 col-md-12" style="margin-top:0px;width:57%">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <label>رقم الوثيقة</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                @Html.EditorFor(model => model.CR_Cas_Sup_Car_Doc_Mainten_No, new { htmlAttributes = new { @class = "form-control", @style = "width:57%" } })
+                                                @Html.ValidationMessageFor(model => model.CR_Cas_Sup_Car_Doc_Mainten_No, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-lg-4 col-md-12 " style="margin-top:0px;">
+                                        <div class="row">
+                                            <div class="col-md-6 label6">
+                                                <label>تاريخه</label>
+                                            </div>
+                                            <div class="col-md-6 input6">
+                                                <input class="form-control text-box single-line hijri-date-input2" data-val="true" data-val-date="The field CR_Cas_Sup_Branch_Documentation_Date must be a date."
+                                                       id="CR_Cas_Sup_Car_Doc_Mainten_Date" name="CR_Cas_Sup_Car_Doc_Mainten_Date" type="text" value="@ViewBag.DocDate">
+                                                @Html.ValidationMessageFor(model => model.CR_Cas_Sup_Car_Doc_Mainten_Date, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-lg-4 col-md-12 " style="margin-top:0px;">
+                                        <div class="row">
+                                            <div class="col-md-6 label6">
+                                                <label>بدايته</label>
+                                            </div>
+                                            <div class="col-md-6 input6">
+                                                <input class="form-control text-box single-line hijri-date-input2" data-val="true" data-val-date="The field CR_Cas_Sup_Branch_Documentation_Date must be a date."
+                                                       id="CR_Cas_Sup_Car_Doc_Mainten_Start_Date" name="CR_Cas_Sup_Car_Doc_Mainten_Start_Date" type="text" value="@ViewBag.StartDate">
+                                                @Html.ValidationMessageFor(model => model.CR_Cas_Sup_Car_Doc_Mainten_Start_Date, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-12 text-center " style="
+                                                                                justify-content: center;
+                                                                                margin: auto;
+                                                                                display: flex;
+                                                                                padding: 0;
+                                                                                margin: 0;
+                                                                             ">
+                                        <div class="row">
+                                            <div class="col-md-6 label6">
+                                                <label>نهايته</label>
+                                            </div>
+                                            <div class="col-md-6 input6">
+                                                <input class="form-control text-box single-line hijri-date-input2" data-val="true" data-val-date="The field CR_Cas_Sup_Branch_Documentation_Date must be a date."
+                                                       id="CR_Cas_Sup_Car_Doc_Mainten_End_Date" name="CR_Cas_Sup_Car_Doc_Mainten_End_Date" type="text" value="@ViewBag.EndDate">
+                                                @Html.ValidationMessageFor(model => model.CR_Cas_Sup_Car_Doc_Mainten_End_Date, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 " style="margin-top:0px;">
+                                        <div class="row">
+                                            <div class="col-lg-2 col-md-12">
+                                                <label>الملاحظات</label>
+                                            </div>
+                                            <div class="col-lg-4 col-md-12">
+                                                <input type="text" id="Reasons" name="Reasons" class="form-control" style="width: 567px" />
+                                                @Html.ValidationMessageFor(model => model.CR_Cas_Sup_Car_Doc_Mainten_Serail_No, "", new { @class = "text-danger" })
+                                            </div>
+                                            <div class="col-lg-4 col-md-12">
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                @if (ViewBag.st == "A")
+                                {
+                                    <div class="col-md-6 col-50" style="margin-top:20px;margin-bottom:10px;">
+                                        <input type="submit" id="Save" name="Save" value="حفظ" class="btn btn-primary waves-effect" disabled style="cursor:no-drop" />
+                                        <input type="submit" id="Delete" name="Delete" value="حذف" class="btn btn-primary waves-effect" style="margin-right: 10px;" />
+                                        <a href="/CarDocMainten/Index/" class="btn btn-primary waves-effect" style="float:left">انهاء</a>
+
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="col-md-6 col-50" style="margin-top:20px;margin-bottom:10px;">
+                                        <input type="submit" id="Save" name="Save" value="حفظ" class="btn btn-primary waves-effect" />
+                                        <input type="submit" id="Delete" name="Delete" value="حذف" class="btn btn-primary waves-effect" disabled style="cursor:no-drop;margin-right:10px;" />
+                                        <a href="/CarDocMainten/Index/" class="btn btn-primary waves-effect" style="margin-right:10px">انهاء</a>
+
+                                    </div>
+                                }
+
+
+
+                                <div class="col-md-2 col-50" style="margin-top:20px;margin-bottom:10px;">
+                                </div>
+                            </div>
+                        }
+
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<style>
+    @@media (min-width: 992px) {
+        .col-lg-2 {
+            -ms-flex: 0 0 16.666667%;
+            flex: 0 0 16.666667%;
+            max-width: 12.766667%;
+        }
+    }
+
+    label {
+        text-align: center
+    }
+</style>
+
+
+<script type="text/javascript">
+        window.addEventListener("load", function () {
+
+            if ('@TempData["TempModel"]'!="") {
+                toastr.success("تم الحفظ بنجاح");
+            }
+
+        });
+</script>

@@ -1,0 +1,151 @@
+﻿@model IEnumerable<RentCar.Models.CR_Mas_Sup_Service_Fee_Bnan>
+<link href="~/Bootstrap_Arabic/bootstrap.min.css" rel="stylesheet" />
+<link href="~/Bootstrap_Arabic/bootstrap-big-grid.min.css" rel="stylesheet" />
+<link href="~/Bootstrap_Arabic/jquery.dataTables.min.css" type="text/css" rel="stylesheet" />
+<link href="~/Bootstrap_Arabic/font-awesome.css" type="text/css" rel="stylesheet" />
+<script src="~/Bootstrap_Arabic/jquery-v1.11.2.js"></script>
+<script src="~/Bootstrap_Arabic/bootstrap.min.js"></script>
+<script src="~/Bootstrap_Arabic/bootstrap.min.js"></script>
+<script src="~/Bootstrap_Arabic/jquery.dataTables.min.js"></script>
+<script src="https://res.cloudinary.com/dxfq3iotg/raw/upload/v1569818907/jquery.table2excel.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+    #inputtext {
+        width: 250px;
+        height: 30px;
+        margin-right: 293px;
+        margin-left: -5px;
+        float: left;
+        margin-top: 5px;
+        border-radius: unset;
+        border-color: #4A80B3;
+    }
+
+   
+    td {
+        font-family: 'Times New Roman';
+        font-size: 14px;
+        padding: 5px 4px !important;
+        font-weight: 100;
+        color: #73A0C1;
+    }
+
+    th {
+        font-family: 'Times New Roman';
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    .title_corp {
+        margin-top: -15px;
+    }
+
+    .table thead {
+        overflow-y: scroll;
+        flex-grow: 1;
+    }
+
+    .table tr a {
+        text-decoration: none;
+        color: black !important;
+    }
+
+    .table td {
+        border-color: #4A80B3;
+        color: #083555;
+    }
+
+    .table thead th {
+        color: #124f77;
+        border-color: #4A80B3;
+        text-align: center;
+        background: #D1EAFA;
+        position: sticky;
+        top: 0;
+    }
+
+    .title_corp {
+        font-family: 'Times New Roman';
+        font-size: 25px;
+    }
+
+    .subtitle_corp {
+        padding-top: 3px !important;
+        font-family: 'Times New Roman' !important;
+        color: #083555;
+    }
+</style>
+<div class="responsive-table-plugin">
+    <div class="table-rep-plugin">
+        <div class="table-responsive" style="width:99%; height:220px; overflow:auto;border: 1px solid #4A80B3;">
+            <div id="dtBasicExample_print">
+                <table class="table table-bordered table-striped " id="myTable">
+                    <thead>
+                        <tr>
+                            <th>
+                               نوع الخدمة
+                            </th>
+                            <th>
+                                حد قيمة العقد
+                            </th>
+                            <th hidden>
+                                @Html.DisplayNameFor(model => model.CR_Mas_Sup_Service_Fee_Bnan_En_Name)
+                            </th>
+                            <th hidden>
+                                @Html.DisplayNameFor(model => model.CR_Mas_Sup_Service_Fee_Bnan_Fr_Name)
+                            </th>
+                            <th >
+                                نسبة رسوم الخدمة
+                            </th>
+                            <th>
+                                قيمة رسوم الخدمة
+                            </th>
+                            <th hidden>
+                                @Html.DisplayNameFor(model => model.CR_Mas_Sup_Service_Fee_Bnan_Status)
+                            </th>
+                            <th hidden>
+                                @Html.DisplayNameFor(model => model.CR_Mas_Sup_Service_Fee_Bnan_Resons)
+                            </th>
+                          
+                        </tr>
+                    </thead>
+                    <tbody id="tbl">
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.CR_Mas_Sup_Service_Fee_Bnan_Ar_Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.CR_Mas_Sup_Service_Fee_Bnan_Price)
+                                </td>
+                                
+                                <td hidden>
+                                    @Html.DisplayFor(modelItem => item.CR_Mas_Sup_Service_Fee_Bnan_En_Name)
+                                </td>
+                                <td hidden>
+                                    @Html.DisplayFor(modelItem => item.CR_Mas_Sup_Service_Fee_Bnan_Fr_Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.CR_Mas_Sup_Service_Fee_Bnan_Percentage)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.CR_Mas_Sup_Service_Fee_Bnan_Value)
+                                </td>
+                                <td hidden>
+                                    @Html.DisplayFor(modelItem => item.CR_Mas_Sup_Service_Fee_Bnan_Status)
+                                </td>
+                                <td hidden>
+                                    @Html.DisplayFor(modelItem => item.CR_Mas_Sup_Service_Fee_Bnan_Resons)
+                                </td>
+
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

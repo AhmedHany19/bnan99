@@ -1,0 +1,277 @@
+﻿@model IEnumerable<RentCar.Models.CR_Cas_Account_Bnan_Owed>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/Bootstrap_Arabic/bootstrap.min.css" rel="stylesheet" />
+<link href="~/Bootstrap_Arabic/bootstrap-big-grid.min.css" rel="stylesheet" />
+<link href="~/Bootstrap_Arabic/jquery.dataTables.min.css" type="text/css" rel="stylesheet" />
+<link href="~/Bootstrap_Arabic/font-awesome.css" type="text/css" rel="stylesheet" />
+<script src="~/Bootstrap_Arabic/jquery-v1.11.2.js"></script>
+<script src="~/Bootstrap_Arabic/bootstrap.min.js"></script>
+<script src="~/Bootstrap_Arabic/bootstrap.min.js"></script>
+<script src="~/Bootstrap_Arabic/jquery.dataTables.min.js"></script>
+<script src="https://res.cloudinary.com/dxfq3iotg/raw/upload/v1569818907/jquery.table2excel.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+    #inputtext {
+        width: 250px;
+        height: 30px;
+        margin-right: 293px;
+        margin-left: -5px;
+        float: left;
+        margin-top: 5px;
+        border-color: #4A80B3;
+        border-radius: unset;
+    }
+
+    #SrchImg {
+        float: left;
+        margin-top: -5px;
+        margin-left: 0px;
+        margin-right: -35px;
+        position: relative;
+    }
+
+    td {
+        font-family: 'Times New Roman';
+        font-size: 14px;
+        padding: 5px 4px !important;
+        font-weight: 100;
+        color: #73A0C1;
+    }
+
+    th {
+        font-family: 'Times New Roman';
+        font-size: 16px;
+        font-weight: bold;
+        border-color: #4A80B3;
+        cursor: pointer;
+    }
+
+    .title_corp {
+        margin-top: -15px;
+    }
+
+    .table thead {
+        overflow-y: scroll;
+        flex-grow: 1;
+        border-color: #4A80B3;
+    }
+
+    .table tr a {
+        text-decoration: none;
+        color: black !important;
+    }
+
+    .table td {
+        border-color: #4A80B3;
+        color: #083555;
+    }
+
+    .table thead th {
+        color: #124f77;
+        border-color: #4A80B3;
+        text-align: center;
+        background: #D1EAFA;
+        position: sticky;
+        top: 0;
+    }
+
+    .title_corp {
+        font-family: 'Times New Roman';
+        font-size: 25px;
+    }
+
+    .subtitle_corp {
+        padding-top: 3px !important;
+        font-family: 'Times New Roman' !important;
+        color: #083555;
+    }
+    label {
+        float: none
+    }
+
+    .radio_top {
+        float: left;
+        margin-right: 10px;
+        line-height: 0.8
+    }
+
+    .btn_form2 i {
+        width: 30px;
+        height: 30px;
+        line-height: 30px;
+        text-align: center;
+        color: #fff;
+        background: #4F7DB1;
+        float: right;
+        font-size: 20px;
+        margin-left: 10px;
+        text-align: center
+    }
+
+    .btn_form2 {
+        
+        color: #F3B161;
+        font-weight: bold;
+        
+        width: 30px;
+        height: 30px;
+        line-height: 30px;
+        text-align: center;
+        color: #fff;
+        background: #4F7DB1;
+        border: none;
+        float: right;
+        
+    }
+</style>
+<div class="corp_content">
+    <div class="title_corp">  العقود / تسديد مستحقات بنان /عرض البيانات </div>
+    <div class="subtitle_corp"> تمكنك الصفحة من البحث و الإطلاع على عقود الشركات و عرض المستحقات على الشركات التي تمت خلال الفترة المحددة المسددة و الغير مسددة</div>
+    <div class="hr_60"></div>
+    <div class="hr_80"></div>
+    <div class="corp_page">
+        <div class="page_content">
+            <form method="post">
+                <div class="form_bg">
+                    <div class="href_layout" style="margin-bottom:7px!important;">
+                        <a href="/Home/index" class="btn_form"><i class="fa fa-times" title="إغلاق"></i></a>
+
+                        <img src="~/images/srch.png" id="SrchImg" />
+                        <input class="form-control" type="text" id="inputtext" name="TxtSearch" placeholder="بحث..." />
+                        <script>
+                            $(document).ready(function () {
+                                $("#inputtext").on("keyup", function () {
+                                    var value = $(this).val().toLowerCase();
+                                    $("#tbl tr").filter(function () {
+                                        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                                    });
+                                });
+                            });
+                        </script>
+                    </div>
+                    <div>
+                        <div class="col-md-6" style="margin-top:10px;">
+                            <label class="label_form col-md-5" style="float:right">إسم الشركة</label>
+                            <input type="text" class="input_form col-md-6" id="CompanyName" value="@ViewBag.CompanyName" name="" style="float:right;width:55%" />
+                            <div class="texterr"></div>
+                        </div>
+                        <div class="col-md-6" style="margin-top:10px;">
+                            <label class="label_form col-md-5" style="float:right">رقم العقد</label>
+                            <input type="text" class="input_form col-md-6" id="ContractNo" value="@ViewBag.ContractNo" name="" style="float:right;width:55%" />
+                            <div class="texterr"></div>
+                        </div>
+                        <div class="col-md-6" style="margin-top:5px;">
+                            <label class="label_form col-md-5" style="float:right">رسوم الإشتراك</label>
+                            <input type="text" class="input_form col-md-6" id="ContractFees" value="@ViewBag.ContractFees" name="" style="float:right;width:55%" />
+                            <div class="texterr"></div>
+                        </div>
+                        <div class="col-md-6" style="margin-top:5px;">
+                            <label class="label_form col-md-5" style="float:right">نسبة الضريبة</label>
+                            <input type="text" class="input_form col-md-6" id="TaxPercentage" name="" value="@ViewBag.TaxPercentage" style="float:right;width:55%" />
+                            <div class="texterr"></div>
+                        </div>
+                        <div class="col-md-6" style="margin-top:5px;">
+                            <label class="label_form col-md-5" style="float:right">نسبة الخصم</label>
+                            <input type="text" class="input_form col-md-6" id="Discount" value="@ViewBag.Discount" style="float:right;width:55%" />
+                            <div class="texterr"></div>
+                        </div>
+                        <div class="col-md-6" style="margin-top:5px;">
+                            <label class="label_form col-md-5" style="float:right">نوع العقد</label>
+                            <input type="text" class="input_form col-md-6" id="ContractType" value="@ViewBag.ContractType" name="" style="float:right;width:55%" />
+                            <div class="texterr"></div>
+                        </div>
+
+
+                        <div class="col-md-6" style="margin-top:5px;">
+                            <label class="label_form col-md-5" style="float:right">إلى تاريخ</label>
+                            <input class="input_form text-box single-line" data-val="true" style="width:40%"
+                                   id="Edate" name="Edate" type="date" value="@ViewBag.Edate">
+                            
+                        </div>
+                        <div class="col-md-6" style="margin-top:5px;">
+                            <label class="label_form col-md-5" style="float:right">من تاريخ</label>
+                            <input class="input_form text-box single-line" data-val="true" style="width:40%"
+                                   id="Sdate" name="Sdate" type="date" value="@ViewBag.Sdate">
+                        </div>
+
+                    </div>
+                    
+                    <div class="row" style="width: 100%; min-height: 20px; margin-right: 0px;">
+
+                        <div class="col-md-5" style="float:left">
+                            <div class="">
+
+                                <div class="radio_top">
+                                    <input type="radio" id="NotPayed" name="Show" onclick="GetFilter()" style="float:right;margin-bottom:0px;margin-top:5px;margin-left:4px;width:13px;height:13px;">
+                                    <label for="javascript" style="float: left; margin-bottom: 0px; margin-top: 5px; font-size: 0.75rem">غير مسدد</label>
+                                </div>
+                                <div class="radio_top">
+                                    <input type="radio" id="Payed" name="Show" onclick="GetFilter()" style="float: right; margin-bottom: 0px; margin-top: 5px; margin-left: 4px; width: 13px; height: 13px;">
+                                    <label for="css" style="float: left; margin-bottom: 0px; margin-top: 5px; font-size: 0.75rem">مسدد</label>
+                                </div>
+                                <div class="radio_top">
+                                    <input type="radio" id="All" name="Show" onclick="GetFilter()" style="float: right; margin-bottom: 0px; margin-top: 5px; margin-left: 4px; width: 13px; height: 13px;">
+                                    <label for="css" style="float: left; margin-bottom: 0px; margin-top: 5px; font-size: 0.75rem">الكل</label>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div id="TableContract">
+                    @{
+                        Html.RenderAction("Table");
+                    }
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+
+        function GetFilter() {
+
+            var sd = document.getElementById('Sdate').value;
+            var ed = document.getElementById('Edate').value;
+            var Id = document.getElementById('ContractNo').value;
+
+            if (document.getElementById('Payed').checked) {
+                $.ajax({
+                url: '@Url.Action("Table", "CompanyContractTaxOwed")',
+                type: "POST",
+                    data: { type: "P", ID: Id, StartDate: sd, EndDate: ed },
+                    success: function (data) {
+
+                        $('#TableContract').html(data);
+                }
+                });
+            } else if (document.getElementById('NotPayed').checked) {
+
+                 $.ajax({
+                         url: '@Url.Action("Table", "CompanyContractTaxOwed")',
+                        type: "POST",
+                        data: { type: "NP", ID: Id, StartDate: sd, EndDate: ed },
+                        success: function (data) {
+                            $('#TableContract').html(data);
+                        }
+                });
+            }
+            else {
+                $.ajax({
+                     url: '@Url.Action("Table", "CompanyContractTaxOwed")',
+                    type: "POST",
+                        data: { type: "All", ID: Id, StartDate: sd, EndDate: ed },
+                        success: function (data) {
+                            $('#TableContract').html(data);
+                        }
+                });
+            }
+        }
+</script>

@@ -1,0 +1,178 @@
+﻿@model IEnumerable<RentCar.Models.CR_Cas_Sup_Bank>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_CASLayout.cshtml";
+}
+<style>
+    label {
+        float: none
+    }
+
+    .radio_top {
+        float: left;
+        margin-right: 10px;
+        line-height: 0.8
+    }
+</style>
+<div class="content">
+    <!-- Start Content-->
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-12">
+
+                <div class="card-box table-responsive" style="height:79vh">
+                    <div class="title_corp"><h3> الخدمات / بنوك / عرض البيانات </h3></div>
+                    <div class="subtitle_corp">تمكنك الصفحة من البحث و اضافة و تعديل بيانات الحسابات البنكية</div>
+                    <div class="hr_60"></div>
+                    <div class="hr_80"></div>
+                    <div class="corp_page">
+                        <div class="page_content">
+                            <form method="post">
+                                <div class="form_bg">
+                                    <div class="href_layout">
+                                        <a href="/CasHome/index" class="btn_form"><i class="fa fa-times" title="إغلاق"></i></a>
+                                        <a href="/CasSupBank/Create" class="btn_form"><i class="fa fa-plus" title="إضافة سجل جديد"></i></a>
+                                    </div>  
+                                    <div class="dataTables_filter">
+                                        <label class="label_search_input">
+                                            <img src="~/images/srch.png" id="SrchImg" />
+                                            بحث:<input class="form-control form_search_input" type="text" id="inputtext" name="TxtSearch" style="width:240px"/>
+                                        </label>
+                                    </div>
+                                   
+
+                                    <div class="row" style="width: 100%; min-height: 20px; height: 20px;">
+                                        <div class="col-md-7" style="float:right">
+
+                                        </div>
+                                        <div class="col-md-5" style="float:right">
+                                            <div class="">
+                                                <div class="radio_top">
+                                                    <input type="radio" id="ShowHolded" name="Show" onclick="LoadData();GetFilter()" style="float:right;margin-left:4px;width:13px;height:13px;">
+                                                    <label for="javascript" style="float: left; font-size: 0.75rem">موقوف</label>
+                                                </div>
+                                                <div class="radio_top">
+                                                    <input type="radio" id="ShowDeleted" name="Show" onclick="LoadData();GetFilter()" style="float:right;margin-left:4px;width:13px;height:13px;">
+                                                    <label for="javascript" style="float: left; font-size: 0.75rem">محذوف</label>
+                                                </div>
+                                                <div class="radio_top">
+                                                    <input type="radio" id="ShowActive" name="Show" onclick="LoadData();GetFilter()" style="float:right;margin-left:4px;width:13px;height:13px;">
+                                                    <label for="css" style="float: left; font-size: 0.75rem">نشط</label>
+                                                </div>
+                                                <div class="radio_top">
+                                                    <input type="radio" id="ShowAll" name="Show" onclick="LoadData();GetFilter()" style="float:right;margin-left:4px;width:13px;height:13px;">
+                                                    <label for="html" style="float: left; font-size: 0.75rem">الكل</label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div id="Table">
+                                        @{
+                                            Html.RenderAction("PartialIndex");
+                                        }
+
+                                    </div>
+
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        window.addEventListener("load", function () {
+
+            if ('@TempData["TempModel"]' == "Saved") {
+
+                toastr.success("تم التعديل بنجاح");
+            }
+            if ('@TempData["TempModel"]'=="Holded") {
+                toastr.success("تم التعطيل بنجاح");
+            }
+
+            if ('@TempData["TempModel"]'=="Deleted") {
+                toastr.success("تم الحذف بنجاح");
+            }
+
+            if ('@TempData["TempModel"]'=="Activated") {
+                toastr.success("تم التنشيط بنجاح");
+            }
+            if ('@TempData["TempModel"]' == "Error") {
+
+                toastr.warning("نأسف لعدم نجاح عملية التعديل, الرجاء التواصل مع المطور");
+            }
+
+
+        });
+
+
+
+
+
+        function GetFilter() {
+
+            if (document.getElementById('ShowDeleted').checked) {
+                $.ajax({
+                    url: '@Url.Action("PartialIndex", "CasSupBank")',
+                    type: "POST",
+                    data: { type: "D" },
+                    success: function (data) {
+                       // $('.spinner').css('display', 'block');
+                        $('#Table').html(data);
+                        $('#preloader').css('display', 'none');
+                    }
+                });
+            } else if (document.getElementById('ShowAll').checked) {
+
+                $.ajax({
+                    url: '@Url.Action("PartialIndex", "CasSupBank")',
+                    type: "POST",
+                    data: { type: "All" },
+                    success: function (data) {
+                       // $('.spinner').css('display', 'block');
+                        $('#Table').html(data);
+                        $('#preloader').css('display', 'none');
+                    }
+                });
+            }else if (document.getElementById('ShowHolded').checked) {
+
+                $.ajax({
+                    url: '@Url.Action("PartialIndex", "CasSupBank")',
+                    type: "POST",
+                    data: { type: "H" },
+                    success: function (data) {
+                        $('#Table').html(data);
+                        $('#preloader').css('display', 'none');
+                    }
+                });
+            } 
+            else {
+                 $.ajax({
+                    url: '@Url.Action("PartialIndex", "CasSupBank")',
+                    type: "POST",
+                    data: { type: "A" },
+                     success: function (data) {
+
+                         $('#Table').html(data);
+                         $('#preloader').css('display', 'none');
+                    }
+                });
+            }
+        }
+    </script>
+    <script>
+        function LoadData() {
+            $('#preloader').css('display', 'block');
+            $('#status').css('display', 'block');
+        }
+
+    </script>
+
+</div>
+

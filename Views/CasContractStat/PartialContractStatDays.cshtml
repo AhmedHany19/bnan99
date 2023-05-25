@@ -1,0 +1,42 @@
+﻿<div class="row" style="height:auto">
+
+    <div class="col-md-12">
+        <script src="~/Scripts/Chart.js"></script>
+
+        <canvas id="ChartDays" style="width:100%;max-width:895px;height:450px;"></canvas>
+
+        <script>
+            var xValues = ["السبت", "الأحد", "الإثنين", "الثلاثاء", "الإربعاء", "الخميس", "الجمعه" ];
+            var yValues = [@ViewBag.Saturday,@ViewBag.Sunday,@ViewBag.Monday,@ViewBag.Tuesday,@ViewBag.Wednesday,@ViewBag.Thursday,@ViewBag.Friday];
+            var barColors = [
+                "#b91d47",
+                "#00aba9",
+                "#2b5797",
+                "#e8c3b9",
+                "#FFB533",
+                "#D7BDE2",
+                "#45B39D"
+            ];
+
+            new Chart("ChartDays", {
+                type: "bar",
+                data: {
+                    labels: xValues,
+                    datasets: [{
+                        backgroundColor: barColors,
+                        data: yValues
+                    }]
+                },
+                options: {
+                    legend: { display: false },
+                    title: {
+                        display: true,
+                        text: "العقود  @ViewBag.NbrTot"
+                    }
+                }
+            });
+        </script>
+
+    </div>
+
+</div>

@@ -1,0 +1,54 @@
+﻿@model IEnumerable<RentCar.Models.CR_Cas_Account_Tax_Owed>
+
+<div class="table-rep-plugin" id="TableDiv" style="max-height:25%;">
+    <table id="myTable" class="table table-striped mb-0" style="cursor:default">
+        <thead style="overflow-y: scroll; flex-grow: 1;">
+            <tr>
+                
+                <th style="width:15%;">
+                    رقم العقد
+                </th>
+                <th style="width:12%;">
+                    تاريخ الإستحقاق
+                </th>
+                <th style="width:9%;">
+                    قيمة العقد
+                </th>
+                <th style="width:14%;">
+                    نسبة القيمة المضافة
+                </th>
+                <th style="width:11%;">
+                    القيمة المضافة
+                </th>
+
+            </tr>
+        </thead>
+        <tbody id="tbl">
+            @foreach (var item in Model)
+            {
+                <tr>
+                    
+                    <td style="width:15%;">
+                        @Html.DisplayFor(modelItem => item.CR_Cas_Account_Tax_Owed_Contract_No)
+                    </td>
+                    <td style="width:12%;">
+                        @item.CR_Cas_Account_Tax_Owed_Due_Date.Value.ToString("yyyy/MM/dd")
+                    </td>
+                    <td style="width:9%;text-align:center">
+                        @Html.DisplayFor(modelItem => item.CR_Cas_Account_Tax_Owed_Contract_Value)
+                    </td>
+                    <td style="width:14%;">
+                        @Html.DisplayFor(modelItem => item.CR_Cas_Account_Tax_Owed_Percentage)
+                    </td>
+                    <td style="width:11%;">
+                        @Html.DisplayFor(modelItem => item.CR_Cas_Account_Tax_Owed_Value)
+                    </td>
+
+                </tr>
+
+            }
+        </tbody>
+    </table>
+</div>
+
+

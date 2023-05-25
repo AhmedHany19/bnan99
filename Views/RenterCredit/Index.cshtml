@@ -1,0 +1,250 @@
+﻿@model IEnumerable<RentCar.Models.CR_Cas_Renter_Lessor>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_CASLayout.cshtml";
+}
+
+<style>
+    label {
+        float: none
+    }
+
+    .radio_top {
+        float: left;
+        margin-right: 10px;
+        line-height: 0.8
+    }
+</style>
+<div class="content">
+    <!-- Start Content-->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+
+                <div class="card-box table-responsive" style="height:79vh">
+                    <div class="title_corp"><h3> المستأجرين / بيانات مستأجر / عرض البيانات </h3></div>
+                    <div class="subtitle_corp"> تمكنك الصفحة من البحث و طباعة  بيانات المستأجرين</div>
+                    <div class="hr_60"></div>
+                    <div class="hr_80"></div>
+                    <div class="corp_page">
+                        <div class="page_content">
+                            <form method="post">
+                                <div class="form_bg" style="width:100%">
+
+                                    <div class="responsive-table-plugin">
+                                        <div class="table-rep-plugin">
+                                            <div class="table-responsive" data-pattern="priority-columns" style="border:none;">
+                                                <div class="href_layout">
+                                                    <a href="/CasHome/index" class="btn_form" data-toggle="tooltip" data-placement="top" title="إغلاق"><i class="fa fa-times"></i></a>
+                                                    @*<a href="/CasBranch/Create" class="btn_form" data-toggle="tooltip" data-placement="top" title="إضافة سجل جديد"><i class="fa fa-plus"></i></a>*@
+                                                    @*<button type="submit" name="excelCall" class="btn_form" value="Excel" style="padding-right:4px;" data-toggle="tooltip" data-placement="top" title="ترحيل البيانات للإكسل">
+                                                            <i class="far fa-file-excel" aria-hidden="true" style=" margin-bottom: 3px; padding-left: 10px;"></i>
+                                                        </button>*@
+
+                                                    <script>
+                                                        $(document).ready(function () {
+                                                            $("#inputtext").on("keyup", function () {
+                                                                var value = $(this).val().toLowerCase();
+                                                                $("#tbl tr").filter(function () {
+                                                                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                                                                });
+                                                            });
+                                                        });
+                                                    </script>
+                                                </div>
+                                                <div id="responsive-datatable_filter" class="dataTables_filter">
+                                                    <label class="label_search_input">
+                                                        <img src="~/images/srch.png" id="SrchImg" />
+                                                        بحث:<input type="search" id="inputtext href_layout" class="form-control form_search_input" placeholder="" aria-controls="responsive-datatable" style="width:33%">
+                                                    </label>
+
+                                                </div>
+
+                                                <table id="myTable" class="table table-striped mb-0" style="cursor:pointer">
+                                                    <thead>
+
+                                                        <tr>
+                                                            <th width="9%">
+                                                                الهوية
+                                                            </th>
+                                                            <th width="38%">
+                                                                الإسم
+                                                            </th>
+
+                                                            <th width="8%">
+                                                                أول زيارة
+                                                            </th>
+                                                            <th width="8%">
+                                                                آخر زيارة
+                                                            </th>
+                                                            <th width="6%">
+                                                                الرصيد
+                                                            </th>
+
+                                                            <th width="6%">
+                                                                المتداولة
+                                                            </th>
+
+                                                            <th width="8%">
+                                                                ع. العقود
+                                                            </th>
+                                                            <th width="5%">
+                                                                التقييم
+                                                            </th>
+
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="tbl">
+                                                        @foreach (var item in Model)
+                                                        {
+                                                            <tr>
+                                                                <td width="9%">
+
+                                                                    @Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Id)
+
+                                                                </td>
+                                                                <td width="38%">
+
+                                                                    @Html.DisplayFor(modelItem => item.CR_Mas_Renter_Information.CR_Mas_Renter_Information_Ar_Name)
+
+                                                                </td>
+                                                                <td width="8%">
+
+                                                                    @item.CR_Cas_Renter_Lessor_Date_First_Interaction.Value.ToString("yyyy/MM/dd")
+
+                                                                </td>
+                                                                <td width="8%">
+
+                                                                    @if (item.CR_Cas_Renter_Lessor_Date_Last_Interaction != null)
+                                                                    {
+                                                                        @item.CR_Cas_Renter_Lessor_Date_Last_Interaction.Value.ToString("yyyy/MM/dd")
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        @item.CR_Cas_Renter_Lessor_Date_Last_Interaction
+                                                                    }
+
+
+                                                                </td>
+                                                                <td width="6%">
+
+                                                                    @Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Balance)
+
+                                                                </td>
+
+                                                                <td width="6%">
+
+                                                                    @Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Interaction_Amount_Value)
+
+                                                                </td>
+
+
+                                                                <td width="8%">
+
+                                                                    @Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Contract_Number)
+
+                                                                </td>
+
+                                                                <td width="5%">
+
+                                                                    @Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Contract_Number)
+
+
+                                                                </td>
+
+
+
+                                                            </tr>
+                                                        }
+                                                    </tbody>
+                                                </table>
+
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div id="dtBasicExample_print">
+
+                                        <iframe name="print_frame" width="0" height="0" frameborder="0" src="about:blank"></iframe>
+                                        <script>
+                                            function printDiv() {
+                                                window.frames["print_frame"].document.body.innerHTML = document.getElementById("dtBasicExample_print").innerHTML;
+                                                window.frames["print_frame"].window.focus();
+                                                window.frames["print_frame"].window.print();
+                                            }
+                                        </script>
+                                        <script>
+                                            $(document).ready(function () {
+                                                $('#dtBasicExample').DataTable();
+                                                $('.dataTables_length').addClass('bs-select');
+                                            });
+                                        </script>
+                                        <script>
+                                            function sortTable(n) {
+                                                var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+                                                table = document.getElementById("myTable");
+                                                switching = true;
+                                                // Set the sorting direction to ascending:
+                                                dir = "asc";
+                                                /* Make a loop that will continue until
+                                                no switching has been done: */
+                                                while (switching) {
+                                                    // Start by saying: no switching is done:
+                                                    switching = false;
+                                                    rows = table.rows;
+                                                    /* Loop through all table rows (except the
+                                                    first, which contains table headers): */
+                                                    for (i = 1; i < (rows.length - 1); i++) {
+                                                        // Start by saying there should be no switching:
+                                                        shouldSwitch = false;
+                                                        /* Get the two elements you want to compare,
+                                                        one from current row and one from the next: */
+                                                        x = rows[i].getElementsByTagName("TD")[n];
+                                                        y = rows[i + 1].getElementsByTagName("TD")[n];
+                                                        /* Check if the two rows should switch place,
+                                                        based on the direction, asc or desc: */
+                                                        if (dir == "asc") {
+                                                            if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                                                                // If so, mark as a switch and break the loop:
+                                                                shouldSwitch = true;
+                                                                break;
+                                                            }
+                                                        } else if (dir == "desc") {
+                                                            if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                                                                // If so, mark as a switch and break the loop:
+                                                                shouldSwitch = true;
+                                                                break;
+                                                            }
+                                                        }
+                                                    }
+                                                    if (shouldSwitch) {
+                                                        /* If a switch has been marked, make the switch
+                                                        and mark that a switch has been done: */
+                                                        rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                                                        switching = true;
+                                                        // Each time a switch is done, increase this count by 1:
+                                                        switchcount++;
+                                                    } else {
+                                                        /* If no switching has been done AND the direction is "asc",
+                                                        set the direction to "desc" and run the while loop again. */
+                                                        if (switchcount == 0 && dir == "asc") {
+                                                            dir = "desc";
+                                                            switching = true;
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        </script>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- end row -->
+    </div> <!-- container-fluid -->
+
+</div> <!-- content -->

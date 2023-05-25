@@ -1,0 +1,348 @@
+﻿@model IEnumerable<RentCar.Models.CR_Cas_Sup_Branch_Documentation>
+
+<div class="responsive-table-plugin">
+    <div class="table-rep-plugin">
+        <div class="table-responsive" data-pattern="priority-columns" style="border:none;">
+            <div id="dtBasicExample_print">
+                <table id="myTable" class="table table-striped mb-0" style="cursor:pointer">
+                    <thead>
+            
+                    <tr>
+
+                        <th hidden="hidden">
+                            @Html.DisplayNameFor(model => model.CR_Cas_Sup_Branch_Documentation_Lessor_Code)
+                        </th>
+                        <th style="width:17%;">
+                            الفرع
+                        </th>
+                        <th style="width:20%;">
+                            نوع المستند
+                        </th>
+                        <th style="width:20%;">
+                            الرقم
+                        </th>
+                        <th style="width:12%;">
+                            التاريخ
+                        </th>
+                        <th style="width:12%;">
+                            بدايته
+                        </th>
+                        <th style="width:12%;">
+                            نهايته
+                        </th>
+                        <th hidden="hidden">
+                            @Html.DisplayNameFor(model => model.CR_Cas_Sup_Branch_Documentation_Activation)
+                        </th>
+
+                        @*<th>
+                على وشك الأنتهاء
+            </th>*@
+                        <th style="width:10%;">
+                            الحالة
+                        </th>
+                        @*<th hidden="hidden">
+                @Html.DisplayNameFor(model => model.CR_Cas_Sup_Procedures_Type)
+            </th>
+            <th hidden="hidden">
+                @Html.DisplayNameFor(model => model.CR_Mas_Com_Lessor.CR_Mas_Com_Lessor_Logo)
+            </th>
+            <th></th>*@
+                    </tr>
+                    </thead>
+                    <tbody id="tbl">
+                        @foreach (var item in Model)
+                        {
+                            if (item.CR_Cas_Sup_Branch_Documentation_Status == "N" || item.CR_Cas_Sup_Branch_Documentation_Status == "E" || item.CR_Cas_Sup_Branch_Documentation_Status == "X")
+                            {
+                                <tr>
+                                    <td hidden="hidden">
+                                        @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Lessor_Code)
+
+                                    </td>
+                                    <td style="text-align:right;vertical-align:middle;width:17%">
+                                        <a href="~/CasDocumentation/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Lessor_Code)
+                                            &id2=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Branch_Code)
+                                            &id3=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Code)" style="color:red">
+                                            @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch.CR_Cas_Sup_Branch_Ar_Short_Name)
+                                            @if (item.CR_Cas_Sup_Branch.CR_Cas_Sup_Branch_Status == "H")
+                                            {
+                                                <span id="statOfBranch"> (الفرع موقوف) </span>
+                                            }
+                                            @if (item.CR_Cas_Sup_Branch.CR_Cas_Sup_Branch_Status == "D")
+                                            {
+                                                <span id="statOfBranch"> (الفرع محذوف) </span>
+                                            }
+                                        </a>
+                                    </td>
+                                    <td style="text-align:right;vertical-align:middle;width:20%">
+
+                                        <a href="~/CasDocumentation/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Lessor_Code)
+                                        &id2=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Branch_Code)
+                                        &id3=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Code)"style="color:red">
+                                            @Html.DisplayFor(modelItem => item.CR_Mas_Sup_Procedures.CR_Mas_Sup_Procedures_Ar_Name)
+                                        </a>
+                                    </td>
+                                    <td style="text-align:center;vertical-align:middle;width:20%">
+
+                                        <a href="~/CasDocumentation/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Lessor_Code)
+                                        &id2=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Branch_Code)
+                                        &id3=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Code)"style="color:red">
+                                            @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_No)
+                                        </a>
+                                    </td>
+                                    <td style="text-align:center;vertical-align:middle;width:12%">
+                                        @*@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Date)*@
+                                        @if (item.CR_Cas_Sup_Branch_Documentation_Date != null)
+                                        {
+
+                                            <a href="~/CasDocumentation/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Lessor_Code)
+                                            &id2=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Branch_Code)
+                                            &id3=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Code)"style="color:red">
+
+                                                @item.CR_Cas_Sup_Branch_Documentation_Date.Value.ToString("yyyy/MM/dd")
+                                            </a>
+                                        }
+                                    </td>
+                                    <td style="text-align:center;vertical-align:middle;width:12%">
+                                        @*@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Start_Date)*@
+                                        @if (item.CR_Cas_Sup_Branch_Documentation_Start_Date != null)
+                                        {
+                                            <a href="~/CasDocumentation/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Lessor_Code)
+                                        &id2=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Branch_Code)
+                                        &id3=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Code)"style="color:red">
+
+                                                @item.CR_Cas_Sup_Branch_Documentation_Start_Date.Value.ToString("yyyy/MM/dd")
+                                            </a>
+
+                                        }
+                                    </td>
+                                    <td style="text-align:center;vertical-align:middle;width:12%">
+                                        @*@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_End_Date)*@
+                                        @if (item.CR_Cas_Sup_Branch_Documentation_End_Date != null)
+                                        {
+                                            <a href="~/CasDocumentation/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Lessor_Code)
+                                            &id2=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Branch_Code)
+                                            &id3=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Code)"style="color:red">
+                                                @item.CR_Cas_Sup_Branch_Documentation_End_Date.Value.ToString("yyyy/MM/dd")
+
+                                            </a>
+
+                                        }
+                                    </td>
+                                    <td hidden="hidden">
+                                        @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Activation)
+                                    </td>
+
+                                    @*<td style="text-align:center">
+                        @if (item.CR_Cas_Sup_Branch_Documentation_About_To_Expire != null)
+                        {
+                        <a href="~/CasDocumentation/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Lessor_Code)
+                            &id2=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Branch_Code)
+                            &id3=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Code)">
+                            @DateTime.Parse(Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_About_To_Expire).ToString()).ToShortDateString()
+                        </a>
+
+                        }
+
+                    </td>*@
+                                    <td style="text-align:center;vertical-align:middle;width:10%">
+                                        @if (item.CR_Cas_Sup_Branch_Documentation_Status == "N")
+                                        {
+                                            <a href="~/CasDocumentation/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Lessor_Code)
+                                        &id2=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Branch_Code)
+                                        &id3=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Code)"style="color:red">
+                                                <label style="color:red">لم يسجل</label>
+                                            </a>
+
+                                        }
+                                        else if (item.CR_Cas_Sup_Branch_Documentation_Status == "D")
+                                        {
+                                            <a href="~/CasDocumentation/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Lessor_Code)
+                                        &id2=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Branch_Code)
+                                        &id3=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Code)"style="color:red">
+                                                <label style="color:red">محذوف</label>
+                                            </a>
+
+                                        }
+                                        else if (item.CR_Cas_Sup_Branch_Documentation_Status == "A")
+                                        {
+                                            <a href="~/CasDocumentation/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Lessor_Code)
+                                        &id2=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Branch_Code)
+                                        &id3=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Code)"style="color:red">
+                                                <label style="color:red">نشط</label>
+                                            </a>
+
+                                        }
+                                        else if (item.CR_Cas_Sup_Branch_Documentation_Status == "E")
+                                        {
+                                            <a href="~/CasDocumentation/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Lessor_Code)
+                                        &id2=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Branch_Code)
+                                        &id3=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Code)"style="color:red">
+                                                <label style="color:red">منتهي</label>
+                                            </a>
+
+                                        }
+                                        else if (item.CR_Cas_Sup_Branch_Documentation_Status == "X")
+                                        {
+                                            <a href="~/CasDocumentation/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Lessor_Code)
+                                        &id2=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Branch_Code)
+                                        &id3=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Code)"style="color:red">
+                                                <label style="color:red">على وشك الإنتهاء</label>
+                                            </a>
+
+                                        }
+                                    </td>
+
+                                </tr>
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td hidden="hidden">
+                                        @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Lessor_Code)
+
+                                    </td>
+                                    <td style="text-align:right;vertical-align:middle;width:17%">
+                                        <a href="~/CasDocumentation/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Lessor_Code)
+                                            &id2=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Branch_Code)
+                                            &id3=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Code)">
+                                            @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch.CR_Cas_Sup_Branch_Ar_Short_Name)
+
+                                            @if (item.CR_Cas_Sup_Branch.CR_Cas_Sup_Branch_Status == "H")
+                                            {
+                                                <span id="statOfBranch"> (الفرع موقوف) </span>
+                                            }
+
+                                            @if (item.CR_Cas_Sup_Branch.CR_Cas_Sup_Branch_Status == "D")
+                                            {
+                                                <span id="statOfBranch"> (الفرع محذوف) </span>
+                                            }
+                                        </a>
+                                    </td>
+                                    <td style="text-align:right;vertical-align:middle;width:20%">
+
+                                        <a href="~/CasDocumentation/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Lessor_Code)
+                                        &id2=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Branch_Code)
+                                        &id3=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Code)">
+                                            @Html.DisplayFor(modelItem => item.CR_Mas_Sup_Procedures.CR_Mas_Sup_Procedures_Ar_Name)
+                                        </a>
+                                    </td>
+                                    <td style="text-align:center;vertical-align:middle;width:20%">
+
+                                        <a href="~/CasDocumentation/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Lessor_Code)
+                                        &id2=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Branch_Code)
+                                        &id3=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Code)">
+                                            @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_No)
+                                        </a>
+                                    </td>
+                                    <td style="text-align:center;vertical-align:middle;width:12%">
+                                        @*@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Date)*@
+                                        @if (item.CR_Cas_Sup_Branch_Documentation_Date != null)
+                                        {
+
+                                            <a href="~/CasDocumentation/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Lessor_Code)
+                                            &id2=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Branch_Code)
+                                            &id3=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Code)">
+
+                                                @item.CR_Cas_Sup_Branch_Documentation_Date.Value.ToString("yyyy/MM/dd")
+                                            </a>
+                                        }
+                                    </td>
+                                    <td style="text-align:center;vertical-align:middle;width:12%">
+                                        @*@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Start_Date)*@
+                                        @if (item.CR_Cas_Sup_Branch_Documentation_Start_Date != null)
+                                        {
+                                            <a href="~/CasDocumentation/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Lessor_Code)
+                                        &id2=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Branch_Code)
+                                        &id3=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Code)">
+
+                                                @item.CR_Cas_Sup_Branch_Documentation_Start_Date.Value.ToString("yyyy/MM/dd")
+                                            </a>
+
+                                        }
+                                    </td>
+                                    <td style="text-align:center;vertical-align:middle;width:12%">
+                                        @*@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_End_Date)*@
+                                        @if (item.CR_Cas_Sup_Branch_Documentation_End_Date != null)
+                                        {
+                                            <a href="~/CasDocumentation/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Lessor_Code)
+                                            &id2=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Branch_Code)
+                                            &id3=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Code)">
+                                                @item.CR_Cas_Sup_Branch_Documentation_End_Date.Value.ToString("yyyy/MM/dd")
+
+                                            </a>
+
+                                        }
+                                    </td>
+                                    <td hidden="hidden">
+                                        @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Activation)
+                                    </td>
+
+     
+                                    <td style="text-align:center;vertical-align:middle;width:10%">
+                                        @if (item.CR_Cas_Sup_Branch_Documentation_Status == "N")
+                                        {
+                                            <a href="~/CasDocumentation/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Lessor_Code)
+                                        &id2=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Branch_Code)
+                                        &id3=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Code)">
+                                                <label style="color:darkcyan">لم يسجل</label>
+                                            </a>
+
+                                        }
+                                        else if (item.CR_Cas_Sup_Branch_Documentation_Status == "D")
+                                        {
+                                            <a href="~/CasDocumentation/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Lessor_Code)
+                                        &id2=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Branch_Code)
+                                        &id3=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Code)">
+                                                <label style="color:red">محذوف</label>
+                                            </a>
+
+                                        }
+                                        else if (item.CR_Cas_Sup_Branch_Documentation_Status == "A")
+                                        {
+                                            <a href="~/CasDocumentation/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Lessor_Code)
+                                        &id2=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Branch_Code)
+                                        &id3=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Code)">
+                                                <label style="color:green">نشط</label>
+                                            </a>
+
+                                        }
+                                        else if (item.CR_Cas_Sup_Branch_Documentation_Status == "E")
+                                        {
+                                            <a href="~/CasDocumentation/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Lessor_Code)
+                                        &id2=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Branch_Code)
+                                        &id3=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Code)">
+                                                <label style="color:crimson">منتهي</label>
+                                            </a>
+
+                                        }
+                                        else if (item.CR_Cas_Sup_Branch_Documentation_Status == "X")
+                                        {
+                                            <a href="~/CasDocumentation/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Lessor_Code)
+                                        &id2=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Branch_Code)
+                                        &id3=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Code)">
+                                                <label style="color:darkorange">على وشك الإنتهاء</label>
+                                            </a>
+
+                                        }
+                                    </td>
+
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <iframe name="print_frame" width="0" height="0" frameborder="0" src="about:blank"></iframe>
+
+
+        </div>
+    </div>
+</div>
+
+<style>
+    #statOfBranch {
+        color: red;
+        margin-right: 4px !important;
+    }
+</style>

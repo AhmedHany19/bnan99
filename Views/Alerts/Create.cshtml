@@ -1,0 +1,247 @@
+﻿@model RentCar.Models.CR_Cas_Sup_Follow_Up_Mechanism
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_CASLayout.cshtml";
+}
+
+<link href="~/BSys3Styles/CSS/style_form.css" rel="stylesheet" />
+<head>
+
+    @*<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+        <script src="~/Scripts/toastr.min.js"></script>
+        <script src="~/Scripts/toastr.js"></script>*@
+
+</head>
+<style>
+
+    #textErr {
+        color: red;
+        font-size: 12px;
+        font-weight: bold;
+    }
+
+    .table td {
+        border: none;
+    }
+
+    .switch {
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        height: 24px;
+    }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 17px;
+            width: 17px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+    input:checked + .slider {
+        background-color: #0ea60e;
+    }
+
+    input:focus + .slider {
+        box-shadow: 0 0 1px #0ea60e;
+    }
+
+    input:checked + .slider:before {
+        -webkit-transform: translateX(35px);
+        -ms-transform: translateX(35px);
+        transform: translateX(35px);
+    }
+
+    /* Rounded sliders */
+    .slider.round {
+        border-radius: 34px;
+    }
+
+        .slider.round:before {
+            border-radius: 50%;
+        }
+
+    .titre_div {
+        margin: 0;
+        padding-bottom: 7px;
+        position: relative;
+        border-bottom: 2px solid #ccc;
+        display: inline-block;
+        font-size: 20px;
+        margin-bottom: 15px;
+    }
+
+        .titre_div:before {
+            position: absolute;
+            background: #FFCE94;
+            height: 2px;
+            content: '';
+            width: 50px;
+            bottom: -2px;
+            right: 0;
+        }
+    .parsley-errors-list{width:100%}
+</style>
+<body>
+    <div class="content">
+
+        <!-- Start Content-->
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card-box table-responsive" style="height:79vh">
+                        <div class="title_corp"><h3> الخدمات / التنبيهات / تحديث </h3></div>
+                        <div class="subtitle_corp">تمكنك الصفحة من تحديث بيانات التنبيهات </div>
+                        <div class="hr_60"></div>
+                        <div class="hr_80"></div>
+                        <div class="corp_page " style=" padding-top: 20px;">
+                            <div class="page_content">
+
+                                <form id="form_validation" action="/Alerts/Create" enctype="multipart/form-data" method="post" data-parsley-validate="" novalidate="">
+
+                                    @Html.AntiForgeryToken()
+                                    <div class="form-horizontal" style="min-height:70%">
+                                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="titre_div"><label style="font-weight:700;color:royalblue">مستندات الشركة</label></div>
+                                                <div>
+                                                    @{
+                                                        Html.RenderAction("AlertCompanyDoc");
+                                                    }
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="titre_div"><label style="font-weight:700;color:royalblue">عقود الشركة</label></div>
+                                                <div>
+                                                    @{
+                                                        Html.RenderAction("AlertCompanyContract");
+                                                    }
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="titre_div"><label style="font-weight:700;color:royalblue">وثائق السيارة</label></div>
+                                                <div>
+                                                    @{
+                                                        Html.RenderAction("AlertCarDoc");
+                                                    }
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="titre_div"><label style="font-weight:700;color:royalblue">صيانة السيارة</label></div>
+                                                <div>
+                                                    @{
+                                                        Html.RenderAction("AlertCarMain");
+
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row" style="margin-top:25px">
+
+                                        <div class="col-md-6 col-50">
+                                            <input type="submit" name="add" class="btn btn-primary waves-effect" id="add_btn" value="حفظ">
+                                            <a href="/CasHome/Index" class="btn btn-primary waves-effect" style="margin-right:20px">انهاء</a>
+
+                                        </div>
+                                        <div class="col-md-6 col-50">
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+<script type="text/javascript">
+    $("body").on("click", "#add_btn", function () {
+
+        var CompanyDocs = new Array();
+        $("#tbl TR").each(function () {
+            var CompanyDoc = {};
+            var LessorCode = $(this).find("TD").eq(0).html().trim();
+            var ProcedureCode = $(this).find("TD").eq(1).html().trim();
+            //var Name = $(this).find("TD").eq(2).html();
+            var chk = $(this).find('input[type="checkbox"]').is(':checked');
+            var BE = $(this).find("input.BExpire").val();
+            var BKm = $(this).find("input.BKm").val();
+            var DKm = $(this).find("input.DKm").val();
+
+            CompanyDoc.CR_Cas_Sup_Follow_Up_Mechanism_Lessor_Code = LessorCode;
+            CompanyDoc.CR_Cas_Sup_Follow_Up_Mechanism_Procedures_Code = ProcedureCode;
+            CompanyDoc.CR_Cas_Sup_Follow_Up_Mechanism_Activate_Service = chk;
+            CompanyDoc.CR_Cas_Sup_Follow_Up_Mechanism_Befor_Expire = BE;
+            CompanyDoc.CR_Cas_Sup_Follow_Up_Mechanism_Befor_KM = BKm;
+            CompanyDoc.CR_Cas_Sup_Follow_Up_Mechanism_Default_KM = DKm;
+            CompanyDocs.push(CompanyDoc);
+        });
+
+        //Send the JSON array to Controller using AJAX.
+        $.ajax({
+            type: "POST",
+            url: "/Alerts/UpdateCompanyDocs",
+            data: JSON.stringify(CompanyDocs),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (r) {
+                toastr.success("تم الحفظ بنجاح");
+            }
+        });
+    });
+
+</script>
+
+<script type="text/javascript">
+        window.addEventListener("load", function () {
+
+            if ('@TempData["TempModel"]'!="") {
+                toastr.success("تم الحفظ بنجاح");
+            }
+
+        });
+</script>
+
+
+<script>
+    $("#add_btn").click(function () {
+        $("#preloader").css("display", "block");
+        $("#status").css("display", "block");
+        toastr.options.setTimeout = 99999;
+        toastr.success("يتم الان حفظ المستندات الرجاء الانتظا...");
+    })
+</script>
+
+
+
+

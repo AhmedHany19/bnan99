@@ -1,0 +1,381 @@
+﻿@model IEnumerable<RentCar.Models.CR_Mas_Basic_Contract>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/Bootstrap_Arabic/bootstrap.min.css" rel="stylesheet" />
+<link href="~/Bootstrap_Arabic/bootstrap-big-grid.min.css" rel="stylesheet" />
+<link href="~/Bootstrap_Arabic/jquery.dataTables.min.css" type="text/css" rel="stylesheet" />
+<link href="~/Bootstrap_Arabic/font-awesome.css" type="text/css" rel="stylesheet" />
+<script src="~/Bootstrap_Arabic/jquery-v1.11.2.js"></script>
+<script src="~/Bootstrap_Arabic/bootstrap.min.js"></script>
+<script src="~/Bootstrap_Arabic/bootstrap.min.js"></script>
+<script src="~/Bootstrap_Arabic/jquery.dataTables.min.js"></script>
+@*<script src="https://res.cloudinary.com/dxfq3iotg/raw/upload/v1569818907/jquery.table2excel.min.js"></script>*@
+@*<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">*@
+<link href="~/Bootstrap_Arabic/font-awesome.min.css" rel="stylesheet" />
+
+
+<style>
+    #inputtext {
+        width: 250px;
+        height: 30px;
+        margin-right: 512px;
+        margin-left: -5px;
+        float: left;
+        margin-top: -34px;
+        border-color: #4A80B3;
+        border-radius: unset;
+    }
+
+    #SrchImg {
+        float: left;
+        margin-top: -5px;
+        margin-left: 0px;
+        margin-right: -35px;
+        position: relative;
+    }
+
+    td {
+        font-family: 'Sakkal Majalla';
+        font-size: 14px;
+        padding: 5px 4px !important;
+        font-weight: 100;
+        color: #73A0C1;
+        border-color: #4A80B3;
+    }
+
+    th {
+        font-family: 'Sakkal Majalla';
+        font-size: 16px;
+        font-weight: bold;
+        border-color: #4A80B3;
+        cursor: pointer;
+    }
+
+    .title_corp {
+        margin-top: -15px;
+    }
+
+    .table thead {
+        overflow-y: scroll;
+        flex-grow: 1;
+    }
+
+    .table tr a {
+        text-decoration: none;
+        color: black !important;
+        border-color: #4A80B3;
+    }
+
+    .table td {
+        color: #083555;
+        border-color: #4A80B3;
+    }
+
+    .table thead th {
+        color: #124f77;
+        border-color: #4A80B3;
+        text-align: center;
+        background: #D1EAFA;
+        position: sticky;
+        top: 0;
+    }
+
+    .title_corp {
+        font-family: 'Sakkal Majalla';
+        font-size: 25px;
+    }
+
+    .subtitle_corp {
+        padding-top: 3px !important;
+        font-family: 'Sakkal Majalla' !important;
+        color: #083555;
+    }
+
+    /* table {
+        table-layout: fixed !important;                 to fix table column size
+
+    }*/
+</style>
+<div class="corp_content">
+    <div class="title_corp"> عقود شركات تأجير السيارات / عرض البيانات </div>
+    <div class="subtitle_corp"> من خلال هذه الصفحة يمكنك الإطلاع على عقود شركات تأجير السيارات كما يمكنك إضافة عقود جديدة</div>
+    <div class="hr_60"></div>
+    <div class="hr_80"></div>
+    <div class="corp_page">
+        <div class="page_content">
+            <form method="post">
+                <div class="form_bg">
+                    <div class="href_layout" style="margin-bottom:7px!important;">
+                        <a href="/Home/index" class="btn_form"><i class="fa fa-times" title="إغلاق"></i></a>
+                        <a href="/MAsBasicContract/Create" class="btn_form"><i class="fa fa-plus" title="إضافة سجل جديد"></i></a>
+                        <input type="submit" name="excelCall" title="ترحيل البيانات للإكسل" class="btn_form btn_exel" value="Excel" style="padding-right:4px;" />
+                        <a href="" class="btn_form" title="طباعة" onclick="printDiv()"><i class="fa fa-print"></i></a>
+
+                        <a href="" class="btn_form" title="بحث"><i class='fa fa-search'></i></a>
+                            <img src="~/images/srch.png" id="SrchImg" />
+                            <input class="form-control" type="text" id="inputtext" name="TxtSearch" placeholder="بحث..." />
+                        <script>
+                            $(document).ready(function () {
+                                $("#inputtext").on("keyup", function () {
+                                    var value = $(this).val().toLowerCase();
+                                    $("#tbl tr").filter(function () {
+                                        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                                    });
+                                });
+                            });
+                        </script>
+                    </div>
+                    <div class="table-responsive" style="width:99%; height:300px; overflow:auto;border: 1px solid #4A80B3;">
+                        <div id="dtBasicExample_print">
+                            <table class="table table-bordered table-striped " id="myTable">
+                                <thead>
+                                    <tr>
+                                        <th style="" hidden="hidden" onclick="sortTable(1)">
+                                            @Html.DisplayNameFor(model => model.CR_Mas_Basic_Contract_No)
+                                        </th>
+                                        <th style="" hidden="hidden" onclick="sortTable(2)">
+                                            @Html.DisplayNameFor(model => model.CR_Mas_Basic_Contract_Year)
+                                        </th>
+                                        <th style="" hidden="hidden" onclick="sortTable(3)">
+                                            @Html.DisplayNameFor(model => model.CR_Mas_Basic_Contract_Sector)
+                                        </th>
+                                        <th style="" hidden="hidden" onclick="sortTable(4)">
+                                            @Html.DisplayNameFor(model => model.CR_Mas_Basic_Contract_Code)
+                                        </th>
+                                        <th style="margin-bottom:0px!important;width:30%;" onclick="sortTable(14)">
+                                            <span>الشركة</span>
+                                        </th>
+                                        <th style="" hidden="hidden" onclick="sortTable(5)">
+                                            @Html.DisplayNameFor(model => model.CR_Mas_Basic_Contract_Com_Code)
+                                        </th>
+                                        <th style="width: 10%;"  onclick="sortTable(6)">
+                                            @Html.DisplayNameFor(model => model.CR_Mas_Basic_Contract_Date)
+                                        </th>
+                                        <th style="width: 10%;"  onclick="sortTable(7)">
+                                            @Html.DisplayNameFor(model => model.CR_Mas_Basic_Contract_Start_Date)
+                                        </th>
+                                        <th style="width: 10%;" onclick="sortTable(8)">
+                                            @Html.DisplayNameFor(model => model.CR_Mas_Basic_Contract_End_Date)
+                                        </th>
+                                        <th style="" hidden="hidden" onclick="sortTable(9)">
+                                            @Html.DisplayNameFor(model => model.CR_Mas_Basic_Contract_Annual_Fees)
+                                        </th>
+                                        <th style="" hidden="hidden" onclick="sortTable(10)">
+                                            @Html.DisplayNameFor(model => model.CR_Mas_Basic_Contract_Service_Fees)
+                                        </th>
+                                        <th style="" hidden="hidden" onclick="sortTable(11)">
+                                            @Html.DisplayNameFor(model => model.CR_Mas_Basic_Contract_Discount_Rate)
+                                        </th>
+                                        <th style="" hidden="hidden" onclick="sortTable(12)">
+                                            @Html.DisplayNameFor(model => model.CR_Mas_Basic_Contract_Tax_Rate)
+                                        </th>
+                                        <th style="width: 10%;" onclick="sortTable(13)">
+                                            @Html.DisplayNameFor(model => model.CR_Mas_Basic_Contract_Status)
+                                        </th>
+                                        <th style="width: 30%;" onclick="sortTable(14)">
+                                            @Html.DisplayNameFor(model => model.CR_Mas_Basic_Contract_Reasons)
+                                        </th>
+                                        @*<th style="" onclick="sortTable(15)">
+                                            @Html.DisplayNameFor(model => model.CR_Mas_Com_Lessor.CR_Mas_Com_Lessor_Logo)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.CR_Mas_Sup_Sector.CR_Mas_Sup_Sector_Ar_Name)
+                                        </th>*@
+                                       
+                                    </tr>
+                                </thead>
+                                <tbody id="tbl">
+                                    @if (Session["ST_1401_update"].ToString() == "true")
+                                    {
+                                        foreach (var item in Model)
+                                        {
+                                            <tr>
+                                                <td hidden="hidden">
+                                                    @Html.DisplayFor(modelItem => item.CR_Mas_Basic_Contract_No)
+                                                </td>
+                                                <td hidden="hidden">
+                                                    @Html.DisplayFor(modelItem => item.CR_Mas_Basic_Contract_Year)
+                                                </td>
+                                                <td hidden="hidden">
+                                                    @Html.DisplayFor(modelItem => item.CR_Mas_Basic_Contract_Sector)
+                                                </td>
+                                                <td hidden="hidden">
+                                                    @Html.DisplayFor(modelItem => item.CR_Mas_Basic_Contract_Code)
+                                                </td>
+                                                <td>
+                                                    <a href="~/MasBasicContract/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Mas_Basic_Contract_No)">
+                                                        @Html.DisplayFor(modelItem => item.CR_Mas_Com_Lessor.CR_Mas_Com_Lessor_Ar_Short_Name)
+                                                        </a>
+                                                </td>
+
+                                                <td hidden="hidden">
+                                                    @Html.DisplayFor(modelItem => item.CR_Mas_Basic_Contract_Com_Code)
+                                                </td>
+                                                <td>
+                                                    <a href="~/MasBasicContract/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Mas_Basic_Contract_No)"> 
+                                                        @DateTime.Parse(@Html.DisplayFor(modelItem => item.CR_Mas_Basic_Contract_Date).ToString()).ToShortDateString()
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <a href="~/MasBasicContract/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Mas_Basic_Contract_No)">
+                                                        
+                                                        @DateTime.Parse(@Html.DisplayFor(modelItem => item.CR_Mas_Basic_Contract_Start_Date).ToString()).ToShortDateString()
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <a href="~/MasBasicContract/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Mas_Basic_Contract_No)">
+                                                        
+                                                        @DateTime.Parse(@Html.DisplayFor(modelItem => item.CR_Mas_Basic_Contract_End_Date).ToString()).ToShortDateString()
+                                                    </a>
+                                                </td>
+                                                <td hidden="hidden">
+                                                    <a href="~/MasBasicContract/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Mas_Basic_Contract_No)">
+                                                        @Html.DisplayFor(modelItem => item.CR_Mas_Basic_Contract_Annual_Fees)
+                                                        </a>
+                                                </td>
+                                                <td hidden="hidden">
+                                                    @Html.DisplayFor(modelItem => item.CR_Mas_Basic_Contract_Service_Fees)
+                                                </td>
+                                                <td hidden="hidden">
+                                                    @Html.DisplayFor(modelItem => item.CR_Mas_Basic_Contract_Discount_Rate)
+                                                </td>
+                                                <td hidden="hidden">
+                                                    @Html.DisplayFor(modelItem => item.CR_Mas_Basic_Contract_Tax_Rate)
+                                                </td>
+
+                                                <td style="text-align:center">
+                                                    @if (item.CR_Mas_Basic_Contract_Status == "A")
+                                                    {
+                                                        <a href="~/MasBasicContract/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Mas_Basic_Contract_No)">
+                                                            نشط
+                                                        </a>
+                                                    }
+                                                    else if (item.CR_Mas_Basic_Contract_Status == "H")
+                                                    {
+                                                        <a href="~/MasBasicContract/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Mas_Basic_Contract_No)">
+                                                            موقوف
+                                                        </a>
+                                                    }
+                                                    else if (item.CR_Mas_Basic_Contract_Status == "D")
+                                                    {
+                                                        <a href="~/MasBasicContract/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Mas_Basic_Contract_No)">
+                                                            محذوف
+                                                        </a>
+                                                    }
+
+                                                </td>
+                                                <td>
+                                                    <a href="~/MasBasicContract/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Mas_Basic_Contract_No)">
+                                                        @Html.DisplayFor(modelItem => item.CR_Mas_Basic_Contract_Reasons)
+                                                        </a>
+                                                </td>
+                                                @*<td>
+                        @Html.DisplayFor(modelItem => item.CR_Mas_Com_Lessor.CR_Mas_Com_Lessor_Logo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CR_Mas_Sup_Sector.CR_Mas_Sup_Sector_Ar_Name)
+                    </td>*@
+
+                                            </tr>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        foreach (var item in Model)
+                                        {
+                                            <tr>
+                                                <td hidden="hidden">
+                                                    @Html.DisplayFor(modelItem => item.CR_Mas_Basic_Contract_No)
+                                                </td>
+                                                <td hidden="hidden">
+                                                    @Html.DisplayFor(modelItem => item.CR_Mas_Basic_Contract_Year)
+                                                </td>
+                                                <td hidden="hidden">
+                                                    @Html.DisplayFor(modelItem => item.CR_Mas_Basic_Contract_Sector)
+                                                </td>
+                                                <td hidden="hidden">
+                                                    @Html.DisplayFor(modelItem => item.CR_Mas_Basic_Contract_Code)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.CR_Mas_Com_Lessor.CR_Mas_Com_Lessor_Ar_Short_Name)
+                                                </td>
+                                                <td hidden="hidden">
+                                                    @Html.DisplayFor(modelItem => item.CR_Mas_Basic_Contract_Com_Code)
+                                                </td>
+                                                <td>
+                                                    
+                                                    @DateTime.Parse(@Html.DisplayFor(modelItem => item.CR_Mas_Basic_Contract_Date).ToString()).ToShortDateString()
+                                                </td>
+                                                <td>
+                                                    
+                                                    @DateTime.Parse(@Html.DisplayFor(modelItem => item.CR_Mas_Basic_Contract_Start_Date).ToString()).ToShortDateString()
+                                                </td>
+                                                <td>
+                                                    
+                                                    @DateTime.Parse(@Html.DisplayFor(modelItem => item.CR_Mas_Basic_Contract_End_Date).ToString()).ToShortDateString()
+                                                </td>
+                                                <td hidden="hidden">
+                                                    @Html.DisplayFor(modelItem => item.CR_Mas_Basic_Contract_Annual_Fees)
+                                                </td>
+                                                <td hidden="hidden">
+                                                    @Html.DisplayFor(modelItem => item.CR_Mas_Basic_Contract_Service_Fees)
+                                                </td>
+                                                <td hidden="hidden">
+                                                    @Html.DisplayFor(modelItem => item.CR_Mas_Basic_Contract_Discount_Rate)
+                                                </td>
+                                                <td hidden="hidden">
+                                                    @Html.DisplayFor(modelItem => item.CR_Mas_Basic_Contract_Tax_Rate)
+                                                </td>
+
+                                                <td style="text-align:center">
+                                                    @if (item.CR_Mas_Basic_Contract_Status == "A")
+                                                    {
+                                                        <label>نشط</label>
+                                                    }
+                                                    else if (item.CR_Mas_Basic_Contract_Status == "H")
+                                                    {
+                                                        <label>موقوف</label>
+                                                    }
+                                                    else if (item.CR_Mas_Basic_Contract_Status == "D")
+                                                    {
+                                                        <label>محذوف</label>
+                                                    }
+
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.CR_Mas_Basic_Contract_Reasons)
+                                                </td>
+                             
+
+                                            </tr>
+                                        }
+                                    }
+
+                                </tbody>
+                            </table>
+                        </div>
+                        <iframe name="print_frame" width="0" height="0" frameborder="0" src="about:blank"></iframe>
+                        <script>
+                            function printDiv() {
+                                window.frames["print_frame"].document.body.innerHTML = document.getElementById("dtBasicExample_print").innerHTML;
+                                window.frames["print_frame"].window.focus();
+                                window.frames["print_frame"].window.print();
+                            }
+                        </script>
+                        <script>
+                            $(document).ready(function () {
+                                $('#dtBasicExample').DataTable();
+                                $('.dataTables_length').addClass('bs-select');
+                            });
+                        </script>
+
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

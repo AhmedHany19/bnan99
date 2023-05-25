@@ -1,0 +1,178 @@
+﻿@model RentCar.Models.CR_Mas_Sup_Procedures
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<style>
+    .texterr {
+        font-family: 'Times New Roman' !important;
+        font-size: 14px !important;
+        color: red !important;
+        margin-right: 50% !important;
+        height: 40px;
+    }
+
+    .title_corp {
+        font-family: 'Times New Roman';
+        font-size: 25px;
+    }
+
+    .subtitle_corp {
+        padding-top: 3px !important;
+        font-family: 'Times New Roman' !important;
+        color: #083555;
+    }
+</style>
+<div class="corp_content">
+    <div class="title_corp"> الإجراءات / إضافة </div>
+    <div class="subtitle_corp">تمكنك الصفحة من إضافة إجراء</div>
+    <div class="hr_60"></div>
+    <div class="hr_80"></div>
+    <div class="corp_page">
+        <div class="page_content" style=" margin-top: 10px; height:570px!important;">
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="col-md-6 offset-md-6 " style="margin-top:20px;">
+                    @Html.LabelFor(model => model.CR_Mas_Sup_Procedures_Code, new { @class = "label_form col-md-6", style = "float:right;" })
+                    @Html.TextBoxFor(model => model.CR_Mas_Sup_Procedures_Code, new { @class = "input_form col-md-6", style = "float:right;width:20%;", @readonly = "readonly" })
+                    <div class="texterr"></div>
+                </div>
+
+                <div class="col-md-6 offset-md-6 m-t-1">
+                    @Html.LabelFor(model => model.CR_Mas_Sup_Procedures_Type, new { @class = "label_form col-md-6", style = "float:right" })
+                    <div style="color:red;float:right;font-size:20px;margin-right:-68px;">*</div>
+                    @Html.TextBoxFor(model => model.CR_Mas_Sup_Procedures_Type, new { @class = "input_form col-md-6", onkeyup = "movetoNext('CR_Mas_Sup_Procedures_Ar_Name')", maxlength = "1", autocomplete = "off", oninput = "this.value=this.value.replace(/[^0-9]/g,'')", onpaste = "return false;", htmlAttributes = new { tabindex = 1 }, style = "float:right;width:20%;" })
+
+                    <div class="texterr"></div>
+                </div>
+
+                <div class="col-md-6 offset-md-6 m-t-1">
+                    @Html.TextBoxFor(model => model.CR_Mas_Sup_Procedures_Ar_Name, new { @class = "input_form col-md-6", onkeyup = "movetoNext('CR_Mas_Sup_Procedures_En_Name')", maxlength = "100", autocomplete = "off", onkeypress = "return CheckArabicCharactersOnly(event);", htmlAttributes = new { tabindex = 2 }, style = "margin-left:-365px;width:550px;", onpaste = "return false;" })
+                    @Html.LabelFor(model => model.CR_Mas_Sup_Procedures_Ar_Name, new { @class = "label_form col-md-6" })
+                    <div style="color:red;float:left;font-size:20px;margin-left:60px;margin-top:-25px;">*</div>
+                    <div class="texterr">@ViewBag.LRExistAr</div>
+                </div>
+
+                <div class="col-md-6 offset-md-6 m-t-1">
+                    @Html.TextBoxFor(model => model.CR_Mas_Sup_Procedures_En_Name, new { @class = "input_form col-md-6", onkeyup = "movetoNext('CR_Mas_Sup_Procedures_Fr_Name')", maxlength = "100", autocomplete = "off", oninput = "this.value=this.value.replace(/[^a-zA-Z\\s]/g,'')", onpaste = "return false;", htmlAttributes = new { tabindex = 3 }, style = "margin-left:-365px;width:550px;" })
+                    @Html.LabelFor(model => model.CR_Mas_Sup_Procedures_En_Name, new { @class = "label_form col-md-6" })
+                    <div style="color:red;float:left;font-size:20px;margin-left:60px;margin-top:-25px;">*</div>
+                    <div class="texterr">@ViewBag.LRExistEn</div>
+                </div>
+
+                <div class="col-md-6 offset-md-6 m-t-1">
+                    @Html.TextBoxFor(model => model.CR_Mas_Sup_Procedures_Fr_Name, new { @class = "input_form col-md-6", onkeyup = "movetoNext('CR_Mas_Sup_Procedures_FollowUp_Befor_Credit_Limit')", maxlength = "100", autocomplete = "off", oninput = "this.value=this.value.replace(/[^a-zA-Z0-9 àâäèéêëîïôœùûüÿçÀÂÄÈÉÊËÎÏÔŒÙÛÜŸÇ]/g,'')", onpaste = "return false;", htmlAttributes = new { tabindex = 4 }, style = "margin-left:-365px;width:550px;" })
+                    @Html.LabelFor(model => model.CR_Mas_Sup_Procedures_Fr_Name, new { @class = "label_form col-md-6" })
+                    <div style="color:red;float:left;font-size:20px;margin-left:60px;margin-top:-25px;">*</div>
+                    <div class="texterr">@ViewBag.LRExistFr</div>
+                </div>
+
+                <div class="col-md-6 offset-md-6 m-t-1">
+                    @Html.LabelFor(model => model.CR_Mas_Sup_Procedures_FollowUp_Befor_Credit_Limit, new { @class = "label_form col-md-6", style = "float:right;" })
+                    @Html.TextBoxFor(model => model.CR_Mas_Sup_Procedures_FollowUp_Befor_Credit_Limit, new { @class = "input_form col-md-6", onkeyup = "movetoNext('CR_Mas_Sup_Procedures_FollowUp_Befor_Expire')", maxlength = "11", autocomplete = "off", oninput = "this.value=this.value.replace(/[^0-9]/g,'')", onpaste = "return false;", htmlAttributes = new { tabindex = 5 }, style = "float:right;width:40%;" })
+                </div>
+
+                <div class="col-md-6 offset-md-6 m-t-1">
+                    @Html.LabelFor(model => model.CR_Mas_Sup_Procedures_FollowUp_Befor_Expire, new { @class = "label_form col-md-6", style = "float:right;" })
+                    @Html.TextBoxFor(model => model.CR_Mas_Sup_Procedures_FollowUp_Befor_Expire, new { @class = "input_form col-md-6", onkeyup = "movetoNext('CR_Mas_Sup_Procedures_FollowUp_Befor_KM')", maxlength = "3", autocomplete = "off", oninput = "this.value=this.value.replace(/[^0-9]/g,'')", onpaste = "return false;", htmlAttributes = new { tabindex = 5 }, style = "float:right;width:40%;" })
+                </div>
+
+
+
+                <div class="col-md-6 offset-md-6 m-t-1">
+                    @Html.LabelFor(model => model.CR_Mas_Sup_Procedures_FollowUp_Befor_KM, new { @class = "label_form col-md-6", style = "float:right;" })
+                    @Html.TextBoxFor(model => model.CR_Mas_Sup_Procedures_FollowUp_Befor_KM, new { @class = "input_form col-md-6", onkeyup = "movetoNext('CR_Mas_Sup_Procedures_FollowUp_Befor_Expire_KM')", maxlength = "6", autocomplete = "off", oninput = "this.value=this.value.replace(/[^0-9]/g,'')", onpaste = "return false;", htmlAttributes = new { tabindex = 5 }, style = "float:right;width:40%;" })
+                </div>
+
+
+                <div class="col-md-6 offset-md-6 m-t-1">
+                    @Html.LabelFor(model => model.CR_Mas_Sup_Procedures_FollowUp_Befor_Expire_KM, new { @class = "label_form col-md-6", style = "float:right;" })
+                    @Html.TextBoxFor(model => model.CR_Mas_Sup_Procedures_FollowUp_Befor_Expire_KM, new { @class = "input_form col-md-6", onkeyup = "movetoNext('CR_Mas_Sup_Procedures_FollowUp_Default_KM')", maxlength = "3", autocomplete = "off", oninput = "this.value=this.value.replace(/[^0-9]/g,'')", onpaste = "return false;", htmlAttributes = new { tabindex = 5 }, style = "float:right;width:40%;" })
+                </div>
+
+                <div class="col-md-6 offset-md-6 m-t-1">
+                    @Html.LabelFor(model => model.CR_Mas_Sup_Procedures_FollowUp_Default_KM, new { @class = "label_form col-md-6", style = "float:right;" })
+                    @Html.TextBoxFor(model => model.CR_Mas_Sup_Procedures_FollowUp_Default_KM, new { @class = "input_form col-md-6", onkeyup = "movetoNext('')", maxlength = "6", autocomplete = "off", oninput = "this.value=this.value.replace(/[^0-9]/g,'')", onpaste = "return false;", htmlAttributes = new { tabindex = 5 }, style = "float:right;width:40%;" })
+                </div>
+                
+
+                <div class="col-md-6 offset-md-6 m-t-1" hidden="hidden">
+                    @Html.TextBoxFor(model => model.CR_Mas_Sup_Procedures_Status, new { @class = "input_form col-md-6", onkeyup = "movetoNext('')", maxlength = "100", autocomplete = "off", onkeypress = "return CheckArabicCharactersOnly(event);", htmlAttributes = new { tabindex = 5 }, style = "margin-left:-365px;width:550px;" })
+                    @Html.LabelFor(model => model.CR_Mas_Sup_Procedures_Status, new { @class = "label_form col-md-6" })
+                    @*<div style="color:red;float:left;font-size:20px;margin-left:60px;margin-top:-25px;">*</div>*@
+                    <div class="texterr"></div>
+                </div>
+
+
+                <div class="col-md-6 offset-md-6 m-t-1" hidden="hidden">
+                    @Html.TextBoxFor(model => model.CR_Mas_Sup_Procedures_Reasons, new { @class = "input_form col-md-6", onkeyup = "movetoNext('')", maxlength = "100", autocomplete = "off", onkeypress = "return CheckArabicCharactersOnly(event);", htmlAttributes = new { tabindex = 6 }, style = "margin-left:-365px;width:550px;" })
+                    @Html.LabelFor(model => model.CR_Mas_Sup_Procedures_Reasons, new { @class = "label_form col-md-6" })
+                    @*<div style="color:red;float:left;font-size:20px;margin-left:60px;margin-top:-25px;">*</div>*@
+                    <div class="texterr"></div>
+                </div>
+
+                <div class="col-md-6" style="margin-top:40px;">
+                    <div style="height:30px;"></div>
+                    <a href="/Procedures/Index/" tabindex="" class="btn" style="font-family:'Times New Roman';float:left;font-size:15px!important;width: 70px !important;padding-top:4px;height:30px; background-color: #F3B161; padding-right: 22px; border-radius: 0px; color: white;">انهاء</a>
+                </div>
+                <div class="col-md-6" style="margin-top:40px;">
+                    <div style="height:30px;"></div>
+                    <input type="submit" tabindex="" name="add" class="submit_btn" id="add_btn" value="حفظ" />
+                </div>
+                <div class="col-md-6" id="Message" style="font-family:'Times New Roman';font-size:16px;color:red;margin-Top: 380px; margin-right: 330px;position:absolute;">@TempData["TempModel"]</div>
+
+            </div>
+           
+
+          
+            <script type="text/javascript">
+                $(document).ready(function () { setTimeout(function () { $("#Message").fadeOut(); }, 4000); });
+            </script>
+            <script language="javascript" type="text/javascript">
+                // Allow Arabic Characters only
+                function CheckArabicCharactersOnly(e) {
+                    var unicode = e.charCode ? e.charCode : e.keyCode
+                    if (unicode != 8) { //if the key isn't the backspace key (which we should allow)
+                        if (unicode == 32)
+                            return true;
+                        else {
+                            if ((unicode > 48 || unicode < 57) && (unicode < 0x0600 || unicode > 0x06FF)) //if not a number or arabic
+                                return false; //disable key press
+                        }
+                    }
+                }
+                function movetoNext(nextFieldID) {
+                    if (event.keyCode == 13) {
+                        document.getElementById(nextFieldID).focus();
+                    }
+                };
+
+
+
+                //////////////// disable auto validate on enter click ///////////////
+                $(document).keypress(function (e) {
+                    if (e.keyCode === 13) {
+                        e.preventDefault();
+                        return false;
+                    }
+                });
+                                                ////////////////////////////////////////////////////////////////////
+
+
+
+            </script>
+            }
+        </div>
+    </div>
+</div>

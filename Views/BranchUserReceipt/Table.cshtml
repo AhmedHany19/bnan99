@@ -1,0 +1,153 @@
+﻿@model IEnumerable<RentCar.Models.CR_Cas_Account_Receipt>
+
+
+<div style="width: 100%; min-height: 50vh; overflow: auto;">
+    <table id="myTable" class="table table-striped mb-0" style="cursor: default; overflow-x: hidden;max-height:60vh">
+        <thead>
+            <tr>
+                <th style="width:5%">
+                    م
+                </th>
+                <th style="width:20%">
+                    رقم القيد
+                </th>
+                <th style="width:10%">
+                    تاريخ القيد
+                </th>
+                <th style="width:10%">
+                    نوع المرجع
+                </th>
+                <th style="width:15%">
+                    طريقة الدفع
+                </th>
+                <th style="width:10%">
+                    دائن
+                </th>
+                <th style="width:10%">
+                    مدين
+                </th>
+                <th style="width:13%">
+                    رصيد سابق
+                </th>
+                <th style="width:10%">
+                    حالة القيد
+                </th>
+
+            </tr>
+        </thead>
+        <tbody id="tbl">
+            @{
+                int c = 0;
+                foreach (var item in Model)
+                {
+                    c++;
+                    <tr class="text-center">
+                        <td style="width:5%;text-align:center">
+                            <a href="~/BranchUserReceipt/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Account_Receipt_No)">
+                                @c
+                            </a>
+                        </td>
+                        <td style="width:20%">
+                            <a href="~/BranchUserReceipt/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Account_Receipt_No)">
+                                @Html.DisplayFor(modelItem => item.CR_Cas_Account_Receipt_No)
+                            </a>
+                        </td>
+                        <td style="width:10%">
+                            <a href="~/BranchUserReceipt/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Account_Receipt_No)">
+                                @item.CR_Cas_Account_Receipt_Date.Value.ToString("yyyy/MM/dd")
+                            </a>
+                        </td>
+                        <td style="width:10%">
+                            <a href="~/BranchUserReceipt/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Account_Receipt_No)">
+                                @Html.DisplayFor(modelItem => item.CR_Cas_Account_Receipt_Reference_Type)
+                            </a>
+                        </td>
+                        <td style="width:15%">
+                            <a href="~/BranchUserReceipt/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Account_Receipt_No)">
+                                @Html.DisplayFor(modelItem => item.CR_Mas_Sup_Payment_Method.CR_Mas_Sup_Payment_Method_Ar_Name)
+                            </a>
+                        </td>
+                        @{
+                            float floatConvert1;
+                            float floatConvert2;
+                            float floatConvert3;
+                            if (item.CR_Cas_Account_Receipt_Payment != null)
+                            {
+                                 floatConvert1 = (float)item.CR_Cas_Account_Receipt_Payment;
+
+                            }
+                            else
+                            {
+                                 floatConvert1 = 0;
+                            }
+
+                            if (item.CR_Cas_Account_Receipt_Receipt != null)
+                            {
+                                 floatConvert2 = (float)item.CR_Cas_Account_Receipt_Receipt;
+
+                            }
+                            else
+                            {
+                                 floatConvert2 = 0;
+                            }
+                            
+                            if (item.CR_Cas_Account_Receipt_Payment != null)
+                            {
+                                 floatConvert2 = (float)item.CR_Cas_Account_Receipt_Receipt;
+
+                            }
+                            else
+                            {
+                                 floatConvert2 = 0;
+                            } 
+                            if (item.CR_Cas_Account_Receipt_User_Previous_Balance != null)
+                            {
+                                 floatConvert3 = (float)item.CR_Cas_Account_Receipt_Receipt;
+
+                            }
+                            else
+                            {
+                                 floatConvert3 = 0;
+                            }
+                            var Receipt_Payment = floatConvert1.ToString("N0");
+                            var Receipt_Receipt = floatConvert2.ToString("N0");
+                            var User_Previous_Balance = floatConvert3.ToString("N0");
+                        }
+                        <td style="width:10%">
+                            <a href="~/BranchUserReceipt/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Account_Receipt_No)">
+                                @Receipt_Payment
+                            </a>
+                        </td>
+                        <td style="width:10%">
+                            <a href="~/BranchUserReceipt/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Account_Receipt_No)">
+                                @Receipt_Receipt
+                            </a>
+                        </td>
+                        <td style="width:13%">
+                            <a href="~/BranchUserReceipt/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Account_Receipt_No)">
+                                @User_Previous_Balance
+                            </a>
+                        </td>
+                        <td style="width:10%">
+                            <a href="~/BranchUserReceipt/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Account_Receipt_No)">
+                                @if (item.CR_Cas_Account_Receipt_Is_Passing == "1")
+                                {
+                                    <label>عهدة</label>
+                                }
+                                else if (item.CR_Cas_Account_Receipt_Is_Passing == "2")
+                                {
+                                    <label>مرحل</label>
+                                }
+                                else if (item.CR_Cas_Account_Receipt_Is_Passing == "3")
+                                {
+                                    <label>محجوز</label>
+                                }
+                            </a>
+                        </td>
+
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>

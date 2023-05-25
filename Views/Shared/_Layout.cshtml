@@ -1,0 +1,727 @@
+﻿<html>
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>RentCar</title>
+    <meta http-equiv="Page-Exit" content="progid:DXImageTransform.Microsoft.Fade(Duration=0.3)">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    @*<link href="~/main_files/style.ar.css" rel="stylesheet" />
+        <link href="~/main_files/style.css" rel="stylesheet" />
+        <link href="~/main_files/ratingar.css" rel="stylesheet" />*@
+    <link rel="icon" type="image/x-icon" href="/BSys3 Styles/Images/favicon.ico" />
+    <link href="~/Bootstrap_Arabic/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Bootstrap_Arabic/bootstrap-big-grid.min.css" rel="stylesheet" />
+    <link href="~/Bootstrap_Arabic/jquery.dataTables.min.css" type="text/css" rel="stylesheet" />
+    <link href="~/Bootstrap_Arabic/style_page.css" type="text/css" rel="stylesheet" />
+    <link href="~/Bootstrap_Arabic/font-awesome.css" type="text/css" rel="stylesheet" />
+    <script src="~/Bootstrap_Arabic/jquery-v1.11.2.js"></script>
+    <script src="~/Bootstrap_Arabic/bootstrap.min.js"></script>
+    <script src="~/Bootstrap_Arabic/bootstrap.min.js"></script>
+    <script src="~/Bootstrap_Arabic/jquery.dataTables.min.js"></script>
+    @*<script src="https://res.cloudinary.com/dxfq3iotg/raw/upload/v1569818907/jquery.table2excel.min.js"></script>*@
+    <style>
+        .DivHeader {
+            background-color: #FFCE94;
+            width: 100%;
+            height: 87px;
+        }
+
+        footer {
+            width: 100%;
+            float: left
+        }
+
+        .DivContent {
+            width: 100%;
+            height: auto;
+            margin-right: 0%;
+        }
+
+        .DivFooter {
+            background-color: #FFCE94;
+            width: 100%;
+            height: 87px;
+            margin-right: 0%;
+        }
+
+        #MenuAccordion {
+            float: right;
+            width: 100%;
+            height: auto;
+            background-color: white;
+        }
+
+        #SharedForm {
+            float: left;
+            width: 79%;
+            height: 100%;
+            margin-top: 1%;
+        }
+
+        #SharedFormHeader {
+            height: 19%;
+            width: 100%;
+        }
+        /*#SharedFormContent{
+            margin-top:1%;
+            height: 78%;
+            width: 100%;
+
+        }*/
+
+        /*\\\\\\\\\\\\\\\\\\\\\\\\\Accordion//////////////////////*/
+        .wrapper {
+            height: auto;
+            width: 100%;
+            margin-top: 3%;
+            margin-bottom: 3%;
+        }
+
+        .mainMenu {
+            width: 100%;
+            display: block;
+            overflow: hidden;
+        }
+
+        .item {
+            border-top: 1px solid #4F83B5;
+            overflow: hidden;
+            list-style: none;
+        }
+
+        .btn {
+            display: block;
+            padding: 7px 20px;
+            color: #003756;
+            position: relative;
+            text-align: right;
+            font-family: 'Times New Roman';
+            font-size: 18px !important;
+            font-weight: bold !important;
+            width: 100%;
+            text-align: right !important;
+        }
+
+            .btn:before {
+                content: '';
+                position: absolute;
+                width: 0;
+                height: 0;
+                border-left: 8px solid transparent;
+                border-right: 8px solid transparent;
+                /* border-top: 10px solid #ff6f61;*/
+                right: 15px;
+                bottom: -10px;
+                z-index: 9;
+            }
+
+        .subMenu {
+            background: #D1EAFA;
+            overflow: hidden;
+            transition: max-height 0.7s;
+            max-height: 0%;
+        }
+
+            .subMenu a {
+                display: block;
+                padding: 2px 2px;
+                color: #252470;
+                font-family: 'Times New Roman';
+                font-size: 15px;
+                /*border-bottom: 1px solid #394c7f;*/
+                position: relative;
+                text-align: right;
+            }
+
+                .subMenu a:before {
+                    content: '';
+                    opacity: 0;
+                    transition: opacity 0.3s;
+                }
+
+                .subMenu a:hover:before {
+                    content: '';
+                    position: absolute;
+                    height: 0;
+                    width: 6px;
+                    left: 0;
+                    top: 0;
+                    opacity: 1;
+                    border-top: 13px solid transparent;
+                    border-left: 11px solid #EEA63C;
+                    border-bottom: 13px solid transparent;
+                }
+
+                .subMenu a:after {
+                    content: '';
+                    opacity: 0;
+                    transition: opacity 0.3s;
+                }
+
+                .subMenu a:hover:after {
+                    content: '';
+                    position: absolute;
+                    height: 0;
+                    width: 6px;
+                    right: 0px;
+                    top: 0;
+                    opacity: 1;
+                    border-top: 13px solid transparent;
+                    border-right: 11px solid #EEA63C;
+                    border-bottom: 13px solid transparent;
+                }
+
+                .subMenu a:hover {
+                    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#273057', endColorstr='#394c7f',GradientType=0 );
+                    transition: all 0.3s;
+                    border-bottom: 1px solid #4A80B4;
+                    border-top: 1px solid #4A80B4;
+                }
+
+                .subMenu a:last-child {
+                    border: none;
+                }
+
+        .item:target .subMenu {
+            max-height: 20em;
+        }
+        /*End Accordion*/
+        #logo {
+            width: 100px;
+            height: 89px;
+            float: left;
+            margin-left: 20px;
+        }
+
+        #sharedBtn {
+            width: 25px;
+            height: 25px;
+            float: left;
+            margin-left: 20px;
+        }
+
+        hr {
+            border-top: 1px solid #B6CAE1;
+            margin-top: -5px;
+        }
+
+        input[type="button"] {
+            font-family: 'Times New Roman';
+            font-size: 14px;
+            border-color: #4B80B4;
+            background-color: #4B80B4;
+            color: white;
+            border: none;
+        }
+    </style>
+</head>
+    <body class="mainBody" dir="rtl" @*onkeydown="return disableBackspace(event)"*@ style="cursor: default;">
+        
+            <div>
+                <header>
+                    <div class="container">
+                        <div class="DivHeader">
+                            <div>
+                                <img id="logo" src="~/images/RentCar/Logo.png" />
+                            </div>
+                        </div>
+                    </div>
+                </header>
+                <content>
+                    <!--content page /**layout**/-->
+                    <div class="content_page">
+                        <div class="container">
+                            <div class="row">
+                                <!--content page left-->
+                                <div class="col-md-9" style="min-height:650px;">
+                                    <form id="form1" runat="server" method="post">
+                                        <div class="top_content">
+                                            <div style="margin-top:0px;">
+                                                <div class="hr_85"></div>
+                                                <div style="float:left;width:100%;margin-top:5px;height:25px;">
+                                                    <div style="float:right;margin-top:0px;color:#4A80B3; font-family:'Times New Roman';font-size:22px;margin-right:10px;">
+                                                        <label class="lbl">
+                                                            @Session["Hello"]
+                                                        </label>
+                                                        <label class="lbl" style="margin-right:90px;font-size:10px;margin-top:0px;color:lightgray;position: absolute;">
+                                                            MAS-@Session["UserId"]-@Session["POS"]
+                                                        </label>
+                                                    </div>
+                                                    <div style="float:left;">
+                                                        <a href="/account/login" title="خروج"><img id="sharedBtn" src="~/images/RentCar/exit.png" /></a>
+                                                        <a href="" title="تغيير كلمة السر"><img id="sharedBtn" src="~/images/RentCar/changePass.png" /></a>
+                                                        @*<a href="" title="اللغة"><img id="sharedBtn" src="~/images/RentCar/language.png" /></a>*@
+                                                        <input type="submit" id="sharedBtn" value="En" style="width:25px;height:25px;border: 3.5px solid #0071BC;border-radius: 25px;padding-right:1px;line-height:normal;font-size:13px;font-weight: bold;color:#0071BC;font-family:'Times New Roman';" />
+                                                    </div>
+                                                </div>
+                                                <div class="hr_100"></div>
+                                                <div class="hr_70"></div>
+                                                <div class="hr_85"></div>
+                                                <div class="hr_80_left"></div>
+                                                <div style="float:left;width:100%;">
+                                                    <div>
+                                                        <div style="float:right;color:#4A80B3;width:auto; font-family:'Times New Roman';font-size:22px;margin-right:10px">مؤشرات</div>
+                                                        <div style="float:right;width:auto;margin-top:-2px">
+                                                            <input type="button" value="العقود" style="margin-right:100px; width:90px;" />
+                                                            <input type="button" value="العقود المنتهية" style="width: 150px;" />
+                                                            <input type="button" value="عقود على وشك الإنتهاء" style="width: 220px;" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="hr_60_left"></div>
+                                                <div class="hr_100"></div>
+                                                <div style="float:right;width:auto;margin-top:-2px">
+                                                    <input type="button" value="العقود" style="margin-right:100px; width:90px;" />
+                                                    <input type="button" value="العقود المنتهية" style="width: 150px;" />
+                                                    <input type="button" value="عقود على وشك الإنتهاء" style="width: 220px;" />
+                                                </div>
+                                                <div class="hr_90" style="margin-top:0"></div>
+                                            </div>
+                                    </div>
+                                        </form>
+                                        <div style="float:left;width:100%;">
+                                            @RenderBody()
+                                        </div>
+                                </div>
+                                    <div class="col-md-3">
+                                        <div id="MenuAccordion">
+                                            <div class="wrapper">
+                                                <ui class="mainMenu">
+                                                    <li class="item" id="Contract">
+                                                        <a href="#Contract" class="btn">العقود</a>
+                                                        <div class="subMenu">
+                                                            @if (Session["MT_1101"].ToString() == "true")
+                                                            {
+                                                                <a href="~/Company_Contract/Index" style="padding-right: 30px;"> عقود شركات تأجير السيارات</a>
+                                                            }
+                                                            else
+                                                            {
+                                                                <a href="" style="padding-right: 30px;color:grey!important;cursor:no-drop;"> عقود شركات تأجير السيارات</a>
+                                                            }
+
+                                                            @if (Session["MT_1103"].ToString() == "true")
+                                                            {
+                                                                <a href="~/MASsupportingContract/Index" style="padding-right: 30px;">عقود الجهات المساندة</a>
+                                                            }
+                                                            else
+                                                            {
+                                                                <a href="" style="padding-right: 30px;color:grey;cursor:no-drop;">عقود الجهات المساندة</a>
+                                                            }
+                                                            <a href="~/MasPayTaxes/Index" style="padding-right: 30px;">تسديد مستحقات العقود</a>
+                                                            <a href="~/CompanyContractTaxOwed/Index" style="padding-right: 30px;">تقرير عن مستحقات العقود</a>
+                                                        </div>
+                                                    </li>
+                                                    <li class="item" id="Reports">
+                                                        <a href="#Reports" class="btn">التقارير</a>
+                                                        <div class="subMenu">
+                                                            @if (Session["MT_1201"].ToString()=="true")
+                                                            {
+                                                                <a href="#" style="padding-right: 30px;">تقارير إدارية مختصرة</a>
+                                                            }
+                                                            else
+                                                            {
+                                                                <a href="" style="padding-right: 30px;color:grey;cursor:no-drop;">تقارير إدارية مختصرة</a>
+                                                            }
+                                                            @if (Session["MT_1202"].ToString()=="true")
+                                                            {
+                                                                <a href="#" style="padding-right: 30px;">تقارير مالية مختصرة</a>
+                                                            }
+                                                            else
+                                                            {
+                                                                <a href="" style="padding-right: 30px;color:grey;cursor:no-drop;">تقارير مالية مختصرة</a>
+                                                            }
+                                                            @if (Session["MT_1203"].ToString()=="true")
+                                                            {
+                                                                <a href="#" style="padding-right: 30px;">تقارير إدارية تفصيلية</a>
+                                                            }
+                                                            else
+                                                            {
+                                                                <a href="" style="padding-right: 30px;color:grey;cursor:no-drop;">تقارير إدارية تفصيلية</a>
+                                                            }
+                                                            @if (Session["MT_1204"].ToString()=="true")
+                                                            {
+                                                                <a href="#" style="padding-right: 30px;">تقارير مالية تفصيلية</a>
+                                                            }
+                                                            else
+                                                            {
+                                                                <a href="" style="padding-right: 30px;color:grey;cursor:no-drop;">تقارير مالية تفصيلية</a>
+                                                            }
+                                                            @if (Session["MT_1205"].ToString() =="true")
+                                                            {
+                                                                <a href="#" style="padding-right: 30px;">تقارير إحصائية</a>
+                                                            }
+                                                            else
+                                                            {
+                                                                <a href="" style="padding-right: 30px;color:grey;cursor:no-drop;">تقارير إحصائية</a>
+                                                            }
+                                                        </div>
+                                                    </li>
+                                                    <li class="item" id="TheTenants">
+                                                        <a href="#TheTenants" class="btn">المستأجرين</a>
+                                                        <div class="subMenu">
+                                                            @if (Session["MT_1301"].ToString() =="true")
+                                                            {
+                                                                <a href="#" style="padding-right: 30px;">إظافة بيانات مستأجر</a>
+                                                            }
+                                                            else
+                                                            {
+                                                                <a href="" style="padding-right: 30px;color:grey;cursor:no-drop;">إظافة بيانات مستأجر</a>
+                                                            }
+                                                            @if (Session["MT_1302"].ToString() =="true")
+                                                            {
+                                                                <a href="#" style="padding-right: 30px;">تقرير بيانات تفصيلية لمستأجر</a>
+                                                            }
+                                                            else
+                                                            {
+                                                                <a href="" style="padding-right: 30px;color:grey;cursor:no-drop;">تقرير بيانات تفصيلية لمستأجر</a>
+                                                            }
+                                                            @if (Session["MT_1303"].ToString() =="true")
+                                                            {
+                                                                <a href="#" style="padding-right: 30px;">عقود المستأجرين</a>
+                                                            }
+                                                            else
+                                                            {
+                                                                <a href="" style="padding-right: 30px;color:grey;cursor:no-drop;">عقود المستأجرين</a>
+                                                            }
+                                                            @if (Session["MT_1304"].ToString() =="true")
+                                                            {
+                                                                <a href="#" style="padding-right: 30px;">تقرير عقود تفصيلية لمستأجر</a>
+                                                            }
+                                                            else
+                                                            {
+                                                                <a href="" style="padding-right: 30px;color:grey;cursor:no-drop;">تقرير عقود تفصيلية لمستأجر</a>
+                                                            }
+                                                        </div>
+                                                    </li>
+                                                    <li class="item" id="Companies">
+                                                        <a href="#Companies" class="btn">الجهات</a>
+                                                        <div class="subMenu">
+                                                            @if (Session["MT_1401"].ToString() =="true")
+                                                            {
+                                                                <a href="~/Lessor/Index" style="padding-right: 30px;">شركات تأجير السيارات</a>
+                                                            }
+                                                            else
+                                                            {
+                                                                <a href="" style="padding-right: 30px;color:grey;cursor:no-drop;">شركات تأجير السيارات</a>
+                                                            }
+                                                            @if (Session["MT_1402"].ToString() =="true")
+                                                            {
+                                                                <a href="~/Supporting/index" style="padding-right: 30px;">الجهات المساندة</a>
+                                                            }
+                                                            else
+                                                            {
+                                                                <a href="" style="padding-right: 30px;color:grey;cursor:no-drop;">الشركات المساندة</a>
+                                                            }
+                                                        </div>
+                                                    </li>
+                                                    <li class="item" id="Cars">
+                                                        <a href="#Cars" class="btn">بيانات السيارات</a>
+                                                        <div class="subMenu">
+                                                            @if (Session["MT_1501"].ToString() =="true")
+                                                            {
+                                                                <a href="~/Brand/index" style="padding-right: 30px;" >الماركات</a>
+                                                                RentCar.Controllers.HomeController.SystemName = "1501";
+                                                            }
+                                                            else
+                                                            {
+                                                                <a href="" style="padding-right: 30px;color:grey;cursor:no-drop;">الماركات</a>
+                                                            }
+
+                                                            @if (Session["MT_1502"].ToString() =="true")
+                                                            {
+                                                                <a href="~/Model/Index" style="padding-right: 30px;">الطراز</a>
+                                                            }
+                                                            else
+                                                            {
+                                                                <a href="" style="padding-right: 30px;color:grey;cursor:no-drop;">الطراز</a>
+                                                            }
+
+                                                            @if (Session["MT_1503"].ToString() =="true")
+                                                            {
+                                                                <a href="~/Category/Index" style="padding-right: 30px;">الفئة</a>
+                                                            }
+                                                            else
+                                                            {
+                                                                <a href="" style="padding-right: 30px;color:grey;cursor:no-drop;">الفئة</a>
+                                                            }
+
+                                                            @if (Session["MT_1504"].ToString() =="true")
+                                                            {
+                                                                <a href="~/Color/index" style="padding-right: 30px;">اللون</a>
+                                                            }
+                                                            else
+                                                            {
+                                                                <a href="" style="padding-right: 30px;color:grey;cursor:no-drop;">اللون</a>
+                                                            }
+
+                                                            @if (Session["MT_1505"].ToString() =="true")
+                                                            {
+                                                                <a href="~/Features/index" style="padding-right: 30px;">المميزات</a>
+                                                            }
+                                                            else
+                                                            {
+                                                                <a href="" style="padding-right: 30px;color:grey;cursor:no-drop;">المميزات</a>
+                                                            }
+
+                                                            @if (Session["MT_1506"].ToString() =="true")
+                                                            {
+                                                                <a href="~/Specifications/index" style="padding-right: 30px;">المواصفات</a>
+                                                            }
+                                                            else
+                                                            {
+                                                                <a href="" style="padding-right: 30px;color:grey;cursor:no-drop;">المواصفات</a>
+                                                            }
+
+                                                            @if (Session["MT_1507"].ToString() =="true")
+                                                            {
+                                                                <a href="~/Additional/index" style="padding-right: 30px;">الإضافات</a>
+                                                            }
+                                                            else
+                                                            {
+                                                                <a href="" style="padding-right: 30px;color:grey;cursor:no-drop;">الإضافات</a>
+                                                            }
+
+                                                            @if (Session["MT_1508"].ToString() =="true")
+                                                            {
+                                                                <a href="~/CategoryCar/index" style="padding-right: 30px;">تحديد الفئة</a>
+                                                            }
+                                                            else
+                                                            {
+                                                                <a href="" style="padding-right: 30px;color:grey;cursor:no-drop;">تحديد الفئة</a>
+                                                            }
+
+                                                            @if (Session["MT_1509"].ToString() =="true")
+                                                            {
+                                                                <a href="~/Specifications/index" style="padding-right: 30px;">تحديد المواصفات</a>
+                                                            }
+                                                            else
+                                                            {
+                                                                <a href="" style="padding-right: 30px;color:grey;cursor:no-drop;">تحديد المواصفات</a>
+                                                            }
+
+                                                            @if (Session["MT_1510"].ToString() =="true")
+                                                            {
+                                                                <a href="~/Choices/index" style="padding-right: 30px;">الخيارات</a>
+                                                            }
+                                                            else
+                                                            {
+                                                                <a href="" style="padding-right: 30px;color:grey;cursor:no-drop;">الخيارات</a>
+                                                            }
+
+                                                        </div>
+                                                    </li>
+                                                    <li class="item" id="UserInfo">
+                                                        <a href="#UserInfo" class="btn">البيانات الشخصية</a>
+                                                        <div class="subMenu">
+                                                            @if (Session["MT_1601"].ToString() =="true")
+                                                            {
+                                                                <a href="~/Nationalities/index" style="padding-right: 30px;">الجنسية</a>
+                                                            }
+                                                            else
+                                                            {
+                                                                <a href="" style="padding-right: 30px;color:grey;cursor:no-drop;">الجنسية</a>
+                                                            }
+                                                            @if (Session["MT_1602"].ToString() =="true")
+                                                            {
+                                                                <a href="#" style="padding-right: 30px;">جهة العمل</a>
+                                                            }
+                                                            else
+                                                            {
+                                                                <a href="" style="padding-right: 30px;color:grey;cursor:no-drop;">جهة العمل</a>
+                                                            }
+                                                            @if (Session["MT_1603"].ToString() =="true")
+                                                            {
+                                                                <a href="~/Jobs/index" style="padding-right: 30px;">المهن</a>
+                                                            }
+                                                            else
+                                                            {
+                                                                <a href="" style="padding-right: 30px;color:grey;cursor:no-drop;">المهن</a>
+                                                            }
+                                                            @if (Session["MT_1604"].ToString() =="true")
+                                                            {
+                                                                <a href="~/Membership/index" style="padding-right: 30px;">العضوية</a>
+                                                            }
+                                                            else
+                                                            {
+                                                                <a href="" style="padding-right: 30px;color:grey;cursor:no-drop;">العضوية</a>
+                                                            }
+                                                            @if (Session["MT_1605"].ToString() =="true")
+                                                            {
+                                                                <a href="~/City/index" style="padding-right: 30px;">المدن</a>
+                                                            }
+                                                            else
+                                                            {
+                                                                <a href="" style="padding-right: 30px;color:grey;cursor:no-drop;">المدن</a>
+                                                            }
+                                                        </div>
+                                                    </li>
+
+                                                    <li class="item" id="Users">
+                                                        <a href="#Users" class="btn">المستخدمين</a>
+                                                        <div class="subMenu">
+                                                            @if (Session["MT_1701"].ToString() =="true")
+                                                            {
+                                                                <a href="~/User/index" style="padding-right: 30px;">المستخدمين</a>
+                                                            }
+                                                            else
+                                                            {
+                                                                <a href="" style="padding-right: 30px;color:grey;cursor:no-drop;">المستخدمين</a>
+                                                            }
+                                                            @if (Session["MT_1702"].ToString() =="true")
+                                                            {
+                                                                <a href="~/SubValidation/index" style="padding-right: 30px;">الصلاحيات</a>
+                                                            }
+                                                            else
+                                                            {
+                                                                <a href="" style="padding-right: 30px;color:grey;cursor:no-drop;">الصلاحيات</a>
+                                                            }
+                                                        </div>
+                                                    </li>
+                                                    <li class="item" id="Measures">
+                                                        <a href="#Measures" class="btn">الإجراءات</a>
+                                                        <div class="subMenu">
+                                                            @if (Session["MT_1801"].ToString() =="true")
+                                                            {
+                                                                <a href="~/Procedures/index" style="padding-right: 30px;">الإجراءات الإدارية</a>
+                                                            }
+                                                            else
+                                                            {
+                                                                <a href="" style="padding-right: 30px;color:grey;cursor:no-drop;">الإجراءات الإدارية</a>
+                                                            }
+
+                                                            @*  -------------------------------------- غير موجود بقائمة الصلاحيات--------------------------------------------*@
+                                                            <a href="~/Procedures/index" style="padding-right: 30px;">الإجراءات المالية</a>
+                                                           
+
+                                                            @if (Session["MT_1802"].ToString() =="true")
+                                                            {
+                                                                <a href="~/ServiceTamm/index" style="padding-right: 30px;">خدمات تم</a>
+                                                            }
+                                                            else
+                                                            {
+                                                                <a href="" style="padding-right: 30px;color:grey;cursor:no-drop;">خدمات تم</a>
+                                                            }
+
+                                                            @if (Session["MT_1803"].ToString() =="true")
+                                                            {
+                                                                <a href="#" style="padding-right: 30px;">الجهات المساندة الأساسية</a>
+                                                            }
+                                                            else
+                                                            {
+                                                                <a href="" style="padding-right: 30px;color:grey;cursor:no-drop;">الجهات المساندة الأساسية</a>
+                                                            }
+
+                                                            @if (Session["MT_1803"].ToString() =="true")
+                                                            {
+                                                                <a href="~/Inspection/index" style="padding-right: 30px;">الفحص الظاهري</a>
+                                                            }
+                                                            else
+                                                            {
+                                                                <a href="" style="padding-right: 30px;color:grey;cursor:no-drop;">الفحص الظاهري</a>
+                                                            }
+
+
+                                                        </div>
+                                                    </li>
+                                                    <li class="item" id="Services">
+                                                        <a href="#Services" class="btn" style="border-bottom: 1px solid ;">الخدمات</a>
+                                                        <div class="subMenu">
+                                                            @if (Session["MT_1901"].ToString() =="true")
+                                                            {
+                                                                <a href="#" style="padding-right: 30px;">الأنظمة</a>
+                                                            }
+                                                            else
+                                                            {
+                                                                <a href="" style="padding-right: 30px;color:grey;cursor:no-drop;">الأنظمة</a>
+                                                            }
+
+                                                            @if (Session["MT_1902"].ToString() =="true")
+                                                            {
+                                                                <a href="~/Tasks/index" style="padding-right: 30px;">المهام</a>
+                                                            }
+                                                            else
+                                                            {
+                                                                <a href="" style="padding-right: 30px;color:grey;cursor:no-drop;">المهام</a>
+                                                            }
+                                                            @if (Session["MT_1903"].ToString() =="true")
+                                                            {
+                                                                <a href="#" style="padding-right: 30px;">الرسائل الإرشادية للنظام</a>
+                                                            }
+                                                            else
+                                                            {
+                                                                <a href="" style="padding-right: 30px;color:grey;cursor:no-drop;">الرسائل الإرشادية للنظام</a>
+                                                            }
+
+                                                            @if (Session["MT_1904"].ToString() =="true")
+                                                            {
+                                                                <a href="~/Questions/index" style="padding-right: 30px;">الأسئلة الأكثر شيوعا</a>
+                                                            }
+                                                            else
+                                                            {
+                                                                <a href="" style="padding-right: 30px;color:grey;cursor:no-drop;">الأسئلة الأكثر شيوعا</a>
+                                                            }
+
+                                                        </div>
+                                                    </li>
+                                                </ui>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--end content page right-->
+                                </div>
+                            </div>
+                </div>
+            <!--content page /***layout **/end-->
+            </content>
+           @* <footer>
+                <div class="container">
+                    <div class="DivFooter">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <center>
+                                    <div class="menu_footer">
+                                        <a href="">من نحن؟</a>
+                                        @using (Html.BeginForm("Question", "Shared", FormMethod.Post))
+                                        {
+                                            <input type="submit" name="question" value="الأسئلة الأكثر شيوعا" style="font-weight: bold; color: #73A0C1; margin-top: -25px; margin-right: -350px; background-color: transparent; border-color: transparent "/>
+                                        }
+                                    </div>
+                                </center>
+                            </div>
+                            <div class="col-md-4">
+                                <center>
+                                    <div class="social_footer">
+                                        <span>تابعونا على</span><br>
+                                        <a href=""><i class="fa fa-facebook"></i></a>
+                                        <a href=""><i class="fa fa-twitter"></i></a>
+                                    </div>
+                                </center>
+                            </div>
+                            <div class="col-md-4">
+                                <center>
+                                    <div class="copyright">
+                                        <span>جميع الحقوق محفوظة</span>
+                                    </div>
+                                </center>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>*@
+        </div> 
+            <script>
+                var time = new Date().getTime();
+                $(document.body).bind("mousemove keypress", function (e) {
+                    time = new Date().getTime();
+                });
+
+                function refresh() {
+                    if (new Date().getTime() - time >= 60000*5)
+                        window.location.reload(true);
+                    else
+                        setTimeout(refresh, 10000);
+                }
+
+                setTimeout(refresh, 10000);
+            </script>
+    </body>
+</html>

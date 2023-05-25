@@ -1,0 +1,270 @@
+﻿@model IEnumerable<RentCar.Models.CR_Cas_Company_Contract>
+
+<div class="responsive-table-plugin">
+    <div class="table-rep-plugin">
+        <div class="table-responsive" data-pattern="priority-columns" style="border:none;">
+            <div id="dtBasicExample_print">
+                <table id="myTable" class="table table-striped mb-0" style="cursor:pointer">
+                    <thead>
+                        <tr>
+
+                            <th style="width:27%">
+                                المستند
+                            </th>
+                            <th style="width:27%">
+                                رقم العقد
+                            </th>
+                            <th style="width:12%">
+                                تاريخه
+                            </th>
+                            <th style="width:12%">
+                                بدايته
+                            </th>
+                            <th style="width:12%">
+                                نهايته
+                            </th>
+                            <th style="width:10%">
+                                الحالة
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbl">
+                        @foreach (var item in Model)
+                        {
+
+                            if (item.CR_Cas_Company_Contract_Code == "17")
+                            {
+                                <tr>
+                                    <td hidden>
+                                        <a href="~/CR_Cas_Company_Contract/Create/?LessorCode=@Html.DisplayFor(modelItem => item.CR_Cas_Company_Contract_Lessor)
+                                                                                        &ProcCode=@Html.DisplayFor(modelItem => item.CR_Cas_Company_Contract_Code)&Cno=@Html.DisplayFor(modelItem => item.CR_Cas_Company_Contract_No)">
+                                            @Html.DisplayFor(modelItem => item.CR_Cas_Company_Contract_No)
+                                        </a>
+                                    </td>
+                                    <td  style="vertical-align:middle;width:27%">
+                                        <a href="~/CR_Cas_Company_Contract/Create/?LessorCode=@Html.DisplayFor(modelItem => item.CR_Cas_Company_Contract_Lessor)
+                                                                                        &ProcCode=@Html.DisplayFor(modelItem => item.CR_Cas_Company_Contract_Code)&Cno=@Html.DisplayFor(modelItem => item.CR_Cas_Company_Contract_No)">
+                                            @Html.DisplayFor(modelItem => item.CR_Mas_Sup_Procedures.CR_Mas_Sup_Procedures_Ar_Name)
+                                        </a>
+                                    </td>
+
+                                    <td style="vertical-align:middle;width:27%">
+
+                                        @Html.DisplayFor(model => item.CR_Cas_Company_Contract_Number)
+
+                                    </td>
+                                    <td style="text-align:center;vertical-align:middle;width:12%">
+                                        @if (item.CR_Cas_Company_Contract_Date != null)
+                                        {
+
+                                            @item.CR_Cas_Company_Contract_Date.Value.ToString("yyyy/MM/dd")
+
+                                        }
+                                    </td>
+
+                                    <td style="text-align:center;vertical-align:middle;width:12%">
+                                        @if (item.CR_Cas_Company_Contract_Start_Date != null)
+                                        {
+
+                                            @item.CR_Cas_Company_Contract_Start_Date.Value.ToString("yyyy/MM/dd")
+
+                                        }
+                                    </td>
+                                    <td style="text-align:center;vertical-align:middle;width:12%">
+                                        @if (item.CR_Cas_Company_Contract_End_Date != null)
+                                        {
+
+                                            @item.CR_Cas_Company_Contract_End_Date.Value.ToString("yyyy/MM/dd")
+
+                                        }
+                                    </td>
+
+                                    <td style="text-align:center;vertical-align:middle;width:10%">
+
+                                        @if (item.CR_Cas_Company_Contract_Status == "N")
+                                        {
+                                            <label style="color: darkcyan; float: inherit;">لم يسجل</label>
+                                        }
+
+                                        @if (item.CR_Cas_Company_Contract_Status == "D")
+                                        {
+                                            <label style="color: red; float: inherit;">محذوف</label>
+                                        }
+                                        @if (item.CR_Cas_Company_Contract_Status == "A")
+                                        {
+                                            <label style="color: green; float: inherit; ">نشط</label>
+                                        }
+                                        @if (item.CR_Cas_Company_Contract_Status == "E")
+                                        {
+                                            <label style="color: crimson; float: inherit;">منتهي</label>
+                                        }
+                                        @if (item.CR_Cas_Company_Contract_Status == "X")
+                                        {
+                                            <label style="color: darkorange; float: inherit;">على وشك الإنتهاء</label>
+                                        }
+
+                                    </td>
+
+                                </tr>
+                            }
+                            else if (item.CR_Cas_Company_Contract_Code == "19")
+                            {
+                                <tr>
+                                    <td style="vertical-align:middle;width:27%">
+                                        <a href="~/CR_Cas_Company_Contract/Create/?LessorCode=@Html.DisplayFor(modelItem => item.CR_Cas_Company_Contract_Lessor)
+                                                                                        &ProcCode=@Html.DisplayFor(modelItem => item.CR_Cas_Company_Contract_Code)&Cno=@Html.DisplayFor(modelItem => item.CR_Cas_Company_Contract_No)">
+
+                                            @Html.DisplayFor(modelItem => item.CR_Mas_Sup_Procedures.CR_Mas_Sup_Procedures_Ar_Name)
+
+                                    </td>
+
+                                    <td style="vertical-align:middle;width:27%">
+
+                                        @Html.DisplayFor(model => item.CR_Cas_Company_Contract_Number)
+
+                                    </td>
+                                    <td style="text-align:center;vertical-align:middle;width:12%">
+                                        @if (item.CR_Cas_Company_Contract_Date != null)
+                                        {
+
+                                            @item.CR_Cas_Company_Contract_Date.Value.ToString("yyyy/MM/dd")
+
+                                        }
+                                    </td>
+
+                                    <td style="text-align:center;vertical-align:middle;width:12%">
+                                        @if (item.CR_Cas_Company_Contract_Start_Date != null)
+                                        {
+
+                                            @item.CR_Cas_Company_Contract_Start_Date.Value.ToString("yyyy/MM/dd")
+
+                                        }
+                                    </td>
+                                    <td style="text-align:center;vertical-align:middle;width:12%">
+                                        @if (item.CR_Cas_Company_Contract_End_Date != null)
+                                        {
+
+                                            @item.CR_Cas_Company_Contract_End_Date.Value.ToString("yyyy/MM/dd")
+
+                                        }
+                                    </td>
+
+                                    <td style="text-align:center;vertical-align:middle;width:10%">
+
+                                        @if (item.CR_Cas_Company_Contract_Status == "N")
+                                        {
+                                            <label style="color: darkcyan; float: inherit;">لم يسجل</label>
+                                        }
+
+                                        @if (item.CR_Cas_Company_Contract_Status == "D")
+                                        {
+                                            <label style="color: red; float: inherit;">محذوف</label>
+
+                                        }
+                                        @if (item.CR_Cas_Company_Contract_Status == "A")
+                                        {
+                                            <label style="color: green; float: inherit;">نشط</label>
+
+                                        }
+                                        @if (item.CR_Cas_Company_Contract_Status == "E")
+                                        {
+                                            <label style="color: crimson; float: inherit;">منتهي</label>
+                                        }
+                                        @if (item.CR_Cas_Company_Contract_Status == "X")
+                                        {
+                                          <label style="color: darkorange; float: inherit;">على وشك الإنتهاء</label>
+                                        }
+
+                                    </td>
+
+
+                                </tr>
+                            }
+                            else
+                            {
+                                <tr>
+
+                                    <td style="vertical-align:middle;width:27%">
+
+
+                                        @Html.DisplayFor(modelItem => item.CR_Mas_Sup_Procedures.CR_Mas_Sup_Procedures_Ar_Name)
+
+                                    </td>
+
+                                    <td style="vertical-align:middle;width:27%">
+
+                                        @Html.DisplayFor(model => item.CR_Cas_Company_Contract_Number)
+
+                                    </td>
+                                    <td style="text-align:center;vertical-align:middle;width:12%">
+                                        @if (item.CR_Cas_Company_Contract_Date != null)
+                                        {
+
+                                            @item.CR_Cas_Company_Contract_Date.Value.ToString("yyyy/MM/dd")
+
+                                        }
+                                    </td>
+
+                                    <td style="text-align:center;vertical-align:middle;width:12%">
+                                        @if (item.CR_Cas_Company_Contract_Start_Date != null)
+                                        {
+
+                                            @item.CR_Cas_Company_Contract_Start_Date.Value.ToString("yyyy/MM/dd")
+
+                                        }
+                                    </td>
+                                    <td style="text-align:center;vertical-align:middle;width:12%">
+                                        @if (item.CR_Cas_Company_Contract_End_Date != null)
+                                        {
+
+                                            @item.CR_Cas_Company_Contract_End_Date.Value.ToString("yyyy/MM/dd")
+
+                                        }
+                                    </td>
+
+                                    <td style="text-align:center;vertical-align:middle;width:10%">
+
+                                        @if (item.CR_Cas_Company_Contract_Status == "N")
+                                        {
+                                            <label style="color: darkcyan; float: inherit;">لم يسجل</label>
+                                        }
+
+                                        @if (item.CR_Cas_Company_Contract_Status == "D")
+                                        {
+                                            <label style="color: red; float: inherit;">محذوف</label>
+                                        }
+                                        @if (item.CR_Cas_Company_Contract_Status == "A")
+                                        {
+                                            <label style="color: green; float: inherit;">نشط</label>
+                                        }
+                                        @if (item.CR_Cas_Company_Contract_Status == "E")
+                                        {
+                                            <label style="color: crimson; float: inherit;">منتهي</label>
+                                        }
+                                        @if (item.CR_Cas_Company_Contract_Status == "X")
+                                        {
+                                            <label style="color: darkorange; float: inherit;">على وشك الإنتهاء</label>
+                                        }
+
+                                    </td>
+
+                                </tr>
+                            }
+
+
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <iframe name="print_frame" width="0" height="0" frameborder="0" src="about:blank"></iframe>
+            <script>
+                                                    function printDiv() {
+                                                        window.frames["print_frame"].document.body.innerHTML = document.getElementById("dtBasicExample_print").innerHTML;
+                                                        window.frames["print_frame"].window.focus();
+                                                        window.frames["print_frame"].window.print();
+                                                    }
+            </script>
+
+        </div>
+    </div>
+</div>

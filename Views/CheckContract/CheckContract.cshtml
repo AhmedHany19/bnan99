@@ -1,0 +1,212 @@
+﻿
+@{
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+    <head runat="server">
+        <title>Rent Car</title>
+        <meta http-equiv="Page-Exit" content="progid:DXImageTransform.Microsoft.Fade(Duration=0.3)" />
+        <link type="text/css" rel="stylesheet" href="~/css/min/richfaces1814.css?v=200930164155" />
+
+        <link type="image/x-icon" rel="shortcut icon" href="images/w.png" />
+
+       
+        <link href="~/BSys3Styles/CSS/bootstrap.min.css" id="bootstrap-stylesheet" rel="stylesheet" type="text/css" />
+
+        <link href="~/BSys3Styles/CSS/icons.min.css" rel="stylesheet" />
+        <link href="~/BSys3Styles/CSS/style_app.css" rel="stylesheet" />
+        <link href="~/BSys3Styles/CSS/app-rtl.min.css" id="bootstrap-stylesheet" rel="stylesheet" type="text/css" />
+
+        <link href="~/Bootstrap_Arabic/font-awesome.css" type="text/css" rel="stylesheet">
+        <style>
+            .authentication-bg {
+                padding-bottom: 0
+            }
+
+            input {
+                text-align: right
+            }
+
+            label {
+                float: right
+            }
+
+            .parsley-errors-list {
+                font-size: 14px
+            }
+
+            .error_span {
+                font-size: 14px;
+                font-family: Roboto,sans-serif;
+                color: #ff5b5b;
+                padding-right: 0px;
+                float: right;
+            }
+           
+        </style>
+    </head>
+    <body class="authentication-bg">
+
+        <div class="account-pages mt-1 mb-1">
+            <div class="container">
+                <div class="row justify-content-center">
+
+                    <div style="border-bottom:solid 1px #EDA63C;width:580px">
+                        <div class="row">
+
+                            <div class="col-md-12">
+                                <img src="~/BSys3Styles/Images/logo.png" style="height:30px; margin:0 auto;display:block" />
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row justify-content-center" style="margin-top:7vh;">
+                    <div class="col-md-8 col-lg-6 col-xl-6">
+
+                        <center>
+                            <h2 style="color:#5292C3">
+                                بنان لإدارة تأجير السيارات
+                            </h2>
+                        </center>
+                        <div class="card" style="margin-top:7vh;">
+
+                            <div class="card-body p-4">
+
+                                <div class="text-center mb-4">
+                                    <h4 class="text-uppercase mt-0">شاشة التحقق من العقود</h4>
+                                </div>
+
+                                <form id="form_validation form" runat="server" method="post" data-parsley-validate="" novalidate="">
+                                    <input type="text" id="path" name="path" hidden />
+                                    <div class="form-group mb-3">
+                                        <label><b>الرقم التسلسلي</b></label>
+                                        <input type="text" class="form-control" name="CarSerialNo" id="CarSerialNo" maxlength="10" autocomplete="off" required />
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <span id="ContractShow" style="color:red">
+                                            <input type="button" onclick="ShowPDF();" name="btn" id="btn" value="عرض الملف" class="btn btn-primary btn-block" style="display:none" />
+                                        </span>
+                                    </div>
+
+                                    <div class="form-group mb-0 text-center">
+                                        <div>
+                                            <input type="button" onclick="check();" name="Check" value="تحقق" class="btn btn-primary btn-block" />
+
+                                        </div>
+                                    </div>
+
+                                </form>
+
+                            </div> <!-- end card-body -->
+                        </div>
+
+
+                        <style>
+
+                            .reseau i {
+                                color: #EDA63C;
+                                font-size: 24px;
+                                margin-top: 5px;
+                                margin-right: 5px;
+                                float: left
+                            }
+
+                            .footer-reseau a {
+                                margin-right: 5px
+                            }
+
+                            .footer a, .footer-links a, .footer {
+                                color: #fff !important;
+                                font-size: 16px;
+                            }
+
+                            .footer-reseau a, .footer-reseau i {
+                                color: #fff !important;
+                                font-size: 24px;
+                            }
+
+                            .footer-links a {
+                                padding-left: 10px;
+                                padding-right: 10px;
+                                float: right
+                            }
+                        </style>
+                        <div class="row" style="        position: fixed;
+        width: 580px;display:inline-block;
+        bottom: 0;
+        border-top: solid 1px #EDA63C;
+        background: #0288C7;
+        color: #fff;
+        height: 5vh;
+        padding: 0 15px;
+        line-height: 5vh;margin-left:-15px">
+
+                            <div class="">
+                                <div class="text-md-right footer-reseau d-none d-sm-block" style="float:left;margin-top:0px;">
+                                    <a href="javascript:void(0);"><i class="fa fa-facebook-square"></i></a>
+                                    <a href="javascript:void(0);"> <i class="fa fa-linkedin-square"></i></a>
+                                    <a href="javascript:void(0);"><i class="fa fa-twitter-square"></i></a>
+                                    <a href="javascript:void(0);"><i class="fa fa-youtube-square"></i></a>
+                                </div>
+                                <div class="text-md-left footer-links d-none d-sm-block" style="float:right;width:75%">
+                                    <a href="javascript:void(0);">من نحن</a>
+                                    <a href="javascript:void(0);">الأكثر شيوعا</a>
+                                    <a href="javascript:void(0);">سياسة الخصوصية</a>
+                                    <a href="javascript:void(0);">الشروط والاحكام</a>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div> <!-- end col -->
+
+                </div>
+
+
+                <!-- end row -->
+            </div>
+            <!-- end container -->
+        </div>
+        <!-- end page -->
+        <!-- Vendor js -->
+        <script src="~/BSys3 Styles/Js/vendor.min.js"></script>
+
+        <script src="~/BSys3Styles/Js/parsley_ar.min.js"></script>
+        <script src="~/BSys3Styles/Js/pages/form-validation.init.js"></script>
+        <script src="~/BSys3Styles/Js/app.min.js"></script>
+
+        <script>
+            function check() {
+
+                
+                $.ajax({
+                    url: '@Url.Action("Check", "CheckContract")',
+                    type: "GET",
+                    data: { Serial: $("#CarSerialNo").val() },
+                    success: function (result) {
+                        if (result != "X" && result!="" && result!=null) {
+                            document.getElementById('path').value = result;
+                            var pt = document.getElementById('path').value;
+                            
+                            window.open(
+                                '/CheckContract/ShowPDF/CheckContract?p=' + pt,
+                                '_blank'
+                            );
+                           
+                        } else {
+                            document.getElementById('ContractShow').innerHTML ="عفوا هذا الملف غير موجود";
+                        }
+                    }
+                });
+            }
+        </script>
+        
+       
+    </body>
+
+

@@ -1,0 +1,251 @@
+﻿@model IEnumerable<RentCar.Models.CR_Cas_Sup_Membership_Conditions>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_CASLayout.cshtml";
+}
+<style>
+    label {
+        float: none
+    }
+
+    .radio_top {
+        float: right;
+        margin-right: 10px
+    }
+    .form-control {
+        border: 0;
+        height: 38px;
+    }
+</style>
+<div class="content">
+    <!-- Start Content-->
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-12">
+
+                <div class="card-box table-responsive" style="height:79vh">
+                    <div class="title_corp"><h3> العضوية/عرض البيانات</h3></div>
+                    <div class="subtitle_corp">.تمكنك الصفحة من تحديث شروط العضوية</div>
+                    <div class="hr_60"></div>
+                    <div class="hr_80"></div>
+                    <div class="corp_page">
+                        <div class="page_content">
+                            <form id="form" action="/CasConditionsMembership/Create" enctype="multipart/form-data" method="post" data-parsley-validate="" novalidate="">
+                                @Html.AntiForgeryToken()
+                                <div class="form_bg">
+                                    <div class="href_layout" style="float:right;margin-top:15px;margin-bottom:10px; width: 100%">
+                                        <a href="/CasHome/index" class="btn_form"><i class="fa fa-times" title="إغلاق"></i></a>
+
+                                    </div>
+
+
+                                    <div class="responsive-table-plugin">
+                                        <div class="table-rep-plugin">
+                                            <div class="table-responsive" data-pattern="priority-columns" style="border:none;">
+                                                <div id="dtBasicExample_print">
+                                                    <table id="myTable" class="table table-striped mb-0" style="cursor:pointer;">
+                                                        <thead>
+                                                            <tr>
+
+                                                                <th hidden></th>
+                                                                <th style="width:7%;">العضوية</th>
+                                                                <th style="width:5%;">تفعيل</th>
+                                                                <th style="width:10%;">المبالغ المتداولة</th>
+                                                                <th style="width:5%;">الشرط</th>
+                                                                <th style="width:11%;">الكيلوات المقطوعة</th>
+                                                                <th style="width:5%">الشرط</th>
+                                                                <th style="width:8%;">عدد العقود</th>
+                                                                <th style="width:5%;" hidden>النتيجة</th>
+                                                                <th style="width:6%;" hidden>المجموعة</th>
+                                                                <th style="width:28%;" hidden>الصورة</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody id="tbl" style="height:290px">
+                                                            @{
+                                                                int i = 0;
+                                                                foreach (var item in Model)
+                                                                {
+                                                                    i++;
+                                                                    <tr>
+                                                                        <td hidden>
+                                                                            @i
+                                                                        </td>
+                                                                        
+                                                                        <td style="width:7%;">
+                                                                            @Html.DisplayFor(modelItem => item.CR_Mas_Sup_Membership.CR_Mas_Sup_Membership_Ar_Name)
+                                                                        </td>
+                                                                        <td style="width:5%;" align="center" valign="middle">
+                                                                            <input type="checkbox" id="CR_Cas_Sup_Membership_Conditions_Insert-@item.CR_Cas_Sup_Membership_Conditions_Code"
+                                                                                   name="CR_Cas_Sup_Membership_Conditions_Insert-@item.CR_Cas_Sup_Membership_Conditions_Code" class="MyCheckBox"
+                                                                                   checked="@item.CR_Cas_Sup_Membership_Conditions_Insert.GetValueOrDefault()" style="width:5mm;height:5mm;margin-top:5px">
+                                                                        </td>
+                                                                        <td style="width:10%;padding:0">
+                                                                            <input type="text" id="CR_Cas_Sup_Membership_Conditions_Amount-@item.CR_Cas_Sup_Membership_Conditions_Code"
+                                                                            name="CR_Cas_Sup_Membership_Conditions_Amount-@item.CR_Cas_Sup_Membership_Conditions_Code" class="form-control lbl col-md-12"
+                                                                            value="@item.CR_Cas_Sup_Membership_Conditions_Amount.GetValueOrDefault()" style="border:none;height:38px;"
+                                                                            onfocusout="calc('CR_Cas_Sup_Membership_Conditions_Amount-@item.CR_Cas_Sup_Membership_Conditions_Code')">
+
+                                                                        </td>
+                                                                        <td style="width: 5%; padding: 0">
+                                                                            @{ 
+                                                                               var cnd1= new List<SelectListItem> {
+                                                                                  new SelectListItem {Value="1",Text="و" ,Selected=item.CR_Cas_Sup_Membership_Conditions_Link_1==1},
+                                                                                  new SelectListItem {Value="2",Text="أو",Selected=item.CR_Cas_Sup_Membership_Conditions_Link_1==2},
+                                                                                  new SelectListItem {Value="3",Text="بدون",Selected=item.CR_Cas_Sup_Membership_Conditions_Link_1==3},
+                                                                                  };
+                                                                            }
+                                                                            @Html.DropDownList("Conditions1", cnd1,  htmlAttributes: new
+                                                                            {
+                                                                           id = "Conditions1_" + item.CR_Cas_Sup_Membership_Conditions_Code,
+                                                                           Name = "Conditions1_" + item.CR_Cas_Sup_Membership_Conditions_Code,
+                                                                           @class = "form-control ",
+                                                                           style = "float:right;",
+                                                                           onchange = "calc('Conditions1-" + item.CR_Cas_Sup_Membership_Conditions_Code + "')"
+                                                                            })
+
+                                                                        <td style="width: 11%; padding: 0">
+                                                                            <input type="text" id="CR_Cas_Sup_Membership_Conditions_KM-@item.CR_Cas_Sup_Membership_Conditions_Code"
+                                                                            name="CR_Cas_Sup_Membership_Conditions_KM-@item.CR_Cas_Sup_Membership_Conditions_Code" class="form-control lbl col-md-12"
+                                                                            value="@item.CR_Cas_Sup_Membership_Conditions_KM.GetValueOrDefault()"
+                                                                            onfocusout="calc('CR_Cas_Sup_Membership_Conditions_KM_@item.CR_Cas_Sup_Membership_Conditions_Code')">
+
+                                                                        </td>
+                                                                        <td style="width: 5%; padding: 0">
+                                                                            @{
+                                                                                var cnd2 = new List<SelectListItem> {
+                                                                                  new SelectListItem {Value="1",Text="و" ,Selected=item.CR_Cas_Sup_Membership_Conditions_Link_2==1},
+                                                                                  new SelectListItem {Value="2",Text="أو",Selected=item.CR_Cas_Sup_Membership_Conditions_Link_2==2},
+                                                                                  new SelectListItem {Value="3",Text="بدون",Selected=item.CR_Cas_Sup_Membership_Conditions_Link_2==3},
+                                                                                  };
+                                                                            }
+                                                                            @Html.DropDownList("Conditions2", cnd2, htmlAttributes: new
+                                                                            {
+                                                                               id = "Conditions2_" + item.CR_Cas_Sup_Membership_Conditions_Code,
+                                                                               Name = "Conditions2_" + item.CR_Cas_Sup_Membership_Conditions_Code,
+                                                                               @class = "form-control ",
+                                                                               style = "float:right;",
+                                                                               onchange = "calc('Conditions2-" + item.CR_Cas_Sup_Membership_Conditions_Code + "')"
+                                                                            })
+                                                                        </td>
+
+                                                                        <td style="width: 8%; padding: 0">
+                                                                            <input type="text" id="CR_Cas_Sup_Membership_Conditions_Contract_No-@item.CR_Cas_Sup_Membership_Conditions_Code"
+                                                                            name="CR_Cas_Sup_Membership_Conditions_Contract_No-@item.CR_Cas_Sup_Membership_Conditions_Code" class="form-control lbl col-md-12"
+                                                                            value="@item.CR_Cas_Sup_Membership_Conditions_Contract_No.GetValueOrDefault()"
+                                                                            onfocusout="calc('CR_Cas_Sup_Membership_Conditions_Contract_No-@item.CR_Cas_Sup_Membership_Conditions_Code')">
+
+                                                                        </td>
+                                                                        <td style="width: 5%; padding: 0" hidden>
+                                                                            <input type="text" id="result-@item.CR_Cas_Sup_Membership_Conditions_Code" name="result-@item.CR_Cas_Sup_Membership_Conditions_Code"
+                                                                                   value="@item.CR_Cas_Sup_Membership_Conditions_Insert_Code" class=" form-control" />
+                                                                        </td>
+                                                                        <td style="width:6%;" hidden>
+                                                                            <input type="text" id="Group-@item.CR_Cas_Sup_Membership_Conditions_Code" name="Group-@item.CR_Cas_Sup_Membership_Conditions_Code"
+                                                                                   value="@item.CR_Cas_Sup_Membership_Conditions_Insert_Group" class=" form-control" />
+                                                                        </td>
+                                                                        <td style="width: 28%; padding: 0"hidden>
+                                                                            <input type="file" id="Img-@item.CR_Cas_Sup_Membership_Conditions_Code" name="Img-@item.CR_Cas_Sup_Membership_Conditions_Code"
+                                                                                   class="form-control" style="float:right;width:fit-content; object-fit: fill;padding-top:3px" accept="image/*" onchange="loadImg(event,'@item.CR_Cas_Sup_Membership_Conditions_Code')" />
+                                                                            @if (item.CR_Cas_Sup_Membership_Conditions_Picture != null && item.CR_Cas_Sup_Membership_Conditions_Picture!="")
+                                                                            {
+                                                                                <img id="MembershipImage-@item.CR_Cas_Sup_Membership_Conditions_Code" name="MembershipImage-@item.CR_Cas_Sup_Membership_Conditions_Code"
+                                                                                     class="zoom" style="float: left; margin-left: 0px; width: 38px; height: 38px; " src="@Url.Content(item.CR_Cas_Sup_Membership_Conditions_Picture)" />
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                <img id="MembershipImage-@item.CR_Cas_Sup_Membership_Conditions_Code" name="MembershipImage-@item.CR_Cas_Sup_Membership_Conditions_Code"
+                                                                                     class="zoom" style="float: left; margin-left: 0px; width: 38px; height: 38px;" src="" />
+                                                                            }
+
+                                                                        </td>
+                                                                    </tr>
+                                                                }
+                                                            }
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <iframe name="print_frame" width="0" height="0" frameborder="0" src="about:blank"></iframe>
+
+                                                <div>
+                                                    <input type="submit" name="Save" class="btn btn-primary waves-effect" id="add_btn" value="حفظ" />
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function calc(id) {
+
+            //var ColName = id.split("-")[0];
+            var result = "";
+            var RowNumber = id.split("-")[1];
+            //alert(RowNumber);
+            var amount = document.getElementById('CR_Cas_Sup_Membership_Conditions_Amount-' + RowNumber).value;
+            if (Number(amount) > 0) {
+                //alert(amount);
+                result = result + "V";
+            } else {
+                result = result + "E";
+            }
+
+            var cond1 = document.getElementById('Conditions1_' + RowNumber).value;
+            result = result + cond1;
+
+            var Km = document.getElementById('CR_Cas_Sup_Membership_Conditions_KM-' + RowNumber).value;
+            if (Number(Km) > 0) {
+                //alert(amount);
+                result = result + "V";
+            } else {
+                result = result + "E";
+            }
+
+            var cond2 = document.getElementById('Conditions2_' + RowNumber).value;
+            result = result + cond2;
+
+
+            var ContractNo = document.getElementById('CR_Cas_Sup_Membership_Conditions_Contract_No-' + RowNumber).value;
+            if (Number(ContractNo) > 0) {
+                //alert(amount);
+                result = result + "V";
+            } else {
+                result = result + "E";
+            }
+            document.getElementById('result-' + RowNumber).value = result;
+
+            var group = "";
+            if (result.length == 5) {
+              $.ajax({
+                    url: '@Url.Action("GetMembershipGroup", "CasConditionsMembership")',
+                    type: "GET",
+                    data: { No: result },
+                    success: function (Info) {
+                        group = Info;
+                        document.getElementById('Group-' + RowNumber).value = group;
+                    }
+                });
+            }
+
+            //document.getElementById('result_' + RowNumber).value = result;
+        }
+
+
+       
+        var loadImg = function (event, Code) {
+            //alert('MembershipImage-' + Code);
+            var image = document.getElementById('MembershipImage-'+Code);
+            image.src = URL.createObjectURL(event.target.files[0]);
+        };
+    
+    </script>
+</div>

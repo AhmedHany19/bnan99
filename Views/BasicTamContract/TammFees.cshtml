@@ -1,0 +1,30 @@
+﻿@model IEnumerable<RentCar.Models.CR_Mas_Sup_Service_Fee_Tamm>
+
+<table class="table table50" id="myTable">
+    <thead>
+        <tr>
+            <th width="70%">
+                نوع الخدمة
+            </th>
+
+            <th width="30%">
+                @Html.DisplayNameFor(model => model.CR_Mas_Sup_Service_Fee_Tamm_Value)
+            </th>
+        </tr>
+        </thead>
+    <tbody id="tbl">
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CR_Mas_Sup_Service_Fee_Tamm_Ar_Name)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.CR_Mas_Sup_Service_Fee_Tamm_Value)
+                </td>
+
+            </tr>
+        }
+        </tbody>
+</table>

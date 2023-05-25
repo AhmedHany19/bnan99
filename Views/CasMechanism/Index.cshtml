@@ -1,0 +1,76 @@
+﻿@model IEnumerable<RentCar.Models.CR_Cas_Sup_Follow_Up_Mechanism>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CR_Cas_Sup_Follow_Up_Mechanism_Activate_Service)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CR_Cas_Sup_Follow_Up_Mechanism_Befor_Credit_Limit)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CR_Cas_Sup_Follow_Up_Mechanism_Befor_Expire)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CR_Cas_Sup_Follow_Up_Mechanism_Befor_KM)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CR_Cas_Sup_Follow_Up_Mechanism_After_Expire)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CR_Cas_Sup_Follow_Up_Mechanism_Default_KM)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CR_Mas_Com_Lessor.CR_Mas_Com_Lessor_Logo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CR_Mas_Sup_Procedures.CR_Mas_Sup_Procedures_Type)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Follow_Up_Mechanism_Activate_Service)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Follow_Up_Mechanism_Befor_Credit_Limit)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Follow_Up_Mechanism_Befor_Expire)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Follow_Up_Mechanism_Befor_KM)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Follow_Up_Mechanism_After_Expire)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Follow_Up_Mechanism_Default_KM)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CR_Mas_Com_Lessor.CR_Mas_Com_Lessor_Logo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CR_Mas_Sup_Procedures.CR_Mas_Sup_Procedures_Type)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>

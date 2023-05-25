@@ -1,0 +1,136 @@
+#preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background:transparent;
+    z-index: 99999
+}
+
+#status {
+    position: fixed;
+    display: block;
+    top: calc(50% - 100px);
+    left: calc(50% - 100px);
+    width: 200px;
+    height: 200px;
+    background: #fff;
+    background-image: url('../Images/logo.png');
+    background-repeat: no-repeat;
+    opacity: 1;
+    visibility: visible;
+    -webkit-transition: all .5s ease-in-out;
+    transition: all .5s ease-in-out;
+    z-index: 9999999999;
+    border-radius: 50%;
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+    -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+}
+    #status:after {
+        content: " ";
+        display: block;
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        border: 6.4px solid currentColor;
+        border-color: currentColor transparent currentColor transparent;
+        animation: lds-dual-ring 1.2s linear infinite;
+        margin-top: -200px;
+    }
+
+@keyframes lds-dual-ring {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@-webkit-keyframes scaleout {
+    0% {
+        -webkit-transform: scale(0)
+    }
+
+    100% {
+        -webkit-transform: scale(1);
+        opacity: 0
+    }
+}
+
+@keyframes scaleout {
+    0% {
+        transform: scale(0);
+        -webkit-transform: scale(0)
+    }
+
+    100% {
+        transform: scale(1);
+        -webkit-transform: scale(1);
+        opacity: 0
+    }
+}
+
+@media(max-width:369px) {
+    #status {
+        left: -40px
+    }
+}
+
+.hidden {
+    display: none
+}
+
+.text-danger {
+    font-size: 12px;
+    margin-right: 160px;
+    font-family: 'Times New Roman';
+}
+.texterr {
+    font-family: 'Times New Roman' !important;
+    font-size: 12px !important;
+    color: red !important;
+    margin-right: 45% !important;
+    height: 20px;
+}
+#asterisk {
+    color: red;
+    float: right;
+    font-size: 15px !important;
+    /*margin-right: 130px;*/
+    margin-top: 0px;
+    position: absolute;
+    font-family: 'Times New Roman';
+    padding-right: 0px !important;
+}
+
+.hr_80 {
+    float: right;
+    width: 80%;
+    height: 0.5px;
+    background: #73A0C1;
+    margin-top: 3px;
+}
+
+.hr_60 {
+    float: right;
+    width: 60%;
+    height: 0.5px;
+    background: #73A0C1;
+    /*.zoom {
+        padding: 50px;
+
+        transition: transform .2s;
+        width: 100px;
+        height: 100px;
+
+    }
+
+        .zoom:hover {
+            -ms-transform: scale(1.5);*/ /* IE 9 */
+    /*-webkit-transform: scale(1.5);*/ /* Safari 3-8 */
+    /*transform: scale(1.5);
+        }*/

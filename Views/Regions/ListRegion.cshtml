@@ -1,0 +1,61 @@
+﻿@model IEnumerable<RentCar.Models.CR_Mas_Sup_Regions>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h4>قائمة المناطق</h4>
+
+<p>
+    @Html.ActionLink("إظافة", "Create", "Regions", null, new { @class = "btn btn-info" })
+</p>
+<div class="table-responsive">
+    <table class="table table-bordered" style="width:100%">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CR_Mas_Sup_Regions_Ar_Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CR_Mas_Sup_Regions_En_Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CR_Mas_Sup_Regions_Fr_Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CR_Mas_Sup_Regions_Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CR_Mas_Sup_Regions_Reasons)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CR_Mas_Sup_Regions_Ar_Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CR_Mas_Sup_Regions_En_Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CR_Mas_Sup_Regions_Fr_Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CR_Mas_Sup_Regions_Status)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CR_Mas_Sup_Regions_Reasons)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.CR_Mas_Sup_Regions_Code },new {@class="btn btn-info" }) |
+                    @*@Html.ActionLink("Details", "Details", new { id = item.CR_Mas_Sup_Regions_Code }) |*@
+                    @Html.ActionLink("Delete", "Delete", new { id = item.CR_Mas_Sup_Regions_Code }, new { @class = "btn btn-danger" })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+

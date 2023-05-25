@@ -1,0 +1,93 @@
+﻿@model IEnumerable<RentCar.Models.CR_Cas_Account_Receipt>
+
+<div style="width: 100%; min-height: 25vh; overflow: auto;">
+    <table id="myTable" class="table table-striped mb-0" style="cursor: default; overflow-x: hidden">
+        <thead>
+            <tr>
+                <th style="width:5%">
+                    م
+                </th>
+                <th style="width:15%">
+                    رقم القيد
+                </th>
+                <th style="width:8%">
+                    تاريخ القيد
+                </th>
+                <th style="width:8%">
+                    نوع المرجع
+                </th>
+                <th style="width:8%">
+                    دائن
+                </th>
+                <th style="width:8%">
+                    مدين
+                </th>
+                <th style="width:10%">
+                    رصيد سابق
+                </th>
+                <th style="width:10%">
+                    حالة العهدة
+                </th>
+                <th>
+                    البيان
+                </th>
+            </tr>
+        </thead>
+        <tbody id="tbl">
+            @{
+                int c = 0;
+                foreach (var item in Model)
+                {
+                    c++;
+                    <tr>
+                        <td style="width:5%;text-align:center">
+                            <a href="~/BranchUserReceipt/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Account_Receipt_No)"> 
+                                @c
+                            </a>
+                        </td>
+                        <td style="width:15%">
+                            <a href="~/BranchUserReceipt/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Account_Receipt_No)">
+                                @Html.DisplayFor(modelItem => item.CR_Cas_Account_Receipt_No)
+                            </a>
+                        </td>
+                        <td style="width:8%">
+                            <a href="~/BranchUserReceipt/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Account_Receipt_No)">
+                                @item.CR_Cas_Account_Receipt_Date.Value.ToString("yyyy/MM/dd")
+                            </a>
+                        </td>
+                        <td style="width:8%">
+                            <a href="~/BranchUserReceipt/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Account_Receipt_No)">
+                                @Html.DisplayFor(modelItem => item.CR_Cas_Account_Receipt_Reference_Type)
+                            </a>
+                        </td>
+                        <td style="width:8%">
+                            <a href="~/BranchUserReceipt/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Account_Receipt_No)">
+                                @Html.DisplayFor(modelItem => item.CR_Cas_Account_Receipt_Payment)
+                            </a>
+                        </td>
+                        <td style="width:8%">
+                            <a href="~/BranchUserReceipt/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Account_Receipt_No)">
+                                @Html.DisplayFor(modelItem => item.CR_Cas_Account_Receipt_Receipt)
+                            </a>
+                        </td>
+                        <td style="width:10%">
+                            <a href="~/BranchUserReceipt/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Account_Receipt_No)">
+                                @Html.DisplayFor(modelItem => item.CR_Cas_Account_Receipt_User_Previous_Balance)
+                            </a>
+                        </td>
+                        <td style="width:10%">
+                            <a href="~/BranchUserReceipt/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Account_Receipt_No)">
+                                @Html.DisplayFor(modelItem => item.CR_Cas_Account_Receipt_Status)
+                            </a>
+                        </td>
+                        <td>
+                            <a href="~/BranchUserReceipt/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Account_Receipt_No)">
+                                @Html.DisplayFor(modelItem => item.CR_Cas_Account_Receipt_Reasons)
+                            </a>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>

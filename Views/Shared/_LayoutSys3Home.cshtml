@@ -1,0 +1,454 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutSys3.cshtml";
+}
+
+<head>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />   
+</head>
+<style>
+    #toast-message {
+        color: black;
+        background-color:black;
+    }
+    .toast-warning {
+        background-color: #f89406;
+    }
+</style>
+<div class="content">
+
+    <!-- Start Content-->
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-md-3">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="card-box bg-white" style="min-height:69px; font-family:Arial !important;">
+                            <h4 class="header-title mt-0 mb-0" style="float: right; width: 30%; line-height: 35px; font-family: Arial !important;">الفرع</h4>
+                            @Html.DropDownList("BranchList", null, htmlAttributes: new { @class = "form-control", style = "float:right;width:70%;" })
+                        </div>
+                    </div><!-- end col -->
+
+                    <div class="col-xl-12 col-md-12">
+
+                        <div class="card-box widget-user border bg-white" style="padding:20px;">
+                            <a onclick="CheckAuthority();" style="cursor:pointer">
+                                <div class="text-center">
+                                    <h2 class="font-weight-normal text-primary"><img src="~/BSys3 Styles/Images/1-1.png" class="img-fluid rounded-circle" alt="user" style="height:54px"></h2>
+                                    <h5>إنشاء عقد</h5>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="card-box widget-user border  bg-white" style="padding:20px;margin-bottom:10px">
+                            <a onclick="CheckCashClosing();" style="cursor:pointer">
+                                <div class="text-center">
+                                    <h2 class="font-weight-normal text-primary"><img src="~/BSys3 Styles/Images/4-1.png" class="img-fluid rounded-circle" alt="user" style="height: 54px"></h2>
+                                    <h5>تسليم عهدة</h5>
+
+                                </div>
+                            </a>
+                        </div>
+                    </div><!-- end col -->
+                </div>
+            </div>
+            <div class="col-md-9">
+
+                @*<div id="CarsList">
+                        @{
+                            Html.RenderAction("Carousel");
+                        }
+
+                    </div>*@
+                @RenderBody()
+            </div>
+        </div>
+        <!-- end row -->
+
+        <div class="row">
+            <div class="col-xl-2 col-md-6">
+
+                <div class="card-box widget-user border bg-white">
+                    <div class="text-center">
+                        <a onclick="AcceptCashTransfer()" style="cursor:pointer">
+                            <h2 class="font-weight-normal text-primary"><img src="~/BSys3 Styles/Images/4-1.png" class="img-fluid rounded-circle" alt="user" style="height: 125px"></h2>
+                            <h5>تغذية الصندوق</h5>
+                        </a>
+                    </div>
+                </div>
+            </div><!-- end col -->
+
+            <div class="col-xl-2 col-md-6">
+                <div class="row">
+                    <div style="width:50%;padding-left:0">
+                        <div class="card-box widget-user border bg-white" style="height: 100px; padding: 5px; margin-bottom: 0 !important; border-left: solid 1px #F0AC34; border-bottom: solid 1px #F0AC34; border-radius: 0 ">
+                            <div class="text-center">
+                                <a onclick="CheckRentedCars();" style="cursor:pointer">
+                                    <h2 class="font-weight-normal text-primary" style="margin:0"><img src="~/BSys3 Styles/Images/10.png" class="img-fluid rounded-circle" alt="user" style="height: 55px"></h2>
+                                    <h5>مؤجر</h5>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="width: 50%; padding-right: 0">
+                        <div class="card-box widget-user border bg-white" style="height: 100px; padding: 5px; margin-bottom: 0 !important; border-bottom: solid 1px #F0AC34; border-radius: 0 ">
+                            <div class="text-center">
+                                <a onclick="CheckActiveCars();" style="cursor:pointer">
+                                    <h2 class="font-weight-normal text-primary" style="margin:0"><img src="~/BSys3 Styles/Images/10.png" class="img-fluid rounded-circle" alt="user" style="height: 55px"></h2>
+                                    <h5>متاح</h5>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="width: 50%; padding-left: 0">
+                        <div class="card-box widget-user border bg-white" style="height: 100px; padding: 5px; border-left: solid 1px #F0AC34; border-radius: 0 ">
+                            <div class="text-center">
+                                <a onclick="CheckMaintCars();" style="cursor:pointer">
+                                    <h2 class="font-weight-normal text-primary" style="margin:0"><img src="~/BSys3 Styles/Images/10.png" class="img-fluid rounded-circle" alt="user" style="height: 55px"></h2>
+                                    <h5>غير متاح</h5>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    @*<div style="width: 50%; padding-left: 0">
+                            <div class="card-box widget-user" style="height: 100px; padding: 5px; border-left: solid 1px #f0ac34; border-radius: 0 ">
+                                <div class="text-center">
+                                    <a href="~/checkcontract/checkcontract">
+                                    <h2 class="font-weight-normal text-primary" style="margin:0"><img src="~/bsys3 styles/images/10.png" class="img-fluid rounded-circle" alt="user" style="height: 55px"></h2>
+                                    <h5>جولة افتراضية</h5>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>*@
+                    <div style="width: 50%; padding-right: 0">
+                        <div class="card-box widget-user border bg-white" style="height: 100px; padding: 5px; border-radius: 0 ">
+                            <div class="text-center">
+                                <a href="~/BranchHome/BranchStat" style="cursor:pointer;">
+                                    <h2 class="font-weight-normal text-primary" style="margin:0"><img src="~/BSys3 Styles/Images/10.png" class="img-fluid rounded-circle" alt="user" style="height: 55px"></h2>
+                                    <h5>إحصائيات</h5>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end col -->
+
+            <div class="col-xl-2 col-md-6">
+                <div class="card-box widget-user border bg-white">
+                    <div class="text-center ">
+                        <a href="~/Sys3RenterLessor/index" style="cursor:pointer">
+                            <h2 class="font-weight-normal text-primary"><img src="~/BSys3 Styles/Images/2-3.png" class="img-fluid rounded-circle" alt="user" style="height: 125px"></h2>
+                            <h5>المستأجرين</h5>
+                        </a>
+                    </div>
+                </div>
+            </div><!-- end col -->
+            <div class="col-xl-2 col-md-6">
+                <div class="card-box widget-user border bg-white">
+                    <a onclick="CheckRenewContract();" style="cursor:pointer">
+                        <div class="text-center">
+                            <h2 class="font-weight-normal text-primary"><img src="~/BSys3 Styles/Images/8.png" class="img-fluid rounded-circle" alt="user" style="height: 125px"></h2>
+                            <h5>تمديد العقد</h5>
+                        </div>
+                    </a>
+                </div>
+            </div><!-- end col -->
+            <div class="col-xl-2 col-md-6">
+                <div class="card-box widget-user border bg-white">
+                    <div class="text-center">
+                        <a onclick="CheckContractSettlement();" style="cursor:pointer">
+                            <h2 class="font-weight-normal text-primary"><img src="~/BSys3 Styles/Images/2-1.png" class="img-fluid rounded-circle" alt="user" style="height: 125px"></h2>
+                            <h5>تسوية عقد</h5>
+                        </a>
+                    </div>
+                </div>
+            </div><!-- end col -->
+            <div class="col-xl-2 col-md-6">
+                <div class="card-box widget-user border bg-white">
+                    <div class="text-center">
+                        <a onclick="CheckReceiptList();" style="cursor:pointer">
+                            <h2 class="font-weight-normal text-primary"><img src="~/BSys3 Styles/Images/8.png" class="img-fluid rounded-circle" alt="user" style="height: 125px"></h2>
+                            <h5>التقرير المالي</h5>
+                        </a>
+                    </div>
+                </div>
+            </div><!-- end col -->
+        </div>
+
+    </div> <!-- container-fluid -->
+
+</div>
+
+<script>
+
+
+    var LessorCode = '@Request.RequestContext.HttpContext.Session["LessorCode"]';
+    var BranchCode = '@Request.RequestContext.HttpContext.Session["BranchCode"]';
+    //alert(BranchCode);
+    var UserLogin = '@Request.RequestContext.HttpContext.Session["UserLogin"]';
+    var ContractRegister ='@Request.RequestContext.HttpContext.Session["ContractRegister"]';
+    var ChamberCommerce ='@Request.RequestContext.HttpContext.Session["ChamberCommerce"]';
+    var TransferPermission='@Request.RequestContext.HttpContext.Session["TransferPermission"]';
+    var LicenceMunicipale='@Request.RequestContext.HttpContext.Session["LicenceMunicipale"]';
+    var CompanyAddress='@Request.RequestContext.HttpContext.Session["CompanyAddress"]';
+
+        $(document).ready(function () {
+            $("#BranchList").change(function () {
+                $.ajax({
+                    url: '@Url.Action("ChangeBranch", "BranchHome")',
+                    type: "GET",
+                    data: { BranchCode: $("#BranchList").val() },
+                    success: function (result) {
+                        if (result != "") {
+                            ////var Name = result.split("-")[1];
+                            $("#BranchNameID").html(result);
+                            BranchCode = $("#BranchList").val();
+
+                        } else {
+                            alert("نأسف لعدم إتمام العملية بنجاح الرجاء التواصل مع المطور");
+                        }
+                        location.reload(true);
+                    }
+                });
+            })
+        });
+
+
+
+
+    async function CheckAuthority() {
+        if (ContractRegister != "True") {
+            toastr.error("عفواً ....... لا يمكن إنشاء عقد فضلاً راجع الإدارة");
+            return;
+        } else if (ChamberCommerce != "True") {
+            toastr.error("عفواً ....... لا يمكن إنشاء عقد فضلاً راجع الإدارة");
+            return;
+        } else if (TransferPermission != "True") {
+            toastr.error("عفواً ....... لا يمكن إنشاء عقد فضلاً راجع الإدارة");
+            return;
+        } else if (LicenceMunicipale != "True") {
+            toastr.error("عفواً ....... لا يمكن إنشاء عقد فضلاً راجع الإدارة");
+            return;
+        } else if (CompanyAddress != "True") {
+            toastr.error("عفواً ....... لا يمكن إنشاء عقد فضلاً راجع الإدارة");
+            return;
+        }
+
+
+        // Check Company
+          let res1 = await  $.ajax({
+                url: '@Url.Action("CheckLessor", "BranchHome")',
+                type: "GET",
+                data: {LessorCode:LessorCode },
+          });
+
+            if (parseFloat(res1) <=0) {
+                toastr.error("عفواً ....... لا يمكن إنشاء عقد فضلاً راجع الإدارة ");
+                return;
+            }
+        // Check Branch
+
+
+
+            let res2 = await $.ajax({
+                    url: '@Url.Action("CheckBranch", "BranchHome")',
+                    type: "GET",
+                    data: { BranchCode: BranchCode, LessorCode: LessorCode},
+            });
+            if (parseFloat(res2) <= 0) {
+                toastr.info("عفوا هذا الفرع موقوف");
+                return;
+            }
+
+        // Check cars
+
+
+            let result3 = await $.ajax({
+                    url: '@Url.Action("CheckCarsPriceStatus", "BranchHome")',
+                    type: "GET",
+                    data: { BranchCode: BranchCode,LessorCode:LessorCode },
+            });
+            if (parseFloat(result3) <= 0) {
+                toastr.info("عفوا لا يوجد سيارات متاحة");
+                return;
+            }
+
+        window.location.href = "@Url.Action("Create", "BasicContract")";
+
+    }
+
+    async  function CheckRenewContract() {
+
+     var ContractExtension = '@Request.RequestContext.HttpContext.Session["ContractExtension"]';
+     if (ContractExtension == "True") {
+         // Check Branch
+          let res1 = await $.ajax({
+                    url: '@Url.Action("CheckBranch", "BranchHome")',
+                    type: "GET",
+                    data: { BranchCode: BranchCode, LessorCode: LessorCode},
+            });
+            if (parseFloat(res1) <= 0) {
+                toastr.info("عفوا هذا الفرع موقوف");
+                return;
+            }
+         // Check If there are contract and authruzation
+
+         let res2 = await $.ajax({
+             url: '@Url.Action("CheckRenewContract", "BranchHome")',
+             type: "GET",
+             data: { BranchCode: BranchCode, LessorCode: LessorCode },
+         });
+         if (parseFloat(res2) > 0) {
+             window.location.href = "@Url.Action("Index", "ActiveContract")";
+         }
+         else {
+             toastr.info("عفواً ....... لا يوجد عقود قائمة ");
+         }
+     }
+
+     else {
+         toastr.warning("عفوا ليس لك صلاحية تمديد عقود");
+     }
+    }
+
+    function CheckContractSettlement() {
+        $.ajax({
+            url: '@Url.Action("CheckContractSettlement", "BranchHome")',
+            type: "GET",
+            data: { BranchCode: BranchCode,LessorCode:LessorCode },
+            success: function (result) {
+                if (parseFloat(result) > 0) {
+                    window.location.href = "@Url.Action("Index", "ContractSettlement")";
+                } else {
+                    toastr.info("عفواً ....... لا يوجد عقود قائمة ");
+                }
+            }
+        });
+    }
+
+  // Check Branch Status ///////////////////////////////////////////////
+
+    function AcceptCashTransfer() {
+         $.ajax({
+                url: '@Url.Action("CheckBranch", "BranchHome")',
+                type: "GET",
+                data: { BranchCode: BranchCode, LessorCode: LessorCode},
+                success: function (result) {
+                    if (parseFloat(result) == 1) {
+                         $.ajax({
+                            url: '@Url.Action("GetCashDrawerNotification", "BranchHome")',
+                            type: "GET",
+                            data: { LessorCode: LessorCode, Login:UserLogin },
+                            success: function (result) {
+                                if (parseFloat(result) ==1) {
+                                    window.location.href = "@Url.Action("Edit", "AcceptCashTransfer")";
+                                } else {
+                                    toastr.info("عفواً ....... لا يوجد تغذية للصندوق");
+                                }
+                            }
+                               });
+                    }
+
+                    else {
+                        toastr.info("عفوا هذا الفرع موقوف");
+                    }
+                }
+         });
+
+
+    }
+
+
+
+    function CheckCashClosing() {
+        $.ajax({
+            url: '@Url.Action("CheckCashClosing", "BranchHome")',
+            type: "GET",
+            data: { LessorCode: LessorCode, Login: UserLogin, BranchCode:BranchCode },
+            success: function (result) {
+                if (parseFloat(result) >=1) {
+                    window.location.href = "@Url.Action("Create", "CashClosing")";
+                } else {
+                    toastr.info("عفواً ....... لا يوجد لديك عهدة مالية في الفرع ");
+                }
+            }
+        });
+    }
+
+
+    function CheckReceiptList() {
+        $.ajax({
+            url: '@Url.Action("CheckReceiptList", "BranchHome")',
+            type: "GET",
+            data: { LessorCode: LessorCode, Login: UserLogin, BranchCode:BranchCode },
+            success: function (result) {
+                if (parseFloat(result) >=1) {
+                    window.location.href = "@Url.Action("Index", "BranchUserReceipt")";
+                } else {
+                    toastr.info(" عفواً .......لا يوجد لديك قيود مالية في الفرع ");
+                }
+            }
+        });
+    }
+
+
+    function CheckRentedCars() {
+        $.ajax({
+            url: '@Url.Action("CheckRentedCars", "BranchHome")',
+            type: "GET",
+            data: { LessorCode: LessorCode, BranchCode:BranchCode },
+            success: function (result) {
+                if (parseFloat(result) >=1) {
+                    window.location.href = "@Url.Action("CarouselRented", "BranchHome")";
+                } else {
+                    toastr.info(" عفواً .......لا يوجد سيارات مؤجرة ");
+                }
+            }
+        });
+    }
+
+    function CheckActiveCars() {
+        $.ajax({
+            url: '@Url.Action("CheckActiveCars", "BranchHome")',
+            type: "GET",
+            data: { LessorCode: LessorCode, BranchCode:BranchCode },
+            success: function (result) {
+                if (parseFloat(result) >=1) {
+                    window.location.href = "@Url.Action("Carousel", "BranchHome")";
+                } else {
+                    toastr.info(" عفواً .......لا يوجد سيارات متاحة ");
+                }
+            }
+        });
+    }
+
+
+    function CheckMaintCars() {
+        $.ajax({
+            url: '@Url.Action("CheckMaintCars", "BranchHome")',
+            type: "GET",
+            data: { LessorCode: LessorCode, BranchCode:BranchCode },
+            success: function (result) {
+                if (parseFloat(result) >=1) {
+                    window.location.href = "@Url.Action("CarouselCarMaint", "BranchHome")";
+                } else {
+                    toastr.info(" عفواً .......لا يوجد سيارات ");
+                }
+            }
+        });
+    }
+
+</script>
+@if (TempData["printCR"] != null)
+{
+    <script>
+            $(function() {
+
+                window.open('@Url.Action("PDFFlyer", "BasicContract", new { p = TempData["printCR"] })')
+                toastr.success("تم الحفظ بنجاح");
+        });
+    </script>
+
+}

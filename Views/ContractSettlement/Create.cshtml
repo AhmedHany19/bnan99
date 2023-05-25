@@ -1,0 +1,1654 @@
+﻿@model RentCar.Models.CR_Cas_Contract_Basic
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_LayoutSys3.cshtml";
+}
+
+
+<style>
+    .tab_reglement {
+        height: 50px !important;
+    }
+
+    .row {
+        min-height: 38px;
+    }
+
+    .last_tab .row {
+        min-height: 36px;
+    }
+
+    #textErr {
+        margin-top: -1px;
+    }
+
+    .btn-secondary {
+        background-color: #4A80B4 !important;
+        border-color: #4A80B4 !important;
+    }
+
+        .btn-secondary:hover {
+            background-color: #EDA63C !important;
+            border-color: #EDA63C !important;
+        }
+
+    .table {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .input_td {
+        padding: 0 !important;
+    }
+
+        .input_td input {
+            width: 100%;
+            border: 0;
+            height: 35px;
+            outline: none;
+        }
+</style>
+<style>
+    input {
+        height: 28px !important;
+    }
+
+    #date_btn1, #date_btn2, #date_btn3 {
+        font-size: 0 !important;
+        background: url('../../BSys3Styles/Images/icone_calendre.png') center 3px no-repeat;
+        width: 30px;
+        border: none;
+        border-left: 0;
+        height: 26px;
+        position: absolute;
+        left: 10px;
+        margin-top: -30px;
+    }
+</style>
+<!-- HTML -->
+<!--tabs amir end-->
+<form id="ContractForm" class="form-horizontal" action="/ContractSettlement/Create" enctype="multipart/form-data" method="post" data-parsley-validate="" novalidate="">
+    @Html.AntiForgeryToken()
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="card" style="height:100%">
+                    <fieldset class="card-body" style="padding-bottom:0px;padding-top:0px;border:none;">
+
+                        <center><h3 class="header-title" style="color:#4A80B4;font-size:30px;"> تسوية عقد</h3></center>
+                        <div id="regForm">
+                            <div style="min-height:70%">
+
+                                <div class="tab" id="accountForm">
+                                    <div>
+
+                                        <!-- Circles which indicates the steps of the form: -->
+                                        <div class="row tab_width_reglement">
+                                            <div class="tab_reglement first" id="firstli" style="z-index:5">
+                                                <span class="step active"> بنود التأجير</span>
+                                            </div>
+                                            <div class="tab_reglement" data-target-form="#fourForm" style="z-index:4">
+                                                <span class="step"> المصروفات</span>
+                                            </div>
+                                            <div class="tab_reglement" data-target-form="#threeForm" style="z-index:3">
+                                                <span class="step"> التعويضات</span>
+                                            </div>
+                                            <div class="tab_reglement" data-target-form="#towForm" style="z-index:2">
+                                                <span class="step"> الفحص الظاهري</span>
+                                            </div>
+                                            <div class="tab_reglement last" data-target-form="#oneForm" style="z-index:1">
+                                                <span class="step">الدفع</span>
+                                            </div>
+                                        </div>
+                                        <div class="" style="">
+                                            <fieldset class="fildest51">
+                                                <div class="row">
+                                                    <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                                                        <div class="form-group row mb-3">
+                                                            <label class="col-md-3" for="userName3">رقم العقد</label>
+                                                            <div class="col-md-8">
+                                                                <input autocomplete="off" class="form-control " id="ContractNo" name="ContractNo" style="float:right;width:100%" type="text" value="@ViewBag.ContractNo" readonly>
+                                                                <input type="text" id="OldCurrentKm" value="@ViewBag.OldCurrentKm" hidden />
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                                        <div class="form-group row mb-3">
+                                                            <label class="col-md-3" for="userName3">تاريخ التسوية</label>
+                                                            <div class="col-md-4">
+                                                                <input autocomplete="off" class="form-control " id="Date" name="Date" style="float:right;width:100%" type="text" value="@ViewBag.Date" readonly>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                                                        <div class="form-group row mb-3">
+                                                            <label class="col-md-4" for="userName3">الرقم التسلسلي</label>
+                                                            <div class="col-md-7">
+                                                                <input autocomplete="off" class="form-control " id="CarSerialNo" name="CarSerialNo" style="float:right;width:100%" type="text" value="@ViewBag.CarSerialNo" readonly>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                                        <div class="form-group row mb-3">
+                                                            <label class="col-md-3" for="userName3">اسم السيارة</label>
+                                                            <div class="col-md-8">
+                                                                <input autocomplete="off" class="form-control " id="CarName" name="CarName" style="float:right;width:100%" type="text" value="@ViewBag.CarName" readonly>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                                                        <div class="form-group row mb-3">
+                                                            <label class="col-md-4" for="userName3">رقم الهوية</label>
+                                                            <div class="col-md-7">
+                                                                <input autocomplete="off" class="form-control " id="RenterId" name="RenterId" style="float:right;width:100%" type="text" value="@ViewBag.RenterId" readonly>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                                        <div class="form-group row mb-3">
+                                                            <label class="col-md-3" for="userName3">اسم المستأجر</label>
+                                                            <div class="col-md-8">
+                                                                <input autocomplete="off" class="form-control " id="nom_locataire" name="nom_locataire" style="float:right;width:100%" type="text" value="@ViewBag.RenterName" readonly>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                                                        <div class="form-group row mb-3">
+                                                            <label class="col-md-4" for="userName3">تاريخ بداية العقد</label>
+                                                            <div class="col-md-7">
+                                                                <input autocomplete="off" class="form-control " id="ContractStartDate" name="ContractStartDate" style="float:right;width:100%" type="text" value="@ViewBag.ContractStartDate" readonly>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                                        <div class="form-group row mb-3">
+                                                            <label class="col-md-3" for="userName3">وقت بداية العقد</label>
+                                                            <div class="col-md-4">
+                                                                <input autocomplete="off" class="form-control " id="ContractStartTime" name="ContractStartTime" style="float:right;width:100%" type="text" value="@ViewBag.ContractStartTime" readonly>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                                                        <div class="form-group row mb-3">
+                                                            <label class="col-md-4" for="userName3">تاريخ نهاية العقد</label>
+                                                            <div class="col-md-7">
+                                                                @*@if (Session["ContractCancel"].ToString() == "True")
+                                                                    {
+                                                                        <input class="form-control text-box single-line" id="ContractEndDate" name="ContractEndDate" data-inputmask="'alias': 'yyyy-mm-dd'" value="@ViewBag.ContractEndDate" style="width:100%" onblur="affich_btn_1(event)">
+                                                                        <input type="button" class="hijri-date-input2" id="date_btn1" onblur="affich_affich_1(event)" />
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <input class="form-control text-box single-line" id="ContractEndDate" name="ContractEndDate" data-inputmask="'alias': 'yyyy-mm-dd'" value="@ViewBag.ContractEndDate" style="width:100%" readonly>
+
+                                                                    }*@
+                                                                <input class="form-control text-box single-line" id="ContractEndDate" name="ContractEndDate" data-inputmask="'alias': 'yyyy-mm-dd'" value="@ViewBag.ContractEndDate" style="width:100%" readonly>
+                                                                <div>
+                                                                    @if (ViewBag.ContractCancel == "False")
+                                                                    {
+                                                                        <label style="color:red;">عفوا ليس لك صلاحية تسوية العقد</label>
+                                                                    }
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                                        <div class="form-group row mb-3">
+                                                            <label class="col-md-3" for="userName3">وقت نهاية العقد</label>
+                                                            <div class="col-md-4">
+
+                                                                <input type="text" class="form-control text-box single-line" id="ContractEndTime" name="ContractEndTime" value="@ViewBag.ContractEndTime" style="width:100%" readonly>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                                                        <div class="form-group row mb-3">
+                                                            <label class="col-md-4" for="userName3">عدد الأيام</label>
+                                                            <div class="col-md-7">
+                                                                <input autocomplete="off" class="form-control " id="ContractDaysNbr" name="ContractDaysNbr" style="float:right;width:100%" type="text" value="@ViewBag.ContractDaysNbr" readonly>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                                        <div class="form-group row mb-3">
+                                                            <label class="col-md-3" for="userName3">الكيلوات المجانية</label>
+                                                            <div class="col-md-4">
+                                                                <input autocomplete="off" class="form-control " id="DailyFreeKm" name="DailyFreeKm" style="float:right;width:100%" type="text" value="@ViewBag.DailyFreeKm" readonly>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                                                        <div class="form-group row mb-3">
+                                                            <label class="col-md-4" for="userName3">ساعات مجانية</label>
+                                                            <div class="col-md-7">
+                                                                <input autocomplete="off" class="form-control " id="FreeAdditionalHours" name="FreeAdditionalHours" style="float:right;width:100%" type="text" value="@ViewBag.FreeAdditionalHours" readonly>
+                                                                <input autocomplete="off" class="form-control " id="MaxHours" name="MaxHours" style="float:right;width:100%" type="text" value="@ViewBag.MaxHours" hidden disabled>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                                        <div class="form-group row mb-3">
+                                                            <label class="col-md-3" for="userName3">ساعات إضافية</label>
+                                                            <div class="col-md-4">
+                                                                <input autocomplete="off" class="form-control " id="AdditionalHours" name="AdditionalHours" style="float:right;width:100%;direction:ltr;text-align:right" type="text" value="@ViewBag.AdditionalHours" readonly>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                                                        <div class="form-group row mb-3">
+                                                            <label class="col-md-4" for="userName3">قيمة الكيلو الإضافي</label>
+                                                            <div class="col-md-7">
+                                                                <input autocomplete="off" class="form-control " id="AdditionalKmValue" name="AdditionalKmValue" style="float:right;width:100%" type="text" value="@ViewBag.AdditionalKmValue" readonly>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                                        <div class="form-group row mb-3">
+                                                            <label class="col-md-3" for="userName3">قيمة الساعة الاضافية</label>
+                                                            <div class="col-md-4">
+                                                                <input autocomplete="off" class="form-control " id="ExtraHourValue" name="ExtraHourValue" style="float:right;width:100%" type="text" value="@ViewBag.ExtraHourValue" readonly>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                                                        <div class="form-group row mb-3">
+                                                            <label class="col-md-4" for="userName3">قيمة الإيجار اليومي</label>
+                                                            <div class="col-md-7">
+                                                                <input autocomplete="off" class="form-control " id="DailyRentValue" name="DailyRentValue" style="float:right;width:100%" type="text" value="@ViewBag.DailyRentValue" readonly>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                                                        <div class="form-group row mb-3">
+                                                            <label class="col-md-4" for="userName3">فرع الإستلام</label>
+                                                            <div class="col-md-7">
+                                                                <input autocomplete="off" class="form-control " id="BranchReceipt" name="BranchReceipt" style="float:right;width:100%" type="text" value="@ViewBag.BranchReceipt" readonly>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                                        <div class="form-group row mb-3">
+                                                            <label class="col-md-3" for="userName3">فرع التسليم</label>
+                                                            <div class="col-md-4">
+                                                                <input autocomplete="off" class="form-control " id="DeliveryBranch" name="DeliveryBranch" style="float:right;width:100%" type="text" value="@ViewBag.DeliveryBranch" readonly>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                                                        <div class="form-group row mb-3">
+                                                            <label class="col-md-4" for="userName3">تاريخ نهاية التفويض</label>
+                                                            <div class="col-md-8">
+                                                                <input autocomplete="off" class="form-control " id="AuthEndDate" name="AuthEndDate" style="float:right;width:100%" type="text" value="@ViewBag.AuthEndDate" readonly>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                                                        <div class="form-group row mb-3">
+                                                            <label class="col-md-4" for="userName3">المصروفات </label>
+                                                            <div class="col-md-2 offset-md-6">
+                                                                <input class="form-control" id="Chk_Depences" name="Chk_Depences" style="height:26px !important;margin-top:0px;" type="radio" value="true">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                                        <div class="form-group row mb-3">
+                                                            <label class="col-md-3" for="userName3">التعويضات </label>
+                                                            <div class="col-md-2 offset-md-6">
+                                                                <input class="form-control" id="Chk_Compensation" name="Chk_Compensation" style="height:26px !important;margin-top:0px;" type="radio" value="true">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div> <!-- end row -->
+                                            </fieldset>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="tab" id="fourForm">
+                                    <!-- Circles which indicates the steps of the form: -->
+                                    <div class="row tab_width_reglement">
+                                        <div class="tab_reglement first" id="firstli" data-target-form="#accountForm" style="z-index:5">
+                                            <span class="step "> بنود التأجير</span>
+                                        </div>
+                                        <div class="tab_reglement" data-target-form="#fourForm" style="z-index:4">
+                                            <span class="step active"> المصروفات</span>
+                                        </div>
+                                        <div class="tab_reglement" data-target-form="#threeForm" style="z-index:3">
+                                            <span class="step"> التعويضات</span>
+                                        </div>
+                                        <div class="tab_reglement" data-target-form="#towForm" style="z-index:2">
+                                            <span class="step"> الفحص الظاهري</span>
+                                        </div>
+                                        <div class="tab_reglement last" data-target-form="#oneForm" style="z-index:1">
+                                            <span class="step">الدفع</span>
+                                        </div>
+                                    </div>
+                                    <div class="" style="">
+                                        <fieldset class="fildest51">
+                                            <div class="row">
+                                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                                    <div class="row">
+                                                        <label class="col-md-4" for="userName3">قيمة المصروفات</label>
+                                                        <div class="col-md-8">
+                                                            <input autocomplete="off" class="form-control " id="Depences" name="Depences" style="float:right;width:100%" type="text" value="">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <label class="col-md-4" for="userName3">بيان المصروفات</label>
+                                                        <div class="col-md-8">
+                                                            <textarea autocomplete="off" class="form-control " id="DepencesReason" name="DepencesReason" style="float: right; height: 290px; resize: none; width: 100%"></textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                                    <div class="row">
+                                                        <div class="col-md-6" style="float: right; margin-bottom: 10px;">
+
+                                                            <div style="width: 100%; float: left;">
+                                                                <div class="input-group">
+                                                                    <span class="input-group-btn" style="width:100%">
+                                                                        <span class="btn btn-primary" onclick="$(this).parent().find('input[type=file]').click();" style="width:100%;height:30px;width:100%;line-height:10px;"> المرفقات 1</span>
+                                                                        <input name="imgx1" type="file" class="form-control " style="display: none; float: right; object-fit: fill;" accept="image/*" id="file" onchange="loadImgx1(event)">
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                            <img id="imgx1" class="zoom" style="float: left; width: 100%; height: 130px; object-fit: cover " />
+                                                        </div>
+
+                                                        <div class="col-md-6" style="float: right; margin-bottom: 10px;">
+                                                            <div style="width:100%;float:left;">
+                                                                <div class="input-group">
+                                                                    <span class="input-group-btn" style="width: 100%">
+                                                                        <span class="btn btn-primary" onclick="$(this).parent().find('input[type=file]').click();" style="width: 100%; height: 30px; width: 100%; line-height: 10px;"> المرفقات 2</span>
+                                                                        <input name="imgx2" type="file" class="form-control " style="display: none; float: right; object-fit: fill;" accept="image/*" id="file" onchange="loadImgx2(event)">
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                            <img id="imgx2" class="zoom" style="float: left; width: 100%; height: 130px; object-fit: cover " />
+                                                        </div>
+                                                        <div class="col-md-6" style="float:right;">
+                                                            <div style="width:100%;float:left;">
+                                                                <div class="input-group">
+                                                                    <span class="input-group-btn" style="width:100%">
+                                                                        <span class="btn btn-primary" onclick="$(this).parent().find('input[type=file]').click();" style="width: 100%; height: 30px; width: 100%; line-height: 10px;"> المرفقات 3</span>
+                                                                        <input name="imgx3" type="file" class="form-control " style="display: none; float: right; object-fit: fill;" accept="image/*" id="file" onchange="loadImgx3(event)">
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                            <img id="imgx3" class="zoom" style="float: left; width: 100%; height: 130px; object-fit: cover " />
+
+                                                        </div>
+
+                                                        <div class="col-md-6" style="float:right;">
+                                                            <div style="width:100%;float:left;">
+                                                                <div class="input-group">
+                                                                    <span class="input-group-btn" style="width:100%">
+                                                                        <span class="btn btn-primary" onclick="$(this).parent().find('input[type=file]').click();" style="width: 100%; height: 30px; width: 100%; line-height: 10px;"> المرفقات 4</span>
+                                                                        <input name="imgx4" type="file" class="form-control " style="display: none; float: right; object-fit: fill;" accept="image/*" id="file" onchange="loadImgx4(event)">
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                            <img id="imgx4" class="zoom" style="float: left; width: 100%; height: 130px; object-fit: cover " />
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                </div>
+                                <div class="tab" id="threeForm">
+                                    <!-- Circles which indicates the steps of the form: -->
+                                    <div class="row tab_width_reglement">
+                                        <div class="tab_reglement first" id="firstli" data-target-form="#accountForm" style="z-index:5">
+                                            <span class="step "> بنود التأجير</span>
+                                        </div>
+                                        <div class="tab_reglement" data-target-form="#fourForm" style="z-index:4">
+                                            <span class="step"> المصروفات</span>
+                                        </div>
+                                        <div class="tab_reglement" data-target-form="#threeForm" style="z-index:3">
+                                            <span class="step active"> التعويضات</span>
+                                        </div>
+                                        <div class="tab_reglement" data-target-form="#towForm" style="z-index:2">
+                                            <span class="step"> الفحص الظاهري</span>
+                                        </div>
+                                        <div class="tab_reglement last" data-target-form="#oneForm" style="z-index:1">
+                                            <span class="step">الدفع</span>
+                                        </div>
+                                    </div>
+                                    <div class="" style="">
+                                        <fieldset class="fildest51">
+                                            <div class="row">
+                                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                                    <div class="row">
+                                                        <label class="col-md-4" for="userName3">التأمين</label>
+                                                        <div class="col-md-8">
+                                                            <input autocomplete="off" class="form-control " id="InsuranceVal" name="InsuranceVal" style="float:right;width:100%" type="text" value="@ViewBag.InsuranceVal" readonly>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <label class="col-md-4" for="userName3">قيمة التعويضات</label>
+                                                        <div class="col-md-8">
+                                                            <input autocomplete="off" class="form-control " id="CompensationVal" name="CompensationVal" style="float:right;width:100%" type="text" value="">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <label class="col-md-4" for="userName3">وصف حالة التعويضات</label>
+                                                        <div class="col-md-8">
+                                                            <textarea autocomplete="off" class="form-control " id="CompensationReason" name="CompensationReason" style="float: right; height: 253px; resize: none; width: 100%"></textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                                    <div class="row">
+                                                        <div class="col-md-6" style="float: right; margin-bottom: 10px;">
+
+                                                            <div style="width: 100%; float: left;">
+                                                                <div class="input-group">
+                                                                    <span class="input-group-btn" style="width:100%">
+                                                                        <span class="btn btn-primary" onclick="$(this).parent().find('input[type=file]').click();" style="width:100%;height:30px;width:100%;line-height:10px;"> المرفقات 1</span>
+                                                                        <input name="imgy1" type="file" class="form-control " style="display: none; float: right; object-fit: fill;" accept="image/*" id="file" onchange="loadImgy1(event)">
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                            <img id="imgy1" class="zoom" style="float: left; width: 100%; height: 130px; object-fit: cover " />
+                                                        </div>
+
+                                                        <div class="col-md-6" style="float: right; margin-bottom: 10px;">
+                                                            <div style="width:100%;float:left;">
+                                                                <div class="input-group">
+                                                                    <span class="input-group-btn" style="width: 100%">
+                                                                        <span class="btn btn-primary" onclick="$(this).parent().find('input[type=file]').click();" style="width: 100%; height: 30px; width: 100%; line-height: 10px;"> المرفقات 2</span>
+                                                                        <input name="imgy2" type="file" class="form-control " style="display: none; float: right; object-fit: fill;" accept="image/*" id="file" onchange="loadImgy2(event)">
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                            <img id="imgy2" class="zoom" style="float: left; width: 100%; height: 130px; object-fit: cover " />
+                                                        </div>
+                                                        <div class="col-md-6" style="float:right;">
+                                                            <div style="width:100%;float:left;">
+                                                                <div class="input-group">
+                                                                    <span class="input-group-btn" style="width:100%">
+                                                                        <span class="btn btn-primary" onclick="$(this).parent().find('input[type=file]').click();" style="width: 100%; height: 30px; width: 100%; line-height: 10px;"> المرفقات 3</span>
+                                                                        <input name="imgy3" type="file" class="form-control " style="display: none; float: right; object-fit: fill;" accept="image/*" id="file" onchange="loadImgy3(event)">
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                            <img id="imgy3" class="zoom" style="float: left; width: 100%; height: 130px; object-fit: cover " />
+
+                                                        </div>
+
+                                                        <div class="col-md-6" style="float:right;">
+                                                            <div style="width:100%;float:left;">
+                                                                <div class="input-group">
+                                                                    <span class="input-group-btn" style="width:100%">
+                                                                        <span class="btn btn-primary" onclick="$(this).parent().find('input[type=file]').click();" style="width: 100%; height: 30px; width: 100%; line-height: 10px;"> المرفقات 4</span>
+                                                                        <input name="imgy4" type="file" class="form-control " style="display: none; float: right; object-fit: fill;" accept="image/*" id="file" onchange="loadImgy4(event)">
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                            <img id="imgy4" class="zoom" style="float: left; width: 100%; height: 130px; object-fit: cover " />
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+
+                                </div>
+                                <div class="tab" id="towForm">
+                                    <!-- Circles which indicates the steps of the form: -->
+                                    <div class="row tab_width_reglement">
+                                        <div class="tab_reglement first" id="firstli" data-target-form="#accountForm" style="z-index:5">
+                                            <span class="step "> بنود التأجير</span>
+                                        </div>
+                                        <div class="tab_reglement" data-target-form="#fourForm" style="z-index:4">
+                                            <span class="step"> المصروفات</span>
+                                        </div>
+                                        <div class="tab_reglement" data-target-form="#threeForm" style="z-index:3">
+                                            <span class="step"> التعويضات</span>
+                                        </div>
+                                        <div class="tab_reglement" data-target-form="#towForm" style="z-index:2">
+                                            <span class="step active"> الفحص الظاهري</span>
+                                        </div>
+                                        <div class="tab_reglement last" data-target-form="#oneForm" style="z-index:1">
+                                            <span class="step">الدفع</span>
+                                        </div>
+                                    </div>
+                                    <fieldset class="fildest51">
+                                        <div class="row">
+                                            <div class="col-lg-6 col-md-12" style="margin-top:0px;">
+
+
+                                                <div id="VirtuelInspection">
+                                                    @{
+                                                        Html.RenderAction("VirtuelInspection");
+                                                    }
+                                                </div>
+
+
+                                            </div>
+
+                                            <div class="col-lg-6 col-md-12" style="float:right;margin-top:-10px">
+
+
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        @if (ViewBag.IsOpenKm == "True")
+                                                        {
+                                                            <div style="color:#4A80B4;font-size:16px;width:100%;text-align:center;margin-top:10px;font-weight:bold"> العداد مفتوح</div>
+                                                        }
+
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-group row mt-2">
+                                                            <label class="col-md-12" for="input3" style="text-align:center">قراءة العداد الحالي </label>
+                                                            <div class="col-md-12">
+                                                                <input type="text" id="CurrentMeter" name="CurrentMeter" value="" style="width:100%" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-group row mt-2">
+                                                            <label class="col-md-12" for="input3" style="text-align: center">الكيلومترات المجانية </label>
+                                                            <div class="col-md-12">
+                                                                <input type="text" id="TotalFreeKm" name="TotalFreeKm" value="@ViewBag.TotalFreeKm" style="width:100%" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-group row mt-2">
+                                                            <label class="col-md-12" for="input3" style="text-align: center">العداد قبل تسليم السيارة </label>
+                                                            <div class="col-md-12">
+                                                                <input type="text" id="OldKm" name="OldKm" value="@ViewBag.OldCurrentKm" style="width:100%" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-group row mt-2">
+                                                            <label class="col-md-12 " for="input3" style="text-align: center">الكيلومترات الإضافية </label>
+                                                            <div class="col-md-12">
+                                                                <input type="text" id="AdditionalKmNo" name="AdditionalKmNo" style="width:100%" value="@ViewBag.AdditionalKmNo" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <div class="row">
+                                                            <div class="col-md-4" style="float:right;">
+
+                                                                <div style="width:100%;float:left;">
+                                                                    <div class="input-group">
+                                                                        <span class="input-group-btn" style="width:100%">
+                                                                            <span class="btn btn-primary" onclick="$(this).parent().find('input[type=file]').click();" style="width:100%;height:25px;width:100%;line-height:10px;"> الصورة 1</span>
+                                                                            <input name="img1" type="file" class="form-control " style="display: none; float: right; object-fit: fill;" accept="image/*" id="file" onchange="loadImg1(event)">
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                                <img id="img1" class="zoom" style="float:left;width:100%;height:77px;object-fit:cover" />
+                                                            </div>
+
+                                                            <div class="col-md-4" style="float:right;">
+                                                                <div style="width:100%;float:left;">
+                                                                    <div class="input-group">
+                                                                        <span class="input-group-btn" style="width:100%">
+                                                                            <span class="btn btn-primary" onclick="$(this).parent().find('input[type=file]').click();" style="width:100%;height:25px;width:100%;line-height:10px;"> الصورة 2</span>
+                                                                            <input name="img2" type="file" class="form-control " style="display: none; float: right; object-fit: fill;" accept="image/*" id="file" onchange="loadImg2(event)">
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                                <img id="img2" class="zoom" style="float: left; width: 100%; height: 77px; object-fit: cover " />
+                                                            </div>
+                                                            <div class="col-md-4" style="float:right;">
+                                                                <div style="width:100%;float:left;">
+                                                                    <div class="input-group">
+                                                                        <span class="input-group-btn" style="width:100%">
+                                                                            <span class="btn btn-primary" onclick="$(this).parent().find('input[type=file]').click();" style="width:100%;height:25px;width:100%;line-height:10px;"> الصورة 3</span>
+                                                                            <input name="img3" type="file" class="form-control " style="display: none; float: right; object-fit: fill;" accept="image/*" id="file" onchange="loadImg3(event)">
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                                <img id="img3" class="zoom" style="float: left; width: 100%; height: 77px; object-fit: cover " />
+
+                                                            </div>
+
+                                                            <div class="col-md-4" style="float:right;">
+                                                                <div style="width:100%;float:left;">
+                                                                    <div class="input-group">
+                                                                        <span class="input-group-btn" style="width:100%">
+                                                                            <span class="btn btn-primary" onclick="$(this).parent().find('input[type=file]').click();" style="width:100%;height:25px;width:100%;line-height:10px;"> الصورة 4</span>
+                                                                            <input name="img4" type="file" class="form-control " style="display: none; float: right; object-fit: fill;" accept="image/*" id="file" onchange="loadImg4(event)">
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                                <img id="img4" class="zoom" style="float: left; width: 100%; height: 77px; object-fit: cover " />
+                                                            </div>
+                                                            <div class="col-md-4" style="float:right;">
+                                                                <div style="width:100%;float:left;">
+                                                                    <div class="input-group">
+                                                                        <span class="input-group-btn" style="width:100%">
+                                                                            <span class="btn btn-primary" onclick="$(this).parent().find('input[type=file]').click();" style="width:100%;height:25px;width:100%;line-height:10px;"> الصورة 5</span>
+                                                                            <input name="img5" type="file" class="form-control " style="display: none; float: right; object-fit: fill;" accept="image/*" id="file" onchange="loadImg5(event)">
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                                <img id="img5" class="zoom" style="float: left; width: 100%; height: 77px; object-fit: cover " />
+                                                            </div>
+                                                            <div class="col-md-4" style="float:right;">
+                                                                <div style="width:100%;float:left;">
+                                                                    <div class="input-group">
+                                                                        <span class="input-group-btn" style="width:100%">
+                                                                            <span class="btn btn-primary" onclick="$(this).parent().find('input[type=file]').click();" style="width:100%;height:25px;width:100%;line-height:10px;"> الصورة 6</span>
+                                                                            <input name="img6" type="file" class="form-control " style="display: none; float: right; object-fit: fill;" accept="image/*" id="file" onchange="loadImg6(event)">
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                                <img id="img6" class="zoom" style="float: left; width: 100%; height: 77px; object-fit: cover " />
+                                                            </div>
+                                                            <div class="col-md-4" style="float:right;">
+                                                                <div style="width:100%;float:left;">
+                                                                    <div class="input-group">
+                                                                        <span class="input-group-btn" style="width:100%">
+                                                                            <span class="btn btn-primary" onclick="$(this).parent().find('input[type=file]').click();" style="width:100%;height:25px;width:100%;line-height:10px;"> الصورة 7</span>
+                                                                            <input name="img7" type="file" class="form-control " style="display: none; float: right; object-fit: fill;" accept="image/*" id="file" onchange="loadImg7(event)">
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                                <img id="img7" class="zoom" style="float: left; width: 100%; height: 77px; object-fit: cover " />
+                                                            </div>
+                                                            <div class="col-md-4" style="float:right;">
+                                                                <div style="width:100%;float:left;">
+                                                                    <div class="input-group">
+                                                                        <span class="input-group-btn" style="width:100%">
+                                                                            <span class="btn btn-primary" onclick="$(this).parent().find('input[type=file]').click();" style="width:100%;height:25px;width:100%;line-height:10px;"> الصورة 8</span>
+                                                                            <input name="img8" type="file" class="form-control " style="display: none; float: right; object-fit: fill;" accept="image/*" id="file" onchange="loadImg8(event)">
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                                <img id="img8" class="zoom" style="float: left; width: 100%; height: 77px; object-fit: cover " />
+                                                            </div>
+                                                            <div class="col-md-4" style="float:right;">
+                                                                <div style="width:100%;float:left;">
+                                                                    <div class="input-group">
+                                                                        <span class="input-group-btn" style="width:100%">
+                                                                            <span class="btn btn-primary" onclick="$(this).parent().find('input[type=file]').click();" style="width:100%;height:25px;width:100%;line-height:10px;"> الصورة 9</span>
+                                                                            <input name="img9" type="file" class="form-control " style="display: none; float: right; object-fit: fill;" accept="image/*" id="file" onchange="loadImg9(event)">
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                                <img id="img9" class="zoom" style="float: left; width: 100%; height: 77px; object-fit: cover " />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </fieldset>
+                                </div>
+                                <div class="tab" id="oneForm">
+                                    <!-- Circles which indicates the steps of the form: -->
+                                    <div class="row tab_width_reglement">
+                                        <div class="tab_reglement first" id="firstli" data-target-form="#accountForm" style="z-index:5">
+                                            <span class="step "> بنود التأجير</span>
+                                        </div>
+                                        <div class="tab_reglement" data-target-form="#fourForm" style="z-index:4">
+                                            <span class="step"> المصروفات</span>
+                                        </div>
+                                        <div class="tab_reglement" data-target-form="#threeForm" style="z-index:3">
+                                            <span class="step"> التعويضات</span>
+                                        </div>
+                                        <div class="tab_reglement" data-target-form="#towForm" style="z-index:2">
+                                            <span class="step"> الفحص الظاهري</span>
+                                        </div>
+                                        <div class="tab_reglement last" data-target-form="#oneForm" style="z-index:1">
+                                            <span class="step active">الدفع</span>
+                                        </div>
+                                    </div>
+                                    <div class="" style="">
+                                        <fieldset class="fildest51">
+                                            <div class="row">
+                                                <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                                                    <div class="form-group row mb-3">
+                                                        <label class="col-md-5" for="userName3">قيمة الإيجار</label>
+                                                        <div class="col-md-6">
+                                                            <input autocomplete="off" class="form-control " id="RentalPrice" name="RentalPrice" style="float:right;width:100%" type="text" value="@ViewBag.RentalPrice" readonly>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                                                    <div class="form-group row mb-3">
+                                                        <label class="col-md-5" for="userName3">قيمة الخيارات</label>
+                                                        <div class="col-md-6">
+                                                            <input autocomplete="off" class="form-control " id="ChoicesVal" name="ChoicesVal" style="float:right;width:100%" type="text" value="@ViewBag.ChoicesVal" readonly>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                                                    <div class="form-group row mb-3">
+                                                        <label class="col-md-5" for="userName3">قيمة السائق الإضافي</label>
+                                                        <div class="col-md-6">
+                                                            <input autocomplete="off" class="form-control " id="AdditionalDriverVal" name="AdditionalDriverVal" style="float:right;width:100%" type="text" value="@ViewBag.AdditionalDriverVal" readonly>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                                                    <div class="form-group row mb-3">
+                                                        <label class="col-md-5" for="userName3">قيمة الإضافات</label>
+                                                        <div class="col-md-6">
+                                                            <input autocomplete="off" class="form-control " id="AdditionalVal" name="AdditionalVal" style="float:right;width:100%" type="text" value="@ViewBag.AdditionalVal" readonly>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                                                    <div class="form-group row mb-3">
+                                                        <label class="col-md-5" for="userName3">قيمة الكيلومترات الزائدة</label>
+                                                        <div class="col-md-6">
+                                                            <input autocomplete="off" class="form-control " id="ExtraKmValue" name="ExtraKmValue" style="float:right;width:100%" type="text" value="@ViewBag.ExtraKmValue" readonly>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                                                    <div class="form-group row mb-3">
+                                                        <label class="col-md-5" for="userName3">قيمة الساعات الزائدة</label>
+                                                        <div class="col-md-6">
+                                                            <input autocomplete="off" class="form-control " id="TotalHoursValue" name="TotalHoursValue" style="float:right;width:100%" type="text" value="" readonly>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                                                    <div class="form-group row mb-3">
+                                                        <label class="col-md-5" for="userName3">قيمة التفويض</label>
+                                                        <div class="col-md-6">
+                                                            <input autocomplete="off" class="form-control " id="AuthValue" name="AuthValue" style="float:right;width:100%" type="text" value="@ViewBag.AuthValue" readonly>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                                                    <div class="form-group row mb-3">
+                                                        <label class="col-md-5" for="userName3">قيمة العقد قبل الخصم</label>
+                                                        <div class="col-md-6">
+                                                            <input autocomplete="off" class="form-control " id="ContractValED" name="ContractValED" style="float:right;width:100%" type="text" value="" readonly>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                                                    <div class="form-group row mb-3">
+                                                        <label class="col-md-5" for="userName3">نسبة الخصم </label>
+                                                        <div class="col-md-6">
+                                                            <input autocomplete="off" class="form-control " id="Discount" name="Discount" style="float:right;width:100%" type="text" value="@ViewBag.Discount" readonly>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                                                    <div class="form-group row mb-3">
+                                                        <label class="col-md-5" for="userName3">قيمة العقد بعد الخصم</label>
+                                                        <div class="col-md-6">
+                                                            <input autocomplete="off" class="form-control " id="ContractValID" name="ContractValID" style="float:right;width:100%" type="text" value="" readonly>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                                                    <div class="form-group row mb-3">
+                                                        <label class="col-md-5" for="userName3">قيمة الضريبة</label>
+                                                        <div class="col-md-6">
+                                                            <input autocomplete="off" class="form-control " id="Tax" name="Tax" style="float:right;width:100%" type="text" value="@ViewBag.Tax" readonly hidden>
+                                                            <input autocomplete="off" class="form-control " id="TaxVal" name="TaxVal" style="float:right;width:100%" type="text" value="" readonly>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                                                    <div class="form-group row mb-3">
+                                                        <label class="col-md-5" for="userName3">إجمالي العقد</label>
+                                                        <div class="col-md-6">
+                                                            <input autocomplete="off" class="form-control " id="TotalContractIT" name="TotalContractIT" style="float:right;width:100%" type="text" value="" readonly>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                                                    <div class="form-group row mb-3">
+                                                        <label class="col-md-5" for="userName3">إجمالي المصروفات</label>
+                                                        <div class="col-md-6">
+                                                            <input autocomplete="off" class="form-control " id="TotDepences" name="TotDepences" style="float:right;width:100%" type="text" value="" readonly>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                                                    <div class="form-group row mb-3">
+                                                        <label class="col-md-5" for="userName3">إجمالي التعويضات</label>
+                                                        <div class="col-md-6">
+                                                            <input autocomplete="off" class="form-control " id="TotCompensation" name="TotCompensation" style="float:right;width:100%" type="text" value="" readonly>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                                                    <div class="form-group row mb-3">
+                                                        <label class="col-md-5" for="userName3">رصيد سابق</label>
+                                                        <div class="col-md-6">
+                                                            <input autocomplete="off" class="form-control " id="RenterPrevBalance" name="RenterPrevBalance" style="float:right;width:100%;text-align:right;direction:ltr;" type="text" value="@ViewBag.RenterPrevBalance" readonly>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                                                    <div class="form-group row mb-3">
+                                                        <label class="col-md-5" for="userName3">المبلغ المطلوب</label>
+                                                        <div class="col-md-6">
+                                                            <input autocomplete="off" class="form-control " id="TotToPay" name="TotToPay" style="float:right;width:100%;direction:ltr;text-align:right" type="text" value="" readonly>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                                                    <div class="form-group row mb-3">
+                                                        <label class="col-md-5" for="userName3">المبلغ المدفوع</label>
+                                                        <div class="col-md-6">
+                                                            <input autocomplete="off" class="form-control " id="TotPayed" name="TotPayed" style="float:right;width:100%;text-align:right;direction:ltr;" type="text" value="">
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                                                    <div class="form-group row mb-3">
+                                                        <label class="col-md-5" for="userName3" id="RestLabel">الباقي</label>
+                                                        <div class="col-md-6">
+                                                            <input autocomplete="off" class="form-control " id="reste" name="reste" style="float:right;width:100%;text-align:right;direction:ltr;" type="text" value="" readonly>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                                                    <div class="form-group row mb-3">
+                                                        <label class="col-md-5" for="userName3">طريقة الدفع</label>
+                                                        <div class="col-md-6">
+                                                            @*<input autocomplete="off" class="form-control " id="facon_payer" name="facon_payer" style="float:right;width:100%" type="text" value="">*@
+                                                            @Html.DropDownList("PayType", null, " --رجاء إختر طريقة الدفع-- ", htmlAttributes: new { @class = "form-control ", style = "float:right;width:100%", @disabled = "disabled" })
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                                                    <div class="form-group row mb-3">
+                                                        <label class="col-md-5" for="userName3">نقطة الدفع</label>
+                                                        <div class="col-md-6">
+                                                            @*<input autocomplete="off" class="form-control " id="point_paiement" name="point_paiement" style="float:right;width:100%" type="text" value="">*@
+                                                            @Html.DropDownList("CasherName", new SelectList(""), " --رجاء إختر نقطة البيع-- ", htmlAttributes: new { @class = "form-control ", style = "float:right;width:100%", @disabled = "disabled" })
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-8 col-md-6 col-sm-12 col-xs-12">
+                                                    <div class=" mb-3">
+                                                        <label style="float:right;width:21.5%" for="userName3">ملاحظات</label>
+                                                        <div style="float:right;width:74%">
+                                                            <input autocomplete="off" class="form-control " id="remarque" name="remarque" style="float:right;width:100%" type="text" value="">
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <fieldset>
+                            <div class="list-inline wizard mb-0">
+                                <button type="button" id="prevBtn" onclick="PrevPrev(-1)" class="btn btn-secondary" style="float: right; margin-left: 20px;">السابق</button>
+                                @if (ViewBag.ContractCancel == "True")
+                                {
+                                    <button type="button" id="nextBtn" onclick="nextPrev(1)" class="btn btn-secondary" style="float: left; margin-left: 20px;">التالي</button>
+                                }
+                                else
+                                {
+                                    <button type="button" id="nextBtn" onclick="nextPrev(1)" class="btn btn-secondary" style="float: left; margin-left: 20px;" disabled title="عفوا لا يمكنك انهاء العقد قبل التاريخ المحدد">التالي</button>
+                                }
+
+                                <input type="submit" name="add" class="btn btn-secondary" id="add_btn" value="حفظ" style="display: none; float: left; margin-left: 20px; height: 38px !important" disabled />
+                                <input type="button" name="AuthBtn" class="btn btn-secondary" id="AuthBtn" value="الموحد" style="display: none; float: left; margin-left: 20px; height: 38px !important" hidden />
+                                <input type="button" name="AuthBtn2" class="btn btn-secondary" id="AuthBtn2" value="إلغاء التفويض" style="display: none;float: left; margin-left: 20px;height:38px !important" />
+
+                                @*<input name="RenterSignatureImg" type="file" class="form-control " style="display: block ; width:200px; float: right; object-fit: fill;" accept="image/*" id="file" onchange="loadRenterSignature(event)">*@
+
+                            </div>
+                        </fieldset>
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#ContractEndDate").change(function () {
+            alert();
+        });
+        $("#ContractEndDate").focusout(function () {
+            alert();
+        });
+    }); 
+    function affich_affich_1(e) {
+        var date = e.target.value;
+        document.getElementById("ContractEndDate").value = date;
+    }
+    function affich_btn_1(e) {
+        var date = e.target.value;
+        document.getElementById("date_btn1").value = date;
+    }
+    function affich_btn_2(e) {
+        var date = e.target.value;
+        document.getElementById("ContractEndDate").value = date;
+    }
+    function affich_affich_2(e) {
+        var date = e.target.value;
+        document.getElementById("ContractEndDate").value = date;
+    }
+</script>
+
+<script type="text/javascript">
+    var Auth = false;
+
+    // Restricts input for each element in the set of matched elements to the given inputFilter.
+    (function ($) {
+        $.fn.inputFilter = function (inputFilter) {
+            return this.on("input keydown keyup mousedown mouseup select contextmenu drop", function () {
+                if (inputFilter(this.value)) {
+                    this.oldValue = this.value;
+                    this.oldSelectionStart = this.selectionStart;
+                    this.oldSelectionEnd = this.selectionEnd;
+                } else if (this.hasOwnProperty("oldValue")) {
+                    this.value = this.oldValue;
+                    this.setSelectionRange(this.oldSelectionStart, this.oldSelectionEnd);
+                } else {
+                    this.value = "";
+                }
+            });
+        };
+    }(jQuery));
+
+    // Install input filters.
+    $("#inputinteger").inputFilter(function (value) { return /^\d*$/.test(value) && (value === "" || parseInt(value) <= 100000); });
+    $("#ContractDiscount").inputFilter(function (value) { return /^-?\d*[.]?\d{0,2}$/.test(value) && (value === "" || parseInt(value) <= 100); });
+    $("#TotalPayed").inputFilter(function (value) { return /^-?\d*[.]?\d{0,2}$/.test(value) && (value === "" || parseInt(value) <= 1000000); });
+
+</script>
+<script>
+    function validateFloatKey(ele, ev) {
+        var errMsg = document.getElementById('errMsg'),
+            val = ele.value,
+            success = false;
+        regEx = /^\d*\.?\d{0, 2}$/;
+        if (regEx.test(ele.value)) {
+            errMsg.style.display = 'none';
+            ele.parentNode.classList.remove('error');
+            console.log(ele.value);
+            success = true;
+        } else {
+            ele.parentNode.classList.add('error');
+            errMsg.style.display = 'block';
+        }
+        return success;
+    }
+</script>
+<script>
+    function validateFloatKeypourcent(ele, ev) {
+        var errMsg = document.getElementById('errMsg'),
+            val = ele.value,
+            success = false;
+        regEx = /^\d*\.?\d{0,2}$/;
+        if (regEx.test(ele.value)) {
+            errMsg.style.display = 'none';
+            ele.parentNode.classList.remove('error');
+            console.log(ele.value);
+            success = true;
+        } else {
+            if (ele.value > 100) {
+                ele.parentNode.classList.add('error');
+                errMsg.style.display = 'block';
+            }
+        }
+        return success;
+    }
+</script>
+<script>
+    var loadImg1 = function (event) {
+        var image = document.getElementById('img1');
+        image.src = URL.createObjectURL(event.target.files[0]);
+    };
+</script>
+
+<script>
+    var loadImg2 = function (event) {
+        var image = document.getElementById('img2');
+        image.src = URL.createObjectURL(event.target.files[0]);
+    };
+</script>
+
+<script>
+    var loadImg3 = function (event) {
+        var image = document.getElementById('img3');
+        image.src = URL.createObjectURL(event.target.files[0]);
+    };
+</script>
+
+<script>
+    var loadImg4 = function (event) {
+        var image = document.getElementById('img4');
+        image.src = URL.createObjectURL(event.target.files[0]);
+    };
+</script>
+
+<script>
+    var loadImg5 = function (event) {
+        var image = document.getElementById('img5');
+        image.src = URL.createObjectURL(event.target.files[0]);
+    };
+</script>
+
+<script>
+    var loadImg6 = function (event) {
+        var image = document.getElementById('img6');
+        image.src = URL.createObjectURL(event.target.files[0]);
+    };
+</script>
+
+<script>
+    var loadImg7 = function (event) {
+        var image = document.getElementById('img7');
+        image.src = URL.createObjectURL(event.target.files[0]);
+    };
+</script>
+
+<script>
+    var loadImg8 = function (event) {
+        var image = document.getElementById('img8');
+        image.src = URL.createObjectURL(event.target.files[0]);
+    };
+</script>
+
+<script>
+    var loadImg9 = function (event) {
+        var image = document.getElementById('img9');
+        image.src = URL.createObjectURL(event.target.files[0]);
+    };
+</script>
+<script>
+    var loadImgx1 = function (event) {
+        var image = document.getElementById('imgx1');
+        image.src = URL.createObjectURL(event.target.files[0]);
+    };
+</script>
+
+<script>
+    var loadImgx2 = function (event) {
+        var image = document.getElementById('imgx2');
+        image.src = URL.createObjectURL(event.target.files[0]);
+    };
+</script>
+
+<script>
+    var loadImgx3 = function (event) {
+        var image = document.getElementById('imgx3');
+        image.src = URL.createObjectURL(event.target.files[0]);
+    };
+</script>
+
+<script>
+    var loadImgx4 = function (event) {
+        var image = document.getElementById('imgx4');
+        image.src = URL.createObjectURL(event.target.files[0]);
+    };
+</script>
+<script>
+    var loadImgy1 = function (event) {
+        var image = document.getElementById('imgy1');
+        image.src = URL.createObjectURL(event.target.files[0]);
+    };
+</script>
+
+<script>
+    var loadImgy2 = function (event) {
+        var image = document.getElementById('imgy2');
+        image.src = URL.createObjectURL(event.target.files[0]);
+    };
+</script>
+
+<script>
+    var loadImgy3 = function (event) {
+        var image = document.getElementById('imgy3');
+        image.src = URL.createObjectURL(event.target.files[0]);
+    };
+</script>
+
+<script>
+    var loadImgy4 = function (event) {
+        var image = document.getElementById('imgy4');
+        image.src = URL.createObjectURL(event.target.files[0]);
+    };
+</script>
+<div id="myModal1" class="modal1">
+    <span class="close">&times;</span>
+    <img class="modal-content1" id="img01">
+    <div id="caption"></div>
+</div>
+
+<script>
+    // Get the modal
+    var modal = document.getElementById("myModal1");
+
+    // Get the image and insert it inside the modal - use its "alt" text as a caption
+    var img = document.getElementById("img1");
+    var modalImg = document.getElementById("img01");
+    img.onclick = function () {
+        modal.style.display = "block";
+        modalImg.src = this.src;
+        captionText.innerHTML = this.alt;
+    }
+    // Get the image and insert it inside the modal - use its "alt" text as a caption
+    var img2 = document.getElementById("img2");
+    var modalImg2 = document.getElementById("img01");
+    img2.onclick = function () {
+        modal.style.display = "block";
+        modalImg2.src = this.src;
+        captionText.innerHTML = this.alt;
+    }
+    // Get the image and insert it inside the modal - use its "alt" text as a caption
+    var img3 = document.getElementById("img3");
+    var modalImg3 = document.getElementById("img01");
+    img3.onclick = function () {
+        modal.style.display = "block";
+        modalImg3.src = this.src;
+        captionText.innerHTML = this.alt;
+    }
+    // Get the image and insert it inside the modal - use its "alt" text as a caption
+    var img4 = document.getElementById("img4");
+    var modalImg4 = document.getElementById("img01");
+    img4.onclick = function () {
+        modal.style.display = "block";
+        modalImg4.src = this.src;
+        captionText.innerHTML = this.alt;
+    }
+    // Get the image and insert it inside the modal - use its "alt" text as a caption
+    var img5 = document.getElementById("img5");
+    var modalImg5 = document.getElementById("img01");
+    img5.onclick = function () {
+        modal.style.display = "block";
+        modalImg5.src = this.src;
+        captionText.innerHTML = this.alt;
+    }
+    // Get the image and insert it inside the modal - use its "alt" text as a caption
+    var img6 = document.getElementById("img6");
+    var modalImg6 = document.getElementById("img01");
+    img6.onclick = function () {
+        modal.style.display = "block";
+        modalImg6.src = this.src;
+        captionText.innerHTML = this.alt;
+    }
+    // Get the image and insert it inside the modal - use its "alt" text as a caption
+    var img7 = document.getElementById("img7");
+    var modalImg7 = document.getElementById("img01");
+    img7.onclick = function () {
+        modal.style.display = "block";
+        modalImg7.src = this.src;
+        captionText.innerHTML = this.alt;
+    }
+    // Get the image and insert it inside the modal - use its "alt" text as a caption
+    var img8 = document.getElementById("img8");
+    var modalImg8 = document.getElementById("img01");
+    img8.onclick = function () {
+        modal.style.display = "block";
+        modalImg8.src = this.src;
+        captionText.innerHTML = this.alt;
+    }
+    // Get the image and insert it inside the modal - use its "alt" text as a caption
+    var img9 = document.getElementById("img9");
+    var modalImg9 = document.getElementById("img01");
+    img9.onclick = function () {
+        modal.style.display = "block";
+        modalImg9.src = this.src;
+        captionText.innerHTML = this.alt;
+    }
+
+
+    // Get the image and insert it inside the modal - use its "alt" text as a caption
+    var imgx1 = document.getElementById("imgx1");
+    var modalImgx1 = document.getElementById("img01");
+    imgx1.onclick = function () {
+        modal.style.display = "block";
+        modalImgx1.src = this.src;
+        captionText.innerHTML = this.alt;
+    }
+    // Get the image and insert it inside the modal - use its "alt" text as a caption
+    var imgx2 = document.getElementById("imgx2");
+    var modalImgx2 = document.getElementById("img01");
+    imgx2.onclick = function () {
+        modal.style.display = "block";
+        modalImgx2.src = this.src;
+        captionText.innerHTML = this.alt;
+    }
+    // Get the image and insert it inside the modal - use its "alt" text as a caption
+    var imgx3 = document.getElementById("imgx3");
+    var modalImgx3 = document.getElementById("img01");
+    imgx3.onclick = function () {
+        modal.style.display = "block";
+        modalImgx3.src = this.src;
+        captionText.innerHTML = this.alt;
+    }
+    // Get the image and insert it inside the modal - use its "alt" text as a caption
+    var imgx4 = document.getElementById("imgx4");
+    var modalImgx4 = document.getElementById("img01");
+    imgx4.onclick = function () {
+        modal.style.display = "block";
+        modalImgx4.src = this.src;
+        captionText.innerHTML = this.alt;
+    }
+
+
+    // Get the image and insert it inside the modal - use its "alt" text as a caption
+    var imgy1 = document.getElementById("imgy1");
+    var modalImgy1 = document.getElementById("img01");
+    imgy1.onclick = function () {
+        modal.style.display = "block";
+        modalImgy1.src = this.src;
+        captionText.innerHTML = this.alt;
+    }
+    // Get the image and insert it inside the modal - use its "alt" text as a caption
+    var imgy2 = document.getElementById("imgy2");
+    var modalImgy2 = document.getElementById("img01");
+    imgy2.onclick = function () {
+        modal.style.display = "block";
+        modalImgy2.src = this.src;
+        captionText.innerHTML = this.alt;
+    }
+    // Get the image and insert it inside the modal - use its "alt" text as a caption
+    var imgy3 = document.getElementById("imgy3");
+    var modalImgy3 = document.getElementById("img01");
+    imgy3.onclick = function () {
+        modal.style.display = "block";
+        modalImgy3.src = this.src;
+        captionText.innerHTML = this.alt;
+    }
+    // Get the image and insert it inside the modal - use its "alt" text as a caption
+    var imgy4 = document.getElementById("imgy4");
+    var modalImgy4 = document.getElementById("img01");
+    imgy4.onclick = function () {
+        modal.style.display = "block";
+        modalImgy4.src = this.src;
+        captionText.innerHTML = this.alt;
+    }
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function () {
+        modal.style.display = "none";
+    }
+
+</script>
+
+<script>
+    var currentTab = 0; // Current tab is set to be the first tab (0)
+    showTab(currentTab); // Display the current tab
+
+    function showTab(n) {
+
+        // This function will display the specified tab of the form...
+        var x = document.getElementsByClassName("tab");
+        x[n].style.display = "block";
+        //... and fix the Previous/Next buttons:
+        if (n == 0) {
+            document.getElementById("prevBtn").style.display = "none";
+        }
+        if (n == 4) {
+            Calculate();
+        }
+        else {
+            document.getElementById("prevBtn").style.display = "inline";
+        }
+        if (n == (x.length - 1)) {
+            //document.getElementById("nextBtn").innerHTML = "حفظ";
+            document.getElementById("nextBtn").style.display = "none";
+            document.getElementById("add_btn").style.display = "inline";
+            document.getElementById("AuthBtn").style.display = "inline";
+            document.getElementById("AuthBtn2").style.display = "inline";
+        } else {
+            document.getElementById("add_btn").style.display = "none";
+            document.getElementById("nextBtn").style.display = "inline";
+            document.getElementById("nextBtn").innerHTML = "التالي";
+            document.getElementById("AuthBtn").style.display = "none";
+            document.getElementById("AuthBtn2").style.display = "none";
+        }
+        //... and run a function that will display the correct step indicator:
+        //fixStepIndicator(n)
+    }
+
+    function nextPrev(n) {
+        // This function will figure out which tab to display
+        var x = document.getElementsByClassName("tab");
+        // Exit the function if any field in the current tab is invalid:
+        //if (n == 1) return false;
+        // Hide the current tab:
+        x[currentTab].style.display = "none";
+
+        currentTab = currentTab + n;
+        // if you have reached the end of the form...
+        if (currentTab >= x.length) {
+            // ... the form gets submitted:
+            document.getElementById("regForm").submit();
+            return false;
+        }
+        // Otherwise, display the correct tab:
+        showTab(currentTab);
+    }
+    function PrevPrev(n) {
+        // This function will figure out which tab to display
+        var x = document.getElementsByClassName("tab");
+        // Exit the function if any field in the current tab is invalid:
+        if (n == 1 && !validateForm()) return false;
+        // Hide the current tab:
+        x[currentTab].style.display = "none";
+
+        currentTab = currentTab + n;
+
+        // if you have reached the end of the form...
+        if (currentTab >= x.length) {
+            // ... the form gets submitted:
+            document.getElementById("regForm").submit();
+            return false;
+        }
+        // Otherwise, display the correct tab:
+        showTab(currentTab);
+    }
+
+
+</script>
+
+<div id="myModal1" class="modal1">
+    <span class="close">&times;</span>
+    <img class="modal-content1" id="img01">
+    <div id="caption"></div>
+</div>
+
+
+@* ///////////////////////////////////////////////////////////////////////////////////////////////////////////*@
+
+
+<script type="text/javascript">
+    $(document).on("keypress", 'form', function (e) {
+        var code = e.keyCode || e.which;
+        if (code == 13) {
+            e.preventDefault();
+            return false;
+        }
+    });
+</script>
+
+<script>
+    //////////////// disable auto validate on enter click ///////////////
+    $(document).keypress(function (e) {
+        if (e.keyCode === 13) {
+            e.preventDefault();
+            return false;
+        }
+    });
+    ////////////////////////////////////////////////////////////////////
+</script>
+
+
+<script>
+    $(document).ready(function () {
+        $("#CurrentMeter").focusout(function () {
+            var OldCurrentKm = document.getElementById('OldCurrentKm').value;
+            var CurrentMeter = document.getElementById('CurrentMeter').value;
+            var TotalFreeKm = document.getElementById('TotalFreeKm').value;
+            //alert(OldCurrentKm);
+            if (parseFloat(CurrentMeter) > (parseFloat(OldCurrentKm) + parseFloat(TotalFreeKm))) {
+                var c = parseFloat(CurrentMeter) - (parseFloat(OldCurrentKm) + parseFloat(TotalFreeKm));
+                document.getElementById('AdditionalKmNo').value = c;
+            } else {
+                document.getElementById('AdditionalKmNo').value = 0;
+            }
+
+            var KmNo = parseInt(document.getElementById('AdditionalKmNo').value);
+            var KmValue = parseFloat(document.getElementById('AdditionalKmValue').value);
+            var ExtraKmValue = KmNo * KmValue
+            if (ExtraKmValue > 0) {
+                document.getElementById('ExtraKmValue').value = ExtraKmValue.toFixed(2);
+            } else {
+                document.getElementById('ExtraKmValue').value = "0.00";
+            }
+           
+            
+        });
+    }); 
+</script>
+<script>
+   
+
+    function Calculate() {
+
+        var ExtraKmValue = document.getElementById('ExtraKmValue').value;
+        if (ExtraKmValue == "") {
+            document.getElementById('ExtraKmValue').value = "0.00";
+        }
+        var AdditionalHours = parseInt(document.getElementById('AdditionalHours').value);
+        var ExtraHourValue = parseFloat(document.getElementById('ExtraHourValue').value);
+
+        if (AdditionalHours > 0) {
+            var TotalAdditionalHoursVal = AdditionalHours * ExtraHourValue;
+            document.getElementById('TotalHoursValue').value = TotalAdditionalHoursVal.toFixed(2);
+        } else {
+            document.getElementById('TotalHoursValue').value = "0.00";
+        }
+
+
+        var ContractDaysNbr = parseFloat(document.getElementById('ContractDaysNbr').value);
+        var DailyRentValue = parseFloat(document.getElementById('DailyRentValue').value);
+        var RentalPrice = DailyRentValue * ContractDaysNbr;
+        document.getElementById('RentalPrice').value = RentalPrice.toFixed(2); 
+        //var RentalPrice = parseFloat(document.getElementById('RentalPrice').value);
+        var ChoicesVal = parseFloat(document.getElementById('ChoicesVal').value);
+        var AdditionalDriverVal = parseFloat(document.getElementById('AdditionalDriverVal').value);
+        var AdditionalVal = parseFloat(document.getElementById('AdditionalVal').value);
+        var ExtraKmValue = parseFloat(document.getElementById('ExtraKmValue').value);
+        var TotalHoursValue = parseFloat(document.getElementById('TotalHoursValue').value);
+        var AuthValue = parseFloat(document.getElementById('AuthValue').value);
+        var ContractValED = (RentalPrice + ChoicesVal + AdditionalDriverVal + AdditionalVal + ExtraKmValue + TotalHoursValue + AuthValue);
+        document.getElementById('ContractValED').value = ContractValED.toFixed(2);
+
+        var Discount = parseFloat(document.getElementById('Discount').value);
+        var DiscountVal = ContractValED * Discount / 100;
+
+        var ContractValID = (ContractValED - DiscountVal).toFixed(2);
+
+        document.getElementById('ContractValID').value = ContractValID;
+        var Tax = parseFloat(document.getElementById('Tax').value);
+        var TaxVal = (ContractValID * (Tax / 100)).toFixed(2);
+        document.getElementById('TaxVal').value = TaxVal;
+        var ContractValIT = (ContractValID * (1 + (Tax / 100))).toFixed(2);
+        document.getElementById('TotalContractIT').value = ContractValIT;
+
+        var depences = document.getElementById('Depences').value;
+        if (depences == "") {
+            document.getElementById('TotDepences').value = "0.00";
+            depences = 0;
+            //alert(1);
+        } else {
+            document.getElementById('TotDepences').value = depences;
+            //alert(2);
+        }         
+
+
+        //////var InsuranceVal = document.getElementById('InsuranceVal').value;
+        //////if (InsuranceVal == "") {
+        //////    InsuranceVal = 0;
+        //////}
+        var CompensationVal = document.getElementById('CompensationVal').value;
+        if (CompensationVal == "") {
+            CompensationVal = 0;
+        }
+
+        var TotCompensation = parseFloat(CompensationVal);
+        document.getElementById('TotCompensation').value = TotCompensation;
+
+
+        var RenterPrevBalance = parseFloat(document.getElementById('RenterPrevBalance').value);
+        var TotToPay = parseFloat(ContractValIT) + parseFloat(TotCompensation) + parseFloat(RenterPrevBalance) - parseFloat(depences);
+        //alert(TotToPay);
+        document.getElementById('TotToPay').value = TotToPay.toFixed(2);
+
+        document.getElementById('TotPayed').focus;
+
+       
+    }
+
+    $(document).ready(function () {
+        $('#TotPayed').focusout(function () {
+            
+            var TotPayed = parseFloat(document.getElementById('TotPayed').value);
+           
+            var TotToPay = parseFloat(document.getElementById('TotToPay').value);
+
+            if (TotToPay > 0) {
+                var reste = TotPayed - TotToPay;
+            } else {
+                var reste = TotPayed + TotToPay;
+            }
+            if (reste == 0) {
+                document.getElementById('RestLabel').innerHTML = "الباقي";
+            } else if (reste >0) {
+                document.getElementById('RestLabel').innerHTML = "الباقي للمستأجر";
+            } else {
+                document.getElementById('RestLabel').innerHTML = "الباقي على للمستأجر";
+            }
+            document.getElementById('reste').value = reste.toFixed(2);
+        })
+    })
+</script>
+
+<script>
+    $(document).ready(function () {
+        $("#PayType").change(function () {
+            $.get("/ContractSettlement/GetSalesPoint", { PayCode: $("#PayType").val() }, function (data) {
+                $("#CasherName").empty();
+                $.each(data, function (index, row) {
+                    $("#CasherName").append("<option value= '" + row.CR_Cas_Sup_SalesPoint_Code + "'>" + row.CR_Cas_Sup_SalesPoint_Ar_Name + "</option>")
+                });
+            });
+        })
+    });
+</script>
+
+
+<script>
+    $(document).ready(function () {
+        $("#TotPayed").focusout(function () {
+            var TotPayed = parseFloat(document.getElementById('TotPayed').value);
+            if (TotPayed > 0) {
+                document.getElementById('PayType').disabled = false;
+                document.getElementById('CasherName').disabled = false;
+            } else {
+                document.getElementById('PayType').disabled = true;
+                document.getElementById('CasherName').disabled = true;
+            }
+        });
+    });
+
+
+
+</script>
+
+<script>
+    $(document).ready(function () {
+        $("#PayType").change(function () {
+            var BtnAdd = document.getElementById('add_btn');
+            BtnAdd.disabled = false;
+        })
+    });
+</script>

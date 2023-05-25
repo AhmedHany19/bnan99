@@ -1,0 +1,92 @@
+﻿@model IEnumerable<RentCar.Models.CR_Cas_Account_Tax_Owed>
+
+<div class="table-rep-plugin" id="TableDiv" style="max-height:25%;">
+    <table id="myTable" class="table table-striped mb-0" style="cursor:default">
+        <thead style="overflow-y: scroll; flex-grow: 1;">
+            <tr>
+                <th width="5%">
+                    إختر
+                </th>
+                <th style="width:15%;">
+                    رقم العقد
+                </th>
+                <th style="width:12%;">
+                    تاريخ الإستحقاق
+                </th>
+                <th style="width:9%;">
+                    قيمة العقد
+                </th>
+                <th style="width:14%;">
+                    نسبة القيمة المضافة
+                </th>
+                <th style="width:11%;">
+                    القيمة المضافة
+                </th>
+                
+            </tr>
+        </thead>
+        <tbody id="tbl">    
+            @foreach (var item in Model)
+            {   
+                <tr>
+                    <td class="keyPayTaxes" hidden="hidden">
+                        <input class="keyValPayTaxes" value="@item.CR_Cas_Account_Tax_Owed_Contract_No" id="Index" />
+                    </td>
+                    <td align="center" style="width:5%">
+                        <input type="checkbox" id="Chk_@item.CR_Cas_Account_Tax_Owed_Contract_No" name="Chk_@item.CR_Cas_Account_Tax_Owed_Contract_No" class="form-control ChkListTaxOwed" style="height:25px;margin-top:2px;" />
+                    </td>
+                    <td style="width:15%;">
+                        @Html.DisplayFor(modelItem => item.CR_Cas_Account_Tax_Owed_Contract_No)
+                    </td>
+                    <td style="width:12%;">
+                        @item.CR_Cas_Account_Tax_Owed_Due_Date.Value.ToString("yyyy/MM/dd")
+                    </td>
+                    <td style="width:9%;text-align:center">
+                        @Html.DisplayFor(modelItem => item.CR_Cas_Account_Tax_Owed_Contract_Value)
+                    </td>
+                    <td style="width:14%;">
+                        @Html.DisplayFor(modelItem => item.CR_Cas_Account_Tax_Owed_Percentage)
+                    </td>
+                    <td style="width:11%;">
+                        @Html.DisplayFor(modelItem => item.CR_Cas_Account_Tax_Owed_Value)
+                    </td>
+                    
+                    <td style="width:10%" hidden>
+                        @Html.DisplayFor(modelItem => item.CR_Cas_Account_Tax_Owed_Value)
+                        <input type="text" name="ValPayTaxes_@item.CR_Cas_Account_Tax_Owed_Contract_No" id="ValPayTaxes_@item.CR_Cas_Account_Tax_Owed_Contract_No" value="@item.CR_Cas_Account_Tax_Owed_Value" />
+                    </td>
+                </tr>   
+            }
+        </tbody>
+    </table>
+</div>
+
+<script>
+    $(document).ready(
+        function () {
+            $(".ChkListTaxOwed").change(function () {
+                var sum = 0;
+                $("#Tbl TR").each(function () {
+
+                    var chk = $(this).find('input[type="checkbox"]').is(':checked');
+                    if (chk == true) {
+
+                        var k = $(this).find(".keyPayTaxes").find(".keyValPayTaxes").val();
+                        //alert(k);
+                        var rs = $("#ValPayTaxes_" + k).val();
+                        //alert(rs);
+                        sum = parseFloat(sum) + parseFloat(rs);
+                        //alert(sum);
+                    }
+
+                });
+
+                if (sum > 0) {
+                    document.getElementById('PayedVal').value = sum.toFixed(2);
+                } else {
+                    document.getElementById('PayedVal').value = "0.00";
+                }
+            })
+
+        });
+</script>

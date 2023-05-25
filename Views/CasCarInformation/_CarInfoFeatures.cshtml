@@ -1,0 +1,84 @@
+﻿@model IEnumerable<RentCar.Models.CR_Mas_Sup_Features>
+
+<style>
+    .table thead th {
+        position: relative
+    }
+</style>
+
+<div class="">
+    <div class="corp_page">
+        <div class="page_content">
+            @*<form method="post">*@
+            <div class="form_bg">
+                <div class="table-responsive" id="tbl" style="width:100%; height:auto; overflow:auto;">
+                    <div id="dtBasicExample_print">
+                        <table class="table table-striped table_no_resp" id="myTable" style="width:100%; height:250px; overflow-x:hidden;">
+                            <thead>
+                                <tr>
+                                    <th hidden>
+                                        code
+                                    </th>
+                                    <th>
+                                        الميزة
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbl" style="max-height:200px; overflow-x:hidden;">
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td hidden>
+                                            @Html.DisplayFor(modelItem => item.CR_Mas_Sup_Features_Code)
+                                        </td>
+                                        <td>
+                                            <label class="checkbox_input">
+                                                @Html.DisplayFor(modelItem => item.CR_Mas_Sup_Features_Ar_Name)
+                                                <input type="checkbox"  id="chk_@item.CR_Mas_Sup_Features_Code" name="chk_@item.CR_Mas_Sup_Features_Code">
+                                                <span class="checkmark"></span>
+                                            </label>
+                                        </td>
+
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            @*</form>*@
+        </div>
+    </div>
+
+
+    @*<script type="text/javascript" lang="en">
+                    $(document).ready(function () {
+                        $('#add_btn').click(function () {
+                            var rows = [];
+                            $('#myTable tbody tr').each(function () {
+                                var code = $(this).find('td').eq(0).text().trim();
+
+                                var name = $(this).find('td').eq(1).text().trim();
+
+                                //var st = $(this).find('td').eq(2).val();
+                                var st = document.getElementById("chk").checked
+
+                                var row = code + "-" + name + "-" + st;
+
+                                rows.push(row);
+                            });
+                            $.post('@Url.Action("AddCasFeatures", "CasCarInformation")', { rows: rows }, function (data) {
+                                //console.log(data);
+                                alert("w");
+                            });
+
+
+                        });
+                    });
+        </script>*@
+
+
+
+
+
+</div>

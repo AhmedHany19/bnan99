@@ -1,0 +1,769 @@
+﻿@model IEnumerable<RentCar.Models.CR_Cas_Contract_Basic>
+
+@{
+    ViewBag.Title = "RenterContracts";
+    Layout = "~/Views/Shared/_CASLayout.cshtml";
+}
+<link href="~/BSys3 Styles/CSS/bootstrap.min.css" rel="stylesheet" />
+<link href="~/BSys3 Styles/CSS/icons.min.css" rel="stylesheet" />
+<link href="~/BSys3 Styles/CSS/app-rtl.min.css" rel="stylesheet" />
+<link href="~/BSys3Styles/CSS/style_app.css" rel="stylesheet" />
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<link href="~/Bootstrap_Arabic/font-awesome.css" type="text/css" rel="stylesheet" />
+<link href="~/Content/toastr.css" rel="stylesheet" />
+<style>
+    body {
+        background-color: transparent !important
+    }
+
+
+        body[data-layout=horizontal] .content-page {
+            padding: 110px 12px 0 12px !important;
+            background-color: transparent !important
+        }
+
+    .date_header {
+        padding-top: 15px;
+        color: #4a80b4;
+        font-size: 18px;
+        font-weight: bold;
+    }
+    /*.card{min-height:570px;}*/
+    .langue_header {
+        margin-top: 15px;
+        color: #4a80b4;
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+        .langue_header a, .reseau a {
+            color: #4a80b4;
+        }
+
+            .langue_header a:hover {
+                color: #EDA63C
+            }
+
+            .reseau a i {
+                color: #EDA63C;
+                font-size: 24px;
+                margin-top: 5px;
+                margin-right: 5px;
+                float: left
+            }
+
+            .reseau a:hover i {
+                color: #4a80b4
+            }
+
+    .footer {
+        padding: 2px;
+        bottom: 0;
+    }
+
+    .enlarged .footer {
+        right: 0 !important;
+    }
+
+    .footer a, .footer .footer-links a, .footer {
+        color: #fff !important;
+        font-size: 16px;
+        line-height: 40px;
+    }
+
+    .footer-reseau a, .footer-reseau i {
+        color: #fff !important;
+        font-size: 24px;
+    }
+
+        .footer-reseau a:hover, .footer-reseau a:hover i, .footer a:hover, .footer .footer-links a:hover {
+            color: #EDA63C !important;
+        }
+
+    html {
+        background: url('/BSys3 Styles/Images/bg.jpg');
+    }
+
+    .form-control {
+        height: 30px;
+        padding: 0 0.5rem;
+    }
+
+    .form-group {
+        margin-bottom: 0.5rem;
+    }
+
+    .error_span {
+        font-size: 14px;
+        font-family: Roboto,sans-serif;
+        color: #ff5b5b;
+        padding-right: 0px;
+        float: right;
+    }
+    /*.error_span:before {
+                left: auto;
+                right: 38px;
+                content: "\F0159";
+                font-family: "Material Design Icons";
+                position: absolute;
+            }*/
+</style>
+<style>
+    .custom-switch .custom-control-label::before {
+        border-color: red;
+    }
+
+    .custom-switch .custom-control-label::after {
+        background-color: red;
+    }
+
+    .custom-switch {
+        padding-right: 3rem;
+    }
+
+    .focus-btn-group {
+        float: left;
+    }
+
+    .btn-toolbar .btn-group {
+        display: none
+    }
+
+
+    #SrchImg {
+        left: 0;
+        margin-top: -3px;
+        margin-left: 0px;
+        margin-right: -35px;
+        position: relative;
+        float: left;
+        height: 35px;
+    }
+
+    .hr_60 {
+        float: right;
+        width: 60%;
+        height: 0.5px;
+        background: #73A0C1;
+        margin-top: 3px;
+    }
+
+    .hr_50 {
+        float: right;
+        width: 50%;
+        height: 0.5px;
+        background: #73A0C1;
+        margin-top: 3px;
+    }
+
+    .hr_70 {
+        float: right;
+        width: 70%;
+        height: 0.5px;
+        background: #73A0C1;
+        margin-top: 3px;
+    }
+
+    .hr_80 {
+        float: right;
+        width: 80%;
+        height: 0.5px;
+        background: #73A0C1;
+        margin-top: 3px;
+    }
+
+    .hr_85 {
+        float: right;
+        width: 85%;
+        height: 0.5px;
+        background: #73A0C1;
+        margin-top: 3px;
+    }
+
+    .hr_90 {
+        float: right;
+        width: 90%;
+        height: 0.5px;
+        background: #73A0C1;
+        margin-top: 3px;
+    }
+
+    .hr_100 {
+        float: right;
+        width: 100%;
+        height: 0.5px;
+        background: #73A0C1;
+        margin-top: 3px;
+    }
+
+    .hr_60_left {
+        float: left;
+        width: 60%;
+        height: 0.5px;
+        background: #73A0C1;
+        margin-top: 3px;
+    }
+
+    .hr_80_left {
+        float: left;
+        width: 60%;
+        height: 0.5px;
+        background: #73A0C1;
+        margin-top: 3px;
+    }
+
+    .hr_50_left {
+        float: left;
+        width: 50%;
+        height: 0.5px;
+        background: #73A0C1;
+        margin-top: 3px;
+    }
+
+    .hr_70_left {
+        float: left;
+        width: 70%;
+        height: 0.5px;
+        background: #73A0C1;
+        margin-top: 3px;
+    }
+
+    .hr_85_left {
+        float: left;
+        width: 85%;
+        height: 0.5px;
+        background: #73A0C1;
+        margin-top: 3px;
+    }
+
+    .hr_90_left {
+        float: left;
+        width: 90%;
+        height: 0.5px;
+        background: #73A0C1;
+        margin-top: 3px;
+    }
+
+    .header-title {
+        font-family: 'Times New Roman';
+        font-size: 25px;
+        color: #0A4169
+    }
+
+    .btn_form i {
+        width: 35px;
+        height: 35px;
+        line-height: 40px;
+        text-align: center;
+        color: #fff;
+        background: #4F7DB1;
+        float: right;
+        margin-left: 10px;
+        padding-right: 12px;
+        text-align: center
+    }
+
+    .btn_form {
+        float: right;
+        color: #F3B161;
+        font-weight: bold;
+        margin-left: 10px;
+        width: 45px;
+        height: 40px;
+        line-height: 37px;
+        text-align: center;
+        color: #fff;
+        background: #4F7DB1;
+        border: none;
+        float: right;
+        margin-left: 10px;
+    }
+
+    .table thead th {
+        color: #124f77;
+        border: solid 2px #4A80B3;
+        text-align: center;
+        background: #D1EAFA;
+        position: sticky;
+        top: 0;
+    }
+
+    .table td {
+        color: #083555;
+        padding: 0.25rem;
+        border: solid 1px #4A80B3;
+    }
+
+        .table td a {
+            color: #4F7DB1
+        }
+
+    .table-striped tbody tr:nth-of-type(odd) {
+        background-color: rgba(5,157,250,.05)
+    }
+
+    input[type="button"] {
+        font-family: 'Sakkal Majalla';
+        font-size: 16px;
+        border-color: #4B80B4;
+        background-color: #4B80B4;
+        color: white;
+        border: none;
+    }
+
+    .top_content {
+        width: 100%;
+        float: left;
+        margin-bottom: 10px;
+    }
+
+    .subtitle_corp {
+        font-weight: bold;
+    }
+
+    .btn {
+        min-width: 75px;
+        padding: 0.45rem 0 !important
+    }
+
+    .btn-disabled {
+        opacity: 0.7
+    }
+
+    .texterr {
+        font-size: 14px !important;
+        color: #ff5b5b;
+        position: relative;
+        list-style: none;
+        font-family: Roboto,sans-serif !important;
+        padding-right: 0px;
+        margin-top: 5px;
+    }
+
+    td {
+        vertical-align: middle !important;
+        text-align:center;
+    }
+    /*.texterr:before {
+                content: "\F0159";
+                font-family: "Material Design Icons";
+                position: absolute;
+                left: auto;
+                right: 2px;
+                top: 0px;
+            }*/
+</style>
+
+<div class="content">
+    <!-- Start Content-->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+
+                <div class="card-box table-responsive" style="height:76vh">
+                    <div class="title_corp"><h3> المستأجرين / عقود المستأجرين / البيانات التفصيلية لعقود مستأجر </h3></div>
+                    <div class="subtitle_corp">
+                        تمكنك الصفحة من عرض عن البيانات التفصيلية لعقود المستأجر
+                    </div>
+                    <div class="hr_60"></div>
+                    <div class="hr_80"></div>
+                    <div class="corp_page">
+                        <div class="page_content">
+                            <form method="post">
+                                <div class="form_bg" style="width:100%">
+
+                                    <div class="responsive-table-plugin">
+                                        <div class="table-rep-plugin">
+                                            <div class="" data-pattern="priority-columns" style="border:none;">
+                                                <div class="href_layout" style="width:50%;float:right;margin-top:15px;margin-bottom:10px;">
+                                                    @*<a href="/CasHome/index" class="btn_form" data-toggle="tooltip" data-placement="top" title="إغلاق"><i class="fa fa-times"></i></a>*@
+                                                    <a href="/CasRenterLessor/LoadRenters" class="btn_form" data-toggle="tooltip" data-placement="top" title="العودة لقائمة المستأجرين"><i class="fa fa dripicons-arrow-left" style="padding-top:12px;"></i></a>
+                                                    @*<button type="submit" name="excelCall" class="btn_form" value="Excel" style="padding-right:4px;" data-toggle="tooltip" data-placement="top" title="ترحيل البيانات للإكسل">
+                                                            <i class="far fa-file-excel" aria-hidden="true" style=" margin-bottom: 3px; padding-left: 10px;"></i>
+                                                        </button>*@
+
+                                                    <script>
+                                                        $(document).ready(function () {
+                                                            $("#inputtext").on("keyup", function () {
+                                                                var value = $(this).val().toLowerCase();
+                                                                $("#tbl trC").filter(function () {
+                                                                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                                                                });
+                                                            });
+                                                        });
+                                                    </script>
+                                                </div>
+
+                                                <div style="width:100%;float:left"></div>
+                                                <div class="row mb-1" hidden>
+                                                    <div class="col-lg-4 col-md-12">
+                                                        <div class="row">
+                                                            <div class="col-md-4" style="float:right">
+                                                                <label>المهنة</label>
+                                                            </div>
+                                                            <div class="col-md-8" style="float:right">
+                                                                <input class="form-control" type="text" id="RenterJobs" name="RenterJobs" value="@ViewBag.RenterJobs" readonly />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4 col-md-12">
+                                                        <div class="row">
+                                                            <div class="col-md-4" style="float:right">
+                                                                <label>الجنسية</label>
+                                                            </div>
+                                                            <div class="col-md-8" style="float:right">
+                                                                <input class="form-control" type="text" id="RenterNationality" name="RenterNationality" value="@ViewBag.RenterNationality" readonly />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4 col-md-12">
+                                                        <div class="row">
+                                                            <div class="col-md-4" style="float:right">
+                                                                <label>العضوية</label>
+                                                            </div>
+                                                            <div class="col-md-8" style="float:right">
+                                                                <input class="form-control" type="text" id="RenterMembership" name="RenterMembership" value="@ViewBag.RenterMembership" readonly />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-1" hidden>
+                                                    <div class="col-lg-4 col-md-12">
+                                                        <div class="row">
+                                                            <div class="col-md-4" style="float:right">
+                                                                <label>أول تعامل</label>
+                                                            </div>
+                                                            <div class="col-md-8" style="float:right">
+                                                                <input class="form-control" type="text" id="RenterFirstInteraction" name="RenterFirstInteraction" value="@ViewBag.RenterFirstInteraction" readonly />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4 col-md-12">
+                                                        <div class="row">
+                                                            <div class="col-md-4" style="float:right">
+                                                                <label>اخر تعامل</label>
+                                                            </div>
+                                                            <div class="col-md-8" style="float:right">
+                                                                <input class="form-control" type="text" id="RenterLastInteraction" name="RenterLastInteraction" value="@ViewBag.RenterLastInteraction" readonly />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4 col-md-12">
+                                                        <div class="row">
+                                                            <div class="col-md-4" style="float:right">
+                                                                <label>التقييم</label>
+                                                            </div>
+                                                            <div class="col-md-8" style="float:right">
+                                                                <input class="form-control" type="text" id="RenterRating" name="RenterRating" value="@ViewBag.RenterRating" readonly />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-1" hidden>
+                                                    <div class="col-lg-4 col-md-12">
+                                                        <div class="row">
+                                                            <div class="col-md-4" style="float:right">
+                                                                <label>المسافة المقطوعة</label>
+                                                            </div>
+                                                            <div class="col-md-8" style="float:right">
+                                                                <input class="form-control" type="text" id="Km" name="Km" value="@ViewBag.Km" readonly />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4 col-md-12">
+                                                        <div class="row">
+                                                            <div class="col-md-4" style="float:right">
+                                                                <label>حجم المبالغ المتداولة</label>
+                                                            </div>
+                                                            <div class="col-md-8" style="float:right">
+                                                                <input class="form-control" type="text" id="InteractionValue" name="InteractionValue" value="@ViewBag.InteractionValue" readonly />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4 col-md-12">
+                                                        <div class="row">
+                                                            <div class="col-md-4" style="float:right">
+                                                                <label>الرصيد</label>
+                                                            </div>
+                                                            <div class="col-md-8" style="float:right">
+                                                                <input class="form-control" type="text" id="RenterBalance" name="RenterBalance" value="@ViewBag.RenterBalance" readonly />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                    <div class="row" style="width: 100%;  font-size: 17px;">
+                                        <div class="col-3">
+                                            <div class="form-group" style="display: flex; align-items: center; font-size: 15px;">
+                                                <label> رقم الهويه</label>
+                                                <input style="width:50%" class="form-control" type="text" id="RenterId" name="RenterId" value="@ViewBag.RenterId" readonly />
+                                            </div>
+
+                                        </div>
+
+                                        <div class="col-4">
+                                            <div class="form-group" style="display: flex; align-items: center; font-size:15px;">
+                                                <label>  الاسم</label>
+                                                <input style="width:50%" class="form-control" type="text" id="RenterName" name="RenterName" value="@ViewBag.RenterName" readonly />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class=" mb-1">
+                                        <table id="myTable" class="table  mb-0" style="cursor:default; vertical-align: middle;">
+                                            <thead>
+                                                <tr>
+                                                <tr>
+                                                    <th width="14%">
+                                                        رقم العقد
+                                                    </th>
+                                                    <th width="7%">
+                                                        تاريخه
+                                                    </th>
+                                                    <th width="7%">
+                                                        بدايته
+                                                    </th>
+                                                    <th width="7%">
+                                                        نهايته
+                                                    </th>
+
+
+                                                    <th width="28%">
+                                                        السيارة
+                                                    </th>
+
+                                                    <th width="7%" style="font-size:14px">
+                                                        قيمة العقد
+                                                    </th>
+
+
+                                                    <th width="4%">
+                                                        عقد
+                                                    </th>
+
+                                                    <th width="4%">
+                                                        الحالة
+                                                    </th>
+
+                                                </tr>
+                                            </thead>
+                                            <tbody id="tbl tr">
+                                                @foreach (var item in Model.Skip(Model.Count() - 1))
+                                                {
+
+
+                                                    int copyNumber = item.CR_Cas_Contract_Basic_Copy;
+
+                                                    <tr>
+                                                        <td width="14%">
+                                                            @Html.DisplayFor(modelItem => item.CR_Cas_Contract_Basic_No)
+                                                            @{
+
+                                                                copyNumber = copyNumber - 1;
+                                                                if (copyNumber > 0)
+                                                                {
+                                                                    <label style="float:left;color:red;">(@copyNumber)</label>
+                                                                }
+
+                                                            }
+                                                        </td>
+                                                        <td width="7%">
+                                                            @if (item.CR_Cas_Contract_Basic_Date != null)
+                                                            {
+                                                                @item.CR_Cas_Contract_Basic_Date.Value.ToString("yyyy/MM/dd")
+                                                            }
+
+
+                                                        </td>
+                                                        <td width="7%">
+                                                            @if (item.CR_Cas_Contract_Basic_Start_Date != null)
+                                                            {
+                                                                @item.CR_Cas_Contract_Basic_Start_Date.Value.ToString("yyyy/MM/dd")
+                                                            }
+
+
+                                                        </td>
+                                                        <td width="7%">
+                                                            @if (item.CR_Cas_Contract_Basic_Expected_End_Date != null)
+                                                            {
+                                                                @item.CR_Cas_Contract_Basic_Expected_End_Date.Value.ToString("yyyy/MM/dd")
+                                                            }
+
+
+                                                        </td>
+
+                                                        <td width="28%">
+
+                                                            @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Information.CR_Cas_Sup_Car_Collect_Ar_Name)
+
+                                                        </td>
+                                                        <td width="7%">
+
+                                                            @Html.DisplayFor(modelItem => item.CR_Cas_Contract_Basic_Net_Value)
+
+                                                        </td>
+
+
+
+                                                        <td align="center" width="4%" style="text-align:center">
+                                                            <a href="~/BasicContract/PDFFlyer/?p=@Html.DisplayFor(modelItem => item.CR_Cas_Contract_Basic_CreateContract_Pdf)" target="_blank">
+                                                                <i class="fas fa-file-pdf" style="color:red;"></i>
+                                                                @*<img src="~/images/common/PdfIcon.png" style="width:20px;height:20px" />*@
+                                                            </a>
+                                                        </td>
+
+
+                                                        <td width="4%">
+                                                            @if (item.CR_Cas_Contract_Basic_Status == "A" || item.CR_Cas_Contract_Basic_Status == "y")
+                                                            {
+                                                                <label style="text-align:center">نشط</label>
+                                                            }
+                                                            else if (item.CR_Cas_Contract_Basic_Status == "C")
+                                                            {
+                                                                <label style="text-align:center">مغلق</label>
+                                                            }
+                                                            else if (item.CR_Cas_Contract_Basic_Status == "E")
+                                                            {
+                                                                <label style="text-align:center">منتهي</label>
+                                                            }
+
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div id="dtBasicExample_print">
+
+                                        <iframe name="print_frame" width="0" height="0" frameborder="0" src="about:blank"></iframe>
+                                        <script>
+                                            function printDiv() {
+                                                window.frames["print_frame"].document.body.innerHTML = document.getElementById("dtBasicExample_print").innerHTML;
+                                                window.frames["print_frame"].window.focus();
+                                                window.frames["print_frame"].window.print();
+                                            }
+                                        </script>
+                                        <script>
+                                            $(document).ready(function () {
+                                                $('#dtBasicExample').DataTable();
+                                                $('.dataTables_length').addClass('bs-select');
+                                            });
+                                        </script>
+                                        <script>
+                                            function sortTable(n) {
+                                                var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+                                                table = document.getElementById("myTable");
+                                                switching = true;
+                                                // Set the sorting direction to ascending:
+                                                dir = "asc";
+                                                /* Make a loop that will continue until
+                                                no switching has been done: */
+                                                while (switching) {
+                                                    // Start by saying: no switching is done:
+                                                    switching = false;
+                                                    rows = table.rows;
+                                                    /* Loop through all table rows (except the
+                                                    first, which contains table headers): */
+                                                    for (i = 1; i < (rows.length - 1); i++) {
+                                                        // Start by saying there should be no switching:
+                                                        shouldSwitch = false;
+                                                        /* Get the two elements you want to compare,
+                                                        one from current row and one from the next: */
+                                                        x = rows[i].getElementsByTagName("TD")[n];
+                                                        y = rows[i + 1].getElementsByTagName("TD")[n];
+                                                        /* Check if the two rows should switch place,
+                                                        based on the direction, asc or desc: */
+                                                        if (dir == "asc") {
+                                                            if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                                                                // If so, mark as a switch and break the loop:
+                                                                shouldSwitch = true;
+                                                                break;
+                                                            }
+                                                        } else if (dir == "desc") {
+                                                            if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                                                                // If so, mark as a switch and break the loop:
+                                                                shouldSwitch = true;
+                                                                break;
+                                                            }
+                                                        }
+                                                    }
+                                                    if (shouldSwitch) {
+                                                        /* If a switch has been marked, make the switch
+                                                        and mark that a switch has been done: */
+                                                        rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                                                        switching = true;
+                                                        // Each time a switch is done, increase this count by 1:
+                                                        switchcount++;
+                                                    } else {
+                                                        /* If no switching has been done AND the direction is "asc",
+                                                        set the direction to "desc" and run the while loop again. */
+                                                        if (switchcount == 0 && dir == "asc") {
+                                                            dir = "desc";
+                                                            switching = true;
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        </script>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- end row -->
+    </div> <!-- container-fluid -->
+    <!-- validation init -->
+</div>
+
+<script>
+
+    // Get a reference to the HTML table
+    const table = document.getElementById('myTable');
+
+    // Specify the indexes of the columns to format (starting from 0)
+    const columnIndexes = [5]; // for example, format columns  6
+
+    // Loop through each row in the table
+    for (let i = 1; i < table.rows.length; i++) { // starting from row 1 to exclude the header row
+        // Loop through each column index in the list
+        for (let j = 0; j < columnIndexes.length; j++) {
+            // Get the cell in the current row for the specified column index
+            const cell = table.rows[i].cells[columnIndexes[j]];
+
+            // Check if the cell contains an <a> tag
+            if (cell.querySelector('a')) {
+                // If it does, get the inner text of the <a> tag and attempt to parse it as a number
+                const value = parseFloat(cell.querySelector('a').innerText);
+
+                // Check if the parsed value is a valid number
+                if (!isNaN(value) && isFinite(value)) {
+                    // Convert the parsed value to a string with thousand separators and decimal points
+                    const formattedValue = value.toLocaleString('en-US', { minimumFractionDigits: 2 });
+
+                    // Update the inner text of the <a> tag with the formatted value
+                    cell.querySelector('a').innerText = formattedValue;
+                }
+            } else {
+                // If the cell doesn't contain an <a> tag, attempt to parse the cell value as a number
+                const value = parseFloat(cell.innerHTML);
+
+                // Check if the parsed value is a valid number
+                if (!isNaN(value) && isFinite(value)) {
+                    // Convert the parsed value to a string with thousand separators and decimal points
+                    const formattedValue = value.toLocaleString('en-US', { minimumFractionDigits: 2 });
+
+                    // Update the cell's innerHTML property with the formatted value
+                    cell.innerHTML = formattedValue;
+                }
+            }
+        }
+    }
+</script>

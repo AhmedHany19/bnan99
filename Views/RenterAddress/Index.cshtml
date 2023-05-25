@@ -1,0 +1,118 @@
+﻿@model IEnumerable<RentCar.Models.CR_MAS_Renter_Addre>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CR_Mas_Renter_Address_Regions)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CR_Mas_Renter_Address_City)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CR_Mas_Renter_Address_Ar_District)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CR_Mas_Renter_Address_En_District)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CR_Mas_Renter_Address_Fr_District)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CR_Mas_Renter_Address_Ar_Street)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CR_Mas_Renter_Address_En_Street)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CR_Mas_Renter_Address_Fr_Street)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CR_Mas_Renter_Address_Building)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CR_Mas_Renter_Address_Unit_No)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CR_Mas_Renter_Address_Zip_Code)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CR_Mas_Renter_Address_Additional_Numbers)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CR_Mas_Renter_Address_UpDate_Post)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CR_Mas_Renter_Address_Status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CR_Mas_Renter_Address_Reasons)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CR_Mas_Renter_Address_Regions)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CR_Mas_Renter_Address_City)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CR_Mas_Renter_Address_Ar_District)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CR_Mas_Renter_Address_En_District)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CR_Mas_Renter_Address_Fr_District)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CR_Mas_Renter_Address_Ar_Street)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CR_Mas_Renter_Address_En_Street)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CR_Mas_Renter_Address_Fr_Street)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CR_Mas_Renter_Address_Building)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CR_Mas_Renter_Address_Unit_No)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CR_Mas_Renter_Address_Zip_Code)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CR_Mas_Renter_Address_Additional_Numbers)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CR_Mas_Renter_Address_UpDate_Post)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CR_Mas_Renter_Address_Status)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CR_Mas_Renter_Address_Reasons)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.CR_Mas_Renter_Address_Id_Code }) |
+            @Html.ActionLink("Details", "Details", new { id=item.CR_Mas_Renter_Address_Id_Code }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.CR_Mas_Renter_Address_Id_Code })
+        </td>
+    </tr>
+}
+
+</table>

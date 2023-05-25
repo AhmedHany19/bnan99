@@ -1,0 +1,463 @@
+﻿@model RentCar.Models.CR_Cas_Renter_Lessor
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_CASLayout.cshtml";
+}
+
+<link href="~/BSys3Styles/CSS/style_form.css" rel="stylesheet" />
+<style>
+    .tooltip > .tooltip-inner {
+        background-color: #f00;
+    }
+
+    .tooltip > .tooltip-arrow {
+        border-top-color: #f00 !important;
+    }
+
+    label {
+        font-size: 13px;
+        font-weight: bold
+    }
+</style>
+<div class="content">
+    <!-- Start Content-->
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card-box table-responsive" style="height:79vh">
+                    <div class="title_corp"> <h3>المستاجرين / بيانات مستأجر /  تعديل  </h3></div>
+                    <div class="subtitle_corp"> تمكنك الصفحةمن عرض البيانات التفصيلية للمستأجر وحضرالمستأجر أو رفع الحضر</div>
+                    <div class="hr_60"></div>
+                    <div class="hr_80"></div>
+                    <div class="corp_page">
+                        <div class="page_content" style="float:left;width:100%">
+
+                            @using (Html.BeginForm())
+                            {
+                                @Html.AntiForgeryToken()
+
+                                <div class="form-horizontal" style="margin-top:15px;min-height:70%">
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    @Html.HiddenFor(model => model.CR_Cas_Renter_Lessor_Id)
+                                    @Html.HiddenFor(model => model.CR_Cas_Renter_Lessor_Status)
+                                    @Html.HiddenFor(model => model.CR_Cas_Renter_Admin_Membership_Code)
+                                    @Html.HiddenFor(model => model.CR_Cas_Renter_Membership_Code)
+
+                                    @Html.HiddenFor(model => model.CR_Cas_Renter_Lessor_Code)
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-12">
+                                            <div class="form-group row">
+                                                <label class="col-md-4 padding_left_none">رقم الهوية</label>
+                                                <div class="col-md-5 padding_right_none">
+                                                    @Html.EditorFor(model => model.CR_Cas_Renter_Lessor_Id, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                                    @Html.ValidationMessageFor(model => model.CR_Cas_Renter_Lessor_Date_First_Interaction, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-12">
+                                            <div class="form-group row">
+                                                <label class="col-md-3 padding_left_none padding_right_none">الإسم</label>
+                                                <div class="col-md-8 padding_right_none">
+                                                    @Html.EditorFor(model => model.CR_Mas_Renter_Information.CR_Mas_Renter_Information_Ar_Name, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                                    @Html.ValidationMessageFor(model => model.CR_Cas_Renter_Lessor_Date_First_Interaction, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-12">
+                                            <div class="form-group row">
+                                                <label class="col-md-4 padding_left_none">الجنس</label>
+                                                <div class="col-md-5 padding_right_none">
+                                                    @Html.EditorFor(model => model.CR_Mas_Renter_Information.CR_Mas_Sup_Gender.CR_Mas_Sup_Gender_Ar_Name, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-12">
+                                            <div class="form-group row">
+                                                <label class="col-md-4 padding_left_none padding_right_none">الجنسية</label>
+                                                <div class="col-md-8 padding_right_none">
+                                                    @Html.EditorFor(model => model.CR_Mas_Renter_Information.CR_Mas_Sup_Nationalities.CR_Mas_Sup_Nationalities_Ar_Name, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-12">
+                                            <div class="form-group row">
+                                                <label class="col-md-4 padding_left_none padding_right_none">القطاع</label>
+                                                <div class="col-md-8 padding_right_none">
+                                                    @Html.EditorFor(model => model.CR_Mas_Renter_Information.CR_Mas_Sup_Sector.CR_Mas_Sup_Sector_Ar_Name, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                                    @Html.ValidationMessageFor(model => model.CR_Cas_Renter_Lessor_Date_First_Interaction, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-12">
+                                            <div class="form-group row">
+                                                <label class="col-md-4 padding_left_none ">المهنة</label>
+                                                <div class="col-md-5 padding_right_none">
+                                                    @Html.EditorFor(model => model.CR_Mas_Renter_Information.CR_Mas_Sup_Jobs.CR_Mas_Sup_Jobs_Ar_Name, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-12">
+                                            <div class="form-group row">
+                                                <label class="col-md-3 padding_left_none padding_right_none">جهة العمل</label>
+                                                <div class="col-md-8 padding_right_none">
+                                                    @Html.EditorFor(model => model.CR_Mas_Renter_Information.CR_Mas_Sup_Employer.CR_Mas_Sup_Employer_Ar_Name, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-12">
+                                            <div class="form-group row">
+                                                <label class="col-md-4 padding_left_none">تاريخ الميلاد</label>
+                                                <div class="col-md-5 padding_right_none">
+                                                    <input type="text" id="Birthdate" class="form-control" value="@ViewBag.BirthDate" readonly />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-12">
+                                            <div class="form-group row">
+                                                <label class="col-md-4 padding_left_none padding_right_none">تاريخ الهوية</label>
+                                                <div class="col-md-8 padding_right_none">
+
+                                                    <input type="text" id="IssueIdDate" class="form-control" value="@ViewBag.IssueIdDate" readonly />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-12">
+                                            <div class="form-group row">
+                                                <label class="col-md-4 padding_left_none padding_right_none">تاريخ نهايتها</label>
+                                                <div class="col-md-8 padding_right_none">
+
+                                                    <input type="text" id="ExpiryIdDate" class="form-control" value="@ViewBag.ExpiryIdDate" readonly />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-12">
+                                            <div class="form-group row">
+                                                <label class="col-md-4 padding_left_none">تاريخ أول زياره</label>
+                                                <div class="col-md-5 padding_right_none">
+                                                    <input class="form-control"
+                                                           id="CR_Cas_Renter_Lessor_Date_First_Interaction" name="CR_Cas_Renter_Lessor_Date_First_Interaction" value="@ViewBag.FirstInteraction" readonly>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-12">
+                                            <div class="form-group row">
+                                                <label class="col-md-4 padding_left_none padding_right_none">تاريخ آخر زياره</label>
+                                                <div class="col-md-8 padding_right_none">
+                                                    <input class="form-control text-box single-line" data-val="true" data-val-date="The field CR_Cas_Sup_Branch_Documentation_Date must be a date."
+                                                           id="CR_Cas_Renter_Lessor_Date_Last_Interaction" name="CR_Cas_Renter_Lessor_Date_Last_Interaction" value="@ViewBag.LastInteraction" readonly>
+                                                </div>
+                                            </div>
+                                        </div>
+                           
+                           
+
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-12">
+                                            <div class="form-group row">
+                                                <label class="col-md-4 padding_left_none">نوع رخصة القيادة</label>
+                                                <div class="col-md-5 padding_right_none">
+                                                    <input class="form-control"
+                                                           id="DrivingLicenceType" name="DrivingLicenceType" value="" readonly>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-12">
+                                            <div class="form-group row">
+                                                <label class="col-md-4 padding_left_none padding_right_none">تاريخ رخصة القيادة</label>
+                                                <div class="col-md-8 padding_right_none">
+                                                    <input class="form-control text-box single-line" data-val="true" data-val-date="The field CR_Cas_Sup_Branch_Documentation_Date must be a date."
+                                                           id="LicenceDate" name="LicenceDate" value="" readonly>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-12">
+                                            <div class="form-group row">
+                                                <label class="col-md-4 padding_left_none padding_right_none"> نهاية رخصة القياده</label>
+                                                <div class="col-md-8 padding_right_none">
+
+                                                    <input type="text" id="ExpiryDrivingLicenseDate" class="form-control" value="@ViewBag.ExpiryDrivingLicenseDate" readonly />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-12">
+                                            <div class="form-group row">
+                                                <label class="col-md-4 padding_left_none">عدد أيام التأجير</label>
+                                                <div class="col-md-5 padding_right_none">
+                                                    @Html.EditorFor(model => model.CR_Cas_Renter_Lessor_Days, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-12">
+                                            <div class="form-group row">
+                                                <label class="col-md-4 padding_left_none padding_right_none">عدد العقود</label>
+                                                <div class="col-md-8 padding_right_none">
+
+                                                    <input value="@Model.CR_Mas_Renter_Information.CR_Cas_Contract_Basic.Where(l => l.CR_Cas_Contract_Basic_Status != "y" && l.CR_Cas_Contract_Basic_Status != "U").Count()"  class = "form-control" readonly id="CR_Cas_Renter_Lessor_Contract_Number" / >
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-12">
+                                            <div class="form-group row">
+                                                <label class="col-md-4 padding_left_none padding_right_none">قيمة المعاملات</label>
+                                                <div class="col-md-8 padding_right_none">
+                                                    @Html.EditorFor(model => model.CR_Cas_Renter_Lessor_Interaction_Amount_Value, new { htmlAttributes = new { @class = "form-control t1", @readonly = "readonly" } })
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-12">
+                                            <div class="form-group row">
+                                                <label class="col-md-4 padding_left_none">الرصيد</label>
+                                                <div class="col-md-5 padding_right_none">
+                                                    @Html.EditorFor(model => model.CR_Cas_Renter_Lessor_Balance, new { htmlAttributes = new { @class = "form-control t1", @readonly = "readonly", style = "direction: ltr!important;" } })
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-12">
+                                            <div class="form-group row">
+                                                <label class="col-md-4 padding_left_none padding_right_none">المسافة المقطوعة</label>
+                                                <div class="col-md-8 padding_right_none">
+                                                    @Html.EditorFor(model => model.CR_Cas_Renter_Lessor_KM, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-12">
+                                            <div class="form-group row">
+                                                <label class="col-md-4 padding_left_none padding_right_none">التقييم</label>
+                                                <div class="col-md-8 padding_right_none">
+                                                    @Html.EditorFor(model => model.CR_Cas_Renter_Rating, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-12">
+                                            <div class="form-group row">
+                                                <label class="col-md-4 padding_left_none">العضوية</label>
+                                                <div class="col-md-5 padding_right_none">
+                                                    @Html.EditorFor(model => model.CR_Cas_Renter_Admin_Membership_Code, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                                   
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-12">
+                                            <div class="form-group row">
+                                                <label class="col-md-4 padding_left_none padding_right_none">البنك</label>
+                                                <div class="col-md-8 padding_right_none">
+                                                    <input type="text" id="Bank" class="form-control" value="@ViewBag.Bank" readonly />
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-12">
+                                            <div class="form-group row">
+                                                <label class="col-md-4 padding_left_none padding_right_none">رقم الحساب</label>
+                                                <div class="col-md-8 padding_right_none">
+                                                    @Html.EditorFor(model => model.CR_Mas_Renter_Information.CR_Mas_Renter_Information_Iban, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <div class="form-group row">
+                                                <label class="col-md-2 padding_left_none ">العنوان</label>
+                                                <div class="col-md-10 padding_right_none">
+                                                    <input type="text" id="Address" name="Address" class="form-control" value="@ViewBag.address" readonly />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <div class="form-group row">
+                                                <label class="col-md-2 padding_left_none">الملاحظات</label>
+                                                <div class="col-md-10  padding_right_none">
+                                                    @Html.EditorFor(model => model.CR_Cas_Renter_Lessor_Reasons, new { htmlAttributes = new { @class = "form-control", maxlength = "100" } })
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+
+
+
+                                    <div class="form-group row " style="margin-top: 20px; width: 74%;">
+                                        @if (ViewBag.ST == "K")
+                                        {
+                                            <div class="col-md-1 col-50" style="margin-left: 20px;">
+                                                <input c type="submit" name="Save" class="btn btn-primary waves-effect" id="add_btn" value="حفظ" disabled style="cursor:no-drop">
+                                            </div>
+                                            <div class="col-md-1 col-50" style="margin-left: 20px;">
+                                                <input type="button" name="Hold" class="btn btn-primary waves-effect" id="btnHold" value="@ViewBag.ButtonName">
+                                            </div>
+                                        }
+                                        else if (ViewBag.ST == "R")
+                                        {
+                                            <div class="col-md-1 col-50" style="margin-left: 20px;">
+                                                <input type="submit" name="Save" class="btn btn-primary waves-effect" id="add_btn" value="حفظ">
+                                            </div>
+                                            <div class="col-md-1 col-50" style="margin-left: 57px;">
+                                                <input type="button" name="Hold" class="btn btn-primary waves-effect" id="btnHold" value="حضر" disabled style="cursor:no-drop">
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="col-md-1 col-50" style="margin-left: 20px;">
+                                                <input type="submit" name="Save" class="btn btn-primary waves-effect" id="add_btn" value="حفظ">
+                                            </div>
+                                            <div class="col-md-1 col-50" style="margin-left: 20px;">
+                                                <input type="button" name="Hold" class="btn btn-primary waves-effect" id="btnHold" value="حضر">
+                                            </div>
+                                        }
+
+                                        <div class="col-md-1 col-50" style="margin-left: 20px;">
+                                            <a href="/CasRenterLessor/Index/" class="btn btn-primary waves-effect" style="float:left">انهاء</a>
+                                        </div>
+                                    </div>
+
+                                    <div class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" id="H-modal">
+                                        <div class="modal-dialog  modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-body" style="padding: 35px;">
+                                                    @if (ViewBag.Delete == "K")
+                                                    {
+                                                        <div style="width:75%;float:right;text-align:right;">
+                                                            <b style="color:red;">تأكيد رفع الحضر ......</b><br />
+                                                            هل ترغب برفع الحضر عن المستأجر؟
+                                                        </div>
+                                                    }
+                                                    else
+                                                    {
+                                                        <div style="width:75%;float:right;text-align:right;">
+                                                            <b style="color:red;">تأكيد الحضر ......</b><br />
+                                                            هل ترغب بحضر المستأجر؟
+                                                        </div>
+                                                    }
+
+                                                    <div style="width:20%;margin-right:5%;float:right;">
+                                                        @if (ViewBag.Delete == "K")
+                                                        {
+                                                            <input type="submit" name="hold" class="btn btn-primary waves-effect" id="HoldModal-btn-si" value="@ViewBag.ButtonName" style="float: left;" />
+                                                        }
+                                                        else
+                                                        {
+                                                            <input type="submit" name="hold" class="btn btn-primary waves-effect" id="HoldModal-btn-si" value="@ViewBag.ButtonName" style="float: left;" />
+                                                        }
+
+                                                        <button type="button" class="btn btn-primary" id="HoldModal-btn-no" style="float: left;margin-top:25px">إلغاء الأمر</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+        window.addEventListener("load", function () {
+
+            if ('@TempData["TempModel"]'=="Added") {
+                toastr.success("تم الحفظ بنجاح");
+            }
+
+            if ('@TempData["TempModel"]'=="Saved") {
+                toastr.success("تم الحفظ بنجاح");
+            }
+
+            if ('@TempData["TempModel"]'=="Holded") {
+                toastr.success("تم التعطيل بنجاح");
+            }
+
+            if ('@TempData["TempModel"]'=="Deleted") {
+                toastr.success("تم الحذف بنجاح");
+            }
+
+            if ('@TempData["TempModel"]'=="Activated") {
+                toastr.success("تم التنشيط بنجاح");
+            }
+
+        });
+</script>
+
+<script>
+    var HoldModal = function (callback) {
+        $("#btnHold").on("click", function () {
+            $("#H-modal").modal('show');
+        });
+        $("#HoldModal-btn-si").on("click", function () {
+            callback(true);
+            $("#H-modal").modal('hide');
+        });
+        $("#HoldModal-btn-no").on("click", function () {
+            callback(false);
+            $("#H-modal").modal('hide');
+        });
+    };
+    HoldModal(function (confirm) {
+        if (confirm) {
+            //Acciones si el usuario confirma
+            $("#form1").submit();
+        } else {
+            //Acciones si el usuario no confirma
+            $("#result").html("canceled");
+        }
+    });
+</script>
+
+
+<script>
+    $(document).ready(function () {
+        formatInputNumber($(".t1"));
+    });
+
+    function formatInputNumber(input) {
+        let num = parseFloat(input.val()); // Get the value of the input and parse it as a float
+        num = num.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'); // Format the number with commas
+        input.val(num); // Set the formatted number as the value of the input
+    }
+</script>

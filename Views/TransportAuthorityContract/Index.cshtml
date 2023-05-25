@@ -1,0 +1,124 @@
+﻿@model IEnumerable<RentCar.Models.CR_Mas_Basic_Contract>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_CASLayout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CR_Mas_Basic_Contract_Year)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CR_Mas_Basic_Contract_Code)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CR_Mas_Basic_Contract_Com_Code)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CR_Mas_Basic_Contract_Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CR_Mas_Basic_Contract_Start_Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CR_Mas_Basic_Contract_End_Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CR_Mas_Basic_Contract_Annual_Fees)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CR_Mas_Basic_Contract_Service_Fees)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CR_Mas_Basic_Contract_Discount_Rate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CR_Mas_Basic_Contract_Tax_Rate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CR_Mas_Basic_Contract_Tamm_User_Id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CR_Mas_Basic_Contract_Tamm_User_PassWord)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CR_Mas_Basic_Contract_Status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CR_Mas_Basic_Contract_Reasons)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CR_Mas_Com_Lessor.CR_Mas_Com_Lessor_Logo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CR_Mas_Sup_Sector.CR_Mas_Sup_Sector_Ar_Name)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CR_Mas_Basic_Contract_Year)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CR_Mas_Basic_Contract_Code)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CR_Mas_Basic_Contract_Com_Code)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CR_Mas_Basic_Contract_Date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CR_Mas_Basic_Contract_Start_Date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CR_Mas_Basic_Contract_End_Date)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CR_Mas_Basic_Contract_Annual_Fees)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CR_Mas_Basic_Contract_Service_Fees)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CR_Mas_Basic_Contract_Discount_Rate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CR_Mas_Basic_Contract_Tax_Rate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CR_Mas_Basic_Contract_Tamm_User_Id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CR_Mas_Basic_Contract_Tamm_User_PassWord)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CR_Mas_Basic_Contract_Status)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CR_Mas_Basic_Contract_Reasons)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CR_Mas_Com_Lessor.CR_Mas_Com_Lessor_Logo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CR_Mas_Sup_Sector.CR_Mas_Sup_Sector_Ar_Name)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.CR_Mas_Basic_Contract_No }) |
+            @Html.ActionLink("Details", "Details", new { id=item.CR_Mas_Basic_Contract_No }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.CR_Mas_Basic_Contract_No })
+        </td>
+    </tr>
+}
+
+</table>

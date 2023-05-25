@@ -1,0 +1,229 @@
+﻿@model IEnumerable<RentCar.Models.CR_Cas_Account_Receipt>
+
+
+<div class="content">
+    <!-- Start Content-->
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+
+                @*<div class="card-box table-responsive" style="height:46vh;padding-top:1rem !important;padding-bottom:0 !important">
+
+                    <div class="corp_page">
+                        <div class="page_content">*@
+                @*<form method="post">*@
+                @*<div class="form_bg" style="width:100%">*@
+
+                <div class="responsive-table-plugin">
+                    <div class="table-rep-plugin">
+                        <div class="table-responsive" data-pattern="priority-columns" style="border:none;">
+
+                            <div style="width: 100%;  overflow: auto;">
+                                <table id="Table" class="table table-striped mb-0" style="cursor:default">
+                                    <thead>
+                                        <tr>
+                                            @*<th style="width:5%">
+                                                    إختر
+                                                </th>*@
+                                            <th style="width:25%">
+                                                رقم القيد
+                                            </th>
+                                            <th style="width:12%">
+                                                تاريخ القيد
+                                            </th>
+                                            <th style="width:20%">
+                                                رقم المرجع
+                                            </th>
+                                            <th style="width:12%">
+                                                نوع المرجع
+                                            </th>
+                                            <th style="width:15%">
+                                                طريقة الدفع
+                                            </th>
+                                            <th style="width:12%">
+                                                دائن
+                                            </th>
+                                            <th style="width:12%">
+                                                مدين
+                                            </th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody id="TblCashClosing">
+
+                                        @foreach (var item in Model)
+                                        {
+
+                                            <tr class="text-center">
+                                                <td class="keyCashClosing" hidden="hidden">
+                                                    <input class="keyvalCashClosing" value="@item.CR_Cas_Account_Receipt_No" id="Index" />
+                                                </td>
+                                                @*<td align="center" style="width:5%">
+                                                        <input type="checkbox" id="Chk_@item.CR_Cas_Account_Receipt_No" name="Chk_@item.CR_Cas_Account_Receipt_No" class="form-control ChkListCashClosing" style="height:25px;margin-top:2px;" />
+                                                    </td>*@
+
+                                                <td style="vertical-align: middle;" width="25%">
+                                                    @Html.DisplayFor(modelItem => item.CR_Cas_Account_Receipt_No)
+                                                    <input type="checkbox" id="Chk_@item.CR_Cas_Account_Receipt_No" name="Chk_@item.CR_Cas_Account_Receipt_No" class="form-control chkbox ChkChoicesList" style="height: 20px; width: 20px; float: right; margin-left: 10px;">
+                                                </td>
+                                                @*<td style="width:25%">
+                                                        <input type="checkbox" id="Chk_@item.CR_Cas_Account_Receipt_No" name="Chk_@item.CR_Cas_Account_Receipt_No" class="form-control ChkListCashClosing" style="height:25px;margin-top:2px;" />
+                                                        @Html.DisplayFor(modelItem => item.CR_Cas_Account_Receipt_No)
+                                                    </td>*@
+                                                <td style="width:12%">
+                                                    @item.CR_Cas_Account_Receipt_Date.Value.ToString("yyyy/MM/dd")
+                                                </td>
+                                                <td style="width:20%">
+                                                    @Html.DisplayFor(modelItem => item.CR_Cas_Account_Receipt_Contract_Operation)
+                                                </td>
+                                                <td style="width:12%">
+                                                    @Html.DisplayFor(modelItem => item.CR_Cas_Account_Receipt_Reference_Type)
+                                                </td>
+                                                <td style="width:15%">
+                                                    @Html.DisplayFor(modelItem => item.CR_Mas_Sup_Payment_Method.CR_Mas_Sup_Payment_Method_Ar_Name)
+                                                </td>
+                                                @{
+                                                    var floatConvert1 = (float)item.CR_Cas_Account_Receipt_Payment;
+                                                    var floatConvert2 = (float)item.CR_Cas_Account_Receipt_Receipt;
+                                                    var Receipt_Payment = floatConvert1.ToString("N0");
+                                                    var Receipt_Receipt = floatConvert2.ToString("N0");
+                                                }
+                                                <td style="width:12%">
+                                                    @Receipt_Payment
+                                                </td>
+
+                                                <td style="width:12%" class="Creditor">
+                                                    @Receipt_Receipt
+                                                </td>
+
+                                                <td style="width:8%" hidden class="debtor">
+                                                    @Html.DisplayFor(modelItem => item.CR_Cas_Account_Receipt_Payment)
+                                                    <input type="text" name="ValCashClosing_@item.CR_Cas_Account_Receipt_No" id="ValCashClosing_@item.CR_Cas_Account_Receipt_No" value="@item.CR_Cas_Account_Receipt_Payment" hidden />
+                                                </td>
+
+                                            </tr>
+                                        }
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                @*</div>*@
+                @*</form>*@
+                @*</div>
+                        </div>
+                    </div>*@
+            </div>
+        </div> <!-- end row -->
+    </div> <!-- container-fluid -->
+    <!-- validation init -->
+</div>
+
+
+
+
+
+<script>
+    $(document).ready(
+        function () {
+
+            $(".ChkChoicesList").change(function () {
+                var sum = 0;
+                $('.t1').each(function () {
+                    var value = $(this).val().toString().replace(/,/g, '');
+                    $(this).val(value.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                });
+
+                $("#TblCashClosing TR").each(function () {
+                    $('.t1').each(function () {
+                        var value = $(this).val().toString().replace(/,/g, '');
+                        $(this).val(value.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    });
+                    var chk = $(this).find('input[type="checkbox"]').is(':checked');
+                    console.log(chk)
+                    if (chk == true) {
+
+                        var k = $(this).find(".keyCashClosing").find(".keyvalCashClosing").val();
+                        //alert(k);
+                        var rs = $("#ValCashClosing_" + k).val();
+                        //alert(rs);
+                        sum = parseFloat(sum) + parseFloat(rs);
+                        //alert(sum);
+
+                        $('.t1').each(function () {
+                            var value = $(this).val().toString().replace(/,/g, '');
+                            $(this).val(value.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                        });
+                    }
+
+                });
+
+                if (sum > 0) {
+
+                    document.getElementById('TotalVal').value = sum.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+                    console.log(sum.toLocaleString("en-US"))
+
+                    $(".totalCreditor").val(sum.toLocaleString("en-US"));
+                } else {
+                    document.getElementById('TotalVal').value = "0.00";
+                    $(".totalCreditor").val(0);
+                }
+
+
+
+
+
+            })
+
+        });
+</script>
+
+<script>
+
+
+
+    $(document).ready(function () {
+        // Calculate total when any checkbox changes state
+        $(".chkbox").on("change", function () {
+            var total = 0;
+            // Loop through each checked checkbox and add its value to the total
+            $(".chkbox:checked").each(function () {
+                var value = parseInt($(this).val());
+                if (!isNaN(value)) {
+                    total += value;
+                }
+            });
+            /*  // Set the total value
+              total = total.replace(",", "").replace(".", "");
+              total = Number(total).toLocaleString("en-US");
+              $(".totalCreditor").val(total);*/
+        });
+    });
+</script>
+
+
+<script>
+    $(document).ready(function () {
+        // Add separators to all input fields with type "number"
+        $('.t1').each(function () {
+            var value = $(this).val(0);
+        });
+    });
+</script>
+
+
+
+
+<script>
+
+  $("#TotalVal1").val("@ViewBag.Total1")
+
+  $('.t2').each(function () {
+            var value = $(this).val().toString().replace(/,/g, '');
+            $(this).val(value.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+        });
+</script>
