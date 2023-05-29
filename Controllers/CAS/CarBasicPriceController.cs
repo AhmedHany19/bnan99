@@ -32,10 +32,8 @@ namespace RentCar.Controllers.CAS
             {
                 return RedirectToAction("Login", "Account");
             }
-            Models.CAS.LoadAlerts lAlerts = new Models.CAS.LoadAlerts();
-            lAlerts.GetExpiredDocs(LessorCode);
-            var cR_Cas_Car_Price_Basic = db.CR_Cas_Car_Price_Basic.Where(b => b.CR_Cas_Car_Price_Basic_Lessor_Code == LessorCode && b.CR_Cas_Car_Price_Basic_Status=="A").Include(c => c.CR_Mas_Com_Lessor).Include(c => c.CR_Mas_Sup_Brand).Include(c => c.CR_Mas_Sup_Model).Include(c => c.CR_Mas_Sup_Sector);
-            return View(cR_Cas_Car_Price_Basic.ToList());
+
+            return View();
 
         }
 
@@ -55,22 +53,24 @@ namespace RentCar.Controllers.CAS
                     RedirectToAction("Account", "Login");
                 }
             }
+
             catch
             {
                 RedirectToAction("Login", "Account");
             }
 
             IQueryable<CR_Cas_Car_Price_Basic> cR_Cas_Car_Price_Basic = null;
-            if (type == "A")
+            if (type == "All")
             {
-                cR_Cas_Car_Price_Basic = db.CR_Cas_Car_Price_Basic.Where(b => b.CR_Cas_Car_Price_Basic_Lessor_Code == LessorCode && b.CR_Cas_Car_Price_Basic_Status == "A"
+                cR_Cas_Car_Price_Basic = db.CR_Cas_Car_Price_Basic.Where(b => b.CR_Cas_Car_Price_Basic_Lessor_Code == LessorCode
                 && b.CR_Cas_Car_Price_Basic_Sector == "1")
                     .Include(c => c.CR_Mas_Com_Lessor)
                     .Include(c => c.CR_Mas_Sup_Brand)
                     .Include(c => c.CR_Mas_Sup_Model)
                     .Include(c => c.CR_Mas_Sup_Sector);
             }
-            else if (type=="D")
+
+            else if (type == "D")
             {
                 cR_Cas_Car_Price_Basic = db.CR_Cas_Car_Price_Basic.Where(b => b.CR_Cas_Car_Price_Basic_Lessor_Code == LessorCode && b.CR_Cas_Car_Price_Basic_Status == "D"
                 && b.CR_Cas_Car_Price_Basic_Sector == "1")
@@ -78,7 +78,7 @@ namespace RentCar.Controllers.CAS
                 .Include(c => c.CR_Mas_Sup_Brand)
                 .Include(c => c.CR_Mas_Sup_Model)
                 .Include(c => c.CR_Mas_Sup_Sector);
-            }    
+            }
             //else if(type=="N")
             //{
             //    cR_Cas_Car_Price_Basic = db.CR_Cas_Car_Price_Basic.Where(b => b.CR_Cas_Car_Price_Basic_Lessor_Code == LessorCode && b.CR_Cas_Car_Price_Basic_Status == "N")
@@ -110,7 +110,7 @@ namespace RentCar.Controllers.CAS
                 DateTime sd = Convert.ToDateTime(StartDate);
                 DateTime ed = Convert.ToDateTime(EndDate);
                 cR_Cas_Car_Price_Basic = db.CR_Cas_Car_Price_Basic.Where(b => b.CR_Cas_Car_Price_Basic_Lessor_Code == LessorCode && b.CR_Cas_Car_Price_Basic_Status == "E"
-                    && b.CR_Cas_Car_Price_Basic_Date>=sd && b.CR_Cas_Car_Price_Basic_Date<=ed && b.CR_Cas_Car_Price_Basic_Sector == "1")
+                    && b.CR_Cas_Car_Price_Basic_Date >= sd && b.CR_Cas_Car_Price_Basic_Date <= ed && b.CR_Cas_Car_Price_Basic_Sector == "1")
                     .Include(c => c.CR_Mas_Com_Lessor)
                     .Include(c => c.CR_Mas_Sup_Brand)
                     .Include(c => c.CR_Mas_Sup_Model)
@@ -118,7 +118,7 @@ namespace RentCar.Controllers.CAS
             }
             else
             {
-                cR_Cas_Car_Price_Basic = db.CR_Cas_Car_Price_Basic.Where(b => b.CR_Cas_Car_Price_Basic_Lessor_Code == LessorCode && b.CR_Cas_Car_Price_Basic_Sector=="1")
+                cR_Cas_Car_Price_Basic = db.CR_Cas_Car_Price_Basic.Where(b => b.CR_Cas_Car_Price_Basic_Lessor_Code == LessorCode && b.CR_Cas_Car_Price_Basic_Sector == "1" && b.CR_Cas_Car_Price_Basic_Status == "A")
                     .Include(c => c.CR_Mas_Com_Lessor)
                     .Include(c => c.CR_Mas_Sup_Brand)
                     .Include(c => c.CR_Mas_Sup_Model)
@@ -409,7 +409,7 @@ namespace RentCar.Controllers.CAS
                                               }, "ID", "Name", 1);
             ViewData["Tax"] = Tax;
 
-            ViewBag.CR_Cas_Car_Price_Basic_Sector = new SelectList(db.CR_Mas_Sup_Sector.Where(x => x.CR_Mas_Sup_Sector_Status != "D"), "CR_Mas_Sup_Sector_Code", "CR_Mas_Sup_Sector_Ar_Name","0");
+            ViewBag.CR_Cas_Car_Price_Basic_Sector = new SelectList(db.CR_Mas_Sup_Sector.Where(x => x.CR_Mas_Sup_Sector_Status != "D"), "CR_Mas_Sup_Sector_Code", "CR_Mas_Sup_Sector_Ar_Name", "0");
 
 
 
@@ -520,7 +520,7 @@ namespace RentCar.Controllers.CAS
                         {
                             var LessorCode = "";
                             var UserLogin = "";
-                            
+
                             LessorCode = Session["LessorCode"].ToString();
                             UserLogin = System.Web.HttpContext.Current.Session["UserLogin"].ToString();
                             if (UserLogin == null || LessorCode == null)
@@ -620,7 +620,7 @@ namespace RentCar.Controllers.CAS
                                         Ad.CR_Cas_Administrative_Procedures_Code = ProcedureCode;
                                         Ad.CR_Cas_Administrative_Int_Procedures_Code = int.Parse(ProcedureCode);
                                         Ad.CR_Cas_Administrative_Procedures_Lessor = LessorCode;
-                                        Ad.CR_Cas_Administrative_Procedures_Targeted_Action = cR_Cas_Car_Price_Basic.CR_Cas_Car_Price_Basic_Model_Code  +";"  + listyear;
+                                        Ad.CR_Cas_Administrative_Procedures_Targeted_Action = cR_Cas_Car_Price_Basic.CR_Cas_Car_Price_Basic_Model_Code + ";" + listyear;
                                         Ad.CR_Cas_Administrative_Procedures_User_Insert = Session["UserLogin"].ToString();
                                         Ad.CR_Cas_Administrative_Procedures_Type = "I";
                                         Ad.CR_Cas_Administrative_Procedures_Date = cR_Cas_Car_Price_Basic.CR_Cas_Car_Price_Basic_Date;
@@ -633,11 +633,57 @@ namespace RentCar.Controllers.CAS
                                         Ad.CR_Cas_Administrative_Procedures_Doc_End_Date = cR_Cas_Car_Price_Basic.CR_Cas_Car_Price_Basic_End_Date;
                                         Ad.CR_Cas_Administrative_Procedures_Doc_No = "";
                                         db.CR_Cas_Administrative_Procedures.Add(Ad);
-                                        ////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                        //////////////////////////////////////////////////////////////////////////////////////////////////////
+
+                                        int? nullableInt;
+
+                                        if (int.TryParse(listyear, out int result))
+                                        {
+                                            nullableInt = result;
+                                        }
+                                        else
+                                        {
+                                            nullableInt = null;
+                                        }
+
+                                        var currentPrice = db.CR_Cas_Car_Price_Basic.Where(l => l.CR_Cas_Car_Price_Basic_Model_Code == cR_Cas_Car_Price_Basic.CR_Cas_Car_Price_Basic_Model_Code
+                                                                                            && l.CR_Cas_Car_Price_Basic_Car_Year == nullableInt
+                                                                                            && l.CR_Cas_Car_Price_Basic_Category_Code == cR_Cas_Car_Price_Basic.CR_Cas_Car_Price_Basic_Category_Code
+                                                                                            && l.CR_Cas_Car_Price_Basic_Brand_Code == cR_Cas_Car_Price_Basic.CR_Cas_Car_Price_Basic_Brand_Code
+                                                                                            && l.CR_Cas_Car_Price_Basic_Status == "D" || l.CR_Cas_Car_Price_Basic_Status == "X" || l.CR_Cas_Car_Price_Basic_Status == "E")
+                                                                                           .ToList();
+
+                                        if (currentPrice != null)
+                                        {
+                                            foreach (var item1 in currentPrice)
+                                            {
+                                                foreach (var item in item1.CR_Cas_Car_Price_Choices.ToList())
+                                                {
+                                                    db.CR_Cas_Car_Price_Choices.Remove(item);
+                                                }
+
+                                                foreach (var item in item1.CR_Cas_Car_Price_Features.ToList())
+                                                {
+                                                    db.CR_Cas_Car_Price_Features.Remove(item);
+                                                }
+                                                foreach (var item in item1.CR_Cas_Contract_Basic.ToList())
+                                                {
+                                                    db.CR_Cas_Contract_Basic.Remove(item);
+                                                }
+                                                db.SaveChanges();
+
+                                                db.CR_Cas_Car_Price_Basic.Remove(item1);
+                                                db.SaveChanges();
+                                            }
+
+                                        }
 
 
                                         CR_Cas_Car_Price_Basic n = new CR_Cas_Car_Price_Basic();
                                         n.CR_Cas_Car_Price_Basic_No = y + "-" + s.CR_Mas_Sup_Sector_Code + "-" + ProcedureCode + "-" + LessorCode + "-" + autoInc.CR_Cas_Administrative_Procedures_No;
+
+
+
                                         n.CR_Cas_Car_Price_Basic_Year = y;
                                         n.CR_Cas_Car_Price_Basic_Type = ProcedureCode;
                                         //n.CR_Cas_Car_Price_Basic_Lessor_Code = cR_Cas_Car_Price_Basic.CR_Cas_Car_Price_Basic_Lessor_Code;
@@ -702,7 +748,7 @@ namespace RentCar.Controllers.CAS
                                         db.CR_Cas_Car_Price_Basic.Add(n);
 
 
-                                        
+
                                         /////////////////////////////////////////////////Save choices////////////////////////////////////////////
                                         foreach (string code in CR_Mas_Sup_Choices_Code)
                                         {
@@ -762,7 +808,7 @@ namespace RentCar.Controllers.CAS
 
                                     }
 
-                                    if(listyear!=null && listyear != "")
+                                    if (listyear != null && listyear != "")
                                     {
                                         var CarYear = int.Parse(listyear);
                                         var cars = db.CR_Cas_Sup_Car_Information.Where(c => c.CR_Cas_Sup_Car_Lessor_Code == LessorCode
@@ -774,7 +820,7 @@ namespace RentCar.Controllers.CAS
                                             db.Entry(car).State = EntityState.Modified;
                                         }
                                     }
-                                    
+
                                 }
                                 else
                                 {
@@ -853,6 +899,7 @@ namespace RentCar.Controllers.CAS
                                     ///////////////////////////////////////////save additional///////////////////////////////////////
                                     foreach (string itemcode in AdditionalCode)
                                     {
+
                                         var c = collection["v_" + itemcode];
                                         if (c != null && c != "")
                                         {
@@ -889,7 +936,7 @@ namespace RentCar.Controllers.CAS
                                         }
                                     }
 
-                                    if(listyear != null && listyear != "")
+                                    if (listyear != null && listyear != "")
                                     {
                                         var CarYear = int.Parse(listyear);
                                         var cars = db.CR_Cas_Sup_Car_Information.Where(c => c.CR_Cas_Sup_Car_Lessor_Code == LessorCode
@@ -901,7 +948,7 @@ namespace RentCar.Controllers.CAS
                                             db.Entry(car).State = EntityState.Modified;
                                         }
                                     }
-                                    
+
                                 }
 
                                 choiceslist.ForEach(c => db.CR_Cas_Car_Price_Choices.Add(c));
@@ -1164,75 +1211,77 @@ namespace RentCar.Controllers.CAS
                     try
                     {
                         var LessorCode = Session["LessorCode"].ToString();
-                        
+
                         if (Delete == "Delete" || Delete == "حذف")
                         {
-                            var prices = db.CR_Cas_Car_Price_Basic.Where(p => p.CR_Cas_Car_Price_Basic_Model_Code == cR_Cas_Car_Price_Basic.CR_Cas_Car_Price_Basic_Model_Code &&
-                            p.CR_Cas_Car_Price_Basic_Car_Year == cR_Cas_Car_Price_Basic.CR_Cas_Car_Price_Basic_Car_Year && p.CR_Cas_Car_Price_Basic_Lessor_Code == LessorCode);
-                            foreach (var price in prices)
                             {
-                                CR_Cas_Administrative_Procedures Ad = new CR_Cas_Administrative_Procedures();
-                                DateTime year = DateTime.Now;
-                                var y = year.ToString("yy");
-                                var sector = price.CR_Cas_Car_Price_Basic_Sector;
-                                var ProcedureCode = "30";
-                                var autoInc = GetLastRecord(ProcedureCode, sector);
-
-                               // var sectors = db.CR_Mas_Sup_Sector.Where(s => s.CR_Mas_Sup_Sector_Code != "0" && s.CR_Mas_Sup_Sector_Status == "A");
-
-
-                                ///////////////////////////////Tracing//////////////////////////////////////
-                                Ad.CR_Cas_Administrative_Procedures_No = y + "-" + sector + "-" + ProcedureCode + "-" + LessorCode + "-" + autoInc.CR_Cas_Administrative_Procedures_No;
-                                Ad.CR_Cas_Administrative_Procedures_Date = DateTime.Now;
-                                string currentTime = DateTime.Now.ToString("HH:mm:ss");
-                                Ad.CR_Cas_Administrative_Procedures_Time = TimeSpan.Parse(currentTime);
-                                Ad.CR_Cas_Administrative_Procedures_Year = y;
-                                Ad.CR_Cas_Administrative_Procedures_Sector = sector;
-                                Ad.CR_Cas_Administrative_Procedures_Code = ProcedureCode;
-                                Ad.CR_Cas_Administrative_Int_Procedures_Code = 30;
-                                Ad.CR_Cas_Administrative_Procedures_Lessor = LessorCode;
-                                Ad.CR_Cas_Administrative_Procedures_Targeted_Action = cR_Cas_Car_Price_Basic.CR_Cas_Car_Price_Basic_Model_Code + ";" + cR_Cas_Car_Price_Basic.CR_Cas_Car_Price_Basic_Car_Year;
-                                Ad.CR_Cas_Administrative_Procedures_User_Insert = Session["UserLogin"].ToString();
-                                Ad.CR_Cas_Administrative_Procedures_Type = "D";
-                                Ad.CR_Cas_Administrative_Procedures_Action = true;
-                                Ad.CR_Cas_Administrative_Procedures_Doc_Date = null;
-                                Ad.CR_Cas_Administrative_Procedures_Doc_Start_Date = null;
-                                Ad.CR_Cas_Administrative_Procedures_Doc_End_Date = null;
-                                Ad.CR_Cas_Administrative_Procedures_Doc_No = "";
-                                db.CR_Cas_Administrative_Procedures.Add(Ad);
-                                ////////////////////////////////////////////////////////////////////////////////////////////////////////
-                                if (listyear != null)
+                                var prices = db.CR_Cas_Car_Price_Basic.Where(p => p.CR_Cas_Car_Price_Basic_Model_Code == cR_Cas_Car_Price_Basic.CR_Cas_Car_Price_Basic_Model_Code &&
+                                p.CR_Cas_Car_Price_Basic_Car_Year == cR_Cas_Car_Price_Basic.CR_Cas_Car_Price_Basic_Car_Year && p.CR_Cas_Car_Price_Basic_Lessor_Code == LessorCode && p.CR_Cas_Car_Price_Basic_Status == "A");
+                                foreach (var price in prices)
                                 {
-                                    cR_Cas_Car_Price_Basic.CR_Cas_Car_Price_Basic_Car_Year = int.Parse(listyear);
+                                    CR_Cas_Administrative_Procedures Ad = new CR_Cas_Administrative_Procedures();
+                                    DateTime year = DateTime.Now;
+                                    var y = year.ToString("yy");
+                                    var sector = price.CR_Cas_Car_Price_Basic_Sector;
+                                    var ProcedureCode = "30";
+                                    var autoInc = GetLastRecord(ProcedureCode, sector);
+
+                                    // var sectors = db.CR_Mas_Sup_Sector.Where(s => s.CR_Mas_Sup_Sector_Code != "0" && s.CR_Mas_Sup_Sector_Status == "A");
+
+
+                                    ///////////////////////////////Tracing//////////////////////////////////////
+                                    Ad.CR_Cas_Administrative_Procedures_No = y + "-" + sector + "-" + ProcedureCode + "-" + LessorCode + "-" + autoInc.CR_Cas_Administrative_Procedures_No;
+                                    Ad.CR_Cas_Administrative_Procedures_Date = DateTime.Now;
+                                    string currentTime = DateTime.Now.ToString("HH:mm:ss");
+                                    Ad.CR_Cas_Administrative_Procedures_Time = TimeSpan.Parse(currentTime);
+                                    Ad.CR_Cas_Administrative_Procedures_Year = y;
+                                    Ad.CR_Cas_Administrative_Procedures_Sector = sector;
+                                    Ad.CR_Cas_Administrative_Procedures_Code = ProcedureCode;
+                                    Ad.CR_Cas_Administrative_Int_Procedures_Code = 30;
+                                    Ad.CR_Cas_Administrative_Procedures_Lessor = LessorCode;
+                                    Ad.CR_Cas_Administrative_Procedures_Targeted_Action = cR_Cas_Car_Price_Basic.CR_Cas_Car_Price_Basic_Model_Code + ";" + cR_Cas_Car_Price_Basic.CR_Cas_Car_Price_Basic_Car_Year;
+                                    Ad.CR_Cas_Administrative_Procedures_User_Insert = Session["UserLogin"].ToString();
+                                    Ad.CR_Cas_Administrative_Procedures_Type = "D";
+                                    Ad.CR_Cas_Administrative_Procedures_Action = true;
+                                    Ad.CR_Cas_Administrative_Procedures_Doc_Date = null;
+                                    Ad.CR_Cas_Administrative_Procedures_Doc_Start_Date = null;
+                                    Ad.CR_Cas_Administrative_Procedures_Doc_End_Date = null;
+                                    Ad.CR_Cas_Administrative_Procedures_Doc_No = "";
+                                    db.CR_Cas_Administrative_Procedures.Add(Ad);
+                                    ////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                    if (listyear != null)
+                                    {
+                                        cR_Cas_Car_Price_Basic.CR_Cas_Car_Price_Basic_Car_Year = int.Parse(listyear);
+                                    }
+
+                                    price.CR_Cas_Car_Price_Basic_Year = y;
+                                    price.CR_Cas_Car_Price_Basic_Type = ProcedureCode;
+                                    price.CR_Cas_Car_Price_Basic_Lessor_Code = Session["UserLogin"].ToString();
+                                    price.CR_Cas_Car_Price_Basic_Date = DateTime.Now;
+                                    price.CR_Cas_Car_Price_Basic_Does_Require_Financial_Credit = false;
+                                    price.CR_Cas_Car_Price_Basic_Status = "D";
+                                    price.CR_Cas_Car_Price_Basic_Type = "30";
+                                    price.CR_Cas_Car_Price_Basic_Lessor_Code = LessorCode;
+                                    //////////////////////////////////////////////////////////////////////////////////////////////////////
+                                    db.Entry(price).State = EntityState.Modified;
                                 }
 
-                                price.CR_Cas_Car_Price_Basic_Year = y;
-                                price.CR_Cas_Car_Price_Basic_Type = ProcedureCode;
-                                price.CR_Cas_Car_Price_Basic_Lessor_Code = Session["UserLogin"].ToString();
-                                price.CR_Cas_Car_Price_Basic_Date = DateTime.Now;
-                                price.CR_Cas_Car_Price_Basic_Does_Require_Financial_Credit = false;
-                                price.CR_Cas_Car_Price_Basic_Status = "D";
-                                price.CR_Cas_Car_Price_Basic_Type = "30";
-                                price.CR_Cas_Car_Price_Basic_Lessor_Code = LessorCode;
-                                //////////////////////////////////////////////////////////////////////////////////////////////////////
-                                db.Entry(price).State = EntityState.Modified;
-                            }
 
-                           
-                            var cars = db.CR_Cas_Sup_Car_Information.Where(c => c.CR_Cas_Sup_Car_Lessor_Code == LessorCode
-                            && c.CR_Cas_Sup_Car_Year == cR_Cas_Car_Price_Basic.CR_Cas_Car_Price_Basic_Car_Year
-                            && c.CR_Cas_Sup_Car_Model_Code == cR_Cas_Car_Price_Basic.CR_Cas_Car_Price_Basic_Model_Code);
-                            foreach (var car in cars)
-                            {
-                                car.CR_Cas_Sup_Car_Price_Status = "0";
-                                db.Entry(car).State = EntityState.Modified;
-                            }
-                            
+                                var cars = db.CR_Cas_Sup_Car_Information.Where(c => c.CR_Cas_Sup_Car_Lessor_Code == LessorCode
+                                && c.CR_Cas_Sup_Car_Year == cR_Cas_Car_Price_Basic.CR_Cas_Car_Price_Basic_Car_Year
+                                && c.CR_Cas_Sup_Car_Model_Code == cR_Cas_Car_Price_Basic.CR_Cas_Car_Price_Basic_Model_Code);
+                                foreach (var car in cars)
+                                {
+                                    car.CR_Cas_Sup_Car_Price_Status = "0";
+                                    db.Entry(car).State = EntityState.Modified;
+                                }
 
-                            db.SaveChanges();
-                            TempData["TempModel"] = "Deleted";
-                            dbTran.Commit();
-                            return RedirectToAction("Index");
+
+                                db.SaveChanges();
+                                TempData["TempModel"] = "Deleted";
+                                dbTran.Commit();
+                                return RedirectToAction("Index");
+                            }
                         }
                     }
                     catch (DbEntityValidationException ex)
