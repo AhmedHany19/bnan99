@@ -407,6 +407,8 @@
                                                     @Html.HiddenFor(Model => Model.CR_Cas_Contract_Basic_Expected_Rental_Days)
                                                     @Html.HiddenFor(Model => Model.CR_Cas_Contract_Basic_Value)
                                                     @Html.HiddenFor(Model => Model.CR_Cas_Contract_Basic_End_Authorization)
+                                                    @Html.HiddenFor(Model => Model.CR_Cas_Contract_Basic_Discount_Value)
+                                                    @Html.HiddenFor(Model => Model.CR_Cas_Contract_Basic_Tax_Value)
                                                     <input type="text" id="TotalChoices" name="TotalChoices" hidden />
                                                     <input type="text" id="ContractET" name="ContractET" hidden />
                                                     <input type="text" id="MaxRentalDays" name="MaxRentalDays" value="@ViewBag.MaxRentalDays" hidden />
@@ -597,7 +599,7 @@
                                                                     <div class="row">
                                                                         <label class="label6" style="margin-right: 10px; "> أيام التمديد </label>
                                                                         <div class="input6">
-                                                                            <input type="text" class="form-control" id="ExpectedRentalDays" style="margin-right: 15px; width: 60px; height: 35px" name="ExpectedRentalDays" autocomplete="off" value="" oninput="this.value=this.value.replace(/[^0-9]/g,'')"/>
+                                                                            <input type="text" class="form-control" id="ExpectedRentalDays" style="margin-right: 15px; width: 60px; height: 35px" name="ExpectedRentalDays" autocomplete="off" value="" oninput="this.value=this.value.replace(/[^0-9]/g,'')" />
                                                                             <div class="texterr" style="margin-top: 0px;">
                                                                                 <span id="ExpectedRentalDaysError" style="margin-right: 15px;">
                                                                                 </span>
@@ -881,18 +883,16 @@
                 document.getElementById('ContractVal').value = (NewContractValue + Number(oldContractVal)).toFixed(2);
                 var discountVal = NewContractValue * (Number(discount) / 100);
                 document.getElementById('ContractET').value = (NewContractValue - discountVal).toFixed(2);
-                document.getElementById('ContractDiscountVal').value = discountVal.toFixed(2);
+                var oldDisVal = document.getElementById('CR_Cas_Contract_Basic_Discount_Value').value;
+                var oldTaxVal = document.getElementById('CR_Cas_Contract_Basic_Tax_Value').value;
+                document.getElementById('ContractDiscountVal').value = (Number(oldDisVal) + discountVal).toFixed(2);
                 var Tax = document.getElementById('CR_Cas_Contract_Basic_Tax_Rate').value;
                 //var Taxvalue = document.getElementById('CR_Cas_Contract_Basic_Tax_Rate').value;
                
 
                 var TaxVal = (Number(NewContractValue) - Number(discountVal)) * Number(Tax / 100);
-                document.getElementById('TaxVal').value = TaxVal.toFixed(2);
-                console.log(NewContractValue);
-                console.log(discountVal);
-                console.log(Number(Tax / 100));
-                console.log(TaxVal.toFixed(2))
-
+                document.getElementById('TaxVal').value = (Number(oldTaxVal) + TaxVal).toFixed(2); TaxVal.toFixed(2);
+              
                 var OldNetVal = document.getElementById('CR_Cas_Contract_Basic_Net_Value').value;
                 console.log("OldNetValue:" + OldNetVal);
 

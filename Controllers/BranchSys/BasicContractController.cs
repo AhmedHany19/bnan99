@@ -1874,7 +1874,7 @@ namespace RentCar.Controllers.BranchSys
             HttpPostedFileBase img1, HttpPostedFileBase img2, HttpPostedFileBase img3, HttpPostedFileBase img4, HttpPostedFileBase img5, HttpPostedFileBase img6, HttpPostedFileBase img7,
             HttpPostedFileBase img8, HttpPostedFileBase img9,string CurrentMeter, HttpPostedFileBase RenterSignatureImg, string PayType,string CasherName,
             string Reasons,string AuthNo,string CR_Cas_Contract_Basic_Previous_Balance, string RenterReason,string DriverReason,string AdditionalDriverReason,string Price,
-            string TotalToPay,string ValueAdditionalDriver,string RenterEmail,string Driver_Email,string Additional_Driver_Email)
+            string TotalToPay,string ValueAdditionalDriver,string RenterEmail,string Driver_Email,string Additional_Driver_Email,int CR_Cas_Contract_Basic_Daily_Free_KM,int CR_Cas_Contract_Basic_Free_Additional_Hours)
         {
             if (ModelState.IsValid)
             {
@@ -2101,17 +2101,17 @@ namespace RentCar.Controllers.BranchSys
                                 {
                                     Contract.CR_Cas_Contract_Basic_User_Discount = Convert.ToDecimal(discount);
                                 }
-                                if (cR_Cas_Contract_Basic.CR_Cas_Contract_Basic_Daily_Free_KM == null)
+                                if (CR_Cas_Contract_Basic_Daily_Free_KM == null)
                                 {
-                                    cR_Cas_Contract_Basic.CR_Cas_Contract_Basic_Daily_Free_KM = 0;
+                                    CR_Cas_Contract_Basic_Daily_Free_KM = 0;
                                 }
-                                Contract.CR_Cas_Contract_Basic_Daily_Free_KM = CarPrice.CR_Cas_Car_Price_Basic_No_Daily_Free_KM + cR_Cas_Contract_Basic.CR_Cas_Contract_Basic_Daily_Free_KM;
+                                Contract.CR_Cas_Contract_Basic_Daily_Free_KM = CarPrice.CR_Cas_Car_Price_Basic_No_Daily_Free_KM + CR_Cas_Contract_Basic_Daily_Free_KM;
                                 Contract.CR_Cas_Contract_Basic_Additional_KM_Value = CarPrice.CR_Cas_Car_Price_Basic_Additional_KM_Value;
-                                if (cR_Cas_Contract_Basic.CR_Cas_Contract_Basic_Free_Additional_Hours == null)
+                                if (CR_Cas_Contract_Basic_Free_Additional_Hours == null)
                                 {
-                                    cR_Cas_Contract_Basic.CR_Cas_Contract_Basic_Free_Additional_Hours = 0;
+                                    CR_Cas_Contract_Basic_Free_Additional_Hours = 0;
                                 }
-                                Contract.CR_Cas_Contract_Basic_Free_Additional_Hours = CarPrice.CR_Cas_Car_Price_Basic_No_Free_Additional_Hours + cR_Cas_Contract_Basic.CR_Cas_Contract_Basic_Free_Additional_Hours;
+                                Contract.CR_Cas_Contract_Basic_Free_Additional_Hours = CarPrice.CR_Cas_Car_Price_Basic_No_Free_Additional_Hours + CR_Cas_Contract_Basic_Free_Additional_Hours;
                                 Contract.CR_Cas_Contract_Basic_Hour_Max = CarPrice.CR_Cas_Car_Price_Basic_Hour_Max;
                                 Contract.CR_Cas_Contract_Basic_Extra_Hour_Value = CarPrice.CR_Cas_Car_Price_Basic_Extra_Hour_Value;
 

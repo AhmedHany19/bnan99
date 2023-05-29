@@ -151,7 +151,7 @@ namespace RentCar.Controllers
                 ViewBag.CarName = cR_Cas_Contract_Basic.CR_Cas_Sup_Car_Information.CR_Cas_Sup_Car_Collect_Ar_Name;
                 ViewBag.RenterId = cR_Cas_Contract_Basic.CR_Cas_Contract_Basic_Renter_Id;
                 ViewBag.RenterName = cR_Cas_Contract_Basic.CR_Mas_Renter_Information.CR_Mas_Renter_Information_Ar_Name;
-                ViewBag.ContractStartDate = string.Format("{0:yyyy-MM-dd}", cR_Cas_Contract_Basic.CR_Cas_Contract_Basic_Start_Date);
+                ViewBag.ContractStartDate = string.Format("{0:yyyy/MM/dd}", cR_Cas_Contract_Basic.CR_Cas_Contract_Basic_Start_Date);
                 ViewBag.ContractStartTime = cR_Cas_Contract_Basic.CR_Cas_Contract_Basic_Start_Time;
                 
                 ViewBag.DailyFreeKm = cR_Cas_Contract_Basic.CR_Cas_Contract_Basic_Daily_Free_KM;
@@ -211,25 +211,25 @@ namespace RentCar.Controllers
                 {
                     ViewBag.DeliveryBranch = branchDelivery.CR_Cas_Sup_Branch_Ar_Name;
                 }
-                ViewBag.AuthEndDate = DateTime.Now;
+                ViewBag.AuthEndDate = DateTime.Now.ToString("yyyy/MM/dd h:m:s tt");
                 
                 
                 ViewBag.AdditionalDriverVal = cR_Cas_Contract_Basic.CR_Cas_Contract_Basic_Additional_Driver_Value;
                 if (Session["ContractCancel"].ToString() == "True")
                 {
-                    ViewBag.ContractEndDate = string.Format("{0:yyyy-MM-dd}", DateTime.Now);
+                    ViewBag.ContractEndDate = string.Format("{0:yyyy/MM/dd}", DateTime.Now);
                     ViewBag.ContractCancel = "True";
                 }
                 else
                 {
                     if (cR_Cas_Contract_Basic.CR_Cas_Contract_Basic_Expected_End_Date > DateTime.Now)
                     {
-                        ViewBag.ContractEndDate = string.Format("{0:yyyy-MM-dd}", cR_Cas_Contract_Basic.CR_Cas_Contract_Basic_Expected_End_Date);
+                        ViewBag.ContractEndDate = string.Format("{0:yyyy/MM/dd}", cR_Cas_Contract_Basic.CR_Cas_Contract_Basic_Expected_End_Date);
                         ViewBag.ContractCancel = "False";
                     }
                     else
                     {
-                        ViewBag.ContractEndDate = string.Format("{0:yyyy-MM-dd}", DateTime.Now);
+                        ViewBag.ContractEndDate = string.Format("{0:yyyy/MM/dd}", DateTime.Now);
                         ViewBag.ContractCancel = "True";
                     }
                 }

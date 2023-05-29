@@ -65,6 +65,22 @@
         left: 10px;
         margin-top: -30px;
     }
+    .textt{
+        font-family:Arial;
+    }
+    .btn-secondary {
+        background-color: #EDA63C !important;
+        border-color: #EDA63C !important;
+    }
+        .btn-secondary:hover {
+            background-color: #4A80B4 !important;
+            border-color: #4A80B4 !important;
+        }
+    .row {
+         display: flex;
+        align-items: center;
+    }
+
 </style>
 <!-- HTML -->
 <!--tabs amir end-->
@@ -101,7 +117,7 @@
                                                 <span class="step">الدفع</span>
                                             </div>
                                         </div>
-                                        <div class="" style="">
+                                        <div class="textt" style="">
                                             <fieldset class="fildest51">
                                                 <div class="row">
                                                     <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
@@ -124,7 +140,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="row">
+                                                <div class="row ">
                                                     <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
                                                         <div class="form-group row mb-3">
                                                             <label class="col-md-4" for="userName3">الرقم التسلسلي</label>
@@ -134,17 +150,17 @@
 
                                                         </div>
                                                     </div>
-                                                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                                    <div class="col-lg-7 col-md-6 col-sm-12 col-xs-12">
                                                         <div class="form-group row mb-3">
                                                             <label class="col-md-3" for="userName3">اسم السيارة</label>
                                                             <div class="col-md-8">
-                                                                <input autocomplete="off" class="form-control " id="CarName" name="CarName" style="float:right;width:100%" type="text" value="@ViewBag.CarName" readonly>
+                                                                <input autocomplete="off" class="form-control " id="CarName" name="CarName" style="float: right; width: 100%; margin-right: -22px;" type="text" value="@ViewBag.CarName" readonly>
                                                             </div>
 
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="row">
+                                                <div class="row ">
                                                     <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
                                                         <div class="form-group row mb-3">
                                                             <label class="col-md-4" for="userName3">رقم الهوية</label>
@@ -164,7 +180,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="row">
+                                                <div class="row mt-1">
                                                     <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
                                                         <div class="form-group row mb-3">
                                                             <label class="col-md-4" for="userName3">تاريخ بداية العقد</label>
@@ -184,28 +200,28 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="row">
+                                                <div class="row mt-1">
                                                     <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
                                                         <div class="form-group row mb-3">
                                                             <label class="col-md-4" for="userName3">تاريخ نهاية العقد</label>
                                                             <div class="col-md-7">
-                                                                @*@if (Session["ContractCancel"].ToString() == "True")
-                                                                    {
-                                                                        <input class="form-control text-box single-line" id="ContractEndDate" name="ContractEndDate" data-inputmask="'alias': 'yyyy-mm-dd'" value="@ViewBag.ContractEndDate" style="width:100%" onblur="affich_btn_1(event)">
-                                                                        <input type="button" class="hijri-date-input2" id="date_btn1" onblur="affich_affich_1(event)" />
-                                                                    }
-                                                                    else
-                                                                    {
-                                                                        <input class="form-control text-box single-line" id="ContractEndDate" name="ContractEndDate" data-inputmask="'alias': 'yyyy-mm-dd'" value="@ViewBag.ContractEndDate" style="width:100%" readonly>
+                                                                @if (Session["ContractCancel"].ToString() == "True")
+                                                                {
+                                                                    <input class="form-control text-box single-line" id="ContractEndDate" name="ContractEndDate" data-inputmask="'alias': 'yyyy/mm/dd'" value="@ViewBag.ContractEndDate" style="width:100%" onblur="affich_btn_1(event)">
+                                                                    <input type="button" class="hijri-date-input2" id="date_btn1" onblur="affich_affich_1(event)" />
+                                                                }
+                                                                else
+                                                                {
+                                                                    <input class="form-control text-box single-line" id="ContractEndDate" name="ContractEndDate" data-inputmask="'alias': 'yyyy/mm/dd'" value="@ViewBag.ContractEndDate" style="width:100%" readonly>
+                                                                    <label style="color:red;">عفوا ليس لك صلاحية تسوية العقد</label>
 
-                                                                    }*@
-                                                                <input class="form-control text-box single-line" id="ContractEndDate" name="ContractEndDate" data-inputmask="'alias': 'yyyy-mm-dd'" value="@ViewBag.ContractEndDate" style="width:100%" readonly>
-                                                                <div>
+                                                                }
+                                                                @*<input class="form-control text-box single-line" id="ContractEndDate" name="ContractEndDate" data-inputmask="'alias': 'yyyy/mm/dd'" value="@ViewBag.ContractEndDate" style="width:100%" readonly>*@
+                                                                @*<div>
                                                                     @if (ViewBag.ContractCancel == "False")
                                                                     {
-                                                                        <label style="color:red;">عفوا ليس لك صلاحية تسوية العقد</label>
                                                                     }
-                                                                </div>
+                                                                </div>*@
                                                             </div>
 
                                                         </div>
@@ -221,7 +237,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="row">
+                                                <div class="row mt-1">
                                                     <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
                                                         <div class="form-group row mb-3">
                                                             <label class="col-md-4" for="userName3">عدد الأيام</label>
@@ -231,17 +247,26 @@
 
                                                         </div>
                                                     </div>
-                                                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                                    <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
                                                         <div class="form-group row mb-3">
-                                                            <label class="col-md-3" for="userName3">الكيلوات المجانية</label>
+                                                            <label class="col-md-4" for="userName3">الكيلوات المجانية</label>
                                                             <div class="col-md-4">
-                                                                <input autocomplete="off" class="form-control " id="DailyFreeKm" name="DailyFreeKm" style="float:right;width:100%" type="text" value="@ViewBag.DailyFreeKm" readonly>
+                                                                <input autocomplete="off" class="form-control " id="DailyFreeKm" name="DailyFreeKm" style="float: right; width: 100%; margin-right: 15px;" type="text" value="@ViewBag.DailyFreeKm" readonly>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                                                        <div class="form-group row mb-3">
+                                                            <label class="col-md-5" for="userName3">قيمة الكيلو الإضافي</label>
+                                                            <div class="col-md-7">
+                                                                <input autocomplete="off" class="form-control " id="AdditionalKmValue" name="AdditionalKmValue" style="float:right;width:100%" type="text" value="@ViewBag.AdditionalKmValue" readonly>
                                                             </div>
 
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="row">
+                                                <div class="row mt-1">
                                                     <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
                                                         <div class="form-group row mb-3">
                                                             <label class="col-md-4" for="userName3">ساعات مجانية</label>
@@ -252,17 +277,26 @@
 
                                                         </div>
                                                     </div>
-                                                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                                    <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
                                                         <div class="form-group row mb-3">
-                                                            <label class="col-md-3" for="userName3">ساعات إضافية</label>
+                                                            <label class="col-md-4" for="userName3">ساعات إضافية</label>
                                                             <div class="col-md-4">
-                                                                <input autocomplete="off" class="form-control " id="AdditionalHours" name="AdditionalHours" style="float:right;width:100%;direction:ltr;text-align:right" type="text" value="@ViewBag.AdditionalHours" readonly>
+                                                                <input autocomplete="off" class="form-control " id="AdditionalHours" name="AdditionalHours" style="float: right; width: 100%; direction: ltr; text-align: right; margin-right: 15px;" type="text" value="@ViewBag.AdditionalHours" readonly>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                                                        <div class="form-group row mb-3">
+                                                            <label class="col-md-5" for="userName3">قيمة الساعة الاضافية</label>
+                                                            <div class="col-md-4">
+                                                                <input autocomplete="off" class="form-control " id="ExtraHourValue" name="ExtraHourValue" style="float:right;width:100%" type="text" value="@ViewBag.ExtraHourValue" readonly>
                                                             </div>
 
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="row">
+                                                @*<div class="row">
                                                     <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
                                                         <div class="form-group row mb-3">
                                                             <label class="col-md-4" for="userName3">قيمة الكيلو الإضافي</label>
@@ -281,19 +315,28 @@
 
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
-                                                        <div class="form-group row mb-3">
-                                                            <label class="col-md-4" for="userName3">قيمة الإيجار اليومي</label>
-                                                            <div class="col-md-7">
-                                                                <input autocomplete="off" class="form-control " id="DailyRentValue" name="DailyRentValue" style="float:right;width:100%" type="text" value="@ViewBag.DailyRentValue" readonly>
-                                                            </div>
-
+                                                </div>*@
+                                            <div class="row mt-1">
+                                                <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                                                    <div class="form-group row mb-3">
+                                                        <label class="col-md-5" for="userName3">قيمة الإيجار اليومي</label>
+                                                        <div class="col-md-7">
+                                                            <input autocomplete="off" class="form-control " id="DailyRentValue" name="DailyRentValue" style="float: right; width: 100%; margin-right: -29px;" type="text" value="@ViewBag.DailyRentValue" readonly>
                                                         </div>
+
                                                     </div>
                                                 </div>
-                                                <div class="row">
+                                                <div class="col-lg-5 col-md-6 col-sm-12 col-xs-12">
+                                                    <div class="form-group row mb-3">
+                                                        <label class="col-md-5" for="userName3">تاريخ نهاية التفويض</label>
+                                                        <div class="col-md-7">
+                                                            <input autocomplete="off" class="form-control " id="AuthEndDate" name="AuthEndDate" style="float: right; width: 100%; margin-right: -50px; " type="text" value="@ViewBag.AuthEndDate" readonly>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                                <div class="row mt-1">
                                                     <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
                                                         <div class="form-group row mb-3">
                                                             <label class="col-md-4" for="userName3">فرع الإستلام</label>
@@ -313,7 +356,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="row">
+                                                @*<div class="row">
                                                     <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
                                                         <div class="form-group row mb-3">
                                                             <label class="col-md-4" for="userName3">تاريخ نهاية التفويض</label>
@@ -323,13 +366,13 @@
 
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="row">
+                                                </div>*@
+                                                <div class="row mt-1">
                                                     <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
                                                         <div class="form-group row mb-3">
                                                             <label class="col-md-4" for="userName3">المصروفات </label>
                                                             <div class="col-md-2 offset-md-6">
-                                                                <input class="form-control" id="Chk_Depences" name="Chk_Depences" style="height:26px !important;margin-top:0px;" type="radio" value="true">
+                                                                <input class="form-control" id="Chk_Depences" name="Chk_Depences" style="height:26px !important;margin-top:0px;" type="checkbox" value="true">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -337,7 +380,7 @@
                                                         <div class="form-group row mb-3">
                                                             <label class="col-md-3" for="userName3">التعويضات </label>
                                                             <div class="col-md-2 offset-md-6">
-                                                                <input class="form-control" id="Chk_Compensation" name="Chk_Compensation" style="height:26px !important;margin-top:0px;" type="radio" value="true">
+                                                                <input class="form-control" id="Chk_Compensation" name="Chk_Compensation" style="height:26px !important;margin-top:0px;" type="checkbox" value="true">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -976,6 +1019,7 @@
                         </div>
                         <fieldset>
                             <div class="list-inline wizard mb-0">
+                                <a href="/BranchHome/branchstat" class="btn btn-secondary text-white" style="float: right; margin-left: 20px; display: inline;">انهاء</a>
                                 <button type="button" id="prevBtn" onclick="PrevPrev(-1)" class="btn btn-secondary" style="float: right; margin-left: 20px;">السابق</button>
                                 @if (ViewBag.ContractCancel == "True")
                                 {
@@ -1006,10 +1050,12 @@
 <script type="text/javascript">
     $(document).ready(function () {
         $("#ContractEndDate").change(function () {
-            alert();
+            var v = document.getElementById("#ContractEndDate").value;
+            alert(v);
         });
         $("#ContractEndDate").focusout(function () {
-            alert();
+            var v = document.getElementById("#ContractEndDate").value;
+            alert(v);
         });
     }); 
     function affich_affich_1(e) {
@@ -1380,7 +1426,9 @@
 
         // This function will display the specified tab of the form...
         var x = document.getElementsByClassName("tab");
+        console.log(x);
         x[n].style.display = "block";
+        console.log(n);
         //... and fix the Previous/Next buttons:
         if (n == 0) {
             document.getElementById("prevBtn").style.display = "none";
@@ -1388,9 +1436,9 @@
         if (n == 4) {
             Calculate();
         }
-        else {
-            document.getElementById("prevBtn").style.display = "inline";
-        }
+        //else {
+        //    document.getElementById("prevBtn").style.display = "inline";
+        //}
         if (n == (x.length - 1)) {
             //document.getElementById("nextBtn").innerHTML = "حفظ";
             document.getElementById("nextBtn").style.display = "none";
@@ -1411,12 +1459,39 @@
     function nextPrev(n) {
         // This function will figure out which tab to display
         var x = document.getElementsByClassName("tab");
+        var depencesCheckbox = document.getElementById("Chk_Depences");// المصروفات
+        var compensationCheckbox = document.getElementById("Chk_Compensation");// التعويضات
         // Exit the function if any field in the current tab is invalid:
         //if (n == 1) return false;
-        // Hide the current tab:
+        // Hide the current tab:'
         x[currentTab].style.display = "none";
-
-        currentTab = currentTab + n;
+        document.getElementById("prevBtn").style.display = "inline";
+        if (currentTab == 0) {
+            if (depencesCheckbox.checked == false && compensationCheckbox.checked == false) {
+                currentTab = currentTab + n + 2;
+            }
+            if (depencesCheckbox.checked == true && compensationCheckbox.checked == true) {
+                currentTab = currentTab + n;
+            }
+            if (depencesCheckbox.checked == true && compensationCheckbox.checked == false) {
+                currentTab = currentTab + n;
+            }
+            if (depencesCheckbox.checked == false && compensationCheckbox.checked == true) {
+                currentTab = currentTab + n + 1;
+            }
+        }
+        else if (currentTab == 1) {
+            if (compensationCheckbox.checked == true) {
+                currentTab = currentTab + n;
+            }
+            else {
+                currentTab = currentTab + n + 1;
+            }
+        }
+        else {
+            currentTab = currentTab + n;
+        }
+       
         // if you have reached the end of the form...
         if (currentTab >= x.length) {
             // ... the form gets submitted:
@@ -1426,23 +1501,52 @@
         // Otherwise, display the correct tab:
         showTab(currentTab);
     }
+    
     function PrevPrev(n) {
         // This function will figure out which tab to display
         var x = document.getElementsByClassName("tab");
+        var depencesCheckbox = document.getElementById("Chk_Depences");// المصروفات
+        var compensationCheckbox = document.getElementById("Chk_Compensation");// التعويضات
         // Exit the function if any field in the current tab is invalid:
         if (n == 1 && !validateForm()) return false;
         // Hide the current tab:
         x[currentTab].style.display = "none";
 
-        currentTab = currentTab + n;
-
+       
+        if (currentTab == 1) {
+            currentTab = currentTab + n;
+        }
+        else if (currentTab == 2) {
+            if (depencesCheckbox.checked == false) {
+                currentTab = 0;
+            }
+            else {
+                currentTab = 1
+            }
+        }
+        else if (currentTab == 3) {
+            if (depencesCheckbox.checked == false && compensationCheckbox.checked == false) {
+                currentTab = 0;
+            }
+            else if (compensationCheckbox.checked == false) {
+                currentTab = 1
+            }
+            else if (depencesCheckbox.checked == false) {
+                currentTab = 2
+            }
+            else {
+                currentTab = currentTab + n;
+            }
+        }
+        else {
+            currentTab = currentTab + n;
+        }
         // if you have reached the end of the form...
         if (currentTab >= x.length) {
             // ... the form gets submitted:
             document.getElementById("regForm").submit();
             return false;
         }
-        // Otherwise, display the correct tab:
         showTab(currentTab);
     }
 
@@ -1652,3 +1756,6 @@
         })
     });
 </script>
+
+
+

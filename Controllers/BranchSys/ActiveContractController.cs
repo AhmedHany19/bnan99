@@ -222,13 +222,13 @@ namespace RentCar.Controllers.BranchSys
 
                             if(TaxVal!=null && TaxVal != "")
                             {
-                                cR_Cas_Contract_Basic.CR_Cas_Contract_Basic_Tax_Value = decimal.Parse(TaxVal)+ cont.CR_Cas_Contract_Basic_Tax_Value;
+                                cR_Cas_Contract_Basic.CR_Cas_Contract_Basic_Tax_Value = decimal.Parse(TaxVal);
                             }
                     
                             cR_Cas_Contract_Basic.CR_Cas_Contract_Basic_User_Discount = cont.CR_Cas_Contract_Basic_User_Discount;
                             if(ContractDiscountVal!=null && ContractDiscountVal != "")
                             {
-                                cR_Cas_Contract_Basic.CR_Cas_Contract_Basic_Discount_Value = decimal.Parse(ContractDiscountVal) + cont.CR_Cas_Contract_Basic_Discount_Value;
+                                cR_Cas_Contract_Basic.CR_Cas_Contract_Basic_Discount_Value = decimal.Parse(ContractDiscountVal) ;
                             }
 
                             if(ContractVal!=null && ContractVal != "")

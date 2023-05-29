@@ -55,16 +55,14 @@
                                                                 <th style="width:20%">
                                                                     رقم العقد
                                                                 </th>
-
+                                                                <th style="width:8%">
+                                                                    المتبقي
+                                                                </th>
                                                                 <th style="width:25%">
                                                                     إسم المستأجر
                                                                 </th>
                                                                 <th style="width:40%">
                                                                     السيارة
-                                                                </th>
-
-                                                                <th style="width:8%">
-                                                                    المتبقي
                                                                 </th>
                                                                 <th style="width:6%">
                                                                     العقد
@@ -83,127 +81,129 @@
 
                                                                 if (item.CR_Cas_Contract_Basic_Status == "E")
                                                                 {
-                                                                    <tr class="text-center">
-                                                                        <td style="width:20%">
-                                                                            <a href="~/ContractSettlement/Create/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Contract_Basic_No)" style="color:red">
-                                                                                @Html.DisplayFor(modelItem => item.CR_Cas_Contract_Basic_No)
-                                                                                @{
+                                                            <tr class="text-center">
+                                                                <td style="width:20%">
+                                                                    <a href="~/ContractSettlement/Create/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Contract_Basic_No)" style="color:red">
+                                                                        @Html.DisplayFor(modelItem => item.CR_Cas_Contract_Basic_No)
+                                                                        @{
 
-                                                                                    copyNumber = copyNumber - 1;
-                                                                                    if (copyNumber > 0)
-                                                                                    {
-                                                                                        <label style="float:left;color:red;">(@copyNumber)</label>
-                                                                                    }
-                                                                                    if (item.CR_Cas_Contract_Basic_is_Receiving_Branch == true)
-                                                                                    {
-                                                                                        <label style="float:left;color:red;" title="ممكن التسليم بفرع ثاني">*</label>
-                                                                                    }
-                                                                                }
-
-                                                                            </a>
-                                                                        </td>
-
-                                                                        <td style="width:25%" class="text-left">
-                                                                            <a href="~/ContractSettlement/Create/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Contract_Basic_No)"style="color:red">
-                                                                                @*@Html.DisplayFor(modelItem => item.CR_Mas_Com_Lessor.CR_Cas_Renter_Lessor.FirstOrDefault(r=>r.CR_Cas_Renter_Lessor_Id==item.CR_Cas_Contract_Basic_Renter_Id).CR_Mas_Renter_Information.CR_Mas_Renter_Information_Ar_Name.ToString())*@
-                                                                                @Html.DisplayFor(modelItem => item.CR_Mas_Renter_Information.CR_Mas_Renter_Information_Ar_Name)
-                                                                            </a>
-                                                                        </td>
-
-
-                                                                        <td style="width:40%" class="text-left">
-                                                                            <a href="~/ContractSettlement/Create/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Contract_Basic_No)"style="color:red">
-                                                                                @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Information.CR_Cas_Sup_Car_Collect_Ar_Name)
-                                                                            </a>
-                                                                        </td>
-
-                                                                        <td style="width:8%">
-                                                                            @{
-                                                                                DateTime currentdate = DateTime.Now;
-                                                                                DateTime enddate = (DateTime)item.CR_Cas_Contract_Basic_Expected_End_Date;
-
-                                                                                var diff = (enddate - currentdate).TotalDays;
-                                                                            }
-                                                                            <label style="color:red">@String.Format("{0:#,##0}", diff)</label>
-                                                                        </td>
-                                                                        <td align="center" style="width:6%">
-                                                                            <a href="~/ActiveContract/ShowPDF/?Cno=@Html.DisplayFor(modelItem => item.CR_Cas_Contract_Basic_No)" target="_blank" style="color:red">
-                                                                                <i class="fas fa-file-pdf"></i>
-                                                                            </a>
-                                                                        </td>
-                                                                        <td align="center" style="width:6%">
-                                                                            @if (item.CR_Cas_Contract_Basic_Status == "A")
+                                                                            copyNumber = copyNumber - 1;
+                                                                            if (copyNumber > 0)
                                                                             {
-                                                                                <label style="color:red">نشط</label>
+                                                                                <label style="float:left;color:red;">(@copyNumber)</label>
                                                                             }
-                                                                            else if (item.CR_Cas_Contract_Basic_Status == "E")
+                                                                            if (item.CR_Cas_Contract_Basic_is_Receiving_Branch == true)
                                                                             {
-                                                                                <label style="color:red">منتهي</label>
+                                                                                <label style="float:left;color:red;" title="ممكن التسليم بفرع ثاني">*</label>
                                                                             }
-                                                                        </td>
-                                                                    </tr>
+                                                                        }
+
+                                                                    </a>
+                                                                </td>
+                                                                <td style="width:8%">
+                                                                    @{
+                                                                        DateTime currentdate = DateTime.Now;
+                                                                        DateTime enddate = (DateTime)item.CR_Cas_Contract_Basic_Expected_End_Date;
+
+                                                                        var diff = (enddate - currentdate).TotalDays;
+                                                                    }
+                                                                    <label style="color:red">@String.Format("{0:#,##0}", diff)</label>
+                                                                </td>
+
+                                                                <td style="width:25%" class="text-left">
+                                                                    <a href="~/ContractSettlement/Create/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Contract_Basic_No)" style="color:red">
+                                                                        @*@Html.DisplayFor(modelItem => item.CR_Mas_Com_Lessor.CR_Cas_Renter_Lessor.FirstOrDefault(r=>r.CR_Cas_Renter_Lessor_Id==item.CR_Cas_Contract_Basic_Renter_Id).CR_Mas_Renter_Information.CR_Mas_Renter_Information_Ar_Name.ToString())*@
+                                                                        @Html.DisplayFor(modelItem => item.CR_Mas_Renter_Information.CR_Mas_Renter_Information_Ar_Name)
+                                                                    </a>
+                                                                </td>
+
+
+                                                                <td style="width:40%" class="text-left">
+                                                                    <a href="~/ContractSettlement/Create/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Contract_Basic_No)" style="color:red">
+                                                                        @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Information.CR_Cas_Sup_Car_Collect_Ar_Name)
+                                                                    </a>
+                                                                </td>
+
+
+                                                                <td align="center" style="width:6%">
+                                                                    <a href="~/ActiveContract/ShowPDF/?Cno=@Html.DisplayFor(modelItem => item.CR_Cas_Contract_Basic_No)" target="_blank" style="color:red">
+                                                                        <i class="fas fa-file-pdf" style="color:red;"></i>
+                                                                    </a>
+                                                                </td>
+                                                                <td align="center" style="width:6%">
+                                                                    @if (item.CR_Cas_Contract_Basic_Status == "A")
+                                                                    {
+                                                                        <label style="color:red">نشط</label>
+                                                                    }
+                                                                    else if (item.CR_Cas_Contract_Basic_Status == "E")
+                                                                    {
+                                                                        <label style="color:red">منتهي</label>
+                                                                    }
+                                                                </td>
+                                                            </tr>
                                                                 }
                                                                 else
                                                                 {
-                                                                    <tr class="text-center">
-                                                                        <td style="width:20%">
-                                                                            <a href="~/ContractSettlement/Create/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Contract_Basic_No)">
-                                                                                @Html.DisplayFor(modelItem => item.CR_Cas_Contract_Basic_No)
-                                                                                @{
+                                                        <tr class="text-center">
+                                                            <td style="width:20%">
+                                                                <a href="~/ContractSettlement/Create/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Contract_Basic_No)">
+                                                                    @Html.DisplayFor(modelItem => item.CR_Cas_Contract_Basic_No)
+                                                                    @{
 
-                                                                                    copyNumber = copyNumber - 1;
-                                                                                    if (copyNumber > 0)
-                                                                                    {
-                                                                                        <label style="float:left;color:red;">(@copyNumber)</label>
-                                                                                    }
-                                                                                    if (item.CR_Cas_Contract_Basic_is_Receiving_Branch == true)
-                                                                                    {
-                                                                                        <label style="float:left;color:red;" title="ممكن التسليم بفرع ثاني">*</label>
-                                                                                    }
-                                                                                }
+                                                                        copyNumber = copyNumber - 1;
+                                                                        if (copyNumber > 0)
+                                                                        {
+                                                                            <label style="float:left;color:red;">(@copyNumber)</label>
+                                                                        }
+                                                                        if (item.CR_Cas_Contract_Basic_is_Receiving_Branch == true)
+                                                                        {
+                                                                            <label style="float:left;color:red;" title="ممكن التسليم بفرع ثاني">*</label>
+                                                                        }
+                                                                    }
 
-                                                                            </a>
-                                                                        </td>
+                                                                </a>
+                                                            </td>
+                                                            <td style="width:8%">
+                                                                @{
+                                                                    DateTime currentdate = DateTime.Now;
+                                                                    DateTime enddate = (DateTime)item.CR_Cas_Contract_Basic_Expected_End_Date;
 
-                                                                        <td style="width:25%" class="text-left">
-                                                                            <a href="~/ContractSettlement/Create/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Contract_Basic_No)">
-                                                                                @*@Html.DisplayFor(modelItem => item.CR_Mas_Com_Lessor.CR_Cas_Renter_Lessor.FirstOrDefault(r=>r.CR_Cas_Renter_Lessor_Id==item.CR_Cas_Contract_Basic_Renter_Id).CR_Mas_Renter_Information.CR_Mas_Renter_Information_Ar_Name.ToString())*@
-                                                                                @Html.DisplayFor(modelItem => item.CR_Mas_Renter_Information.CR_Mas_Renter_Information_Ar_Name)
-                                                                            </a>
-                                                                        </td>
+                                                                    var diff = (enddate - currentdate).TotalDays;
+                                                                }
+                                                                <label>@String.Format("{0:#,##0}", diff)</label>
+                                                            </td>
+
+                                                            <td style="width:25%" class="text-left">
+                                                                <a href="~/ContractSettlement/Create/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Contract_Basic_No)">
+                                                                    @*@Html.DisplayFor(modelItem => item.CR_Mas_Com_Lessor.CR_Cas_Renter_Lessor.FirstOrDefault(r=>r.CR_Cas_Renter_Lessor_Id==item.CR_Cas_Contract_Basic_Renter_Id).CR_Mas_Renter_Information.CR_Mas_Renter_Information_Ar_Name.ToString())*@
+                                                                    @Html.DisplayFor(modelItem => item.CR_Mas_Renter_Information.CR_Mas_Renter_Information_Ar_Name)
+                                                                </a>
+                                                            </td>
 
 
-                                                                        <td style="width:40%" class="text-left">
-                                                                            <a href="~/ContractSettlement/Create/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Contract_Basic_No)">
-                                                                                @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Information.CR_Cas_Sup_Car_Collect_Ar_Name)
-                                                                            </a>
-                                                                        </td>
+                                                            <td style="width:40%" class="text-left">
+                                                                <a href="~/ContractSettlement/Create/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Contract_Basic_No)">
+                                                                    @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Information.CR_Cas_Sup_Car_Collect_Ar_Name)
+                                                                </a>
+                                                            </td>
 
-                                                                        <td style="width:8%">
-                                                                            @{
-                                                                                DateTime currentdate = DateTime.Now;
-                                                                                DateTime enddate = (DateTime)item.CR_Cas_Contract_Basic_Expected_End_Date;
 
-                                                                                var diff = (enddate - currentdate).TotalDays;
-                                                                            }
-                                                                            <label>@String.Format("{0:#,##0}", diff)</label>
-                                                                        </td>
-                                                                        <td align="center" style="width:6%">
-                                                                            <a href="~/ActiveContract/ShowPDF/?Cno=@Html.DisplayFor(modelItem => item.CR_Cas_Contract_Basic_No)" target="_blank">
-                                                                                <i class="fas fa-file-pdf"></i>
-                                                                            </a>
-                                                                        </td>
-                                                                        <td align="center" style="width:6%">
-                                                                            @if (item.CR_Cas_Contract_Basic_Status == "A")
-                                                                            {
-                                                                                <label>نشط</label>
-                                                                            }
-                                                                            else if (item.CR_Cas_Contract_Basic_Status == "E")
-                                                                            {
-                                                                                <label>منتهي</label>
-                                                                            }
-                                                                        </td>
-                                                                    </tr>
+                                                            <td align="center" style="width:6%">
+                                                                <a href="~/ActiveContract/ShowPDF/?Cno=@Html.DisplayFor(modelItem => item.CR_Cas_Contract_Basic_No)" target="_blank">
+                                                                    <i class="fas fa-file-pdf" style="color:red;"></i>
+                                                                </a>
+                                                            </td>
+                                                            <td align="center" style="width:6%">
+                                                                @if (item.CR_Cas_Contract_Basic_Status == "A")
+                                                                {
+                                                                    <label>نشط</label>
+                                                                }
+                                                                else if (item.CR_Cas_Contract_Basic_Status == "E")
+                                                                {
+                                                                    <label>منتهي</label>
+                                                                }
+                                                            </td>
+                                                        </tr>
                                                                 }
                                                             }
                                                         </tbody>
