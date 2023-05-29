@@ -200,6 +200,7 @@ namespace BnanFollowUpContracts
 
         public static void SendMailWhenEnd(CR_Cas_Contract_Basic contract)
         {
+
             string imagePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "images\\End.jpeg");
             Image image = Image.FromFile(imagePath);
             string logoPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "images\\3.png");
