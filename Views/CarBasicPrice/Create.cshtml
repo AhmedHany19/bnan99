@@ -151,7 +151,7 @@
 </style>
 <!-- HTML -->
 <!--tabs amir end-->
-<div id="regForm" style="min-height: 350px; white-space: nowrap;">
+<div id="regForm" style="min-height: 350px;  white-space: nowrap;">
     <div style="min-height:67%">
         <div class="tab" id="FirstList">
             <div style="min-height: 350px">
@@ -608,7 +608,7 @@
 
 
 </div>
-<div style="margin-top: 0px; float: left; width: 100%; padding-bottom: 10px;">
+<div style="margin-top: 0px; float: left; width: 100%; padding-bottom: 35px;">
     <div>
         <button type="button" id="prevBtn" onclick="PrevPrev(-1)" class="btn btn-primary waves-effect" style="float: right; margin-left: 20px;">السابق</button>
         <button type="button" id="nextBtn" onclick="nextPrev(1)" class="btn btn-primary waves-effect" style="float: right; margin-left: 20px;">التالي</button>
@@ -811,16 +811,16 @@
             }
             else {
                 currentTab = 2
-
                 $("#add_btn").css('display', 'none');
+                $("#nextBtn").css('display', 'block');
 
 
             }
         }
-        /* if (nbre) { currentTab = currentTab + n; } else { currentTab = currentTab + n - 1; }*/
+
 
         if (currentTab == 0) {
-            //document.getElementById("CR_Cas_Car_Price_Basic_Model_Code").disabled = false;
+
             document.getElementById("listyear").disabled = false;
             document.getElementById("CR_Cas_Car_Price_Basic_Sector").disabled = false;
             document.getElementById("BrandCategory").disabled = false;
@@ -1156,7 +1156,12 @@
 
         });
 </script>
-
-
-
+@*
+    <script>
+        $(document).ready(function () {
+            $("table input").on("click", fun
+            )
+        })
+    </script>
+*@
 
