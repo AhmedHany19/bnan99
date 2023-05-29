@@ -675,10 +675,10 @@ namespace RentCar.Controllers.CAS
                                                 db.CR_Cas_Car_Price_Basic.Remove(item1);
                                                 db.SaveChanges();
                                             }
-                                            
+
                                         }
 
-                                        
+
                                         CR_Cas_Car_Price_Basic n = new CR_Cas_Car_Price_Basic();
                                         n.CR_Cas_Car_Price_Basic_No = y + "-" + s.CR_Mas_Sup_Sector_Code + "-" + ProcedureCode + "-" + LessorCode + "-" + autoInc.CR_Cas_Administrative_Procedures_No;
 

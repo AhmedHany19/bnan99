@@ -1,4 +1,5 @@
-﻿<html lang="ar">
+﻿﻿
+<html lang="ar">
 <html lang="ar">
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -363,9 +364,9 @@
                 <li class=" notification-list">
                     @if (Session["AuthBranch"].ToString() == "true")
                     {
-                    <a href="~/BranchHome/BranchStat" class="nav-link  nav-user mr-0 waves-effect" data-toggle="tooltip" data-placement="left" title="نظام الفروع" style="margin-top:25px;height:22px">
-                        <i class="fe-tablet noti-icon"></i>
-                    </a>
+                        <a href="~/BranchHome/BranchStat" class="nav-link  nav-user mr-0 waves-effect" data-toggle="tooltip" data-placement="left" title="نظام الفروع" style="margin-top:25px;height:22px">
+                            <i class="fe-tablet noti-icon"></i>
+                        </a>
                     }
                     else
                     {
@@ -373,8 +374,6 @@
                             <i class="fe-tablet noti-icon"></i>
                         </a>
                     }
-
-
                 </li>
                 <li class="dropdown notification-list notif_after" data-toggle="tooltip" data-placement="left" title="الإشعارات" style="height:50px">
                     <a class="nav-link dropdown-toggle  waves-effect" data-toggle="dropdown" role="button" aria-haspopup="false" aria-expanded="false" style="margin-top: 25px; height: 25px; display: initial;">
@@ -382,51 +381,58 @@
                         <span class="badge badge-danger rounded-circle noti-icon-badge" style="top:-10px">@(Session["AlertsNbr"])</span>
                         <i class="fe-bell noti-icon"></i>
                     </a>
-                    <div style="float: left; margin-right: 10px;" class="dropdown " data-toggle="tooltip" data-placement="left" title="" data-original-title="الإشعارات" id="tooltip_notif">
-                     
-                        <div class="dropdown-menu dropdown-menu-right dropdown-lg" style="width: 350px; background-color:white;">
+                    <div class="dropdown-menu dropdown-menu-right dropdown-lg" style="width: 350px; background: white;">
 
-                            <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 290px;">
-                                <div class="slimscroll noti-scroll" style="max-height: 290px !important; height: 290px; overflow: hidden; width: auto;">
+                        <div class="slimscroll noti-scroll" style=" max-height: 234px !important; height: 234px !important">
 
-                                    <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                        <p class="notify-details" style="text-align:right;margin-right:0">
-                                            <span style="float:right">مستندات الفرع</span>
-                                            <small class="text-muted" style="float:left;color:green!important" title="مستندات الفرع النشطه">@(Session["BranchdocsN"])</small>
-                                            <small class="text-muted" style="float:left;margin-left:15px;color:orange!important" title="مستندات الفرع  على وشك الإنتهاء ">@(Session["BranchdocsX"])</small>
-                                            <small class="text-muted" style="float:left;margin-left:15px;color:red!important" title="مستندات الفرع  المنتهيه ">@(Session["BranchdocsE"])</small>
-                                        </p>
-                                    </a>
-
-                                    <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                        <p class="notify-details" style="text-align:right;margin-right:0">
-                                            <span style="float:right"> وثائق السيارات</span>
-                                            <small class="text-muted" style="float:left;color:green!important" title="وثائق السيارات النشطه ">@(Session["BranchCarsDocN"])</small>
-                                            <small class="text-muted" style="float:left;margin-left:15px;color:orange!important " title="وثائق السيارات  على وشك الإنتهاء ">@(Session["BranchCarsDocX"])</small>
-                                            <small class="text-muted" style="float:left;margin-left:15px;color:red!important" title=" وثائق السيارات المنتهيه ">@(Session["BranchCarsDocE"])</small>
-                                        </p>
-                                    </a>
-                                    <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                        <p class="notify-details" style="text-align:right;margin-right:0">
-                                            <span style="float:right"> صيانة السيارات</span>
-                                            <small class="text-muted" style="float:left;color:green!important" title="صيانةالسيارات النشطه ">@(Session["BranchCarsMaintenanceN"])</small>
-                                            <small class="text-muted" style="float:left;margin-left:15px;color:orange!important" title="صيانة السيارات على وشك الإنتهاء ">@(Session["BranchCarsMaintenanceX"])</small>
-                                            <small class="text-muted" style="float:left;margin-left:15px;color:red!important" title=" صيانة السيارات المنتهيه ">@(Session["BranchCarsMaintenanceE"])</small>
-                                        </p>
-                                    </a>
-                                    <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                        <p class="notify-details" style="text-align:right;margin-right:0">
-                                            <span style="float:right"> أسعار السيارات</span>
-                                            <small class="text-muted" style="float:left;color:green!important" title="أسعارالسيارات النشطه ">@(Session["BranchPricesN"])</small>
-                                            <small class="text-muted" style="float:left;margin-left:15px;color:orange!important" title="أسعار السيارات على وشك الإنتهاء ">@(Session["BranchPricesX"])</small>
-                                            <small class="text-muted" style="float:left;margin-left:15px;color:red!important" title=" صيانة السيارات المنتهيه ">@(Session["BranchPricesE"])</small>
-                                        </p>
-                                    </a>
-
-                                </div><div class="slimScrollBar" style="background: rgb(158, 165, 171); width: 8px; position: absolute; top: 0px; opacity: 0.4; display: block; border-radius: 7px; z-index: 99; right: 1px;"></div><div class="slimScrollRail" style="width: 8px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(51, 51, 51); opacity: 0.2; z-index: 90; right: 1px;"></div>
-                            </div>
-
+                            <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                <p class="notify-details" style="text-align:right;margin-right:0">
+                                    <span style="float:right">مستندات الشركة</span>
+                                    <small class="text-muted" style="float:left;color:green!important">@(Session["CompanydocsN"])</small>
+                                    <small class="text-muted" style="float:left;margin-left:15px;color:orange!important">@(Session["CompanydocsX"])</small>
+                                    <small class="text-muted" style="float:left;margin-left:15px;color:red!important">@(Session["CompanydocsE"])</small>
+                                </p>
+                            </a>
+                            <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                <p class="notify-details" style="text-align:right;margin-right:0">
+                                    <span style="float:right"> عقود الشركة</span>
+                                    <small class="text-muted" style="float:left;color:green!important">@(Session["CompanyContractsN"])</small>
+                                    <small class="text-muted" style="float:left;margin-left:15px;color:orange!important ">@(Session["CompanyContractsX"])</small>
+                                    <small class="text-muted" style="float:left;margin-left:15px;color:red!important">@(Session["CompanyContractsE"])</small>
+                                </p>
+                            </a>
+                            <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                <p class="notify-details" style="text-align:right;margin-right:0">
+                                    <span style="float:right"> وثائق السيارة</span>
+                                    <small class="text-muted" style="float:left;color:green!important">@(Session["CarsDocN"])</small>
+                                    <small class="text-muted" style="float:left;margin-left:15px;color:orange!important ">@(Session["CarsDocX"])</small>
+                                    <small class="text-muted" style="float:left;margin-left:15px;color:red!important">@(Session["CarsDocE"])</small>
+                                </p>
+                            </a>
+                            <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                <p class="notify-details" style="text-align:right;margin-right:0">
+                                    <span style="float:right"> صيانةالسيارات</span>
+                                    <small class="text-muted" style="float:left;color:green!important">@(Session["CarsMaintenanceN"])</small>
+                                    <small class="text-muted" style="float:left;margin-left:15px;color:orange!important">@(Session["CarsMaintenanceX"])</small>
+                                    <small class="text-muted" style="float:left;margin-left:15px;color:red!important">@(Session["CarsMaintenanceE"])</small>
+                                </p>
+                            </a>
+                            <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                <p class="notify-details" style="text-align:right;margin-right:0">
+                                    <span style="float:right"> أسعارالسيارة</span>
+                                    <small class="text-muted" style="float:left;color:green!important">@(Session["PricesN"])</small>
+                                    <small class="text-muted" style="float:left;margin-left:15px;color:orange!important">@(Session["PricesX"])</small>
+                                    <small class="text-muted" style="float:left;margin-left:15px;color:red!important">@(Session["PricesE"])</small>
+                                </p>
+                            </a>
+                            @*<a href="javascript:void(0);" class="dropdown-item notify-item">
+                                    <p class="notify-details" style="text-align:right;margin-right:0">
+                                        <span style="float:right">العروض الملنتهية أو على وشك الانتهاء</span>
+                                        <small class="text-muted" style="float:left;">(0)</small>
+                                    </p>
+                                </a>*@
                         </div>
+
                     </div>
                 </li>
 
@@ -695,16 +701,16 @@
             }
 
             .reseau {
-                width:180px !important
+                width: 180px !important
             }
 
-            .reseau i {
-                color: #EDA63C;
-                font-size: 24px;
-                margin-top: 5px;
-                margin-right: 5px;
-                float: left
-            }
+                .reseau i {
+                    color: #EDA63C;
+                    font-size: 24px;
+                    margin-top: 5px;
+                    margin-right: 5px;
+                    float: left
+                }
 
             .footer-reseau a {
                 margin-right: 5px
@@ -723,13 +729,14 @@
             .card-box {
                 padding: 15px;
             }
- 
+
             html {
                 background: url('./bg.jpg');
             }
-            .card-box.table-responsive{
-                overflow:auto;
-                height:89vh !important;
+
+            .card-box.table-responsive {
+                overflow: auto;
+                height: 89vh !important;
             }
         </style>
         <div class="content-page" style="margin-top:12vh !important;">
@@ -1263,16 +1270,26 @@
                 }
             });
         </script>*@
-<script>
-    $(document).ready(function () {
-        $(':input').on('focus', function () {
-            $(this).attr('autocomplete', 'off');
+    <script>
+        $(document).ready(function () {
+            $(':input').on('focus', function () {
+                $(this).attr('autocomplete', 'off');
+            });
         });
-    });
-</script>
+    </script>
 
+
+    <style>
+        .dropdown-menu dropdown-menu-right dropdown-lg show {
+            background-color: white !important;
+            width: 350px;
+            position: absolute;
+            transform: translate3d(-264px, 0px, 0px);
+            top: 0px;
+            left: 0px;
+            will-change: transform;
+        }
+    </style>
 
 </body>
 </html>
-
-
