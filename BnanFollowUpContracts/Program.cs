@@ -17,8 +17,6 @@ namespace BnanFollowUpContracts
 
             foreach (var item in database.CR_Cas_Contract_Basic.Include(l => l.CR_Mas_Com_Lessor).Include(l => l.CR_Mas_Renter_Information).Include(l => l.CR_Cas_Sup_Car_Information).Where(d => d.CR_Cas_Contract_Basic_Status == "A").ToList())
             {
-
-
                 // check if contract will end after 24 hours
                 if (item.CR_Cas_Contract_Basic_Day_DateTime_Alert <= DateTime.Now && item.CR_Cas_Contract_Basic_Alert_Status == "0")
                 {

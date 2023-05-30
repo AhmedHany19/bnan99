@@ -1185,31 +1185,40 @@ namespace RentCar.Controllers.BranchSys
         {
             int nbr = 0;
             var BranchdocsN = db.CR_Cas_Sup_Branch_Documentation.Where(d => d.CR_Cas_Sup_Branch_Documentation_Lessor_Code == LessorCode
-            && d.CR_Cas_Sup_Branch_Documentation_Status == "N" && d.CR_Cas_Sup_Branch_Documentation_Branch_Code==BranchCode).Count();
+            && d.CR_Cas_Sup_Branch_Documentation_Status == "N" && d.CR_Cas_Sup_Branch_Documentation_Branch_Code == BranchCode).Count() != 0 ? db.CR_Cas_Sup_Branch_Documentation.Where(d => d.CR_Cas_Sup_Branch_Documentation_Lessor_Code == LessorCode
+            && d.CR_Cas_Sup_Branch_Documentation_Status == "N" && d.CR_Cas_Sup_Branch_Documentation_Branch_Code == BranchCode).Count() : 0;
+
+
             Session["BranchdocsN"] = BranchdocsN;
 
             var BranchdocsX = db.CR_Cas_Sup_Branch_Documentation.Where(d => d.CR_Cas_Sup_Branch_Documentation_Lessor_Code == LessorCode
-            && d.CR_Cas_Sup_Branch_Documentation_Status == "X" && d.CR_Cas_Sup_Branch_Documentation_Branch_Code == BranchCode).Count();
+            && d.CR_Cas_Sup_Branch_Documentation_Status == "X" && d.CR_Cas_Sup_Branch_Documentation_Branch_Code == BranchCode).Count() != 0 ? db.CR_Cas_Sup_Branch_Documentation.Where(d => d.CR_Cas_Sup_Branch_Documentation_Lessor_Code == LessorCode
+            && d.CR_Cas_Sup_Branch_Documentation_Status == "X" && d.CR_Cas_Sup_Branch_Documentation_Branch_Code == BranchCode).Count() : 0;
+
             Session["BranchdocsX"] = BranchdocsX;
 
             var BranchdocsE = db.CR_Cas_Sup_Branch_Documentation.Where(d => d.CR_Cas_Sup_Branch_Documentation_Lessor_Code == LessorCode
-            && d.CR_Cas_Sup_Branch_Documentation_Status == "E" && d.CR_Cas_Sup_Branch_Documentation_Branch_Code == BranchCode).Count();
+            && d.CR_Cas_Sup_Branch_Documentation_Status == "E" && d.CR_Cas_Sup_Branch_Documentation_Branch_Code == BranchCode).Count() != 0 ? db.CR_Cas_Sup_Branch_Documentation.Where(d => d.CR_Cas_Sup_Branch_Documentation_Lessor_Code == LessorCode
+            && d.CR_Cas_Sup_Branch_Documentation_Status == "E" && d.CR_Cas_Sup_Branch_Documentation_Branch_Code == BranchCode).Count() : 0;
             Session["BranchdocsE"] = BranchdocsE;
 
             var Companydocs = BranchdocsN + BranchdocsX + BranchdocsE;
 
 
             var BranchPricesN = db.CR_Cas_Car_Price_Basic.Where(d => d.CR_Cas_Car_Price_Basic_Lessor_Code == LessorCode
-            && d.CR_Cas_Car_Price_Basic_Status == "N" && d.CR_Cas_Car_Price_Basic_Lessor_Code == BranchCode).Count();
+            && d.CR_Cas_Car_Price_Basic_Status == "N" && d.CR_Cas_Car_Price_Basic_Lessor_Code == BranchCode).Count() !=0 ? db.CR_Cas_Car_Price_Basic.Where(d => d.CR_Cas_Car_Price_Basic_Lessor_Code == LessorCode
+            && d.CR_Cas_Car_Price_Basic_Status == "N" && d.CR_Cas_Car_Price_Basic_Lessor_Code == BranchCode).Count() : 0;
 
             Session["BranchPricesN"] = BranchPricesN;
 
             var BranchPricesX = db.CR_Cas_Car_Price_Basic.Where(d => d.CR_Cas_Car_Price_Basic_Lessor_Code == LessorCode
-            && d.CR_Cas_Car_Price_Basic_Status == "X" && d.CR_Cas_Car_Price_Basic_Lessor_Code == BranchCode).Count();
+            && d.CR_Cas_Car_Price_Basic_Status == "X" && d.CR_Cas_Car_Price_Basic_Lessor_Code == BranchCode).Count() != 0 ? db.CR_Cas_Car_Price_Basic.Where(d => d.CR_Cas_Car_Price_Basic_Lessor_Code == LessorCode
+            && d.CR_Cas_Car_Price_Basic_Status == "X" && d.CR_Cas_Car_Price_Basic_Lessor_Code == BranchCode).Count() : 0;
             Session["BranchPricesX"] = BranchPricesX;
 
             var BranchPricesE = db.CR_Cas_Car_Price_Basic.Where(d => d.CR_Cas_Car_Price_Basic_Lessor_Code == LessorCode
-            && d.CR_Cas_Car_Price_Basic_Status == "E" && d.CR_Cas_Car_Price_Basic_Lessor_Code == BranchCode).Count();
+            && d.CR_Cas_Car_Price_Basic_Status == "E" && d.CR_Cas_Car_Price_Basic_Lessor_Code == BranchCode).Count() != 0 ? db.CR_Cas_Car_Price_Basic.Where(d => d.CR_Cas_Car_Price_Basic_Lessor_Code == LessorCode
+            && d.CR_Cas_Car_Price_Basic_Status == "E" && d.CR_Cas_Car_Price_Basic_Lessor_Code == BranchCode).Count() :0;
             Session["PricesE"] = BranchPricesE;
 
             var Prices = BranchPricesX + BranchPricesE;
@@ -1219,14 +1228,17 @@ namespace RentCar.Controllers.BranchSys
 
             var BranchCarsDocN = db.CR_Cas_Sup_Car_Doc_Mainten.Where(d => d.CR_Cas_Sup_Car_Doc_Mainten_Lessor_Code == LessorCode && d.CR_Cas_Sup_Car_Doc_Mainten_Type == "3"
             && d.CR_Cas_Sup_Car_Doc_Mainten_Status == "N" && d.CR_Cas_Sup_Car_Doc_Mainten_Branch_Code==BranchCode).Count();
-            Session["BranchCarsDocN"] = BranchCarsDocN;
+            Session["BranchCarsDocN"] = BranchCarsDocN != 0 ? db.CR_Cas_Sup_Car_Doc_Mainten.Where(d => d.CR_Cas_Sup_Car_Doc_Mainten_Lessor_Code == LessorCode && d.CR_Cas_Sup_Car_Doc_Mainten_Type == "3"
+            && d.CR_Cas_Sup_Car_Doc_Mainten_Status == "N" && d.CR_Cas_Sup_Car_Doc_Mainten_Branch_Code == BranchCode).Count() :0 ;
 
             var BranchCarsDocX = db.CR_Cas_Sup_Car_Doc_Mainten.Where(d => d.CR_Cas_Sup_Car_Doc_Mainten_Lessor_Code == LessorCode && d.CR_Cas_Sup_Car_Doc_Mainten_Type == "3"
-            && d.CR_Cas_Sup_Car_Doc_Mainten_Status == "X" && d.CR_Cas_Sup_Car_Doc_Mainten_Branch_Code == BranchCode).Count();
+            && d.CR_Cas_Sup_Car_Doc_Mainten_Status == "X" && d.CR_Cas_Sup_Car_Doc_Mainten_Branch_Code == BranchCode).Count() != 0 ? db.CR_Cas_Sup_Car_Doc_Mainten.Where(d => d.CR_Cas_Sup_Car_Doc_Mainten_Lessor_Code == LessorCode && d.CR_Cas_Sup_Car_Doc_Mainten_Type == "3"
+            && d.CR_Cas_Sup_Car_Doc_Mainten_Status == "X" && d.CR_Cas_Sup_Car_Doc_Mainten_Branch_Code == BranchCode).Count():0;
             Session["BranchCarsDocX"] = BranchCarsDocX;
 
             var BranchCarsDocE = db.CR_Cas_Sup_Car_Doc_Mainten.Where(d => d.CR_Cas_Sup_Car_Doc_Mainten_Lessor_Code == LessorCode && d.CR_Cas_Sup_Car_Doc_Mainten_Type == "3"
-            && d.CR_Cas_Sup_Car_Doc_Mainten_Status == "E" && d.CR_Cas_Sup_Car_Doc_Mainten_Branch_Code == BranchCode).Count();
+            && d.CR_Cas_Sup_Car_Doc_Mainten_Status == "E" && d.CR_Cas_Sup_Car_Doc_Mainten_Branch_Code == BranchCode).Count() !=0 ? db.CR_Cas_Sup_Car_Doc_Mainten.Where(d => d.CR_Cas_Sup_Car_Doc_Mainten_Lessor_Code == LessorCode && d.CR_Cas_Sup_Car_Doc_Mainten_Type == "3"
+            && d.CR_Cas_Sup_Car_Doc_Mainten_Status == "E" && d.CR_Cas_Sup_Car_Doc_Mainten_Branch_Code == BranchCode).Count() :0;
             Session["BranchCarsDocE"] = BranchCarsDocE;
 
             var CarsDoc = BranchCarsDocN + BranchCarsDocX + BranchCarsDocE;
@@ -1235,15 +1247,18 @@ namespace RentCar.Controllers.BranchSys
 
 
             var BranchCarsMaintenanceN = db.CR_Cas_Sup_Car_Doc_Mainten.Where(d => d.CR_Cas_Sup_Car_Doc_Mainten_Lessor_Code == LessorCode && d.CR_Cas_Sup_Car_Doc_Mainten_Type == "4"
-            && d.CR_Cas_Sup_Car_Doc_Mainten_Status == "N" && d.CR_Cas_Sup_Car_Doc_Mainten_Branch_Code == BranchCode).Count();
+            && d.CR_Cas_Sup_Car_Doc_Mainten_Status == "N" && d.CR_Cas_Sup_Car_Doc_Mainten_Branch_Code == BranchCode).Count() != 0 ? db.CR_Cas_Sup_Car_Doc_Mainten.Where(d => d.CR_Cas_Sup_Car_Doc_Mainten_Lessor_Code == LessorCode && d.CR_Cas_Sup_Car_Doc_Mainten_Type == "4"
+            && d.CR_Cas_Sup_Car_Doc_Mainten_Status == "N" && d.CR_Cas_Sup_Car_Doc_Mainten_Branch_Code == BranchCode).Count() :0;
             Session["BranchCarsMaintenanceN"] = BranchCarsMaintenanceN;
 
             var BranchCarsMaintenanceE = db.CR_Cas_Sup_Car_Doc_Mainten.Where(d => d.CR_Cas_Sup_Car_Doc_Mainten_Lessor_Code == LessorCode && d.CR_Cas_Sup_Car_Doc_Mainten_Type == "4"
-            && d.CR_Cas_Sup_Car_Doc_Mainten_Status == "X" && d.CR_Cas_Sup_Car_Doc_Mainten_Branch_Code == BranchCode).Count();
+            && d.CR_Cas_Sup_Car_Doc_Mainten_Status == "X" && d.CR_Cas_Sup_Car_Doc_Mainten_Branch_Code == BranchCode).Count() !=0 ? db.CR_Cas_Sup_Car_Doc_Mainten.Where(d => d.CR_Cas_Sup_Car_Doc_Mainten_Lessor_Code == LessorCode && d.CR_Cas_Sup_Car_Doc_Mainten_Type == "4"
+            && d.CR_Cas_Sup_Car_Doc_Mainten_Status == "X" && d.CR_Cas_Sup_Car_Doc_Mainten_Branch_Code == BranchCode).Count() : 0;
             Session["BranchCarsMaintenanceE"] = BranchCarsMaintenanceE;
 
             var BranchCarsMaintenanceX = db.CR_Cas_Sup_Car_Doc_Mainten.Where(d => d.CR_Cas_Sup_Car_Doc_Mainten_Lessor_Code == LessorCode && d.CR_Cas_Sup_Car_Doc_Mainten_Type == "4"
-            && d.CR_Cas_Sup_Car_Doc_Mainten_Status == "E" && d.CR_Cas_Sup_Car_Doc_Mainten_Branch_Code == BranchCode).Count();
+            && d.CR_Cas_Sup_Car_Doc_Mainten_Status == "E" && d.CR_Cas_Sup_Car_Doc_Mainten_Branch_Code == BranchCode).Count() != 0 ? db.CR_Cas_Sup_Car_Doc_Mainten.Where(d => d.CR_Cas_Sup_Car_Doc_Mainten_Lessor_Code == LessorCode && d.CR_Cas_Sup_Car_Doc_Mainten_Type == "4"
+            && d.CR_Cas_Sup_Car_Doc_Mainten_Status == "E" && d.CR_Cas_Sup_Car_Doc_Mainten_Branch_Code == BranchCode).Count() : 0;
             Session["BranchCarsMaintenanceX"] = BranchCarsMaintenanceX;
 
             var CarsMaintenance = BranchCarsMaintenanceN + BranchCarsMaintenanceX + BranchCarsMaintenanceE;
