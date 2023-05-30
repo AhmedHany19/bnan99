@@ -13,10 +13,9 @@ namespace BnanFollowUpContracts
         public static void SendMailBeforeOneDay(CR_Cas_Contract_Basic contract)
         {
 
-            string imagePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "images\\1day.jpeg");
+            string imagePath = Path.Combine(Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).FullName).FullName, "images\\1day.jpeg");
             Image image = Image.FromFile(imagePath);
-            /* Image image = Image.FromFile("C:\\Users\\HP\\Desktop\\B3\\bnan0\\bnan0\\images\\1day.jpeg"); */
-            string logoPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "images\\3.png");
+            string logoPath = Path.Combine(Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).FullName).FullName, "images\\3.png");
             Image logo = Image.FromFile(logoPath);
 
             // Create a graphics object from the image
@@ -106,10 +105,9 @@ namespace BnanFollowUpContracts
 
         public static void SendMailBeforeFourHours(CR_Cas_Contract_Basic contract)
         {
-
-            string imagePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "images\\4hours.jpeg");
+            string imagePath = Path.Combine(Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).FullName).FullName, "images\\4hours.jpeg");
             Image image = Image.FromFile(imagePath);
-            string logoPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "images\\3.png");
+            string logoPath = Path.Combine(Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).FullName).FullName, "images\\3.png");
             Image logo = Image.FromFile(logoPath);
 
             // Create a graphics object from the image
@@ -200,9 +198,10 @@ namespace BnanFollowUpContracts
 
         public static void SendMailWhenEnd(CR_Cas_Contract_Basic contract)
         {
-            string imagePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "images\\End.jpeg");
+
+            string imagePath = Path.Combine(Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).FullName).FullName, "images\\End.jpeg");
             Image image = Image.FromFile(imagePath);
-            string logoPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "images\\3.png");
+            string logoPath = Path.Combine(Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).FullName).FullName, "images\\3.png");
             Image logo = Image.FromFile(logoPath);
 
             // Create a graphics object from the image

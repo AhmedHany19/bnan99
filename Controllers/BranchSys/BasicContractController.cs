@@ -2998,7 +2998,7 @@ namespace RentCar.Controllers.BranchSys
             graphics.DrawString(contract.CR_Cas_Contract_Basic_No, font, brush, new PointF(800, 335));
             graphics.DrawString(contract.CR_Cas_Contract_Basic_Start_Date.ToString(), font, brush, new PointF(800, 400));
             graphics.DrawString(contract.CR_Cas_Contract_Basic_Expected_End_Date.ToString(), font, brush, new PointF(800, 470));
-            graphics.DrawString(contract.CR_Cas_Sup_Car_Information.CR_Cas_Sup_Car_Collect_Ar_Name.Trim(), carfont, brush, new PointF(730, 535));
+            graphics.DrawString(contract.CR_Cas_Sup_Car_Information.CR_Cas_Sup_Car_Collect_Ar_Name.Trim(), carfont, brush, new PointF(675, 535));
             graphics.DrawString(contract.CR_Cas_Contract_Basic_Net_Value.ToString(), font, brush, new PointF(880, 595));
 
             // Save the modified image back to file or memory stream
