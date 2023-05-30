@@ -69,6 +69,13 @@ namespace RentCar.Controllers.BranchSys
             && r.CR_Cas_Account_Receipt_Lessor_Code==LessorCode && r.CR_Cas_Account_Receipt_Is_Passing=="1").Count();
             return Json(receipt, JsonRequestBehavior.AllowGet);
         }
+
+        public JsonResult CheckRenterLessor(string LessorCode)
+        {
+            var cR_Cas_Renter_Lessor = db.CR_Cas_Renter_Lessor.Where(r => r.CR_Cas_Renter_Lessor_Code == LessorCode).Count();
+
+            return Json(cR_Cas_Renter_Lessor, JsonRequestBehavior.AllowGet);
+        }
         public JsonResult CheckReceiptList(string LessorCode, string Login, string BranchCode)
         {
             var receipt = db.CR_Cas_Account_Receipt.Where(r => r.CR_Cas_Account_Receipt_User_Code == Login && r.CR_Cas_Account_Receipt_Branch_Code == BranchCode
