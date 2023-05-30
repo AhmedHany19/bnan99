@@ -118,9 +118,9 @@
                 <th hidden>
                     @Html.DisplayNameFor(model => model.CR_Mas_Sup_Virtual_Inspection_Reasons)
                 </th>
-                <th width="20%">
+                @*<th width="20%">
                     حالة الفحص
-                </th>
+                </th>*@
                 <th width="50%">
                     ملاحظات
                 </th>
@@ -135,10 +135,11 @@
                     </td>
                     <td width="30%">
                         @Html.DisplayFor(modelItem => item.CR_Mas_Sup_Virtual_Inspection_Ar_Name)
+                        <input type="checkbox" id="ChkInspection_@item.CR_Mas_Sup_Virtual_Inspection_Code" name="ChkInspection_@item.CR_Mas_Sup_Virtual_Inspection_Code" class="form-control ChkChoicesList" style="height: 20px; width: 20px; float: right; margin-left: 10px;" />
                     </td>
-                    <td align="center" width="20%">
+                    @*<td align="center" width="20%">
                         <input type="checkbox" id="ChkInspection_@item.CR_Mas_Sup_Virtual_Inspection_Code" name="ChkInspection_@item.CR_Mas_Sup_Virtual_Inspection_Code" class="form-control chkInspection" style="height:25px;margin-top:2px;" />
-                    </td>
+                    </td>*@
                     <td class="input_td" width="50%">
                         <input type="text" id="Remark_@item.CR_Mas_Sup_Virtual_Inspection_Code" name="Remark_@item.CR_Mas_Sup_Virtual_Inspection_Code" />
                     </td>
