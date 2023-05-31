@@ -217,7 +217,7 @@ namespace RentCar.Controllers
                 ViewBag.AdditionalDriverVal = cR_Cas_Contract_Basic.CR_Cas_Contract_Basic_Additional_Driver_Value;
                 if (Session["ContractCancel"].ToString() == "True")
                 {
-                    ViewBag.ContractEndDate = string.Format("{0:yyyy/MM/dd}", DateTime.Now);
+                    ViewBag.ContractEndDate = string.Format("{0:yyyy/MM/dd}", cR_Cas_Contract_Basic.CR_Cas_Contract_Basic_Expected_End_Date);
                     ViewBag.ContractCancel = "True";
                 }
                 else

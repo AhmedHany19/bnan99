@@ -40,7 +40,7 @@ namespace RentCar.Controllers.BranchSys
                 UserLogin = System.Web.HttpContext.Current.Session["UserLogin"].ToString();
                 if (UserLogin == null || LessorCode == null || BranchCode == null)
                 {
-                    return RedirectToAction("Account", "Login");
+                    return RedirectToAction("Login", "Account");
                 }
             }
             catch
@@ -65,7 +65,7 @@ namespace RentCar.Controllers.BranchSys
                 UserLogin = System.Web.HttpContext.Current.Session["UserLogin"].ToString();
                 if (UserLogin == null || LessorCode == null || BranchCode == null)
                 {
-                    RedirectToAction("Account", "Login");
+                    RedirectToAction("Login", "Account");
                 }
             }
             catch
@@ -304,7 +304,7 @@ namespace RentCar.Controllers.BranchSys
                 UserLogin = System.Web.HttpContext.Current.Session["UserLogin"].ToString();
                 if (UserLogin == null || LessorCode == null || BranchCode == null)
                 {
-                    return RedirectToAction("Account", "Login"); 
+                    return RedirectToAction("Login", "Account"); 
                 }
             }
             catch
@@ -330,7 +330,7 @@ namespace RentCar.Controllers.BranchSys
                 UserLogin = System.Web.HttpContext.Current.Session["UserLogin"].ToString();
                 if (UserLogin == null || LessorCode == null || BranchCode == null)
                 {
-                    return RedirectToAction("Account", "Login");
+                    return RedirectToAction("Login", "Account");
                 }
             }
             catch
@@ -400,7 +400,7 @@ namespace RentCar.Controllers.BranchSys
                 UserLogin = System.Web.HttpContext.Current.Session["UserLogin"].ToString();
                 if (UserLogin == null || LessorCode == null || BranchCode == null)
                 {
-                    RedirectToAction("Account", "Login");
+                    RedirectToAction("Login", "Account");
                 }
             }
             catch
@@ -425,7 +425,7 @@ namespace RentCar.Controllers.BranchSys
                 UserLogin = System.Web.HttpContext.Current.Session["UserLogin"].ToString();
                 if (UserLogin == null || LessorCode == null || BranchCode == null)
                 {
-                    RedirectToAction("Account", "Login");
+                    RedirectToAction("Login", "Account");
                 }
             }
             catch
@@ -450,7 +450,7 @@ namespace RentCar.Controllers.BranchSys
                 UserLogin = System.Web.HttpContext.Current.Session["UserLogin"].ToString();
                 if (UserLogin == null || LessorCode == null || BranchCode == null)
                 {
-                    RedirectToAction("Account", "Login");
+                    RedirectToAction("Login", "Account");
                 }
             }
             catch
@@ -509,7 +509,7 @@ namespace RentCar.Controllers.BranchSys
                 UserLogin = System.Web.HttpContext.Current.Session["UserLogin"].ToString();
                 if (UserLogin == null || LessorCode == null || BranchCode == null)
                 {
-                    RedirectToAction("Account", "Login");
+                    RedirectToAction("Login", "Account");
                 }
             }
             catch
@@ -537,7 +537,7 @@ namespace RentCar.Controllers.BranchSys
                 UserLogin = System.Web.HttpContext.Current.Session["UserLogin"].ToString();
                 if (UserLogin == null || LessorCode == null || BranchCode == null)
                 {
-                    RedirectToAction("Account", "Login");
+                    RedirectToAction("Login", "Account");
                 }
             }
             catch (Exception ex)
@@ -860,7 +860,7 @@ namespace RentCar.Controllers.BranchSys
                 UserLogin = System.Web.HttpContext.Current.Session["UserLogin"].ToString();
                 if (UserLogin == null || LessorCode == null || BranchCode == null)
                 {
-                    RedirectToAction("Account", "Login");
+                    RedirectToAction("Login", "Account");
                 }
             }
             catch
@@ -1823,7 +1823,7 @@ namespace RentCar.Controllers.BranchSys
                 UserLogin = System.Web.HttpContext.Current.Session["UserLogin"].ToString();
                 if (UserLogin == null || LessorCode == null || BranchCode == null)
                 {
-                    RedirectToAction("Account", "Login");
+                    RedirectToAction("Login", "Account");
                 }
             }
             catch
@@ -1892,7 +1892,7 @@ namespace RentCar.Controllers.BranchSys
                     UserLogin = System.Web.HttpContext.Current.Session["UserLogin"].ToString();
                     if (UserLogin == null || LessorCode == null || BranchCode == null)
                     {
-                        RedirectToAction("Account", "Login");
+                        RedirectToAction("Login", "Account");
                     }
                 }
                 catch
@@ -3012,13 +3012,13 @@ namespace RentCar.Controllers.BranchSys
             image.Save(savedModified);
 
 
-            string htmlBody = "<html><body><h1>Contract Summary </h1><br><img src=cid:Contract style='width:100%;height:100%'></body></html>";
+            string htmlBody = "<html><body><h1>العقد</h1><br><img src=cid:Contract style='width:100%;height:100%'></body></html>";
 
             AlternateView avHtml = AlternateView.CreateAlternateViewFromString
                (htmlBody, null, MediaTypeNames.Text.Html);
 
             LinkedResource inline = new LinkedResource(savedModified, MediaTypeNames.Image.Jpeg);
-            inline.ContentId = "Contract";
+            inline.ContentId = contract.CR_Cas_Contract_Basic_No;
             avHtml.LinkedResources.Add(inline);
 
             MailMessage mail = new MailMessage();
@@ -3039,7 +3039,7 @@ namespace RentCar.Controllers.BranchSys
                 *//*         mail.To.Add(contract.CR_Mas_Renter_Information.CR_Mas_Renter_Information_Email);*//*
             }*/
                 mail.To.Add("bnanbnanmail@gmail.com");
-            mail.Subject = " Contract Mail ";
+            mail.Subject = " ملخص العقد ";
             mail.Body = inline.ContentId;
 
             mail.IsBodyHtml = true;

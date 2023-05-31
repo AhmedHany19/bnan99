@@ -138,9 +138,9 @@
                                                 <div class="row">
                                                     <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
                                                         <div class="form-group row mb-3">
-                                                            <label class="col-md-3" for="userName3">رقم العقد</label>
-                                                            <div class="col-md-8">
-                                                                <input autocomplete="off" class="form-control " id="ContractNo" name="ContractNo" style="float:right;width:100%" type="text" value="@ViewBag.ContractNo" readonly>
+                                                            <label  for="userName3" style="margin-right: 10px">رقم العقد</label>
+                                                            <div >
+                                                                <input autocomplete="off" class="form-control " id="ContractNo" name="ContractNo" style="float: right; width: 100%; margin-right: 60px;" type="text" value="@ViewBag.ContractNo" readonly>
                                                                 <input type="text" id="OldCurrentKm" value="@ViewBag.OldCurrentKm" hidden />
                                                             </div>
 
@@ -199,7 +199,7 @@
                                                 <div class="row mt-1">
                                                     <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
                                                         <div class="form-group row mb-3">
-                                                            <label class="col-md-4" for="userName3">تاريخ بداية العقد</label>
+                                                            <label class="col-md-4" for="userName3">بداية العقد</label>
                                                             <div class="col-md-7">
                                                                 <input autocomplete="off" class="form-control " id="ContractStartDate" name="ContractStartDate" style="float:right;width:100%" type="text" value="@ViewBag.ContractStartDate" readonly>
                                                             </div>
@@ -219,7 +219,7 @@
                                                 <div class="row mt-1">
                                                     <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
                                                         <div class="form-group row mb-3">
-                                                            <label class="col-md-4" for="userName3">تاريخ نهاية العقد</label>
+                                                            <label class="col-md-4" for="userName3">نهاية العقد</label>
                                                             <div class="col-md-7">
                                                                 @if (Session["ContractCancel"].ToString() == "True")
                                                                 {
@@ -229,7 +229,7 @@
                                                                 else
                                                                 {
                                                                     <input class="form-control text-box single-line" id="ContractEndDate" name="ContractEndDate" data-inputmask="'alias': 'yyyy/mm/dd'" value="@ViewBag.ContractEndDate" style="width:100%" readonly>
-                                                                    <label style="color:red;">عفوا ليس لك صلاحية تسوية العقد</label>
+                                                                    @*<label style="color:red;">عفوا ليس لك صلاحية تسوية العقد</label>*@
 
                                                                 }
                                                                 @*<input class="form-control text-box single-line" id="ContractEndDate" name="ContractEndDate" data-inputmask="'alias': 'yyyy/mm/dd'" value="@ViewBag.ContractEndDate" style="width:100%" readonly>*@
@@ -276,7 +276,7 @@
 
 
                                                     </div>
-                                                    <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                                                    @*<div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
                                                         <div class="form-group row mb-3">
                                                             <label class="col-md-4" for="userName3">الكيلوات المجانية</label>
                                                             <div class="col-md-4">
@@ -284,7 +284,7 @@
                                                             </div>
 
                                                         </div>
-                                                    </div>
+                                                    </div>*@
                                                     <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
                                                         <div class="form-group row mb-3">
                                                             <label class="col-md-5" for="userName3">قيمة الكيلو الإضافي</label>
@@ -317,7 +317,7 @@
                                                     </div>
                                                     <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
                                                         <div class="form-group row mb-3">
-                                                            <label class="col-md-5" for="userName3">قيمة الساعة الاضافية</label>
+                                                            <label class="col-md-6" for="userName3">قيمة الساعة الاضافية</label>
                                                             <div class="col-md-4">
                                                                 <input autocomplete="off" class="form-control " id="ExtraHourValue" name="ExtraHourValue" style="float:right;width:100%" type="text" value="@ViewBag.ExtraHourValue" readonly>
                                                             </div>
@@ -823,12 +823,14 @@
                                             <span class="step active">الدفع</span>
                                         </div>
                                     </div>
+
+
                                     <div class="" style="">
                                         <fieldset class="fildest51">
-                                            <div class="row">
+                                            <div class="row mt-1">
                                                 <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
                                                     <div class="form-group row mb-3">
-                                                        <label class="col-md-5" for="userName3">قيمة الإيجار</label>
+                                                        <label class="col-md-6" for="userName3">قيمة الإيجار</label>
                                                         <div class="col-md-6">
                                                             <input autocomplete="off" class="form-control " id="RentalPrice" name="RentalPrice" style="float:right;width:100%" type="text" value="@ViewBag.RentalPrice" readonly>
                                                         </div>
@@ -837,18 +839,27 @@
                                                 </div>
                                                 <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
                                                     <div class="form-group row mb-3">
-                                                        <label class="col-md-5" for="userName3">قيمة الخيارات</label>
+                                                        <label class="col-md-6" for="userName3">قيمة الخيارات</label>
                                                         <div class="col-md-6">
                                                             <input autocomplete="off" class="form-control " id="ChoicesVal" name="ChoicesVal" style="float:right;width:100%" type="text" value="@ViewBag.ChoicesVal" readonly>
                                                         </div>
 
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="row">
                                                 <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
                                                     <div class="form-group row mb-3">
-                                                        <label class="col-md-5" for="userName3">قيمة السائق الإضافي</label>
+                                                        <label class="col-md-6" for="userName3">قيمة الإضافات</label>
+                                                        <div class="col-md-6">
+                                                            <input autocomplete="off" class="form-control " id="AdditionalVal" name="AdditionalVal" style="float:right;width:100%" type="text" value="@ViewBag.AdditionalVal" readonly>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row mt-1">
+                                                <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                                                    <div class="form-group row mb-3">
+                                                        <label class="col-md-6" for="userName3">قيمة السائق الإضافي</label>
                                                         <div class="col-md-6">
                                                             <input autocomplete="off" class="form-control " id="AdditionalDriverVal" name="AdditionalDriverVal" style="float:right;width:100%" type="text" value="@ViewBag.AdditionalDriverVal" readonly>
                                                         </div>
@@ -857,18 +868,7 @@
                                                 </div>
                                                 <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
                                                     <div class="form-group row mb-3">
-                                                        <label class="col-md-5" for="userName3">قيمة الإضافات</label>
-                                                        <div class="col-md-6">
-                                                            <input autocomplete="off" class="form-control " id="AdditionalVal" name="AdditionalVal" style="float:right;width:100%" type="text" value="@ViewBag.AdditionalVal" readonly>
-                                                        </div>
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
-                                                    <div class="form-group row mb-3">
-                                                        <label class="col-md-5" for="userName3">قيمة الكيلومترات الزائدة</label>
+                                                        <label class="col-md-6" for="userName3">قيمة الكيلوات الزائدة</label>
                                                         <div class="col-md-6">
                                                             <input autocomplete="off" class="form-control " id="ExtraKmValue" name="ExtraKmValue" style="float:right;width:100%" type="text" value="@ViewBag.ExtraKmValue" readonly>
                                                         </div>
@@ -877,165 +877,168 @@
                                                 </div>
                                                 <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
                                                     <div class="form-group row mb-3">
-                                                        <label class="col-md-5" for="userName3">قيمة الساعات الزائدة</label>
+                                                        <label class="col-md-6" for="userName3">قيمة الساعات الزائدة</label>
                                                         <div class="col-md-6">
                                                             <input autocomplete="off" class="form-control " id="TotalHoursValue" name="TotalHoursValue" style="float:right;width:100%" type="text" value="" readonly>
                                                         </div>
 
                                                     </div>
                                                 </div>
+
                                             </div>
-                                            <div class="row">
-                                                <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
-                                                    <div class="form-group row mb-3">
-                                                        <label class="col-md-5" for="userName3">قيمة التفويض</label>
-                                                        <div class="col-md-6">
-                                                            <input autocomplete="off" class="form-control " id="AuthValue" name="AuthValue" style="float:right;width:100%" type="text" value="@ViewBag.AuthValue" readonly>
-                                                        </div>
-
+                                            @*<div class="row">
+                                                
+                                            </div>*@
+                                        <div class="row mt-1">
+                                            <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                                                <div class="form-group row mb-3">
+                                                    <label class="col-md-6" for="userName3">قيمة التفويض</label>
+                                                    <div class="col-md-6">
+                                                        <input autocomplete="off" class="form-control " id="AuthValue" name="AuthValue" style="float:right;width:100%" type="text" value="@ViewBag.AuthValue" readonly>
                                                     </div>
-                                                </div>
-                                                <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
-                                                    <div class="form-group row mb-3">
-                                                        <label class="col-md-5" for="userName3">قيمة العقد قبل الخصم</label>
-                                                        <div class="col-md-6">
-                                                            <input autocomplete="off" class="form-control " id="ContractValED" name="ContractValED" style="float:right;width:100%" type="text" value="" readonly>
-                                                        </div>
 
-                                                    </div>
                                                 </div>
                                             </div>
-                                            <div class="row">
-                                                <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
-                                                    <div class="form-group row mb-3">
-                                                        <label class="col-md-5" for="userName3">نسبة الخصم </label>
-                                                        <div class="col-md-6">
-                                                            <input autocomplete="off" class="form-control " id="Discount" name="Discount" style="float:right;width:100%" type="text" value="@ViewBag.Discount" readonly>
-                                                        </div>
-
+                                            <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                                                <div class="form-group row mb-3">
+                                                    <label class="col-md-6" for="userName3">قيمة العقد قبل الخصم</label>
+                                                    <div class="col-md-6">
+                                                        <input autocomplete="off" class="form-control " id="ContractValED" name="ContractValED" style="float:right;width:100%" type="text" value="" readonly>
                                                     </div>
-                                                </div>
-                                                <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
-                                                    <div class="form-group row mb-3">
-                                                        <label class="col-md-5" for="userName3">قيمة العقد بعد الخصم</label>
-                                                        <div class="col-md-6">
-                                                            <input autocomplete="off" class="form-control " id="ContractValID" name="ContractValID" style="float:right;width:100%" type="text" value="" readonly>
-                                                        </div>
 
-                                                    </div>
                                                 </div>
                                             </div>
-                                            <div class="row">
-                                                <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
-                                                    <div class="form-group row mb-3">
-                                                        <label class="col-md-5" for="userName3">قيمة الضريبة</label>
-                                                        <div class="col-md-6">
-                                                            <input autocomplete="off" class="form-control " id="Tax" name="Tax" style="float:right;width:100%" type="text" value="@ViewBag.Tax" readonly hidden>
-                                                            <input autocomplete="off" class="form-control " id="TaxVal" name="TaxVal" style="float:right;width:100%" type="text" value="" readonly>
-                                                        </div>
-
+                                            <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                                                <div class="form-group row mb-3">
+                                                    <label class="col-md-6" for="userName3">نسبة الخصم </label>
+                                                    <div class="col-md-6">
+                                                        <input autocomplete="off" class="form-control " id="Discount" name="Discount" style="float:right;width:100%" type="text" value="@ViewBag.Discount" readonly>
                                                     </div>
-                                                </div>
-                                                <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
-                                                    <div class="form-group row mb-3">
-                                                        <label class="col-md-5" for="userName3">إجمالي العقد</label>
-                                                        <div class="col-md-6">
-                                                            <input autocomplete="off" class="form-control " id="TotalContractIT" name="TotalContractIT" style="float:right;width:100%" type="text" value="" readonly>
-                                                        </div>
 
-                                                    </div>
                                                 </div>
                                             </div>
-                                            <div class="row">
-                                                <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
-                                                    <div class="form-group row mb-3">
-                                                        <label class="col-md-5" for="userName3">إجمالي المصروفات</label>
-                                                        <div class="col-md-6">
-                                                            <input autocomplete="off" class="form-control " id="TotDepences" name="TotDepences" style="float:right;width:100%" type="text" value="" readonly>
-                                                        </div>
+                                        </div>
+                                        <div class="row mt-1">
 
+                                            <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                                                <div class="form-group row mb-3">
+                                                    <label class="col-md-6" for="userName3">قيمة العقد بعد الخصم</label>
+                                                    <div class="col-md-6">
+                                                        <input autocomplete="off" class="form-control " id="ContractValID" name="ContractValID" style="float:right;width:100%" type="text" value="" readonly>
                                                     </div>
-                                                </div>
-                                                <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
-                                                    <div class="form-group row mb-3">
-                                                        <label class="col-md-5" for="userName3">إجمالي التعويضات</label>
-                                                        <div class="col-md-6">
-                                                            <input autocomplete="off" class="form-control " id="TotCompensation" name="TotCompensation" style="float:right;width:100%" type="text" value="" readonly>
-                                                        </div>
 
-                                                    </div>
                                                 </div>
                                             </div>
-                                            <div class="row">
-                                                <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
-                                                    <div class="form-group row mb-3">
-                                                        <label class="col-md-5" for="userName3">رصيد سابق</label>
-                                                        <div class="col-md-6">
-                                                            <input autocomplete="off" class="form-control " id="RenterPrevBalance" name="RenterPrevBalance" style="float:right;width:100%;text-align:right;direction:ltr;" type="text" value="@ViewBag.RenterPrevBalance" readonly>
-                                                        </div>
-
+                                            <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                                                <div class="form-group row mb-3">
+                                                    <label class="col-md-6" for="userName3">قيمة الضريبة</label>
+                                                    <div class="col-md-6">
+                                                        <input autocomplete="off" class="form-control " id="Tax" name="Tax" style="float:right;width:100%" type="text" value="@ViewBag.Tax" readonly hidden>
+                                                        <input autocomplete="off" class="form-control " id="TaxVal" name="TaxVal" style="float:right;width:100%" type="text" value="" readonly>
                                                     </div>
-                                                </div>
-                                                <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
-                                                    <div class="form-group row mb-3">
-                                                        <label class="col-md-5" for="userName3">المبلغ المطلوب</label>
-                                                        <div class="col-md-6">
-                                                            <input autocomplete="off" class="form-control " id="TotToPay" name="TotToPay" style="float:right;width:100%;direction:ltr;text-align:right" type="text" value="" readonly>
-                                                        </div>
 
-                                                    </div>
                                                 </div>
                                             </div>
-                                            <div class="row">
-                                                <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
-                                                    <div class="form-group row mb-3">
-                                                        <label class="col-md-5" for="userName3">المبلغ المدفوع</label>
-                                                        <div class="col-md-6">
-                                                            <input autocomplete="off" class="form-control " id="TotPayed" name="TotPayed" style="float:right;width:100%;text-align:right;direction:ltr;" type="text" value="">
-                                                        </div>
-
+                                            
+                                        </div>
+                                           
+                                        <div class="row mt-1">
+                                            <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                                                <div class="form-group row mb-3">
+                                                    <label class="col-md-6" for="userName3">إجمالي العقد</label>
+                                                    <div class="col-md-6">
+                                                        <input autocomplete="off" class="form-control " id="TotalContractIT" name="TotalContractIT" style="float:right;width:100%" type="text" value="" readonly>
                                                     </div>
-                                                </div>
-                                                <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
-                                                    <div class="form-group row mb-3">
-                                                        <label class="col-md-5" for="userName3" id="RestLabel">الباقي</label>
-                                                        <div class="col-md-6">
-                                                            <input autocomplete="off" class="form-control " id="reste" name="reste" style="float:right;width:100%;text-align:right;direction:ltr;" type="text" value="" readonly>
-                                                        </div>
 
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                                                <div class="form-group row mb-3">
+                                                    <label class="col-md-6" for="userName3">إجمالي المصروفات</label>
+                                                    <div class="col-md-6">
+                                                        <input autocomplete="off" class="form-control " id="TotDepences" name="TotDepences" style="float:right;width:100%" type="text" value="" readonly>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                                                <div class="form-group row mb-3">
+                                                    <label class="col-md-6" for="userName3">إجمالي التعويضات</label>
+                                                    <div class="col-md-6">
+                                                        <input autocomplete="off" class="form-control " id="TotCompensation" name="TotCompensation" style="float:right;width:100%" type="text" value="" readonly>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row mt-1">
+                                            <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                                                <div class="form-group row mb-3">
+                                                    <label class="col-md-6" for="userName3">رصيد سابق</label>
+                                                    <div class="col-md-6">
+                                                        <input autocomplete="off" class="form-control " id="RenterPrevBalance" name="RenterPrevBalance" style="float:right;width:100%;text-align:right;direction:ltr;" type="text" value="@ViewBag.RenterPrevBalance" readonly>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                                                <div class="form-group row mb-3">
+                                                    <label class="col-md-6" for="userName3">المبلغ المطلوب</label>
+                                                    <div class="col-md-6">
+                                                        <input autocomplete="off" class="form-control " id="TotToPay" name="TotToPay" style="float:right;width:100%;direction:ltr;text-align:right" type="text" value="" readonly>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="row">
-                                                <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
-                                                    <div class="form-group row mb-3">
-                                                        <label class="col-md-5" for="userName3">طريقة الدفع</label>
-                                                        <div class="col-md-6">
-                                                            @*<input autocomplete="off" class="form-control " id="facon_payer" name="facon_payer" style="float:right;width:100%" type="text" value="">*@
-                                                            @Html.DropDownList("PayType", null, " --رجاء إختر طريقة الدفع-- ", htmlAttributes: new { @class = "form-control ", style = "float:right;width:100%", @disabled = "disabled" })
-                                                        </div>
-
+                                            <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                                                <div class="form-group row mb-3">
+                                                    <label class="col-md-5" for="userName3" id="RestLabel">الباقي</label>
+                                                    <div class="col-md-6">
+                                                        <input autocomplete="off" class="form-control " id="reste" name="reste" style="float:right;width:100%;text-align:right;direction:ltr;" type="text" value="" readonly>
                                                     </div>
-                                                </div>
-                                                <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
-                                                    <div class="form-group row mb-3">
-                                                        <label class="col-md-5" for="userName3">نقطة الدفع</label>
-                                                        <div class="col-md-6">
-                                                            @*<input autocomplete="off" class="form-control " id="point_paiement" name="point_paiement" style="float:right;width:100%" type="text" value="">*@
-                                                            @Html.DropDownList("CasherName", new SelectList(""), " --رجاء إختر نقطة البيع-- ", htmlAttributes: new { @class = "form-control ", style = "float:right;width:100%", @disabled = "disabled" })
-                                                        </div>
 
-                                                    </div>
                                                 </div>
                                             </div>
-                                            <div class="row">
+                                        </div>
+                                        <div class="row mt-1">
+                                            <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                                                <div class="form-group row mb-3">
+                                                    <label class="col-md-6" for="userName3">المبلغ المدفوع</label>
+                                                    <div class="col-md-6">
+                                                        <input autocomplete="off" class="form-control " id="TotPayed" name="TotPayed" style="float: right; width: 65%; text-align: right; direction: ltr; height: 35px !important " type="text" value="">
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                                                <div class="form-group row mb-3">
+                                                    <label  for="userName3">طريقة الدفع</label>
+                                                    <div >
+                                                        @*<input autocomplete="off" class="form-control " id="facon_payer" name="facon_payer" style="float:right;width:100%" type="text" value="">*@
+                                                        @Html.DropDownList("PayType", null, " --رجاء إختر طريقة الدفع-- ", htmlAttributes: new { @class = "form-control ", style = "float:right;width:85%;margin-right: 30px;height: 42px;", @disabled = "disabled" })
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                                                <div class="form-group row mb-3">
+                                                    <label  for="userName3">نقطة الدفع</label>
+                                                    <div >
+                                                        @*<input autocomplete="off" class="form-control " id="point_paiement" name="point_paiement" style="float:right;width:100%" type="text" value="">*@
+                                                        @Html.DropDownList("CasherName", new SelectList(""), " --رجاء إختر نقطة البيع-- ", htmlAttributes: new { @class = "form-control ", style = "float:right;width:95%;margin-right: 30px;height: 42px;", @disabled = "disabled" })
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                            
+                                            <div class="row mt-2">
                                                 <div class="col-lg-8 col-md-6 col-sm-12 col-xs-12">
                                                     <div class=" mb-3">
                                                         <label style="float:right;width:21.5%" for="userName3">ملاحظات</label>
                                                         <div style="float:right;width:74%">
-                                                            <input autocomplete="off" class="form-control " id="remarque" name="remarque" style="float:right;width:100%" type="text" value="">
+                                                            <input autocomplete="off" class="form-control " id="remarque" name="remarque" style="float: right; width: 165%; height: 35px !important; margin-right: 30px; " type="text" maxlength="100" value="">
                                                         </div>
-
                                                     </div>
                                                 </div>
                                             </div>
@@ -1050,14 +1053,14 @@
                             <div class="list-inline wizard mb-0">
                                 <a href="/BranchHome/branchstat" class="btn btn-secondary text-white" style="float: right; margin-left: 20px; display: inline;">انهاء</a>
                                 <button type="button" id="prevBtn" onclick="PrevPrev(-1)" class="btn btn-secondary" style="float: right; margin-left: 20px;">السابق</button>
-                                @if (ViewBag.ContractCancel == "True")
-                                {
+                                @*@if (ViewBag.ContractCancel == "True")
+                                {*@
                                     <button type="button" id="nextBtn" onclick="nextPrev(1)" class="btn btn-secondary" style="float: left; margin-left: 20px;">التالي</button>
-                                }
-                                else
+                                @*}*@
+                                @*else
                                 {
                                     <button type="button" id="nextBtn" onclick="nextPrev(1)" class="btn btn-secondary" style="float: left; margin-left: 20px;" disabled title="عفوا لا يمكنك انهاء العقد قبل التاريخ المحدد">التالي</button>
-                                }
+                                }*@
 
                                 <input type="submit" name="add" class="btn btn-secondary" id="add_btn" value="حفظ" style="display: none; float: left; margin-left: 20px; height: 38px !important" disabled />
                                 <input type="button" name="AuthBtn" class="btn btn-secondary" id="AuthBtn" value="الموحد" style="display: none; float: left; margin-left: 20px; height: 38px !important" hidden />

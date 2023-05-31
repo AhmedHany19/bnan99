@@ -28,7 +28,7 @@ namespace RentCar.Controllers.BranchSys
                 UserLogin = System.Web.HttpContext.Current.Session["UserLogin"].ToString();
                 if (UserLogin == null || LessorCode == null || BranchCode == null)
                 {
-                    RedirectToAction("Account", "Login");
+                    RedirectToAction("Login", "Account");
                 }
             }
             catch
@@ -415,7 +415,7 @@ namespace RentCar.Controllers.BranchSys
                 UserLogin = System.Web.HttpContext.Current.Session["UserLogin"].ToString();
                 if (UserLogin == null || LessorCode == null)
                 {
-                    RedirectToAction("Account", "Login");
+                    RedirectToAction("Login", "Account");
                 }
             }
             catch
@@ -512,7 +512,7 @@ namespace RentCar.Controllers.BranchSys
                 UserLogin = System.Web.HttpContext.Current.Session["UserLogin"].ToString();
                 if (UserLogin == null || LessorCode == null || BranchCode == null)
                 {
-                    RedirectToAction("Account", "Login");
+                    RedirectToAction("Login", "Account");
                 }
             }
             catch
@@ -693,7 +693,7 @@ namespace RentCar.Controllers.BranchSys
                 UserLogin = System.Web.HttpContext.Current.Session["UserLogin"].ToString();
                 if (UserLogin == null || LessorCode == null || BranchCode == null)
                 {
-                    RedirectToAction("Account", "Login");
+                    RedirectToAction("Login", "Account");
                 }
             }
             catch
@@ -883,7 +883,7 @@ namespace RentCar.Controllers.BranchSys
                 UserLogin = System.Web.HttpContext.Current.Session["UserLogin"].ToString();
                 if (UserLogin == null || LessorCode == null || BranchCode == null)
                 {
-                    RedirectToAction("Account", "Login");
+                    RedirectToAction("Login", "Account");
                 }
             }
             catch
@@ -1072,18 +1072,22 @@ namespace RentCar.Controllers.BranchSys
             var BranchCode = "";
             try
             {
+                if (Session["LessorCode"] == null || Session["BranchCode"] == null)
+                {
+                    return RedirectToAction("Login", "Account");
+                }
                 LessorCode = Session["LessorCode"].ToString();
                 BranchCode = Session["BranchCode"].ToString();
 
                 UserLogin = System.Web.HttpContext.Current.Session["UserLogin"].ToString();
                 if (UserLogin == null || LessorCode == null || BranchCode == null)
                 {
-                    RedirectToAction("Account", "Login");
+                    return RedirectToAction("Login", "Account");
                 }
             }
             catch
             {
-                RedirectToAction("Login", "Account");
+              return  RedirectToAction("Login", "Account");
             }
 
 
