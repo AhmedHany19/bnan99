@@ -1694,12 +1694,12 @@ namespace RentCar.Controllers.BranchSys
                 UserLogin = System.Web.HttpContext.Current.Session["UserLogin"].ToString();
                 if (UserLogin == null || LessorCode == null || BranchCode == null)
                 {
-                    return RedirectToAction("Login", "Account");
+                     RedirectToAction("Login", "Account");
                 }
             }
             catch
             {
-                return RedirectToAction("Login", "Account");
+                 RedirectToAction("Login", "Account");
             }
             var Code = LessorCode + "0000";
             db.Configuration.ProxyCreationEnabled = false;
