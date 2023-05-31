@@ -18,6 +18,8 @@ namespace RentCar.Controllers.CAS
         public ActionResult Index()
         {
             var cR_Cas_Account_Tax_Owed = db.CR_Cas_Account_Tax_Owed.Include(c => c.CR_Cas_Sup_Branch);
+            ViewBag.Startdate = DateTime.Now.ToString("yyyy/MM/dd");
+            ViewBag.Enddate = DateTime.Now.ToString("yyyy/MM/dd");
             return View(cR_Cas_Account_Tax_Owed.ToList());
         }
 

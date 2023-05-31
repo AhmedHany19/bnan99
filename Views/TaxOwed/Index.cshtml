@@ -69,6 +69,18 @@
         float: right;
         margin-left: 10px;
     }
+
+    #Startdate, #Enddate {
+        font-size: 0 !important;
+        background: url(../../BSys3Styles/Images/icone_calendre.png) center 3px no-repeat;
+        width: 30px;
+        border: none;
+        border-left: 0;
+        height: 27px;
+        position: absolute;
+        left: 17px;
+        margin-top: -29px;
+    }
 </style>
 
 <div class="content">
@@ -112,7 +124,12 @@
                                                                     <label>من</label>
                                                                 </div>
                                                                 <div class="col-md-9" style="float:right">
-                                                                    <input type="date" id="Startdate" onclick="GetDateFilter()" value="@ViewBag.Startdate" style="width:100%">
+@*                                                                    <input type="date" id="Startdate" onclick="GetDateFilter()" value="@ViewBag.Startdate" style="width:100%">
+*@
+
+                                                                    <input class="form-control text-box single-line dateOfContractInp" data-val="true" id="startinp" type="text" data-inputmask="'alias': 'yyyy-mm-dd'" onblur="affich_btn_1(event)" onchange="reset()" autocomplete="off" value="@ViewBag.Startdate">
+
+                                                                    <input type="button" class="hijri-date-input2 dateOfContract" id="Startdate" onblur="affich_affich_1(event)" onchange="reset()" value="2023-05-30">
                                                                 </div>
 
                                                             </div>
@@ -123,7 +140,10 @@
                                                                     <label>إلى</label>
                                                                 </div>
                                                                 <div class="col-md-9" style="float:right">
-                                                                    <input type="date" id="Enddate" onclick="GetDateFilter()" value="@ViewBag.Enddate" style="width:100%">
+                                                                    @*<input type="date" id="Enddate" onclick="GetDateFilter()" value="@ViewBag.Enddate" style="width:100%">*@
+                                                                    <input class="form-control text-box single-line dateOfContractInp" data-val="true" id="Enddateinp" type="text" data-inputmask="'alias': 'yyyy-mm-dd'" onblur="affich_btn_2(event)" onchange="reset()" autocomplete="off" value="@ViewBag.Enddate">
+
+                                                                    <input type="button" class="hijri-date-input2 dateOfContract" id="Enddate" onblur="affich_affich_2(event)" onchange="reset()">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -254,6 +274,30 @@
             </div>
         </div> <!-- end row -->
     </div> <!-- container-fluid -->
+
+
+   
+    <script>
+         function affich_affich_1(e) {
+            var date = e.target.value;
+            document.getElementById("startinp").value = date;
+        }
+        function affich_btn_1(e) {
+            var date = e.target.value;
+            document.getElementById("Startdate").value = date;
+        }
+
+        function affich_affich_2(e) {
+            var date = e.target.value;
+            document.getElementById("Enddateinp").value = date;
+        }
+        function affich_btn_1(e) {
+            var date = e.target.value;
+            document.getElementById("Enddate").value = date;
+        }
+
+    </script>
+
     <script type="text/javascript">
         window.addEventListener("load", function () {
 
@@ -303,7 +347,7 @@
         }
 
 
-       
+
     </script>
     <script>
          function GetFilter() {

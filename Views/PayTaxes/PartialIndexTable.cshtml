@@ -16,12 +16,12 @@
                 <th style="width:9%;">
                     قيمة العقد
                 </th>
-                <th style="width:14%;">
+               @* <th style="width:14%;">
                     نسبة القيمة المضافة
                 </th>
                 <th style="width:11%;">
                     القيمة المضافة
-                </th>
+                </th>*@
                 
             </tr>
         </thead>
@@ -41,12 +41,12 @@
                     <td style="width:12%;">
                         @item.CR_Cas_Account_Tax_Owed_Due_Date.Value.ToString("yyyy/MM/dd")
                     </td>
-                    <td style="width:9%;text-align:center">
+                   @* <td style="width:9%;text-align:center">
                         @Html.DisplayFor(modelItem => item.CR_Cas_Account_Tax_Owed_Contract_Value)
                     </td>
                     <td style="width:14%;">
                         @Html.DisplayFor(modelItem => item.CR_Cas_Account_Tax_Owed_Percentage)
-                    </td>
+                    </td>*@
                     <td style="width:11%;">
                         @Html.DisplayFor(modelItem => item.CR_Cas_Account_Tax_Owed_Value)
                     </td>
