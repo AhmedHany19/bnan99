@@ -51,7 +51,7 @@ namespace RentCar.Controllers.BranchSys
                 UserLogin = System.Web.HttpContext.Current.Session["UserLogin"].ToString().Trim();
                 if (UserLogin == null || LessorCode == null || BranchCode == null)
                 {
-                    RedirectToAction("Account", "Login");
+                    RedirectToAction("Login", "Account");
                 }
             }
             catch
@@ -87,7 +87,7 @@ namespace RentCar.Controllers.BranchSys
                 userlogin = Session["userlogin"].ToString();
                 if (userlogin == null || LessorCode == null || branchcode == null)
                 {
-                    RedirectToAction("account", "login");
+                    RedirectToAction("Login", "Account");
                 }
             }
             catch

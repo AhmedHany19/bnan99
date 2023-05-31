@@ -547,6 +547,12 @@ namespace RentCar.Controllers
                                         }
 
                                         Session["CompName"] = getlessor.CR_Mas_Com_Lessor_Ar_Long_Name.ToString();
+
+                                        var x = Session["CompName"];
+                                        //if (Session["CompName"] == null && Sess)
+                                        //{
+                                        //    return RedirectToAction("Login", "Account");
+                                        //}
                                     }
                                     else if (getlessor.CR_Mas_Com_Lessor_Status == "H")
                                     {

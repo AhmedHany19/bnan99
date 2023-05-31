@@ -41,12 +41,12 @@ namespace RentCar.Controllers.BranchSys
                 UserLogin = System.Web.HttpContext.Current.Session["UserLogin"].ToString();
                 if (UserLogin == null || LessorCode == null || BranchCode == null)
                 {
-                    RedirectToAction("Account", "Login");
+                    return RedirectToAction("Login", "Account");
                 }
             }
             catch
             {
-                RedirectToAction("Login", "Account");
+                return RedirectToAction("Login", "Account");
             }
             var cR_Cas_Contract_Basic = db.CR_Cas_Contract_Basic.Where(c => c.CR_Cas_Contract_Basic_Status == "A" &&
             c.CR_Cas_Contract_Basic_Lessor == LessorCode && c.CR_Cas_Contract_Basic_Owner_Branch == BranchCode && c.CR_Cas_Contract_Basic_Expected_End_Date>=DateTime.Now)
@@ -153,12 +153,12 @@ namespace RentCar.Controllers.BranchSys
                     UserLogin = System.Web.HttpContext.Current.Session["UserLogin"].ToString();
                     if (UserLogin == null || LessorCode == null || BranchCode == null)
                     {
-                        RedirectToAction("Account", "Login");
+                        return RedirectToAction("Login", "Account");
                     }
                 }
                 catch
                 {
-                    RedirectToAction("Login", "Account");
+                    return RedirectToAction("Login", "Account");
                 }
                 using (DbContextTransaction dbTran = db.Database.BeginTransaction())
                 {
@@ -1694,12 +1694,12 @@ namespace RentCar.Controllers.BranchSys
                 UserLogin = System.Web.HttpContext.Current.Session["UserLogin"].ToString();
                 if (UserLogin == null || LessorCode == null || BranchCode == null)
                 {
-                    RedirectToAction("Account", "Login");
+                     RedirectToAction("Login", "Account");
                 }
             }
             catch
             {
-                RedirectToAction("Login", "Account");
+                 RedirectToAction("Login", "Account");
             }
             var Code = LessorCode + "0000";
             db.Configuration.ProxyCreationEnabled = false;
