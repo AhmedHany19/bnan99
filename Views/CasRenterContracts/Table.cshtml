@@ -4,7 +4,7 @@
     <table id="myTable" class="table table-striped mb-0" style="cursor:pointer">
         <thead style="overflow-y: scroll; flex-grow: 1;">
             <tr>
-                <th style="width:15%">
+                <th style="width:18%">
                     رقم العقد
                 </th>
                 <th style="width:10%">
@@ -17,10 +17,10 @@
                     نهايته
                 </th>*@
 
-                <th style="width:20%">
+                <th style="width:22%">
                     المستأجر
                 </th>
-                <th style="width:35%">
+                <th style="width:34%">
                     السيارة
                 </th>
 
@@ -28,10 +28,10 @@
                     الحالة
                 </th>
 
-                <th style="width:12%">
+                <th style="width:11%">
                     إنشاء العقد
                 </th>
-                <th style="width: 12%">
+                <th style="width: 11%">
                     إغلاق العقد
                 </th>
 
@@ -46,7 +46,7 @@
                 if (item.CR_Cas_Contract_Basic_Status == "E")
                 {
                     <tr>
-                        <td style="width:15%;color:red">
+                        <td style="width:18%;color:red">
                             @Html.DisplayFor(modelItem => item.CR_Cas_Contract_Basic_No)
                             @{
 
@@ -67,12 +67,12 @@
 
                         </td>
 
-                        <td style="width: 20%; color: red">
+                        <td style="width: 22%; color: red">
 
                             @Html.DisplayFor(modelItem => item.CR_Mas_Renter_Information.CR_Mas_Renter_Information_Ar_Name)
 
                         </td>
-                        <td style="width: 35%; color: red">
+                        <td style="width: 34%; color: red">
 
                             @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Information.CR_Cas_Sup_Car_Collect_Ar_Name)
 
@@ -102,13 +102,13 @@
 
                         </td>
 
-                        <td align="center" style="width: 12%; color: red">
+                        <td align="center" style="width: 11%; color: red">
                             <a href="~/BasicContract/PDFFlyer/?p=@Html.DisplayFor(modelItem => item.CR_Cas_Contract_Basic_CreateContract_Pdf)" target="_blank">
                                 <i class="fas fa-file-pdf" style="color:red;"></i>
 
                             </a>
                         </td>
-                        <td align="center" style="width: 12%; color: red">
+                        <td align="center" style="width: 11%; color: red">
                             @if (item.CR_Cas_Contract_Basic_CloseContract_Pdf != null)
                             {
                                 <a href="~/BasicContract/PDFFlyer/?p=@Html.DisplayFor(modelItem => item.CR_Cas_Contract_Basic_CloseContract_Pdf)" target="_blank">
@@ -123,7 +123,7 @@
                 else
                 {
                     <tr>
-                        <td style="width:15%">
+                        <td style="width:18%">
                             @Html.DisplayFor(modelItem => item.CR_Cas_Contract_Basic_No)
                             @{
 
@@ -159,12 +159,12 @@
 
 
                         </td>*@
-                        <td style="width:20%">
+                        <td style="width:22%">
 
                             @Html.DisplayFor(modelItem => item.CR_Mas_Renter_Information.CR_Mas_Renter_Information_Ar_Name)
 
                         </td>
-                        <td style="width:35%">
+                        <td style="width:34%">
 
                             @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Information.CR_Cas_Sup_Car_Collect_Ar_Name)
 
@@ -216,13 +216,13 @@
                             }
 
                         </td>*@
-                        <td align="center" style="width:12%">
+                        <td align="center" style="width:11%">
                             <a href="~/BasicContract/PDFFlyer/?p=@Html.DisplayFor(modelItem => item.CR_Cas_Contract_Basic_CreateContract_Pdf)" target="_blank">
                                 <i class="fas fa-file-pdf" style="color:red;"></i>
 
                             </a>
                         </td>
-                        <td align="center" style="width:12%">
+                        <td align="center" style="width:11%">
                             @if (item.CR_Cas_Contract_Basic_CloseContract_Pdf != null)
                             {
                                 <a href="~/BasicContract/PDFFlyer/?p=@Html.DisplayFor(modelItem => item.CR_Cas_Contract_Basic_CloseContract_Pdf)" target="_blank">
