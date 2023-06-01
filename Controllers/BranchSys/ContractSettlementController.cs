@@ -172,27 +172,27 @@ namespace RentCar.Controllers
                 ViewBag.FreeAdditionalHours = cR_Cas_Contract_Basic.CR_Cas_Contract_Basic_Free_Additional_Hours;
                 ViewBag.MaxHours = cR_Cas_Contract_Basic.CR_Cas_Contract_Basic_Hour_Max;
                 var MaxHours =Convert.ToInt32(cR_Cas_Contract_Basic.CR_Cas_Contract_Basic_Hour_Max);
-                if (CurrentHour > EndTime)
-                {
-                    TimeSpan freeH = TimeSpan.FromHours(Convert.ToDouble(cR_Cas_Contract_Basic.CR_Cas_Contract_Basic_Free_Additional_Hours));
-                    var H = CurrentHour - EndTime;
-                    var r = H - freeH;
-                    ViewBag.AdditionalHours = r.Hours;
-                    if(cR_Cas_Contract_Basic.CR_Cas_Contract_Basic_Hour_Max - cR_Cas_Contract_Basic.CR_Cas_Contract_Basic_Free_Additional_Hours > r.Hours)
-                    {
-                        AddDays = 0;
-                    }
-                    else
-                    {
-                        AddDays = 1;
-                    }
+                //if (CurrentHour > EndTime)
+                //{
+                //    TimeSpan freeH = TimeSpan.FromHours(Convert.ToDouble(cR_Cas_Contract_Basic.CR_Cas_Contract_Basic_Free_Additional_Hours));
+                //    var H = CurrentHour - EndTime;
+                //    var r = H - freeH;
+                //    ViewBag.AdditionalHours = r.Hours;
+                //    if(cR_Cas_Contract_Basic.CR_Cas_Contract_Basic_Hour_Max - cR_Cas_Contract_Basic.CR_Cas_Contract_Basic_Free_Additional_Hours > r.Hours)
+                //    {
+                //        AddDays = 0;
+                //    }
+                //    else
+                //    {
+                //        AddDays = 1;
+                //    }
 
                     
-                }
-                else
-                {
-                    ViewBag.AdditionalHours = "0";
-                }
+                //}
+                //else
+                //{
+                //    ViewBag.AdditionalHours = "0";
+                //}
 
                 
 
