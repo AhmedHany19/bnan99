@@ -798,7 +798,10 @@
                     x = true;
                 }
 
-                if (@Model.CR_Cas_Sup_SalesPoint.Where(l=>l.CR_Cas_Sup_SalesPoint_Status != "D").Count() > 0) {
+
+
+                if (@Model.CR_Cas_Sup_SalesPoint.Where(l=>l.CR_Cas_Sup_SalesPoint_Status == "A").Count() > 0) {
+                    console.log(@Model.CR_Cas_Sup_SalesPoint.Where(l=>l.CR_Cas_Sup_SalesPoint_Status == "A").Count())
                     toastr.info("لايمكن حذف فرع به نقاط بيع");
                     return;
 

@@ -101,7 +101,7 @@
                                     <td style="text-align:center" width="12%">
                                         @if (item.CR_Cas_Car_Price_Basic_Status == "A")
                                         {
-                                            <a href="~/CarBasicPrice/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Car_Price_Basic_No)">
+                                            <a href="~/CarBasicPrice/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Car_Price_Basic_No)" style="color:red">
                                                 <label>نشط</label>
                                             </a>
 
@@ -122,14 +122,14 @@
                                         }
                                 else if (item.CR_Cas_Car_Price_Basic_Status == "E")
                                 {
-                                            <a href="~/CarBasicPrice/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Car_Price_Basic_No)">
+                                            <a href="~/CarBasicPrice/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Car_Price_Basic_No)" style="color:red">
                                                 <label>منتهي</label>
                                             </a>
 
                                         }
                                 else if (item.CR_Cas_Car_Price_Basic_Status == "N")
                                 {
-                                            <a href="~/CarBasicPrice/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Car_Price_Basic_No)">
+                                            <a href="~/CarBasicPrice/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Car_Price_Basic_No)" style="color:red">
                                                 <label style="color:crimson">لم يسجل</label>
                                             </a>
 
