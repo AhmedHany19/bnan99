@@ -313,8 +313,11 @@
                                                             <div class="col-md-4">
                                                                 <input autocomplete="off" class="form-control " id="AdditionalHours" name="AdditionalHours" style="float: right; width: 100%; direction: ltr; text-align: right; margin-right: 15px;" type="text" value="@ViewBag.MaxHours" readonly>
                                                             </div>
-
                                                         </div>
+                                                        <span id="textErr" style="white-space: nowrap; width: 100%; margin-top: -10px;">
+
+                                                        </span>
+
                                                     </div>
                                                     <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
                                                         <div class="form-group row mb-3">
@@ -1015,7 +1018,7 @@
                                                         <label for="userName3">طريقة الدفع</label>
                                                         <div>
                                                             @*<input autocomplete="off" class="form-control " id="facon_payer" name="facon_payer" style="float:right;width:100%" type="text" value="">*@
-                                                            @Html.DropDownList("PayType", null, " --رجاء إختر طريقة الدفع-- ", htmlAttributes: new { @class = "form-control ", style = "float:right;width:85%;margin-right: 30px;height: 42px;", @disabled = "disabled" })
+                                                            @Html.DropDownList("PayType", null, " --رجاء إختر طريقة الدفع-- ", htmlAttributes: new { @class = "form-control ", style = "float:right;width:85%;margin-right: 30px;height: 42px;border: 1px solid !important;", @disabled = "disabled" })
                                                         </div>
 
                                                     </div>
@@ -1025,7 +1028,7 @@
                                                         <label for="userName3">نقطة الدفع</label>
                                                         <div>
                                                             @*<input autocomplete="off" class="form-control " id="point_paiement" name="point_paiement" style="float:right;width:100%" type="text" value="">*@
-                                                            @Html.DropDownList("CasherName", new SelectList(""), " --رجاء إختر نقطة البيع-- ", htmlAttributes: new { @class = "form-control ", style = "float:right;width:95%;margin-right: 30px;height: 42px;", @disabled = "disabled" })
+                                                            @Html.DropDownList("CasherName", new SelectList(""), " --رجاء إختر نقطة البيع-- ", htmlAttributes: new { @class = "form-control ", style = "float:right;width:95%;margin-right: 30px;height: 42px;border: 1px solid !important;", @disabled = "disabled" })
                                                         </div>
 
                                                     </div>
@@ -1097,57 +1100,60 @@
         console.log(startTime);
         console.log(endTime);
 
-        var dateTimeString = endDate + " " + endTime;
+        var dateTimeString = endDate + " " + startTime;
+        console.log("dateTimeString :" + dateTimeString);
+
 
         var dateObj = new Date(dateTimeString);
         var eeeeDate = dateObj.getFullYear() + "-" + (dateObj.getMonth() + 1) + "-" + dateObj.getDate() + " " + dateObj.getHours() + ":" + dateObj.getMinutes() + ":" + dateObj.getSeconds();
 
+        console.log("eeeeDate :" + eeeeDate);
 
 
 
 
         var today = new Date();
+        console.log("today :" + today);
         var eDate = new Date(eeeeDate);
+        console.log("eDate :" + eDate);
         var differenceInMs = today - eDate;
+        console.log("differenceInMs :" + differenceInMs);
         var differenceInHours = Math.ceil(differenceInMs / (1000 * 60 * 60));
-        console.log(differenceInHours)
+        console.log("Total Hours:"+ differenceInHours)
 
         if (differenceInHours > 0) {
 
             if (parseInt(freeAddHoursContract) != 0 || parseInt(freeAddHoursPriceCar) != 0) {
-
                 differenceInHours = differenceInHours - parseInt(freeAddHoursContract) - parseInt(freeAddHoursPriceCar);
-
-
+                console.log("Total Hours with free and additional:" + differenceInHours)
                 if (differenceInHours > 0) {
-
-                   
                     if (parseInt(additionalHours) <= parseInt(differenceInHours)) {
-                        console.log("aaa")
+                        console.log("additionalHours: " + additionalHours)
+                        console.log("differenceInHours : " + differenceInHours)
                         $("#TotalHoursValue").val(parseFloat(additionalHours) * parseFloat(extraHourValue));
-                        differenceInHours -= parseInt(additionalHours);
-                        console.log("11111"+differenceInHours)
-
+                        console.log("TotalHoursValue :" + parseFloat(extraHourValue) * parseFloat(additionalHours))
+                        $("#textErr").text(`عدد الساعات المتاخرة ${differenceInHours} وستحاسب علي الساعة بقيمة اليوم`);
+                        //differenceInHours -= parseInt(additionalHours);
                         if (differenceInHours > 0) {
-                            console.log(555555555);
-
                             rentalPrice = (parseFloat(differenceInHours) * parseFloat(DailyRentValue)).toFixed(2);
-                            console.log(rentalPrice);
+                            localStorage.setItem('key', rentalPrice);
+                            console.log("The hours assume as daily rent : " + rentalPrice);
+                        }
+                        else {
+                            localStorage.setItem('key', 0);
                         }
                     }
-
                 }
-
+                else {
+                    $("#TotalHoursValue").val(0);
+                    localStorage.setItem('key', 0);
+                }
             }
         }
         else {
             $("#TotalHoursValue").val("0.00");
-            console.log("LFssss");
-
+            localStorage.setItem('key', 0);
         }
-
-
-
     })
 
 </script>
@@ -1766,9 +1772,17 @@
         var ContractDaysNbr = parseFloat(document.getElementById('ContractDaysNbr').value);
         var DailyRentValue = parseFloat(document.getElementById('DailyRentValue').value);
         var RentalPrice = DailyRentValue * ContractDaysNbr;
-        var x = document.getElementById('RentalPrice').value;
+        //var x = document.getElementById('RentalPrice').value;
+        var valueRental = localStorage.getItem('key');
+        console.log("valueRental"+valueRental);
+        console.log("RentalPrice" + RentalPrice);
 
-        document.getElementById('RentalPrice').value = parseFloat(x) + RentalPrice.toFixed(2);
+        document.getElementById('RentalPrice').value = (parseFloat(valueRental) + parseFloat(RentalPrice)).toFixed(2);
+        //localStorage.removeItem('key');
+        
+        var r = document.getElementById('RentalPrice').value;
+        console.log("r" + r);
+
         //var RentalPrice = parseFloat(document.getElementById('RentalPrice').value);
         var ChoicesVal = parseFloat(document.getElementById('ChoicesVal').value);
         var AdditionalDriverVal = parseFloat(document.getElementById('AdditionalDriverVal').value);
@@ -1776,7 +1790,7 @@
         var ExtraKmValue = parseFloat(document.getElementById('ExtraKmValue').value);
         var TotalHoursValue = parseFloat(document.getElementById('TotalHoursValue').value);
         var AuthValue = parseFloat(document.getElementById('AuthValue').value);
-        var ContractValED = (RentalPrice + ChoicesVal + AdditionalDriverVal + AdditionalVal + ExtraKmValue + TotalHoursValue + AuthValue);
+        var ContractValED = (parseFloat(r) + ChoicesVal + AdditionalDriverVal + AdditionalVal + ExtraKmValue + TotalHoursValue + AuthValue);
         document.getElementById('ContractValED').value = ContractValED.toFixed(2);
 
         var Discount = parseFloat(document.getElementById('Discount').value);
@@ -1827,24 +1841,28 @@
 
     $(document).ready(function () {
         $('#TotPayed').focusout(function () {
-
-            var TotPayed = parseFloat(document.getElementById('TotPayed').value);
-
+            var TotPayed = document.getElementById('TotPayed').value;
             var TotToPay = parseFloat(document.getElementById('TotToPay').value);
+            if (TotPayed != "") {
+                TotPayed = parseFloat(TotPayed);
+                if (TotToPay > 0) {
+                    var reste = TotPayed - TotToPay;
+                } else {
+                    var reste = TotPayed + TotToPay;
+                }
+                if (reste == 0) {
+                    document.getElementById('RestLabel').innerHTML = "الباقي";
+                } else if (reste > 0) {
+                    document.getElementById('RestLabel').innerHTML = "الباقي للمستأجر";
+                } else {
+                    document.getElementById('RestLabel').innerHTML = "الباقي على للمستأجر";
+                }
+                document.getElementById('reste').value = reste.toFixed(2);
+            }
+            else {
+                document.getElementById('reste').value = "";
 
-            if (TotToPay > 0) {
-                var reste = TotPayed - TotToPay;
-            } else {
-                var reste = TotPayed + TotToPay;
             }
-            if (reste == 0) {
-                document.getElementById('RestLabel').innerHTML = "الباقي";
-            } else if (reste > 0) {
-                document.getElementById('RestLabel').innerHTML = "الباقي للمستأجر";
-            } else {
-                document.getElementById('RestLabel').innerHTML = "الباقي على للمستأجر";
-            }
-            document.getElementById('reste').value = reste.toFixed(2);
         })
     })
 </script>
@@ -1866,6 +1884,7 @@
 <script>
     $(document).ready(function () {
         $("#TotPayed").focusout(function () {
+
             var TotPayed = parseFloat(document.getElementById('TotPayed').value);
             if (TotPayed > 0) {
                 document.getElementById('PayType').disabled = false;
@@ -1876,9 +1895,6 @@
             }
         });
     });
-
-
-
 </script>
 
 <script>

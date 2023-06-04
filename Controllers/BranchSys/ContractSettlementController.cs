@@ -212,9 +212,15 @@ namespace RentCar.Controllers
                     ViewBag.DeliveryBranch = branchDelivery.CR_Cas_Sup_Branch_Ar_Name;
                 }
                 ViewBag.AuthEndDate = DateTime.Now.ToString("yyyy/MM/dd h:m:s tt");
-                
-                
-                ViewBag.AdditionalDriverVal = cR_Cas_Contract_Basic.CR_Cas_Contract_Basic_Additional_Driver_Value;
+
+                if (cR_Cas_Contract_Basic.CR_Cas_Contract_Basic_is_Renter_Driver==true)
+                {
+                    ViewBag.AdditionalDriverVal = 0;
+                }
+                else
+                {
+                    ViewBag.AdditionalDriverVal = cR_Cas_Contract_Basic.CR_Cas_Contract_Basic_Additional_Driver_Value;
+                }
                 if (Session["ContractCancel"].ToString() == "True")
                 {
                     ViewBag.ContractEndDate = string.Format("{0:yyyy/MM/dd}", cR_Cas_Contract_Basic.CR_Cas_Contract_Basic_Expected_End_Date);
