@@ -646,37 +646,36 @@ namespace RentCar.Controllers.CAS
                                             nullableInt = null;
                                         }
 
-                                        var currentPrice = db.CR_Cas_Car_Price_Basic.Where(l => l.CR_Cas_Car_Price_Basic_Model_Code == cR_Cas_Car_Price_Basic.CR_Cas_Car_Price_Basic_Model_Code
+                                        /*var currentPrice = db.CR_Cas_Car_Price_Basic.FirstOrDefault(l => l.CR_Cas_Car_Price_Basic_Model_Code == cR_Cas_Car_Price_Basic.CR_Cas_Car_Price_Basic_Model_Code
                                                                                             && l.CR_Cas_Car_Price_Basic_Car_Year == nullableInt
                                                                                             && l.CR_Cas_Car_Price_Basic_Category_Code == cR_Cas_Car_Price_Basic.CR_Cas_Car_Price_Basic_Category_Code
                                                                                             && l.CR_Cas_Car_Price_Basic_Brand_Code == cR_Cas_Car_Price_Basic.CR_Cas_Car_Price_Basic_Brand_Code
-                                                                                            && l.CR_Cas_Car_Price_Basic_Status == "D" || l.CR_Cas_Car_Price_Basic_Status == "X" || l.CR_Cas_Car_Price_Basic_Status == "E")
-                                                                                           .ToList();
-
-                                        if (currentPrice != null)
-                                        {
-                                            foreach (var item1 in currentPrice)
+                                                                                            && l.CR_Cas_Car_Price_Basic_Status == "D" || l.CR_Cas_Car_Price_Basic_Status == "X" || l.CR_Cas_Car_Price_Basic_Status == "E");*/
+                                        /*
+                                            if (currentPrice != null)
                                             {
-                                                foreach (var item in item1.CR_Cas_Car_Price_Choices.ToList())
+                                                foreach (var item1 in currentPrice)
                                                 {
-                                                    db.CR_Cas_Car_Price_Choices.Remove(item);
+                                                    foreach (var item in item1.CR_Cas_Car_Price_Choices.ToList())
+                                                    {
+                                                        db.CR_Cas_Car_Price_Choices.Remove(item);
+                                                    }
+
+                                                    foreach (var item in item1.CR_Cas_Car_Price_Features.ToList())
+                                                    {
+                                                        db.CR_Cas_Car_Price_Features.Remove(item);
+                                                    }
+                                                    foreach (var item in item1.CR_Cas_Contract_Basic.ToList())
+                                                    {
+                                                        db.CR_Cas_Contract_Basic.Remove(item);
+                                                    }
+                                                    db.SaveChanges();
+
+                                                    db.CR_Cas_Car_Price_Basic.Remove(item1);
+                                                    db.SaveChanges();
                                                 }
 
-                                                foreach (var item in item1.CR_Cas_Car_Price_Features.ToList())
-                                                {
-                                                    db.CR_Cas_Car_Price_Features.Remove(item);
-                                                }
-                                                foreach (var item in item1.CR_Cas_Contract_Basic.ToList())
-                                                {
-                                                    db.CR_Cas_Contract_Basic.Remove(item);
-                                                }
-                                                db.SaveChanges();
-
-                                                db.CR_Cas_Car_Price_Basic.Remove(item1);
-                                                db.SaveChanges();
-                                            }
-
-                                        }
+                                           }*/
 
 
                                         CR_Cas_Car_Price_Basic n = new CR_Cas_Car_Price_Basic();
