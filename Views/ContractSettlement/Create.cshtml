@@ -115,6 +115,10 @@
                     @Html.HiddenFor(Model => Model.CR_Cas_Contract_Basic_Start_Date)
                     @Html.HiddenFor(Model => Model.CR_Cas_Contract_Basic_Expected_Rental_Days)
                     @Html.HiddenFor(Model => Model.CR_Cas_Contract_Basic_Free_Additional_Hours)
+                    @Html.HiddenFor(Model => Model.CR_Cas_Contract_Basic_Hour_Max)
+                    @Html.HiddenFor(Model => Model.CR_Cas_Contract_Basic_Daily_Free_KM)
+                    @Html.HiddenFor(Model => Model.CR_Cas_Contract_Basic_Choices_Value)
+
 
                     <fieldset class="card-body" style="padding-bottom:0px;padding-top:0px;border:none;">
 
@@ -324,7 +328,7 @@
                                                         <div class="form-group row mb-3">
                                                             <label class="col-md-4" for="userName3">ساعات إضافية</label>
                                                             <div class="col-md-4">
-                                                                <input autocomplete="off" class="form-control " id="AdditionalHours" name="AdditionalHours" style="float: right; width: 100%; direction: ltr; text-align: right; margin-right: 15px;" type="number" value="@ViewBag.AdditionalHours" readonly>
+                                                                <input autocomplete="off" class="form-control " id="AdditionalHours" name="AdditionalHours" style="float: right; width: 100%; direction: ltr; text-align: right; margin-right: 15px;" type="text" value="@ViewBag.AdditionalHours" readonly>
                                                             </div>
                                                         </div>
                                                         <span id="textErr" style="white-space: nowrap; width: 100%; margin-top: -10px;"></span>
@@ -358,12 +362,12 @@
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
-                                                            <div class="form-group row mb-3">
-                                                                <label class="col-md-6" for="userName3">قيمة الكيلو الإضافي</label>
-                                                                <div class="col-md-4">
-                                                                    <input autocomplete="off" class="form-control " id="AdditionalKmValue" name="AdditionalKmValue" style="float:right;width:100%" type="text" value="@ViewBag.AdditionalKmValue" readonly>
-                                                                </div>
+                                                        <div class="form-group row mb-3">
+                                                            <label class="col-md-6" for="userName3">قيمة الكيلو الإضافي</label>
+                                                            <div class="col-md-4">
+                                                                <input autocomplete="off" class="form-control " id="AdditionalKmValue" name="AdditionalKmValue" style="float:right;width:100%" type="text" value="@ViewBag.AdditionalKmValue" readonly>
                                                             </div>
+                                                        </div>
                                                     </div>
                                                 </div>
 
@@ -664,7 +668,7 @@
                                                                 <div class="form-group row mt-2">
                                                                     <label class="col-md-12" for="input3" style="text-align: center">الكيلومترات المجانية </label>
                                                                     <div class="col-md-12">
-                                                                        <input class="text-center" type="text" id="TotalFreeKm" name="TotalFreeKm" value="@ViewBag.TotalFreeKm" style="width:100%" />
+                                                                        <input class="text-center" type="text" id="TotalFreeKm" name="TotalFreeKm" value="" style="width:100%" />
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -840,7 +844,7 @@
                                                     <div class="form-group row mb-3">
                                                         <label class="col-md-6" for="userName3">قيمة الخيارات</label>
                                                         <div class="col-md-6">
-                                                            <input autocomplete="off" class="form-control " id="ChoicesVal" name="ChoicesVal" style="float:right;width:100%" type="text" value="@ViewBag.ChoicesVal" readonly>
+                                                            <input autocomplete="off" class="form-control " id="ChoicesVal" name="ChoicesVal" style="float:right;width:100%" type="text" value="" readonly>
                                                         </div>
 
                                                     </div>
@@ -887,7 +891,7 @@
                                             </div>
                                             @*<div class="row">
 
-                                                </div>*@
+                                </div>*@
                                             <div class="row mt-1">
                                                 <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
                                                     <div class="form-group row mb-3">
@@ -1053,13 +1057,13 @@
                                 <a href="/ContractSettlement/Index" class="btn btn-secondary text-white" style="float: right; margin-left: 20px; display: inline;">رجوع</a>
                                 <button type="button" id="prevBtn" onclick="PrevPrev(-1)" class="btn btn-secondary" style="float: right; margin-left: 20px;">السابق</button>
                                 @*@if (ViewBag.ContractCancel == "True")
-                                    {*@
+                    {*@
                                 <button type="button" id="nextBtn" onclick="nextPrev(1)" class="btn btn-secondary" style="float: left; margin-left: 20px;">التالي</button>
                                 @*}*@
                                 @*else
-                                    {
-                                        <button type="button" id="nextBtn" onclick="nextPrev(1)" class="btn btn-secondary" style="float: left; margin-left: 20px;" disabled title="عفوا لا يمكنك انهاء العقد قبل التاريخ المحدد">التالي</button>
-                                    }*@
+                    {
+                        <button type="button" id="nextBtn" onclick="nextPrev(1)" class="btn btn-secondary" style="float: left; margin-left: 20px;" disabled title="عفوا لا يمكنك انهاء العقد قبل التاريخ المحدد">التالي</button>
+                    }*@
 
                                 <input type="submit" name="add" class="btn btn-secondary" id="add_btn" value="حفظ" style="display: none; float: left; margin-left: 20px; height: 38px !important" />
                                 <input type="button" name="AuthBtn" class="btn btn-secondary" id="AuthBtn" value="الموحد" style="display: none; float: left; margin-left: 20px; height: 38px !important" hidden />
@@ -1088,8 +1092,7 @@
         var startTime = $("#ContractStartTime").val();
         var endTime = $("#ContractEndTime").val()
         var freeAddHoursContract = $("#CR_Cas_Contract_Basic_Free_Additional_Hours").val();
-        var freeAddHoursPriceCar = $("#FreeAdditionalHours").val();
-        var additionalHours = $("#AdditionalHours").val();
+        var additionalHours = $("#CR_Cas_Contract_Basic_Hour_Max").val();
         var extraHourValue = $("#ExtraHourValue").val();
         var DailyRentValue = $("#DailyRentValue").val();
         var rentalPrice = $("#RentalPrice").val();
@@ -1103,52 +1106,73 @@
         console.log("dateTimeStringEx :" + dateTimeStringEx);
         var dateObjEx = new Date(dateTimeStringEx);
         var eeeeDateEx = dateObjEx.getFullYear() + "-" + (dateObjEx.getMonth() + 1) + "-" + dateObjEx.getDate() + " " + dateObjEx.getHours() + ":" + dateObjEx.getMinutes() + ":" + dateObjEx.getSeconds();
-
         var today = new Date(eeeeDateEx);
         var eDate = new Date(eeeeDate);
-        var differenceInMs = today - eDate;
-        var differenceInHours = Math.ceil(differenceInMs / (1000 * 60 * 60));
-        console.log("Total Hours:" + differenceInHours)
+        console.log("today:" + today)
+        console.log("eDate:" + eDate)
+
+        var dateTimeString1 = endDate + " " + startTime;
+        var dateTimeStringEx1 = endDateEx + " " + endTimeEx;
+
+        var endDate = new Date(dateTimeString1);
+        var endDateEx = new Date(dateTimeStringEx1);
+
+        var startHour = endDate.getHours();
+        var startMinute = endDate.getMinutes();
+        var startSecond = endDate.getSeconds();
+
+        var endHour = endDateEx.getHours();
+        var endMinute = endDateEx.getMinutes();
+        var endSecond = endDateEx.getSeconds();
+
+        var endTimeOnly = startHour + ":" + startMinute + ":" + startSecond;
+        var endTimeOnlyEx = endHour + ":" + endMinute + ":" + endSecond;
+        const now = new Date();
+        const dateEndTimeOnlyEx = new Date(`${now.toDateString()} ${endTimeOnlyEx}`);
+        const dateEndTimeOnly = new Date(`${now.toDateString()} ${endTimeOnly}`);
+
+        //console.log("dateEndTimeOnlyEx:" + dateEndTimeOnlyEx)
+        //console.log("dateEndTimeOnly:" + dateEndTimeOnly)
+        var differenceInMsEx = dateEndTimeOnlyEx - dateEndTimeOnly;
+        var differenceInHoursEx = Math.round(differenceInMsEx / (1000 * 60 * 60));
+        console.log("Total Hours EX :" + differenceInHoursEx)
 
         if (today > eDate) {
-            if (differenceInHours > 0) {
-                if (parseInt(freeAddHoursContract) != 0 || parseInt(freeAddHoursPriceCar) != 0) {
-                    differenceInHours = differenceInHours - parseInt(freeAddHoursContract) - parseInt(freeAddHoursPriceCar);
-                    console.log("Total Hours with free and additional:" + differenceInHours)
-                    console.log(" freeAddHoursContract:" + differenceInHours)
-                    console.log(" freeAddHoursPriceCar:" + freeAddHoursPriceCar)
+            console.log("Welcome :" + "Ahmed ")
+            if (differenceInHoursEx > 0) {
+                if (parseInt(freeAddHoursContract) != 0) {
+                    differenceInHoursEx = differenceInHoursEx - parseInt(freeAddHoursContract);
+                    console.log("freeAddHoursContract:" + freeAddHoursContract)
+                    if (differenceInHoursEx > 0) {
+                        if (parseInt(additionalHours) <= parseInt(differenceInHoursEx)) {
 
-                    if (differenceInHours > 0) {
-                        console.log("Total Hours with free and additionalaaaaa:" + differenceInHours)
-                        if (parseInt(additionalHours) <= parseInt(differenceInHours)) {
                             $("#TotalHoursValue").val(parseFloat(additionalHours) * parseFloat(extraHourValue));
-                            if (differenceInHours > 0) {
-                                console.log("Total Hours with free and additionalbbbb:" + differenceInHours)
-                                var rentalDays = Math.floor(differenceInHours / 24); // حساب عدد الأيام
-                                var rentalHours = differenceInHours % 24; // حساب عدد الساعات المتبقية بعد حساب الأيام
-                                $("#textErr").text(`عدد الساعات المتاخرة ${rentalHours} وستحاسب عليهم بسعر اليوم `);
-                                if (rentalHours > 0) {
-                                    rentalPrice = ((rentalDays + 1) * parseFloat(DailyRentValue)).toFixed(2);
-                                }
-                                else {
-                                    rentalPrice = (rentalDays * parseFloat(DailyRentValue)).toFixed(2);
-                                }
+                            differenceInHoursEx = differenceInHoursEx - additionalHours;
+                            console.log("differenceInHoursEx:" + differenceInHoursEx)
+
+                            if (differenceInHoursEx > 0) {
+                                rentalPrice = parseFloat(DailyRentValue).toFixed(2);
+                                $("#textErr").text(`عدد الساعات المتاخرة ${differenceInHoursEx} وستحاسب عليهم بسعر اليوم `);
                                 localStorage.setItem('key', rentalPrice);
-                                //console.log("The hours assume as daily rent : " + rentalPrice);
+                                console.log("rentalPrice:" + rentalPrice);
+
                             } else {
                                 localStorage.setItem('key', 0);
+                                $("#textErr").text("");
                             }
                         }
                     }
                     else {
                         $("#TotalHoursValue").val(0);
                         localStorage.setItem('key', 0);
+                        $("#textErr").text("");
                     }
                 }
             }
             else {
                 $("#TotalHoursValue").val("0.00");
                 localStorage.setItem('key', 0);
+                $("#textErr").text("");
             }
         }
         else {
@@ -1223,8 +1247,7 @@
         var startTime = $("#ContractStartTime").val();
         var endTime = $("#ContractEndTime").val()
         var freeAddHoursContract = $("#CR_Cas_Contract_Basic_Free_Additional_Hours").val();
-        var freeAddHoursPriceCar = $("#FreeAdditionalHours").val();
-        var additionalHours = $("#AdditionalHours").val();
+        var additionalHours = $("#CR_Cas_Contract_Basic_Hour_Max").val();
         var extraHourValue = $("#ExtraHourValue").val();
         var DailyRentValue = $("#DailyRentValue").val();
         var rentalPrice = $("#RentalPrice").val();
@@ -1238,47 +1261,73 @@
         console.log("dateTimeStringEx :" + dateTimeStringEx);
         var dateObjEx = new Date(dateTimeStringEx);
         var eeeeDateEx = dateObjEx.getFullYear() + "-" + (dateObjEx.getMonth() + 1) + "-" + dateObjEx.getDate() + " " + dateObjEx.getHours() + ":" + dateObjEx.getMinutes() + ":" + dateObjEx.getSeconds();
-
         var today = new Date(eeeeDateEx);
         var eDate = new Date(eeeeDate);
-        var differenceInMs = today - eDate;
-        var differenceInHours = Math.ceil(differenceInMs / (1000 * 60 * 60));
-        console.log("Total Hours:" + differenceInHours)
+        console.log("today:" + today)
+        console.log("eDate:" + eDate)
+
+        var dateTimeString1 = endDate + " " + startTime;
+        var dateTimeStringEx1 = endDateEx + " " + endTimeEx;
+
+        var endDate = new Date(dateTimeString1);
+        var endDateEx = new Date(dateTimeStringEx1);
+
+        var startHour = endDate.getHours();
+        var startMinute = endDate.getMinutes();
+        var startSecond = endDate.getSeconds();
+
+        var endHour = endDateEx.getHours();
+        var endMinute = endDateEx.getMinutes();
+        var endSecond = endDateEx.getSeconds();
+
+        var endTimeOnly = startHour + ":" + startMinute + ":" + startSecond;
+        var endTimeOnlyEx = endHour + ":" + endMinute + ":" + endSecond;
+        const now = new Date();
+        const dateEndTimeOnlyEx = new Date(`${now.toDateString()} ${endTimeOnlyEx}`);
+        const dateEndTimeOnly = new Date(`${now.toDateString()} ${endTimeOnly}`);
+
+        //console.log("dateEndTimeOnlyEx:" + dateEndTimeOnlyEx)
+        //console.log("dateEndTimeOnly:" + dateEndTimeOnly)
+        var differenceInMsEx = dateEndTimeOnlyEx - dateEndTimeOnly;
+        var differenceInHoursEx = Math.round(differenceInMsEx / (1000 * 60 * 60));
+        console.log("Total Hours EX :" + differenceInHoursEx)
 
         if (today > eDate) {
-            if (differenceInHours > 0) {
-                if (parseInt(freeAddHoursContract) != 0 || parseInt(freeAddHoursPriceCar) != 0) {
-                    differenceInHours = differenceInHours - parseInt(freeAddHoursContract) - parseInt(freeAddHoursPriceCar);
-                    if (differenceInHours > 0) {
-                        if (parseInt(additionalHours) <= parseInt(differenceInHours)) {
+            console.log("Welcome :" + "Ahmed ")
+            var d = differenceInHoursEx + parseInt(freeAddHoursContract) + parseFloat(additionalHours);
+            console.log("d  :" + d)
+
+            if (differenceInHoursEx > 0) {
+                if (parseInt(freeAddHoursContract) != 0) {
+                    differenceInHoursEx = differenceInHoursEx - parseInt(freeAddHoursContract);
+                    console.log("freeAddHoursContract:" + freeAddHoursContract)
+                    if (differenceInHoursEx > 0) {
+                        if (parseInt(additionalHours) <= parseInt(differenceInHoursEx)) {
                             $("#TotalHoursValue").val(parseFloat(additionalHours) * parseFloat(extraHourValue));
-                            if (differenceInHours > 0) {
-                                var rentalDays = Math.floor(differenceInHours / 24); // حساب عدد الأيام
-                                var rentalHours = differenceInHours % 24; // حساب عدد الساعات المتبقية بعد حساب الأيام
-                                if (rentalHours > 0) {
-                                    rentalPrice = ((rentalDays + 1) * parseFloat(DailyRentValue)).toFixed(2);
-                                    $("#textErr").text(`عدد الساعات المتاخرة ${rentalHours} وستحاسب عليهم بسعر اليوم `);
-                                }
-                                else {
-                                    rentalPrice = (rentalDays * parseFloat(DailyRentValue)).toFixed(2);
-                                    $("#textErr").text("");
-                                }
+                            differenceInHoursEx = differenceInHoursEx - additionalHours;
+                            console.log("differenceInHoursEx:" + differenceInHoursEx)
+                            if (differenceInHoursEx > 0) {
+                                rentalPrice = parseFloat(DailyRentValue).toFixed(2);
+                                $("#textErr").text(`عدد الساعات المتاخرة ${differenceInHoursEx} وستحاسب عليهم بسعر اليوم `);
                                 localStorage.setItem('key', rentalPrice);
-                                //console.log("The hours assume as daily rent : " + rentalPrice);
+                                console.log("rentalPrice:" + rentalPrice);
                             } else {
                                 localStorage.setItem('key', 0);
+                                $("#textErr").text("");
                             }
                         }
                     }
                     else {
                         $("#TotalHoursValue").val(0);
                         localStorage.setItem('key', 0);
+                        $("#textErr").text("");
                     }
                 }
             }
             else {
                 $("#TotalHoursValue").val("0.00");
                 localStorage.setItem('key', 0);
+                $("#textErr").text("");
             }
         }
         else {
@@ -1286,8 +1335,28 @@
             $("#TotalHoursValue").val(0);
             localStorage.setItem('key', 0);
         }
-           
+        var kmFreeDaily = $("#CR_Cas_Contract_Basic_Daily_Free_KM").val();
+        var valueChoices = $("#CR_Cas_Contract_Basic_Choices_Value").val();
+        var ExNbrDays = $("#ContractDaysNbr").val();
+        console.log("kmFreeDaily :" + kmFreeDaily)
+        console.log("ContractDaysNbr :" + ExNbrDays)
+        $("#TotalFreeKm").val(parseInt(ExNbrDays) * parseInt(kmFreeDaily));
+        $("#ChoicesVal").val(parseInt(ExNbrDays) * parseInt(valueChoices));
     }
+    
+       
+   
+</script>
+<script>
+    $(document).ready(function () {
+        var kmFreeDaily = $("#CR_Cas_Contract_Basic_Daily_Free_KM").val();
+        var valueChoices = $("#CR_Cas_Contract_Basic_Choices_Value").val();
+        var ExNbrDays = $("#ContractDaysNbr").val();
+        console.log("kmFreeDaily :" + kmFreeDaily)
+        console.log("ContractDaysNbr :" + ExNbrDays)
+        $("#TotalFreeKm").val(parseInt(ExNbrDays) * parseInt(kmFreeDaily));
+        $("#ChoicesVal").val(parseInt(ExNbrDays) * parseInt(valueChoices));
+    });
 </script>
 
 <script type="text/javascript">
@@ -1885,7 +1954,10 @@
             var OldCurrentKm = document.getElementById('OldCurrentKm').value;
             var CurrentMeter = document.getElementById('CurrentMeter').value;
             var TotalFreeKm = document.getElementById('TotalFreeKm').value;
-            //alert(OldCurrentKm);
+            console.log("TotalFreeKm:" + TotalFreeKm);
+
+            //TotalFreeKm = parseInt(nbrDaysEx);
+            console.log("TotalFreeKm:" + TotalFreeKm);
             if (parseFloat(CurrentMeter) > (parseFloat(OldCurrentKm) + parseFloat(TotalFreeKm))) {
                 var c = parseFloat(CurrentMeter) - (parseFloat(OldCurrentKm) + parseFloat(TotalFreeKm));
                 document.getElementById('AdditionalKmNo').value = c;
@@ -1942,7 +2014,7 @@
         }
 
 
-        var ContractDaysNbr = parseFloat(document.getElementById('ExContractDaysNbr').value);
+        var ContractDaysNbr = parseFloat(document.getElementById('ContractDaysNbr').value);
         var DailyRentValue = parseFloat(document.getElementById('DailyRentValue').value);
         var RentalPrice = DailyRentValue * ContractDaysNbr;
         //var x = document.getElementById('RentalPrice').value;

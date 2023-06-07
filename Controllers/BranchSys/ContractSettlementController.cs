@@ -260,7 +260,7 @@ namespace RentCar.Controllers
                 else
                 {
                     ViewBag.ContractDaysNbr = nbrdays+ AddDays;
-                    ViewBag.AdditionalHours = 0;
+                    //ViewBag.AdditionalHours = 0;
                 }
                
 
@@ -280,7 +280,7 @@ namespace RentCar.Controllers
                 ViewBag.ChoicesVal = cR_Cas_Contract_Basic.CR_Cas_Contract_Basic_Choices_Value * nbrdays;
                 ViewBag.AdditionalVal = cR_Cas_Contract_Basic.CR_Cas_Contract_Basic_Additional_Value;
                 var nbDays = cR_Cas_Contract_Basic.CR_Cas_Contract_Basic_Expected_Rental_Days;
-                var DailyFreeKm = nbDays * cR_Cas_Contract_Basic.CR_Cas_Contract_Basic_Daily_Free_KM;
+                var DailyFreeKm = cR_Cas_Contract_Basic.CR_Cas_Contract_Basic_Daily_Free_KM;
                 ViewBag.DailyFreeKm = DailyFreeKm;
                 ViewBag.TotalFreeKm = DailyFreeKm;
 
@@ -573,16 +573,14 @@ namespace RentCar.Controllers
                             ////////////////////////////////////////////////////////////////////////////
                             ///
                             /////////////////////////Create Tax Owed////////////////////////////
-                            /*CR_Cas_Account_Tax_Owed TaxOwed = new CR_Cas_Account_Tax_Owed();
+                            CR_Cas_Account_Tax_Owed TaxOwed = new CR_Cas_Account_Tax_Owed();
                             TaxOwed.CR_Cas_Account_Tax_Owed_Contract_No = Contract.CR_Cas_Contract_Basic_No;
                             TaxOwed.CR_Cas_Account_Tax_Owed_Com_Code = LessorCode;
                             TaxOwed.CR_Cas_Account_Tax_Owed_Brn_Code = BranchCode;
-                            TaxOwed.CR_Cas_Account_Tax_Owed_Contract_Value = Contract.CR_Cas_Contract_Basic_Net_Value;
-                            TaxOwed.CR_Cas_Account_Tax_Owed_Percentage = Contract.CR_Cas_Contract_Basic_Tax_Rate;
                             TaxOwed.CR_Cas_Account_Tax_Owed_Value = Contract.CR_Cas_Contract_Basic_Tax_Value;
                             TaxOwed.CR_Cas_Account_Tax_Owed_Due_Date = DateTime.Now;
                             TaxOwed.CR_Cas_Account_Tax_Owed_Is_Paid = false;
-                            db.CR_Cas_Account_Tax_Owed.Add(TaxOwed);*/
+                            db.CR_Cas_Account_Tax_Owed.Add(TaxOwed);
                             /////////////////////////////////////////////////////////////
                             ///////////////////////Create Bnan Owed/////////////////////////////
                             /*CR_Cas_Account_Bnan_Owed BnanOwed = new CR_Cas_Account_Bnan_Owed();
@@ -610,7 +608,7 @@ namespace RentCar.Controllers
                             }*/
 
 
-                            
+
                             /*var Services = db.CR_Mas_Service_Bnan_Contract.Where(s => s.CR_Mas_Service_Bnan_Contract_No == CompanyContract.CR_Cas_Company_Contract_No);
                             var LastRecord = Services.OrderByDescending(s => s.CR_Mas_Service_Bnan_Contract_Code).FirstOrDefault();
                             foreach (var Service in Services)
@@ -739,7 +737,7 @@ namespace RentCar.Controllers
                                 CR_Cas_Account_Receipt Receipt = new CR_Cas_Account_Receipt();
                                 var Sector = "1";
                                 var autoinc = GetReceiptLastRecord(LessorCode, BranchCode).CR_Cas_Account_Receipt_No;
-                                Receipt.CR_Cas_Account_Receipt_No = y + "-" + Sector + "-" + "60" + "-" + LessorCode + "-" + BranchCode + autoinc;
+                                Receipt.CR_Cas_Account_Receipt_No = y + "-" + Sector + "-" + "61" + "-" + LessorCode + "-" + BranchCode + autoinc;
                                 Receipt.CR_Cas_Account_Receipt_Year = y;
                                 Receipt.CR_Cas_Account_Receipt_Type = "61";
                                 Receipt.CR_Cas_Account_Receipt_Lessor_Code = LessorCode;
