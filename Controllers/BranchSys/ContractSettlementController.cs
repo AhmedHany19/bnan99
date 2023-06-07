@@ -169,8 +169,8 @@ namespace RentCar.Controllers
                 //////    ViewBag.AdditionalHours = 0;
                 //////}
                 var AddDays = 0;
-                ViewBag.FreeAdditionalHours = cR_Cas_Contract_Basic.CR_Cas_Contract_Basic_Free_Additional_Hours;
-                ViewBag.MaxHours = cR_Cas_Contract_Basic.CR_Cas_Contract_Basic_Hour_Max;
+                //ViewBag.FreeAdditionalHours = cR_Cas_Contract_Basic.CR_Cas_Contract_Basic_Free_Additional_Hours;
+                ViewBag.AdditionalHours = cR_Cas_Contract_Basic.CR_Cas_Contract_Basic_Hour_Max;
                 var MaxHours =Convert.ToInt32(cR_Cas_Contract_Basic.CR_Cas_Contract_Basic_Hour_Max);
                 //if (CurrentHour > EndTime)
                 //{
@@ -221,26 +221,29 @@ namespace RentCar.Controllers
                 {
                     ViewBag.AdditionalDriverVal = cR_Cas_Contract_Basic.CR_Cas_Contract_Basic_Additional_Driver_Value;
                 }
-                if (Session["ContractCancel"].ToString() == "True")
-                {
-                    ViewBag.ContractEndDate = string.Format("{0:yyyy/MM/dd}", cR_Cas_Contract_Basic.CR_Cas_Contract_Basic_Expected_End_Date);
-                    ViewBag.ContractCancel = "True";
-                }
-                else
-                {
-                    if (cR_Cas_Contract_Basic.CR_Cas_Contract_Basic_Expected_End_Date > DateTime.Now)
-                    {
-                        ViewBag.ContractEndDate = string.Format("{0:yyyy/MM/dd}", cR_Cas_Contract_Basic.CR_Cas_Contract_Basic_Expected_End_Date);
-                        ViewBag.ContractCancel = "False";
-                    }
-                    else
-                    {
-                        ViewBag.ContractEndDate = string.Format("{0:yyyy/MM/dd}", DateTime.Now);
-                        ViewBag.ContractCancel = "True";
-                    }
-                }
+                //if (Session["ContractCancel"].ToString() == "True")
+                //{
+                //    ViewBag.ContractEndDate = string.Format("{0:yyyy/MM/dd}", cR_Cas_Contract_Basic.CR_Cas_Contract_Basic_Expected_End_Date);
+                //    ViewBag.ContractCancel = "True";
+                //}
+                //else
+                //{
+                //    if (cR_Cas_Contract_Basic.CR_Cas_Contract_Basic_Expected_End_Date > DateTime.Now)
+                //    {
+                //        ViewBag.ContractEndDate = string.Format("{0:yyyy/MM/dd}", cR_Cas_Contract_Basic.CR_Cas_Contract_Basic_Expected_End_Date);
+                //        ViewBag.ContractCancel = "False";
+                //    }
+                //    else
+                //    {
+                //        ViewBag.ContractEndDate = string.Format("{0:yyyy/MM/dd}", DateTime.Now);
+                //        ViewBag.ContractCancel = "True";
+                //    }
+                //}
+                ViewBag.ContractEndDateEx= string.Format("{0:yyyy/MM/dd}", DateTime.Now);
+                ViewBag.ContractEndTimeEx = DateTime.Now.ToString("HH:mm:ss");
 
-                ViewBag.ContractEndTime = CurrentHour;
+                ViewBag.ContractEndTime = cR_Cas_Contract_Basic.CR_Cas_Contract_Basic_Expected_End_Time;
+                ViewBag.ContractEndDate = string.Format("{0:yyyy/MM/dd}", cR_Cas_Contract_Basic.CR_Cas_Contract_Basic_Expected_End_Date); 
 
 
                 var CurrentDate = DateTime.Now.ToShortDateString();
@@ -273,11 +276,11 @@ namespace RentCar.Controllers
                     ViewBag.DailyRentValue = cR_Cas_Contract_Basic.CR_Cas_Contract_Basic_Monthly_Rent;
                    
                 }
-
+                ViewBag.ExContractDaysNbr = cR_Cas_Contract_Basic.CR_Cas_Contract_Basic_Expected_Rental_Days;
                 ViewBag.ChoicesVal = cR_Cas_Contract_Basic.CR_Cas_Contract_Basic_Choices_Value * nbrdays;
                 ViewBag.AdditionalVal = cR_Cas_Contract_Basic.CR_Cas_Contract_Basic_Additional_Value;
-
-                var DailyFreeKm = nbrdays * cR_Cas_Contract_Basic.CR_Cas_Contract_Basic_Daily_Free_KM;
+                var nbDays = cR_Cas_Contract_Basic.CR_Cas_Contract_Basic_Expected_Rental_Days;
+                var DailyFreeKm = nbDays * cR_Cas_Contract_Basic.CR_Cas_Contract_Basic_Daily_Free_KM;
                 ViewBag.DailyFreeKm = DailyFreeKm;
                 ViewBag.TotalFreeKm = DailyFreeKm;
 
@@ -328,9 +331,9 @@ namespace RentCar.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(string ContractNo,string ContractEndDate,string ContractEndTime,string ContractDaysNbr, string ContractValED,string ContractValID,string TaxVal,
-            string TotalContractIT,string TotPayed,string CurrentMeter,string OldKm, string TotalFreeKm,string AdditionalHours,string ExtraKmValue, string TotalHoursValue , string Chk_Depences, string Chk_Compensation,
-            string Depences,string DepencesReason,string CompensationVal,string CompensationReason,string RenterPrevBalance,string reste,
+        public ActionResult Create(string ContractNo,string ContractEndDate,string ContractEndTime,string ContractDaysNbr, string ContractValED,string ContractValID,string TaxVal, 
+            string TotalContractIT,string TotPayed,string CurrentMeter,string OldKm, string TotalFreeKm,decimal? AdditionalHours,string ExtraKmValue, string TotalHoursValue , string Chk_Depences, string Chk_Compensation,
+            string Depences,string DepencesReason,string CompensationVal,string CompensationReason,string RenterPrevBalance,string reste, string TotToPay, string PayType , string CasherName,string remarque,
             HttpPostedFileBase img1, HttpPostedFileBase img2, HttpPostedFileBase img3, HttpPostedFileBase img4, HttpPostedFileBase img5, HttpPostedFileBase img6, HttpPostedFileBase img7,
             HttpPostedFileBase img8, HttpPostedFileBase img9, FormCollection collection, HttpPostedFileBase imgx1, HttpPostedFileBase imgx2, HttpPostedFileBase imgx3, HttpPostedFileBase imgx4,
             HttpPostedFileBase imgy1, HttpPostedFileBase imgy2, HttpPostedFileBase imgy3, HttpPostedFileBase imgy4)
@@ -352,7 +355,7 @@ namespace RentCar.Controllers
                             UserLogin = System.Web.HttpContext.Current.Session["UserLogin"].ToString();
                             if (UserLogin == null || LessorCode == null || BranchCode == null)
                             {
-                                RedirectToAction("Account", "Login");
+                                RedirectToAction("Login", "Account");
                             }
                         }
                         catch
@@ -362,15 +365,19 @@ namespace RentCar.Controllers
                         var Contract = db.CR_Cas_Contract_Basic.Single(c=>c.CR_Cas_Contract_Basic_No== ContractNo && c.CR_Cas_Contract_Basic_Status!="y");
                         if (Contract != null)
                         {
+                            DateTime StartDate = DateTime.Now;
+                            string CurrentTime = DateTime.Now.ToString("HH:mm:ss");
+                            var StartTime = TimeSpan.Parse(CurrentTime);
+
                             Contract.CR_Cas_Contract_Basic_Status = "C";
                             Contract.CR_Cas_Contract_Basic_Receiving_Branch = BranchCode;
                             if (ContractEndDate != "")
                             {
-                                Contract.CR_Cas_Contract_Basic_Expected_End_Date = Convert.ToDateTime(ContractEndDate);
+                                Contract.CR_Cas_Contract_Basic_Expected_End_Date = DateTime.Now.Date;
                             }
                             if (ContractEndTime!="")
                             {
-                                Contract.CR_Cas_Contract_Basic_Expected_End_Time = TimeSpan.Parse(ContractEndTime);
+                                Contract.CR_Cas_Contract_Basic_Expected_End_Time = TimeSpan.Parse(CurrentTime);
                             }
                             if (ContractDaysNbr != "")
                             {
@@ -407,7 +414,7 @@ namespace RentCar.Controllers
                             {
                                 Contract.CR_Cas_Contract_Basic_Actual_Additional_Free_KM = Convert.ToInt32(TotalFreeKm);
                             }
-                            if (AdditionalHours!="")
+                            if (AdditionalHours!=null)
                             {
                                 Contract.CR_Cas_Contract_Basic_Additional_Hours = Convert.ToInt32(AdditionalHours);
                             }
@@ -420,24 +427,24 @@ namespace RentCar.Controllers
                                 Contract.CR_Cas_Contract_Basic_Actual_Extra_Hour_Value = Convert.ToDecimal(TotalHoursValue);
                             }
                             
-                            if (Chk_Depences == "true")
+                            if (Chk_Depences == "false" || Chk_Depences ==null)
                             {
-                                Contract.CR_Cas_Contract_Basic_Contarct_is_Expenses ="1";
+                                     Contract.CR_Cas_Contract_Basic_Contarct_is_Expenses = "0";
                             }
                             else
                             {
-                                Contract.CR_Cas_Contract_Basic_Contarct_is_Expenses = "0";
+                                Contract.CR_Cas_Contract_Basic_Contarct_is_Expenses = "1";
                             }
                             Contract.CR_Cas_Contract_Basic_Contarct_Expenses_Value = Depences;
                             Contract.CR_Cas_Contract_Basic_Contarct_Expenses_Description = DepencesReason;
 
-                            if (Chk_Compensation == "true")
-                            {
-                                Contract.CR_Cas_Contract_Basic_Contarct_is_Compensation = "1";
+                            if (Chk_Compensation == "false" || Chk_Compensation == null)
+                            { 
+                                Contract.CR_Cas_Contract_Basic_Contarct_is_Compensation = "0";
                             }
                             else
                             {
-                                Contract.CR_Cas_Contract_Basic_Contarct_is_Compensation = "0";
+                                Contract.CR_Cas_Contract_Basic_Contarct_is_Compensation = "1";
                             }
                             Contract.CR_Cas_Contract_Basic_Contarct_Compensation_Value = CompensationVal;
                             Contract.CR_Cas_Contract_Basic_Contarct_Compensation_Description = CompensationReason;
@@ -522,7 +529,7 @@ namespace RentCar.Controllers
                                 {
                                     Contract.CR_Cas_Contract_Basic_Statistics_KM = 2;
                                 }
-                                else if (RealKm >= 201 && RealKm < 250)
+                                else if (RealKm >= 201 && RealKm < 300)
                                 {
                                     Contract.CR_Cas_Contract_Basic_Statistics_KM = 3;
                                 }
@@ -661,22 +668,130 @@ namespace RentCar.Controllers
                                
                             }*/
 
-                            var CasRenter = db.CR_Cas_Renter_Lessor.FirstOrDefault(r=>r.CR_Cas_Renter_Lessor_Id==Contract.CR_Cas_Contract_Basic_Renter_Id);
+                            // Renter Lessor /////////
+                            var CasRenter = db.CR_Cas_Renter_Lessor.FirstOrDefault(r=>r.CR_Cas_Renter_Lessor_Id==Contract.CR_Cas_Contract_Basic_Renter_Id && r.CR_Cas_Renter_Lessor_Code==LessorCode);
+                            var CasRenterContracts = db.CR_Cas_Contract_Basic.Where(x => x.CR_Cas_Contract_Basic_Renter_Id == Contract.CR_Cas_Contract_Basic_Renter_Id && x.CR_Cas_Contract_Basic_Lessor == LessorCode&&x.CR_Cas_Contract_Basic_Status!="U");
                             if (CasRenter != null)
                             {
-                                var ContractNumber = CasRenter.CR_Cas_Renter_Lessor_Contract_Number;
-                                var InteractionValue = CasRenter.CR_Cas_Renter_Lessor_Interaction_Amount_Value;
-                                var Km = CasRenter.CR_Cas_Renter_Lessor_KM;
 
+                                if (CasRenterContracts != null)
+                                {
+                                    int allDaysForRenter = 0;
+                                    int allkms = 0;
+                                    foreach (var item in CasRenterContracts)
+                                    {
+                                        allDaysForRenter += (int)item.CR_Cas_Contract_Basic_Expected_Rental_Days;
+                                        allkms += (int)item.CR_Cas_Contract_Basic_Actual_Total_KM;
+                                    }
+                                    CasRenter.CR_Cas_Renter_Lessor_Days = allDaysForRenter;
+                                    CasRenter.CR_Cas_Renter_Lessor_Interaction_Amount_Value = Convert.ToDecimal(TotalContractIT);
+                                    CasRenter.CR_Cas_Renter_Lessor_KM = allkms;
+                                    CasRenter.CR_Cas_Renter_Lessor_Status = "A";
+                                    if (reste!=null && reste!="")
+                                    {
+                                        CasRenter.CR_Cas_Renter_Lessor_Balance = Convert.ToDecimal(reste);
+                                    }
+                                    CasRenter.CR_Cas_Renter_Lessor_Date_Last_Interaction = DateTime.Now.Date;
+                                    CasRenter.CR_Cas_Renter_Lessor_Statistics_Nationalities = Contract.CR_Cas_Contract_Basic_Statistics_Nationalities;
+                                    CasRenter.CR_Cas_Renter_Lessor_Statistics_Country = Contract.CR_Cas_Contract_Basic_Statistics_Country;
+                                    CasRenter.CR_Cas_Renter_Lessor_Statistics_Gender = Contract.CR_Cas_Contract_Basic_Statistics_Gender;
+                                    CasRenter.CR_Cas_Renter_Lessor_Statistics_Jobs = Contract.CR_Cas_Contract_Basic_Statistics_Jobs;
+                                    CasRenter.CR_Cas_Renter_Lessor_Statistics_Regions = Contract.CR_Cas_Contract_Basic_Statistics_Regions_Renter;
+                                    CasRenter.CR_Cas_Renter_Lessor_Statistics_Age = Contract.CR_Cas_Contract_Basic_Statistics_Age_No;
+                                    CasRenter.CR_Cas_Renter_Lessor_Statistics_City = Contract.CR_Cas_Contract_Basic_Statistics_City_Renter;
+
+                                    
+                                }
                             }
-/*
-                            BnanOwed.CR_Cas_Account_Bnan_Owed_Tax_Percentage = CompanyContract.CR_Cas_Company_Contract_Tax_Rate;
-                            BnanOwed.CR_Cas_Account_Bnan_Owed_Tax_Value = (BnanOwed.CR_Cas_Account_Bnan_Owed_After_Due_Amount * CompanyContract.CR_Cas_Company_Contract_Tax_Rate) / 100;
-                            BnanOwed.CR_Cas_Account_Bnan_Owed_Due_Amount_After_Tax_Value = BnanOwed.CR_Cas_Account_Bnan_Owed_After_Due_Amount + BnanOwed.CR_Cas_Account_Bnan_Owed_Tax_Value;
-                            BnanOwed.CR_Cas_Account_Bnan_Owed_Daily_Value = Contract.CR_Cas_Contract_Basic_Daily_Rent;
-                            BnanOwed.CR_Cas_Account_Bnan_Owed_Due_Date = DateTime.Now;
-                            BnanOwed.CR_Cas_Account_Bnan_Owed_Is_Paid = false;
-                            db.CR_Cas_Account_Bnan_Owed.Add(BnanOwed);*/
+                            // Renter Information for All Company /////////
+
+                            var CasRenterComs = db.CR_Cas_Renter_Lessor.Where(r => r.CR_Cas_Renter_Lessor_Id == Contract.CR_Cas_Contract_Basic_Renter_Id);
+                            var CasRenterinfo = db.CR_Mas_Renter_Information.FirstOrDefault(r => r.CR_Mas_Renter_Information_Id == Contract.CR_Cas_Contract_Basic_Renter_Id);
+
+                            var CasRenterContractsComs = db.CR_Cas_Contract_Basic.Where(x => x.CR_Cas_Contract_Basic_Renter_Id == Contract.CR_Cas_Contract_Basic_Renter_Id);
+                            if (CasRenterComs!=null)
+                            {
+                                var contractNo = 0;
+                                var contractTotVal = 0;
+                                var dayNoTotal = 0;
+
+                                foreach (var item in CasRenterComs)
+                                    {
+                                       contractNo +=(int) item.CR_Cas_Renter_Lessor_Contract_Number;
+                                       contractTotVal += (int)item.CR_Cas_Renter_Lessor_Interaction_Amount_Value;
+                                       dayNoTotal += (int)item.CR_Cas_Renter_Lessor_Days;
+                                    }
+                                if (CasRenterinfo!=null)
+                                {
+                                    CasRenterinfo.CR_Mas_Renter_Information_Contract_Number = contractNo;
+                                    CasRenterinfo.CR_Mas_Renter_Information_Value =Convert.ToDecimal(contractTotVal);
+                                    CasRenterinfo.CR_Mas_Renter_Information_Date_Last_Interaction = DateTime.Now.Date;
+                                    CasRenterinfo.CR_Mas_Renter_Information_Days = dayNoTotal;
+                                }
+                            }
+
+                            // Create ACcount Receipt ' مستند صرف ' if totaltoPay < 0
+                            
+                            if (Convert.ToDecimal(TotToPay) < 0)
+                            {
+                                DateTime year = DateTime.Now;
+                                var y = year.ToString("yy");
+                                CR_Cas_Account_Receipt Receipt = new CR_Cas_Account_Receipt();
+                                var Sector = "1";
+                                var autoinc = GetReceiptLastRecord(LessorCode, BranchCode).CR_Cas_Account_Receipt_No;
+                                Receipt.CR_Cas_Account_Receipt_No = y + "-" + Sector + "-" + "60" + "-" + LessorCode + "-" + BranchCode + autoinc;
+                                Receipt.CR_Cas_Account_Receipt_Year = y;
+                                Receipt.CR_Cas_Account_Receipt_Type = "61";
+                                Receipt.CR_Cas_Account_Receipt_Lessor_Code = LessorCode;
+                                Receipt.CR_Cas_Account_Receipt_Branch_Code = BranchCode;
+                                Receipt.CR_Cas_Account_Receipt_Date = DateTime.Now;
+                                Receipt.CR_Cas_Account_Receipt_Contract_Operation = Contract.CR_Cas_Contract_Basic_No;
+                                Receipt.CR_Cas_Account_Receipt_Payment = 0;
+                                Receipt.CR_Cas_Account_Receipt_Receipt = Convert.ToDecimal(TotPayed);
+                                Receipt.CR_Cas_Account_Receipt_Payment_Method = PayType;
+                                /////////////////////////////////Update Sales Point//////////////////////
+                                var salesPoint = db.CR_Cas_Sup_SalesPoint.Single(s => s.CR_Cas_Sup_SalesPoint_Code == CasherName);
+                                if (salesPoint != null)
+                                {
+                                    Receipt.CR_Cas_Account_Receipt_SalesPoint_No = CasherName;
+                                    Receipt.CR_Cas_Account_Receipt_Bank_Code = salesPoint.CR_Cas_Sup_SalesPoint_Bank_Code;
+                                    Receipt.CR_Cas_Account_Receipt_SalesPoint_Previous_Balance = salesPoint.CR_Cas_Sup_SalesPoint_Balance;
+                                    salesPoint.CR_Cas_Sup_SalesPoint_Balance -= Convert.ToDecimal(TotPayed);
+                                    db.Entry(salesPoint).State = EntityState.Modified;
+                                }
+                                /////////////////////////////////Update Cas User Information//////////////////////
+                                var userinfo = db.CR_Cas_User_Information.Single(u => u.CR_Cas_User_Information_Id == UserLogin);
+                                if (userinfo != null)
+                                {
+                                    Receipt.CR_Cas_Account_Receipt_User_Previous_Balance = userinfo.CR_Cas_User_Information_Balance;
+                                    userinfo.CR_Cas_User_Information_Balance -= Convert.ToDecimal(TotPayed);
+                                    db.Entry(userinfo).State = EntityState.Modified;
+                                }
+                                //////////////////////////////////////////////////////////////////////////////////
+                                Receipt.CR_Cas_Account_Receipt_Renter_Code = Contract.CR_Cas_Contract_Basic_Renter_Id;
+                                Receipt.CR_Cas_Account_Receipt_Renter_Previous_Balance = Convert.ToDecimal(RenterPrevBalance);
+                                Receipt.CR_Cas_Account_Receipt_User_Code = UserLogin;
+                                //Receipt.CR_Cas_Account_Receipt_User_Previous_Balance = 0;
+                                Receipt.CR_Cas_Account_Receipt_Car_Code = Contract.CR_Cas_Contract_Basic_Car_Serail_No;
+                                Receipt.CR_Cas_Account_Receipt_Status = "A";
+                                Receipt.CR_Cas_Account_Receipt_Reference_Type = "عقد";
+                                Receipt.CR_Cas_Account_Receipt_Is_Passing = "1";
+                                Receipt.CR_Cas_Account_Receipt_Reasons = remarque;
+                                db.CR_Cas_Account_Receipt.Add(Receipt);
+                            }
+
+
+
+
+
+                            /*
+                                                        BnanOwed.CR_Cas_Account_Bnan_Owed_Tax_Percentage = CompanyContract.CR_Cas_Company_Contract_Tax_Rate;
+                                                        BnanOwed.CR_Cas_Account_Bnan_Owed_Tax_Value = (BnanOwed.CR_Cas_Account_Bnan_Owed_After_Due_Amount * CompanyContract.CR_Cas_Company_Contract_Tax_Rate) / 100;
+                                                        BnanOwed.CR_Cas_Account_Bnan_Owed_Due_Amount_After_Tax_Value = BnanOwed.CR_Cas_Account_Bnan_Owed_After_Due_Amount + BnanOwed.CR_Cas_Account_Bnan_Owed_Tax_Value;
+                                                        BnanOwed.CR_Cas_Account_Bnan_Owed_Daily_Value = Contract.CR_Cas_Contract_Basic_Daily_Rent;
+                                                        BnanOwed.CR_Cas_Account_Bnan_Owed_Due_Date = DateTime.Now;
+                                                        BnanOwed.CR_Cas_Account_Bnan_Owed_Is_Paid = false;
+                                                        db.CR_Cas_Account_Bnan_Owed.Add(BnanOwed);*/
                             /////////////////////////////////////////////////////////////
 
                             Contract.CR_Cas_Contract_Basic_User_Close = UserLogin;
@@ -1003,6 +1118,28 @@ namespace RentCar.Controllers
             return View();
         }
 
+
+        public CR_Cas_Account_Receipt GetReceiptLastRecord(string LessorCode, string BranchCode)
+        {
+            DateTime year = DateTime.Now;
+            var y = year.ToString("yy");
+            var Lrecord = db.CR_Cas_Account_Receipt.Where(x => x.CR_Cas_Account_Receipt_Lessor_Code == LessorCode
+                && x.CR_Cas_Account_Receipt_Year == y && x.CR_Cas_Account_Receipt_Branch_Code == BranchCode)
+                .Max(x => x.CR_Cas_Account_Receipt_No.Substring(x.CR_Cas_Account_Receipt_No.Length - 4, 4));
+
+            CR_Cas_Account_Receipt c = new CR_Cas_Account_Receipt();
+            if (Lrecord != null)
+            {
+                Int64 val = Int64.Parse(Lrecord) + 1;
+                c.CR_Cas_Account_Receipt_No = val.ToString("0000");
+            }
+            else
+            {
+                c.CR_Cas_Account_Receipt_No = "0001";
+            }
+
+            return c;
+        }
         // GET: ContractSettlement/Edit/5
         public ActionResult Edit(string id)
         {
