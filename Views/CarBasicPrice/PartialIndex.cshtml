@@ -101,14 +101,14 @@
                                     <td style="text-align:center" width="12%">
                                         @if (item.CR_Cas_Car_Price_Basic_Status == "A")
                                         {
-                                            <a href="~/CarBasicPrice/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Car_Price_Basic_No)" style="color:red">
+                                            <a href="~/CarBasicPrice/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Car_Price_Basic_No)" >
                                                 <label>نشط</label>
                                             </a>
 
                                         }
                                         else if (item.CR_Cas_Car_Price_Basic_Status == "D")
                                 {
-                                            <a href="~/CarBasicPrice/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Car_Price_Basic_No)">
+                                            <a href="~/CarBasicPrice/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Car_Price_Basic_No)"  style="color:red">
                                                 <label>محذوف</label>
                                             </a>
 
