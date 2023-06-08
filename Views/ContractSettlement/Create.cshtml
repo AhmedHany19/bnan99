@@ -244,7 +244,7 @@
                                                         <div class="form-group row mb-3">
                                                             <label class="col-md-5" for="userName3">وقت نهاية العقد</label>
                                                             <div class="col-md-4">
-                                                                <input type="text" class="form-control text-box single-line" id="ContractEndTime" name="ContractEndTime" value="@ViewBag.ContractEndTime" style="width:100%" readonly>
+                                                                <input type="text" class="form-control text-box single-line" id="ContractEndTime" name="ContractEndTime" value="@ViewBag.ContractEndTime" style="width: 100%; margin-right: -15px;" readonly>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -278,7 +278,7 @@
                                                                 <div>
                                                                     <input class="form-control text-box single-line" id="ContractEndDateEx" name="ContractEndDateEx" data-inputmask="'alias': 'yyyy/mm/dd'" value="@ViewBag.ContractEndDateEx" style="width: 100%;margin-right: 10px;" readonly>
                                                                 </div>
-                                                                <label class="textErr1" style=" margin-right: 140px; font-size: 10px !important;">عفوا ليس لك صلاحية تسوية العقد</label>
+                                                                @*<label class="textErr1" style=" margin-right: 140px; font-size: 10px !important;">عفوا ليس لك صلاحية تسوية العقد</label>*@
 
                                                             }
                                                         </div>
@@ -287,7 +287,7 @@
                                                         <div class="form-group row mb-3">
                                                             <label class="col-md-5" for="userName3">وقت نهاية العقد</label>
                                                             <div class="col-md-7">
-                                                                <input autocomplete="off" class="form-control " id="ContractEndTimeEx" name="ContractEndTimeEx" style="float:right;width:100%" type="text" value="@ViewBag.ContractEndTimeEx" readonly>
+                                                                <input autocomplete="off" class="form-control " id="ContractEndTimeEx" name="ContractEndTimeEx" style="float: right; width: 100%; margin-right: -15px;" type="text" value="@ViewBag.ContractEndTimeEx" readonly>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -307,6 +307,7 @@
                                                                 <label class="col-md-6" for="userName3">عدد الأيام الفعلي</label>
                                                                 <div class="col-md-4">
                                                                     <input autocomplete="off" class="form-control " id="ContractDaysNbr" name="ContractDaysNbr" style="float: right; width: 100%;" type="text" value="@ViewBag.ContractDaysNbr" readonly>
+
                                                                 </div>
                                                             </div>
                                                         }
@@ -333,7 +334,7 @@
                                                         </div>
                                                         <span id="textErr" style="white-space: nowrap; width: 100%; margin-top: -10px;"></span>
                                                     </div>
-                                                    <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                                                    <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12" hidden>
                                                         <div class="form-group row mb-3">
                                                             <label class="col-md-6" for="userName3">قيمة الساعة الاضافية</label>
                                                             <div class="col-md-4">
@@ -357,11 +358,11 @@
                                                         <div class="form-group row mb-3">
                                                             <label class="col-md-5" for="userName3">تاريخ نهاية التفويض</label>
                                                             <div class="col-md-7">
-                                                                <input autocomplete="off" class="form-control " id="AuthEndDate" name="AuthEndDate" style="float: right; width: 100%; " type="text" value="@ViewBag.AuthEndDate" readonly>
+                                                                <input autocomplete="off" class="form-control " id="AuthEndDate" name="AuthEndDate" style="float: right; width: 100%; margin-right: -12px; " type="text" value="@ViewBag.AuthEndDate" readonly>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                                                    <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12" hidden>
                                                         <div class="form-group row mb-3">
                                                             <label class="col-md-6" for="userName3">قيمة الكيلو الإضافي</label>
                                                             <div class="col-md-4">
@@ -1153,11 +1154,14 @@
                             if (differenceInHoursEx > 0) {
                                 rentalPrice = parseFloat(DailyRentValue).toFixed(2);
                                 $("#textErr").text(`عدد الساعات المتاخرة ${differenceInHoursEx} وستحاسب عليهم بسعر اليوم `);
+                                localStorage.setItem('extraDayValue', differenceInHoursEx);
                                 localStorage.setItem('key', rentalPrice);
                                 console.log("rentalPrice:" + rentalPrice);
 
                             } else {
                                 localStorage.setItem('key', 0);
+                                localStorage.setItem('extraDayValue', 0);
+
                                 $("#textErr").text("");
                             }
                         }
@@ -1166,6 +1170,8 @@
                         $("#TotalHoursValue").val(0);
                         localStorage.setItem('key', 0);
                         $("#textErr").text("");
+                        localStorage.setItem('extraDayValue', 0);
+
                     }
                 }
             }
@@ -1173,12 +1179,16 @@
                 $("#TotalHoursValue").val("0.00");
                 localStorage.setItem('key', 0);
                 $("#textErr").text("");
+                localStorage.setItem('extraDayValue', 0);
+
             }
         }
         else {
             $("#textErr").text("");
             $("#TotalHoursValue").val(0);
             localStorage.setItem('key', 0);
+            localStorage.setItem('extraDayValue', 0);
+
         }
         
     })
@@ -1309,15 +1319,19 @@
                             if (differenceInHoursEx > 0) {
                                 rentalPrice = parseFloat(DailyRentValue).toFixed(2);
                                 $("#textErr").text(`عدد الساعات المتاخرة ${differenceInHoursEx} وستحاسب عليهم بسعر اليوم `);
+                                localStorage.setItem('extraDayValue', differenceInHoursEx);
                                 localStorage.setItem('key', rentalPrice);
+
                                 console.log("rentalPrice:" + rentalPrice);
                             } else {
+                                localStorage.setItem('extraDayValue', 0);
                                 localStorage.setItem('key', 0);
                                 $("#textErr").text("");
                             }
                         }
                     }
                     else {
+                        localStorage.setItem('extraDayValue', 0);
                         $("#TotalHoursValue").val(0);
                         localStorage.setItem('key', 0);
                         $("#textErr").text("");
@@ -1325,12 +1339,14 @@
                 }
             }
             else {
+                localStorage.setItem('extraDayValue', 0);
                 $("#TotalHoursValue").val("0.00");
                 localStorage.setItem('key', 0);
                 $("#textErr").text("");
             }
         }
         else {
+            localStorage.setItem('extraDayValue', 0);
             $("#textErr").text("");
             $("#TotalHoursValue").val(0);
             localStorage.setItem('key', 0);
@@ -1338,6 +1354,10 @@
         var kmFreeDaily = $("#CR_Cas_Contract_Basic_Daily_Free_KM").val();
         var valueChoices = $("#CR_Cas_Contract_Basic_Choices_Value").val();
         var ExNbrDays = $("#ContractDaysNbr").val();
+        var extraDay = localStorage.getItem('extraDayValue');
+        if (extraDay >0) {
+            ExNbrDays++;
+        }
         console.log("kmFreeDaily :" + kmFreeDaily)
         console.log("ContractDaysNbr :" + ExNbrDays)
         $("#TotalFreeKm").val(parseInt(ExNbrDays) * parseInt(kmFreeDaily));
@@ -1351,7 +1371,21 @@
     $(document).ready(function () {
         var kmFreeDaily = $("#CR_Cas_Contract_Basic_Daily_Free_KM").val();
         var valueChoices = $("#CR_Cas_Contract_Basic_Choices_Value").val();
-        var ExNbrDays = $("#ContractDaysNbr").val();
+        if (@Session["ContractCancel"].ToString().ToLower() == "true") {
+            var ExNbrDays = $("#ContractDaysNbr").val();
+             console.log("User is logged in.");
+             console.log(ContractDaysNbr);
+
+        } else {
+             var ExNbrDays = $("#ExContractDaysNbr").val();
+             console.log("User is not logged in.");
+             console.log(ContractDaysNbr);
+        }
+        var extraDay = localStorage.getItem('extraDayValue');
+        console.log("extraDay:" + extraDay)
+        if (extraDay > 0) {
+            ExNbrDays++;
+        }
         console.log("kmFreeDaily :" + kmFreeDaily)
         console.log("ContractDaysNbr :" + ExNbrDays)
         $("#TotalFreeKm").val(parseInt(ExNbrDays) * parseInt(kmFreeDaily));
@@ -1824,31 +1858,37 @@
         }
 
         else if (currentTab == 3) {
-            var m = 0;
-            var ig1 = $('#img1').attr('src');
-            var ig2 = $('#img2').attr('src');
-            var ig3 = $('#img3').attr('src');
-            var ig4 = $('#img4').attr('src');
-            var ig5 = $('#img5').attr('src');
-            var ig6 = $('#img6').attr('src');
-            var ig7 = $('#img7').attr('src');
-            var ig8 = $('#img8').attr('src');
-            var ig9 = $('#img9').attr('src');
-            if (ig1) m = m + 1;
-            if (ig2) m = m + 1;
-            if (ig3) m = m + 1;
-            if (ig4) m = m + 1;
-            if (ig5) m = m + 1;
-            if (ig6) m = m + 1;
-            if (ig7) m = m + 1;
-            if (ig8) m = m + 1;
-            if (ig9) m = m + 1;
-            if (CurrentMeter != null && CurrentMeter != "" && m >= 3) {
-                currentTab = currentTab + n;
+            if (CheckInspection() == true) {
+                var m = 0;
+                var ig1 = $('#img1').attr('src');
+                var ig2 = $('#img2').attr('src');
+                var ig3 = $('#img3').attr('src');
+                var ig4 = $('#img4').attr('src');
+                var ig5 = $('#img5').attr('src');
+                var ig6 = $('#img6').attr('src');
+                var ig7 = $('#img7').attr('src');
+                var ig8 = $('#img8').attr('src');
+                var ig9 = $('#img9').attr('src');
+                if (ig1) m = m + 1;
+                if (ig2) m = m + 1;
+                if (ig3) m = m + 1;
+                if (ig4) m = m + 1;
+                if (ig5) m = m + 1;
+                if (ig6) m = m + 1;
+                if (ig7) m = m + 1;
+                if (ig8) m = m + 1;
+                if (ig9) m = m + 1;
+                if (CurrentMeter != null && CurrentMeter != "" && m >= 3) {
+                    currentTab = currentTab + n;
+                }
+                else {
+                    toastr.info("الرجاء ادخال  قراءة العداد الحالي وثلاث صور علي الاقل");
+                }
             }
             else {
-                toastr.info("الرجاء ادخال  قراءة العداد الحالي وثلاث صور علي الاقل");
+                toastr.info("الرجاء التحقق من الفحص الظاهري");
             }
+           
         }
         else {
             currentTab = currentTab + n;
@@ -1914,6 +1954,32 @@
     }
 
 
+</script>
+<script type="text/javascript">
+    function CheckInspection() {
+        var n = 0;
+        var grid = document.getElementById("InspectionTable");
+
+        //Reference the CheckBoxes in Table.
+        var checkbox = grid.getElementsByClassName("ChkChoicesList");
+        console.log(checkbox)
+
+        //Loop through the CheckBoxes.
+        for (var i = 0; i < checkbox.length; i++) {
+            if (checkbox[i].type == "checkbox") {
+                if (checkbox[i].checked) {
+                    n = n + 1;
+                }
+            }
+        }
+        if ((n == checkbox.length)) {
+            return true;
+        } else {
+            return false;
+            console.log("false")
+            toastr.warning("الرجاء اكمال الفحص الضاهري");
+        }
+    }
 </script>
 
 <div id="myModal1" class="modal1">
@@ -1997,38 +2063,51 @@
 <script>
 
 
-    function Calculate() {
 
+    function Calculate() {
         var ExtraKmValue = document.getElementById('ExtraKmValue').value;
         if (ExtraKmValue == "") {
             document.getElementById('ExtraKmValue').value = "0.00";
         }
         var AdditionalHours = parseInt(document.getElementById('AdditionalHours').value);
-        var ExtraHourValue = parseFloat(document.getElementById('ExtraHourValue').value);
+        var ExtraHourValue  = parseFloat(document.getElementById('ExtraHourValue').value);
+        if (@Session["ContractCancel"].ToString().ToLower() == "true") {
+             var ContractDaysNbr = parseFloat(document.getElementById('ContractDaysNbr').value);
+             console.log("User is logged in.");
+             console.log(ContractDaysNbr);
 
-        if (AdditionalHours > 0) {
-            var TotalAdditionalHoursVal = AdditionalHours * ExtraHourValue;
-            //    document.getElementById('TotalHoursValue').value = TotalAdditionalHoursVal.toFixed(2);
         } else {
-            //    document.getElementById('TotalHoursValue').value = "0.00";
+             var ContractDaysNbr = parseFloat(document.getElementById('ExContractDaysNbr').value);
+             console.log("User is not logged in.");
+             console.log(ContractDaysNbr);
+
+        }
+        var extraDay = localStorage.getItem('extraDayValue');
+        if (extraDay > 0) {
+            ContractDaysNbr++;
         }
 
 
-        var ContractDaysNbr = parseFloat(document.getElementById('ContractDaysNbr').value);
+      //var ContractDaysNbr = parseFloat(document.getElementById('ContractDaysNbr').value);
+
         var DailyRentValue = parseFloat(document.getElementById('DailyRentValue').value);
         var RentalPrice = DailyRentValue * ContractDaysNbr;
-        //var x = document.getElementById('RentalPrice').value;
+
+      //var x = document.getElementById('RentalPrice').value;
+
         var valueRental = localStorage.getItem('key');
+
         console.log("valueRental"+valueRental);
         console.log("RentalPrice" + RentalPrice);
 
         document.getElementById('RentalPrice').value = (parseFloat(valueRental) + parseFloat(RentalPrice)).toFixed(2);
-        //localStorage.removeItem('key');
-        
+
+      //localStorage.removeItem('key');
+
         var r = document.getElementById('RentalPrice').value;
         console.log("r" + r);
 
-        //var RentalPrice = parseFloat(document.getElementById('RentalPrice').value);
+        var RentalPrice = parseFloat(document.getElementById('RentalPrice').value);
         var ChoicesVal = parseFloat(document.getElementById('ChoicesVal').value);
         var AdditionalDriverVal = parseFloat(document.getElementById('AdditionalDriverVal').value);
         var AdditionalVal = parseFloat(document.getElementById('AdditionalVal').value);
@@ -2036,20 +2115,17 @@
         var TotalHoursValue = parseFloat(document.getElementById('TotalHoursValue').value);
         var AuthValue = parseFloat(document.getElementById('AuthValue').value);
         var ContractValED = (parseFloat(r) + ChoicesVal + AdditionalDriverVal + AdditionalVal + ExtraKmValue + TotalHoursValue + AuthValue);
-        document.getElementById('ContractValED').value = ContractValED.toFixed(2);
 
+        document.getElementById('ContractValED').value = ContractValED.toFixed(2);
         var Discount = parseFloat(document.getElementById('Discount').value);
         var DiscountVal = ContractValED * Discount / 100;
-
         var ContractValID = (ContractValED - DiscountVal).toFixed(2);
-
         document.getElementById('ContractValID').value = ContractValID;
         var Tax = parseFloat(document.getElementById('Tax').value);
         var TaxVal = (ContractValID * (Tax / 100)).toFixed(2);
         document.getElementById('TaxVal').value = TaxVal;
         var ContractValIT = (ContractValID * (1 + (Tax / 100))).toFixed(2);
         document.getElementById('TotalContractIT').value = ContractValIT;
-
         var depences = document.getElementById('Depences').value;
         if (depences == "") {
             document.getElementById('TotDepences').value = "0.00";
@@ -2061,10 +2137,10 @@
         }
 
 
-        //////var InsuranceVal = document.getElementById('InsuranceVal').value;
-        //////if (InsuranceVal == "") {
-        //////    InsuranceVal = 0;
-        //////}
+        //var InsuranceVal = document.getElementById('InsuranceVal').value;
+        //if (InsuranceVal == "") {
+        //    InsuranceVal = 0;
+        //}
         var CompensationVal = document.getElementById('CompensationVal').value;
         if (CompensationVal == "") {
             CompensationVal = 0;

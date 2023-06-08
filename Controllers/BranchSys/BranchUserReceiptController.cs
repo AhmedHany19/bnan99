@@ -154,7 +154,7 @@ namespace RentCar.Controllers
             }
 
 
-            return PartialView(Receipt);
+            return PartialView(Receipt.OrderBy(x=>x.CR_Cas_Account_Receipt_Date));
         }
 
 
