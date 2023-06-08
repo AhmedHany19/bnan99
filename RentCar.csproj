@@ -747,6 +747,7 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ContractClose.rpt</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reports\ContractBasicReports\ContractCr\ContractRenew.cs">
       <AutoGen>True</AutoGen>
