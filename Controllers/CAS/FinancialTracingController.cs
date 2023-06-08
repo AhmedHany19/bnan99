@@ -64,6 +64,7 @@ namespace RentCar.Controllers.CAS
                 T.CR_Cas_Administrative_Procedures_Action = (bool)tr.CR_Cas_Administrative_Procedures_Action;
                 T.CR_Cas_Administrative_Procedures_Code = tr.CR_Cas_Administrative_Procedures_Code;
                 T.CR_Cas_Administrative_Int_Procedures_Code = (int)tr.CR_Cas_Administrative_Int_Procedures_Code;
+
                 var p = db.CR_Mas_Sup_Procedures.FirstOrDefault(pr => pr.CR_Mas_Sup_Procedures_Code == T.CR_Cas_Administrative_Procedures_Code);
 
                 T.CR_Cas_Administrative_Procedures_Com_Supporting = tr.CR_Cas_Administrative_Procedures_Com_Supporting;
@@ -85,7 +86,6 @@ namespace RentCar.Controllers.CAS
 
                 if (int.Parse(tr.CR_Cas_Administrative_Procedures_Code) == 60)
                 {
-
                     if (tr.CR_Cas_Administrative_Procedures_Targeted_Action != null && tr.CR_Cas_Administrative_Procedures_Targeted_Action != "")
                     {
                         T.ProcedureName = p.CR_Mas_Sup_Procedures_Ar_Name;

@@ -209,6 +209,8 @@ namespace RentCar.Controllers.CAS
             if (ModelState.IsValid)
             {
                 var LessorCode = Session["LessorCode"].ToString();
+                var UserLogin = System.Web.HttpContext.Current.Session["UserLogin"].ToString();
+                var userNameAction = db.CR_Cas_User_Information.FirstOrDefault(l=> l.CR_Cas_User_Information_Id == UserLogin).CR_Cas_User_Information_Ar_Name;
                 ///////////////////////////////Tracing//////////////////////////////////////
                 CR_Cas_Administrative_Procedures Ad = new CR_Cas_Administrative_Procedures();
                 DateTime year = DateTime.Now;
@@ -226,6 +228,8 @@ namespace RentCar.Controllers.CAS
                 Ad.CR_Cas_Administrative_Procedures_Code = "66";
                 Ad.CR_Cas_Administrative_Int_Procedures_Code = 66;
                 Ad.CR_Cas_Administrative_Procedures_Lessor = LessorCode;
+                Ad.CR_Cas_Administrative_Procedures_Targeted_Action = userNameAction;
+              
                 
                 Ad.CR_Cas_Administrative_Procedures_User_Insert = Session["UserLogin"].ToString();
                 Ad.CR_Cas_Administrative_Procedures_Type = "I";

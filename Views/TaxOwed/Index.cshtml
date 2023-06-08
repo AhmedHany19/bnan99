@@ -129,7 +129,7 @@
 
                                                                     <input class="form-control text-box single-line dateOfContractInp" data-val="true" id="startinp" type="text" data-inputmask="'alias': 'yyyy-mm-dd'" onblur="affich_btn_1(event)" onchange="reset()" autocomplete="off" value="@ViewBag.Startdate">
 
-                                                                    <input type="button" class="hijri-date-input2 dateOfContract" id="Startdate" onblur="affich_affich_1(event)" onchange="reset()" value="2023-05-30">
+                                                                    <input type="button" class="hijri-date-input2 dateOfContract" id="Startdate" onblur="affich_affich_1(event)" onchange="reset()" value="@ViewBag.Startdate">
                                                                 </div>
 
                                                             </div>
@@ -143,7 +143,7 @@
                                                                     @*<input type="date" id="Enddate" onclick="GetDateFilter()" value="@ViewBag.Enddate" style="width:100%">*@
                                                                     <input class="form-control text-box single-line dateOfContractInp" data-val="true" id="Enddateinp" type="text" data-inputmask="'alias': 'yyyy-mm-dd'" onblur="affich_btn_2(event)" onchange="reset()" autocomplete="off" value="@ViewBag.Enddate">
 
-                                                                    <input type="button" class="hijri-date-input2 dateOfContract" id="Enddate" onblur="affich_affich_2(event)" onchange="reset()">
+                                                                    <input type="button" class="hijri-date-input2 dateOfContract" id="Enddate" onblur="affich_affich_2(event)" onchange="reset()" value="@ViewBag.Enddate">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -155,7 +155,7 @@
                                                 <div id="responsive-datatable_filter" class="dataTables_filter ">
                                                     <label class="label_search_input">
                                                         <img src="~/images/srch.png" id="SrchImg" />
-                                                        بحث:<input type="search" id="inputtext" class="form-control form_search_input" placeholder="" aria-controls="responsive-datatable" style="width:20%">
+                                                        بحث:<input type="search" id="inputtext" class="form-control form_search_input" placeholder="" aria-controls="responsive-datatable" style="width:50%">
                                                     </label>
                                                 </div>
 

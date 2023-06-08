@@ -67,7 +67,7 @@ namespace RentCar.Controllers.CAS
             }
             else if (type == "N" && StartDate != "" && EndDate != "")
             {
-                query = db.CR_Cas_Account_Tax_Owed.Where(c => c.CR_Cas_Account_Tax_Owed_Com_Code == LessorCode && c.CR_Cas_Account_Tax_Owed_Is_Paid==false
+                query = db.CR_Cas_Account_Tax_Owed.Where(c => c.CR_Cas_Account_Tax_Owed_Com_Code == LessorCode && c.CR_Cas_Account_Tax_Owed_Is_Paid == false
                    && c.CR_Cas_Account_Tax_Owed_Due_Date >= sd && c.CR_Cas_Account_Tax_Owed_Due_Date <= ed).OrderByDescending(d => d.CR_Cas_Account_Tax_Owed_Due_Date)
                .Include(c => c.CR_Cas_Sup_Branch);
             }
@@ -76,13 +76,19 @@ namespace RentCar.Controllers.CAS
                 query = db.CR_Cas_Account_Tax_Owed.Where(c => c.CR_Cas_Account_Tax_Owed_Com_Code == LessorCode
                    && (c.CR_Cas_Account_Tax_Owed_Due_Date >= sd && c.CR_Cas_Account_Tax_Owed_Due_Date <= ed)).OrderByDescending(d => d.CR_Cas_Account_Tax_Owed_Due_Date)
                .Include(c => c.CR_Cas_Sup_Branch);
-                
+
+            }
+            else if (type == "All" && StartDate != "" && EndDate != "")
+            {
+                query = db.CR_Cas_Account_Tax_Owed.Where(c => c.CR_Cas_Account_Tax_Owed_Com_Code == LessorCode ).OrderByDescending(d => d.CR_Cas_Account_Tax_Owed_Due_Date)
+                .Include(c => c.CR_Cas_Sup_Branch);
             }
             else
             {
-                query = db.CR_Cas_Account_Tax_Owed.Where(c => c.CR_Cas_Account_Tax_Owed_Com_Code == LessorCode
-                    && c.CR_Cas_Account_Tax_Owed_Due_Date >= sd && c.CR_Cas_Account_Tax_Owed_Due_Date <= ed).OrderByDescending(d => d.CR_Cas_Account_Tax_Owed_Due_Date)
-                .Include(c => c.CR_Cas_Sup_Branch);
+                query = db.CR_Cas_Account_Tax_Owed.Where(c => c.CR_Cas_Account_Tax_Owed_Com_Code == LessorCode && c.CR_Cas_Account_Tax_Owed_Is_Paid == false
+                 ).OrderByDescending(d => d.CR_Cas_Account_Tax_Owed_Due_Date)
+              .Include(c => c.CR_Cas_Sup_Branch);
+
             }
 
             return PartialView(query.ToList());

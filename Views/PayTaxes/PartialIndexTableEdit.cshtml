@@ -35,10 +35,10 @@
                         @item.CR_Cas_Account_Tax_Owed_Due_Date.Value.ToString("yyyy/MM/dd")
                     </td>
                     <td style="width:9%;text-align:center">
-                        @Html.DisplayFor(modelItem => item.CR_Cas_Account_Tax_Owed_Contract_Value)
+                        @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch.CR_Mas_Com_Lessor.CR_Cas_Contract_Basic.FirstOrDefault(l => l.CR_Cas_Contract_Basic_No == item.CR_Cas_Account_Tax_Owed_Contract_No).CR_Cas_Contract_Basic_Value)
                     </td>
                     <td style="width:14%;">
-                        @Html.DisplayFor(modelItem => item.CR_Cas_Account_Tax_Owed_Percentage)
+                        @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch.CR_Mas_Com_Lessor.CR_Cas_Contract_Basic.FirstOrDefault(l => l.CR_Cas_Contract_Basic_No == item.CR_Cas_Account_Tax_Owed_Contract_No).CR_Cas_Contract_Basic_Tax_Rate)
                     </td>
                     <td style="width:11%;">
                         @Html.DisplayFor(modelItem => item.CR_Cas_Account_Tax_Owed_Value)
