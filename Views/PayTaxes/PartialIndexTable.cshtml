@@ -4,9 +4,6 @@
     <table id="myTable" class="table table-striped mb-0" style="cursor:default">
         <thead style="overflow-y: scroll; flex-grow: 1;">
             <tr>
-                <th width="5%">
-                    إختر
-                </th>
                 <th style="width:15%;">
                     رقم العقد
                 </th>
@@ -16,46 +13,45 @@
                 <th style="width:9%;">
                     قيمة العقد
                 </th>
-               @* <th style="width:14%;">
-                    نسبة القيمة المضافة
+                <th style="width:14%;">
+                    النسبة 
                 </th>
                 <th style="width:11%;">
-                    القيمة المضافة
-                </th>*@
+                    القيمة 
+                </th>
                 
             </tr>
         </thead>
         <tbody id="tbl">    
             @foreach (var item in Model)
             {   
-                <tr>
-                    <td class="keyPayTaxes" hidden="hidden">
-                        <input class="keyValPayTaxes" value="@item.CR_Cas_Account_Tax_Owed_Contract_No" id="Index" />
-                    </td>
-                    <td align="center" style="width:5%">
-                        <input type="checkbox" id="Chk_@item.CR_Cas_Account_Tax_Owed_Contract_No" name="Chk_@item.CR_Cas_Account_Tax_Owed_Contract_No" class="form-control ChkListTaxOwed" style="height:25px;margin-top:2px;" />
-                    </td>
-                    <td style="width:15%;">
-                        @Html.DisplayFor(modelItem => item.CR_Cas_Account_Tax_Owed_Contract_No)
-                    </td>
-                    <td style="width:12%;">
-                        @item.CR_Cas_Account_Tax_Owed_Due_Date.Value.ToString("yyyy/MM/dd")
-                    </td>
-                   @* <td style="width:9%;text-align:center">
-                        @Html.DisplayFor(modelItem => item.CR_Cas_Account_Tax_Owed_Contract_Value)
-                    </td>
-                    <td style="width:14%;">
-                        @Html.DisplayFor(modelItem => item.CR_Cas_Account_Tax_Owed_Percentage)
-                    </td>*@
-                    <td style="width:11%;">
-                        @Html.DisplayFor(modelItem => item.CR_Cas_Account_Tax_Owed_Value)
-                    </td>
-                    
-                    <td style="width:10%" hidden>
-                        @Html.DisplayFor(modelItem => item.CR_Cas_Account_Tax_Owed_Value)
-                        <input type="text" name="ValPayTaxes_@item.CR_Cas_Account_Tax_Owed_Contract_No" id="ValPayTaxes_@item.CR_Cas_Account_Tax_Owed_Contract_No" value="@item.CR_Cas_Account_Tax_Owed_Value" />
-                    </td>
-                </tr>   
+            <tr>
+                <td class="keyPayTaxes" hidden="hidden">
+                    <input class="keyValPayTaxes" value="@item.CR_Cas_Account_Tax_Owed_Contract_No" id="Index" />
+                </td>
+                <td style="width:15%; text-align:right">
+                    <input type="checkbox" id="Chk_@item.CR_Cas_Account_Tax_Owed_Contract_No" name="Chk_@item.CR_Cas_Account_Tax_Owed_Contract_No" class="form-control ChkListTaxOwed" style="height:25px;margin-top:2px; width:20%; display:inline; vertical-align:middle" />
+                    @Html.DisplayFor(modelItem => item.CR_Cas_Account_Tax_Owed_Contract_No)
+                </td>
+                <td style="width:12%;">
+                    @item.CR_Cas_Account_Tax_Owed_Due_Date.Value.ToString("yyyy/MM/dd")
+                </td>
+                <td style="width:9%;text-align:center">
+                    @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch.CR_Mas_Com_Lessor.CR_Cas_Contract_Basic.FirstOrDefault(l => l.CR_Cas_Contract_Basic_No == item.CR_Cas_Account_Tax_Owed_Contract_No && l.CR_Cas_Contract_Basic_Status != "y").CR_Cas_Contract_Basic_Value)
+
+                </td>
+                <td style="width:14%;">
+                    @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch.CR_Mas_Com_Lessor.CR_Cas_Contract_Basic.FirstOrDefault(l => l.CR_Cas_Contract_Basic_No == item.CR_Cas_Account_Tax_Owed_Contract_No).CR_Cas_Contract_Basic_Tax_Rate)
+                </td>
+                <td style="width:11%;">
+                    @Html.DisplayFor(modelItem => item.CR_Cas_Account_Tax_Owed_Value)
+                </td>
+
+                <td style="width:10%" hidden>
+                    @Html.DisplayFor(modelItem => item.CR_Cas_Account_Tax_Owed_Value)
+                    <input type="text" name="ValPayTaxes_@item.CR_Cas_Account_Tax_Owed_Contract_No" id="ValPayTaxes_@item.CR_Cas_Account_Tax_Owed_Contract_No" value="@item.CR_Cas_Account_Tax_Owed_Value" />
+                </td>
+            </tr>   
             }
         </tbody>
     </table>
@@ -90,3 +86,9 @@
 
         });
 </script>
+
+<style>
+    td{
+        text-align:center;
+    }
+</style>

@@ -3064,36 +3064,6 @@ namespace RentCar.Controllers.BranchSys
 
 
 
-        ////////public ActionResult PrintContract(string Sno)
-        ////////{
-        ////////    try
-        ////////    {
-        ////////        ReportDocument rd = new ReportDocument();
-        ////////        rd.Load(Path.Combine(Server.MapPath("~/Reports/ContractBasicReports/ContractCr"), "Cr.rpt"));
-        ////////        rd.SetParameterValue("UserName", Session["UserName"].ToString());
-        ////////        Stream stream = rd.ExportToStream(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat);
-        ////////        stream.Seek(0, SeekOrigin.Begin);
-        ////////        rd.Close();
-        ////////        return File(stream, "Contract", Sno + ".pdf");
-
-        ////////    }
-        ////////    catch
-        ////////    {
-        ////////        throw;
-        ////////    }
-        ////////}
-        ////////////@if(TempData["printCR"] != null)
-        ////////////{
-        ////////////    < script >
-        ////////////        $(function() {
-
-        ////////////        window.open('@Url.Action("PrintContract", "BasicContract",new {Sno= TempData["printCR"] })')
-        ////////////        });
-        ////////////    </ script >
-
-        ////////////}
-
-        ////////TempData["printCR"] = Contract.CR_Cas_Contract_Basic_No;
 
 
 
