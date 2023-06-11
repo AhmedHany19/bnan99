@@ -22,6 +22,10 @@ namespace RentCar.Controllers.BranchSys
             DateTime year = DateTime.Now;
             var y = year.ToString("yy");
             var sector = "1";
+            if (Session["LessorCode"] == null || Session["UserLogin"] == null || Session["BranchCode"] == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
             var LessorCode = Session["LessorCode"].ToString();
             var UserLogin = Session["UserLogin"].ToString().Trim();
             var proc = db.CR_Cas_Administrative_Procedures.FirstOrDefault(a=>a.CR_Cas_Administrative_Procedures_Lessor==LessorCode &&
@@ -81,7 +85,10 @@ namespace RentCar.Controllers.BranchSys
             "CR_Cas_Administrative_Procedures_Doc_End_Date,CR_Cas_Administrative_Procedures_From_Branch,CR_Cas_Administrative_Procedures_To_Branch")] 
         CR_Cas_Administrative_Procedures cR_Cas_Administrative_Procedures ,string save,string Refuse)
         {
-
+            if (Session["LessorCode"] == null || Session["UserLogin"] == null || Session["BranchCode"] == null )
+            {
+                return RedirectToAction("Login", "Account");
+            }
             var LessorCode = Session["LessorCode"].ToString();
             var BranchCode = Session["BranchCode"].ToString();
             var UserLogin = System.Web.HttpContext.Current.Session["UserLogin"].ToString();

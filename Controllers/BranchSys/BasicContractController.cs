@@ -34,14 +34,13 @@ namespace RentCar.Controllers.BranchSys
             var BranchCode = "";
             try
             {
-                LessorCode = Session["LessorCode"].ToString();
-                BranchCode = Session["BranchCode"].ToString();
-
-                UserLogin = System.Web.HttpContext.Current.Session["UserLogin"].ToString();
-                if (UserLogin == null || LessorCode == null || BranchCode == null)
+                if (Session["LessorCode"] == null || Session["UserLogin"] == null || Session["BranchCode"] == null)
                 {
                     return RedirectToAction("Login", "Account");
                 }
+                LessorCode = Session["LessorCode"].ToString();
+                BranchCode = Session["BranchCode"].ToString();
+                UserLogin = System.Web.HttpContext.Current.Session["UserLogin"].ToString();
             }
             catch
             {
@@ -59,14 +58,13 @@ namespace RentCar.Controllers.BranchSys
             var BranchCode = "";
             try
             {
+                if (Session["LessorCode"] == null || Session["UserLogin"] == null || Session["BranchCode"] == null)
+                {
+                     RedirectToAction("Login", "Account");
+                }
                 LessorCode = Session["LessorCode"].ToString();
                 BranchCode = Session["BranchCode"].ToString();
-
                 UserLogin = System.Web.HttpContext.Current.Session["UserLogin"].ToString();
-                if (UserLogin == null || LessorCode == null || BranchCode == null)
-                {
-                    RedirectToAction("Login", "Account");
-                }
             }
             catch
             {
@@ -298,14 +296,13 @@ namespace RentCar.Controllers.BranchSys
             var BranchCode = "";
             try
             {
+                if (Session["LessorCode"] == null || Session["UserLogin"] == null || Session["BranchCode"] == null)
+                {
+                    return RedirectToAction("Login", "Account");
+                }
                 LessorCode = Session["LessorCode"].ToString();
                 BranchCode = Session["BranchCode"].ToString();
-
                 UserLogin = System.Web.HttpContext.Current.Session["UserLogin"].ToString();
-                if (UserLogin == null || LessorCode == null || BranchCode == null)
-                {
-                    return RedirectToAction("Login", "Account"); 
-                }
             }
             catch
             {
@@ -324,14 +321,13 @@ namespace RentCar.Controllers.BranchSys
             var BranchCode = "";
             try
             {
-                LessorCode = Session["LessorCode"].ToString();
-                BranchCode = Session["BranchCode"].ToString();
-
-                UserLogin = System.Web.HttpContext.Current.Session["UserLogin"].ToString();
-                if (UserLogin == null || LessorCode == null || BranchCode == null)
+                if (Session["LessorCode"] == null || Session["UserLogin"] == null || Session["BranchCode"] == null)
                 {
                     return RedirectToAction("Login", "Account");
                 }
+                LessorCode = Session["LessorCode"].ToString();
+                BranchCode = Session["BranchCode"].ToString();
+                UserLogin = System.Web.HttpContext.Current.Session["UserLogin"].ToString();
             }
             catch
             {
@@ -394,14 +390,13 @@ namespace RentCar.Controllers.BranchSys
             var BranchCode = "";
             try
             {
+                if (Session["LessorCode"] == null || Session["UserLogin"] == null || Session["BranchCode"] == null)
+                {
+                     RedirectToAction("Login", "Account");
+                }
                 LessorCode = Session["LessorCode"].ToString();
                 BranchCode = Session["BranchCode"].ToString();
-
                 UserLogin = System.Web.HttpContext.Current.Session["UserLogin"].ToString();
-                if (UserLogin == null || LessorCode == null || BranchCode == null)
-                {
-                    RedirectToAction("Login", "Account");
-                }
             }
             catch
             {
@@ -419,14 +414,13 @@ namespace RentCar.Controllers.BranchSys
             var BranchCode = "";
             try
             {
+                if (Session["LessorCode"] == null || Session["UserLogin"] == null || Session["BranchCode"] == null)
+                {
+                     RedirectToAction("Login", "Account");
+                }
                 LessorCode = Session["LessorCode"].ToString();
                 BranchCode = Session["BranchCode"].ToString();
-
                 UserLogin = System.Web.HttpContext.Current.Session["UserLogin"].ToString();
-                if (UserLogin == null || LessorCode == null || BranchCode == null)
-                {
-                    RedirectToAction("Login", "Account");
-                }
             }
             catch
             {
@@ -443,15 +437,13 @@ namespace RentCar.Controllers.BranchSys
             var UserLogin = "";
             var BranchCode = "";
             try
-            {
+            { if (Session["LessorCode"] == null || Session["UserLogin"] == null|| Session["BranchCode"]==null)
+                {
+                     RedirectToAction("Login", "Account");
+                }
                 LessorCode = Session["LessorCode"].ToString();
                 BranchCode = Session["BranchCode"].ToString();
-
                 UserLogin = System.Web.HttpContext.Current.Session["UserLogin"].ToString();
-                if (UserLogin == null || LessorCode == null || BranchCode == null)
-                {
-                    RedirectToAction("Login", "Account");
-                }
             }
             catch
             {
@@ -503,14 +495,13 @@ namespace RentCar.Controllers.BranchSys
             var BranchCode = "";
             try
             {
-                LessorCode = Session["LessorCode"].ToString();
-                BranchCode = Session["BranchCode"].ToString();
-
-                UserLogin = System.Web.HttpContext.Current.Session["UserLogin"].ToString();
-                if (UserLogin == null || LessorCode == null || BranchCode == null)
+                if (Session["LessorCode"] == null || Session["UserLogin"] == null || Session["BranchCode"] == null)
                 {
                     RedirectToAction("Login", "Account");
                 }
+                LessorCode = Session["LessorCode"].ToString();
+                BranchCode = Session["BranchCode"].ToString();
+                UserLogin = System.Web.HttpContext.Current.Session["UserLogin"].ToString();
             }
             catch
             {
@@ -531,14 +522,13 @@ namespace RentCar.Controllers.BranchSys
             var BranchCode = "";
             try
             {
-                LessorCode = Session["LessorCode"].ToString();
-                BranchCode = Session["BranchCode"].ToString();
-
-                UserLogin = System.Web.HttpContext.Current.Session["UserLogin"].ToString();
-                if (UserLogin == null || LessorCode == null || BranchCode == null)
+                if (Session["LessorCode"] == null || Session["UserLogin"] == null || Session["BranchCode"] == null)
                 {
                     RedirectToAction("Login", "Account");
                 }
+                LessorCode = Session["LessorCode"].ToString();
+                BranchCode = Session["BranchCode"].ToString();
+                UserLogin = System.Web.HttpContext.Current.Session["UserLogin"].ToString();
             }
             catch (Exception ex)
             {
@@ -854,14 +844,13 @@ namespace RentCar.Controllers.BranchSys
             var BranchCode = "";
             try
             {
-                LessorCode = Session["LessorCode"].ToString();
-                BranchCode = Session["BranchCode"].ToString();
-
-                UserLogin = System.Web.HttpContext.Current.Session["UserLogin"].ToString();
-                if (UserLogin == null || LessorCode == null || BranchCode == null)
+                if (Session["LessorCode"] == null || Session["UserLogin"] == null || Session["BranchCode"] == null)
                 {
                     RedirectToAction("Login", "Account");
                 }
+                LessorCode = Session["LessorCode"].ToString();
+                BranchCode = Session["BranchCode"].ToString();
+                UserLogin = System.Web.HttpContext.Current.Session["UserLogin"].ToString();
             }
             catch
             {
@@ -1817,14 +1806,13 @@ namespace RentCar.Controllers.BranchSys
             var BranchCode = "";
             try
             {
-                LessorCode = Session["LessorCode"].ToString();
-                BranchCode = Session["BranchCode"].ToString();
-
-                UserLogin = System.Web.HttpContext.Current.Session["UserLogin"].ToString();
-                if (UserLogin == null || LessorCode == null || BranchCode == null)
+                if (Session["LessorCode"] == null || Session["UserLogin"] == null || Session["BranchCode"] == null)
                 {
                     RedirectToAction("Login", "Account");
                 }
+                LessorCode = Session["LessorCode"].ToString();
+                BranchCode = Session["BranchCode"].ToString();
+                UserLogin = System.Web.HttpContext.Current.Session["UserLogin"].ToString();
             }
             catch
             {
@@ -1886,14 +1874,13 @@ namespace RentCar.Controllers.BranchSys
                 decimal RenterBalance = 0;                                                           
                 try
                 {
-                    LessorCode = Session["LessorCode"].ToString();
-                    BranchCode = Session["BranchCode"].ToString();
-
-                    UserLogin = System.Web.HttpContext.Current.Session["UserLogin"].ToString();
-                    if (UserLogin == null || LessorCode == null || BranchCode == null)
+                    if (Session["LessorCode"] == null || Session["UserLogin"] == null || Session["BranchCode"] == null)
                     {
                         RedirectToAction("Login", "Account");
                     }
+                    LessorCode = Session["LessorCode"].ToString();
+                    BranchCode = Session["BranchCode"].ToString();
+                    UserLogin = System.Web.HttpContext.Current.Session["UserLogin"].ToString();
                 }
                 catch
                 {

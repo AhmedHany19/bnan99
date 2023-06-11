@@ -45,14 +45,14 @@ namespace RentCar.Controllers.BranchSys
             var BranchCode = "";
             try
             {
-                LessorCode = Session["LessorCode"].ToString();
-                BranchCode = Session["BranchCode"].ToString();
-
-                UserLogin = System.Web.HttpContext.Current.Session["UserLogin"].ToString().Trim();
-                if (UserLogin == null || LessorCode == null || BranchCode == null)
+                if (Session["LessorCode"] == null || Session["UserLogin"] == null || Session["BranchCode"] == null)
                 {
                     RedirectToAction("Login", "Account");
                 }
+                LessorCode = Session["LessorCode"].ToString();
+                BranchCode = Session["BranchCode"].ToString();
+                UserLogin = System.Web.HttpContext.Current.Session["UserLogin"].ToString().Trim();
+               
             }
             catch
             {
@@ -82,13 +82,14 @@ namespace RentCar.Controllers.BranchSys
             var branchcode = "";
             try
             {
-                LessorCode = Session["lessorcode"].ToString();
-                branchcode = Session["branchcode"].ToString();
-                userlogin = Session["userlogin"].ToString();
-                if (userlogin == null || LessorCode == null || branchcode == null)
+                if (Session["LessorCode"] == null || Session["UserLogin"] == null || Session["BranchCode"] == null)
                 {
                     RedirectToAction("Login", "Account");
                 }
+                LessorCode = Session["lessorcode"].ToString();
+                branchcode = Session["branchcode"].ToString();
+                userlogin = Session["userlogin"].ToString();
+                
             }
             catch
             {
@@ -121,6 +122,10 @@ namespace RentCar.Controllers.BranchSys
         public ActionResult Create(string TracingNo, FormCollection collection, string sd, string ed, string CR_Cas_Sup_SalesPoint_Code, string reason)
         {
             var b = false;
+            if (Session["LessorCode"] == null || Session["UserLogin"] == null || Session["BranchCode"] == null)
+            {
+                RedirectToAction("Login", "Account");
+            }
             var LessorCode = Session["lessorcode"].ToString();
             var branchcode = Session["branchcode"].ToString();
             var userlogin = Session["userlogin"].ToString();

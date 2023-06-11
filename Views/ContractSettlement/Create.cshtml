@@ -1371,7 +1371,7 @@
     $(document).ready(function () {
         var kmFreeDaily = $("#CR_Cas_Contract_Basic_Daily_Free_KM").val();
         var valueChoices = $("#CR_Cas_Contract_Basic_Choices_Value").val();
-        if (@Session["ContractCancel"].ToString().ToLower() == "true") {
+        if (@Session["ContractCancel"].ToString().ToLower() == true) {
             var ExNbrDays = $("#ContractDaysNbr").val();
              console.log("User is logged in.");
              console.log(ContractDaysNbr);
@@ -2071,7 +2071,7 @@
         }
         var AdditionalHours = parseInt(document.getElementById('AdditionalHours').value);
         var ExtraHourValue  = parseFloat(document.getElementById('ExtraHourValue').value);
-        if (@Session["ContractCancel"].ToString().ToLower() == "true") {
+        if (@Session["ContractCancel"].ToString().ToLower() == true) {
              var ContractDaysNbr = parseFloat(document.getElementById('ContractDaysNbr').value);
              console.log("User is logged in.");
              console.log(ContractDaysNbr);
@@ -2100,7 +2100,7 @@
         console.log("valueRental"+valueRental);
         console.log("RentalPrice" + RentalPrice);
 
-        document.getElementById('RentalPrice').value = (parseFloat(valueRental) + parseFloat(RentalPrice)).toFixed(2);
+        document.getElementById('RentalPrice').value = /*(parseFloat(valueRental) +*/ parseFloat(RentalPrice).toFixed(2);
 
       //localStorage.removeItem('key');
 
