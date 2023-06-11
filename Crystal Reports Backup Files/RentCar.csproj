@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
   <Import Project="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -15,10 +14,10 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>RentCar</RootNamespace>
     <AssemblyName>RentCar</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
-    <Use64BitIISExpress />
+    <Use64BitIISExpress>false</Use64BitIISExpress>
     <IISExpressSSLPort>44388</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -36,6 +35,9 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <RegisterForComInterop>false</RegisterForComInterop>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>false</DebugSymbols>
@@ -46,66 +48,157 @@
     </DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CrystalDecisions.CrystalReports.Engine">
-      <HintPath>c:\program files (x86)\sap businessobjects\crystal reports for .net framework 4.0\common\sap businessobjects enterprise xi 4.0\win32_x86\dotnet\CrystalDecisions.CrystalReports.Engine.dll</HintPath>
+    <Reference Include="BouncyCastle.Crypto, Version=1.8.9.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
+      <HintPath>packages\BouncyCastle.1.8.9\lib\BouncyCastle.Crypto.dll</HintPath>
     </Reference>
-    <Reference Include="CrystalDecisions.ReportSource">
-      <HintPath>c:\program files (x86)\sap businessobjects\crystal reports for .net framework 4.0\common\sap businessobjects enterprise xi 4.0\win32_x86\dotnet\CrystalDecisions.ReportSource.dll</HintPath>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\CrystalDecisions.CrystalReports.Engine.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="CrystalDecisions.Shared">
-      <HintPath>c:\program files (x86)\sap businessobjects\crystal reports for .net framework 4.0\common\sap businessobjects enterprise xi 4.0\win32_x86\dotnet\CrystalDecisions.Shared.dll</HintPath>
+    <Reference Include="CrystalDecisions.ReportAppServer.ClientDoc, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <HintPath>packages\CrystalReports.ReportAppServer.ClientDoc.13.0.4003\lib\net40\CrystalDecisions.ReportAppServer.ClientDoc.dll</HintPath>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="CrystalDecisions.Web">
-      <HintPath>c:\program files (x86)\sap businessobjects\crystal reports for .net framework 4.0\common\sap businessobjects enterprise xi 4.0\win32_x86\dotnet\CrystalDecisions.Web.dll</HintPath>
+    <Reference Include="CrystalDecisions.ReportAppServer.CommLayer, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <HintPath>packages\CrystalReports.ReportAppServer.CommLayer.13.0.4003\lib\net40\CrystalDecisions.ReportAppServer.CommLayer.dll</HintPath>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="CrystalDecisions.ReportAppServer.CommonControls, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="CrystalDecisions.ReportAppServer.CommonObjectModel, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <HintPath>packages\CrystalReports.ReportAppServer.CommonObjectModel.13.0.4003\lib\net40\CrystalDecisions.ReportAppServer.CommonObjectModel.dll</HintPath>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="CrystalDecisions.ReportAppServer.Controllers, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\CrystalDecisions.ReportSource.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\CrystalDecisions.Shared.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="CrystalDecisions.Web, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\CrystalDecisions.Web.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp, Version=5.5.13.3, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>packages\iTextSharp.5.5.13.3\lib\itextsharp.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=2.0.15.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>packages\log4net.2.0.15\lib\net45\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp">
       <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Data.Linq" />
-    <Reference Include="System.Drawing" />
+    <Reference Include="Microsoft.Extensions.Logging.Abstractions, Version=7.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Extensions.Logging.Abstractions.7.0.0\lib\net462\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="System">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data.Linq">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Drawing">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
     <Reference Include="System.Net.Http.Formatting, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.AspNet.WebApi.Client.5.2.7\lib\net45\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
-    <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.Security" />
-    <Reference Include="System.Web.DynamicData" />
-    <Reference Include="System.Web.Entity" />
-    <Reference Include="System.Web.ApplicationServices" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Runtime.CompilerServices.Unsafe.4.5.3\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.ApplicationServices">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.DynamicData">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Entity">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Extensions">
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Web.Http, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.AspNet.WebApi.Core.5.2.7\lib\net45\System.Web.Http.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.Http.WebHost, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.AspNet.WebApi.WebHost.5.2.7\lib\net45\System.Web.Http.WebHost.dll</HintPath>
     </Reference>
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Web" />
-    <Reference Include="System.Web.Extensions" />
-    <Reference Include="System.Web.Abstractions" />
-    <Reference Include="System.Web.Routing" />
-    <Reference Include="System.Xml" />
-    <Reference Include="System.Configuration" />
-    <Reference Include="System.Web.Services" />
-    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Web.Abstractions">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Routing">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Configuration">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Services">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.EnterpriseServices">
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http">
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Net.Http.WebRequest">
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
@@ -137,6 +230,9 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="System.Xml.Linq">
+      <Private>True</Private>
+    </Reference>
     <Reference Include="WebGrease">
       <Private>True</Private>
       <HintPath>packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
@@ -162,6 +258,8 @@
     <Compile Include="Controllers\BranchSys\CashClosingController.cs" />
     <Compile Include="Controllers\BranchSys\Sys3RenterLessorController.cs" />
     <Compile Include="Controllers\BranchSys\BranchUserReceiptController.cs" />
+    <Compile Include="Controllers\CAS\CasCarsStatController.cs" />
+    <Compile Include="Controllers\CAS\CasContractStatController.cs" />
     <Compile Include="Controllers\CAS\AccountInformationController.cs" />
     <Compile Include="Controllers\CAS\AlertsController.cs" />
     <Compile Include="Controllers\CAS\CarBasicPriceController.cs" />
@@ -179,17 +277,20 @@
     <Compile Include="Controllers\CAS\Cas_User_Validity_ContractController.cs" />
     <Compile Include="Controllers\CAS\ClosingReceptionController.cs" />
     <Compile Include="Controllers\CAS\FinancialTracingController.cs" />
+    <Compile Include="Controllers\CAS\PayTaxesController.cs" />
     <Compile Include="Controllers\CAS\RenterCreditController.cs" />
     <Compile Include="Controllers\CAS\RenterDebitController.cs" />
     <Compile Include="Controllers\CAS\RenterReceiptListController.cs" />
     <Compile Include="Controllers\CAS\SalesPointReceiptListController.cs" />
     <Compile Include="Controllers\CAS\ShortTracingController.cs" />
+    <Compile Include="Controllers\CAS\TaxOwedController.cs" />
     <Compile Include="Controllers\CAS\TracingController.cs" />
     <Compile Include="Controllers\CAS\TransferCarsController.cs" />
     <Compile Include="Controllers\CAS\TransferFromRenterController.cs" />
     <Compile Include="Controllers\CAS\TransferToUserController.cs" />
     <Compile Include="Controllers\CAS\TransferToRenterController.cs" />
     <Compile Include="Controllers\CAS\TransportAuthorityContractController.cs" />
+    <Compile Include="Controllers\CAS\TransportAuthoritySystemController.cs" />
     <Compile Include="Controllers\CAS\UserValidityContractController.cs" />
     <Compile Include="Controllers\CheckContrtact\CheckContractController.cs" />
     <Compile Include="Controllers\CAS\CR_Cas_Company_ContractController.cs" />
@@ -212,6 +313,7 @@
     <Compile Include="Controllers\MAS\ChoicesController.cs" />
     <Compile Include="Controllers\MAS\CityController.cs" />
     <Compile Include="Controllers\MAS\ColorController.cs" />
+    <Compile Include="Controllers\MAS\CompanyContractTaxOwedController.cs" />
     <Compile Include="Controllers\MAS\Company_ContractController.cs" />
     <Compile Include="Controllers\MAS\FeaturesController.cs" />
     <Compile Include="Controllers\MAS\HomeController.cs" />
@@ -219,6 +321,7 @@
     <Compile Include="Controllers\MAS\JobsController.cs" />
     <Compile Include="Controllers\MAS\LessorController.cs" />
     <Compile Include="Controllers\MAS\MasBasicContractController.cs" />
+    <Compile Include="Controllers\MAS\MasPayTaxesController.cs" />
     <Compile Include="Controllers\MAS\MASsupportingContractController.cs" />
     <Compile Include="Controllers\MAS\MembershipController.cs" />
     <Compile Include="Controllers\MAS\CategoryCarController.cs" />
@@ -254,293 +357,294 @@
     <Compile Include="Models\CAS\ClosingReceptionMD.cs" />
     <Compile Include="Models\CAS\LoadAlerts.cs" />
     <Compile Include="Models\CAS\SalesPointReceiptMD.cs" />
+    <Compile Include="Models\CAS\TracingModel.cs" />
     <Compile Include="Models\ChoicesListVal.cs" />
     <Compile Include="Models\CityMD.cs" />
     <Compile Include="Models\ContractTammMD.cs" />
     <Compile Include="Models\ChoicesMD.cs" />
     <Compile Include="Models\CR_Cas_Account_Bnan_Owed.cs">
-      <DependentUpon>RentCarModel.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CR_Cas_Account_Pay_Owed.cs">
-      <DependentUpon>RentCarModel.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CR_Cas_Account_Receipt.cs">
-      <DependentUpon>RentCarModel.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CR_Cas_Account_Restrictions.cs">
-      <DependentUpon>RentCarModel.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CR_Cas_Account_TAMM_Owed.cs">
-      <DependentUpon>RentCarModel.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CR_Cas_Account_Tax_Owed.cs">
-      <DependentUpon>RentCarModel.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CR_Cas_Account_Tga_Owed.cs">
-      <DependentUpon>RentCarModel.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CR_Cas_Account_Transfers_Tenants.cs">
-      <DependentUpon>RentCarModel.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CR_Cas_Administrative_Procedures.cs">
-      <DependentUpon>RentCarModel.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CR_Cas_Basic_Service_Tamm_Contract.cs" />
     <Compile Include="Models\CR_Cas_Basic_Tamm_Contract.cs" />
     <Compile Include="Models\CR_Cas_Car_Price_Additional.cs">
-      <DependentUpon>RentCarModel.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CR_Cas_Car_Price_Basic.cs">
-      <DependentUpon>RentCarModel.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CR_Cas_Car_Price_Choices.cs">
-      <DependentUpon>RentCarModel.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CR_Cas_Car_Price_Features.cs">
-      <DependentUpon>RentCarModel.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CR_Cas_Company_Contract.cs">
-      <DependentUpon>RentCarModel.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CR_Cas_Contract_Additional.cs">
-      <DependentUpon>RentCarModel.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CR_Cas_Contract_Basic.cs">
-      <DependentUpon>RentCarModel.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CR_Cas_Contract_Choices.cs">
-      <DependentUpon>RentCarModel.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CR_Cas_Contract_Virtual_Inspection.cs">
-      <DependentUpon>RentCarModel.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CR_Cas_Renter_Lessor.cs">
-      <DependentUpon>RentCarModel.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CR_Cas_Sup_Bank.cs">
-      <DependentUpon>RentCarModel.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CR_Cas_Sup_Beneficiary.cs">
-      <DependentUpon>RentCarModel.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CR_Cas_Sup_Branch.cs">
-      <DependentUpon>RentCarModel.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CR_Cas_Sup_Branch_Documentation.cs">
-      <DependentUpon>RentCarModel.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CR_Cas_Sup_Car_Doc_Mainten.cs">
-      <DependentUpon>RentCarModel.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CR_Cas_Sup_Car_Information.cs">
-      <DependentUpon>RentCarModel.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CR_Cas_Sup_Features.cs">
-      <DependentUpon>RentCarModel.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CR_Cas_Sup_Features_Model.cs" />
     <Compile Include="Models\CR_Cas_Sup_Follow_Up_Mechanism.cs">
-      <DependentUpon>RentCarModel.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CR_Cas_Sup_Main_Brn_Account.cs">
-      <DependentUpon>RentCarModel.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CR_Cas_Sup_Main_Com_Account.cs">
-      <DependentUpon>RentCarModel.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CR_Cas_Sup_Membership_Conditions.cs">
-      <DependentUpon>RentCarModel.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CR_Cas_Sup_Owners.cs">
-      <DependentUpon>RentCarModel.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CR_Cas_Sup_SalesPoint.cs">
-      <DependentUpon>RentCarModel.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CR_Cas_Sup_Sub_Brn_Account.cs">
-      <DependentUpon>RentCarModel.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CR_Cas_Sup_Sub_Com_Account.cs">
-      <DependentUpon>RentCarModel.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CR_Cas_User_Branch_Validity.cs">
-      <DependentUpon>RentCarModel.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CR_Cas_User_Information.cs">
-      <DependentUpon>RentCarModel.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CR_Cas_User_Validity_Contract.cs">
-      <DependentUpon>RentCarModel.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CR_ELM_Address.cs">
-      <DependentUpon>RentCarModel.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CR_Elm_Personal.cs">
-      <DependentUpon>RentCarModel.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CR_Mas_Account_Data_Owed.cs">
-      <DependentUpon>RentCarModel.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CR_Mas_Account_License_Owed.cs">
-      <DependentUpon>RentCarModel.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CR_Mas_Account_Msg_Owed.cs">
-      <DependentUpon>RentCarModel.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CR_Mas_Account_Post_Owed.cs">
-      <DependentUpon>RentCarModel.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CR_Mas_Address.cs">
-      <DependentUpon>RentCarModel.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CR_Mas_Basic_Contract.cs">
-      <DependentUpon>RentCarModel.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CR_Mas_Com_Lessor.cs">
-      <DependentUpon>RentCarModel.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CR_Mas_Com_Supporting.cs">
-      <DependentUpon>RentCarModel.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CR_Mas_Msg_Questions_Answer.cs">
-      <DependentUpon>RentCarModel.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CR_MAS_Renter_Addre.cs">
-      <DependentUpon>RentCarModel.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CR_MAS_Renter_Address.cs" />
     <Compile Include="Models\CR_Mas_Renter_Information.cs">
-      <DependentUpon>RentCarModel.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CR_Mas_Service_Bnan_Contract.cs">
-      <DependentUpon>RentCarModel.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CR_Mas_Service_Tamm_Contract.cs">
-      <DependentUpon>RentCarModel.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CR_Mas_Sup_Additional.cs">
-      <DependentUpon>RentCarModel.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CR_Mas_Sup_Administrative_Financial_Process.cs" />
     <Compile Include="Models\CR_Mas_Sup_Age.cs">
-      <DependentUpon>RentCarModel.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CR_Mas_Sup_Bank.cs">
-      <DependentUpon>RentCarModel.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CR_Mas_Sup_Brand.cs">
-      <DependentUpon>RentCarModel.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CR_Mas_Sup_Car_Features.cs" />
     <Compile Include="Models\CR_Mas_Sup_Car_Model_Category.cs" />
     <Compile Include="Models\CR_Mas_Sup_Car_Specifications.cs" />
     <Compile Include="Models\CR_Mas_Sup_Category.cs">
-      <DependentUpon>RentCarModel.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CR_Mas_Sup_Category_Car.cs">
-      <DependentUpon>RentCarModel.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CR_Mas_Sup_Choices.cs">
-      <DependentUpon>RentCarModel.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CR_Mas_Sup_City.cs">
-      <DependentUpon>RentCarModel.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CR_Mas_Sup_Color.cs">
-      <DependentUpon>RentCarModel.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CR_Mas_Sup_Country.cs">
-      <DependentUpon>RentCarModel.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CR_Mas_Sup_Educational_Qualification.cs">
-      <DependentUpon>RentCarModel.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CR_Mas_Sup_Employer.cs">
-      <DependentUpon>RentCarModel.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CR_Mas_Sup_Features.cs">
-      <DependentUpon>RentCarModel.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CR_Mas_Sup_Gender.cs">
-      <DependentUpon>RentCarModel.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CR_Mas_Sup_Group.cs">
-      <DependentUpon>RentCarModel.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CR_Mas_Sup_Jobs.cs">
-      <DependentUpon>RentCarModel.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CR_Mas_Sup_Made_Year.cs">
-      <DependentUpon>RentCarModel.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CR_Mas_Sup_Main_Account.cs">
-      <DependentUpon>RentCarModel.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CR_Mas_Sup_Membership.cs">
-      <DependentUpon>RentCarModel.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CR_Mas_Sup_Membership_Group.cs">
-      <DependentUpon>RentCarModel.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CR_Mas_Sup_Model.cs">
-      <DependentUpon>RentCarModel.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CR_Mas_Sup_Nationalities.cs">
-      <DependentUpon>RentCarModel.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CR_Mas_Sup_Payment_Method.cs">
-      <DependentUpon>RentCarModel.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CR_Mas_Sup_Procedures.cs">
-      <DependentUpon>RentCarModel.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CR_Mas_Sup_Regions.cs">
-      <DependentUpon>RentCarModel.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CR_Mas_Sup_Registration_Car.cs">
-      <DependentUpon>RentCarModel.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CR_Mas_Sup_Sector.cs">
-      <DependentUpon>RentCarModel.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CR_Mas_Sup_Service_Fee_Bnan.cs">
-      <DependentUpon>RentCarModel.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CR_Mas_Sup_Service_Fee_Data.cs">
-      <DependentUpon>RentCarModel.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CR_Mas_Sup_Service_Fee_Tamm.cs">
-      <DependentUpon>RentCarModel.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CR_Mas_Sup_Service_Fee_Tga.cs">
-      <DependentUpon>RentCarModel.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CR_Mas_Sup_Social.cs">
-      <DependentUpon>RentCarModel.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CR_Mas_Sup_Specifications.cs">
-      <DependentUpon>RentCarModel.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CR_Mas_Sup_Sub_Account.cs">
-      <DependentUpon>RentCarModel.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CR_Mas_Sup_Virtual_Inspection.cs">
-      <DependentUpon>RentCarModel.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CR_Mas_Sys_System_Name.cs">
-      <DependentUpon>RentCarModel.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CR_Mas_Sys_Tasks.cs">
-      <DependentUpon>RentCarModel.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CR_Mas_User_Information.cs">
-      <DependentUpon>RentCarModel.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CR_Mas_User_Main_Validation.cs">
-      <DependentUpon>RentCarModel.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CR_Mas_User_Sub_Validation.cs">
-      <DependentUpon>RentCarModel.tt</DependentUpon>
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CR_Mas_User_Validation.cs" />
     <Compile Include="Models\DistinctFeatures.cs" />
@@ -550,26 +654,27 @@
     <Compile Include="Models\InspectionMD.cs" />
     <Compile Include="Models\LessorMD.cs" />
     <Compile Include="Models\MasCasFeaturesModel.cs" />
+    <Compile Include="Models\MAS\MasTracingMD.cs" />
+    <Compile Include="Models\Model1.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Model1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Model1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Models\ModelCategoryMD.cs" />
     <Compile Include="Models\OwnerCarsModel.cs" />
     <Compile Include="Models\OwnersMD.cs" />
     <Compile Include="Models\partialCR_Mas_User_Sub_Validation.cs" />
     <Compile Include="Models\ProceduresMD.cs" />
-    <Compile Include="Models\RentCarModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>RentCarModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\RentCarModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>RentCarModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\RentCarModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>RentCarModel.edmx</DependentUpon>
-    </Compile>
     <Compile Include="Models\RptModels\AdditionalRPTMD.cs" />
     <Compile Include="Models\RptModels\ChoicesRPTMD.cs" />
     <Compile Include="Models\RptModels\VirtualInspectionRptMD.cs" />
@@ -638,21 +743,22 @@
     <Compile Include="Reports\BranchReport\ReportViewer.aspx.designer.cs">
       <DependentUpon>ReportViewer.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Reports\ContractBasicReports\ContractCr\Mohsen.cs">
-      <DependentUpon>Mohsen.rpt</DependentUpon>
+    <Compile Include="Reports\ContractBasicReports\ContractCr\ContractClose.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+      <DependentUpon>ContractClose.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reports\ContractBasicReports\ContractCr\ContractOpen.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ContractOpen.rpt</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reports\ContractBasicReports\ContractCr\ContractOpenCopy.cs">
-      <DependentUpon>ContractOpenCopy.rpt</DependentUpon>
+    <Compile Include="Reports\ContractBasicReports\ContractCr\ContractRenew.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+      <DependentUpon>ContractRenew.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
   </ItemGroup>
@@ -1221,8 +1327,6 @@
     <Content Include="aspnet_client\system_web\4_0_30319\crystalreportviewers13\prompting\js\promptengine_strings_zh_TW.js" />
     <Content Include="aspnet_client\system_web\4_0_30319\crystalreportviewers13\urlreporting\activexviewer.js" />
     <Content Include="aspnet_client\system_web\4_0_30319\crystalreportviewers13\urlreporting\appletviewer.js" />
-    <Content Include="bin\RentCar.dll" />
-    <Content Include="bin\RentCar.pdb" />
     <Content Include="bootstrap-3.4.1-dist\bootstrap-3.4.1-dist\css\bootstrap-theme.css" />
     <Content Include="bootstrap-3.4.1-dist\bootstrap-3.4.1-dist\css\bootstrap-theme.min.css" />
     <Content Include="bootstrap-3.4.1-dist\bootstrap-3.4.1-dist\css\bootstrap-toggle.css" />
@@ -1494,6 +1598,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="images\3.png" />
+    <Content Include="images\4.png" />
     <Content Include="main_files\ajax-loader.gif" />
     <Content Include="main_files\closelabelar.gif" />
     <Content Include="main_files\logo.png" />
@@ -1512,190 +1618,16 @@
     <Content Include="bootstrap-3.4.1-dist\bootstrap-3.4.1-dist\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="bootstrap-3.4.1-dist\bootstrap-3.4.1-dist\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="bootstrap-3.4.1-dist\bootstrap-3.4.1-dist\fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="Models\RentCarModel.Context.tt">
+    <Content Include="Models\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>RentCarModel.edmx</DependentUpon>
-      <LastGenOutput>RentCarModel.Context.cs</LastGenOutput>
+      <DependentUpon>Model1.edmx</DependentUpon>
+      <LastGenOutput>Model1.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\RentCarModel.tt">
+    <Content Include="Models\Model1.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>RentCarModel.edmx</DependentUpon>
-      <LastGenOutput>RentCarModel.cs</LastGenOutput>
+      <DependentUpon>Model1.edmx</DependentUpon>
+      <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
-    <Content Include="packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll" />
-    <Content Include="packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.pdb" />
-    <Content Include="packages\bootstrap.3.4.1\contentFiles\Content\bootstrap-theme.css" />
-    <Content Include="packages\bootstrap.3.4.1\contentFiles\Content\bootstrap-theme.min.css" />
-    <Content Include="packages\bootstrap.3.4.1\contentFiles\Content\bootstrap.css" />
-    <Content Include="packages\bootstrap.3.4.1\contentFiles\Content\bootstrap.min.css" />
-    <Content Include="packages\bootstrap.3.4.1\contentFiles\fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="packages\bootstrap.3.4.1\contentFiles\Scripts\bootstrap.js" />
-    <Content Include="packages\bootstrap.3.4.1\contentFiles\Scripts\bootstrap.min.js" />
-    <Content Include="packages\bootstrap.3.4.1\content\Content\bootstrap-theme.css" />
-    <Content Include="packages\bootstrap.3.4.1\content\Content\bootstrap-theme.min.css" />
-    <Content Include="packages\bootstrap.3.4.1\content\Content\bootstrap.css" />
-    <Content Include="packages\bootstrap.3.4.1\content\Content\bootstrap.min.css" />
-    <Content Include="packages\bootstrap.3.4.1\content\fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="packages\bootstrap.3.4.1\content\Scripts\bootstrap.js" />
-    <Content Include="packages\bootstrap.3.4.1\content\Scripts\bootstrap.min.js" />
-    <Content Include="packages\bootstrap.3.4.1\LICENSE.txt" />
-    <Content Include="packages\EntityFramework.6.2.0\lib\net40\EntityFramework.dll" />
-    <Content Include="packages\EntityFramework.6.2.0\lib\net40\EntityFramework.SqlServer.dll" />
-    <Content Include="packages\EntityFramework.6.2.0\lib\net40\EntityFramework.SqlServer.xml" />
-    <Content Include="packages\EntityFramework.6.2.0\lib\net40\EntityFramework.xml" />
-    <Content Include="packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll" />
-    <Content Include="packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll" />
-    <Content Include="packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.xml" />
-    <Content Include="packages\EntityFramework.6.2.0\lib\net45\EntityFramework.xml" />
-    <Content Include="packages\EntityFramework.6.2.0\tools\about_EntityFramework.help.txt" />
-    <Content Include="packages\EntityFramework.6.2.0\tools\EntityFramework.PowerShell.dll" />
-    <Content Include="packages\EntityFramework.6.2.0\tools\EntityFramework.PowerShell.Utility.dll" />
-    <Content Include="packages\EntityFramework.6.2.0\tools\migrate.exe" />
-    <Content Include="packages\EntityFramework.6.4.4\build\Microsoft.Data.Entity.Build.Tasks.dll" />
-    <Content Include="packages\EntityFramework.6.4.4\Icon.png" />
-    <Content Include="packages\EntityFramework.6.4.4\lib\net40\EntityFramework.dll" />
-    <Content Include="packages\EntityFramework.6.4.4\lib\net40\EntityFramework.SqlServer.dll" />
-    <Content Include="packages\EntityFramework.6.4.4\lib\net40\EntityFramework.SqlServer.xml" />
-    <Content Include="packages\EntityFramework.6.4.4\lib\net40\EntityFramework.xml" />
-    <Content Include="packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll" />
-    <Content Include="packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll" />
-    <Content Include="packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.xml" />
-    <Content Include="packages\EntityFramework.6.4.4\lib\net45\EntityFramework.xml" />
-    <Content Include="packages\EntityFramework.6.4.4\lib\netstandard2.1\EntityFramework.dll" />
-    <Content Include="packages\EntityFramework.6.4.4\lib\netstandard2.1\EntityFramework.SqlServer.dll" />
-    <Content Include="packages\EntityFramework.6.4.4\lib\netstandard2.1\EntityFramework.SqlServer.xml" />
-    <Content Include="packages\EntityFramework.6.4.4\lib\netstandard2.1\EntityFramework.xml" />
-    <Content Include="packages\EntityFramework.6.4.4\tools\about_EntityFramework6.help.txt" />
-    <Content Include="packages\EntityFramework.6.4.4\tools\net40\any\ef6.exe" />
-    <Content Include="packages\EntityFramework.6.4.4\tools\net40\any\ef6.pdb" />
-    <Content Include="packages\EntityFramework.6.4.4\tools\net40\win-x86\ef6.exe" />
-    <Content Include="packages\EntityFramework.6.4.4\tools\net40\win-x86\ef6.pdb" />
-    <Content Include="packages\EntityFramework.6.4.4\tools\net45\any\ef6.exe" />
-    <Content Include="packages\EntityFramework.6.4.4\tools\net45\any\ef6.pdb" />
-    <Content Include="packages\EntityFramework.6.4.4\tools\net45\win-x86\ef6.exe" />
-    <Content Include="packages\EntityFramework.6.4.4\tools\net45\win-x86\ef6.pdb" />
-    <Content Include="packages\EntityFramework.6.4.4\tools\netcoreapp3.0\any\ef6.dll" />
-    <Content Include="packages\EntityFramework.6.4.4\tools\netcoreapp3.0\any\ef6.pdb" />
-    <None Include="packages\jQuery.3.4.1\Content\Scripts\jquery-3.4.1-vsdoc.js" />
-    <Content Include="packages\jQuery.3.4.1\Content\Scripts\jquery-3.4.1.js" />
-    <Content Include="packages\jQuery.3.4.1\Content\Scripts\jquery-3.4.1.min.js" />
-    <Content Include="packages\jQuery.3.4.1\Content\Scripts\jquery-3.4.1.slim.js" />
-    <Content Include="packages\jQuery.3.4.1\Content\Scripts\jquery-3.4.1.slim.min.js" />
-    <None Include="packages\jQuery.3.4.1\Tools\jquery-3.4.1.intellisense.js" />
-    <None Include="packages\jQuery.Validation.1.17.0\Content\Scripts\jquery.validate-vsdoc.js" />
-    <Content Include="packages\jQuery.Validation.1.17.0\Content\Scripts\jquery.validate.js" />
-    <Content Include="packages\jQuery.Validation.1.17.0\Content\Scripts\jquery.validate.min.js" />
-    <Content Include="packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll" />
-    <Content Include="packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.xml" />
-    <Content Include="packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll" />
-    <Content Include="packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.xml" />
-    <Content Include="packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll" />
-    <Content Include="packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\system.web.optimization.xml" />
-    <Content Include="packages\Microsoft.AspNet.WebApi.Client.5.2.7\lib\net45\System.Net.Http.Formatting.dll" />
-    <Content Include="packages\Microsoft.AspNet.WebApi.Client.5.2.7\lib\net45\System.Net.Http.Formatting.xml" />
-    <Content Include="packages\Microsoft.AspNet.WebApi.Client.5.2.7\lib\netstandard2.0\System.Net.Http.Formatting.dll" />
-    <Content Include="packages\Microsoft.AspNet.WebApi.Client.5.2.7\lib\netstandard2.0\System.Net.Http.Formatting.xml" />
-    <Content Include="packages\Microsoft.AspNet.WebApi.Client.5.2.7\lib\portable-wp8%252Bnetcore45%252Bnet45%252Bwp81%252Bwpa81\System.Net.Http.Formatting.dll" />
-    <Content Include="packages\Microsoft.AspNet.WebApi.Client.5.2.7\lib\portable-wp8%252Bnetcore45%252Bnet45%252Bwp81%252Bwpa81\System.Net.Http.Formatting.xml" />
-    <Content Include="packages\Microsoft.AspNet.WebApi.Core.5.2.7\lib\net45\System.Web.Http.dll" />
-    <Content Include="packages\Microsoft.AspNet.WebApi.Core.5.2.7\lib\net45\System.Web.Http.xml" />
-    <Content Include="packages\Microsoft.AspNet.WebApi.WebHost.5.2.7\lib\net45\System.Web.Http.WebHost.dll" />
-    <Content Include="packages\Microsoft.AspNet.WebApi.WebHost.5.2.7\lib\net45\System.Web.Http.WebHost.xml" />
-    <Content Include="packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll" />
-    <Content Include="packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.xml" />
-    <Content Include="packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Deployment.dll" />
-    <Content Include="packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Deployment.xml" />
-    <Content Include="packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.dll" />
-    <Content Include="packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll" />
-    <Content Include="packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.xml" />
-    <Content Include="packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.xml" />
-    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll" />
-    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml" />
-    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\tools\Roslyn45\csc.exe" />
-    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\tools\Roslyn45\csi.exe" />
-    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\tools\Roslyn45\Microsoft.Build.Tasks.CodeAnalysis.dll" />
-    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\tools\Roslyn45\Microsoft.CodeAnalysis.CSharp.dll" />
-    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\tools\Roslyn45\Microsoft.CodeAnalysis.CSharp.Scripting.dll" />
-    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\tools\Roslyn45\Microsoft.CodeAnalysis.dll" />
-    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\tools\Roslyn45\Microsoft.CodeAnalysis.Scripting.dll" />
-    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\tools\Roslyn45\Microsoft.CodeAnalysis.VisualBasic.dll" />
-    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\tools\Roslyn45\Microsoft.DiaSymReader.Native.amd64.dll" />
-    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\tools\Roslyn45\Microsoft.DiaSymReader.Native.x86.dll" />
-    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\tools\Roslyn45\System.AppContext.dll" />
-    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\tools\Roslyn45\System.Collections.Immutable.dll" />
-    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\tools\Roslyn45\System.Diagnostics.StackTrace.dll" />
-    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\tools\Roslyn45\System.IO.FileSystem.dll" />
-    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\tools\Roslyn45\System.IO.FileSystem.Primitives.dll" />
-    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\tools\Roslyn45\System.Reflection.Metadata.dll" />
-    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\tools\Roslyn45\vbc.exe" />
-    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\tools\Roslyn45\VBCSCompiler.exe" />
-    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\tools\RoslynLatest\csc.exe" />
-    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\tools\RoslynLatest\csi.exe" />
-    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\tools\RoslynLatest\Microsoft.Build.Tasks.CodeAnalysis.dll" />
-    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\tools\RoslynLatest\Microsoft.CodeAnalysis.CSharp.dll" />
-    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\tools\RoslynLatest\Microsoft.CodeAnalysis.CSharp.Scripting.dll" />
-    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\tools\RoslynLatest\Microsoft.CodeAnalysis.dll" />
-    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\tools\RoslynLatest\Microsoft.CodeAnalysis.Scripting.dll" />
-    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\tools\RoslynLatest\Microsoft.CodeAnalysis.VisualBasic.dll" />
-    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\tools\RoslynLatest\Microsoft.DiaSymReader.Native.amd64.dll" />
-    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\tools\RoslynLatest\Microsoft.DiaSymReader.Native.x86.dll" />
-    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\tools\RoslynLatest\Microsoft.Win32.Primitives.dll" />
-    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\tools\RoslynLatest\System.AppContext.dll" />
-    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\tools\RoslynLatest\System.Collections.Immutable.dll" />
-    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\tools\RoslynLatest\System.Console.dll" />
-    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\tools\RoslynLatest\System.Diagnostics.DiagnosticSource.dll" />
-    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\tools\RoslynLatest\System.Diagnostics.FileVersionInfo.dll" />
-    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\tools\RoslynLatest\System.Diagnostics.StackTrace.dll" />
-    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\tools\RoslynLatest\System.Globalization.Calendars.dll" />
-    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\tools\RoslynLatest\System.IO.Compression.dll" />
-    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\tools\RoslynLatest\System.IO.Compression.ZipFile.dll" />
-    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\tools\RoslynLatest\System.IO.FileSystem.dll" />
-    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\tools\RoslynLatest\System.IO.FileSystem.Primitives.dll" />
-    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\tools\RoslynLatest\System.Net.Http.dll" />
-    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\tools\RoslynLatest\System.Net.Sockets.dll" />
-    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\tools\RoslynLatest\System.Reflection.Metadata.dll" />
-    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\tools\RoslynLatest\System.Runtime.InteropServices.RuntimeInformation.dll" />
-    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\tools\RoslynLatest\System.Security.Cryptography.Algorithms.dll" />
-    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\tools\RoslynLatest\System.Security.Cryptography.Encoding.dll" />
-    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\tools\RoslynLatest\System.Security.Cryptography.Primitives.dll" />
-    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\tools\RoslynLatest\System.Security.Cryptography.X509Certificates.dll" />
-    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\tools\RoslynLatest\System.Text.Encoding.CodePages.dll" />
-    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\tools\RoslynLatest\System.Threading.Tasks.Extensions.dll" />
-    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\tools\RoslynLatest\System.ValueTuple.dll" />
-    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\tools\RoslynLatest\System.Xml.ReaderWriter.dll" />
-    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\tools\RoslynLatest\System.Xml.XmlDocument.dll" />
-    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\tools\RoslynLatest\System.Xml.XPath.dll" />
-    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\tools\RoslynLatest\System.Xml.XPath.XDocument.dll" />
-    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\tools\RoslynLatest\vbc.exe" />
-    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\tools\RoslynLatest\VBCSCompiler.exe" />
-    <Content Include="packages\Microsoft.jQuery.Unobtrusive.Validation.3.2.11\Content\Scripts\jquery.validate.unobtrusive.js" />
-    <Content Include="packages\Microsoft.jQuery.Unobtrusive.Validation.3.2.11\Content\Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll" />
-    <Content Include="packages\Modernizr.2.8.3\Content\Scripts\modernizr-2.8.3.js" />
-    <Content Include="packages\Newtonsoft.Json.12.0.2\lib\net20\Newtonsoft.Json.dll" />
-    <Content Include="packages\Newtonsoft.Json.12.0.2\lib\net20\Newtonsoft.Json.xml" />
-    <Content Include="packages\Newtonsoft.Json.12.0.2\lib\net35\Newtonsoft.Json.dll" />
-    <Content Include="packages\Newtonsoft.Json.12.0.2\lib\net35\Newtonsoft.Json.xml" />
-    <Content Include="packages\Newtonsoft.Json.12.0.2\lib\net40\Newtonsoft.Json.dll" />
-    <Content Include="packages\Newtonsoft.Json.12.0.2\lib\net40\Newtonsoft.Json.xml" />
-    <Content Include="packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll" />
-    <Content Include="packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.xml" />
-    <Content Include="packages\Newtonsoft.Json.12.0.2\lib\netstandard1.0\Newtonsoft.Json.dll" />
-    <Content Include="packages\Newtonsoft.Json.12.0.2\lib\netstandard1.0\Newtonsoft.Json.xml" />
-    <Content Include="packages\Newtonsoft.Json.12.0.2\lib\netstandard1.3\Newtonsoft.Json.dll" />
-    <Content Include="packages\Newtonsoft.Json.12.0.2\lib\netstandard1.3\Newtonsoft.Json.xml" />
-    <Content Include="packages\Newtonsoft.Json.12.0.2\lib\netstandard2.0\Newtonsoft.Json.dll" />
-    <Content Include="packages\Newtonsoft.Json.12.0.2\lib\netstandard2.0\Newtonsoft.Json.xml" />
-    <Content Include="packages\Newtonsoft.Json.12.0.2\lib\portable-net40+sl5+win8+wp8+wpa81\Newtonsoft.Json.dll" />
-    <Content Include="packages\Newtonsoft.Json.12.0.2\lib\portable-net40+sl5+win8+wp8+wpa81\Newtonsoft.Json.xml" />
-    <Content Include="packages\Newtonsoft.Json.12.0.2\lib\portable-net45+win8+wp8+wpa81\Newtonsoft.Json.dll" />
-    <Content Include="packages\Newtonsoft.Json.12.0.2\lib\portable-net45+win8+wp8+wpa81\Newtonsoft.Json.xml" />
-    <Content Include="packages\toastr.2.1.1\content\content\toastr.css" />
-    <Content Include="packages\toastr.2.1.1\content\content\toastr.min.css" />
-    <Content Include="packages\toastr.2.1.1\content\scripts\toastr.js" />
-    <Content Include="packages\toastr.2.1.1\content\scripts\toastr.min.js" />
-    <Content Include="packages\WebGrease.1.6.0\lib\WebGrease.dll" />
-    <Content Include="packages\WebGrease.1.6.0\tools\WG.EXE" />
     <Content Include="Reports\Admin_Procedures\FrmTracing.aspx" />
     <Content Include="Reports\Admin_Procedures\RptViewer.aspx" />
     <Content Include="Reports\BranchReport\ReportViewer.aspx" />
@@ -1749,13 +1681,6 @@
     <Content Include="bootstrap-3.4.1-dist\bootstrap-3.4.1-dist\js\bootstrap2-toggle.min.js.map" />
     <Content Include="bootstrap-3.4.1-dist\bootstrap-3.4.1-dist\js\bootstrap-toggle.min.js.map" />
     <Content Include="bootstrap-3.4.1-dist\bootstrap-3.4.1-dist\js\bootstrap2-toggle.min.js.map" />
-    <EntityDeploy Include="Models\RentCarModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>RentCarModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\RentCarModel.edmx.diagram">
-      <DependentUpon>RentCarModel.edmx</DependentUpon>
-    </Content>
     <Content Include="BSys3 Styles\Fonts\dripicons-v2.eot" />
     <Content Include="BSys3 Styles\Fonts\dripicons-v2.ttf" />
     <Content Include="BSys3 Styles\Fonts\dripicons-v2.woff" />
@@ -1872,194 +1797,26 @@
     <Content Include="BSys3Styles\Fonts\themify9f24.ttf" />
     <Content Include="BSys3Styles\Fonts\themify9f24.woff" />
     <Content Include="BSys3Styles\Fonts\themifyd41d.eot" />
-    <Content Include="packages\Antlr.3.5.0.2\.signature.p7s" />
-    <Content Include="packages\Antlr.3.5.0.2\Antlr.3.5.0.2.nupkg" />
-    <Content Include="packages\bootstrap.3.4.1\.signature.p7s" />
-    <Content Include="packages\bootstrap.3.4.1\bootstrap.3.4.1.nupkg" />
-    <Content Include="packages\bootstrap.3.4.1\contentFiles\Content\bootstrap-theme.css.map" />
-    <Content Include="packages\bootstrap.3.4.1\contentFiles\Content\bootstrap-theme.min.css.map" />
-    <Content Include="packages\bootstrap.3.4.1\contentFiles\Content\bootstrap.css.map" />
-    <Content Include="packages\bootstrap.3.4.1\contentFiles\Content\bootstrap.min.css.map" />
-    <Content Include="packages\bootstrap.3.4.1\contentFiles\fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="packages\bootstrap.3.4.1\contentFiles\fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="packages\bootstrap.3.4.1\contentFiles\fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="packages\bootstrap.3.4.1\contentFiles\fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="packages\bootstrap.3.4.1\content\Content\bootstrap-theme.css.map" />
-    <Content Include="packages\bootstrap.3.4.1\content\Content\bootstrap-theme.min.css.map" />
-    <Content Include="packages\bootstrap.3.4.1\content\Content\bootstrap.css.map" />
-    <Content Include="packages\bootstrap.3.4.1\content\Content\bootstrap.min.css.map" />
-    <Content Include="packages\bootstrap.3.4.1\content\fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="packages\bootstrap.3.4.1\content\fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="packages\bootstrap.3.4.1\content\fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="packages\bootstrap.3.4.1\content\fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="packages\EntityFramework.6.2.0\Content\net40\App.config.transform" />
-    <Content Include="packages\EntityFramework.6.2.0\Content\net40\Web.config.transform" />
-    <Content Include="packages\EntityFramework.6.2.0\EntityFramework.6.2.0.nupkg" />
-    <Content Include="packages\EntityFramework.6.2.0\tools\EntityFramework.psd1" />
-    <Content Include="packages\EntityFramework.6.2.0\tools\EntityFramework.psm1" />
-    <Content Include="packages\EntityFramework.6.2.0\tools\init.ps1" />
-    <Content Include="packages\EntityFramework.6.2.0\tools\install.ps1" />
-    <Content Include="packages\EntityFramework.6.4.4\.signature.p7s" />
-    <Content Include="packages\EntityFramework.6.4.4\buildTransitive\EntityFramework.props" />
-    <Content Include="packages\EntityFramework.6.4.4\buildTransitive\EntityFramework.targets" />
-    <Content Include="packages\EntityFramework.6.4.4\buildTransitive\netcoreapp3.0\EntityFramework.props" />
-    <Content Include="packages\EntityFramework.6.4.4\buildTransitive\netcoreapp3.0\EntityFramework.targets" />
-    <Content Include="packages\EntityFramework.6.4.4\build\EntityFramework.DefaultItems.props" />
-    <Content Include="packages\EntityFramework.6.4.4\build\EntityFramework.props" />
-    <Content Include="packages\EntityFramework.6.4.4\build\EntityFramework.targets" />
-    <Content Include="packages\EntityFramework.6.4.4\build\netcoreapp3.0\EntityFramework.props" />
-    <Content Include="packages\EntityFramework.6.4.4\build\netcoreapp3.0\EntityFramework.targets" />
-    <Content Include="packages\EntityFramework.6.4.4\content\net40\App.config.install.xdt" />
-    <Content Include="packages\EntityFramework.6.4.4\content\net40\App.config.transform" />
-    <Content Include="packages\EntityFramework.6.4.4\content\net40\Web.config.install.xdt" />
-    <Content Include="packages\EntityFramework.6.4.4\content\net40\Web.config.transform" />
-    <Content Include="packages\EntityFramework.6.4.4\EntityFramework.6.4.4.nupkg" />
-    <Content Include="packages\EntityFramework.6.4.4\tools\EntityFramework6.PS2.psd1" />
-    <Content Include="packages\EntityFramework.6.4.4\tools\EntityFramework6.PS2.psm1" />
-    <Content Include="packages\EntityFramework.6.4.4\tools\EntityFramework6.psd1" />
-    <Content Include="packages\EntityFramework.6.4.4\tools\EntityFramework6.psm1" />
-    <Content Include="packages\EntityFramework.6.4.4\tools\init.ps1" />
-    <Content Include="packages\EntityFramework.6.4.4\tools\install.ps1" />
-    <Content Include="packages\EntityFramework.6.4.4\tools\netcoreapp3.0\any\ef6.runtimeconfig.json" />
-    <Content Include="packages\jQuery.3.4.1\.signature.p7s" />
-    <Content Include="packages\jQuery.3.4.1\Content\Scripts\jquery-3.4.1.min.map" />
-    <Content Include="packages\jQuery.3.4.1\Content\Scripts\jquery-3.4.1.slim.min.map" />
-    <Content Include="packages\jQuery.3.4.1\jQuery.3.4.1.nupkg" />
-    <Content Include="packages\jQuery.3.4.1\Tools\common.ps1" />
-    <Content Include="packages\jQuery.3.4.1\Tools\install.ps1" />
-    <Content Include="packages\jQuery.3.4.1\Tools\uninstall.ps1" />
-    <Content Include="packages\jQuery.Validation.1.17.0\.signature.p7s" />
-    <Content Include="packages\jQuery.Validation.1.17.0\jQuery.Validation.1.17.0.nupkg" />
-    <Content Include="packages\Microsoft.AspNet.Mvc.5.2.7\.signature.p7s" />
-    <Content Include="packages\Microsoft.AspNet.Mvc.5.2.7\Content\Web.config.install.xdt" />
-    <Content Include="packages\Microsoft.AspNet.Mvc.5.2.7\Content\Web.config.uninstall.xdt" />
-    <Content Include="packages\Microsoft.AspNet.Mvc.5.2.7\Microsoft.AspNet.Mvc.5.2.7.nupkg" />
-    <Content Include="packages\Microsoft.AspNet.Razor.3.2.7\.signature.p7s" />
-    <Content Include="packages\Microsoft.AspNet.Razor.3.2.7\Microsoft.AspNet.Razor.3.2.7.nupkg" />
-    <Content Include="packages\Microsoft.AspNet.Web.Optimization.1.1.3\.signature.p7s" />
-    <Content Include="packages\Microsoft.AspNet.Web.Optimization.1.1.3\Microsoft.AspNet.Web.Optimization.1.1.3.nupkg" />
-    <Content Include="packages\Microsoft.AspNet.WebApi.5.2.7\.signature.p7s" />
-    <Content Include="packages\Microsoft.AspNet.WebApi.5.2.7\Microsoft.AspNet.WebApi.5.2.7.nupkg" />
-    <Content Include="packages\Microsoft.AspNet.WebApi.Client.5.2.7\.signature.p7s" />
-    <Content Include="packages\Microsoft.AspNet.WebApi.Client.5.2.7\Microsoft.AspNet.WebApi.Client.5.2.7.nupkg" />
-    <Content Include="packages\Microsoft.AspNet.WebApi.Core.5.2.7\.signature.p7s" />
-    <Content Include="packages\Microsoft.AspNet.WebApi.Core.5.2.7\Content\web.config.transform" />
-    <Content Include="packages\Microsoft.AspNet.WebApi.Core.5.2.7\Microsoft.AspNet.WebApi.Core.5.2.7.nupkg" />
-    <Content Include="packages\Microsoft.AspNet.WebApi.HelpPage.5.2.7\.signature.p7s" />
-    <Content Include="packages\Microsoft.AspNet.WebApi.HelpPage.5.2.7\Content\Areas\HelpPage\ApiDescriptionExtensions.cs.pp" />
-    <Content Include="packages\Microsoft.AspNet.WebApi.HelpPage.5.2.7\Content\Areas\HelpPage\App_Start\HelpPageConfig.cs.pp" />
-    <Content Include="packages\Microsoft.AspNet.WebApi.HelpPage.5.2.7\Content\Areas\HelpPage\Controllers\HelpController.cs.pp" />
-    <Content Include="packages\Microsoft.AspNet.WebApi.HelpPage.5.2.7\Content\Areas\HelpPage\HelpPage.css.pp" />
-    <Content Include="packages\Microsoft.AspNet.WebApi.HelpPage.5.2.7\Content\Areas\HelpPage\HelpPageAreaRegistration.cs.pp" />
-    <Content Include="packages\Microsoft.AspNet.WebApi.HelpPage.5.2.7\Content\Areas\HelpPage\HelpPageConfigurationExtensions.cs.pp" />
-    <Content Include="packages\Microsoft.AspNet.WebApi.HelpPage.5.2.7\Content\Areas\HelpPage\ModelDescriptions\CollectionModelDescription.cs.pp" />
-    <Content Include="packages\Microsoft.AspNet.WebApi.HelpPage.5.2.7\Content\Areas\HelpPage\ModelDescriptions\ComplexTypeModelDescription.cs.pp" />
-    <Content Include="packages\Microsoft.AspNet.WebApi.HelpPage.5.2.7\Content\Areas\HelpPage\ModelDescriptions\DictionaryModelDescription.cs.pp" />
-    <Content Include="packages\Microsoft.AspNet.WebApi.HelpPage.5.2.7\Content\Areas\HelpPage\ModelDescriptions\EnumTypeModelDescription.cs.pp" />
-    <Content Include="packages\Microsoft.AspNet.WebApi.HelpPage.5.2.7\Content\Areas\HelpPage\ModelDescriptions\EnumValueDescription.cs.pp" />
-    <Content Include="packages\Microsoft.AspNet.WebApi.HelpPage.5.2.7\Content\Areas\HelpPage\ModelDescriptions\IModelDocumentationProvider.cs.pp" />
-    <Content Include="packages\Microsoft.AspNet.WebApi.HelpPage.5.2.7\Content\Areas\HelpPage\ModelDescriptions\KeyValuePairModelDescription.cs.pp" />
-    <Content Include="packages\Microsoft.AspNet.WebApi.HelpPage.5.2.7\Content\Areas\HelpPage\ModelDescriptions\ModelDescription.cs.pp" />
-    <Content Include="packages\Microsoft.AspNet.WebApi.HelpPage.5.2.7\Content\Areas\HelpPage\ModelDescriptions\ModelDescriptionGenerator.cs.pp" />
-    <Content Include="packages\Microsoft.AspNet.WebApi.HelpPage.5.2.7\Content\Areas\HelpPage\ModelDescriptions\ModelNameAttribute.cs.pp" />
-    <Content Include="packages\Microsoft.AspNet.WebApi.HelpPage.5.2.7\Content\Areas\HelpPage\ModelDescriptions\ModelNameHelper.cs.pp" />
-    <Content Include="packages\Microsoft.AspNet.WebApi.HelpPage.5.2.7\Content\Areas\HelpPage\ModelDescriptions\ParameterAnnotation.cs.pp" />
-    <Content Include="packages\Microsoft.AspNet.WebApi.HelpPage.5.2.7\Content\Areas\HelpPage\ModelDescriptions\ParameterDescription.cs.pp" />
-    <Content Include="packages\Microsoft.AspNet.WebApi.HelpPage.5.2.7\Content\Areas\HelpPage\ModelDescriptions\SimpleTypeModelDescription.cs.pp" />
-    <Content Include="packages\Microsoft.AspNet.WebApi.HelpPage.5.2.7\Content\Areas\HelpPage\Models\HelpPageApiModel.cs.pp" />
-    <Content Include="packages\Microsoft.AspNet.WebApi.HelpPage.5.2.7\Content\Areas\HelpPage\SampleGeneration\HelpPageSampleGenerator.cs.pp" />
-    <Content Include="packages\Microsoft.AspNet.WebApi.HelpPage.5.2.7\Content\Areas\HelpPage\SampleGeneration\HelpPageSampleKey.cs.pp" />
-    <Content Include="packages\Microsoft.AspNet.WebApi.HelpPage.5.2.7\Content\Areas\HelpPage\SampleGeneration\ImageSample.cs.pp" />
-    <Content Include="packages\Microsoft.AspNet.WebApi.HelpPage.5.2.7\Content\Areas\HelpPage\SampleGeneration\InvalidSample.cs.pp" />
-    <Content Include="packages\Microsoft.AspNet.WebApi.HelpPage.5.2.7\Content\Areas\HelpPage\SampleGeneration\ObjectGenerator.cs.pp" />
-    <Content Include="packages\Microsoft.AspNet.WebApi.HelpPage.5.2.7\Content\Areas\HelpPage\SampleGeneration\SampleDirection.cs.pp" />
-    <Content Include="packages\Microsoft.AspNet.WebApi.HelpPage.5.2.7\Content\Areas\HelpPage\SampleGeneration\TextSample.cs.pp" />
-    <Content Include="packages\Microsoft.AspNet.WebApi.HelpPage.5.2.7\Content\Areas\HelpPage\Views\Help\Api.cshtml.pp" />
-    <Content Include="packages\Microsoft.AspNet.WebApi.HelpPage.5.2.7\Content\Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml.pp" />
-    <Content Include="packages\Microsoft.AspNet.WebApi.HelpPage.5.2.7\Content\Areas\HelpPage\Views\Help\DisplayTemplates\CollectionModelDescription.cshtml.pp" />
-    <Content Include="packages\Microsoft.AspNet.WebApi.HelpPage.5.2.7\Content\Areas\HelpPage\Views\Help\DisplayTemplates\ComplexTypeModelDescription.cshtml.pp" />
-    <Content Include="packages\Microsoft.AspNet.WebApi.HelpPage.5.2.7\Content\Areas\HelpPage\Views\Help\DisplayTemplates\DictionaryModelDescription.cshtml.pp" />
-    <Content Include="packages\Microsoft.AspNet.WebApi.HelpPage.5.2.7\Content\Areas\HelpPage\Views\Help\DisplayTemplates\EnumTypeModelDescription.cshtml.pp" />
-    <Content Include="packages\Microsoft.AspNet.WebApi.HelpPage.5.2.7\Content\Areas\HelpPage\Views\Help\DisplayTemplates\HelpPageApiModel.cshtml.pp" />
-    <Content Include="packages\Microsoft.AspNet.WebApi.HelpPage.5.2.7\Content\Areas\HelpPage\Views\Help\DisplayTemplates\ImageSample.cshtml.pp" />
-    <Content Include="packages\Microsoft.AspNet.WebApi.HelpPage.5.2.7\Content\Areas\HelpPage\Views\Help\DisplayTemplates\InvalidSample.cshtml.pp" />
-    <Content Include="packages\Microsoft.AspNet.WebApi.HelpPage.5.2.7\Content\Areas\HelpPage\Views\Help\DisplayTemplates\KeyValuePairModelDescription.cshtml.pp" />
-    <Content Include="packages\Microsoft.AspNet.WebApi.HelpPage.5.2.7\Content\Areas\HelpPage\Views\Help\DisplayTemplates\ModelDescriptionLink.cshtml.pp" />
-    <Content Include="packages\Microsoft.AspNet.WebApi.HelpPage.5.2.7\Content\Areas\HelpPage\Views\Help\DisplayTemplates\Parameters.cshtml.pp" />
-    <Content Include="packages\Microsoft.AspNet.WebApi.HelpPage.5.2.7\Content\Areas\HelpPage\Views\Help\DisplayTemplates\Samples.cshtml.pp" />
-    <Content Include="packages\Microsoft.AspNet.WebApi.HelpPage.5.2.7\Content\Areas\HelpPage\Views\Help\DisplayTemplates\SimpleTypeModelDescription.cshtml.pp" />
-    <Content Include="packages\Microsoft.AspNet.WebApi.HelpPage.5.2.7\Content\Areas\HelpPage\Views\Help\DisplayTemplates\TextSample.cshtml.pp" />
-    <Content Include="packages\Microsoft.AspNet.WebApi.HelpPage.5.2.7\Content\Areas\HelpPage\Views\Help\Index.cshtml.pp" />
-    <Content Include="packages\Microsoft.AspNet.WebApi.HelpPage.5.2.7\Content\Areas\HelpPage\Views\Help\ResourceModel.cshtml.pp" />
-    <Content Include="packages\Microsoft.AspNet.WebApi.HelpPage.5.2.7\Content\Areas\HelpPage\Views\Shared\_Layout.cshtml.pp" />
-    <Content Include="packages\Microsoft.AspNet.WebApi.HelpPage.5.2.7\Content\Areas\HelpPage\Views\Web.config" />
-    <Content Include="packages\Microsoft.AspNet.WebApi.HelpPage.5.2.7\Content\Areas\HelpPage\Views\_ViewStart.cshtml.pp" />
-    <Content Include="packages\Microsoft.AspNet.WebApi.HelpPage.5.2.7\Content\Areas\HelpPage\XmlDocumentationProvider.cs.pp" />
-    <Content Include="packages\Microsoft.AspNet.WebApi.HelpPage.5.2.7\Microsoft.AspNet.WebApi.HelpPage.5.2.7.nupkg" />
-    <Content Include="packages\Microsoft.AspNet.WebApi.WebHost.5.2.7\.signature.p7s" />
-    <Content Include="packages\Microsoft.AspNet.WebApi.WebHost.5.2.7\Microsoft.AspNet.WebApi.WebHost.5.2.7.nupkg" />
-    <Content Include="packages\Microsoft.AspNet.WebPages.3.2.7\.signature.p7s" />
-    <Content Include="packages\Microsoft.AspNet.WebPages.3.2.7\Content\Web.config.install.xdt" />
-    <Content Include="packages\Microsoft.AspNet.WebPages.3.2.7\Content\Web.config.uninstall.xdt" />
-    <Content Include="packages\Microsoft.AspNet.WebPages.3.2.7\Microsoft.AspNet.WebPages.3.2.7.nupkg" />
-    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\.signature.p7s" />
-    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.Extensions.props" />
-    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" />
-    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.Extensions.props" />
-    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" />
-    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\content\net45\app.config.install.xdt" />
-    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\content\net45\app.config.uninstall.xdt" />
-    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\content\net45\web.config.install.xdt" />
-    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\content\net45\web.config.uninstall.xdt" />
-    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\content\net46\app.config.install.xdt" />
-    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\content\net46\app.config.uninstall.xdt" />
-    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\content\net46\web.config.install.xdt" />
-    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\content\net46\web.config.uninstall.xdt" />
-    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1.nupkg" />
-    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\tools\net45\install.ps1" />
-    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\tools\net45\uninstall.ps1" />
-    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\tools\Roslyn45\csc.exe.config" />
-    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\tools\Roslyn45\csc.rsp" />
-    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\tools\Roslyn45\csi.rsp" />
-    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\tools\Roslyn45\Microsoft.CSharp.Core.targets" />
-    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\tools\Roslyn45\Microsoft.VisualBasic.Core.targets" />
-    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\tools\Roslyn45\vbc.exe.config" />
-    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\tools\Roslyn45\vbc.rsp" />
-    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\tools\Roslyn45\VBCSCompiler.exe.config" />
-    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\tools\RoslynLatest\csc.exe.config" />
-    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\tools\RoslynLatest\csc.rsp" />
-    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\tools\RoslynLatest\csi.exe.config" />
-    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\tools\RoslynLatest\csi.rsp" />
-    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\tools\RoslynLatest\Microsoft.CSharp.Core.targets" />
-    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\tools\RoslynLatest\Microsoft.Managed.Core.targets" />
-    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\tools\RoslynLatest\Microsoft.VisualBasic.Core.targets" />
-    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\tools\RoslynLatest\vbc.exe.config" />
-    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\tools\RoslynLatest\vbc.rsp" />
-    <Content Include="packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\tools\RoslynLatest\VBCSCompiler.exe.config" />
-    <Content Include="packages\Microsoft.jQuery.Unobtrusive.Validation.3.2.11\.signature.p7s" />
-    <Content Include="packages\Microsoft.jQuery.Unobtrusive.Validation.3.2.11\Microsoft.jQuery.Unobtrusive.Validation.3.2.11.nupkg" />
-    <Content Include="packages\Microsoft.Web.Infrastructure.1.0.0.0\.signature.p7s" />
-    <Content Include="packages\Microsoft.Web.Infrastructure.1.0.0.0\Microsoft.Web.Infrastructure.1.0.0.0.nupkg" />
-    <Content Include="packages\Modernizr.2.8.3\.signature.p7s" />
-    <Content Include="packages\Modernizr.2.8.3\Modernizr.2.8.3.nupkg" />
-    <Content Include="packages\Modernizr.2.8.3\Tools\common.ps1" />
-    <Content Include="packages\Modernizr.2.8.3\Tools\install.ps1" />
-    <Content Include="packages\Modernizr.2.8.3\Tools\uninstall.ps1" />
-    <Content Include="packages\Newtonsoft.Json.12.0.2\.signature.p7s" />
-    <Content Include="packages\Newtonsoft.Json.12.0.2\LICENSE.md" />
-    <Content Include="packages\Newtonsoft.Json.12.0.2\Newtonsoft.Json.12.0.2.nupkg" />
-    <Content Include="packages\toastr.2.1.1\.signature.p7s" />
-    <Content Include="packages\toastr.2.1.1\content\content\toastr.less" />
-    <Content Include="packages\toastr.2.1.1\content\content\toastr.scss" />
-    <Content Include="packages\toastr.2.1.1\toastr.2.1.1.nupkg" />
-    <Content Include="packages\WebGrease.1.6.0\.signature.p7s" />
-    <Content Include="packages\WebGrease.1.6.0\WebGrease.1.6.0.nupkg" />
+    <Content Include="BSys3Styles\Fonts\Cairo\Cairo-Black.ttf" />
+    <Content Include="BSys3Styles\Fonts\Cairo\Cairo-Bold.ttf" />
+    <Content Include="BSys3Styles\Fonts\Cairo\Cairo-ExtraLight.ttf" />
+    <Content Include="BSys3Styles\Fonts\Cairo\Cairo-Light.ttf" />
+    <Content Include="BSys3Styles\Fonts\Cairo\Cairo-Regular.ttf" />
+    <Content Include="BSys3Styles\Fonts\Cairo\Cairo-SemiBold.ttf" />
+    <EntityDeploy Include="Models\Model1.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Model1.edmx.diagram">
+      <DependentUpon>Model1.edmx</DependentUpon>
+    </Content>
     <None Include="Properties\PublishProfiles\IISProfile.pubxml" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\Chart.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
@@ -2074,10 +1831,11 @@
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\toastr.js" />
     <Content Include="Scripts\toastr.min.js" />
-    <Content Include="test.html" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Brand\Index.cshtml" />
     <Content Include="Views\Car_Mainten\Edit.cshtml" />
+    <Content Include="Views\CasCarsStat\Index.cshtml" />
+    <Content Include="Views\CasContractStat\Index.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Web.config" />
@@ -2189,11 +1947,6 @@
     <Content Include="Views\CasUser\Details.cshtml" />
     <Content Include="Views\CasUser\Edit.cshtml" />
     <Content Include="Views\CasUser\Index.cshtml" />
-    <Content Include="Views\CasOwners\Create.cshtml" />
-    <Content Include="Views\CasOwners\Delete.cshtml" />
-    <Content Include="Views\CasOwners\Details.cshtml" />
-    <Content Include="Views\CasOwners\Edit.cshtml" />
-    <Content Include="Views\CasOwners\Index.cshtml" />
     <Content Include="Views\RenterAddress\Create.cshtml" />
     <Content Include="Views\RenterAddress\Delete.cshtml" />
     <Content Include="Views\RenterAddress\Details.cshtml" />
@@ -2205,7 +1958,6 @@
     <Content Include="Views\Choices\Index.cshtml" />
     <Content Include="Views\Shared\Question.cshtml" />
     <Content Include="Views\RenterAddress\Index.cshtml" />
-    <Content Include="Views\Shared\_CASLayout.cshtml" />
     <Content Include="Views\CasHome\Index.cshtml" />
     <Content Include="Views\CasBranch\Create.cshtml" />
     <Content Include="Views\CasBranch\Delete.cshtml" />
@@ -2214,21 +1966,6 @@
     <Content Include="Views\CasBranch\Index.cshtml" />
     <Content Include="Views\DocAlert\Index.cshtml" />
     <Content Include="Views\ContractAlert\Index.cshtml" />
-    <Content Include="Views\CasDocumentation\Create.cshtml" />
-    <Content Include="Views\CasDocumentation\Delete.cshtml" />
-    <Content Include="Views\CasDocumentation\Details.cshtml" />
-    <Content Include="Views\CasDocumentation\Edit.cshtml" />
-    <Content Include="Views\CasDocumentation\Index.cshtml" />
-    <Content Include="Views\CasDocumentationContract\Create.cshtml" />
-    <Content Include="Views\CasDocumentationContract\Delete.cshtml" />
-    <Content Include="Views\CasDocumentationContract\Details.cshtml" />
-    <Content Include="Views\CasDocumentationContract\Edit.cshtml" />
-    <Content Include="Views\CasDocumentationContract\Index.cshtml" />
-    <Content Include="Views\BasicTamContract\Create.cshtml" />
-    <Content Include="Views\BasicTamContract\Delete.cshtml" />
-    <Content Include="Views\BasicTamContract\Details.cshtml" />
-    <Content Include="Views\BasicTamContract\Edit.cshtml" />
-    <Content Include="Views\BasicTamContract\Index.cshtml" />
     <Content Include="Views\ServiceTamm\Create.cshtml" />
     <Content Include="Views\ServiceTamm\Delete.cshtml" />
     <Content Include="Views\ServiceTamm\Details.cshtml" />
@@ -2264,20 +2001,13 @@
     <Content Include="Views\CasCarInformation\Details.cshtml" />
     <Content Include="Views\CasCarInformation\Edit.cshtml" />
     <Content Include="Views\CasCarInformation\Index.cshtml" />
-    <Content Include="Views\CarDocMainten\Create.cshtml" />
-    <Content Include="Views\CarDocMainten\Delete.cshtml" />
-    <Content Include="Views\CarDocMainten\Details.cshtml" />
-    <Content Include="Views\CarDocMainten\Edit.cshtml" />
-    <Content Include="Views\CarDocMainten\Index.cshtml" />
     <Content Include="Views\Car_Mainten\Create.cshtml" />
     <Content Include="Views\Car_Mainten\Delete.cshtml" />
     <Content Include="Views\Car_Mainten\Details.cshtml" />
     <Content Include="Views\Car_Mainten\Index.cshtml" />
     <Content Include="Views\CasCarInformation\_CarInfoFeatures.cshtml" />
     <Content Include="Views\CasCarInformation\_CasInfoFeatures.cshtml" />
-    <Content Include="Views\CarBasicPrice\Create.cshtml" />
     <Content Include="Views\CarBasicPrice\Index.cshtml" />
-    <Content Include="Views\CarBasicPrice\_BasicPriceLayout.cshtml" />
     <Content Include="Views\CarBasicPrice\ChoicesList.cshtml" />
     <Content Include="Views\CarBasicPrice\FeaturesList.cshtml" />
     <Content Include="Views\CarBasicPrice\AdditionalList.cshtml" />
@@ -2288,15 +2018,6 @@
     <Content Include="Views\CarBasicPrice\_BasicPriceLayoutEdit.cshtml" />
     <Content Include="Views\Shared\_LayoutSys3.cshtml" />
     <Content Include="Views\BranchHome\BranchHome.cshtml" />
-    <Content Include="Views\BasicContract\Create.cshtml" />
-    <Content Include="Views\BasicContract\Delete.cshtml" />
-    <Content Include="Views\BasicContract\Details.cshtml" />
-    <Content Include="Views\BasicContract\Edit.cshtml" />
-    <Content Include="Views\BasicContract\Index.cshtml" />
-    <Content Include="Views\BasicContract\CarsList.cshtml" />
-    <Content Include="Views\BasicContract\ChoicesList.cshtml" />
-    <Content Include="Views\BasicContract\AdditionalList.cshtml" />
-    <Content Include="Views\BasicContract\VirtuelInspection.cshtml" />
     <Content Include="Views\Tracing\Index.cshtml" />
     <Content Include="Views\TransferCars\Create.cshtml" />
     <Content Include="Views\TransferCars\Delete.cshtml" />
@@ -2325,13 +2046,11 @@
     <Content Include="Views\Alerts\Details.cshtml" />
     <Content Include="Views\Alerts\Edit.cshtml" />
     <Content Include="Views\Alerts\Index.cshtml" />
-    <Content Include="Views\BasicTamContract\TammFees.cshtml" />
     <Content Include="Views\TransportAuthorityContract\Create.cshtml" />
     <Content Include="Views\TransportAuthorityContract\Delete.cshtml" />
     <Content Include="Views\TransportAuthorityContract\Details.cshtml" />
     <Content Include="Views\TransportAuthorityContract\Edit.cshtml" />
     <Content Include="Views\TransportAuthorityContract\Index.cshtml" />
-    <Content Include="Views\BasicContract\CategoriesList.cshtml" />
     <Content Include="Views\CasRenterLessor\Create.cshtml" />
     <Content Include="Views\CasRenterLessor\Delete.cshtml" />
     <Content Include="Views\CasRenterLessor\Details.cshtml" />
@@ -2347,11 +2066,6 @@
     <Content Include="Views\ActiveContract\Details.cshtml" />
     <Content Include="Views\ActiveContract\Edit.cshtml" />
     <Content Include="Views\ActiveContract\Index.cshtml" />
-    <Content Include="Views\BasicContract\CarsDocs.cshtml" />
-    <Content Include="Views\BasicContract\CarMaint.cshtml" />
-    <Content Include="Views\BasicContract\AllContracts.cshtml" />
-    <Content Include="Views\BasicContract\NotFound.cshtml" />
-    <Content Include="Views\BasicContract\RenterContracts.cshtml" />
     <Content Include="Views\CheckContract\Details.cshtml" />
     <Content Include="Views\CheckContract\Index.cshtml" />
     <Content Include="Views\CheckContract\CheckContract.cshtml" />
@@ -2361,21 +2075,11 @@
     <Content Include="Views\CasRenterLessor\LoadRenters.cshtml" />
     <Content Include="Views\CasRenterLessor\RentersContracts.cshtml" />
     <Content Include="Views\CasBranch\PartialIndex.cshtml" />
-    <Content Include="Views\CasDocumentation\PartialIndex.cshtml" />
-    <Content Include="Views\CasOwners\PartialIndex.cshtml" />
     <Content Include="Views\CasCarInformation\PartialIndex.cshtml" />
-    <Content Include="Views\CarDocMainten\PartialIndex.cshtml" />
     <Content Include="Views\CarBasicPrice\PartialIndex.cshtml" />
     <Content Include="Views\CasRenterLessor\PartialIndex.cshtml" />
     <Content Include="Views\CasRenterLessor\PartialLoadRenter.cshtml" />
     <Content Include="Views\CasUser\PartialIndex.cshtml" />
-    <Content Include="Views\CR_Cas_Company_Contract\Create.cshtml" />
-    <Content Include="Views\CR_Cas_Company_Contract\Delete.cshtml" />
-    <Content Include="Views\CR_Cas_Company_Contract\Details.cshtml" />
-    <Content Include="Views\CR_Cas_Company_Contract\Edit.cshtml" />
-    <Content Include="Views\CR_Cas_Company_Contract\Index.cshtml" />
-    <Content Include="Views\CR_Cas_Company_Contract\TammFees.cshtml" />
-    <Content Include="Views\CR_Cas_Company_Contract\PartialIndex.cshtml" />
     <Content Include="Views\AccountInformation\Create.cshtml" />
     <Content Include="Views\AccountInformation\Delete.cshtml" />
     <Content Include="Views\AccountInformation\Details.cshtml" />
@@ -2460,8 +2164,6 @@
     <Content Include="Views\RenterCredit\Index.cshtml" />
     <Content Include="Views\SalesPointReceiptList\SalesPointMovementSheet.cshtml" />
     <Content Include="Views\RenterReceiptList\RenterReceiptBalance.cshtml" />
-    <Content Include="Views\CashClosing\Create.cshtml" />
-    <Content Include="Views\CashClosing\PartialView.cshtml" />
     <Content Include="Views\BranchHome\Carousel.cshtml" />
     <Content Include="Views\BranchUserReceipt\Edit.cshtml" />
     <Content Include="Views\BranchUserReceipt\Index.cshtml" />
@@ -2480,10 +2182,110 @@
     <Content Include="Views\ContractSettlement\Index.cshtml" />
     <Content Include="Views\ContractSettlement\VirtuelInspection.cshtml" />
     <Content Include="Views\FinancialTracing\Index.cshtml" />
+    <Content Include="Views\ShortTracing\Table.cshtml" />
+    <Content Include="Views\CasContractStat\PartialContractStat.cshtml" />
+    <Content Include="Views\CasContractStat\PartialContractStatCity.cshtml" />
+    <Content Include="Views\CasContractStat\PartialContractStatBranch.cshtml" />
+    <Content Include="Views\CasContractStat\PartialContractStatDays.cshtml" />
+    <Content Include="Views\CasContractStat\PartialContractStatPeriod.cshtml" />
+    <Content Include="Views\CasContractStat\PartialContractStatKm.cshtml" />
+    <Content Include="Views\CasCarsStat\PartialCarsStatBranch.cshtml" />
+    <Content Include="Views\CasCarsStat\PartialCarsStatBrand.cshtml" />
+    <Content Include="Views\CasCarsStat\PartialCarsStatYear.cshtml" />
+    <Content Include="Views\CasCarsStat\PartialCarsStatCategory.cshtml" />
+    <Content Include="Views\CasContractStat\PartialContractStatus.cshtml" />
+    <Content Include="Views\CasCarsStat\PartialCarsStatus.cshtml" />
+    <Content Include="Views\FinancialTracing\Table.cshtml" />
+    <Content Include="Views\Sys3RenterLessor\PartialIndex.cshtml" />
+    <Content Include="Views\TaxOwed\Index.cshtml" />
+    <Content Include="Views\TaxOwed\PartialIndexTable.cshtml" />
+    <Content Include="Views\PayTaxes\Create.cshtml" />
+    <Content Include="Views\PayTaxes\Delete.cshtml" />
+    <Content Include="Views\PayTaxes\Details.cshtml" />
+    <Content Include="Views\PayTaxes\Edit.cshtml" />
+    <Content Include="Views\PayTaxes\Index.cshtml" />
+    <Content Include="Views\PayTaxes\PartialIndexTable.cshtml" />
+    <Content Include="Views\PayTaxes\PartialIndexTableEdit.cshtml" />
+    <Content Include="Views\CompanyContractTaxOwed\Create.cshtml" />
+    <Content Include="Views\CompanyContractTaxOwed\Delete.cshtml" />
+    <Content Include="Views\CompanyContractTaxOwed\Details.cshtml" />
+    <Content Include="Views\CompanyContractTaxOwed\Edit.cshtml" />
+    <Content Include="Views\CompanyContractTaxOwed\Index.cshtml" />
+    <Content Include="Views\MasPayTaxes\Create.cshtml" />
+    <Content Include="Views\MasPayTaxes\Delete.cshtml" />
+    <Content Include="Views\MasPayTaxes\Details.cshtml" />
+    <Content Include="Views\MasPayTaxes\Edit.cshtml" />
+    <Content Include="Views\MasPayTaxes\Index.cshtml" />
+    <Content Include="Views\MasPayTaxes\PartialIndexTable.cshtml" />
+    <Content Include="Views\TransportAuthoritySystem\Create.cshtml" />
+    <Content Include="Views\TransportAuthoritySystem\Delete.cshtml" />
+    <Content Include="Views\TransportAuthoritySystem\Details.cshtml" />
+    <Content Include="Views\TransportAuthoritySystem\Edit.cshtml" />
+    <Content Include="Views\TransportAuthoritySystem\Index.cshtml" />
+    <Content Include="Views\CompanyContractTaxOwed\TaxPartialView.cshtml" />
+    <Content Include="Views\CompanyContractTaxOwed\Table.cshtml" />
+    <Content Include="Views\CasDocumentation\Create.cshtml" />
+    <Content Include="Views\CasDocumentation\Delete.cshtml" />
+    <Content Include="Views\CasDocumentation\Details.cshtml" />
+    <Content Include="Views\CasDocumentation\Edit.cshtml" />
+    <Content Include="Views\CasDocumentation\Index.cshtml" />
+    <Content Include="Views\CasDocumentation\PartialIndex.cshtml" />
+    <Content Include="Views\CasDocumentationContract\Create.cshtml" />
+    <Content Include="Views\CasDocumentationContract\Delete.cshtml" />
+    <Content Include="Views\CasDocumentationContract\Details.cshtml" />
+    <Content Include="Views\CasDocumentationContract\Edit.cshtml" />
+    <Content Include="Views\CasDocumentationContract\Index.cshtml" />
+    <Content Include="Views\BasicTamContract\Create.cshtml" />
+    <Content Include="Views\BasicTamContract\Delete.cshtml" />
+    <Content Include="Views\BasicTamContract\Details.cshtml" />
+    <Content Include="Views\BasicTamContract\Edit.cshtml" />
+    <Content Include="Views\BasicTamContract\Index.cshtml" />
+    <Content Include="Views\BasicTamContract\TammFees.cshtml" />
+    <Content Include="Views\CR_Cas_Company_Contract\Create.cshtml" />
+    <Content Include="Views\CR_Cas_Company_Contract\Delete.cshtml" />
+    <Content Include="Views\CR_Cas_Company_Contract\Details.cshtml" />
+    <Content Include="Views\CR_Cas_Company_Contract\Edit.cshtml" />
+    <Content Include="Views\CR_Cas_Company_Contract\Index.cshtml" />
+    <Content Include="Views\CR_Cas_Company_Contract\PartialIndex.cshtml" />
+    <Content Include="Views\CR_Cas_Company_Contract\TammFees.cshtml" />
+    <Content Include="Views\CasOwners\Create.cshtml" />
+    <Content Include="Views\CasOwners\Delete.cshtml" />
+    <Content Include="Views\CasOwners\Details.cshtml" />
+    <Content Include="Views\CasOwners\Edit.cshtml" />
+    <Content Include="Views\CasOwners\Index.cshtml" />
+    <Content Include="Views\CasOwners\PartialIndex.cshtml" />
+    <Content Include="Views\CarDocMainten\Create.cshtml" />
+    <Content Include="Views\CarDocMainten\Delete.cshtml" />
+    <Content Include="Views\CarDocMainten\Details.cshtml" />
+    <Content Include="Views\CarDocMainten\Edit.cshtml" />
+    <Content Include="Views\CarDocMainten\Index.cshtml" />
+    <Content Include="Views\CarDocMainten\PartialIndex.cshtml" />
+    <Content Include="Views\Shared\_CASLayout.cshtml" />
+    <Content Include="Views\CashClosing\Create.cshtml" />
+    <Content Include="Views\CashClosing\PartialView.cshtml" />
+    <Content Include="Views\BasicContract\AdditionalList.cshtml" />
+    <Content Include="Views\BasicContract\AllContracts.cshtml" />
+    <Content Include="Views\BasicContract\BranchHome.cshtml" />
+    <Content Include="Views\BasicContract\CarMaint.cshtml" />
+    <Content Include="Views\BasicContract\CarsDocs.cshtml" />
+    <Content Include="Views\BasicContract\CarsList.cshtml" />
+    <Content Include="Views\BasicContract\CategoriesList.cshtml" />
+    <Content Include="Views\BasicContract\ChoicesList.cshtml" />
+    <Content Include="Views\BasicContract\Delete.cshtml" />
+    <Content Include="Views\BasicContract\Details.cshtml" />
+    <Content Include="Views\BasicContract\Edit.cshtml" />
+    <Content Include="Views\BasicContract\Index.cshtml" />
+    <Content Include="Views\BasicContract\NotFound.cshtml" />
+    <Content Include="Views\BasicContract\RenterContracts.cshtml" />
+    <Content Include="Views\BasicContract\VirtuelInspection.cshtml" />
+    <Content Include="Views\BasicContract\Create.cshtml" />
+    <Content Include="Views\CasContractStat\PartialContractStatAge.cshtml" />
+    <Content Include="Views\CarBasicPrice\Create.cshtml" />
+    <Content Include="Views\CarBasicPrice\_BasicPriceLayout.cshtml" />
+    <Content Include="Views\ClosingReception\PartialIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Reports\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -2515,22 +2317,28 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>BranchList.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reports\ContractBasicReports\ContractCr\Mohsen.rpt">
+    <EmbeddedResource Include="Reports\ContractBasicReports\ContractCr\ContractClose.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>Mohsen.cs</LastGenOutput>
+      <LastGenOutput>ContractClose.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\ContractBasicReports\ContractCr\ContractOpen.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ContractOpen.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reports\ContractBasicReports\ContractCr\ContractOpenCopy.rpt">
+    <EmbeddedResource Include="Reports\ContractBasicReports\ContractCr\ContractRenew.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>ContractOpenCopy.cs</LastGenOutput>
+      <LastGenOutput>ContractRenew.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
@@ -2552,6 +2360,9 @@
           <CustomServerUrl>
           </CustomServerUrl>
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+          <servers defaultServer="SelfHostServer">
+            <server name="SelfHostServer" exePath="" cmdArgs="" url="http://localhost:50938/" workingDir="" />
+          </servers>
         </WebProjectProperties>
       </FlavorProperties>
     </VisualStudio>
@@ -2561,10 +2372,7 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
-    <Error Condition="!Exists('packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
-    <Error Condition="!Exists('packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
   </Target>
-  <Import Project="packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

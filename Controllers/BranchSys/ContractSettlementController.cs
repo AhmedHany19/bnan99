@@ -8,6 +8,8 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using CrystalDecisions.CrystalReports.Engine;
+using CrystalDecisions.Shared;
 using RentCar.Models;
 
 namespace RentCar.Controllers
@@ -741,6 +743,7 @@ namespace RentCar.Controllers
                                 var Sector = "1";
                                 var autoinc = GetReceiptLastRecord(LessorCode, BranchCode).CR_Cas_Account_Receipt_No;
                                 Receipt.CR_Cas_Account_Receipt_No = y + "-" + Sector + "-" + "61" + "-" + LessorCode + "-" + BranchCode + autoinc;
+                                TempData["rec"] = Receipt.CR_Cas_Account_Receipt_No;
                                 Receipt.CR_Cas_Account_Receipt_Year = y;
                                 Receipt.CR_Cas_Account_Receipt_Type = "61";
                                 Receipt.CR_Cas_Account_Receipt_Lessor_Code = LessorCode;
@@ -781,19 +784,6 @@ namespace RentCar.Controllers
                                 db.CR_Cas_Account_Receipt.Add(Receipt);
                             }
 
-
-
-
-
-                            /*
-                                                        BnanOwed.CR_Cas_Account_Bnan_Owed_Tax_Percentage = CompanyContract.CR_Cas_Company_Contract_Tax_Rate;
-                                                        BnanOwed.CR_Cas_Account_Bnan_Owed_Tax_Value = (BnanOwed.CR_Cas_Account_Bnan_Owed_After_Due_Amount * CompanyContract.CR_Cas_Company_Contract_Tax_Rate) / 100;
-                                                        BnanOwed.CR_Cas_Account_Bnan_Owed_Due_Amount_After_Tax_Value = BnanOwed.CR_Cas_Account_Bnan_Owed_After_Due_Amount + BnanOwed.CR_Cas_Account_Bnan_Owed_Tax_Value;
-                                                        BnanOwed.CR_Cas_Account_Bnan_Owed_Daily_Value = Contract.CR_Cas_Contract_Basic_Daily_Rent;
-                                                        BnanOwed.CR_Cas_Account_Bnan_Owed_Due_Date = DateTime.Now;
-                                                        BnanOwed.CR_Cas_Account_Bnan_Owed_Is_Paid = false;
-                                                        db.CR_Cas_Account_Bnan_Owed.Add(BnanOwed);*/
-                            /////////////////////////////////////////////////////////////
 
                             Contract.CR_Cas_Contract_Basic_User_Close = UserLogin;
 
@@ -1102,6 +1092,11 @@ namespace RentCar.Controllers
                             TempData["TempModel"] = "Saved";
                             dbTran.Commit();
 
+                            var rec = TempData["rec"].ToString();
+                            SavePdf(Contract, ContractNo, ContractEndDate, ContractEndTime, ContractDaysNbr, ContractValED, ContractValID, TaxVal,
+             TotalContractIT, TotPayed, CurrentMeter, OldKm, TotalFreeKm, AdditionalHours, ExtraKmValue, TotalHoursValue, Chk_Depences, Chk_Compensation,
+             Depences, DepencesReason, CompensationVal, CompensationReason, RenterPrevBalance, reste, TotToPay, rec, PayType, CasherName, remarque, imgx1path, imgx2path, imgx3path, imgx4path, imgy1path, imgy2path, imgy3path, imgy4path);
+
 
                         }
 
@@ -1121,6 +1116,160 @@ namespace RentCar.Controllers
             return View();
         }
 
+        private void SavePdf(CR_Cas_Contract_Basic contract, string contractNo, string rec, string contractEndDate, string contractEndTime, string contractDaysNbr, string contractValED, string contractValID, string taxVal, string totalContractIT, string totPayed, string currentMeter, string oldKm, string totalFreeKm, decimal? additionalHours, string extraKmValue, string totalHoursValue, string chk_Depences, string chk_Compensation, string depences, string depencesReason, string compensationVal, string compensationReason, string renterPrevBalance, string reste, string totToPay, string payType, string casherName, string remarque, string imgx1path, string imgx2path, string imgx3path, string imgx4path, string imgy1path, string imgy2path, string imgy3path, string imgy4path)
+        {
+            var LessorCode = Session["LessorCode"].ToString();
+            var BranchCode = Session["BranchCode"].ToString();
+            ReportDocument rd = new ReportDocument();
+            rd.Load(Path.Combine(Server.MapPath("~/Reports/ContractBasicReports/ContractCr"), "ContractClose.rpt"));
+
+            if (contract != null)
+            {
+                var branch = db.CR_Cas_Sup_Branch.FirstOrDefault(b => b.CR_Cas_Sup_Lessor_Code == LessorCode && b.CR_Cas_Sup_Branch_Code == BranchCode);
+                var lessor = db.CR_Mas_Com_Lessor.FirstOrDefault(l => l.CR_Mas_Com_Lessor_Code == contract.CR_Cas_Contract_Basic_Lessor);
+                if (lessor != null)
+                {
+                    rd.SetParameterValue("CompanyName", lessor.CR_Mas_Com_Lessor_Ar_Long_Name.Trim());
+                    rd.SetParameterValue("CompanyNameEng", lessor.CR_Mas_Com_Lessor_En_Long_Name.Trim());
+                    rd.SetParameterValue("CompanyAuthNo", lessor.CR_Mas_Com_Lessor_Commercial_Registration_No.Trim());
+                    rd.SetParameterValue("ContractNo", contract.CR_Cas_Contract_Basic_No.Trim());
+                    rd.SetParameterValue("ContractDate", contract.CR_Cas_Contract_Basic_Date.ToString());
+                    if (lessor.CR_Mas_Com_Lessor_Commercial_Registration_No != null)
+                    {
+                        rd.SetParameterValue("CommercialRegisterNo", lessor.CR_Mas_Com_Lessor_Commercial_Registration_No.Trim());
+                    }
+                    else
+                    {
+                        rd.SetParameterValue("CommercialRegisterNo", "        ");
+                    }
+                    var address = db.CR_Mas_Address.FirstOrDefault(adr => adr.CR_Mas_Address_Id_Code == lessor.CR_Mas_Com_Lessor_Government_No);
+                    if (address != null)
+                    {
+                        string street = address.CR_Mas_Address_Ar_Street;
+                        string district = address.CR_Mas_Address_Ar_District;
+                        string buildingNo = address.CR_Mas_Address_Building.ToString();
+                        string UnitNo = address.CR_Mas_Address_Unit_No;
+                        string ZipCode = address.CR_Mas_Address_Zip_Code.ToString();
+                        string reg = "";
+                        string cit = "";
+                        var region = db.CR_Mas_Sup_Regions.FirstOrDefault(r => r.CR_Mas_Sup_Regions_Code == address.CR_Mas_Address_Regions);
+                        if (region != null)
+                        {
+                            reg = region.CR_Mas_Sup_Regions_Ar_Name;
+                        }
+                        var city = db.CR_Mas_Sup_City.FirstOrDefault(c => c.CR_Mas_Sup_City_Code == address.CR_Mas_Address_City);
+                        if (city != null)
+                        {
+                            cit = city.CR_Mas_Sup_City_Ar_Name;
+                        }
+
+                        string addr = reg + " " + cit + " " + district + " " + street + " " + buildingNo + " " + UnitNo + " " + ZipCode;
+
+                        rd.SetParameterValue("CompanyAddress", addr.Trim());
+
+
+                    }
+                    if (lessor.CR_Mas_Com_Lessor_Tax_Number != null)
+                    {
+                        rd.SetParameterValue("TaxNumber", lessor.CR_Mas_Com_Lessor_Tax_Number.Trim());
+                    }
+                    else
+                    {
+                        rd.SetParameterValue("TaxNumber", "     ");
+                    }
+
+                    if (lessor.CR_Mas_Com_Lessor_Tolk_Free != null)
+                    {
+                        rd.SetParameterValue("FreeTall", lessor.CR_Mas_Com_Lessor_Tolk_Free.Trim());
+                    }
+                    else
+                    {
+                        rd.SetParameterValue("FreeTall", "    ");
+                    }
+                    if (branch != null)
+                    {
+                        rd.SetParameterValue("BranchName", branch.CR_Cas_Sup_Branch_Ar_Name.Trim());
+                        rd.SetParameterValue("BranchContact", branch.CR_Cas_Sup_Branch_Tel.Trim());
+                        var Branchaddress = db.CR_Mas_Address.FirstOrDefault(adr => adr.CR_Mas_Address_Id_Code == branch.CR_Cas_Sup_Branch_Government_No);
+                        if (Branchaddress != null)
+                        {
+                            string street = Branchaddress.CR_Mas_Address_Ar_Street;
+                            string district = Branchaddress.CR_Mas_Address_Ar_District;
+                            string buildingNo = Branchaddress.CR_Mas_Address_Building.ToString();
+                            string UnitNo = Branchaddress.CR_Mas_Address_Unit_No;
+                            string ZipCode = Branchaddress.CR_Mas_Address_Zip_Code.ToString();
+                            string reg = "";
+                            string cit = "";
+                            var region = db.CR_Mas_Sup_Regions.FirstOrDefault(r => r.CR_Mas_Sup_Regions_Code == Branchaddress.CR_Mas_Address_Regions);
+                            if (region != null)
+                            {
+                                reg = region.CR_Mas_Sup_Regions_Ar_Name;
+                            }
+                            var city = db.CR_Mas_Sup_City.FirstOrDefault(c => c.CR_Mas_Sup_City_Code == Branchaddress.CR_Mas_Address_City);
+                            if (city != null)
+                            {
+                                cit = city.CR_Mas_Sup_City_Ar_Name;
+                            }
+
+                            string addr = reg + " " + cit + " " + district + " " + street + " " + buildingNo + " " + UnitNo + " " + ZipCode;
+
+                            rd.SetParameterValue("BranchAddress", addr.Trim());
+                        }
+                    }
+
+                    rd.SetParameterValue("BranchAddress", contract.CR_Cas_Contract_Basic_Car_Serail_No);
+                    rd.SetParameterValue("CusId", contract.CR_Mas_Renter_Information.CR_Mas_Renter_Information_Id);
+                    rd.SetParameterValue("contractEndDateActual", contractEndDate);
+                    if (additionalHours != null && additionalHours != 0)
+                    {
+                        rd.SetParameterValue("ExtraHourValue", additionalHours);
+                    }
+                    else
+                    {
+                        rd.SetParameterValue("ExtraHourValue", "0");
+                    }
+
+                    if (contract.CR_Cas_Contract_Basic_End_Authorization != null)
+                    {
+                        rd.SetParameterValue("AuthEndDate", contract.CR_Cas_Contract_Basic_End_Authorization.ToString());
+                    }
+                    else
+                    {
+                        rd.SetParameterValue("AuthEndDate", "0");
+                    }
+                    if (contract.CR_Cas_Contract_Basic_Daily_Rent != null && contract.CR_Cas_Contract_Basic_Daily_Rent != 0)
+                    {
+                        rd.SetParameterValue("DailyRentPrice", contract.CR_Cas_Contract_Basic_Daily_Rent.ToString());
+                    }
+                    else
+                    {
+                        rd.SetParameterValue("DailyRentPrice", "0");
+                    }
+
+                    if (contract.CR_Cas_Contract_Basic_Expected_End_Time != null)
+                    {
+                        rd.SetParameterValue("contractEndTimeActual", contract.CR_Cas_Contract_Basic_Expected_End_Time.ToString());
+                    }
+                    else
+                    {
+                        rd.SetParameterValue("contractEndTimeActual", "0");
+                    }
+                    rd.SetParameterValue("contractEndTimeActual", contract.CR_Cas_Contract_Basic_Expected_Rental_Days.ToString());
+                    rd.SetParameterValue("ReceiptNo", rec);
+                    if (contract.CR_Cas_Contract_Basic_Previous_Balance != null)
+                    {
+                        rd.SetParameterValue("PreviousBalance", contract.CR_Cas_Contract_Basic_Previous_Balance.ToString());
+                    }
+                    else
+                    {
+                        rd.SetParameterValue("PreviousBalance", "0");
+                    }
+
+                    rd.ExportToDisk(ExportFormatType.PortableDocFormat, "C:\\Users\\hp\\Desktop\\bnan99\\images\\Company\\5003\\100\\23-1-90-5003-1000001\\OpenPdf\\1\\15.pdf");
+                }
+
+            }
+        }
 
         public CR_Cas_Account_Receipt GetReceiptLastRecord(string LessorCode, string BranchCode)
         {
