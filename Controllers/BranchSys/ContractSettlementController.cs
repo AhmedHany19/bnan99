@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Validation;
+using System.Diagnostics.Contracts;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -26,14 +27,14 @@ namespace RentCar.Controllers
             var BranchCode = "";
             try
             {
-                if (Session["LessorCode"] == null || Session["UserLogin"] == null || Session["BranchCode"] == null)
-                {
-                    RedirectToAction("Login", "Account");
-                }
                 LessorCode = Session["LessorCode"].ToString();
                 BranchCode = Session["BranchCode"].ToString();
+
                 UserLogin = System.Web.HttpContext.Current.Session["UserLogin"].ToString();
-               
+                if (UserLogin == null || LessorCode == null || BranchCode == null)
+                {
+                    RedirectToAction("Account", "Login");
+                }
             }
             catch
             {
@@ -57,13 +58,14 @@ namespace RentCar.Controllers
             var BranchCode = "";
             try
             {
-                if (Session["LessorCode"] == null || Session["UserLogin"] == null || Session["BranchCode"] == null)
-                {
-                    RedirectToAction("Login", "Account");
-                }
                 LessorCode = Session["LessorCode"].ToString();
                 BranchCode = Session["BranchCode"].ToString();
+
                 UserLogin = System.Web.HttpContext.Current.Session["UserLogin"].ToString();
+                if (UserLogin == null || LessorCode == null || BranchCode == null)
+                {
+                    RedirectToAction("Account", "Login");
+                }
             }
             catch
             {
@@ -95,14 +97,14 @@ namespace RentCar.Controllers
             var BranchCode = "";
             try
             {
-                if (Session["LessorCode"] == null || Session["UserLogin"] == null || Session["BranchCode"] == null)
-                {
-                    RedirectToAction("Login", "Account");
-                }
                 LessorCode = Session["LessorCode"].ToString();
                 BranchCode = Session["BranchCode"].ToString();
+
                 UserLogin = System.Web.HttpContext.Current.Session["UserLogin"].ToString();
-               
+                if (UserLogin == null || LessorCode == null || BranchCode == null)
+                {
+                    RedirectToAction("Account", "Login");
+                }
             }
             catch
             {
@@ -122,13 +124,14 @@ namespace RentCar.Controllers
             var BranchCode = "";
             try
             {
-                if (Session["LessorCode"] == null || Session["UserLogin"] == null || Session["BranchCode"] == null)
-                {
-                    RedirectToAction("Login", "Account");
-                }
                 LessorCode = Session["LessorCode"].ToString();
                 BranchCode = Session["BranchCode"].ToString();
+
                 UserLogin = System.Web.HttpContext.Current.Session["UserLogin"].ToString();
+                if (UserLogin == null || LessorCode == null || BranchCode == null)
+                {
+                    RedirectToAction("Account", "Login");
+                }
             }
             catch
             {
@@ -334,7 +337,7 @@ namespace RentCar.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(string ContractNo, string ContractEndDate, string ContractEndTime, string ContractDaysNbr, string ContractValED, string ContractValID, string TaxVal,
+        public ActionResult Create(string ContractNo, string ContractEndDate, string ContractEndTime, string ContractDaysNbr, string CarSerialNo, string ContractEndDateEx, string ContractEndTimeEx, string ContractValED, string ContractValID, string TaxVal,
             string TotalContractIT, string TotPayed, string CurrentMeter, string OldKm, string TotalFreeKm, decimal? AdditionalHours, string ExtraKmValue, string TotalHoursValue, string Chk_Depences, string Chk_Compensation,
             string Depences, string DepencesReason, string CompensationVal, string CompensationReason, string RenterPrevBalance, string reste, string TotToPay, string PayType, string CasherName, string remarque,
             HttpPostedFileBase img1, HttpPostedFileBase img2, HttpPostedFileBase img3, HttpPostedFileBase img4, HttpPostedFileBase img5, HttpPostedFileBase img6, HttpPostedFileBase img7,
@@ -352,13 +355,14 @@ namespace RentCar.Controllers
                         var BranchCode = "";
                         try
                         {
-                            if (Session["LessorCode"] == null || Session["UserLogin"] == null || Session["BranchCode"] == null)
+                            LessorCode = Session["LessorCode"].ToString();
+                            BranchCode = Session["BranchCode"].ToString();
+
+                            UserLogin = System.Web.HttpContext.Current.Session["UserLogin"].ToString();
+                            if (UserLogin == null || LessorCode == null || BranchCode == null)
                             {
                                 RedirectToAction("Login", "Account");
                             }
-                            LessorCode = Session["LessorCode"].ToString();
-                            BranchCode = Session["BranchCode"].ToString();
-                            UserLogin = System.Web.HttpContext.Current.Session["UserLogin"].ToString();
                         }
                         catch
                         {
@@ -743,7 +747,7 @@ namespace RentCar.Controllers
                                 var Sector = "1";
                                 var autoinc = GetReceiptLastRecord(LessorCode, BranchCode).CR_Cas_Account_Receipt_No;
                                 Receipt.CR_Cas_Account_Receipt_No = y + "-" + Sector + "-" + "61" + "-" + LessorCode + "-" + BranchCode + autoinc;
-                                TempData["rec"] = Receipt.CR_Cas_Account_Receipt_No;
+
                                 Receipt.CR_Cas_Account_Receipt_Year = y;
                                 Receipt.CR_Cas_Account_Receipt_Type = "61";
                                 Receipt.CR_Cas_Account_Receipt_Lessor_Code = LessorCode;
@@ -1092,10 +1096,13 @@ namespace RentCar.Controllers
                             TempData["TempModel"] = "Saved";
                             dbTran.Commit();
 
-                            var rec = TempData["rec"].ToString();
-                            SavePdf(Contract, ContractNo, ContractEndDate, ContractEndTime, ContractDaysNbr, ContractValED, ContractValID, TaxVal,
+                          
+                              
+                            
+
+                            SavePdf(Contract, ContractEndDateEx, ContractEndTimeEx, ContractNo, CarSerialNo, ContractEndDate, ContractEndTime, ContractDaysNbr, ContractValED, ContractValID, TaxVal,
              TotalContractIT, TotPayed, CurrentMeter, OldKm, TotalFreeKm, AdditionalHours, ExtraKmValue, TotalHoursValue, Chk_Depences, Chk_Compensation,
-             Depences, DepencesReason, CompensationVal, CompensationReason, RenterPrevBalance, reste, TotToPay, rec, PayType, CasherName, remarque, imgx1path, imgx2path, imgx3path, imgx4path, imgy1path, imgy2path, imgy3path, imgy4path);
+             Depences, DepencesReason, CompensationVal, CompensationReason, RenterPrevBalance, reste, TotToPay, PayType, CasherName, remarque, imgx1path, imgx2path, imgx3path, imgx4path, imgy1path, imgy2path, imgy3path, imgy4path);
 
 
                         }
@@ -1116,96 +1123,50 @@ namespace RentCar.Controllers
             return View();
         }
 
-        private void SavePdf(CR_Cas_Contract_Basic contract, string contractNo, string rec, string contractEndDate, string contractEndTime, string contractDaysNbr, string contractValED, string contractValID, string taxVal, string totalContractIT, string totPayed, string currentMeter, string oldKm, string totalFreeKm, decimal? additionalHours, string extraKmValue, string totalHoursValue, string chk_Depences, string chk_Compensation, string depences, string depencesReason, string compensationVal, string compensationReason, string renterPrevBalance, string reste, string totToPay, string payType, string casherName, string remarque, string imgx1path, string imgx2path, string imgx3path, string imgx4path, string imgy1path, string imgy2path, string imgy3path, string imgy4path)
+        private void SavePdf(CR_Cas_Contract_Basic contract, string ContractEndDateEx, string ContractEndTimeEx, string contractNo, string carSerialNo, string contractEndDate, string contractEndTime, string contractDaysNbr, string contractValED, string contractValID, string taxVal, string totalContractIT, string totPayed, string currentMeter, string oldKm, string totalFreeKm, decimal? additionalHours, string extraKmValue, string totalHoursValue, string chk_Depences, string chk_Compensation, string depences, string depencesReason, string compensationVal, string compensationReason, string renterPrevBalance, string reste, string totToPay, string payType, string casherName, string remarque, string imgx1path, string imgx2path, string imgx3path, string imgx4path, string imgy1path, string imgy2path, string imgy3path, string imgy4path)
         {
             var LessorCode = Session["LessorCode"].ToString();
             var BranchCode = Session["BranchCode"].ToString();
             ReportDocument rd = new ReportDocument();
             rd.Load(Path.Combine(Server.MapPath("~/Reports/ContractBasicReports/ContractCr"), "ContractClose.rpt"));
 
-            if (contract != null)
+            try
             {
-                var branch = db.CR_Cas_Sup_Branch.FirstOrDefault(b => b.CR_Cas_Sup_Lessor_Code == LessorCode && b.CR_Cas_Sup_Branch_Code == BranchCode);
-                var lessor = db.CR_Mas_Com_Lessor.FirstOrDefault(l => l.CR_Mas_Com_Lessor_Code == contract.CR_Cas_Contract_Basic_Lessor);
-                if (lessor != null)
+                if (contract != null)
                 {
-                    rd.SetParameterValue("CompanyName", lessor.CR_Mas_Com_Lessor_Ar_Long_Name.Trim());
-                    rd.SetParameterValue("CompanyNameEng", lessor.CR_Mas_Com_Lessor_En_Long_Name.Trim());
-                    rd.SetParameterValue("CompanyAuthNo", lessor.CR_Mas_Com_Lessor_Commercial_Registration_No.Trim());
-                    rd.SetParameterValue("ContractNo", contract.CR_Cas_Contract_Basic_No.Trim());
-                    rd.SetParameterValue("ContractDate", contract.CR_Cas_Contract_Basic_Date.ToString());
-                    if (lessor.CR_Mas_Com_Lessor_Commercial_Registration_No != null)
+                    var branch = db.CR_Cas_Sup_Branch.FirstOrDefault(b => b.CR_Cas_Sup_Lessor_Code == LessorCode && b.CR_Cas_Sup_Branch_Code == BranchCode);
+                    var lessor = db.CR_Mas_Com_Lessor.FirstOrDefault(l => l.CR_Mas_Com_Lessor_Code == contract.CR_Cas_Contract_Basic_Lessor);
+                    if (lessor != null)
                     {
-                        rd.SetParameterValue("CommercialRegisterNo", lessor.CR_Mas_Com_Lessor_Commercial_Registration_No.Trim());
-                    }
-                    else
-                    {
-                        rd.SetParameterValue("CommercialRegisterNo", "        ");
-                    }
-                    var address = db.CR_Mas_Address.FirstOrDefault(adr => adr.CR_Mas_Address_Id_Code == lessor.CR_Mas_Com_Lessor_Government_No);
-                    if (address != null)
-                    {
-                        string street = address.CR_Mas_Address_Ar_Street;
-                        string district = address.CR_Mas_Address_Ar_District;
-                        string buildingNo = address.CR_Mas_Address_Building.ToString();
-                        string UnitNo = address.CR_Mas_Address_Unit_No;
-                        string ZipCode = address.CR_Mas_Address_Zip_Code.ToString();
-                        string reg = "";
-                        string cit = "";
-                        var region = db.CR_Mas_Sup_Regions.FirstOrDefault(r => r.CR_Mas_Sup_Regions_Code == address.CR_Mas_Address_Regions);
-                        if (region != null)
+                        rd.SetParameterValue("CompanyName", lessor.CR_Mas_Com_Lessor_Ar_Long_Name.Trim());
+                        rd.SetParameterValue("CompanyNameEng", lessor.CR_Mas_Com_Lessor_En_Long_Name.Trim());
+                        rd.SetParameterValue("CompanyAuthNo", lessor.CR_Mas_Com_Lessor_Commercial_Registration_No.Trim());
+                        rd.SetParameterValue("ContractNo", contract.CR_Cas_Contract_Basic_No.Trim());
+                        rd.SetParameterValue("ContractDate", contract.CR_Cas_Contract_Basic_Date.ToString());
+                        if (lessor.CR_Mas_Com_Lessor_Commercial_Registration_No != null)
                         {
-                            reg = region.CR_Mas_Sup_Regions_Ar_Name;
+                            rd.SetParameterValue("CommercialRegisterNo", lessor.CR_Mas_Com_Lessor_Commercial_Registration_No.Trim());
                         }
-                        var city = db.CR_Mas_Sup_City.FirstOrDefault(c => c.CR_Mas_Sup_City_Code == address.CR_Mas_Address_City);
-                        if (city != null)
+                        else
                         {
-                            cit = city.CR_Mas_Sup_City_Ar_Name;
+                            rd.SetParameterValue("CommercialRegisterNo", "        ");
                         }
-
-                        string addr = reg + " " + cit + " " + district + " " + street + " " + buildingNo + " " + UnitNo + " " + ZipCode;
-
-                        rd.SetParameterValue("CompanyAddress", addr.Trim());
-
-
-                    }
-                    if (lessor.CR_Mas_Com_Lessor_Tax_Number != null)
-                    {
-                        rd.SetParameterValue("TaxNumber", lessor.CR_Mas_Com_Lessor_Tax_Number.Trim());
-                    }
-                    else
-                    {
-                        rd.SetParameterValue("TaxNumber", "     ");
-                    }
-
-                    if (lessor.CR_Mas_Com_Lessor_Tolk_Free != null)
-                    {
-                        rd.SetParameterValue("FreeTall", lessor.CR_Mas_Com_Lessor_Tolk_Free.Trim());
-                    }
-                    else
-                    {
-                        rd.SetParameterValue("FreeTall", "    ");
-                    }
-                    if (branch != null)
-                    {
-                        rd.SetParameterValue("BranchName", branch.CR_Cas_Sup_Branch_Ar_Name.Trim());
-                        rd.SetParameterValue("BranchContact", branch.CR_Cas_Sup_Branch_Tel.Trim());
-                        var Branchaddress = db.CR_Mas_Address.FirstOrDefault(adr => adr.CR_Mas_Address_Id_Code == branch.CR_Cas_Sup_Branch_Government_No);
-                        if (Branchaddress != null)
+                        var address = db.CR_Mas_Address.FirstOrDefault(adr => adr.CR_Mas_Address_Id_Code == lessor.CR_Mas_Com_Lessor_Government_No);
+                        if (address != null)
                         {
-                            string street = Branchaddress.CR_Mas_Address_Ar_Street;
-                            string district = Branchaddress.CR_Mas_Address_Ar_District;
-                            string buildingNo = Branchaddress.CR_Mas_Address_Building.ToString();
-                            string UnitNo = Branchaddress.CR_Mas_Address_Unit_No;
-                            string ZipCode = Branchaddress.CR_Mas_Address_Zip_Code.ToString();
+                            string street = address.CR_Mas_Address_Ar_Street;
+                            string district = address.CR_Mas_Address_Ar_District;
+                            string buildingNo = address.CR_Mas_Address_Building.ToString();
+                            string UnitNo = address.CR_Mas_Address_Unit_No;
+                            string ZipCode = address.CR_Mas_Address_Zip_Code.ToString();
                             string reg = "";
                             string cit = "";
-                            var region = db.CR_Mas_Sup_Regions.FirstOrDefault(r => r.CR_Mas_Sup_Regions_Code == Branchaddress.CR_Mas_Address_Regions);
+                            var region = db.CR_Mas_Sup_Regions.FirstOrDefault(r => r.CR_Mas_Sup_Regions_Code == address.CR_Mas_Address_Regions);
                             if (region != null)
                             {
                                 reg = region.CR_Mas_Sup_Regions_Ar_Name;
                             }
-                            var city = db.CR_Mas_Sup_City.FirstOrDefault(c => c.CR_Mas_Sup_City_Code == Branchaddress.CR_Mas_Address_City);
+                            var city = db.CR_Mas_Sup_City.FirstOrDefault(c => c.CR_Mas_Sup_City_Code == address.CR_Mas_Address_City);
                             if (city != null)
                             {
                                 cit = city.CR_Mas_Sup_City_Ar_Name;
@@ -1213,62 +1174,493 @@ namespace RentCar.Controllers
 
                             string addr = reg + " " + cit + " " + district + " " + street + " " + buildingNo + " " + UnitNo + " " + ZipCode;
 
-                            rd.SetParameterValue("BranchAddress", addr.Trim());
+                            rd.SetParameterValue("CompanyAddress", addr.Trim());
+
+
                         }
+                        if (lessor.CR_Mas_Com_Lessor_Tax_Number != null)
+                        {
+                            rd.SetParameterValue("TaxNumber", lessor.CR_Mas_Com_Lessor_Tax_Number.Trim());
+                        }
+                        else
+                        {
+                            rd.SetParameterValue("TaxNumber", "     ");
+                        }
+
+                        if (lessor.CR_Mas_Com_Lessor_Signature_Ar_Director_Name != null)
+                        {
+                            rd.SetParameterValue("DirectorName", lessor.CR_Mas_Com_Lessor_Signature_Ar_Director_Name.Trim());
+                        }
+                        else
+                        {
+                            rd.SetParameterValue("DirectorName", "     ");
+                        }
+
+                        if (contract.CR_Cas_Contract_Basic_Owner_Branch != null)
+                        {
+                            rd.SetParameterValue("BranchDirectorName", contract.CR_Cas_Contract_Basic_Owner_Branch.Trim());
+                        }
+                        else
+                        {
+                            rd.SetParameterValue("BranchDirectorName", "     ");
+                        }
+                        if (contract.CR_Cas_Contract_Basic_User_Close != null)
+                        {
+                            rd.SetParameterValue("UserName", contract.CR_Cas_Contract_Basic_User_Close.Trim());
+                        }
+                        else
+                        {
+                            rd.SetParameterValue("UserName", "     ");
+                        }
+
+                        if (lessor.CR_Mas_Com_Lessor_Tolk_Free != null)
+                        {
+                            rd.SetParameterValue("FreeTall", lessor.CR_Mas_Com_Lessor_Tolk_Free.Trim());
+                        }
+                        else
+                        {
+                            rd.SetParameterValue("FreeTall", "    ");
+                        }
+                        if (branch != null)
+                        {
+                            rd.SetParameterValue("BranchName", branch.CR_Cas_Sup_Branch_Ar_Name.Trim());
+                            rd.SetParameterValue("BranchContact", branch.CR_Cas_Sup_Branch_Tel.Trim());
+                            var Branchaddress = db.CR_Mas_Address.FirstOrDefault(adr => adr.CR_Mas_Address_Id_Code == branch.CR_Cas_Sup_Branch_Government_No);
+                            if (Branchaddress != null)
+                            {
+                                string street = Branchaddress.CR_Mas_Address_Ar_Street;
+                                string district = Branchaddress.CR_Mas_Address_Ar_District;
+                                string buildingNo = Branchaddress.CR_Mas_Address_Building.ToString();
+                                string UnitNo = Branchaddress.CR_Mas_Address_Unit_No;
+                                string ZipCode = Branchaddress.CR_Mas_Address_Zip_Code.ToString();
+                                string reg = "";
+                                string cit = "";
+                                var region = db.CR_Mas_Sup_Regions.FirstOrDefault(r => r.CR_Mas_Sup_Regions_Code == Branchaddress.CR_Mas_Address_Regions);
+                                if (region != null)
+                                {
+                                    reg = region.CR_Mas_Sup_Regions_Ar_Name;
+                                }
+                                var city = db.CR_Mas_Sup_City.FirstOrDefault(c => c.CR_Mas_Sup_City_Code == Branchaddress.CR_Mas_Address_City);
+                                if (city != null)
+                                {
+                                    cit = city.CR_Mas_Sup_City_Ar_Name;
+                                }
+
+                                string addr = reg + " " + cit + " " + district + " " + street + " " + buildingNo + " " + UnitNo + " " + ZipCode;
+
+                                rd.SetParameterValue("BranchAddress", addr.Trim());
+                            }
+                        }
+
+                        rd.SetParameterValue("contractSerialNo", contract.CR_Cas_Contract_Basic_Car_Serail_No);
+                        rd.SetParameterValue("CusId", contract.CR_Mas_Renter_Information.CR_Mas_Renter_Information_Id);
+                        rd.SetParameterValue("contractEndDateActual", ContractEndDateEx);
+                        if (contract.CR_Cas_Contract_Basic_Actual_Extra_Hour_Value != null)
+                        {
+                            rd.SetParameterValue("ExtraHourValue", contract.CR_Cas_Contract_Basic_Actual_Extra_Hour_Value.ToString());
+                        }
+                        else
+                        {
+                            rd.SetParameterValue("ExtraHourValue", "0");
+                        }
+
+                        if (contract.CR_Cas_Contract_Basic_End_Authorization != null)
+                        {
+                            rd.SetParameterValue("AuthEndDate", contract.CR_Cas_Contract_Basic_End_Authorization.ToString());
+                        }
+                        else
+                        {
+                            rd.SetParameterValue("AuthEndDate", "0");
+                        }
+                        if (contract.CR_Cas_Contract_Basic_Daily_Rent != null)
+                        {
+                            rd.SetParameterValue("DailyRentPrice", contract.CR_Cas_Contract_Basic_Daily_Rent.ToString());
+                        }
+                        else
+                        {
+                            rd.SetParameterValue("DailyRentPrice", "0");
+                        }
+
+                        if (ContractEndTimeEx != null)
+                        {
+                            rd.SetParameterValue("contractEndTimeActual", ContractEndTimeEx.ToString());
+                        }
+                        else
+                        {
+                            rd.SetParameterValue("contractEndTimeActual", "0");
+                        }
+                        if (contractDaysNbr != null)
+                        {
+                            rd.SetParameterValue("ActualDays", contractDaysNbr);
+                        }
+                        else
+                        {
+                            rd.SetParameterValue("ActualDays", "0");
+                        }
+
+                        //********************************
+                        rd.SetParameterValue("ReceiptNo", carSerialNo);
+
+
+                        if (contract.CR_Cas_Contract_Basic_Previous_Balance != null)
+                        {
+                            rd.SetParameterValue("PreviousBalance", contract.CR_Cas_Contract_Basic_Previous_Balance.ToString());
+                        }
+                        else
+                        {
+                            rd.SetParameterValue("PreviousBalance", "0");
+                        }
+
+                        if (contract.CR_Cas_Contract_Basic_Additional_Driver_Value != null)
+                        {
+                            rd.SetParameterValue("ValueAdditionalDriver", contract.CR_Cas_Contract_Basic_Additional_Driver_Value.ToString());
+
+                        }
+                        else
+                        {
+                            rd.SetParameterValue("ValueAdditionalDriver", "0");
+                        }
+
+                        if (contract.CR_Cas_Contract_Basic_Authorization_Value != null)
+                        {
+                            rd.SetParameterValue("AuthorizationPercentage", contract.CR_Cas_Contract_Basic_Authorization_Value.ToString());
+                        }
+                        else
+                        {
+                            rd.SetParameterValue("AuthorizationPercentage", "0");
+                        }
+                        if (contract.CR_Cas_Contract_Basic_User_Discount != null)
+                        {
+                            rd.SetParameterValue("DiscountPercentage", contract.CR_Cas_Contract_Basic_User_Discount.ToString());
+                        }
+                        else
+                        {
+                            rd.SetParameterValue("DiscountPercentage", "0");
+                        }
+                        if (contractValED != null)
+                        {
+                            rd.SetParameterValue("contractValueBeforeDis", contractValED);
+                        }
+                        else
+                        {
+                            rd.SetParameterValue("contractValueBeforeDis", "0");
+                        }
+                        if (contract.CR_Cas_Contract_Basic_Tax_Value != null)
+                        {
+                            rd.SetParameterValue("TaxValue", contract.CR_Cas_Contract_Basic_Tax_Value.ToString());
+                        }
+                        else
+                        {
+                            rd.SetParameterValue("TaxValue", "0");
+                        }
+                        if (contract.CR_Cas_Contract_Basic_After_Discount_Value != null)
+                        {
+                            rd.SetParameterValue("contractValueAfterDIs", contract.CR_Cas_Contract_Basic_After_Discount_Value.ToString());
+                        }
+                        else
+                        {
+                            rd.SetParameterValue("contractValueAfterDIs", "0");
+                        }
+                        if (payType != null)
+                        {
+                            rd.SetParameterValue("PayMethod", payType);
+                        }
+                        else
+                        {
+                            rd.SetParameterValue("PayMethod", "  ");
+                        }
+                        if (totToPay != null)
+                        {
+                            rd.SetParameterValue("TotalToPay", totToPay);
+                        }
+                        else
+                        {
+                            rd.SetParameterValue("TotalToPay", "0");
+                        }
+                        if (contract.CR_Cas_Contract_Basic_Additional_Value != null)
+                        {
+                            rd.SetParameterValue("AdditionalTotal", contract.CR_Cas_Contract_Basic_Additional_Value.ToString());
+                        }
+                        else
+                        {
+                            rd.SetParameterValue("AdditionalTotal", "0");
+                        }
+                        if (contract.CR_Cas_Contract_Basic_Choices_Value != null)
+                        {
+                            rd.SetParameterValue("ChoicesTotal", contract.CR_Cas_Contract_Basic_Choices_Value.ToString());
+                        }
+                        else
+                        {
+                            rd.SetParameterValue("ChoicesTotal", "0");
+                        }
+                        if (contract.CR_Cas_Contract_Basic_Actual_Extra_Hour_Value != null)
+                        {
+                            rd.SetParameterValue("ExtraHourValue", contract.CR_Cas_Contract_Basic_Actual_Extra_Hour_Value.ToString());
+                        }
+                        else
+                        {
+                            rd.SetParameterValue("ExtraHourValue", "");
+                        }
+
+                        if (contract.CR_Cas_Contract_Basic_Additional_KM_Value != null)
+                        {
+                            rd.SetParameterValue("KmValue", contract.CR_Cas_Contract_Basic_Additional_KM_Value.ToString());
+                        }
+                        else
+                        {
+                            rd.SetParameterValue("KmValue", "0");
+                        }
+                        if (contract.CR_Cas_Contract_Basic_Contarct_Remaining_Amount != null)
+                        {
+                            rd.SetParameterValue("remains", contract.CR_Cas_Contract_Basic_Contarct_Remaining_Amount.ToString());
+                        }
+                        else
+                        {
+                            rd.SetParameterValue("remains", "0");
+                        }
+                        if (contract.CR_Cas_Contract_Basic_Daily_Rent != null)
+                        {
+                            rd.SetParameterValue("Price", contract.CR_Cas_Contract_Basic_Daily_Rent.ToString());
+                        }
+                        else
+                        {
+                            rd.SetParameterValue("Price", "0");
+                        }
+                        if (compensationVal != null)
+                        {
+                            rd.SetParameterValue("totalCompensation", compensationVal);
+                        }
+                        else
+                        {
+                            rd.SetParameterValue("totalCompensation", "0");
+                        }
+                        if (depences != null)
+                        {
+                            rd.SetParameterValue("totalExpense", depences);
+                        }
+                        else
+                        {
+                            rd.SetParameterValue("totalExpense", "0");
+                        }
+                        if (contract.CR_Cas_Contract_Basic_Net_Value != null)
+                        {
+                            rd.SetParameterValue("ContractNetValue", contract.CR_Cas_Contract_Basic_Net_Value);
+                        }
+                        else
+                        {
+                            rd.SetParameterValue("ContractNetValue", "0");
+                        }
+                        if (totPayed != null)
+                        {
+                            rd.SetParameterValue("amountPaid", totPayed);
+                        }
+                        else
+                        {
+                            rd.SetParameterValue("amountPaid", "0");
+                        }
+                        if (remarque != null)
+                        {
+                            rd.SetParameterValue("Reasons", remarque);
+                        }
+                        else
+                        {
+                            rd.SetParameterValue("Reasons", "0");
+                        }
+
+                        ////depences ===>> expenses
+                        if (depences != null)
+                        {
+                            rd.SetParameterValue("expensesval", depences);
+                        }
+                        else
+                        {
+                            rd.SetParameterValue("expensesval", "0");
+                        }
+
+                        if (depencesReason != null)
+                        {
+                            rd.SetParameterValue("expensesstat", depencesReason);
+                        }
+                        else
+                        {
+                            rd.SetParameterValue("expensesstat", " ");
+                        }
+
+                        if (imgy1path != null && imgy1path != "")
+                        {
+                            imgy1path = imgy1path.Replace("/", "\\");
+                            imgy1path = imgy1path.Substring(1, imgy1path.Length - 1);
+                            var img1path = System.Web.Hosting.HostingEnvironment.ApplicationPhysicalPath + imgy1path;
+                            rd.SetParameterValue("expenseImg1", img1path);
+                        }
+                        else
+                        {
+                            rd.SetParameterValue("expenseImg1", "         ");
+                        }
+
+                        if (imgy2path != null && imgy2path != "")
+                        {
+                            imgy2path = imgy2path.Replace("/", "\\");
+                            imgy2path = imgy2path.Substring(1, imgy2path.Length - 1);
+                            var img2path = System.Web.Hosting.HostingEnvironment.ApplicationPhysicalPath + imgy2path;
+                            rd.SetParameterValue("expenseImg2", img2path);
+                        }
+                        else
+                        {
+                            rd.SetParameterValue("expenseImg2", "         ");
+                        }
+
+                        if (imgy3path != null && imgy3path != "")
+                        {
+                            imgy3path = imgy2path.Replace("/", "\\");
+                            imgy3path = imgy2path.Substring(1, imgy3path.Length - 1);
+                            var img3path = System.Web.Hosting.HostingEnvironment.ApplicationPhysicalPath + imgy3path;
+                            rd.SetParameterValue("expenseImg3", img3path);
+                        }
+                        else
+                        {
+                            rd.SetParameterValue("expenseImg3", "         ");
+                        }
+
+                        if (imgy4path != null && imgy4path != "")
+                        {
+                            imgy4path = imgy4path.Replace("/", "\\");
+                            imgy4path = imgy4path.Substring(1, imgy4path.Length - 1);
+                            var img4path = System.Web.Hosting.HostingEnvironment.ApplicationPhysicalPath + imgy4path;
+                            rd.SetParameterValue("expenseImg4", img4path);
+                        }
+                        else
+                        {
+                            rd.SetParameterValue("expenseImg4", "         ");
+                        }
+
+                        
+
+                        //compestaion
+
+                        if (compensationVal != null)
+                        {
+                            rd.SetParameterValue("compensationVal", compensationVal);
+                        }
+                        else
+                        {
+                            rd.SetParameterValue("compensationVal", "0");
+                        }
+
+                        if (compensationReason != null)
+                        {
+                            rd.SetParameterValue("compensationstat", compensationReason);
+                        }
+                        else
+                        {
+                            rd.SetParameterValue("compensationstat", "0");
+                        }
+
+                        if (imgx1path != null && imgx1path != "")
+                        {
+                            imgx1path = imgx1path.Replace("/", "\\");
+                            imgx1path = imgx1path.Substring(1, imgx1path.Length - 1);
+                            var img1path = System.Web.Hosting.HostingEnvironment.ApplicationPhysicalPath + imgx1path;
+                            rd.SetParameterValue("compensationImg1", img1path);
+                        }
+                        else
+                        {
+                            rd.SetParameterValue("compensationImg1", "         ");
+                        }
+
+                        if (imgx2path != null && imgx2path != "")
+                        {
+                            imgx2path = imgx2path.Replace("/", "\\");
+                            imgx2path = imgx2path.Substring(1, imgx2path.Length - 1);
+                            var img1path = System.Web.Hosting.HostingEnvironment.ApplicationPhysicalPath + imgx2path;
+                            rd.SetParameterValue("compensationImg2", img1path);
+                        }
+                        else
+                        {
+                            rd.SetParameterValue("compensationImg2", "         ");
+                        }
+
+                        if (imgx3path != null && imgx3path != "")
+                        {
+                            imgx3path = imgx3path.Replace("/", "\\");
+                            imgx3path = imgx3path.Substring(1, imgx3path.Length - 1);
+                            var img1path = System.Web.Hosting.HostingEnvironment.ApplicationPhysicalPath + imgx3path;
+                            rd.SetParameterValue("compensationImg3", img1path);
+                        }
+                        else
+                        {
+                            rd.SetParameterValue("compensationImg3", "         ");
+                        }
+
+                        if (imgx4path != null && imgx4path != "")
+                        {
+                            imgx4path = imgx4path.Replace("/", "\\");
+                            imgx4path = imgx4path.Substring(1, imgx4path.Length - 1);
+                            var img1path = System.Web.Hosting.HostingEnvironment.ApplicationPhysicalPath + imgx4path;
+                            rd.SetParameterValue("compensationImg4", img1path);
+                        }
+                        else
+                        {
+                            rd.SetParameterValue("compensationImg4", "         ");
+                        }
+
+                        //inspection
+                        if (currentMeter != null)
+                        {
+                            rd.SetParameterValue("CurrentMeter", currentMeter);
+                        }
+                        else
+                        {
+                            rd.SetParameterValue("CurrentMeter", "0");
+                        }
+                        if (oldKm != null)
+                        {
+                            rd.SetParameterValue("OldKm", oldKm);
+                        }
+                        else
+                        {
+                            rd.SetParameterValue("OldKm", "0");
+                        }
+
+                        if (totalFreeKm != null)
+                        {
+                            rd.SetParameterValue("TotalFreeKm", totalFreeKm);
+                        }
+                        else
+                        {
+                            rd.SetParameterValue("TotalFreeKm", "0");
+                        }
+                        if (contract.CR_Cas_Contract_Basic_Actual_Additional_Free_KM != null)
+                        {
+                            rd.SetParameterValue("AdditionalKmNo", contract.CR_Cas_Contract_Basic_Actual_Additional_Free_KM);
+                        }
+                        else
+                        {
+                            rd.SetParameterValue("AdditionalKmNo", "0");
+                        }
+
+                        if (contract.CR_Cas_Contract_Basic_Actual_Additional_Free_KM != null)
+                        {
+                            rd.SetParameterValue("insImg1", contract.CR_Cas_Contract_Basic_Actual_Additional_Free_KM);
+                        }
+                        else
+                        {
+                            rd.SetParameterValue("insImg1", "");
+                        }
+
+                        var x = "/images/Company/" + LessorCode + "/" + BranchCode + "/" + contract.CR_Cas_Contract_Basic_No + "/" + "ClosePDF" + "/" + "1" + contract.CR_Cas_Contract_Basic_No + ".pdf";
+                        var fullPath = System.Web.Hosting.HostingEnvironment.ApplicationPhysicalPath + x;
+                        rd.ExportToDisk(ExportFormatType.PortableDocFormat, fullPath);
                     }
 
-                    rd.SetParameterValue("BranchAddress", contract.CR_Cas_Contract_Basic_Car_Serail_No);
-                    rd.SetParameterValue("CusId", contract.CR_Mas_Renter_Information.CR_Mas_Renter_Information_Id);
-                    rd.SetParameterValue("contractEndDateActual", contractEndDate);
-                    if (additionalHours != null && additionalHours != 0)
-                    {
-                        rd.SetParameterValue("ExtraHourValue", additionalHours);
-                    }
-                    else
-                    {
-                        rd.SetParameterValue("ExtraHourValue", "0");
-                    }
-
-                    if (contract.CR_Cas_Contract_Basic_End_Authorization != null)
-                    {
-                        rd.SetParameterValue("AuthEndDate", contract.CR_Cas_Contract_Basic_End_Authorization.ToString());
-                    }
-                    else
-                    {
-                        rd.SetParameterValue("AuthEndDate", "0");
-                    }
-                    if (contract.CR_Cas_Contract_Basic_Daily_Rent != null && contract.CR_Cas_Contract_Basic_Daily_Rent != 0)
-                    {
-                        rd.SetParameterValue("DailyRentPrice", contract.CR_Cas_Contract_Basic_Daily_Rent.ToString());
-                    }
-                    else
-                    {
-                        rd.SetParameterValue("DailyRentPrice", "0");
-                    }
-
-                    if (contract.CR_Cas_Contract_Basic_Expected_End_Time != null)
-                    {
-                        rd.SetParameterValue("contractEndTimeActual", contract.CR_Cas_Contract_Basic_Expected_End_Time.ToString());
-                    }
-                    else
-                    {
-                        rd.SetParameterValue("contractEndTimeActual", "0");
-                    }
-                    rd.SetParameterValue("contractEndTimeActual", contract.CR_Cas_Contract_Basic_Expected_Rental_Days.ToString());
-                    rd.SetParameterValue("ReceiptNo", rec);
-                    if (contract.CR_Cas_Contract_Basic_Previous_Balance != null)
-                    {
-                        rd.SetParameterValue("PreviousBalance", contract.CR_Cas_Contract_Basic_Previous_Balance.ToString());
-                    }
-                    else
-                    {
-                        rd.SetParameterValue("PreviousBalance", "0");
-                    }
-
-                    rd.ExportToDisk(ExportFormatType.PortableDocFormat, "C:\\Users\\hp\\Desktop\\bnan99\\images\\Company\\5003\\100\\23-1-90-5003-1000001\\OpenPdf\\1\\15.pdf");
                 }
 
             }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
         }
 
         public CR_Cas_Account_Receipt GetReceiptLastRecord(string LessorCode, string BranchCode)

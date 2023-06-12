@@ -951,22 +951,6 @@ namespace RentCar.Reports.ContractBasicReports.ContractCr {
                 return this.DataDefinition.ParameterFields[107];
             }
         }
-        
-        [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_Tracingrpt_UserName {
-            get {
-                return this.DataDefinition.ParameterFields[108];
-            }
-        }
-        
-        [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_Tracingrpt_Logo {
-            get {
-                return this.DataDefinition.ParameterFields[109];
-            }
-        }
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
