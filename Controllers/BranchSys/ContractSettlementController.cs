@@ -1093,9 +1093,9 @@ namespace RentCar.Controllers
                             dbTran.Commit();
 
                             var rec = TempData["rec"].ToString();
-                            SavePdf(Contract, ContractNo, ContractEndDate, ContractEndTime, ContractDaysNbr, ContractValED, ContractValID, TaxVal,
-             TotalContractIT, TotPayed, CurrentMeter, OldKm, TotalFreeKm, AdditionalHours, ExtraKmValue, TotalHoursValue, Chk_Depences, Chk_Compensation,
-             Depences, DepencesReason, CompensationVal, CompensationReason, RenterPrevBalance, reste, TotToPay, rec, PayType, CasherName, remarque, imgx1path, imgx2path, imgx3path, imgx4path, imgy1path, imgy2path, imgy3path, imgy4path);
+             //               SavePdf(Contract, ContractNo, ContractEndDate, ContractEndTime, ContractDaysNbr, ContractValED, ContractValID, TaxVal,
+             //TotalContractIT, TotPayed, CurrentMeter, OldKm, TotalFreeKm, AdditionalHours, ExtraKmValue, TotalHoursValue, Chk_Depences, Chk_Compensation,
+             //Depences, DepencesReason, CompensationVal, CompensationReason, RenterPrevBalance, reste, TotToPay, rec, PayType, CasherName, remarque, imgx1path, imgx2path, imgx3path, imgx4path, imgy1path, imgy2path, imgy3path, imgy4path);
 
 
                         }

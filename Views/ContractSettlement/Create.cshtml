@@ -2065,6 +2065,11 @@
 
 
     function Calculate() {
+
+
+        
+       
+        
         var ExtraKmValue = document.getElementById('ExtraKmValue').value;
         if (ExtraKmValue == "") {
             document.getElementById('ExtraKmValue').value = "0.00";
@@ -2158,6 +2163,31 @@
         document.getElementById('TotPayed').focus;
 
 
+       // اذا كان المستأجر له فلوس يبقي لازم ندفعله نقدا من الصندوق
+        if ($("#TotToPay").val() < 0) {
+            document.getElementById("PayType").value = "11"; // تعيين القيمة الأولى في القائمة كقيمة افتراضية
+            $.get("/ContractSettlement/GetSalesPoint", { PayCode: '11' }, function (data) {
+                $("#CasherName").empty();
+                $.each(data, function (index, row) {
+                    $("#CasherName").append("<option value= '" + row.CR_Cas_Sup_SalesPoint_Code + "'>" + row.CR_Cas_Sup_SalesPoint_Ar_Name + "</option>")
+                });
+            });
+            document.getElementById('PayType').disabled = true;
+            document.getElementById('CasherName').disabled = true;
+        }
+        else {
+            $("#PayType").change(function () {
+                $.get("/ContractSettlement/GetSalesPoint", { PayCode: $("#PayType").val() }, function (data) {
+                    $("#CasherName").empty();
+                    $.each(data, function (index, row) {
+                        $("#CasherName").append("<option value= '" + row.CR_Cas_Sup_SalesPoint_Code + "'>" + row.CR_Cas_Sup_SalesPoint_Ar_Name + "</option>")
+                    });
+                });
+            })
+        }
+       
+
+
     }
 
     $(document).ready(function () {
@@ -2189,31 +2219,37 @@
 </script>
 
 <script>
-    $(document).ready(function () {
-        $("#PayType").change(function () {
-            $.get("/ContractSettlement/GetSalesPoint", { PayCode: $("#PayType").val() }, function (data) {
-                $("#CasherName").empty();
-                $.each(data, function (index, row) {
-                    $("#CasherName").append("<option value= '" + row.CR_Cas_Sup_SalesPoint_Code + "'>" + row.CR_Cas_Sup_SalesPoint_Ar_Name + "</option>")
-                });
-            });
-        })
-    });
+    //$(document).ready(function () {
+    //    $("#PayType").change(function () {
+    //        $.get("/ContractSettlement/GetSalesPoint", { PayCode: $("#PayType").val() }, function (data) {
+    //            $("#CasherName").empty();
+    //            $.each(data, function (index, row) {
+    //                $("#CasherName").append("<option value= '" + row.CR_Cas_Sup_SalesPoint_Code + "'>" + row.CR_Cas_Sup_SalesPoint_Ar_Name + "</option>")
+    //            });
+    //        });
+    //    })
+    //});
 </script>
 
 
 <script>
     $(document).ready(function () {
         $("#TotPayed").focusout(function () {
-
             var TotPayed = parseFloat(document.getElementById('TotPayed').value);
-            if (TotPayed > 0) {
-                document.getElementById('PayType').disabled = false;
-                document.getElementById('CasherName').disabled = false;
-            } else {
+            if ($("#TotToPay").val() >= 0) {
+                if (TotPayed > 0) {
+                    document.getElementById('PayType').disabled = false;
+                    document.getElementById('CasherName').disabled = false;
+                } else {
+                    document.getElementById('PayType').disabled = true;
+                    document.getElementById('CasherName').disabled = true;
+                }
+            }
+            else {
                 document.getElementById('PayType').disabled = true;
                 document.getElementById('CasherName').disabled = true;
             }
+            
         });
     });
 </script>
@@ -2276,6 +2312,9 @@
     });
 
 
+</script>
+<script>
+   
 </script>
 
 

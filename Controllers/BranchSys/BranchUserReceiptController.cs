@@ -88,7 +88,7 @@ namespace RentCar.Controllers
                  
                 sd1=sd1.AddDays(-30);
                 sd = sd1.Date;
-                ed = DateTime.Now.Date;
+                ed = DateTime.Now;
             }
             
             var LessorCode = "";
