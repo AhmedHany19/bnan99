@@ -4402,17 +4402,17 @@ namespace RentCar.Controllers.BranchSys
 
                 
 
-                if (img1 != null && img1 != "")
-                {
-                    img1 = img1.Replace("/", "\\");
-                    img1 = img1.Substring(1, img1.Length - 1);
-                    var img1path = System.Web.Hosting.HostingEnvironment.ApplicationPhysicalPath + img1;
-                    rd.SetParameterValue("img1", img1path);
-                }
-                else
-                {
-                    rd.SetParameterValue("img1", "         ");
-                }
+                    if (img1 != null && img1 != "")
+                    {
+                        img1 = img1.Replace("/", "\\");
+                        img1 = img1.Substring(1, img1.Length - 1);
+                        var img1path = System.Web.Hosting.HostingEnvironment.ApplicationPhysicalPath + img1;
+                        rd.SetParameterValue("img1", img1path);
+                    }
+                    else
+                    {
+                        rd.SetParameterValue("img1", "         ");
+                    }
                 if (img2 != null && img2 != "")
                 {
                     img2 = img2.Replace("/", "\\");
