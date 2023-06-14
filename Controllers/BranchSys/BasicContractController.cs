@@ -3194,6 +3194,7 @@ namespace RentCar.Controllers.BranchSys
 
             List<VirtualInspectionRptMD> VirtualInspectionMD = new List<VirtualInspectionRptMD>();
             var Vinspection = db.CR_Cas_Contract_Virtual_Inspection.Where(a => a.CR_Cas_Contract_Virtual_Inspection_No == Sno);
+
             if (Vinspection != null)
             {
                 var nb = 15 - Vinspection.Count();
