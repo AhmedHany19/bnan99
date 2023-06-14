@@ -2165,15 +2165,23 @@
 
        // اذا كان المستأجر له فلوس يبقي لازم ندفعله نقدا من الصندوق
         if ($("#TotToPay").val() < 0) {
-            document.getElementById("PayType").value = "11"; // تعيين القيمة الأولى في القائمة كقيمة افتراضية
-            $.get("/ContractSettlement/GetSalesPoint", { PayCode: '11' }, function (data) {
+            //document.getElementById("PayType").value = "11"; // تعيين القيمة الأولى في القائمة كقيمة افتراضية
+            $.get("/ContractSettlement/GetSalesPoint", { paycode: '11' }, function (data) {
                 $("#CasherName").empty();
                 $.each(data, function (index, row) {
-                    $("#CasherName").append("<option value= '" + row.CR_Cas_Sup_SalesPoint_Code + "'>" + row.CR_Cas_Sup_SalesPoint_Ar_Name + "</option>")
+                    $("#CasherName").append("<option value= '" + row.CR_Cas_Sup_SalesPoint_Code + "'>" + row.CR_Cas_Sup_SalesPoint_Ar_Name + "</option>");
+                    $("#CasherName").val(row.CR_Cas_Sup_SalesPoint_Code);
+                    document.getElementById("PayType").options[1].selected = true;
+                    var payTypeDropdown = document.getElementById("PayType");
+                    for (var i = 0; i < payTypeDropdown.options.length; i++) {
+                        if (i !== 1) { // skip the selected option
+                            payTypeDropdown.options[i].style.display = 'none';
+                        }
+                    }
+                    
                 });
             });
-            document.getElementById('PayType').disabled = true;
-            document.getElementById('CasherName').disabled = true;
+            
         }
         else {
             $("#PayType").change(function () {
@@ -2246,8 +2254,8 @@
                 }
             }
             else {
-                document.getElementById('PayType').disabled = true;
-                document.getElementById('CasherName').disabled = true;
+                document.getElementById('PayType').disabled = false;
+                document.getElementById('CasherName').disabled = false;
             }
             
         });
