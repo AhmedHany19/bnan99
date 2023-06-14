@@ -1129,9 +1129,9 @@ namespace RentCar.Controllers.BranchSys
                 ViewBag.NbrActiveContracts = Contracts.Where(a=>a.CR_Cas_Contract_Basic_Status=="A").Count();
                 ViewBag.NbrexpiredContracts = Contracts.Where(a => a.CR_Cas_Contract_Basic_Status == "E").Count();
                 // this day
-                ViewBag.NbrDexpiredContracts = Contracts.Where(a => a.CR_Cas_Contract_Basic_Expected_End_Date== date).Count();
+                ViewBag.NbrDexpiredContracts = Contracts.Where(a => a.CR_Cas_Contract_Basic_Expected_End_Date== date && a.CR_Cas_Contract_Basic_Status != "C").Count();
                 // after day
-                ViewBag.NbrTexpiredContracts = Contracts.Where(a => a.CR_Cas_Contract_Basic_Expected_End_Date == afterDay).Count();
+                ViewBag.NbrTexpiredContracts = Contracts.Where(a => a.CR_Cas_Contract_Basic_Expected_End_Date == afterDay && a.CR_Cas_Contract_Basic_Status != "C").Count();
                 ViewBag.NbrClosedContracts = Contracts.Where(a=>a.CR_Cas_Contract_Basic_Status=="C").Count();
             }
 
