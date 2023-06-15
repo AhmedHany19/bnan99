@@ -729,12 +729,6 @@
     <Compile Include="Reports\BranchReport\ReportViewer.aspx.designer.cs">
       <DependentUpon>ReportViewer.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Reports\ContractBasicReports\ContractCr\ContractClose.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ContractClose.rpt</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Reports\ContractBasicReports\ContractCr\ContractOpen.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -2302,10 +2296,6 @@
     <EmbeddedResource Include="Reports\BranchReport\BranchList.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>BranchList.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reports\ContractBasicReports\ContractCr\ContractClose.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>ContractClose.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\ContractBasicReports\ContractCr\ContractOpen.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

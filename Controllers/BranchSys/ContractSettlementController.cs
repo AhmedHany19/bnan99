@@ -1747,7 +1747,7 @@ namespace RentCar.Controllers
                             rd.SetParameterValue("insImg9", "  ");
                         }
                         List<VirtualInspectionRptMD> VirtualInspectionMD = new List<VirtualInspectionRptMD>();
-                        var Vinspection = db.CR_Cas_Contract_Virtual_Inspection.Where(a => a.CR_Cas_Contract_Virtual_Inspection_No == contract.CR_Cas_Contract_Basic_No);
+                      var Vinspection = db.CR_Cas_Contract_Virtual_Inspection.Where(a => a.CR_Cas_Contract_Virtual_Inspection_No == contract.CR_Cas_Contract_Basic_No);
 
                         if (Vinspection != null)
                         {
@@ -1773,9 +1773,9 @@ namespace RentCar.Controllers
                                 {
                                     VirtualInspectionRptMD VI = new VirtualInspectionRptMD();
                                     VI.CR_Cas_Contract_Virtual_Inspection_Code = 0;
-                                    VI.CR_Cas_Contract_Virtual_Inspection_Remarks = "";
+                                    VI.CR_Cas_Contract_Virtual_Inspection_Remarks = " ";
                                     VI.CR_Cas_Contract_Virtual_Inspection_Action = false;
-                                    VI.CR_Mas_Sup_Virtual_Inspection_Ar_Name = "";
+                                    VI.CR_Mas_Sup_Virtual_Inspection_Ar_Name = " ";
 
                                     VirtualInspectionMD.Add(VI);
                                 }
@@ -1787,14 +1787,14 @@ namespace RentCar.Controllers
                             {
                                 VirtualInspectionRptMD VI = new VirtualInspectionRptMD();
                                 VI.CR_Cas_Contract_Virtual_Inspection_Code = 0;
-                                VI.CR_Cas_Contract_Virtual_Inspection_Remarks = "";
+                                VI.CR_Cas_Contract_Virtual_Inspection_Remarks = " ";
                                 VI.CR_Cas_Contract_Virtual_Inspection_Action = false;
-                                VI.CR_Mas_Sup_Virtual_Inspection_Ar_Name = "";
+                                VI.CR_Mas_Sup_Virtual_Inspection_Ar_Name = " ";
 
                                 VirtualInspectionMD.Add(VI);
                             }
                         }
-                        rd.Subreports["VirtualInspectionSubRPT"].SetDataSource(VirtualInspectionMD);
+                        rd.Subreports["VirtualInspectionSubRPT1"].SetDataSource(VirtualInspectionMD);
 
                         var x = "/images/Company/" + LessorCode + "/" + BranchCode + "/" + contract.CR_Cas_Contract_Basic_No + "/" + "ClosePDF" + "/" + "1" + "/" + contract.CR_Cas_Contract_Basic_No + ".pdf";
                         var fullPath = System.Web.Hosting.HostingEnvironment.ApplicationPhysicalPath + x;
