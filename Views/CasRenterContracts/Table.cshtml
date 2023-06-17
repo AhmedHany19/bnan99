@@ -4,37 +4,28 @@
     <table id="myTable" class="table table-striped mb-0" style="cursor:pointer">
         <thead style="overflow-y: scroll; flex-grow: 1;">
             <tr>
-                <th style="width:18%">
+                <th style="width:20%">
                     رقم العقد
                 </th>
                 <th style="width:10%">
                     تاريخه
                 </th>
-                @*<th  style="width:8%">
-                    بدايته
-                </th>
-                <th  style="width:8%">
-                    نهايته
-                </th>*@
 
-                <th style="width:22%">
+                <th style="width:24%">
                     المستأجر
                 </th>
-                <th style="width:34%">
+                <th style="width:37%">
                     السيارة
                 </th>
 
-                <th style="width:8%">
+                <th style="width:6%">
                     الحالة
                 </th>
 
                 <th style="width:11%">
                     إنشاء العقد
                 </th>
-                <th style="width: 11%">
-                    إغلاق العقد
-                </th>
-
+          
 
             </tr>
         </thead>
@@ -46,7 +37,7 @@
                 if (item.CR_Cas_Contract_Basic_Status == "E")
                 {
                     <tr>
-                        <td style="width:18%;color:red">
+                        <td style="width:20%;color:red">
                             @Html.DisplayFor(modelItem => item.CR_Cas_Contract_Basic_No)
                             @{
 
@@ -67,18 +58,18 @@
 
                         </td>
 
-                        <td style="width: 22%; color: red">
+                        <td style="width: 24%; color: red">
 
                             @Html.DisplayFor(modelItem => item.CR_Mas_Renter_Information.CR_Mas_Renter_Information_Ar_Name)
 
                         </td>
-                        <td style="width: 34%; color: red">
+                        <td style="width: 37%; color: red">
 
                             @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Information.CR_Cas_Sup_Car_Collect_Ar_Name)
 
                         </td>
 
-                        <td style="width: 8%; color: red" align="center">
+                        <td style="width: 6%; color: red" align="center">
                             @if (item.CR_Cas_Contract_Basic_Status == "A")
                             {
                                 <label>نشط</label>
@@ -108,22 +99,12 @@
 
                             </a>
                         </td>
-                        <td align="center" style="width: 11%; color: red">
-                            @if (item.CR_Cas_Contract_Basic_CloseContract_Pdf != null)
-                            {
-                                <a href="~/BasicContract/PDFFlyer/?p=@Html.DisplayFor(modelItem => item.CR_Cas_Contract_Basic_CloseContract_Pdf)" target="_blank">
-                                    <i class="fas fa-file-pdf" style="color:red;"></i>
-
-                                </a>
-                            }
-
-                        </td>
                     </tr>
                 }
                 else
                 {
                     <tr>
-                        <td style="width:18%">
+                        <td style="width:20%">
                             @Html.DisplayFor(modelItem => item.CR_Cas_Contract_Basic_No)
                             @{
 
@@ -143,34 +124,19 @@
 
 
                         </td>
-                        @*<td style="width:8%">
-                            @if (item.CR_Cas_Contract_Basic_Start_Date != null)
-                            {
-                                @item.CR_Cas_Contract_Basic_Start_Date.Value.ToString("yyyy/MM/dd")
-                            }
-
-
-                        </td>
-                        <td style="width:8%">
-                            @if (item.CR_Cas_Contract_Basic_Expected_End_Date != null)
-                            {
-                                @item.CR_Cas_Contract_Basic_Expected_End_Date.Value.ToString("yyyy/MM/dd")
-                            }
-
-
-                        </td>*@
-                        <td style="width:22%">
+                        
+                        <td style="width:24%">
 
                             @Html.DisplayFor(modelItem => item.CR_Mas_Renter_Information.CR_Mas_Renter_Information_Ar_Name)
 
                         </td>
-                        <td style="width:34%">
+                        <td style="width:37%">
 
                             @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Information.CR_Cas_Sup_Car_Collect_Ar_Name)
 
                         </td>
 
-                        <td style="width:8%" align="center">
+                        <td style="width:6%" align="center">
                             @if (item.CR_Cas_Contract_Basic_Status == "A")
                             {
                                 <label>نشط</label>
@@ -194,44 +160,14 @@
 
                         </td>
 
-                        @*<td>
-                            @{
-                                if (item.CR_Cas_Contract_Basic_Expected_End_Date != null)
-                                {
-                                    DateTime currentdate = DateTime.Now;
-                                    DateTime enddate = (DateTime)item.CR_Cas_Contract_Basic_Expected_End_Date;
-
-                                    var diff = (enddate - currentdate).TotalDays;
-                                    if (diff > 0)
-                                    {
-                                        <label>@String.Format("{0:#,##0}", diff)</label>
-                                    }
-                                    else
-                                    {
-                                        <label>@String.Format("{0:#,##0}", 0)</label>
-                                    }
-
-                                }
-
-                            }
-
-                        </td>*@
+                       
                         <td align="center" style="width:11%">
                             <a href="~/BasicContract/PDFFlyer/?p=@Html.DisplayFor(modelItem => item.CR_Cas_Contract_Basic_CreateContract_Pdf)" target="_blank">
                                 <i class="fas fa-file-pdf" style="color:red;"></i>
 
                             </a>
                         </td>
-                        <td align="center" style="width:11%">
-                            @if (item.CR_Cas_Contract_Basic_CloseContract_Pdf != null)
-                            {
-                                <a href="~/BasicContract/PDFFlyer/?p=@Html.DisplayFor(modelItem => item.CR_Cas_Contract_Basic_CloseContract_Pdf)" target="_blank">
-                                    <i class="fas fa-file-pdf" style="color:red;"></i>
-
-                                </a>
-                            }
-
-                        </td>
+                       
                     </tr>
                 }
             }
