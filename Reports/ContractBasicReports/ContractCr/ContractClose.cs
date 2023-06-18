@@ -16,14 +16,14 @@ namespace RentCar.Reports.ContractBasicReports.ContractCr {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class ContractClose : ReportClass {
+    public class ContractOpen : ReportClass {
         
-        public ContractClose() {
+        public ContractOpen() {
         }
         
         public override string ResourceName {
             get {
-                return "ContractClose.rpt";
+                return "ContractOpen.rpt";
             }
             set {
                 // Do nothing
@@ -41,7 +41,7 @@ namespace RentCar.Reports.ContractBasicReports.ContractCr {
         
         public override string FullResourceName {
             get {
-                return "RentCar.Reports.ContractBasicReports.ContractCr.ContractClose.rpt";
+                return "RentCar.Reports.ContractBasicReports.ContractCr.ContractOpen.rpt";
             }
             set {
                 // Do nothing
@@ -74,7 +74,7 @@ namespace RentCar.Reports.ContractBasicReports.ContractCr {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section Section4 {
+        public CrystalDecisions.CrystalReports.Engine.Section DetailSection4 {
             get {
                 return this.ReportDefinition.Sections[3];
             }
@@ -82,7 +82,7 @@ namespace RentCar.Reports.ContractBasicReports.ContractCr {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section Section5 {
+        public CrystalDecisions.CrystalReports.Engine.Section DetailSection3 {
             get {
                 return this.ReportDefinition.Sections[4];
             }
@@ -90,9 +90,17 @@ namespace RentCar.Reports.ContractBasicReports.ContractCr {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_TaxNumber {
+        public CrystalDecisions.CrystalReports.Engine.Section Section4 {
             get {
-                return this.DataDefinition.ParameterFields[0];
+                return this.ReportDefinition.Sections[5];
+            }
+        }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.CrystalReports.Engine.Section Section5 {
+            get {
+                return this.ReportDefinition.Sections[6];
             }
         }
         
@@ -100,31 +108,15 @@ namespace RentCar.Reports.ContractBasicReports.ContractCr {
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
         public CrystalDecisions.Shared.IParameterField Parameter_CompanyName {
             get {
+                return this.DataDefinition.ParameterFields[0];
+            }
+        }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_TaxNumber {
+            get {
                 return this.DataDefinition.ParameterFields[1];
-            }
-        }
-        
-        [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_CompanyAddress {
-            get {
-                return this.DataDefinition.ParameterFields[2];
-            }
-        }
-        
-        [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_CompanyNameEng {
-            get {
-                return this.DataDefinition.ParameterFields[3];
-            }
-        }
-        
-        [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_CommercialRegisterNo {
-            get {
-                return this.DataDefinition.ParameterFields[4];
             }
         }
         
@@ -132,23 +124,7 @@ namespace RentCar.Reports.ContractBasicReports.ContractCr {
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
         public CrystalDecisions.Shared.IParameterField Parameter_BranchName {
             get {
-                return this.DataDefinition.ParameterFields[5];
-            }
-        }
-        
-        [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_BranchAddress {
-            get {
-                return this.DataDefinition.ParameterFields[6];
-            }
-        }
-        
-        [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_FreeTall {
-            get {
-                return this.DataDefinition.ParameterFields[7];
+                return this.DataDefinition.ParameterFields[2];
             }
         }
         
@@ -156,13 +132,53 @@ namespace RentCar.Reports.ContractBasicReports.ContractCr {
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
         public CrystalDecisions.Shared.IParameterField Parameter_BranchContact {
             get {
+                return this.DataDefinition.ParameterFields[3];
+            }
+        }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_CompanyAddress {
+            get {
+                return this.DataDefinition.ParameterFields[4];
+            }
+        }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_Logo {
+            get {
+                return this.DataDefinition.ParameterFields[5];
+            }
+        }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_LessorDirectorSignature {
+            get {
+                return this.DataDefinition.ParameterFields[6];
+            }
+        }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_BranchDirectorSignature {
+            get {
+                return this.DataDefinition.ParameterFields[7];
+            }
+        }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_UserSignature {
+            get {
                 return this.DataDefinition.ParameterFields[8];
             }
         }
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_CompanyAuthNo {
+        public CrystalDecisions.Shared.IParameterField Parameter_BranchAddress {
             get {
                 return this.DataDefinition.ParameterFields[9];
             }
@@ -170,7 +186,7 @@ namespace RentCar.Reports.ContractBasicReports.ContractCr {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_ContractNo {
+        public CrystalDecisions.Shared.IParameterField Parameter_FreeTall {
             get {
                 return this.DataDefinition.ParameterFields[10];
             }
@@ -178,7 +194,7 @@ namespace RentCar.Reports.ContractBasicReports.ContractCr {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_ContractDate {
+        public CrystalDecisions.Shared.IParameterField Parameter_ContractNo {
             get {
                 return this.DataDefinition.ParameterFields[11];
             }
@@ -186,7 +202,7 @@ namespace RentCar.Reports.ContractBasicReports.ContractCr {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_InsuranceDocNo {
+        public CrystalDecisions.Shared.IParameterField Parameter_ContractDate {
             get {
                 return this.DataDefinition.ParameterFields[12];
             }
@@ -218,7 +234,7 @@ namespace RentCar.Reports.ContractBasicReports.ContractCr {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_CurrentKm {
+        public CrystalDecisions.Shared.IParameterField Parameter_InsuranceDocNo {
             get {
                 return this.DataDefinition.ParameterFields[16];
             }
@@ -226,7 +242,7 @@ namespace RentCar.Reports.ContractBasicReports.ContractCr {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_TrafficPermit {
+        public CrystalDecisions.Shared.IParameterField Parameter_RenterId {
             get {
                 return this.DataDefinition.ParameterFields[17];
             }
@@ -234,7 +250,7 @@ namespace RentCar.Reports.ContractBasicReports.ContractCr {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_CarDrivingLicenceEndDate {
+        public CrystalDecisions.Shared.IParameterField Parameter_RenterName {
             get {
                 return this.DataDefinition.ParameterFields[18];
             }
@@ -242,7 +258,7 @@ namespace RentCar.Reports.ContractBasicReports.ContractCr {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_InsuranceEndDate {
+        public CrystalDecisions.Shared.IParameterField Parameter_RenterAdr {
             get {
                 return this.DataDefinition.ParameterFields[19];
             }
@@ -250,7 +266,7 @@ namespace RentCar.Reports.ContractBasicReports.ContractCr {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_TrafficPermitEndDate {
+        public CrystalDecisions.Shared.IParameterField Parameter_RenterTaxNo {
             get {
                 return this.DataDefinition.ParameterFields[20];
             }
@@ -258,7 +274,7 @@ namespace RentCar.Reports.ContractBasicReports.ContractCr {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_PeriodicMaintenanceEndDate {
+        public CrystalDecisions.Shared.IParameterField Parameter_DriverId {
             get {
                 return this.DataDefinition.ParameterFields[21];
             }
@@ -266,7 +282,7 @@ namespace RentCar.Reports.ContractBasicReports.ContractCr {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_CarPassengersNo {
+        public CrystalDecisions.Shared.IParameterField Parameter_DriverName {
             get {
                 return this.DataDefinition.ParameterFields[22];
             }
@@ -274,7 +290,7 @@ namespace RentCar.Reports.ContractBasicReports.ContractCr {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_CarDoorNo {
+        public CrystalDecisions.Shared.IParameterField Parameter_DriverNationality {
             get {
                 return this.DataDefinition.ParameterFields[23];
             }
@@ -282,7 +298,7 @@ namespace RentCar.Reports.ContractBasicReports.ContractCr {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_CarBigBagsNo {
+        public CrystalDecisions.Shared.IParameterField Parameter_DriverWorkPlace {
             get {
                 return this.DataDefinition.ParameterFields[24];
             }
@@ -290,7 +306,7 @@ namespace RentCar.Reports.ContractBasicReports.ContractCr {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_CarSmallBagsNo {
+        public CrystalDecisions.Shared.IParameterField Parameter_DriverAdr {
             get {
                 return this.DataDefinition.ParameterFields[25];
             }
@@ -298,7 +314,7 @@ namespace RentCar.Reports.ContractBasicReports.ContractCr {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_FreeKm {
+        public CrystalDecisions.Shared.IParameterField Parameter_DriverGender {
             get {
                 return this.DataDefinition.ParameterFields[26];
             }
@@ -306,7 +322,7 @@ namespace RentCar.Reports.ContractBasicReports.ContractCr {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_KmValue {
+        public CrystalDecisions.Shared.IParameterField Parameter_AdditionalDriverId {
             get {
                 return this.DataDefinition.ParameterFields[27];
             }
@@ -314,7 +330,7 @@ namespace RentCar.Reports.ContractBasicReports.ContractCr {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_FreeHours {
+        public CrystalDecisions.Shared.IParameterField Parameter_AdditionalDriverName {
             get {
                 return this.DataDefinition.ParameterFields[28];
             }
@@ -322,7 +338,7 @@ namespace RentCar.Reports.ContractBasicReports.ContractCr {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_HoursMax {
+        public CrystalDecisions.Shared.IParameterField Parameter_AdditionalDriverNationality {
             get {
                 return this.DataDefinition.ParameterFields[29];
             }
@@ -330,7 +346,7 @@ namespace RentCar.Reports.ContractBasicReports.ContractCr {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_ExtraHourValue {
+        public CrystalDecisions.Shared.IParameterField Parameter_AdditionalDriverWorkPlace {
             get {
                 return this.DataDefinition.ParameterFields[30];
             }
@@ -338,7 +354,7 @@ namespace RentCar.Reports.ContractBasicReports.ContractCr {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_ContractStartDate {
+        public CrystalDecisions.Shared.IParameterField Parameter_AdditionalDriverAdr {
             get {
                 return this.DataDefinition.ParameterFields[31];
             }
@@ -346,7 +362,7 @@ namespace RentCar.Reports.ContractBasicReports.ContractCr {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_ContractEndDate {
+        public CrystalDecisions.Shared.IParameterField Parameter_AdditionalDriverGender {
             get {
                 return this.DataDefinition.ParameterFields[32];
             }
@@ -354,7 +370,7 @@ namespace RentCar.Reports.ContractBasicReports.ContractCr {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_ContractStartTime {
+        public CrystalDecisions.Shared.IParameterField Parameter_FreeKm {
             get {
                 return this.DataDefinition.ParameterFields[33];
             }
@@ -362,7 +378,7 @@ namespace RentCar.Reports.ContractBasicReports.ContractCr {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_ContractEndTime {
+        public CrystalDecisions.Shared.IParameterField Parameter_KmValue {
             get {
                 return this.DataDefinition.ParameterFields[34];
             }
@@ -370,7 +386,7 @@ namespace RentCar.Reports.ContractBasicReports.ContractCr {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_DailyRentPrice {
+        public CrystalDecisions.Shared.IParameterField Parameter_FreeHours {
             get {
                 return this.DataDefinition.ParameterFields[35];
             }
@@ -378,7 +394,7 @@ namespace RentCar.Reports.ContractBasicReports.ContractCr {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_DiscountPercentage {
+        public CrystalDecisions.Shared.IParameterField Parameter_HoursMax {
             get {
                 return this.DataDefinition.ParameterFields[36];
             }
@@ -386,7 +402,7 @@ namespace RentCar.Reports.ContractBasicReports.ContractCr {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_ContractAccidentFees {
+        public CrystalDecisions.Shared.IParameterField Parameter_ExtraHourValue {
             get {
                 return this.DataDefinition.ParameterFields[37];
             }
@@ -394,7 +410,7 @@ namespace RentCar.Reports.ContractBasicReports.ContractCr {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_ContractStealingFees {
+        public CrystalDecisions.Shared.IParameterField Parameter_ContractStartDate {
             get {
                 return this.DataDefinition.ParameterFields[38];
             }
@@ -402,7 +418,7 @@ namespace RentCar.Reports.ContractBasicReports.ContractCr {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_ContractDrawningFees {
+        public CrystalDecisions.Shared.IParameterField Parameter_ContractEndDate {
             get {
                 return this.DataDefinition.ParameterFields[39];
             }
@@ -410,7 +426,7 @@ namespace RentCar.Reports.ContractBasicReports.ContractCr {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_ContractFireFees {
+        public CrystalDecisions.Shared.IParameterField Parameter_ExpectedDays {
             get {
                 return this.DataDefinition.ParameterFields[40];
             }
@@ -434,7 +450,7 @@ namespace RentCar.Reports.ContractBasicReports.ContractCr {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_ExpectedDays {
+        public CrystalDecisions.Shared.IParameterField Parameter_ContractStartTime {
             get {
                 return this.DataDefinition.ParameterFields[43];
             }
@@ -442,7 +458,7 @@ namespace RentCar.Reports.ContractBasicReports.ContractCr {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_TaxValue {
+        public CrystalDecisions.Shared.IParameterField Parameter_ContractEndTime {
             get {
                 return this.DataDefinition.ParameterFields[44];
             }
@@ -450,7 +466,7 @@ namespace RentCar.Reports.ContractBasicReports.ContractCr {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_ContractNetValue {
+        public CrystalDecisions.Shared.IParameterField Parameter_TaxValue {
             get {
                 return this.DataDefinition.ParameterFields[45];
             }
@@ -458,7 +474,7 @@ namespace RentCar.Reports.ContractBasicReports.ContractCr {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_PreviousBalance {
+        public CrystalDecisions.Shared.IParameterField Parameter_ContractNetValue {
             get {
                 return this.DataDefinition.ParameterFields[46];
             }
@@ -466,7 +482,7 @@ namespace RentCar.Reports.ContractBasicReports.ContractCr {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_DiscountValue {
+        public CrystalDecisions.Shared.IParameterField Parameter_PreviousBalance {
             get {
                 return this.DataDefinition.ParameterFields[47];
             }
@@ -474,7 +490,7 @@ namespace RentCar.Reports.ContractBasicReports.ContractCr {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_ContractAfterDiscountValue {
+        public CrystalDecisions.Shared.IParameterField Parameter_DiscountValue {
             get {
                 return this.DataDefinition.ParameterFields[48];
             }
@@ -482,7 +498,7 @@ namespace RentCar.Reports.ContractBasicReports.ContractCr {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_ContractValue {
+        public CrystalDecisions.Shared.IParameterField Parameter_ContractAfterDiscountValue {
             get {
                 return this.DataDefinition.ParameterFields[49];
             }
@@ -490,7 +506,7 @@ namespace RentCar.Reports.ContractBasicReports.ContractCr {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_ContractPayedValue {
+        public CrystalDecisions.Shared.IParameterField Parameter_ContractValue {
             get {
                 return this.DataDefinition.ParameterFields[50];
             }
@@ -498,7 +514,7 @@ namespace RentCar.Reports.ContractBasicReports.ContractCr {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_AuthorizationPercentage {
+        public CrystalDecisions.Shared.IParameterField Parameter_ContractPayedValue {
             get {
                 return this.DataDefinition.ParameterFields[51];
             }
@@ -506,7 +522,7 @@ namespace RentCar.Reports.ContractBasicReports.ContractCr {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_ContractUserDiscount {
+        public CrystalDecisions.Shared.IParameterField Parameter_img1 {
             get {
                 return this.DataDefinition.ParameterFields[52];
             }
@@ -514,7 +530,7 @@ namespace RentCar.Reports.ContractBasicReports.ContractCr {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_ReceiptNo {
+        public CrystalDecisions.Shared.IParameterField Parameter_img2 {
             get {
                 return this.DataDefinition.ParameterFields[53];
             }
@@ -522,7 +538,7 @@ namespace RentCar.Reports.ContractBasicReports.ContractCr {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_Price {
+        public CrystalDecisions.Shared.IParameterField Parameter_img3 {
             get {
                 return this.DataDefinition.ParameterFields[54];
             }
@@ -530,7 +546,7 @@ namespace RentCar.Reports.ContractBasicReports.ContractCr {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_TotalToPay {
+        public CrystalDecisions.Shared.IParameterField Parameter_img4 {
             get {
                 return this.DataDefinition.ParameterFields[55];
             }
@@ -538,7 +554,7 @@ namespace RentCar.Reports.ContractBasicReports.ContractCr {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_Reasons {
+        public CrystalDecisions.Shared.IParameterField Parameter_img5 {
             get {
                 return this.DataDefinition.ParameterFields[56];
             }
@@ -546,7 +562,7 @@ namespace RentCar.Reports.ContractBasicReports.ContractCr {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_ValueAdditionalDriver {
+        public CrystalDecisions.Shared.IParameterField Parameter_img6 {
             get {
                 return this.DataDefinition.ParameterFields[57];
             }
@@ -554,7 +570,7 @@ namespace RentCar.Reports.ContractBasicReports.ContractCr {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_CasherName {
+        public CrystalDecisions.Shared.IParameterField Parameter_img7 {
             get {
                 return this.DataDefinition.ParameterFields[58];
             }
@@ -562,7 +578,7 @@ namespace RentCar.Reports.ContractBasicReports.ContractCr {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_CasherCode {
+        public CrystalDecisions.Shared.IParameterField Parameter_img8 {
             get {
                 return this.DataDefinition.ParameterFields[59];
             }
@@ -570,7 +586,7 @@ namespace RentCar.Reports.ContractBasicReports.ContractCr {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_PayMethod {
+        public CrystalDecisions.Shared.IParameterField Parameter_img9 {
             get {
                 return this.DataDefinition.ParameterFields[60];
             }
@@ -578,7 +594,7 @@ namespace RentCar.Reports.ContractBasicReports.ContractCr {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_BankName {
+        public CrystalDecisions.Shared.IParameterField Parameter_CompanyStamp {
             get {
                 return this.DataDefinition.ParameterFields[61];
             }
@@ -586,7 +602,7 @@ namespace RentCar.Reports.ContractBasicReports.ContractCr {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_ChoicesTotal {
+        public CrystalDecisions.Shared.IParameterField Parameter_CompanyNameEng {
             get {
                 return this.DataDefinition.ParameterFields[62];
             }
@@ -594,7 +610,7 @@ namespace RentCar.Reports.ContractBasicReports.ContractCr {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_AdditionalTotal {
+        public CrystalDecisions.Shared.IParameterField Parameter_CommercialRegisterNo {
             get {
                 return this.DataDefinition.ParameterFields[63];
             }
@@ -602,7 +618,7 @@ namespace RentCar.Reports.ContractBasicReports.ContractCr {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_AccountName {
+        public CrystalDecisions.Shared.IParameterField Parameter_CarDrivingLicenceEndDate {
             get {
                 return this.DataDefinition.ParameterFields[64];
             }
@@ -610,7 +626,7 @@ namespace RentCar.Reports.ContractBasicReports.ContractCr {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_AccountNo {
+        public CrystalDecisions.Shared.IParameterField Parameter_CarPassengersNo {
             get {
                 return this.DataDefinition.ParameterFields[65];
             }
@@ -618,7 +634,7 @@ namespace RentCar.Reports.ContractBasicReports.ContractCr {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_UserName {
+        public CrystalDecisions.Shared.IParameterField Parameter_CarDoorNo {
             get {
                 return this.DataDefinition.ParameterFields[66];
             }
@@ -626,7 +642,7 @@ namespace RentCar.Reports.ContractBasicReports.ContractCr {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_BranchDirectorName {
+        public CrystalDecisions.Shared.IParameterField Parameter_CarBigBagsNo {
             get {
                 return this.DataDefinition.ParameterFields[67];
             }
@@ -634,7 +650,7 @@ namespace RentCar.Reports.ContractBasicReports.ContractCr {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_DirectorName {
+        public CrystalDecisions.Shared.IParameterField Parameter_CarSmallBagsNo {
             get {
                 return this.DataDefinition.ParameterFields[68];
             }
@@ -642,7 +658,7 @@ namespace RentCar.Reports.ContractBasicReports.ContractCr {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_expensesval {
+        public CrystalDecisions.Shared.IParameterField Parameter_CurrentKm {
             get {
                 return this.DataDefinition.ParameterFields[69];
             }
@@ -650,7 +666,7 @@ namespace RentCar.Reports.ContractBasicReports.ContractCr {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_expensesstat {
+        public CrystalDecisions.Shared.IParameterField Parameter_CurrentOilKm {
             get {
                 return this.DataDefinition.ParameterFields[70];
             }
@@ -658,7 +674,7 @@ namespace RentCar.Reports.ContractBasicReports.ContractCr {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_expenseImg1 {
+        public CrystalDecisions.Shared.IParameterField Parameter_CurrentWheelKm {
             get {
                 return this.DataDefinition.ParameterFields[71];
             }
@@ -666,7 +682,7 @@ namespace RentCar.Reports.ContractBasicReports.ContractCr {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_expenseImg2 {
+        public CrystalDecisions.Shared.IParameterField Parameter_InsuranceEndDate {
             get {
                 return this.DataDefinition.ParameterFields[72];
             }
@@ -674,7 +690,7 @@ namespace RentCar.Reports.ContractBasicReports.ContractCr {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_expenseImg3 {
+        public CrystalDecisions.Shared.IParameterField Parameter_RenterMembership {
             get {
                 return this.DataDefinition.ParameterFields[73];
             }
@@ -682,7 +698,7 @@ namespace RentCar.Reports.ContractBasicReports.ContractCr {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_expenseImg4 {
+        public CrystalDecisions.Shared.IParameterField Parameter_RenterEmail {
             get {
                 return this.DataDefinition.ParameterFields[74];
             }
@@ -690,7 +706,7 @@ namespace RentCar.Reports.ContractBasicReports.ContractCr {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_compensationVal {
+        public CrystalDecisions.Shared.IParameterField Parameter_DriverBirthDate {
             get {
                 return this.DataDefinition.ParameterFields[75];
             }
@@ -698,7 +714,7 @@ namespace RentCar.Reports.ContractBasicReports.ContractCr {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_compensationstat {
+        public CrystalDecisions.Shared.IParameterField Parameter_DriverMembership {
             get {
                 return this.DataDefinition.ParameterFields[76];
             }
@@ -706,7 +722,7 @@ namespace RentCar.Reports.ContractBasicReports.ContractCr {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_compensationImg1 {
+        public CrystalDecisions.Shared.IParameterField Parameter_DriverJob {
             get {
                 return this.DataDefinition.ParameterFields[77];
             }
@@ -714,7 +730,7 @@ namespace RentCar.Reports.ContractBasicReports.ContractCr {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_compensationImg2 {
+        public CrystalDecisions.Shared.IParameterField Parameter_DriverEmail {
             get {
                 return this.DataDefinition.ParameterFields[78];
             }
@@ -722,7 +738,7 @@ namespace RentCar.Reports.ContractBasicReports.ContractCr {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_compensationImg3 {
+        public CrystalDecisions.Shared.IParameterField Parameter_AdditionalDriverBirthDate {
             get {
                 return this.DataDefinition.ParameterFields[79];
             }
@@ -730,7 +746,7 @@ namespace RentCar.Reports.ContractBasicReports.ContractCr {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_compensationImg4 {
+        public CrystalDecisions.Shared.IParameterField Parameter_AdditionalDriverMembership {
             get {
                 return this.DataDefinition.ParameterFields[80];
             }
@@ -738,7 +754,7 @@ namespace RentCar.Reports.ContractBasicReports.ContractCr {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_insImg1 {
+        public CrystalDecisions.Shared.IParameterField Parameter_AdditionalDriverJob {
             get {
                 return this.DataDefinition.ParameterFields[81];
             }
@@ -746,7 +762,7 @@ namespace RentCar.Reports.ContractBasicReports.ContractCr {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_insImg2 {
+        public CrystalDecisions.Shared.IParameterField Parameter_AdditionalDriverEmail {
             get {
                 return this.DataDefinition.ParameterFields[82];
             }
@@ -754,7 +770,7 @@ namespace RentCar.Reports.ContractBasicReports.ContractCr {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_insImg3 {
+        public CrystalDecisions.Shared.IParameterField Parameter_DailyRentPrice {
             get {
                 return this.DataDefinition.ParameterFields[83];
             }
@@ -762,7 +778,7 @@ namespace RentCar.Reports.ContractBasicReports.ContractCr {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_insImg4 {
+        public CrystalDecisions.Shared.IParameterField Parameter_AuthorizationPercentage {
             get {
                 return this.DataDefinition.ParameterFields[84];
             }
@@ -770,7 +786,7 @@ namespace RentCar.Reports.ContractBasicReports.ContractCr {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_insImg5 {
+        public CrystalDecisions.Shared.IParameterField Parameter_DiscountPercentage {
             get {
                 return this.DataDefinition.ParameterFields[85];
             }
@@ -778,7 +794,7 @@ namespace RentCar.Reports.ContractBasicReports.ContractCr {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_insImg6 {
+        public CrystalDecisions.Shared.IParameterField Parameter_ContractAccidentFees {
             get {
                 return this.DataDefinition.ParameterFields[86];
             }
@@ -786,7 +802,7 @@ namespace RentCar.Reports.ContractBasicReports.ContractCr {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_insImg7 {
+        public CrystalDecisions.Shared.IParameterField Parameter_ContractStealingFees {
             get {
                 return this.DataDefinition.ParameterFields[87];
             }
@@ -794,7 +810,7 @@ namespace RentCar.Reports.ContractBasicReports.ContractCr {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_insImg8 {
+        public CrystalDecisions.Shared.IParameterField Parameter_ContractDrawningFees {
             get {
                 return this.DataDefinition.ParameterFields[88];
             }
@@ -802,7 +818,7 @@ namespace RentCar.Reports.ContractBasicReports.ContractCr {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_insImg9 {
+        public CrystalDecisions.Shared.IParameterField Parameter_ContractFireFees {
             get {
                 return this.DataDefinition.ParameterFields[89];
             }
@@ -810,7 +826,7 @@ namespace RentCar.Reports.ContractBasicReports.ContractCr {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_contractSerialNo {
+        public CrystalDecisions.Shared.IParameterField Parameter_ContractUserDiscount {
             get {
                 return this.DataDefinition.ParameterFields[90];
             }
@@ -818,7 +834,7 @@ namespace RentCar.Reports.ContractBasicReports.ContractCr {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_CusId {
+        public CrystalDecisions.Shared.IParameterField Parameter_TrafficPermit {
             get {
                 return this.DataDefinition.ParameterFields[91];
             }
@@ -826,7 +842,7 @@ namespace RentCar.Reports.ContractBasicReports.ContractCr {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_contractEndDateActual {
+        public CrystalDecisions.Shared.IParameterField Parameter_ReceiptNo {
             get {
                 return this.DataDefinition.ParameterFields[92];
             }
@@ -834,7 +850,7 @@ namespace RentCar.Reports.ContractBasicReports.ContractCr {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_closingDate {
+        public CrystalDecisions.Shared.IParameterField Parameter_RenterReason {
             get {
                 return this.DataDefinition.ParameterFields[93];
             }
@@ -842,7 +858,7 @@ namespace RentCar.Reports.ContractBasicReports.ContractCr {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_contractEndTimeActual {
+        public CrystalDecisions.Shared.IParameterField Parameter_DriverReason {
             get {
                 return this.DataDefinition.ParameterFields[94];
             }
@@ -850,7 +866,7 @@ namespace RentCar.Reports.ContractBasicReports.ContractCr {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_ActualDays {
+        public CrystalDecisions.Shared.IParameterField Parameter_AdditionalDriverReason {
             get {
                 return this.DataDefinition.ParameterFields[95];
             }
@@ -858,7 +874,7 @@ namespace RentCar.Reports.ContractBasicReports.ContractCr {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_RenterName {
+        public CrystalDecisions.Shared.IParameterField Parameter_Price {
             get {
                 return this.DataDefinition.ParameterFields[96];
             }
@@ -866,7 +882,7 @@ namespace RentCar.Reports.ContractBasicReports.ContractCr {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_contractValueAfterDIs {
+        public CrystalDecisions.Shared.IParameterField Parameter_TotalToPay {
             get {
                 return this.DataDefinition.ParameterFields[97];
             }
@@ -874,7 +890,7 @@ namespace RentCar.Reports.ContractBasicReports.ContractCr {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_contractValueBeforeDis {
+        public CrystalDecisions.Shared.IParameterField Parameter_Reasons {
             get {
                 return this.DataDefinition.ParameterFields[98];
             }
@@ -882,7 +898,7 @@ namespace RentCar.Reports.ContractBasicReports.ContractCr {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_totalCompensation {
+        public CrystalDecisions.Shared.IParameterField Parameter_ValueAdditionalDriver {
             get {
                 return this.DataDefinition.ParameterFields[99];
             }
@@ -890,7 +906,7 @@ namespace RentCar.Reports.ContractBasicReports.ContractCr {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_remains {
+        public CrystalDecisions.Shared.IParameterField Parameter_AuthValue {
             get {
                 return this.DataDefinition.ParameterFields[100];
             }
@@ -898,7 +914,7 @@ namespace RentCar.Reports.ContractBasicReports.ContractCr {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_payPoint {
+        public CrystalDecisions.Shared.IParameterField Parameter_CasherName {
             get {
                 return this.DataDefinition.ParameterFields[101];
             }
@@ -906,7 +922,7 @@ namespace RentCar.Reports.ContractBasicReports.ContractCr {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_totalExpense {
+        public CrystalDecisions.Shared.IParameterField Parameter_CasherCode {
             get {
                 return this.DataDefinition.ParameterFields[102];
             }
@@ -914,7 +930,7 @@ namespace RentCar.Reports.ContractBasicReports.ContractCr {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_amountPaid {
+        public CrystalDecisions.Shared.IParameterField Parameter_PayMethod {
             get {
                 return this.DataDefinition.ParameterFields[103];
             }
@@ -922,7 +938,7 @@ namespace RentCar.Reports.ContractBasicReports.ContractCr {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_CurrentMeter {
+        public CrystalDecisions.Shared.IParameterField Parameter_BankName {
             get {
                 return this.DataDefinition.ParameterFields[104];
             }
@@ -930,7 +946,7 @@ namespace RentCar.Reports.ContractBasicReports.ContractCr {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_TotalFreeKm {
+        public CrystalDecisions.Shared.IParameterField Parameter_ChoicesTotal {
             get {
                 return this.DataDefinition.ParameterFields[105];
             }
@@ -938,7 +954,7 @@ namespace RentCar.Reports.ContractBasicReports.ContractCr {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_OldKm {
+        public CrystalDecisions.Shared.IParameterField Parameter_AdditionalTotal {
             get {
                 return this.DataDefinition.ParameterFields[106];
             }
@@ -946,17 +962,289 @@ namespace RentCar.Reports.ContractBasicReports.ContractCr {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_AdditionalKmNo {
+        public CrystalDecisions.Shared.IParameterField Parameter_DirectorName {
             get {
                 return this.DataDefinition.ParameterFields[107];
+            }
+        }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_BranchDirectorName {
+            get {
+                return this.DataDefinition.ParameterFields[108];
+            }
+        }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_UserName {
+            get {
+                return this.DataDefinition.ParameterFields[109];
+            }
+        }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_RenterSignature {
+            get {
+                return this.DataDefinition.ParameterFields[110];
+            }
+        }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_TrafficPermitEndDate {
+            get {
+                return this.DataDefinition.ParameterFields[111];
+            }
+        }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_PeriodicMaintenanceEndDate {
+            get {
+                return this.DataDefinition.ParameterFields[112];
+            }
+        }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_CurrentOilKmEndDate {
+            get {
+                return this.DataDefinition.ParameterFields[113];
+            }
+        }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_CurrentWheelKmEndDate {
+            get {
+                return this.DataDefinition.ParameterFields[114];
+            }
+        }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_CompanyAuthNo {
+            get {
+                return this.DataDefinition.ParameterFields[115];
+            }
+        }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_DriverDrivingLicenceEndDate {
+            get {
+                return this.DataDefinition.ParameterFields[116];
+            }
+        }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_AdditionalDriverDrivingLicenceEndDate {
+            get {
+                return this.DataDefinition.ParameterFields[117];
+            }
+        }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_AccountName {
+            get {
+                return this.DataDefinition.ParameterFields[118];
+            }
+        }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_AccountNo {
+            get {
+                return this.DataDefinition.ParameterFields[119];
+            }
+        }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_Cond1 {
+            get {
+                return this.DataDefinition.ParameterFields[120];
+            }
+        }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_Cond2 {
+            get {
+                return this.DataDefinition.ParameterFields[121];
+            }
+        }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_contractSerialNo {
+            get {
+                return this.DataDefinition.ParameterFields[122];
+            }
+        }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_CusId {
+            get {
+                return this.DataDefinition.ParameterFields[123];
+            }
+        }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_contractEndDateActual {
+            get {
+                return this.DataDefinition.ParameterFields[124];
+            }
+        }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_contractEndTimeActual {
+            get {
+                return this.DataDefinition.ParameterFields[125];
+            }
+        }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_ActualDays {
+            get {
+                return this.DataDefinition.ParameterFields[126];
+            }
+        }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_contractValueAfterDIs {
+            get {
+                return this.DataDefinition.ParameterFields[127];
+            }
+        }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_contractValueBeforeDis {
+            get {
+                return this.DataDefinition.ParameterFields[128];
+            }
+        }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_totalCompensation {
+            get {
+                return this.DataDefinition.ParameterFields[129];
+            }
+        }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_remains {
+            get {
+                return this.DataDefinition.ParameterFields[130];
+            }
+        }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_payPoint {
+            get {
+                return this.DataDefinition.ParameterFields[131];
+            }
+        }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_totalExpense {
+            get {
+                return this.DataDefinition.ParameterFields[132];
+            }
+        }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_amountPaid {
+            get {
+                return this.DataDefinition.ParameterFields[133];
+            }
+        }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_CurrentMeter {
+            get {
+                return this.DataDefinition.ParameterFields[134];
+            }
+        }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_OldKm {
+            get {
+                return this.DataDefinition.ParameterFields[135];
+            }
+        }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_TotalFreeKm {
+            get {
+                return this.DataDefinition.ParameterFields[136];
+            }
+        }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_AdditionalKmNo {
+            get {
+                return this.DataDefinition.ParameterFields[137];
+            }
+        }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_expensesval {
+            get {
+                return this.DataDefinition.ParameterFields[138];
+            }
+        }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_expensesstat {
+            get {
+                return this.DataDefinition.ParameterFields[139];
+            }
+        }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_compensationstat {
+            get {
+                return this.DataDefinition.ParameterFields[140];
+            }
+        }
+        
+        [Browsable(false)]
+        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
+        public CrystalDecisions.Shared.IParameterField Parameter_compensationVal {
+            get {
+                return this.DataDefinition.ParameterFields[141];
             }
         }
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-    public class CachedContractClose : Component, ICachedReport {
+    public class CachedContractOpen : Component, ICachedReport {
         
-        public CachedContractClose() {
+        public CachedContractOpen() {
         }
         
         [Browsable(false)]
@@ -993,7 +1281,7 @@ namespace RentCar.Reports.ContractBasicReports.ContractCr {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            ContractClose rpt = new ContractClose();
+            ContractOpen rpt = new ContractOpen();
             rpt.Site = this.Site;
             return rpt;
         }

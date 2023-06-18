@@ -11,6 +11,7 @@ using System.Web.Mvc;
 using CrystalDecisions.CrystalReports.Engine;
 using CrystalDecisions.Shared;
 using RentCar.Models;
+using RentCar.Models.RptModels;
 
 namespace RentCar.Controllers
 {
@@ -846,6 +847,7 @@ namespace RentCar.Controllers
                             {
                                 if (img1.FileName.Length > 0)
                                 {
+
                                     img1path = "/images/Company/" + LessorCode + "/" + BranchCode + "/" + Contract.CR_Cas_Contract_Basic_No + "/" + "CloseImage" + "/" + Path.GetFileName(img1.FileName);
                                     img1.SaveAs(HttpContext.Server.MapPath(img1path));
                                 }
@@ -860,6 +862,7 @@ namespace RentCar.Controllers
                             {
                                 if (img2.FileName.Length > 0)
                                 {
+
                                     img2path = "/images/Company/" + LessorCode + "/" + BranchCode + "/" + Contract.CR_Cas_Contract_Basic_No + "/" + "CloseImage" + "/" + Path.GetFileName(img2.FileName);
                                     img2.SaveAs(HttpContext.Server.MapPath(img2path));
                                 }
@@ -1087,6 +1090,9 @@ namespace RentCar.Controllers
                                 imgy4path = "/images/common/Empty.bmp";
                             }
                             /////////////////////////////////////////////////////////////////////////
+                            SavePdf(Contract, ContractEndDateEx, ContractEndTimeEx, ContractNo, CarSerialNo, ContractEndDate, ContractEndTime, ContractDaysNbr, ContractValED, ContractValID, TaxVal,
+                                       TotalContractIT, TotPayed, CurrentMeter, OldKm, TotalFreeKm, AdditionalHours, ExtraKmValue, TotalHoursValue, Chk_Depences, Chk_Compensation,
+                                       Depences, DepencesReason, CompensationVal, CompensationReason, RenterPrevBalance, reste, TotToPay, PayType, CasherName, remarque, imgx1path, imgx2path, imgx3path, imgx4path, imgy1path, imgy2path, imgy3path, imgy4path, img1path, img2path, img3path, img4path, img5path, img6path, img7path, img8path, img9path);
 
 
                             db.Entry(Contract).State = EntityState.Modified;
@@ -1098,10 +1104,7 @@ namespace RentCar.Controllers
 
 
 
-                            SavePdf(Contract, ContractEndDateEx, ContractEndTimeEx, ContractNo, CarSerialNo, ContractEndDate, ContractEndTime, ContractDaysNbr, ContractValED, ContractValID, TaxVal,
-             TotalContractIT, TotPayed, CurrentMeter, OldKm, TotalFreeKm, AdditionalHours, ExtraKmValue, TotalHoursValue, Chk_Depences, Chk_Compensation,
-             Depences, DepencesReason, CompensationVal, CompensationReason, RenterPrevBalance, reste, TotToPay, PayType, CasherName, remarque, imgx1path, imgx2path, imgx3path, imgx4path, imgy1path, imgy2path, imgy3path, imgy4path);
-
+                          
 
                         }
 
@@ -1116,20 +1119,71 @@ namespace RentCar.Controllers
             }
 
             ViewBag.PayType = new SelectList(db.CR_Mas_Sup_Payment_Method.Where(p => p.CR_Mas_Sup_Payment_Method_Type == "2" && p.CR_Mas_Sup_Payment_Method_Status == "A")
-, "CR_Mas_Sup_Payment_Method_Code", "CR_Mas_Sup_Payment_Method_Ar_Name");
+                , "CR_Mas_Sup_Payment_Method_Code", "CR_Mas_Sup_Payment_Method_Ar_Name");
             ViewBag.CasherName = "";
             return View();
         }
 
-        private void SavePdf(CR_Cas_Contract_Basic contract, string ContractEndDateEx, string ContractEndTimeEx, string contractNo, string carSerialNo, string contractEndDate, string contractEndTime, string contractDaysNbr, string contractValED, string contractValID, string taxVal, string totalContractIT, string totPayed, string currentMeter, string oldKm, string totalFreeKm, decimal? additionalHours, string extraKmValue, string totalHoursValue, string chk_Depences, string chk_Compensation, string depences, string depencesReason, string compensationVal, string compensationReason, string renterPrevBalance, string reste, string totToPay, string payType, string casherName, string remarque, string imgx1path, string imgx2path, string imgx3path, string imgx4path, string imgy1path, string imgy2path, string imgy3path, string imgy4path)
+        private void SavePdf(CR_Cas_Contract_Basic contract, string ContractEndDateEx, string ContractEndTimeEx, string contractNo, string carSerialNo, string contractEndDate, string contractEndTime, string contractDaysNbr, string contractValED, string contractValID, string taxVal, string totalContractIT, string totPayed, string currentMeter, string oldKm, string totalFreeKm, decimal? additionalHours, string extraKmValue, string totalHoursValue, string chk_Depences, string chk_Compensation, string depences, string depencesReason, string compensationVal, string compensationReason, string renterPrevBalance, string reste, string totToPay, string payType, string casherName, string remarque, string imgx1path, string imgx2path, string imgx3path, string imgx4path, string imgy1path, string imgy2path, string imgy3path, string imgy4path, string img1, string img2, string img3, string img4, string img5, string img6, string img7, string img8, string img9)
         {
             var LessorCode = Session["LessorCode"].ToString();
             var BranchCode = Session["BranchCode"].ToString();
+            var UserLogin = System.Web.HttpContext.Current.Session["UserLogin"].ToString();
+
             ReportDocument rd = new ReportDocument();
             rd.Load(Path.Combine(Server.MapPath("~/Reports/ContractBasicReports/ContractCr"), "ContractClose.rpt"));
 
             try
             {
+                List<VirtualInspectionRptMD> VirtualInspectionMD = new List<VirtualInspectionRptMD>();
+                var Vinspection = db.CR_Cas_Contract_Virtual_Inspection.Where(a => a.CR_Cas_Contract_Virtual_Inspection_No == contractNo);
+                if (Vinspection != null)
+                {
+                    var nb = 15 - Vinspection.Count();
+                    foreach (var v in Vinspection)
+                    {
+                        VirtualInspectionRptMD VI = new VirtualInspectionRptMD();
+                        VI.CR_Cas_Contract_Virtual_Inspection_Code = v.CR_Cas_Contract_Virtual_Inspection_Code;
+                        VI.CR_Cas_Contract_Virtual_Inspection_Remarks = v.CR_Cas_Contract_Virtual_Inspection_Remarks;
+                        VI.CR_Cas_Contract_Virtual_Inspection_Action = (bool)v.CR_Cas_Contract_Virtual_Inspection_Action;
+                        var InsName = db.CR_Mas_Sup_Virtual_Inspection.FirstOrDefault(i => i.CR_Mas_Sup_Virtual_Inspection_Code.ToString() == v.CR_Cas_Contract_Virtual_Inspection_Code.ToString());
+                        if (InsName != null)
+                        {
+                            VI.CR_Mas_Sup_Virtual_Inspection_Ar_Name = InsName.CR_Mas_Sup_Virtual_Inspection_Ar_Name;
+                            VI.CR_Mas_Sup_Virtual_Inspection_En_Name = InsName.CR_Mas_Sup_Virtual_Inspection_En_Name;
+                            VI.CR_Mas_Sup_Virtual_Inspection_Fr_Name = InsName.CR_Mas_Sup_Virtual_Inspection_Fr_Name;
+                        }
+                        VirtualInspectionMD.Add(VI);
+                    }
+                    if (nb > 0)
+                    {
+                        for (int i = 1; i <= nb; i++)
+                        {
+                            VirtualInspectionRptMD VI = new VirtualInspectionRptMD();
+                            VI.CR_Cas_Contract_Virtual_Inspection_Code = 0;
+                            VI.CR_Cas_Contract_Virtual_Inspection_Remarks = "";
+                            VI.CR_Cas_Contract_Virtual_Inspection_Action = false;
+                            VI.CR_Mas_Sup_Virtual_Inspection_Ar_Name = "";
+
+                            VirtualInspectionMD.Add(VI);
+                        }
+                    }
+                }
+                else
+                {
+                    for (int i = 1; i <= 15; i++)
+                    {
+                        VirtualInspectionRptMD VI = new VirtualInspectionRptMD();
+                        VI.CR_Cas_Contract_Virtual_Inspection_Code = 0;
+                        VI.CR_Cas_Contract_Virtual_Inspection_Remarks = "";
+                        VI.CR_Cas_Contract_Virtual_Inspection_Action = false;
+                        VI.CR_Mas_Sup_Virtual_Inspection_Ar_Name = "";
+
+                        VirtualInspectionMD.Add(VI);
+                    }
+                }
+                rd.Subreports["VirtualInspectionSubRPT"].SetDataSource(VirtualInspectionMD);
+
                 if (contract != null)
                 {
                     var branch = db.CR_Cas_Sup_Branch.FirstOrDefault(b => b.CR_Cas_Sup_Lessor_Code == LessorCode && b.CR_Cas_Sup_Branch_Code == BranchCode);
@@ -1176,6 +1230,11 @@ namespace RentCar.Controllers
 
 
                         }
+                        else
+                        {
+                            rd.SetParameterValue("CompanyAddress", "");
+                        }
+
                         if (lessor.CR_Mas_Com_Lessor_Tax_Number != null)
                         {
                             rd.SetParameterValue("TaxNumber", lessor.CR_Mas_Com_Lessor_Tax_Number.Trim());
@@ -1194,22 +1253,53 @@ namespace RentCar.Controllers
                             rd.SetParameterValue("DirectorName", "     ");
                         }
 
-                        if (contract.CR_Cas_Contract_Basic_Owner_Branch != null)
+
+
+                        if (branch.CR_Cas_Sup_Branch_Signature_Ar_Director_Name != null)
                         {
-                            rd.SetParameterValue("BranchDirectorName", contract.CR_Cas_Contract_Basic_Owner_Branch.Trim());
+                            rd.SetParameterValue("BranchDirectorName", branch.CR_Cas_Sup_Branch_Signature_Ar_Director_Name.Trim());
                         }
                         else
                         {
-                            rd.SetParameterValue("BranchDirectorName", "     ");
+                            rd.SetParameterValue("BranchDirectorName", "    ");
                         }
-                        if (contract.CR_Cas_Contract_Basic_User_Close != null)
+                       
+
+                        if (UserLogin != null && UserLogin != "")
                         {
-                            rd.SetParameterValue("UserName", contract.CR_Cas_Contract_Basic_User_Close.Trim());
+                            UserLogin = UserLogin.Trim();
+                        }
+                        var user = db.CR_Cas_User_Information.FirstOrDefault(u => u.CR_Cas_User_Information_Id == UserLogin);
+                        if (user != null)
+                        {
+                            var UserSignature = user.CR_Cas_User_Information_Signature;
+                            if (UserSignature != "" && UserSignature != null)
+                            {
+                                var Usersignature = UserSignature.Replace("~", "");
+                                Usersignature = Usersignature.Replace("/", "\\");
+                                Usersignature = Usersignature.Substring(1, Usersignature.Length - 1);
+                                var UserS = System.Web.Hosting.HostingEnvironment.ApplicationPhysicalPath + Usersignature;
+                                rd.SetParameterValue("UserSignature", UserS);
+                            }
+                            else
+                            {
+                                rd.SetParameterValue("UserSignature", " ");
+                            }
+                            if (user.CR_Cas_User_Information_Ar_Name != null)
+                            {
+                                rd.SetParameterValue("UserName", user.CR_Cas_User_Information_Ar_Name.Trim());
+                            }
+                            else
+                            {
+                                rd.SetParameterValue("UserName", " ");
+                            }
                         }
                         else
                         {
-                            rd.SetParameterValue("UserName", "     ");
+                            rd.SetParameterValue("UserSignature", " ");
+                            rd.SetParameterValue("UserName", " ");
                         }
+
 
                         if (lessor.CR_Mas_Com_Lessor_Tolk_Free != null)
                         {
@@ -1248,6 +1338,16 @@ namespace RentCar.Controllers
 
                                 rd.SetParameterValue("BranchAddress", addr.Trim());
                             }
+                            else
+                            {
+                                rd.SetParameterValue("BranchAddress", "");
+
+                            }
+                        }
+                        else
+                        {
+                            rd.SetParameterValue("BranchAddress", "");
+
                         }
 
                         rd.SetParameterValue("contractSerialNo", contract.CR_Cas_Contract_Basic_Car_Serail_No);
@@ -1424,22 +1524,45 @@ namespace RentCar.Controllers
                         {
                             rd.SetParameterValue("Price", "0");
                         }
-                        if (compensationVal != null)
+                        
+                        var Stamp = lessor.CR_Mas_Com_Lessor_Stamp;
+                        var stm = Stamp.Replace("~", "");
+                        stm = stm.Replace("/", "\\");
+                        stm = stm.Substring(1, stm.Length - 1);
+                        var stp = System.Web.Hosting.HostingEnvironment.ApplicationPhysicalPath + stm;
+                        rd.SetParameterValue("CompanyStamp", stp);
+
+
+                        var LessorDirectorSignature = lessor.CR_Mas_Com_Lessor_Signature_Director;
+                        if (LessorDirectorSignature != "" && LessorDirectorSignature != null)
                         {
-                            rd.SetParameterValue("totalCompensation", compensationVal);
+                            var LDsignature = LessorDirectorSignature.Replace("~", "");
+                            LDsignature = LDsignature.Replace("/", "\\");
+                            LDsignature = LDsignature.Substring(1, LDsignature.Length - 1);
+                            var LDS = System.Web.Hosting.HostingEnvironment.ApplicationPhysicalPath + LDsignature;
+                            rd.SetParameterValue("LessorDirectorSignature", LDS);
                         }
                         else
                         {
-                            rd.SetParameterValue("totalCompensation", "0");
+                            rd.SetParameterValue("LessorDirectorSignature", "    ");
                         }
-                        if (depences != null)
+
+                        var BranchDirectorSignature = branch.CR_Cas_Sup_Branch_Signature_Director;
+                        if (BranchDirectorSignature != "" && BranchDirectorSignature != null)
                         {
-                            rd.SetParameterValue("totalExpense", depences);
+                            var BDsignature = BranchDirectorSignature.Replace("~", "");
+                            BDsignature = BDsignature.Replace("/", "\\");
+                            BDsignature = BDsignature.Substring(1, BDsignature.Length - 1);
+                            var BDS = System.Web.Hosting.HostingEnvironment.ApplicationPhysicalPath + BDsignature;
+                            rd.SetParameterValue("BranchDirectorSignature", BDS);
                         }
                         else
                         {
-                            rd.SetParameterValue("totalExpense", "0");
+                            rd.SetParameterValue("BranchDirectorSignature", "    ");
                         }
+
+
+
                         if (contract.CR_Cas_Contract_Basic_Net_Value != null)
                         {
                             rd.SetParameterValue("ContractNetValue", contract.CR_Cas_Contract_Basic_Net_Value);
@@ -1637,17 +1760,118 @@ namespace RentCar.Controllers
                             rd.SetParameterValue("AdditionalKmNo", "0");
                         }
 
-                        if (contract.CR_Cas_Contract_Basic_Actual_Additional_Free_KM != null)
+                        if (img1 != null)
                         {
-                            rd.SetParameterValue("insImg1", contract.CR_Cas_Contract_Basic_Actual_Additional_Free_KM);
+                            img1 = img1.Replace("/", "\\");
+                            img1 = img1.Substring(1, img1.Length - 1);
+                            var img1path = System.Web.Hosting.HostingEnvironment.ApplicationPhysicalPath + img1;
+                            rd.SetParameterValue("insImg1", img1path);
                         }
                         else
                         {
                             rd.SetParameterValue("insImg1", "");
+                        } 
+                        if (img2 != null)
+                        {
+                            img2 = img2.Replace("/", "\\");
+                            img2 = img2.Substring(1, img2.Length - 1);
+                            var img2path = System.Web.Hosting.HostingEnvironment.ApplicationPhysicalPath + img2;
+                            rd.SetParameterValue("insImg2", img2path);
                         }
+                        else
+                        {
+                            rd.SetParameterValue("insImg2", "");
+                        }
+                        if (img3 != null)
+                        {
+                            img3 = img3.Replace("/", "\\");
+                            img3 = img3.Substring(1, img3.Length - 1);
+                            var img3path = System.Web.Hosting.HostingEnvironment.ApplicationPhysicalPath + img3;
+                            rd.SetParameterValue("insImg3", img3path);
+                        }
+                        else
+                        {
+                            rd.SetParameterValue("insImg3", "");
+                        }
+                        if (img4 != null)
+                        {
+                            img4 = img4.Replace("/", "\\");
+                            img4 = img4.Substring(1, img4.Length - 1);
+                            var img4path = System.Web.Hosting.HostingEnvironment.ApplicationPhysicalPath + img4;
+                            rd.SetParameterValue("insImg4", img4path);
+                        }
+                        else
+                        {
+                            rd.SetParameterValue("insImg4", "");
+                        } 
+                        if (img5 != null)
+                        {
+                            img5 = img5.Replace("/", "\\");
+                            img5 = img5.Substring(1, img5.Length - 1);
+                            var img5path = System.Web.Hosting.HostingEnvironment.ApplicationPhysicalPath + img5;
+                            rd.SetParameterValue("insImg5", img5path);
+                        }
+                        else
+                        {
+                            rd.SetParameterValue("insImg5", "");
+                        } 
+                        
+                        if (img6 != null)
+                        {
+                            img6 = img6.Replace("/", "\\");
+                            img6 = img6.Substring(1, img6.Length - 1);
+                            var img6path = System.Web.Hosting.HostingEnvironment.ApplicationPhysicalPath + img6;
+                            rd.SetParameterValue("insImg6", img6path);
+                        }
+                        else
+                        {
+                            rd.SetParameterValue("insImg6", "");
+                        } 
+                        if (img7 != null)
+                        {
+                            img7 = img7.Replace("/", "\\");
+                            img7 = img7.Substring(1, img7.Length - 1);
+                            var img7path = System.Web.Hosting.HostingEnvironment.ApplicationPhysicalPath + img7;
+                            rd.SetParameterValue("insImg7", img7path);
+                        }
+                        else
+                        {
+                            rd.SetParameterValue("insImg7", "");
+                        }
+                        if (img8 != null)
+                        {
+                            img8 = img8.Replace("/", "\\");
+                            img8 = img8.Substring(1, img8.Length - 1);
+                            var img8path = System.Web.Hosting.HostingEnvironment.ApplicationPhysicalPath + img8;
+                            rd.SetParameterValue("insImg8", img8path);
+                        }
+                        else
+                        {
+                            rd.SetParameterValue("insImg8", "");
+                        }
+                        if (img9 != null)
+                        {
+                            img9 = img9.Replace("/", "\\");
+                            img9 = img9.Substring(1, img9.Length - 1);
+                            var img9path = System.Web.Hosting.HostingEnvironment.ApplicationPhysicalPath + img9;
+                            rd.SetParameterValue("insImg9", img9path);
+                        }
+                        else
+                        {
+                            rd.SetParameterValue("insImg9", "");
+                        }
+
+                      
+
+
+
+
+
 
                         var x = "/images/Company/" + LessorCode + "/" + BranchCode + "/" + contract.CR_Cas_Contract_Basic_No + "/" + "ClosePDF" + "/" + "1" + contract.CR_Cas_Contract_Basic_No + ".pdf";
                         var fullPath = System.Web.Hosting.HostingEnvironment.ApplicationPhysicalPath + x;
+                        fullPath = fullPath.Replace("/", "\\");
+
                         rd.ExportToDisk(ExportFormatType.PortableDocFormat, fullPath);
                     }
 

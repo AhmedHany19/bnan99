@@ -3241,14 +3241,6 @@ namespace RentCar.Controllers.BranchSys
                 }
             }
             rd.Subreports["VirtualInspectionSubRPT"].SetDataSource(VirtualInspectionMD);
-
-
-
-
-
-
-
-
             var contract = db.CR_Cas_Contract_Basic.FirstOrDefault(c => c.CR_Cas_Contract_Basic_No == Sno);
             if (contract != null)
             {
