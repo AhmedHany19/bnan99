@@ -582,7 +582,6 @@ namespace RentCar.Controllers.BranchSys
                         var CarPrice = db.CR_Cas_Car_Price_Basic.FirstOrDefault(price => price.CR_Cas_Car_Price_Basic_No == cR_Cas_Contract_Basic.CR_Cas_Contract_Basic_Car_Price_Basic_No);
                         if (CarPrice != null)
                         {
-                            ///
                             //////////////////////////////////////////////////////////////////////////////////
                             cont.CR_Cas_Contract_Basic_Status = "y";
                             db.Entry(cR_Cas_Contract_Basic).State = EntityState.Modified;

@@ -6,10 +6,14 @@ using System.Data.Entity.Validation;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Mail;
+using System.Net.Mime;
 using System.Web;
 using System.Web.Mvc;
 using CrystalDecisions.CrystalReports.Engine;
 using CrystalDecisions.Shared;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
 using RentCar.Models;
 using RentCar.Models.RptModels;
 
@@ -586,90 +590,7 @@ namespace RentCar.Controllers
                             TaxOwed.CR_Cas_Account_Tax_Owed_Due_Date = DateTime.Now;
                             TaxOwed.CR_Cas_Account_Tax_Owed_Is_Paid = false;
                             db.CR_Cas_Account_Tax_Owed.Add(TaxOwed);
-                            /////////////////////////////////////////////////////////////
-                            ///////////////////////Create Bnan Owed/////////////////////////////
-                            /*CR_Cas_Account_Bnan_Owed BnanOwed = new CR_Cas_Account_Bnan_Owed();
-                            BnanOwed.CR_Cas_Account_Bnan_Owed_Contract_No = Contract.CR_Cas_Contract_Basic_No;
-                            BnanOwed.CR_Cas_Account_Bnan_Owed_Com_Code = LessorCode;
-                            var CompanyContract = db.CR_Cas_Company_Contract.FirstOrDefault(c=>c.CR_Cas_Company_Contract_Lessor==LessorCode && c.CR_Cas_Company_Contract_Code=="18" && c.CR_Cas_Company_Contract_Status=="A");
-                            if (CompanyContract != null)
-                            {
-                                BnanOwed.CR_Cas_Account_Bnan_Owed_Contract_Com = CompanyContract.CR_Cas_Company_Contract_No;
-                            }
-                            BnanOwed.CR_Cas_Account_Bnan_Owed_Value = Contract.CR_Cas_Contract_Basic_Net_Value;
-                            var ServiceBnan = db.CR_Mas_Service_Bnan_Contract.FirstOrDefault(s => s.CR_Mas_Service_Bnan_Contract_No == CompanyContract.CR_Cas_Company_Contract_No);
-                            if (ServiceBnan != null)
-                            {
-                                if (ServiceBnan.CR_Mas_Service_Bnan_Contract_Price_Or_Percentage == true)
-                                {
-                                    BnanOwed.CR_Cas_Account_Bnan_Owed_Due_Type = true;
-                                    BnanOwed.CR_Cas_Account_Bnan_Owed_Due_Percentage = 0;
-                                }
-                                else
-                                {
-                                    BnanOwed.CR_Cas_Account_Bnan_Owed_Due_Type = false;
-                                    BnanOwed.CR_Cas_Account_Bnan_Owed_Due_Value = 0;
-                                }
-                            }*/
-
-
-
-                            /*var Services = db.CR_Mas_Service_Bnan_Contract.Where(s => s.CR_Mas_Service_Bnan_Contract_No == CompanyContract.CR_Cas_Company_Contract_No);
-                            var LastRecord = Services.OrderByDescending(s => s.CR_Mas_Service_Bnan_Contract_Code).FirstOrDefault();
-                            foreach (var Service in Services)
-                            {
-                                
-                                if (Contract.CR_Cas_Contract_Basic_Daily_Rent < Service.CR_Mas_Service_Bnan_Contract_Price)
-                                {
-                                    if (BnanOwed.CR_Cas_Account_Bnan_Owed_Due_Type == false)
-                                    {
-                                        BnanOwed.CR_Cas_Account_Bnan_Owed_Due_Percentage = Service.CR_Mas_Service_Bnan_Contract_Percentage;
-                                        BnanOwed.CR_Cas_Account_Bnan_Owed_Due_Amount = (Service.CR_Mas_Service_Bnan_Contract_Percentage * Contract.CR_Cas_Contract_Basic_Net_Value) / 100;
-                                        BnanOwed.CR_Cas_Account_Bnan_Owed_Due_Value = 0;
-                                        ////new Fields////
-                                        BnanOwed.CR_Cas_Account_Bnan_Owed_Before_Due_Amount = (Service.CR_Mas_Service_Bnan_Contract_Percentage * Contract.CR_Cas_Contract_Basic_Net_Value) / 100;
-                                        var discount = CompanyContract.CR_Cas_Company_Contract_Discount_Rate;
-                                        BnanOwed.CR_Cas_Account_Bnan_Owed_After_Due_Amount = BnanOwed.CR_Cas_Account_Bnan_Owed_Before_Due_Amount * (1 - discount / 100);
-                                    }
-                                    else
-                                    {
-                                        BnanOwed.CR_Cas_Account_Bnan_Owed_Due_Value = Service.CR_Mas_Service_Bnan_Contract_Value;
-                                        BnanOwed.CR_Cas_Account_Bnan_Owed_Due_Percentage = 0;
-
-                                        ////new Fields////
-                                        BnanOwed.CR_Cas_Account_Bnan_Owed_Before_Due_Amount = Service.CR_Mas_Service_Bnan_Contract_Value;
-                                        var discount = CompanyContract.CR_Cas_Company_Contract_Discount_Rate;
-                                        BnanOwed.CR_Cas_Account_Bnan_Owed_After_Due_Amount = BnanOwed.CR_Cas_Account_Bnan_Owed_Before_Due_Amount * (1 - discount / 100);
-                                    }
-                                    
-                                }
-                                else if (Contract.CR_Cas_Contract_Basic_Daily_Rent > LastRecord.CR_Mas_Service_Bnan_Contract_Price)
-                                {
-                                    if (BnanOwed.CR_Cas_Account_Bnan_Owed_Due_Type == false)
-                                    {
-                                        BnanOwed.CR_Cas_Account_Bnan_Owed_Due_Percentage = LastRecord.CR_Mas_Service_Bnan_Contract_Percentage;
-                                        BnanOwed.CR_Cas_Account_Bnan_Owed_Due_Amount = (LastRecord.CR_Mas_Service_Bnan_Contract_Percentage * Contract.CR_Cas_Contract_Basic_Net_Value) / 100;
-                                        BnanOwed.CR_Cas_Account_Bnan_Owed_Due_Value = 0;
-
-                                        ////new Fields////
-                                        BnanOwed.CR_Cas_Account_Bnan_Owed_Before_Due_Amount = (LastRecord.CR_Mas_Service_Bnan_Contract_Percentage * Contract.CR_Cas_Contract_Basic_Net_Value) / 100;
-                                        var discount = CompanyContract.CR_Cas_Company_Contract_Discount_Rate;
-                                        BnanOwed.CR_Cas_Account_Bnan_Owed_After_Due_Amount = BnanOwed.CR_Cas_Account_Bnan_Owed_Before_Due_Amount * (1 - discount / 100);
-                                    }
-                                    else
-                                    {
-                                        BnanOwed.CR_Cas_Account_Bnan_Owed_Due_Value = LastRecord.CR_Mas_Service_Bnan_Contract_Value;
-                                        BnanOwed.CR_Cas_Account_Bnan_Owed_Due_Percentage = 0;
-
-                                        ////new Fields////
-                                        BnanOwed.CR_Cas_Account_Bnan_Owed_Before_Due_Amount = LastRecord.CR_Mas_Service_Bnan_Contract_Value;
-                                        var discount = CompanyContract.CR_Cas_Company_Contract_Discount_Rate;
-                                        BnanOwed.CR_Cas_Account_Bnan_Owed_After_Due_Amount = BnanOwed.CR_Cas_Account_Bnan_Owed_Before_Due_Amount * (1 - discount / 100);
-                                    }
-                                    
-                                }
-                               
-                            }*/
+                            
 
                             // Renter Lessor /////////
                             var CasRenter = db.CR_Cas_Renter_Lessor.FirstOrDefault(r => r.CR_Cas_Renter_Lessor_Id == Contract.CR_Cas_Contract_Basic_Renter_Id && r.CR_Cas_Renter_Lessor_Code == LessorCode);
@@ -787,6 +708,13 @@ namespace RentCar.Controllers
                                 db.CR_Cas_Account_Receipt.Add(Receipt);
                             }
 
+                            var carInfo = db.CR_Cas_Sup_Car_Information.FirstOrDefault(c => c.CR_Cas_Sup_Car_Lessor_Code == LessorCode && c.CR_Cas_Sup_Car_Location_Branch_Code == BranchCode && c.CR_Cas_Sup_Car_Serail_No == Contract.CR_Cas_Contract_Basic_Car_Serail_No);
+                            if (carInfo!=null)
+                            {
+                                carInfo.CR_Cas_Sup_Car_Status = "A";
+                            }
+
+
 
                             Contract.CR_Cas_Contract_Basic_User_Close = UserLogin;
 
@@ -828,7 +756,7 @@ namespace RentCar.Controllers
                             {
                                 Directory.CreateDirectory(CreateCopyFolder);
                             }
-                            if (!Directory.Exists(CloseImage))
+                                if (!Directory.Exists(CloseImage))
                             {
                                 Directory.CreateDirectory(CloseImage);
                             }
@@ -840,6 +768,14 @@ namespace RentCar.Controllers
                             {
                                 Directory.CreateDirectory(CloseImageCompensation);
                             }
+
+
+
+                            string fname = Contract.CR_Cas_Contract_Basic_No + ".pdf";
+                            string fullpath = CreateCopyFolder + fname;
+                            Contract.CR_Cas_Contract_Basic_CloseContract_Pdf = fullpath;
+
+
 
 
                             string img1path = "";
@@ -1090,7 +1026,7 @@ namespace RentCar.Controllers
                                 imgy4path = "/images/common/Empty.bmp";
                             }
                             /////////////////////////////////////////////////////////////////////////
-                            SavePdf(Contract, ContractEndDateEx, ContractEndTimeEx, ContractNo, CarSerialNo, ContractEndDate, ContractEndTime, ContractDaysNbr, ContractValED, ContractValID, TaxVal,
+                            SavePdf(Contract, fullpath, ContractEndDateEx, ContractEndTimeEx, ContractNo, CarSerialNo, ContractEndDate, ContractEndTime, ContractDaysNbr, ContractValED, ContractValID, TaxVal,
                                        TotalContractIT, TotPayed, CurrentMeter, OldKm, TotalFreeKm, AdditionalHours, ExtraKmValue, TotalHoursValue, Chk_Depences, Chk_Compensation,
                                        Depences, DepencesReason, CompensationVal, CompensationReason, RenterPrevBalance, reste, TotToPay, PayType, CasherName, remarque, imgx1path, imgx2path, imgx3path, imgx4path, imgy1path, imgy2path, imgy3path, imgy4path, img1path, img2path, img3path, img4path, img5path, img6path, img7path, img8path, img9path);
 
@@ -1103,8 +1039,9 @@ namespace RentCar.Controllers
 
 
 
+                            SendMail(Contract);
 
-                          
+
 
                         }
 
@@ -1124,7 +1061,7 @@ namespace RentCar.Controllers
             return View();
         }
 
-        private void SavePdf(CR_Cas_Contract_Basic contract, string ContractEndDateEx, string ContractEndTimeEx, string contractNo, string carSerialNo, string contractEndDate, string contractEndTime, string contractDaysNbr, string contractValED, string contractValID, string taxVal, string totalContractIT, string totPayed, string currentMeter, string oldKm, string totalFreeKm, decimal? additionalHours, string extraKmValue, string totalHoursValue, string chk_Depences, string chk_Compensation, string depences, string depencesReason, string compensationVal, string compensationReason, string renterPrevBalance, string reste, string totToPay, string payType, string casherName, string remarque, string imgx1path, string imgx2path, string imgx3path, string imgx4path, string imgy1path, string imgy2path, string imgy3path, string imgy4path, string img1, string img2, string img3, string img4, string img5, string img6, string img7, string img8, string img9)
+        private void SavePdf(CR_Cas_Contract_Basic contract,string fullpath, string ContractEndDateEx, string ContractEndTimeEx, string contractNo, string carSerialNo, string contractEndDate, string contractEndTime, string contractDaysNbr, string contractValED, string contractValID, string taxVal, string totalContractIT, string totPayed, string currentMeter, string oldKm, string totalFreeKm, decimal? additionalHours, string extraKmValue, string totalHoursValue, string chk_Depences, string chk_Compensation, string depences, string depencesReason, string compensationVal, string compensationReason, string renterPrevBalance, string reste, string totToPay, string payType, string casherName, string remarque, string imgx1path, string imgx2path, string imgx3path, string imgx4path, string imgy1path, string imgy2path, string imgy3path, string imgy4path, string img1, string img2, string img3, string img4, string img5, string img6, string img7, string img8, string img9)
         {
             var LessorCode = Session["LessorCode"].ToString();
             var BranchCode = Session["BranchCode"].ToString();
@@ -1861,18 +1798,20 @@ namespace RentCar.Controllers
                             rd.SetParameterValue("insImg9", "");
                         }
 
-                      
-
-
-
-
-
-
-                        var x = "/images/Company/" + LessorCode + "/" + BranchCode + "/" + contract.CR_Cas_Contract_Basic_No + "/" + "ClosePDF" + "/" + "1" + contract.CR_Cas_Contract_Basic_No + ".pdf";
+                        var x = "/images/Company/" + LessorCode + "/" + BranchCode + "/" + contract.CR_Cas_Contract_Basic_No + "/" + "ClosePDF" + "/" + "1" + "/" + contract.CR_Cas_Contract_Basic_No + ".pdf";
                         var fullPath = System.Web.Hosting.HostingEnvironment.ApplicationPhysicalPath + x;
                         fullPath = fullPath.Replace("/", "\\");
-
                         rd.ExportToDisk(ExportFormatType.PortableDocFormat, fullPath);
+
+
+                        var firstPath = contract.CR_Cas_Contract_Basic_CreateContract_Pdf;
+                        var secondPath = contract.CR_Cas_Contract_Basic_CloseContract_Pdf;
+
+                        string[] paths = { firstPath, secondPath };
+                        var output = fullpath;
+                        MergePDFs(paths, output + "1");
+
+
                     }
 
                 }
@@ -1882,6 +1821,84 @@ namespace RentCar.Controllers
             {
                 throw ex;
             }
+
+        }
+
+
+        public void MergePDFs(string[] fileNames, string outFile)
+        {
+
+            using (var stream = new FileStream(outFile, FileMode.Append, FileAccess.Write))
+            {
+                var document = new Document();
+                var writer = new PdfCopy(document, stream);
+                document.Open();
+
+                foreach (string fileName in fileNames)
+                {
+                    using (var reader = new PdfReader(fileName))
+                    {
+                        writer.AddDocument(reader);
+                    }
+                }
+
+                document.Close();
+
+            }
+
+            if (System.IO.File.Exists(outFile.Remove(outFile.Length - 1)))
+            {
+                System.IO.File.Delete(outFile.Remove(outFile.Length - 1));
+            }
+
+            if (System.IO.File.Exists(outFile))
+            {
+                System.IO.File.Move(outFile, outFile.Remove(outFile.Length - 1));
+            }
+        }
+
+        private void SendMail(CR_Cas_Contract_Basic contract)
+        {
+            string projectFolder = Server.MapPath(string.Format("~/{0}/", "images"));
+            string image1 = Path.Combine(projectFolder, "End.jpeg");
+            
+
+            string htmlBody = "<html><body><h1>Contract Extension </h1><br><img src=cid:Contract style='width:100%;height:100%'></body></html>";
+
+            AlternateView avHtml = AlternateView.CreateAlternateViewFromString
+               (htmlBody, null, MediaTypeNames.Text.Html);
+            LinkedResource inline = new LinkedResource(image1, MediaTypeNames.Image.Jpeg);
+            inline.ContentId = "Closed Contract";
+            avHtml.LinkedResources.Add(inline);
+
+            MailMessage mail = new MailMessage();
+            mail.AlternateViews.Add(avHtml);
+
+            Attachment attachment = new Attachment(contract.CR_Cas_Contract_Basic_CloseContract_Pdf);
+            mail.Attachments.Add(attachment);
+
+            
+            mail.From = new MailAddress("Bnanrent@outlook.com");
+
+
+            if (contract.CR_Mas_Renter_Information.CR_Mas_Renter_Information_Email != null)
+            {
+                /*         mail.To.Add(contract.CR_Mas_Renter_Information.CR_Mas_Renter_Information_Email);*/
+                mail.To.Add("bnanbnanmail@gmail.com");
+            }
+            mail.Subject = "Closed Contract Mail ";
+            mail.Body = inline.ContentId;
+
+            mail.IsBodyHtml = true;
+
+            SmtpClient smtpClient = new SmtpClient("smtp.office365.com");
+            smtpClient.Port = 587;
+            smtpClient.UseDefaultCredentials = false;
+            smtpClient.EnableSsl = true;
+            smtpClient.Credentials = new NetworkCredential("Bnanrent@outlook.com", "bnan123123");
+
+            // Send the message
+            smtpClient.Send(mail);
 
         }
 

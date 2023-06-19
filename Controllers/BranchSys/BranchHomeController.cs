@@ -1125,13 +1125,13 @@ namespace RentCar.Controllers.BranchSys
             {
                 var date = DateTime.Now.Date;
                 var afterDay =  date.AddDays(1);
-                ViewBag.NbrContracts = Contracts.Where(c => c.CR_Cas_Contract_Basic_Status != "U").Count();
+                ViewBag.NbrContracts = Contracts.Where(c => c.CR_Cas_Contract_Basic_Status != "U" && c.CR_Cas_Contract_Basic_Status != "y").Count();
                 ViewBag.NbrActiveContracts = Contracts.Where(a=>a.CR_Cas_Contract_Basic_Status=="A").Count();
                 ViewBag.NbrexpiredContracts = Contracts.Where(a => a.CR_Cas_Contract_Basic_Status == "E").Count();
                 // this day
                 ViewBag.NbrDexpiredContracts = Contracts.Where(a => a.CR_Cas_Contract_Basic_Expected_End_Date== date && a.CR_Cas_Contract_Basic_Status != "C").Count();
                 // after day
-                ViewBag.NbrTexpiredContracts = Contracts.Where(a => a.CR_Cas_Contract_Basic_Expected_End_Date == afterDay && a.CR_Cas_Contract_Basic_Status != "C").Count();
+                ViewBag.NbrTexpiredContracts = Contracts.Where(a => a.CR_Cas_Contract_Basic_Expected_End_Date == afterDay && a.CR_Cas_Contract_Basic_Status != "C"&& a.CR_Cas_Contract_Basic_Status=="A").Count();
                 ViewBag.NbrClosedContracts = Contracts.Where(a=>a.CR_Cas_Contract_Basic_Status=="C").Count();
             }
 
