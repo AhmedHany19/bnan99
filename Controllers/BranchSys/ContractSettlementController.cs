@@ -1035,10 +1035,6 @@ namespace RentCar.Controllers
                             db.SaveChanges();
                             TempData["TempModel"] = "Saved";
                             dbTran.Commit();
-
-
-
-
                             SendMail(Contract);
 
 
@@ -1051,7 +1047,7 @@ namespace RentCar.Controllers
                         dbTran.Rollback();
                         throw ex;
                     }
-                    return RedirectToAction("Index");
+                    return RedirectToAction("BranchStat","BranchHome");
                 }
             }
 

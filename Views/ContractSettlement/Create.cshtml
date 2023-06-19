@@ -103,9 +103,19 @@
         font-weight: 700;
         font-size: 14px !important;
     }
+    .table-striped tbody {
+        display: block;
+        max-height: 333px !important;
+        overflow-y: scroll;
+    }
 </style>
 <!-- HTML -->
 <!--tabs amir end-->
+<div id="loader" hidden>
+    <div id="status">
+        <img src="~/BSys3Styles/Images/logo.png" style="width:150px;height:150px;margin:25px ;" />
+    </div>
+</div>
 <form id="ContractForm" class="form-horizontal" action="/ContractSettlement/Create" enctype="multipart/form-data" method="post" data-parsley-validate="" novalidate="">
     @Html.AntiForgeryToken()
     <div class="container">
@@ -2322,7 +2332,21 @@
 
 </script>
 <script>
-   
+        $(document).ready(function () {
+            $('#ContractForm').submit(function (e) {
+                var fieldVal = $('#TotPayed').val();
+
+                if (!fieldVal || fieldVal === '0') {
+                    toastr.info('الرجاء ادخال المبلغ المدفوع'); // show an alert message
+                    e.preventDefault(); // prevent the form from submitting normally
+                }
+                else {
+                    $("#loader").removeAttr("hidden");
+                    toastr.options.setTimeout = 99999;
+                    toastr.success("جــاري حفظ بيانات اغلاق العقــد وارســالـه للمستــاجــر ......")
+                }
+            });
+    });
 </script>
 
 

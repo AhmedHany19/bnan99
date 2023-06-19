@@ -4,10 +4,10 @@
     <table id="myTable" class="table table-striped mb-0" style="cursor:pointer">
         <thead style="overflow-y: scroll; flex-grow: 1;">
             <tr>
-                <th style="width:20%">
+                <th style="width:16%">
                     رقم العقد
                 </th>
-                <th style="width:10%">
+                <th style="width:8%">
                     تاريخه
                 </th>
 
@@ -22,14 +22,14 @@
                     الحالة
                 </th>
 
-                <th style="width:11%">
-                    إنشاء العقد
+                <th style="width:6%">
+                    العقد
                 </th>
           
 
             </tr>
         </thead>
-        <tbody id="tbl">
+        <tbody id="tbl" style="height: 435px;">
 
             @foreach (var item in Model)
             {
@@ -37,7 +37,7 @@
                 if (item.CR_Cas_Contract_Basic_Status == "E")
                 {
                     <tr>
-                        <td style="width:20%;color:red">
+                        <td style="width:16%;color:red">
                             @Html.DisplayFor(modelItem => item.CR_Cas_Contract_Basic_No)
                             @{
 
@@ -49,7 +49,7 @@
 
                             }
                         </td>
-                        <td style="width: 10%; color: red">
+                        <td style="width: 8%; color: red" class="text-center">
                             @if (item.CR_Cas_Contract_Basic_Date != null)
                             {
                                 @item.CR_Cas_Contract_Basic_Date.Value.ToString("yyyy/MM/dd")
@@ -93,7 +93,7 @@
 
                         </td>
 
-                        <td align="center" style="width: 11%; color: red">
+                        <td align="center" style="width: 6%; color: red">
                             <a href="~/BasicContract/PDFFlyer/?p=@Html.DisplayFor(modelItem => item.CR_Cas_Contract_Basic_CreateContract_Pdf)" target="_blank">
                                 <i class="fas fa-file-pdf" style="color:red;"></i>
 
@@ -104,7 +104,7 @@
                 else
                 {
                     <tr>
-                        <td style="width:20%">
+                        <td style="width:16%" class="text-center">
                             @Html.DisplayFor(modelItem => item.CR_Cas_Contract_Basic_No)
                             @{
 
@@ -116,7 +116,7 @@
 
                             }
                         </td>
-                        <td style="width:10%">
+                        <td style="width:8%" class="text-center">
                             @if (item.CR_Cas_Contract_Basic_Date != null)
                             {
                                 @item.CR_Cas_Contract_Basic_Date.Value.ToString("yyyy/MM/dd")
@@ -161,7 +161,7 @@
                         </td>
 
                        
-                        <td align="center" style="width:11%">
+                        <td align="center" style="width:6%">
                             <a href="~/BasicContract/PDFFlyer/?p=@Html.DisplayFor(modelItem => item.CR_Cas_Contract_Basic_CreateContract_Pdf)" target="_blank">
                                 <i class="fas fa-file-pdf" style="color:red;"></i>
 

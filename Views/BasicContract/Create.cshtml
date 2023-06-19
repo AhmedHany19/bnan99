@@ -39,6 +39,12 @@
     input[type=text] {
         color: #0288C7;
     }
+
+    .table-striped tbody {
+        display: block;
+        max-height: 333px !important;
+        overflow-y: scroll;
+    }
    
 </style>
 
@@ -3848,7 +3854,7 @@
             else {
                 $("#loader").removeAttr("hidden");
                 toastr.options.setTimeout = 99999;
-                toastr.success("جــاري حفظ العقــد وارســالـه للمستــاجــر ......")
+                toastr.success("جــاري حفظ بيانات العقــد وارســالـه للمستــاجــر ......")
             }
         });
     });
