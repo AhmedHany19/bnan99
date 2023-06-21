@@ -3827,35 +3827,55 @@
             CloseModalAuth();
         }
     }
-
     function CancelModalAuth() {
         Auth = false;
         CloseModalAuth();
     }
 </script>
 
-@*<script>
-    $("#add_btn").click(function () {
-        $("#loader").removeAttr("hidden");
-        toastr.options.setTimeout = 99999;
-        toastr.success("جــاري حفــظ العقــد وارســالـه للمستــاجــر ......")
-    }); 
-</script>*@
 
 <script>
     $(document).ready(function () {
         $('#ContractForm').submit(function (e) {
             var fieldVal = $('#CR_Cas_Contract_Basic_Expected_Rental_Days').val();
+            var TotalPayed = $('#TotalPayed').val();
+            var PayType = $('#PayType').val();
 
             if (!fieldVal || fieldVal === '0') {
-                toastr.info('الرجاء ادخال عدد ايام'); // show an alert message
+                toastr.info('الرجاء ادخال عدد ايام');// show an alert message
                 e.preventDefault(); // prevent the form from submitting normally
             }
+            else if (TotalPayed > 0) {
+                if (PayType === "") {
+                    toastr.info("يرجي ادخال طريقة الدفع......");
+                    e.preventDefault();
+                }
+                else {
+                    document.getElementById("add_btn").disabled = true;
+                    $("#loader").removeAttr("hidden");
+                    toastr.options.setTimeout = 99999;
+                    toastr.success("جــاري حفظ بيانات العقــد وارســالـه للمستــاجــر ......")
+                }
+            }
             else {
+                document.getElementById("add_btn").disabled = true;
                 $("#loader").removeAttr("hidden");
                 toastr.options.setTimeout = 99999;
                 toastr.success("جــاري حفظ بيانات العقــد وارســالـه للمستــاجــر ......")
             }
         });
     });
+</script>
+
+<script>
+    //$(document).ready(function () {
+    //    $("#AuthNoBtn").click(function (e) {
+    //        if ($("#TotalPayed").val() > 0) {
+    //            if ($("#PayType").val() === "") {
+    //                toastr.info("يرجي ادخال طريقة الدفع......");
+    //                e.preventDefault();
+    //            }
+    //        }
+    //    })
+    //});
 </script>

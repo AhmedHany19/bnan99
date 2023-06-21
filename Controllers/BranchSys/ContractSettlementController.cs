@@ -329,6 +329,22 @@ namespace RentCar.Controllers
 
                 ViewBag.OldKm = cR_Cas_Contract_Basic.CR_Cas_Contract_Basic_CurrentMeters;
 
+                var user = db.CR_Cas_User_Information.FirstOrDefault(u => u.CR_Cas_User_Information_Id == UserLogin);
+                if (user != null)
+                {
+                    if (user.CR_Cas_User_Information_Balance == null)
+                    {
+                        ViewBag.UserBalance = 0;
+                    }
+                    else
+                    {
+                        var convertUserBalanceToFloat = (float)user.CR_Cas_User_Information_Balance;
+                        var Receipt_Receipt = convertUserBalanceToFloat.ToString("N0");
+                        ViewBag.UserBalance = Receipt_Receipt;
+                    }
+
+                }
+
                 ViewBag.PayType = new SelectList(db.CR_Mas_Sup_Payment_Method.Where(p => p.CR_Mas_Sup_Payment_Method_Type == "2" && p.CR_Mas_Sup_Payment_Method_Status == "A")
                 , "CR_Mas_Sup_Payment_Method_Code", "CR_Mas_Sup_Payment_Method_Ar_Name");
                 ViewBag.CasherName = "";
@@ -342,7 +358,7 @@ namespace RentCar.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(string ContractNo, string ContractEndDate, string ContractEndTime, string ContractDaysNbr, string CarSerialNo, string ContractEndDateEx, string ContractEndTimeEx, string ContractValED, string ContractValID, string TaxVal,
            string TotalContractIT, string TotPayed, string CurrentMeter, string OldKm, string TotalFreeKm, decimal? AdditionalHours, string ExtraKmValue, string TotalHoursValue, string Chk_Depences, string Chk_Compensation,
-           string Depences, string DepencesReason, string CompensationVal, string CompensationReason, string RenterPrevBalance, string reste, string TotToPay, string PayType, string CasherName, string remarque,
+           string Depences, string DepencesReason, string CompensationVal, string CompensationReason, string RenterPrevBalance, string reste, string TotToPay, string PayType, string CasherName, string remarque,string AdditionalKmNo,
            HttpPostedFileBase img1, HttpPostedFileBase img2, HttpPostedFileBase img3, HttpPostedFileBase img4, HttpPostedFileBase img5, HttpPostedFileBase img6, HttpPostedFileBase img7,
            HttpPostedFileBase img8, HttpPostedFileBase img9, FormCollection collection, HttpPostedFileBase imgx1, HttpPostedFileBase imgx2, HttpPostedFileBase imgx3, HttpPostedFileBase imgx4,
            HttpPostedFileBase imgy1, HttpPostedFileBase imgy2, HttpPostedFileBase imgy3, HttpPostedFileBase imgy4)
@@ -773,7 +789,7 @@ namespace RentCar.Controllers
 
                             string fname = Contract.CR_Cas_Contract_Basic_No + ".pdf";
                             string fullpath = CreateCopyFolder + fname;
-                            Contract.CR_Cas_Contract_Basic_CloseContract_Pdf = fullpath;
+                            
 
 
 
@@ -1028,9 +1044,9 @@ namespace RentCar.Controllers
                             /////////////////////////////////////////////////////////////////////////
                             SavePdf(Contract, fullpath, ContractEndDateEx, ContractEndTimeEx, ContractNo, CarSerialNo, ContractEndDate, ContractEndTime, ContractDaysNbr, ContractValED, ContractValID, TaxVal,
                                        TotalContractIT, TotPayed, CurrentMeter, OldKm, TotalFreeKm, AdditionalHours, ExtraKmValue, TotalHoursValue, Chk_Depences, Chk_Compensation,
-                                       Depences, DepencesReason, CompensationVal, CompensationReason, RenterPrevBalance, reste, TotToPay, PayType, CasherName, remarque, imgx1path, imgx2path, imgx3path, imgx4path, imgy1path, imgy2path, imgy3path, imgy4path, img1path, img2path, img3path, img4path, img5path, img6path, img7path, img8path, img9path);
+                                       Depences, DepencesReason, CompensationVal, CompensationReason, RenterPrevBalance, reste, TotToPay, PayType, CasherName, remarque, AdditionalKmNo, imgx1path, imgx2path, imgx3path, imgx4path, imgy1path, imgy2path, imgy3path, imgy4path, img1path, img2path, img3path, img4path, img5path, img6path, img7path, img8path, img9path);
 
-
+                            //Contract.CR_Cas_Contract_Basic_CreateContract_Pdf = fullpath;
                             db.Entry(Contract).State = EntityState.Modified;
                             db.SaveChanges();
                             TempData["TempModel"] = "Saved";
@@ -1057,7 +1073,7 @@ namespace RentCar.Controllers
             return View();
         }
 
-        private void SavePdf(CR_Cas_Contract_Basic contract,string fullpath, string ContractEndDateEx, string ContractEndTimeEx, string contractNo, string carSerialNo, string contractEndDate, string contractEndTime, string contractDaysNbr, string contractValED, string contractValID, string taxVal, string totalContractIT, string totPayed, string currentMeter, string oldKm, string totalFreeKm, decimal? additionalHours, string extraKmValue, string totalHoursValue, string chk_Depences, string chk_Compensation, string depences, string depencesReason, string compensationVal, string compensationReason, string renterPrevBalance, string reste, string totToPay, string payType, string casherName, string remarque, string imgx1path, string imgx2path, string imgx3path, string imgx4path, string imgy1path, string imgy2path, string imgy3path, string imgy4path, string img1, string img2, string img3, string img4, string img5, string img6, string img7, string img8, string img9)
+        private void SavePdf(CR_Cas_Contract_Basic contract,string fullpath, string ContractEndDateEx, string ContractEndTimeEx, string contractNo, string carSerialNo, string contractEndDate, string contractEndTime, string contractDaysNbr, string contractValED, string contractValID, string taxVal, string totalContractIT, string totPayed, string currentMeter, string oldKm, string totalFreeKm, decimal? additionalHours, string extraKmValue, string totalHoursValue, string chk_Depences, string chk_Compensation, string depences, string depencesReason, string compensationVal, string compensationReason, string renterPrevBalance, string reste, string totToPay, string payType, string casherName, string remarque,string AdditionalKmNo, string imgx1path, string imgx2path, string imgx3path, string imgx4path, string imgy1path, string imgy2path, string imgy3path, string imgy4path, string img1, string img2, string img3, string img4, string img5, string img6, string img7, string img8, string img9)
         {
             var LessorCode = Session["LessorCode"].ToString();
             var BranchCode = Session["BranchCode"].ToString();
@@ -1233,6 +1249,20 @@ namespace RentCar.Controllers
                             rd.SetParameterValue("UserName", " ");
                         }
 
+                        //var logo = lessor.CR_Mas_Com_Lessor_Logo_Print.ToString();
+                        //var log = logo.Replace("~", "");
+                        //log = log.Replace("/", "\\");
+                        //log = log.Substring(1, log.Length - 1);
+                        //var lm = System.Web.Hosting.HostingEnvironment.ApplicationPhysicalPath + log;
+                        //if (logo!=null &&lm!=null)
+                        //{
+                        //   rd.SetParameterValue("Logo", lm.Trim().ToString());
+                        //}
+                        //else
+                        //{
+                        //    rd.SetParameterValue("Logo", "   ");
+                        //}
+                       
 
                         if (lessor.CR_Mas_Com_Lessor_Tolk_Free != null)
                         {
@@ -1684,9 +1714,9 @@ namespace RentCar.Controllers
                         {
                             rd.SetParameterValue("TotalFreeKm", "0");
                         }
-                        if (contract.CR_Cas_Contract_Basic_Actual_Additional_Free_KM != null)
+                        if (AdditionalKmNo != null)
                         {
-                            rd.SetParameterValue("AdditionalKmNo", contract.CR_Cas_Contract_Basic_Actual_Additional_Free_KM);
+                            rd.SetParameterValue("AdditionalKmNo", AdditionalKmNo.ToString());
                         }
                         else
                         {
@@ -1801,10 +1831,10 @@ namespace RentCar.Controllers
 
 
                         var firstPath = contract.CR_Cas_Contract_Basic_CreateContract_Pdf;
-                        var secondPath = contract.CR_Cas_Contract_Basic_CloseContract_Pdf;
+                        var secondPath = fullPath;
 
                         string[] paths = { firstPath, secondPath };
-                        var output = fullpath;
+                        var output = firstPath;
                         MergePDFs(paths, output + "1");
 
 
@@ -1870,7 +1900,7 @@ namespace RentCar.Controllers
             MailMessage mail = new MailMessage();
             mail.AlternateViews.Add(avHtml);
 
-            Attachment attachment = new Attachment(contract.CR_Cas_Contract_Basic_CloseContract_Pdf);
+            Attachment attachment = new Attachment(contract.CR_Cas_Contract_Basic_CreateContract_Pdf);
             mail.Attachments.Add(attachment);
 
             

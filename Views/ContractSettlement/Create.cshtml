@@ -103,6 +103,7 @@
         font-weight: 700;
         font-size: 14px !important;
     }
+
     .table-striped tbody {
         display: block;
         max-height: 333px !important;
@@ -1200,7 +1201,7 @@
             localStorage.setItem('extraDayValue', 0);
 
         }
-        
+
     })
 
 </script>
@@ -1244,13 +1245,13 @@
             days.value = 1;
         }
         else {
-            days.value = differenceInDays-1;
+            days.value = differenceInDays - 1;
         }
         if (days.value == 0) {
             days.value = 1;
         }
         console.log(differenceInDays + "A7a2"); // Output: 3
-         cal();
+        cal();
 
     }
     function affich_btn_1(e) {
@@ -1365,7 +1366,7 @@
         var valueChoices = $("#CR_Cas_Contract_Basic_Choices_Value").val();
         var ExNbrDays = $("#ContractDaysNbr").val();
         var extraDay = localStorage.getItem('extraDayValue');
-        if (extraDay >0) {
+        if (extraDay > 0) {
             ExNbrDays++;
         }
         console.log("kmFreeDaily :" + kmFreeDaily)
@@ -1373,9 +1374,9 @@
         $("#TotalFreeKm").val(parseInt(ExNbrDays) * parseInt(kmFreeDaily));
         $("#ChoicesVal").val(parseInt(ExNbrDays) * parseInt(valueChoices));
     }
-    
-       
-   
+
+
+
 </script>
 <script>
     $(document).ready(function () {
@@ -1791,7 +1792,7 @@
         var Depences = document.getElementById("Depences").value;// التعويضات
         var CompensationVal = document.getElementById("CompensationVal").value;// التعويضات
         var CurrentMeter = document.getElementById("CurrentMeter").value;// التعويضات
-        
+
         // Hide the current tab:'
         x[currentTab].style.display = "none";
         document.getElementById("prevBtn").style.display = "inline";
@@ -1811,23 +1812,23 @@
         }
         else if (currentTab == 1) {
             if (compensationCheckbox.checked == true) {
-               
-                    var m = 0;
-                    var ig1 = $('#imgx1').attr('src');
-                    var ig2 = $('#imgx2').attr('src');
-                    var ig3 = $('#imgx3').attr('src');
-                    var ig4 = $('#imgx4').attr('src');
-                    if (ig1) m = m + 1;
-                    if (ig2) m = m + 1;
-                    if (ig3) m = m + 1;
-                    if (ig4) m = m + 1;
 
-                    if (Depences != null && Depences != "" && m >=1) {
-                        currentTab = currentTab + n;
-                    }
-                    else {
-                        toastr.info("الرجاء ادخال قيمة المصروفات وصورة واحدة علي الاقل");
-                    }
+                var m = 0;
+                var ig1 = $('#imgx1').attr('src');
+                var ig2 = $('#imgx2').attr('src');
+                var ig3 = $('#imgx3').attr('src');
+                var ig4 = $('#imgx4').attr('src');
+                if (ig1) m = m + 1;
+                if (ig2) m = m + 1;
+                if (ig3) m = m + 1;
+                if (ig4) m = m + 1;
+
+                if (Depences != null && Depences != "" && m >= 1) {
+                    currentTab = currentTab + n;
+                }
+                else {
+                    toastr.info("الرجاء ادخال قيمة المصروفات وصورة واحدة علي الاقل");
+                }
             }
 
             else {
@@ -1898,7 +1899,7 @@
             else {
                 toastr.info("الرجاء التحقق من الفحص الظاهري");
             }
-           
+
         }
         else {
             currentTab = currentTab + n;
@@ -2054,7 +2055,7 @@
         });
     });
     /////////////////////////////////
-    
+
 </script>
 <script>
     $("#CurrentMeter").focusout(function () {
@@ -2077,9 +2078,9 @@
     function Calculate() {
 
 
-        
-       
-        
+
+
+
         var ExtraKmValue = document.getElementById('ExtraKmValue').value;
         if (ExtraKmValue == "") {
             document.getElementById('ExtraKmValue').value = "0.00";
@@ -2172,9 +2173,10 @@
 
         document.getElementById('TotPayed').focus;
 
-
+        var userBalance = @Html.Raw(Json.Encode(ViewBag.UserBalance));
+        var TotPayed = $('#TotPayed').val();
        // اذا كان المستأجر له فلوس يبقي لازم ندفعله نقدا من الصندوق
-        if ($("#TotToPay").val() < 0) {
+        if ($("#TotToPay").val() < 0 && parseInt(userBalance.replace(",", "")) > Math.abs(TotToPay)) {
             //document.getElementById("PayType").value = "11"; // تعيين القيمة الأولى في القائمة كقيمة افتراضية
             $.get("/ContractSettlement/GetSalesPoint", { paycode: '11' }, function (data) {
                 $("#CasherName").empty();
@@ -2188,10 +2190,19 @@
                             payTypeDropdown.options[i].style.display = 'none';
                         }
                     }
-                    
+
                 });
             });
-            
+        }
+        else if ($("#TotToPay").val() < 0 && parseInt(userBalance.replace(",", "")) < Math.abs(TotToPay)) {
+            $("#PayType").change(function () {
+                $.get("/ContractSettlement/GetSalesPoint", { PayCode: $("#PayType").val() }, function (data) {
+                    $("#CasherName").empty();
+                    $.each(data, function (index, row) {
+                        $("#CasherName").append("<option value= '" + row.CR_Cas_Sup_SalesPoint_Code + "'>" + row.CR_Cas_Sup_SalesPoint_Ar_Name + "</option>")
+                    });
+                });
+            })
         }
         else {
             $("#PayType").change(function () {
@@ -2203,8 +2214,6 @@
                 });
             })
         }
-       
-
 
     }
 
@@ -2267,19 +2276,12 @@
                 document.getElementById('PayType').disabled = false;
                 document.getElementById('CasherName').disabled = false;
             }
-            
+
         });
     });
 </script>
 
-<script>
-    //$(document).ready(function () {
-    //    $("#PayType").change(function () {
-    //        var BtnAdd = document.getElementById('add_btn');
-    //        BtnAdd.disabled = false;
-    //    })
-    //});
-</script>
+
 
 
 <script>
@@ -2329,26 +2331,99 @@
         });
     });
 
-
 </script>
 <script>
-        $(document).ready(function () {
-            $('#ContractForm').submit(function (e) {
-                var fieldVal = $('#TotPayed').val();
+    $('#ContractForm').submit(function (e) {
+            Calculate();
+            var fieldVal = $('#TotPayed').val();
+            var PayType = $('#PayType').val();
+            var userBalance = @Html.Raw(Json.Encode(ViewBag.UserBalance));
+            var TotToPay = $("#TotToPay").val();
+            console.log(`Input value has changed to: ${TotToPay}`);
 
-                if (!fieldVal || fieldVal === '0') {
-                    toastr.info('الرجاء ادخال المبلغ المدفوع'); // show an alert message
-                    e.preventDefault(); // prevent the form from submitting normally
+
+            //if (!fieldVal || fieldVal === '0') {
+            //    toastr.info('الرجاء ادخال المبلغ المدفوع'); // show an alert message
+            //    e.preventDefault(); // prevent the form from submitting normally
+            //}
+            //else if (fieldVal > 0 && fieldVal != null && fieldVal !== "") {
+            //    if (PayType === "") {
+            //        toastr.info("يرجي ادخال طريقة الدفع......");
+            //        e.preventDefault();
+            //    }
+            //    else {
+            //        document.getElementById("add_btn").disabled = true;
+            //        $("#loader").removeAttr("hidden");
+            //        toastr.options.setTimeout = 99999;
+            //        toastr.success("جــاري حفظ بيانات اغلاق العقــد وارســالـه للمستــاجــر ......")
+            //    }
+
+        //}
+            if (TotToPay<0) {
+                    console.log("رصيدك يسمح......");
+                    console.log(`Input value has changed to: ${$("#TotToPay").val()}`);
+                if (fieldVal > parseInt(userBalance.replace(",", ""))) {
+                    console.log("رصيدك لا يسمح  ")
+                    toastr.info("رصيدك لا يسمح");
+                    e.preventDefault();
+                }
+                else if (fieldVal < parseInt(userBalance.replace(",", ""))) {
+                    if (fieldVal > 0 && fieldVal != null && fieldVal !== "") {
+                        if (PayType === "") {
+                            toastr.info("يرجي ادخال طريقة الدفع......");
+                            e.preventDefault();
+                        }
+                        else {
+                            document.getElementById("add_btn").disabled = true;
+                            $("#loader").removeAttr("hidden");
+                            toastr.options.setTimeout = 99999;
+                            toastr.success("جــاري حفظ بيانات اغلاق العقــد وارســالـه للمستــاجــر ......")
+                        }
+                    }
+                    
                 }
                 else {
+                    document.getElementById("add_btn").disabled = true;
                     $("#loader").removeAttr("hidden");
                     toastr.options.setTimeout = 99999;
                     toastr.success("جــاري حفظ بيانات اغلاق العقــد وارســالـه للمستــاجــر ......")
                 }
-            });
-    });
+                
+                   
+            }
+            else if (TotToPay > 0) {
+                if (fieldVal > 0 && fieldVal != null && fieldVal !== "") {
+                    if (PayType === "") {
+                        toastr.info("يرجي ادخال طريقة الدفع......");
+                        e.preventDefault();
+                    }
+                    else {
+                        document.getElementById("add_btn").disabled = true;
+                        $("#loader").removeAttr("hidden");
+                        toastr.options.setTimeout = 99999;
+                        toastr.success("جــاري حفظ بيانات اغلاق العقــد وارســالـه للمستــاجــر ......")
+                    }
+                }
+                else {
+                    document.getElementById("add_btn").disabled = true;
+                    $("#loader").removeAttr("hidden");
+                    toastr.options.setTimeout = 99999;
+                    toastr.success("جــاري حفظ بيانات اغلاق العقــد وارســالـه للمستــاجــر ......")
+                }
+            }
+            
+            else {
+                document.getElementById("add_btn").disabled = true;
+                $("#loader").removeAttr("hidden");
+                toastr.options.setTimeout = 99999;
+                toastr.success("جــاري حفظ بيانات اغلاق العقــد وارســالـه للمستــاجــر ......")
+            }
+        });
 </script>
 
+<script>
+   
+</script>
 
 
 
