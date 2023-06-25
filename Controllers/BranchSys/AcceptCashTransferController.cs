@@ -165,7 +165,7 @@ namespace RentCar.Controllers.BranchSys
 
                    
 
-                    RedirectToAction("BranchHome", "BranchHome");
+                    RedirectToAction("BranchStat", "BranchHome");
                     db.SaveChanges();
                     TempData["TempModel"] = "Saved";
                 }
@@ -173,16 +173,16 @@ namespace RentCar.Controllers.BranchSys
                 {
                     Ad.CR_Cas_Administrative_Procedures_Type = "Z";
                     db.Entry(Ad).State = EntityState.Modified;
-                    RedirectToAction("BranchHome", "BranchHome");
+                    RedirectToAction("BranchStat", "BranchHome");
                     db.SaveChanges();
                 }
                 db.SaveChanges();
 
-                return RedirectToAction("BranchHome", "BranchHome");
+                return RedirectToAction("BranchStat", "BranchHome");
             }
 
            
-            return RedirectToAction("BranchHome", "BranchHome");
+            return RedirectToAction("BranchStat", "BranchHome");
         }
     }
 }

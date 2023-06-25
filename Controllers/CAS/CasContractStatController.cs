@@ -345,6 +345,9 @@ namespace RentCar.Controllers
                     ViewBag.A4 = contracts.Where(c => c.CR_Cas_Contract_Basic_Statistics_Age_No == 4).Count();
                     ViewBag.A5 = contracts.Where(c => c.CR_Cas_Contract_Basic_Statistics_Age_No == 5).Count();
                     ViewBag.A6 = contracts.Where(c => c.CR_Cas_Contract_Basic_Statistics_Age_No == 6).Count();
+                    ViewBag.A7 = contracts.Where(c => c.CR_Cas_Contract_Basic_Statistics_Age_No == 7).Count();
+                    ViewBag.A8 = contracts.Where(c => c.CR_Cas_Contract_Basic_Statistics_Age_No == 8).Count();
+                    ViewBag.A9 = contracts.Where(c => c.CR_Cas_Contract_Basic_Statistics_Age_No == 9).Count();
                 }
 
 

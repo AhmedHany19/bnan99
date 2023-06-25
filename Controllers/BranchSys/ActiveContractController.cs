@@ -259,7 +259,28 @@ namespace RentCar.Controllers.BranchSys
                             {
                                 PayedValue = decimal.Parse(PayedVal);
                             }
+                            //var userinfo = db.CR_Cas_User_Information.Single(u => u.CR_Cas_User_Information_Id == UserLogin);
+                            //if (userinfo != null)
+                            //{
+                            //    if (userinfo.CR_Cas_User_Information_Balance == null)
+                            //    {
+                            //        Receipt.CR_Cas_Account_Receipt_User_Previous_Balance = 0;
+                            //    }
+                            //    else
+                            //    {
+                            //        Receipt.CR_Cas_Account_Receipt_User_Previous_Balance = userinfo.CR_Cas_User_Information_Balance;
+                            //    }
+                            //    if (userinfo.CR_Cas_User_Information_Balance == null)
+                            //    {
+                            //        userinfo.CR_Cas_User_Information_Balance = PayedValue;
+                            //    }
+                            //    else
+                            //    {
+                            //        userinfo.CR_Cas_User_Information_Balance += PayedValue;
+                            //    }
 
+                            //    db.Entry(userinfo).State = EntityState.Modified;
+                            //}
                             cR_Cas_Contract_Basic.CR_Cas_Contract_Basic_Daily_Free_KM = cont.CR_Cas_Contract_Basic_Daily_Free_KM;
                             cR_Cas_Contract_Basic.CR_Cas_Contract_Basic_Additional_KM_Value = cont.CR_Cas_Contract_Basic_Additional_KM_Value;
                             cR_Cas_Contract_Basic.CR_Cas_Contract_Basic_Free_Additional_Hours = cont.CR_Cas_Contract_Basic_Free_Additional_Hours;

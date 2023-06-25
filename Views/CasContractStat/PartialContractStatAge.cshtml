@@ -6,8 +6,8 @@
         <canvas id="ChartKm" style="width:100%;max-width:895px;height:450px;"></canvas>
 
         <script>
-            var xValues = ["أقل من 20", "من 21 إلى 30", "من 31 إلى 40", "من 41 إلى 50", "من 51 الي 60", "اكبر من 60"];
-            var yValues = [@ViewBag.A1,@ViewBag.A2,@ViewBag.A3,@ViewBag.A4,@ViewBag.A5,@ViewBag.A6];
+            var xValues = ["أقل من 25", "من 25 إلى 29", "من 30 إلى 34", "من 35 إلى 39", "من 40 الي 44", "من 45 الي 49", "من 50 الي 54", "من 55 الي 59", "اكبر من 60"];
+            var yValues = [@ViewBag.A1,@ViewBag.A2,@ViewBag.A3,@ViewBag.A4,@ViewBag.A5,@ViewBag.A6,@ViewBag.A7,@ViewBag.A8,@ViewBag.A9];
             var barColors = [
                 "#b91d47",
                 "#00aba9",
@@ -15,6 +15,9 @@
                 "#e8c3b9",
                 "#FFB533",
                 "#45B39D",
+                "#45B22D",
+                "#45B32D",
+                "#45B99D"
             ];
 
             new Chart("ChartKm", {

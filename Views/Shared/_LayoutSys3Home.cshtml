@@ -205,11 +205,13 @@
                             ////var Name = result.split("-")[1];
                             $("#BranchNameID").html(result);
                             BranchCode = $("#BranchList").val();
+                            window.location.href = "@Url.Action("BranchStat", "BranchHome")";
+
 
                         } else {
                             alert("نأسف لعدم إتمام العملية بنجاح الرجاء التواصل مع المطور");
                         }
-                        location.reload(true);
+                    //    location.reload(true);
                     }
                 });
             })
@@ -309,25 +311,33 @@
      }
 
      else {
-         toastr.warning("عفوا ليس لك صلاحية تمديد عقود");
+         toastr.info("عفوا ليس لك صلاحية تمديد عقود");
      }
     }
 
-    function CheckContractSettlement() {
-        $.ajax({
-            url: '@Url.Action("CheckContractSettlement", "BranchHome")',
-            type: "GET",
-            data: { BranchCode: BranchCode,LessorCode:LessorCode },
-            success: function (result) {
-                if (parseFloat(result) > 0) {
-                    window.location.href = "@Url.Action("Index", "ContractSettlement")";
-                } else {
-                    toastr.info("عفواً ....... لا يوجد عقود قائمة ");
-                }
-            }
-        });
-    }
+  async function CheckContractSettlement() {
+      var ContractCancel = '@Request.RequestContext.HttpContext.Session["ContractCancel"]';
 
+
+
+      if (ContractCancel == "True") {
+          let res1 = await $.ajax({
+              url: '@Url.Action("CheckContractSettlement", "BranchHome")',
+              type: "GET",
+              data: { BranchCode: BranchCode, LessorCode: LessorCode },
+          });
+          if (parseFloat(res1) > 0) {
+              window.location.href = "@Url.Action("Index", "ContractSettlement")";
+          }
+          else {
+              toastr.info("عفواً ....... لا يوجد عقود قائمة ");
+          }
+      }
+      else {
+          toastr.info("عفوا ليس لك صلاحية تسوية عقود");
+
+      }
+    }
 
      function CheckRenterLessor() {
         $.ajax({
