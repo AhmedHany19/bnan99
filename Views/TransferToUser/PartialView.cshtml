@@ -3,10 +3,13 @@
 <table id="myTable" class="table table-striped mb-0" style="cursor:pointer">
     <thead>
         <tr>
+            <th width="5%">
+                م
+            </th>
             <th width="9%">
                 رقم المستخدم
             </th>
-            <th width="21%">
+            <th width="21%" class="text-left">
                 إسم المستخدم
             </th>
             <th width="9%">
@@ -18,13 +21,21 @@
             <th width="30%">
                 البريد الإلكتروني
             </th>
-           
+
         </tr>
     </thead>
     <tbody id="tbl">
-        @foreach (var item in Model)
-        {
+        @{ int c = 0;
+            foreach (var item in Model)
+            {
+                c += 1;
                 <tr>
+                    <td width="5%" align="center">
+
+                                <a href="~/TransferToUser/create/?id=@Html.DisplayFor(modelItem => item.CR_Cas_User_Information_Id)">
+                                    @c
+                                </a>
+                    </td>
                     <td width="9%" align="center">
 
                         <a href="~/TransferToUser/create/?id=@Html.DisplayFor(modelItem => item.CR_Cas_User_Information_Id)">
@@ -36,7 +47,7 @@
                             @Html.DisplayFor(modelItem => item.CR_Cas_User_Information_Ar_Name)
                         </a>
                     </td>
-                    
+
 
                     <td width="9%" align="center">
                         <a href="~/TransferToUser/create/?id=@Html.DisplayFor(modelItem => item.CR_Cas_User_Information_Id)">
@@ -45,9 +56,24 @@
                     </td>
 
                     <td width="9%" align="center">
-                        <a href="~/TransferToUser/create/?id=@Html.DisplayFor(modelItem => item.CR_Cas_User_Information_Id)" style="color:red">
-                            @Html.DisplayFor(modelItem => item.CR_Cas_User_Information_Balance)
+                        <a href="~/TransferToUser/create/?id=@Html.DisplayFor(modelItem => item.CR_Cas_User_Information_Id)">
+                            @{
+                                float floatConvert3;
+                                if (item.CR_Cas_User_Information_Balance != null)
+                                {
+                                    floatConvert3 = (float)item.CR_Cas_User_Information_Balance;
+
+                                }
+                                else
+                                {
+                                    floatConvert3 = 0;
+                                }
+                                var Information_Balance = floatConvert3.ToString("N2");
+                            }
+                            @Information_Balance
                         </a>
+
+                        
                     </td>
 
                     <td align="right" width="30%">
@@ -56,9 +82,10 @@
                         </a>
                     </td>
 
-                 
+
                 </tr>
 
-        }
-    </tbody>
+                }
+            }
+        </tbody>
 </table>

@@ -125,6 +125,50 @@ namespace RentCar.Controllers.CAS
             }
 
         }
+        public ActionResult ShowCreate(string No, string Date)
+        {
+            var LessorCode = "";
+            var userlogin = "";
+            var branchcode = "";
+            try
+            {
+                LessorCode = Session["lessorcode"].ToString();
+                userlogin = Session["userlogin"].ToString();
+                if (userlogin == null || LessorCode == null || branchcode == null)
+                {
+                    RedirectToAction("account", "login");
+                }
+            }
+            catch
+            {
+                RedirectToAction("login", "account");
+            }
+
+            var Receipt = db.CR_Cas_Account_Receipt.Where(r => r.CR_Cas_Account_Receipt_Reference_Passing == No.Trim()&&r.CR_Cas_Account_Receipt_Payment_Method!="25");
+            if (Receipt == null)
+            {
+                return HttpNotFound();
+            }
+            else
+            {
+                ViewBag.ProcNo = No;
+                var d = DateTime.Parse(Date);
+                string s = d.ToString("yyyy/MM/dd");
+                ViewBag.Date = s;
+
+                var f = Receipt.First();
+                var sd = f.CR_Cas_Account_Receipt_Date;
+                ViewBag.sd = sd?.ToString("yyyy/MM/dd");
+
+                var l = Receipt.OrderByDescending(x => x.CR_Cas_Account_Receipt_Date).FirstOrDefault();
+                var ed = f.CR_Cas_Account_Receipt_Date;
+                ViewBag.ed = string.Format("{0:yyyy/MM/dd}", ed);
+
+
+                return View(Receipt);
+            }
+
+        }
         [HttpPost]
         public ActionResult Create(string TracingNo, string save, string Cancel)
         {

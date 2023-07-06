@@ -162,6 +162,25 @@ namespace RentCar.Controllers.BranchSys
             }
             if (b == true)
             {
+               List<CR_Cas_Account_Receipt> receipts = new List<CR_Cas_Account_Receipt>(); ;
+                foreach (string item in collection.AllKeys)
+                {
+                    if (item.StartsWith("Chk_"))
+                    {
+                        var ReceiptNo = item.Replace("Chk_", "");
+                        var  receipt= db.CR_Cas_Account_Receipt.Single(r => r.CR_Cas_Account_Receipt_No == ReceiptNo);
+                        receipts.Add(receipt);
+                    }
+                }
+
+
+                //var accountReceipt = db.CR_Cas_Account_Receipt.Where(c => c.CR_Cas_Sup_SalesPoint.CR_Cas_Sup_SalesPoint_Code == CR_Cas_Sup_SalesPoint_Code && c.CR_Cas_Account_Receipt_Lessor_Code == LessorCode
+                //&& c.CR_Cas_Account_Receipt_Branch_Code == branchcode && c.CR_Cas_Account_Receipt_User_Code == userlogin).ToList();
+
+
+                DateTime minDate =(DateTime)receipts.Min(c => c.CR_Cas_Account_Receipt_Date);
+                DateTime maxDate =(DateTime)receipts.Max(c => c.CR_Cas_Account_Receipt_Date);
+
                 ///////////////////////////////Tracing//////////////////////////////////////
                 CR_Cas_Administrative_Procedures Ad = new CR_Cas_Administrative_Procedures();
                 DateTime year = DateTime.Now;
@@ -184,8 +203,8 @@ namespace RentCar.Controllers.BranchSys
                 Ad.CR_Cas_Administrative_Procedures_Doc_Date = DateTime.Now;
                 DateTime StartDate = Convert.ToDateTime(sd);
                 DateTime EndDate = Convert.ToDateTime(ed);
-                Ad.CR_Cas_Administrative_Procedures_Doc_Start_Date = StartDate;
-                Ad.CR_Cas_Administrative_Procedures_Doc_End_Date = EndDate;
+                Ad.CR_Cas_Administrative_Procedures_Doc_Start_Date = minDate;
+                Ad.CR_Cas_Administrative_Procedures_Doc_End_Date = maxDate;
                 Ad.CR_Cas_Administrative_Procedures_Doc_No = "";
                 Ad.CR_Cas_Administrative_Procedures_Value = val;
                 db.CR_Cas_Administrative_Procedures.Add(Ad);
@@ -194,7 +213,7 @@ namespace RentCar.Controllers.BranchSys
                 db.SaveChanges();
             }
 
-            return RedirectToAction("BranchHome", "BranchHome");
+            return RedirectToAction("BranchStat", "BranchHome");
         }
 
 

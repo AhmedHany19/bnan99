@@ -11,14 +11,18 @@
         <div class="row">
             <div class="col-12">
                 <div class="card-box table-responsive" style="height:79vh">
-                    <div class="title_corp"><h3> الحسابات/إستلام عهدة/قبول أو رفض</h3></div>
-                    <div class="subtitle_corp">تمكنك الصفحة عرض بيانات استلام العهدة من الموظف و قبول أو رفض الاستلام</div>
+                    <div class="title_corp"><h3> الحسابات/إستلام عهدة/استلام العهدة</h3></div>
+                    <div class="subtitle_corp">تمكنك الصفحة عرض بيانات استلام العهدة من الموظف </div>
                     <div class="hr_60"></div>
                     <div class="hr_80"></div>
                     <div class="corp_page">
-                        <div class="page_content" style="float:left;width:100%">
-                            <form id="form_validation" action="/Closingreception/Create" enctype="multipart/form-data" method="post" data-parsley-validate novalidate>
 
+                        <div class="page_content" style="float:left;width:100%">
+                            <div class="d-flex mt-3">
+                                <a href="/ClosingReception/index" class="btn_form " data-toggle="tooltip" data-placement="top" title="رجوع"><i class="fa fa dripicons-arrow-left" style="padding-top:12px;"></i></a>
+
+                            </div>
+                            <form id="form_validation" action="/Closingreception/Create" enctype="multipart/form-data" method="post" data-parsley-validate novalidate>
                                 @Html.AntiForgeryToken()
 
                                 <div class="form-horizontal" style="margin-top:15px;min-height:50%">
@@ -117,7 +121,7 @@
                                                     <label class="label_form">ملاحظات</label>
                                                 </div>
                                                 <div class="col-lg-10 col-md-10" style="padding:0">
-                                                    <input type="text" class="form-control" name="reason" value="@Model.FirstOrDefault().CR_Cas_Account_Receipt_Reasons" style="width:450px" />
+                                                    <input type="text" class="form-control" name="reason" value="@Model.FirstOrDefault().CR_Cas_Account_Receipt_Reasons" style="width:450px" disabled="disabled" />
 
                                                 </div>
                                             </div>
@@ -151,7 +155,7 @@
                                                                     <th style="width:10%" class="text-left">
                                                                         نوع المرجع
                                                                     </th>
-                                                                    <th style="width:10%" class="text-left">
+                                                                    <th style="width:20%" class="text-left">
                                                                         طريقة الدفع
                                                                     </th>
                                                                     <th style="width:8%">
@@ -171,7 +175,8 @@
                                                                         c += 1;
 
                                                                         <tr class="text-center">
-                                                                             <td width="2%" >
+
+                                                                            <td width="2%" >
                                                                                             @c
                                                                             </td>
                                                                             <td style="width:15%">
@@ -186,7 +191,7 @@
                                                                             <td style="width:10%" class="text-left">
                                                                                 @Html.DisplayFor(modelItem => item.CR_Cas_Account_Receipt_Reference_Type)
                                                                             </td>
-                                                                            <td style="width:10%" class="text-left">
+                                                                            <td style="width:20%" class="text-left">
                                                                                 @Html.DisplayFor(modelItem => item.CR_Mas_Sup_Payment_Method.CR_Mas_Sup_Payment_Method_Ar_Name)
                                                                             </td>
                                                                             <td style="width:8%" class="Creditor">
@@ -199,6 +204,7 @@
                                                                         </tr>
                                                                         }
                                                                     }
+
                                                                 </tbody>
                                                         </table>
                                                     </div>
@@ -206,26 +212,7 @@
 
                                             </div>
                                         </div>
-
-
                                     </div>
-                                    
-                                    <div class="row mb-5">
-                                        <div class="col-md-4 col-50 ">
-                                            <input type="submit" name="Save" class="btn btn-primary waves-effect" id="add_btn" value="قبول" style=" margin-left: 18px;" />
-                                            <input type="submit" name="Cancel" class="btn btn-primary waves-effect" id="CancelBtn" value="رفض" style=" margin-left: 18px;" />
-                                            <a href="/ClosingReception/index" tabindex="" class="btn btn-primary waves-effect">انهاء</a>
-                                        </div>
-                                    
-
-
-
-                                        @* <div class="col-md-1 col-50" style="margin-top:50px;">
-                <div></div>
-            </div>*@
-
-                                    </div>
-
                                 </div>
                             </form>
                         </div>
@@ -237,8 +224,8 @@
 </div>
 
 <style>
-    .row{
-        align-items:center
+    .row {
+        align-items: center
     }
 </style>
 
@@ -250,7 +237,7 @@
     const table = document.getElementById('myTable');
 
     // Specify the indexes of the columns to format (starting from 0)
-    const columnIndexes = [5,6]; // for example, format columns  5, 6    
+    const columnIndexes = [5,6]; // for example, format columns  5, 6
 
     // Loop through each row in the table
     for (let i = 1; i < table.rows.length; i++) { // starting from row 1 to exclude the header row
@@ -294,7 +281,7 @@
     $(document).ready(function () {
         formatInputNumber($(".t1"));
     });
-        
+
     function formatInputNumber(input) {
         let num = parseFloat(input.val()); // Get the value of the input and parse it as a float
         num = num.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'); // Format the number with commas
@@ -309,11 +296,11 @@
                 var price = parseFloat($(this).text().replace(/,/g, ''));
                 if (!isNaN(price)) {
                     total += price;
-                } 
+                }
             });
             console.log(total)
             $('.totalCreditor').val(total.toFixed(2).toLocaleString('en-US'));
-        }); 
+        });
 
         $(document).ready(function () {
             var total = 0;
@@ -324,7 +311,7 @@
                 }
             });
             $('.totaldebtor').val(total.toFixed(2).toLocaleString('en-US'));
-        }); 
+        });
 
 
     $(document).ready(function () {
@@ -334,4 +321,5 @@
         });
     });
 </script>
+
 

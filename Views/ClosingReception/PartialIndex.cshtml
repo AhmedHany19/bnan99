@@ -23,14 +23,14 @@
                             <th width="8%">
                                 إلى تاريخ
                             </th>
-                            <th width="12%">
+                            <th width="12%" class="text-left">
                                 نقطة البيع
                             </th>
                             <th width="7%">
                                 المبلغ
                             </th>
 
-                            <th width="12%">
+                            <th width="12%" class="text-left">
                                 الموظف
                             </th>
                             <th width="9%">
@@ -51,7 +51,7 @@
                         {
                             if (item.CR_Cas_Administrative_Procedures_Type == "I")
                             {
-                                <tr >
+                                <tr>
                                     <td width="4%" style="text-align:center">
                                         <a href="~/ClosingReception/Create/?No=@Html.DisplayFor(modelItem =>
                                         item.CR_Cas_Administrative_Procedures_No)
@@ -94,11 +94,26 @@
                                             @Html.DisplayFor(modelItem => item.CR_Cas_Sup_SalesPoint_Ar_Name)
                                         </a>
                                     </td>
-                                    <td width="7%">
+                                    <td width="7%" class="text-center">
                                         <a href="~/ClosingReception/Create/?No=@Html.DisplayFor(modelItem =>
                                         item.CR_Cas_Administrative_Procedures_No)
                                         &Date=@Html.DisplayFor(modelItem => item.CR_Cas_Administrative_Procedures_Date)">
-                                            @Html.DisplayFor(modelItem => item.CR_Cas_Administrative_Procedures_Value)
+                                            @*@Html.DisplayFor(modelItem => item.CR_Cas_Administrative_Procedures_Value)*@
+
+                                            @{
+                                                float floatConvert3;
+                                                if (item.CR_Cas_Administrative_Procedures_Value != null)
+                                                {
+                                                    floatConvert3 = (float)item.CR_Cas_Administrative_Procedures_Value;
+
+                                                }
+                                                else
+                                                {
+                                                    floatConvert3 = 0;
+                                                }
+                                                var Procedures_Value = floatConvert3.ToString("N2");
+                                            }
+                                            @Procedures_Value
                                         </a>
                                     </td>
                                     <td width="12%">
@@ -119,7 +134,7 @@
                                             }
                                             else if (item.CR_Cas_Administrative_Procedures_Type == "Q")
                                             {
-                                                @Html.Raw("<span style=\"color:green\">قبول</span>");
+                                                @Html.Raw("<span>قبول</span>");
                                             }
 
 
@@ -136,49 +151,80 @@
                             }
                             else
                             {
-                                <tr >
+                                <tr>
                                     <td width="4%" style="text-align:center">
-                                        <a>
+                                        <a href="~/ClosingReception/ShowCreate/?No=@Html.DisplayFor(modelItem =>
+                                        item.CR_Cas_Administrative_Procedures_No)
+                                        &Date=@Html.DisplayFor(modelItem => item.CR_Cas_Administrative_Procedures_Date)">
                                             @i
                                         </a>
                                     </td>
                                     <td width="12%">
-                                        <a>
+                                        <a href="~/ClosingReception/ShowCreate/?No=@Html.DisplayFor(modelItem =>
+                                        item.CR_Cas_Administrative_Procedures_No)
+                                        &Date=@Html.DisplayFor(modelItem => item.CR_Cas_Administrative_Procedures_Date)">
                                             @Html.DisplayFor(modelItem => item.CR_Cas_Administrative_Procedures_No)
                                         </a>
                                     </td>
                                     <td width="8%" style="text-align:center">
-                                        <a>
+                                        <a href="~/ClosingReception/ShowCreate/?No=@Html.DisplayFor(modelItem =>
+                                        item.CR_Cas_Administrative_Procedures_No)
+                                        &Date=@Html.DisplayFor(modelItem => item.CR_Cas_Administrative_Procedures_Date)">
                                             @item.CR_Cas_Administrative_Procedures_Date.Value.ToString("yyyy/MM/dd")
                                         </a>
                                     </td>
                                     <td width="8%" style="text-align:center">
-                                        <a>
+                                        <a href="~/ClosingReception/ShowCreate/?No=@Html.DisplayFor(modelItem =>
+                                        item.CR_Cas_Administrative_Procedures_No)
+                                        &Date=@Html.DisplayFor(modelItem => item.CR_Cas_Administrative_Procedures_Date)">
                                             @item.CR_Cas_Administrative_Procedures_Doc_Start_Date.Value.ToString("yyyy/MM/dd")
                                         </a>
                                     </td>
                                     <td width="8%" style="text-align:center">
-                                        <a>
+                                        <a href="~/ClosingReception/ShowCreate/?No=@Html.DisplayFor(modelItem =>
+                                        item.CR_Cas_Administrative_Procedures_No)
+                                        &Date=@Html.DisplayFor(modelItem => item.CR_Cas_Administrative_Procedures_Date)">
                                             @item.CR_Cas_Administrative_Procedures_Doc_End_Date.Value.ToString("yyyy/MM/dd")
                                         </a>
                                     </td>
                                     <td width="12%">
-                                        <a>
+                                       <a href="~/ClosingReception/ShowCreate/?No=@Html.DisplayFor(modelItem =>
+                                        item.CR_Cas_Administrative_Procedures_No)
+                                        &Date=@Html.DisplayFor(modelItem => item.CR_Cas_Administrative_Procedures_Date)">
                                             @Html.DisplayFor(modelItem => item.CR_Cas_Sup_SalesPoint_Ar_Name)
                                         </a>
                                     </td>
-                                    <td width="7%">
-                                        <a>
-                                            @Html.DisplayFor(modelItem => item.CR_Cas_Administrative_Procedures_Value)
+                                    <td width="7%" class="text-center">
+                                        <a href="~/ClosingReception/ShowCreate/?No=@Html.DisplayFor(modelItem =>
+                                        item.CR_Cas_Administrative_Procedures_No)
+                                        &Date=@Html.DisplayFor(modelItem => item.CR_Cas_Administrative_Procedures_Date)">
+                                            @{
+                                                float floatConvert3;
+                                                if (item.CR_Cas_Administrative_Procedures_Value != null)
+                                                {
+                                                    floatConvert3 = (float)item.CR_Cas_Administrative_Procedures_Value;
+
+                                                }
+                                                else
+                                                {
+                                                    floatConvert3 = 0;
+                                                }
+                                                var Procedures_Value = floatConvert3.ToString("N2");
+                                            }
+                                            @Procedures_Value
                                         </a>
                                     </td>
                                     <td width="12%">
-                                        <a>
+                                        <a href="~/ClosingReception/ShowCreate/?No=@Html.DisplayFor(modelItem =>
+                                        item.CR_Cas_Administrative_Procedures_No)
+                                        &Date=@Html.DisplayFor(modelItem => item.CR_Cas_Administrative_Procedures_Date)">
                                             @Html.DisplayFor(modelItem => item.CR_Cas_User_Information_Ar_Name)
                                         </a>
                                     </td>
                                     <td width="9%" class="text-center">
-                                        <a>
+                                        <a href="~/ClosingReception/ShowCreate/?No=@Html.DisplayFor(modelItem =>
+                                        item.CR_Cas_Administrative_Procedures_No)
+                                        &Date=@Html.DisplayFor(modelItem => item.CR_Cas_Administrative_Procedures_Date)">
                                             @if (item.CR_Cas_Administrative_Procedures_Type == "I")
                                             {
                                                 @Html.Raw("<span>نشط</span>");
@@ -186,14 +232,16 @@
                                             }
                                             else if (item.CR_Cas_Administrative_Procedures_Type == "Q")
                                             {
-                                                @Html.Raw("<span style=\"color:green\">قبول</span>");
+                                                @Html.Raw("<span>قبول</span>");
                                             }
 
 
                                         </a>
                                     </td>
                                     <td width="20%">
-                                        <a>
+                                        <a href="~/ClosingReception/ShowCreate/?No=@Html.DisplayFor(modelItem =>
+                                        item.CR_Cas_Administrative_Procedures_No)
+                                        &Date=@Html.DisplayFor(modelItem => item.CR_Cas_Administrative_Procedures_Date)">
                                             @Html.DisplayFor(modelItem => item.CR_Cas_Administrative_Procedures_Reasons)
                                         </a>
                                     </td>
@@ -203,7 +251,7 @@
                             i++;
                         }
 
-                </table>
+</table>
             </div>
         </div>
     </div>

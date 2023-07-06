@@ -588,7 +588,7 @@
                             <ul class="nav-second-level" aria-expanded="false">
                                 <li><a href="~/CasRenterLessor/index">بيانات المستأجرين</a></li>
                                 <li><a href="~/CasRenterLessor/LoadRenters">عقود المستأجرين</a></li>
-                                <li><a href="~/RenterReceiptList/RenterReceiptBalance"> مديونيات المستأجرين</a></li>
+                                <li><a onclick="CheckRenterList();" style="cursor:pointer"> مديونيات المستأجرين</a></li>
                             </ul>
                         </li>
                         <li>
@@ -824,7 +824,22 @@
                 }
             }
         });
-    }
+        }
+
+
+        function CheckRenterList() {
+             $.ajax({
+            url: '@Url.Action("CheckRenterList", "RenterReceiptList")',
+            type: "GET",
+            success: function (result) {
+                if (parseFloat(result) > 0) {
+                    window.location.href = "@Url.Action("RenterReceiptBalance", "RenterReceiptList")";
+                } else {
+                    toastr.info("عفواً ....... لا يوجد مديونيات ");
+                }
+            }
+        });
+        }
     </script>
     @*date hijri*@
     <script type="text/javascript">

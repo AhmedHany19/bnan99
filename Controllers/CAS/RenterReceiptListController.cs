@@ -136,6 +136,8 @@ namespace RentCar.Controllers.CAS
             {
                 RedirectToAction("Login", "Account");
             }
+            var renters = db.CR_Cas_Renter_Lessor.Where(c => c.CR_Cas_Renter_Lessor_Code == LessorCode).Count();
+
             List<CR_Cas_Renter_Lessor> RenterList = new List<CR_Cas_Renter_Lessor>();
             var cR_Cas_Renter_Lessor = db.CR_Cas_Renter_Lessor.Where(l => l.CR_Cas_Renter_Lessor_Code == LessorCode && l.CR_Cas_Renter_Lessor_Balance != 0 && l.CR_Cas_Renter_Lessor_Status!="R").Include(c => c.CR_Mas_Com_Lessor).Include(c => c.CR_Mas_Renter_Information).OrderByDescending(d=>d.CR_Cas_Renter_Lessor_Date_Last_Interaction);
             foreach (var Renter in cR_Cas_Renter_Lessor)
@@ -167,7 +169,13 @@ namespace RentCar.Controllers.CAS
             return View(RenterList);
         }
 
+        public JsonResult CheckRenterList()
+        {
+            string LessorCode = Session["LessorCode"].ToString();
 
+            var RenterList = db.CR_Cas_Renter_Lessor.Where(l => l.CR_Cas_Renter_Lessor_Code == LessorCode && l.CR_Cas_Renter_Lessor_Balance != 0 && l.CR_Cas_Renter_Lessor_Status != "R").Count();
+            return Json(RenterList, JsonRequestBehavior.AllowGet);
+        }
 
         public JsonResult GetReceiptSum(string type, string StartDate, string EndDate,string id)
         {
