@@ -91,6 +91,20 @@
                         <a href="~/CasRenterLessor/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Id)
                                                                            &id2=@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Code)" style="color:red;">
                             @Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Balance)
+                            @{
+                                float floatConvert4;
+                                if (item.CR_Cas_Renter_Lessor_Balance != null)
+                                {
+                                    floatConvert4 = (float)item.CR_Cas_Renter_Lessor_Balance;
+
+                                }
+                                else
+                                {
+                                    floatConvert4 = 0;
+                                }
+                                var Lessor_Balance = floatConvert4.ToString("N2");
+                            }
+                            @Lessor_Balance
                         </a>
                     </td>
 
@@ -217,7 +231,20 @@
         <td width="8%" style="text-align:center!important;vertical-align:middle">
             <a href="~/CasRenterLessor/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Id)
                                                                            &id2=@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Code)">
-                @Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Balance)
+                @{
+                    float floatConvert4;
+                    if (item.CR_Cas_Renter_Lessor_Balance != null)
+                    {
+                        floatConvert4 = (float)item.CR_Cas_Renter_Lessor_Balance;
+
+                    }
+                    else
+                    {
+                        floatConvert4 = 0;
+                    }
+                    var Lessor_Balance = floatConvert4.ToString("N2");
+                }
+                @Lessor_Balance
             </a>
         </td>
 

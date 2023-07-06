@@ -143,7 +143,20 @@
                                                                 </td>
                                                                 <td style="text-align:center!important;vertical-align:middle" width="8%">
                                                                     <a href="~/RenterReceiptList/GetRenterReceiptList/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Id)">
-                                                                        @Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Balance)
+                                                                        @{
+                                                                            float floatConvert4;
+                                                                            if (item.CR_Cas_Renter_Lessor_Balance != null)
+                                                                            {
+                                                                                floatConvert4 = (float)item.CR_Cas_Renter_Lessor_Balance;
+
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                floatConvert4 = 0;
+                                                                            }
+                                                                            var Renter_Lessor_Balance = floatConvert4.ToString("N2");
+                                                                        }
+                                                                        @Renter_Lessor_Balance
                                                                     </a>
                                                                 </td>
 

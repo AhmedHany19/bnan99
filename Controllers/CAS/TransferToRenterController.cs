@@ -61,27 +61,41 @@ namespace RentCar.Controllers.CAS
             }
 
             IQueryable<CR_Cas_Renter_Lessor> cR_Cas_Renter_Lessor = null;
-            if (type == "D")
-            {
-                cR_Cas_Renter_Lessor = db.CR_Cas_Renter_Lessor.Where(l => l.CR_Cas_Renter_Lessor_Code == LessorCode && l.CR_Cas_Renter_Lessor_Status == "D")
-                    .Include(c => c.CR_Mas_Com_Lessor)
-                    .Include(c => c.CR_Mas_Renter_Information);
-            }
-            else if (type == "K")
-            {
-                cR_Cas_Renter_Lessor = db.CR_Cas_Renter_Lessor.Where(l => l.CR_Cas_Renter_Lessor_Code == LessorCode && l.CR_Cas_Renter_Lessor_Status == "K")
-                    .Include(c => c.CR_Mas_Com_Lessor)
-                    .Include(c => c.CR_Mas_Renter_Information);
-            }
-            else
-            {
-                cR_Cas_Renter_Lessor = db.CR_Cas_Renter_Lessor.Where(l => l.CR_Cas_Renter_Lessor_Code == LessorCode && (l.CR_Cas_Renter_Lessor_Status=="A" || l.CR_Cas_Renter_Lessor_Status=="K"))
-                    .Include(c => c.CR_Mas_Com_Lessor)
-                    .Include(c => c.CR_Mas_Renter_Information);
-            }
+            //if (type == "D")
+            //{
+            //    cR_Cas_Renter_Lessor = db.CR_Cas_Renter_Lessor.Where(l => l.CR_Cas_Renter_Lessor_Code == LessorCode && l.CR_Cas_Renter_Lessor_Status == "D")
+            //        .Include(c => c.CR_Mas_Com_Lessor)
+            //        .Include(c => c.CR_Mas_Renter_Information);
+            //}
+            //else if (type == "K")
+            //{
+            //    cR_Cas_Renter_Lessor = db.CR_Cas_Renter_Lessor.Where(l => l.CR_Cas_Renter_Lessor_Code == LessorCode && l.CR_Cas_Renter_Lessor_Status == "K")
+            //        .Include(c => c.CR_Mas_Com_Lessor)
+            //        .Include(c => c.CR_Mas_Renter_Information);
+            //}
+            //else
+            //{
+            //    cR_Cas_Renter_Lessor = db.CR_Cas_Renter_Lessor.Where(l => l.CR_Cas_Renter_Lessor_Code == LessorCode && (l.CR_Cas_Renter_Lessor_Status=="A" || l.CR_Cas_Renter_Lessor_Status=="K"))
+            //        .Include(c => c.CR_Mas_Com_Lessor)
+            //        .Include(c => c.CR_Mas_Renter_Information);
+            //}
+
+            cR_Cas_Renter_Lessor = db.CR_Cas_Renter_Lessor.Where(l => l.CR_Cas_Renter_Lessor_Code == LessorCode && (l.CR_Cas_Renter_Lessor_Status == "A" || l.CR_Cas_Renter_Lessor_Status == "K"))
+                   .Include(c => c.CR_Mas_Com_Lessor)
+                   .Include(c => c.CR_Mas_Renter_Information);
+
             return PartialView(cR_Cas_Renter_Lessor);
         }
 
+
+
+        public JsonResult CheckActiveContract(string id)
+        {
+            string LessorCode = Session["LessorCode"].ToString();
+
+            var RenterList = db.CR_Cas_Contract_Basic.Where(l => l.CR_Cas_Contract_Basic_Lessor == LessorCode && l.CR_Cas_Contract_Basic_Renter_Id == id && l.CR_Cas_Contract_Basic_Status == "A").Count();
+            return Json(RenterList, JsonRequestBehavior.AllowGet);
+        }
         // GET: TransferToRenter/Details/5
         public ActionResult Details(string id)
         {
