@@ -15,6 +15,7 @@
         margin-right: 10px;
         line-height: 0.8
     }
+
     .btn_form2 i {
         width: 30px;
         height: 30px;
@@ -43,8 +44,6 @@
         float: right;
         margin-left: 10px;
     }
-
-
 </style>
 <div class="content">
     <!-- Start Content-->
@@ -107,27 +106,27 @@
                                         </div>
                                         <div class="col-md-5" style="float:right">
                                             <div class="radio_top">
-                                                <input type="radio" id="ShowExpired" name="Show" onclick="LoadData();GetFilter()" style="float:right;margin-left:4px;width:13px;height:13px;">
+                                                <input type="radio" id="ShowExpired" name="Show" onclick="LoadData(); GetFilter();clearInput()" style="float:right;margin-left:4px;width:13px;height:13px;">
                                                 <label for="javascript" style="float: left; font-size: 0.75rem">منتهي</label>
                                             </div>
                                             <div class="radio_top">
-                                                <input type="radio" id="ShowAboutExpire" name="Show" onclick="LoadData();GetFilter()" style="float:right;margin-left:4px;width:13px;height:13px;">
+                                                <input type="radio" id="ShowAboutExpire" name="Show" onclick="LoadData();GetFilter();clearInput()" style="float:right;margin-left:4px;width:13px;height:13px;">
                                                 <label for="javascript" style="float: left; font-size: 0.75rem">على وشك الإنتهاء</label>
                                             </div>
                                             <div class="radio_top" hidden>
-                                                <input type="radio" id="ShowDeleted" name="Show" onclick="LoadData();GetFilter()" style="float:right;margin-left:4px;width:13px;height:13px;">
+                                                <input type="radio" id="ShowDeleted" name="Show" onclick="LoadData();GetFilter();clearInput()" style="float:right;margin-left:4px;width:13px;height:13px;">
                                                 <label for="javascript" style="float: left; font-size: 0.75rem">محذوف</label>
                                             </div>
                                             <div class="radio_top">
-                                                <input type="radio" id="ShowUnder" name="Show" onclick="LoadData();GetFilter()" style="float:right;margin-left:4px;width:13px;height:13px;">
+                                                <input type="radio" id="ShowUnder" name="Show" onclick="LoadData();GetFilter();clearInput()" style="float:right;margin-left:4px;width:13px;height:13px;">
                                                 <label for="javascript" style="float: left; font-size: 0.75rem">لم يسجل</label>
                                             </div>
                                             <div class="radio_top">
-                                                <input type="radio" id="ShowActive" name="Show" onclick="LoadData();GetFilter()" style="float:right;margin-left:4px;width:13px;height:13px;">
+                                                <input type="radio" id="ShowActive" name="Show" onclick="LoadData();GetFilter();clearInput()" style="float:right;margin-left:4px;width:13px;height:13px;">
                                                 <label for="css" style="float: left; font-size: 0.75rem">نشط</label>
                                             </div>
                                             <div class="radio_top">
-                                                <input type="radio" id="ShowAll" name="Show" onclick="LoadData();GetFilter()" style="float:right;margin-left:4px;width:13px;height:13px;">
+                                                <input type="radio" id="ShowAll" name="Show" onclick="LoadData();GetFilter();clearInput()" style="float:right;margin-left:4px;width:13px;height:13px;">
                                                 <label for="html" style="float: left; font-size: 0.75rem">الكل</label>
                                             </div>
                                         </div>
@@ -257,4 +256,11 @@
         }
 
     </script>
+
+
 </div>
+<script>
+    function clearInput() {
+        document.getElementById("inputtext").value = "";
+    }
+</script>

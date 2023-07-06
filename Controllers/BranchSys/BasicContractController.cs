@@ -2201,17 +2201,21 @@ namespace RentCar.Controllers.BranchSys
                                         var BrnAccount1 = db.CR_Cas_Sup_Main_Brn_Account.FirstOrDefault(bc => bc.CR_Cas_Sup_Main_Brn_Account_Com_Code == LessorCode 
                                         && bc.CR_Cas_Sup_Main_Brn_Account_Brn_Code == BranchCode
                                         && bc.CR_Cas_Sup_Main_Brn_Account_Main_Code == "1" && bc.CR_Cas_Sup_Main_Brn_Account_Status == "A");
-
-                                        BrnAccount1.CR_Cas_Sup_Main_Brn_Account_Balance += decimal.Parse(TotalPayed);
-                                        db.Entry(BrnAccount1).State = EntityState.Modified;
+                                        if (BrnAccount1 != null)
+                                        {
+                                            BrnAccount1.CR_Cas_Sup_Main_Brn_Account_Balance += decimal.Parse(TotalPayed);
+                                            db.Entry(BrnAccount1).State = EntityState.Modified;
+                                        }
+                                       
 
                                         var BrnAccount4 = db.CR_Cas_Sup_Main_Brn_Account.FirstOrDefault(bc => bc.CR_Cas_Sup_Main_Brn_Account_Com_Code == LessorCode
                                         && bc.CR_Cas_Sup_Main_Brn_Account_Brn_Code == BranchCode
                                         && bc.CR_Cas_Sup_Main_Brn_Account_Main_Code == "3" && bc.CR_Cas_Sup_Main_Brn_Account_Status == "A");
-
-                                        BrnAccount4.CR_Cas_Sup_Main_Brn_Account_Balance += decimal.Parse(TotalPayed);
-                                        db.Entry(BrnAccount4).State = EntityState.Modified;
-
+                                        if (BrnAccount4!=null)
+                                        {
+                                            BrnAccount4.CR_Cas_Sup_Main_Brn_Account_Balance += decimal.Parse(TotalPayed);
+                                            db.Entry(BrnAccount4).State = EntityState.Modified;
+                                        }
                                         //////////////////////////////////////////////////////////////////////////////////
                                         ///////////////////////////////CR_Cas_Sup_Sub_Com_Account//////////////////////////
                                         if (PayType == "10")
@@ -2247,27 +2251,32 @@ namespace RentCar.Controllers.BranchSys
                                             var SubBrnAccount = db.CR_Cas_Sup_Sub_Brn_Account.FirstOrDefault(Sc => Sc.CR_Cas_Sup_Sub_Brn_Account_Com_Code == LessorCode 
                                             && Sc.CR_Cas_Sup_Sub_Brn_Account_Sub_Code == "110"
                                             && Sc.CR_Cas_Sup_Sub_Brn_Account_Status == "A" && Sc.CR_Cas_Sup_Sub_Brn_Account_Brn_Code == BranchCode);
-                                           
-                                            SubBrnAccount.CR_Cas_Sup_Sub_Brn_Account_Balance += decimal.Parse(TotalPayed);
-                                            db.Entry(SubBrnAccount).State = EntityState.Modified;
-                                            
+                                            if (SubBrnAccount != null)
+                                            {
+                                                SubBrnAccount.CR_Cas_Sup_Sub_Brn_Account_Balance += decimal.Parse(TotalPayed);
+                                                db.Entry(SubBrnAccount).State = EntityState.Modified;
+                                            }
                                         }
                                         else
                                         {
                                             var SubBrnAccount = db.CR_Cas_Sup_Sub_Brn_Account.FirstOrDefault(Sc => Sc.CR_Cas_Sup_Sub_Brn_Account_Com_Code == LessorCode 
                                             && Sc.CR_Cas_Sup_Sub_Brn_Account_Sub_Code == "111"
                                             && Sc.CR_Cas_Sup_Sub_Brn_Account_Status == "A" && Sc.CR_Cas_Sup_Sub_Brn_Account_Brn_Code == BranchCode);
-                                            
-                                            SubBrnAccount.CR_Cas_Sup_Sub_Brn_Account_Balance += decimal.Parse(TotalPayed);
-                                            db.Entry(SubBrnAccount).State = EntityState.Modified;
-                                            
+                                            if (SubBrnAccount !=null)
+                                            {
+                                                SubBrnAccount.CR_Cas_Sup_Sub_Brn_Account_Balance += decimal.Parse(TotalPayed);
+                                                db.Entry(SubBrnAccount).State = EntityState.Modified;
+                                            }
                                         }
                                         var SubBrnAccountObligation = db.CR_Cas_Sup_Sub_Brn_Account.FirstOrDefault(Sc => Sc.CR_Cas_Sup_Sub_Brn_Account_Com_Code == LessorCode
                                            && Sc.CR_Cas_Sup_Sub_Brn_Account_Sub_Code == "330"
                                            && Sc.CR_Cas_Sup_Sub_Brn_Account_Status == "A" && Sc.CR_Cas_Sup_Sub_Brn_Account_Brn_Code == BranchCode);
-
-                                        SubBrnAccountObligation.CR_Cas_Sup_Sub_Brn_Account_Balance += decimal.Parse(TotalPayed);
-                                        db.Entry(SubBrnAccountObligation).State = EntityState.Modified;
+                                        if (SubBrnAccountObligation!=null)
+                                        {
+                                            SubBrnAccountObligation.CR_Cas_Sup_Sub_Brn_Account_Balance += decimal.Parse(TotalPayed);
+                                            db.Entry(SubBrnAccountObligation).State = EntityState.Modified;
+                                        }
+                                       
                                         ////////////////////////////////////////////////////////////////////////////////// \
                                         ///\
                                        

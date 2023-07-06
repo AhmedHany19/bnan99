@@ -75,7 +75,7 @@
                                             بحث:<input class="form-control form_search_input" type="text" id="inputtext" name="TxtSearch" style="width:52%" />
                                         </label>
                                     </div>
-                                    
+
                                     <div class="row" style="width: 100%; min-height: 20px">
                                         <div class="col-md-7 ">
                                             <div class="row" hidden>
@@ -107,27 +107,27 @@
                                         </div>
                                         <div class="col-md-5" style="float:right">
                                             <div class="radio_top">
-                                                <input type="radio" id="ShowExpired" name="Show" onclick="LoadData();GetFilter()" style="float:right;margin-left:4px;width:13px;height:13px;">
+                                                <input type="radio" id="ShowExpired" name="Show" onclick="LoadData();GetFilter();clearInput()" style="float:right;margin-left:4px;width:13px;height:13px;">
                                                 <label for="javascript" style="float: left; font-size: 0.75rem">منتهي</label>
                                             </div>
                                             <div class="radio_top">
-                                                <input type="radio" id="ShowAboutExpire" name="Show" onclick="LoadData();GetFilter()" style="float:right;margin-left:4px;width:13px;height:13px;">
+                                                <input type="radio" id="ShowAboutExpire" name="Show" onclick="LoadData();GetFilter();clearInput()" style="float:right;margin-left:4px;width:13px;height:13px;">
                                                 <label for="javascript" style="float: left; font-size: 0.75rem">على وشك الإنتهاء</label>
                                             </div>
                                             <div class="radio_top" hidden>
-                                                <input type="radio" id="ShowDeleted" name="Show" onclick="LoadData();GetFilter()" style="float:right;margin-left:4px;width:13px;height:13px;">
+                                                <input type="radio" id="ShowDeleted" name="Show" onclick="LoadData();GetFilter();clearInput()" style="float:right;margin-left:4px;width:13px;height:13px;">
                                                 <label for="javascript" style="float: left; font-size: 0.75rem">محذوف</label>
                                             </div>
                                             <div class="radio_top">
-                                                <input type="radio" id="ShowUnder" name="Show" onclick="LoadData();GetFilter()" style="float:right;margin-left:4px;width:13px;height:13px;">
+                                                <input type="radio" id="ShowUnder" name="Show" onclick="LoadData();GetFilter();clearInput()" style="float:right;margin-left:4px;width:13px;height:13px;">
                                                 <label for="javascript" style="float: left; font-size: 0.75rem">لم يسجل</label>
                                             </div>
                                             <div class="radio_top">
-                                                <input type="radio" id="ShowActive" name="Show" onclick="LoadData();GetFilter()" style="float:right;margin-left:4px;width:13px;height:13px;">
+                                                <input type="radio" id="ShowActive" name="Show" onclick="LoadData();GetFilter();clearInput()" style="float:right;margin-left:4px;width:13px;height:13px;">
                                                 <label for="css" style="float: left; font-size: 0.75rem">نشط</label>
                                             </div>
                                             <div class="radio_top">
-                                                <input type="radio" id="ShowAll" name="Show" onclick="LoadData();GetFilter()" style="float:right;margin-left:4px;width:13px;height:13px;">
+                                                <input type="radio" id="ShowAll" name="Show" onclick="LoadData();GetFilter();clearInput()" style="float:right;margin-left:4px;width:13px;height:13px;">
                                                 <label for="html" style="float: left; font-size: 0.75rem">الكل</label>
                                             </div>
                                         </div>
@@ -256,5 +256,10 @@
             $('#status').css('display', 'block');
         }
 
+    </script>
+    <script>
+        function clearInput() {
+            document.getElementById("inputtext").value = "";
+        }
     </script>
 </div>

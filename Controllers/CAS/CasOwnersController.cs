@@ -80,7 +80,7 @@ namespace RentCar.Controllers
             {
                 RedirectToAction("Login", "Account");
             }
-
+            var owners = db.CR_Cas_Sup_Owners.Where(c=>c.CR_Cas_Sup_Owners_Lessor_Code==LessorCode).Count();
             IQueryable<CR_Cas_Sup_Owners> cR_Cas_Sup_Owners = null;
             if (type == "All")
             {
@@ -126,7 +126,13 @@ namespace RentCar.Controllers
         }
 
 
+        public JsonResult CheckOwners()
+        {
+           string LessorCode = Session["LessorCode"].ToString();
 
+            var owners = db.CR_Cas_Sup_Owners.Where(c => c.CR_Cas_Sup_Owners_Lessor_Code == LessorCode).Count();
+            return Json(owners, JsonRequestBehavior.AllowGet);
+        }
                 // GET: CasOwners/Details/5
                 public ActionResult Details(string id)
         {

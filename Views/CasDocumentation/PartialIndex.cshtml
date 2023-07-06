@@ -49,7 +49,7 @@
             <th></th>*@
                     </tr>
                     </thead>
-                    <tbody id="tbl">
+                    <tbody id="tbl" style="height:450px">
                         @foreach (var item in Model)
                         {
                             if (item.CR_Cas_Sup_Branch_Documentation_Status == "N" || item.CR_Cas_Sup_Branch_Documentation_Status == "E" || item.CR_Cas_Sup_Branch_Documentation_Status == "X")
@@ -150,8 +150,8 @@
                                         {
                                             <a href="~/CasDocumentation/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Lessor_Code)
                                         &id2=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Branch_Code)
-                                        &id3=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Code)"style="color:red">
-                                                <label style="color:red">لم يسجل</label>
+                                        &id3=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Code)"style="color: red; font-weight: 100 !important">
+                                                <label style="color: red; font-weight: 100 !important">لم يسجل</label>
                                             </a>
 
                                         }
@@ -159,8 +159,8 @@
                                         {
                                             <a href="~/CasDocumentation/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Lessor_Code)
                                         &id2=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Branch_Code)
-                                        &id3=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Code)"style="color:red">
-                                                <label style="color:red">محذوف</label>
+                                        &id3=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Code)"style="color: red; font-weight: 100 !important">
+                                                <label style="color: red; font-weight: 100 !important">محذوف</label>
                                             </a>
 
                                         }
@@ -168,8 +168,8 @@
                                         {
                                             <a href="~/CasDocumentation/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Lessor_Code)
                                         &id2=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Branch_Code)
-                                        &id3=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Code)"style="color:red">
-                                                <label style="color:red">نشط</label>
+                                        &id3=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Code)"style="color: forestgreen; font-weight: 100 !important">
+                                                <label style="color:green">نشط</label>
                                             </a>
 
                                         }
@@ -177,8 +177,8 @@
                                         {
                                             <a href="~/CasDocumentation/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Lessor_Code)
                                         &id2=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Branch_Code)
-                                        &id3=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Code)"style="color:red">
-                                                <label style="color:red">منتهي</label>
+                                        &id3=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Code)"style="color:red ;font-weight:100!important">
+                                                <label style="color: red; font-weight: 100 !important">منتهي</label>
                                             </a>
 
                                         }
@@ -186,8 +186,8 @@
                                         {
                                             <a href="~/CasDocumentation/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Lessor_Code)
                                         &id2=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Branch_Code)
-                                        &id3=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Code)"style="color:red">
-                                                <label style="color:red">على وشك الإنتهاء</label>
+                                        &id3=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Code)"style="color: red; font-weight: 100 !important">
+                                                <label style="color: red; font-weight: 100 !important">على وشك الإنتهاء</label>
                                             </a>
 
                                         }
@@ -285,7 +285,7 @@
                                             <a href="~/CasDocumentation/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Lessor_Code)
                                         &id2=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Branch_Code)
                                         &id3=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Code)">
-                                                <label style="color:darkcyan">لم يسجل</label>
+                                                <label style="color: red; font-weight: 100 !important">لم يسجل</label>
                                             </a>
 
                                         }
@@ -294,7 +294,7 @@
                                             <a href="~/CasDocumentation/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Lessor_Code)
                                         &id2=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Branch_Code)
                                         &id3=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Code)">
-                                                <label style="color:red">محذوف</label>
+                                                <label style="color: red; font-weight: 100 !important">محذوف</label>
                                             </a>
 
                                         }
@@ -312,7 +312,7 @@
                                             <a href="~/CasDocumentation/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Lessor_Code)
                                         &id2=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Branch_Code)
                                         &id3=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Code)">
-                                                <label style="color:crimson">منتهي</label>
+                                                <label style="color: red; font-weight: 100 !important">منتهي</label>
                                             </a>
 
                                         }
@@ -321,7 +321,7 @@
                                             <a href="~/CasDocumentation/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Lessor_Code)
                                         &id2=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Branch_Code)
                                         &id3=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Documentation_Code)">
-                                                <label style="color:darkorange">على وشك الإنتهاء</label>
+                                                <label style="color: red; font-weight: 100 !important">على وشك الإنتهاء</label>
                                             </a>
 
                                         }

@@ -51,27 +51,27 @@
                                         <div class="col-md-5" >
                                             <div class="">
                                                 <div class="radio_top">
-                                                    <input type="radio" id="ShowExpired" name="Show" onclick="GetFilter()" style="float:right;margin-left:4px;width:13px;height:13px;">
+                                                    <input type="radio" id="ShowExpired" name="Show" onclick="GetFilter();clearInput()" style="float:right;margin-left:4px;width:13px;height:13px;">
                                                     <label for="javascript" style="float: left; font-size: 0.75rem">منتهي</label>
                                                 </div>
                                                 <div class="radio_top">
-                                                    <input type="radio" id="ShowAboutExpire" name="Show" onclick="GetFilter()" style="float:right;margin-left:4px;width:13px;height:13px;">
+                                                    <input type="radio" id="ShowAboutExpire" name="Show" onclick="GetFilter();clearInput()" style="float:right;margin-left:4px;width:13px;height:13px;">
                                                     <label for="javascript" style="float: left; font-size: 0.75rem">على وشك الإنتهاء</label>
                                                 </div>
                                                 <div class="radio_top">
-                                                    <input type="radio" id="ShowUnder" name="Show" onclick="GetFilter()" style="float:right;margin-left:4px;width:13px;height:13px;">
+                                                    <input type="radio" id="ShowUnder" name="Show" onclick="GetFilter();clearInput()" style="float:right;margin-left:4px;width:13px;height:13px;">
                                                     <label for="javascript" style="float: left; font-size: 0.75rem">لم يسجل</label>
                                                 </div>
                                                 <div class="radio_top" hidden>
-                                                    <input type="radio" id="ShowDeleted" name="Show" onclick="GetFilter()" style="float:right;margin-left:4px;width:13px;height:13px;">
+                                                    <input type="radio" id="ShowDeleted" name="Show" onclick="GetFilter();clearInput()" style="float:right;margin-left:4px;width:13px;height:13px;">
                                                     <label for="javascript" style="float: left; font-size: 0.75rem">محذوف</label>
                                                 </div>
                                                 <div class="radio_top">
-                                                    <input type="radio" id="ShowActive" name="Show" onclick="GetFilter()" style="float:right;margin-left:4px;width:13px;height:13px;">
+                                                    <input type="radio" id="ShowActive" name="Show" onclick="GetFilter();clearInput()" style="float:right;margin-left:4px;width:13px;height:13px;">
                                                     <label for="css" style="float: left; font-size: 0.75rem">نشط</label>
                                                 </div>
                                                 <div class="radio_top">
-                                                    <input type="radio" id="ShowAll" name="Show" onclick="GetFilter()" style="float:right;margin-left:4px;width:13px;height:13px;">
+                                                    <input type="radio" id="ShowAll" name="Show" onclick="GetFilter();clearInput()" style="float:right;margin-left:4px;width:13px;height:13px;">
                                                     <label for="html" style="float: left; font-size: 0.75rem">الكل</label>
                                                 </div>
                                             </div>
@@ -197,4 +197,9 @@
                 });
             }
         }
+</script>
+<script>
+    function clearInput() {
+        document.getElementById("inputtext").value = "";
+    }
 </script>

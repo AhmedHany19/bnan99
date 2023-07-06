@@ -88,10 +88,28 @@ namespace RentCar.Controllers.CAS
             {
                 RedirectToAction("Login", "Account");
             }
+            var sd = DateTime.Now.AddDays(-30);
+            var ed = DateTime.Now;
+            ViewBag.Sdate = string.Format("{0:yyyy-MM-dd}", sd);
+            ViewBag.Edate = string.Format("{0:yyyy-MM-dd}", ed);
             var renter = db.CR_Cas_Renter_Lessor.FirstOrDefault(r=>r.CR_Cas_Renter_Lessor_Id==id && r.CR_Cas_Renter_Lessor_Code==LessorCode);
             if (renter != null)
             {
                 ViewBag.RenterName = renter.CR_Mas_Renter_Information.CR_Mas_Renter_Information_Ar_Name;
+                ViewBag.RenterId = renter.CR_Mas_Renter_Information.CR_Mas_Renter_Information_Id;
+                ViewBag.Work = renter.CR_Mas_Renter_Information.CR_Mas_Sup_Jobs.CR_Mas_Sup_Jobs_Ar_Name;
+                ViewBag.Balance = renter.CR_Cas_Renter_Lessor_Balance;
+                var rpt = db.CR_Cas_Account_Receipt.Where(rp => rp.CR_Cas_Account_Receipt_Lessor_Code == LessorCode && rp.CR_Cas_Account_Receipt_Renter_Code==renter.CR_Cas_Renter_Lessor_Id);
+                if (rpt != null)
+                {
+                    var convertReceiptPaymentToFloat = (float)rpt.Select(m => m.CR_Cas_Account_Receipt_Payment).Sum();
+                    var Receipt_Payment = convertReceiptPaymentToFloat.ToString("N0");
+                    ViewBag.RenterCreit = Receipt_Payment;
+
+                    var convertReceiptReceiptToFloat = (float)rpt.Select(m => m.CR_Cas_Account_Receipt_Receipt).Sum();
+                    var Receipt_Receipt = convertReceiptReceiptToFloat.ToString("N0");
+                    ViewBag.RenterDebit = Receipt_Receipt;
+                }
             }
            
             var ReceiptList = db.CR_Cas_Account_Receipt.Where(r=>r.CR_Cas_Account_Receipt_Renter_Code==id && r.CR_Cas_Account_Receipt_Lessor_Code==LessorCode);
@@ -151,7 +169,135 @@ namespace RentCar.Controllers.CAS
 
 
 
+        public JsonResult GetReceiptSum(string type, string StartDate, string EndDate,string id)
+        {
+            DateTime sd;
+            DateTime sd1 = DateTime.Now;
+            DateTime ed;
+            var UserCreit = 0;
+            var UserDebit = 0;
+            if (StartDate != null && EndDate != null)
+            {
+                sd = Convert.ToDateTime(StartDate);
+                sd = sd.Date;
+                ed = Convert.ToDateTime(EndDate);
+                ed = ed.Date;
+            }
+            else
+            {
+
+                sd1 = sd1.AddDays(-30);
+                sd = sd1.Date;
+                ed = DateTime.Now.Date;
+            }
+
+            var LessorCode = "";
+            var UserLogin = "";
+            var BranchCode = "";
+            try
+            {
+                if (Session["LessorCode"] == null || Session["UserLogin"] == null || Session["BranchCode"] == null)
+                {
+                    RedirectToAction("Login", "Account");
+                }
+                LessorCode = Session["LessorCode"].ToString();
+                BranchCode = Session["BranchCode"].ToString();
+                UserLogin = System.Web.HttpContext.Current.Session["UserLogin"].ToString();
+            }
+            catch
+            {
+                RedirectToAction("Login", "Account");
+            }
+            var renter = db.CR_Cas_Renter_Lessor.FirstOrDefault(r => r.CR_Cas_Renter_Lessor_Id == id && r.CR_Cas_Renter_Lessor_Code == LessorCode);
+
+            IQueryable<CR_Cas_Account_Receipt> Receipt = null;
+            
+             if (type == "Date")
+            {
+                Receipt = db.CR_Cas_Account_Receipt.Where(r => r.CR_Cas_Account_Receipt_Lessor_Code == LessorCode && r.CR_Cas_Account_Receipt_Renter_Code == renter.CR_Cas_Renter_Lessor_Id &&
+                r.CR_Cas_Account_Receipt_Date >= sd && r.CR_Cas_Account_Receipt_Date <= ed);
+                if (Receipt != null && Receipt.Count() > 0)
+                {
+                    UserCreit = (int)Receipt.Select(m => m.CR_Cas_Account_Receipt_Payment).Sum();
+                    UserDebit = (int)Receipt.Select(m => m.CR_Cas_Account_Receipt_Receipt).Sum();
+                }
+            }
+            else
+            {
+                Receipt = db.CR_Cas_Account_Receipt.Where(r => r.CR_Cas_Account_Receipt_Lessor_Code == LessorCode && r.CR_Cas_Account_Receipt_Renter_Code == renter.CR_Cas_Renter_Lessor_Id &&
+                r.CR_Cas_Account_Receipt_Date >= sd && r.CR_Cas_Account_Receipt_Date <= ed);
+                if (Receipt != null && Receipt.Count() > 0)
+                {
+                    UserCreit = (int)Receipt.Select(m => m.CR_Cas_Account_Receipt_Payment).Sum();
+                    UserDebit = (int)Receipt.Select(m => m.CR_Cas_Account_Receipt_Receipt).Sum();
+                }
+            }
+            return Json(UserCreit + "/" + UserDebit, JsonRequestBehavior.AllowGet);
+        }
         // GET: RenterReceiptList/Details/5
+
+
+        public PartialViewResult Table(string type, string StartDate, string EndDate, string id)
+        {
+            DateTime sd;
+            DateTime sd1 = DateTime.Now;
+            DateTime ed;
+            if (StartDate != null && EndDate != null)
+            {
+                sd = Convert.ToDateTime(StartDate);
+                sd = sd.Date;
+                ed = Convert.ToDateTime(EndDate);
+                ed = ed.Date;
+            }
+            else
+            {
+
+                sd1 = sd1.AddDays(-30);
+                sd = sd1.Date;
+                ed = DateTime.Now;
+            }
+
+            var LessorCode = "";
+            var UserLogin = "";
+            var BranchCode = "";
+            try
+            {
+                if (Session["LessorCode"] == null || Session["UserLogin"] == null || Session["BranchCode"] == null)
+                {
+                    RedirectToAction("Login", "Account");
+                }
+                LessorCode = Session["LessorCode"].ToString();
+                BranchCode = Session["BranchCode"].ToString();
+                UserLogin = System.Web.HttpContext.Current.Session["UserLogin"].ToString();
+
+            }
+            catch
+            {
+                RedirectToAction("Login", "Account");
+            }
+            var renter = db.CR_Cas_Renter_Lessor.FirstOrDefault(r => r.CR_Cas_Renter_Lessor_Id == id && r.CR_Cas_Renter_Lessor_Code == LessorCode);
+
+            IQueryable<CR_Cas_Account_Receipt> Receipt = null;
+
+            if (type == "Date")
+            {
+                Receipt = db.CR_Cas_Account_Receipt.Where(r => r.CR_Cas_Account_Receipt_Lessor_Code == LessorCode && r.CR_Cas_Account_Receipt_Renter_Code == renter.CR_Cas_Renter_Lessor_Id &&
+                r.CR_Cas_Account_Receipt_Date >= sd && r.CR_Cas_Account_Receipt_Date <= ed);
+               
+            }
+            else
+            {
+                Receipt = db.CR_Cas_Account_Receipt.Where(r => r.CR_Cas_Account_Receipt_Lessor_Code == LessorCode && r.CR_Cas_Account_Receipt_Renter_Code == renter.CR_Cas_Renter_Lessor_Id &&
+                r.CR_Cas_Account_Receipt_Date >= sd && r.CR_Cas_Account_Receipt_Date <= ed);
+               
+            }
+
+
+
+
+
+            return PartialView(Receipt.OrderBy(x => x.CR_Cas_Account_Receipt_Date));
+        }
         public ActionResult Details(string id)
         {
             if (id == null)

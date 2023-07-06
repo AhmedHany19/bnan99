@@ -4,14 +4,14 @@
 <table id="myTable" class="table table-striped mb-0" style="cursor:pointer">
     <thead>
     <tr>
-        <th onclick="sortTable(0)" width="11%">
+        <th onclick="sortTable(0)" class="text-left" width="11%">
             الفرع
         </th>
-        <th onclick="sortTable(2)" width="23%">
+        <th onclick="sortTable(2)" class="text-left" width="23%">
             المدينة
         </th>
 
-        <th onclick="sortTable(3)" width="21%">
+        <th onclick="sortTable(3)" class="text-left" width="21%">
             المدير
         </th>
         <th onclick="sortTable(4)" width="14%">
@@ -30,19 +30,19 @@
 
     </tr>
     </thead>
-    <tbody id="tbl">
+    <tbody id="tbl" style="height:450px">
         @foreach (var item in Model)
         {
             if (item.CR_Cas_Sup_Branch_Status == "D" || item.CR_Cas_Sup_Branch_Status == "H")
             {
                 <tr>
-                    <td width="11%">
+                    <td width="11%" class="text-left">
                         <a href="~/CasBranch/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Code)&id2=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Lessor_Code)&id3=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Government_No)"  style="color:red">
                             @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Ar_Short_Name)
                         </a>
                     </td>
 
-                    <td width="23%">
+                    <td width="23%" class="text-left">
                         <a href="~/CasBranch/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Code)&id2=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Lessor_Code)&id3=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Government_No)"  style="color:red">
                             @Html.DisplayFor(modelItem => item.Region)
                             /
@@ -51,7 +51,7 @@
                     </td>
 
 
-                    <td width="21%">
+                    <td width="21%" class="text-left">
                         <a href="~/CasBranch/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Code)&id2=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Lessor_Code)&id3=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Government_No)"  style="color:red">
                             @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Signature_Ar_Director_Name)
                         </a>
@@ -96,13 +96,13 @@
             else
             {
                 <tr>
-                    <td width="11%">
+                    <td width="11%" class="text-left">
                         <a href="~/CasBranch/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Code)&id2=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Lessor_Code)&id3=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Government_No)">
                             @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Ar_Short_Name)
                         </a>
                     </td>
 
-                    <td width="23%">
+                    <td width="23%" class="text-left">
                         <a href="~/CasBranch/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Code)&id2=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Lessor_Code)&id3=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Government_No)">
                             @Html.DisplayFor(modelItem => item.Region)
                             /
@@ -111,7 +111,7 @@
                     </td>
 
 
-                    <td width="21%">
+                    <td width="21%" class="text-left">
                         <a href="~/CasBranch/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Code)&id2=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Lessor_Code)&id3=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Government_No)">
                             @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch_Signature_Ar_Director_Name)
                         </a>

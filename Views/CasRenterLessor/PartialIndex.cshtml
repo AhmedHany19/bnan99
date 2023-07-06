@@ -4,10 +4,13 @@
     <thead>
 
         <tr>
+            <th width="5%">
+                م
+            </th>
             <th width="10%">
                 الهوية
             </th>
-            <th width="33%">
+            <th width="33%" class="text-left">
                 الإسم
             </th>
 
@@ -37,13 +40,21 @@
 
         </tr>
     </thead>
-    <tbody id="tbl">
+    <tbody id="tbl" style="height: 450px;">
 
-        @foreach (var item in Model)
-        {
-            if (item.CR_Cas_Renter_Lessor_Status == "K")
+        @{ int c = 0;
+            foreach (var item in Model)
             {
+                c += 1;
+                if (item.CR_Cas_Renter_Lessor_Status == "K")
+                {
                 <tr style="color:red;">
+                            <td width="5%" align="center">
+                                <a href="~/CasRenterLessor/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Id)
+                                                                           &id2=@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Code)" style="color:red;">
+                                    @c
+                                </a>
+                            </td>
                     <td width="10%" align="center">
                         <a href="~/CasRenterLessor/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Id)
                                                                            &id2=@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Code)" style="color:red;">
@@ -86,14 +97,29 @@
                     <td width="8%" style="text-align:center!important;vertical-align:middle">
                         <a href="~/CasRenterLessor/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Id)
                                                                            &id2=@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Code)" style="color:red;">
-                            @Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Interaction_Amount_Value)
+                            @*@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Interaction_Amount_Value)*@
+                            @{
+                                float floatConvert3;
+                                if (item.CR_Cas_Renter_Lessor_Interaction_Amount_Value != null)
+                                {
+                                    floatConvert3 = (float)item.CR_Cas_Renter_Lessor_Interaction_Amount_Value;
+
+                                }
+                                else
+                                {
+                                    floatConvert3 = 0;
+                                }
+                                var Amount_Value = floatConvert3.ToString("N2");
+                            }
+                            @Amount_Value
                         </a>
                     </td>
 
 
                     <td width="8%" style="text-align:center!important;vertical-align:middle">
                         <a href="~/CasRenterLessor/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Id)
-                                                                           &id2=@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Code)"style="color:red;">
+                                                                           &id2=@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Code)" style="color:red;">
+                            
                             @Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Contract_Number)
                         </a>
 
@@ -101,7 +127,7 @@
 
                     <td width="8%" style="text-align:center!important;vertical-align:middle">
                         <a href="~/CasRenterLessor/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Id)
-                                                                           &id2=@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Code)"style="color:red;">
+                                                                           &id2=@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Code)" style="color:red;">
                             @Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Contract_Number)
                         </a>
 
@@ -113,32 +139,32 @@
                         @if (item.CR_Cas_Renter_Lessor_Status == "D")
                         {
                             <a href="~/CasRenterLessor/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Id)
-                                                                           &id2=@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Code)"style="color:red;">
-                                <label>محذوف</label>
+                                                                           &id2=@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Code)" style="color:red;">
+                                <label style="font-weight:100 !important">محذوف</label>
                             </a>
 
                         }
                         else if (item.CR_Cas_Renter_Lessor_Status == "A")
                         {
                             <a href="~/CasRenterLessor/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Id)
-                                                                           &id2=@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Code)"style="color:red;">
-                                <label>نشط</label>
+                                                                           &id2=@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Code)" style="color:red;">
+                                <label style="font-weight:100 !important">نشط</label>
                             </a>
 
                         }
                         else if (item.CR_Cas_Renter_Lessor_Status == "K")
                         {
                             <a href="~/CasRenterLessor/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Id)
-                                                                           &id2=@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Code)"style="color:red;">
-                                <label>محضور</label>
+                                                                           &id2=@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Code)" style="color:red;font-weight:100 !important">
+                                <label style="color:red;font-weight:100 !important">محضور</label>
                             </a>
 
                         }
                         else if (item.CR_Cas_Renter_Lessor_Status == "R")
                         {
                             <a href="~/CasRenterLessor/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Id)
-                                                                           &id2=@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Code)"style="color:red;">
-                                <label>مستأجر</label>
+                                                                           &id2=@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Code)" style="color:red;">
+                                <label style="font-weight:100 !important">مستأجر</label>
                             </a>
 
                         }
@@ -146,115 +172,136 @@
                     </td>
 
                 </tr>
-            }
-            else
+                }
+                else
+                {
+    <tr>
+        <td width="5%" align="center">
+            <a href="~/CasRenterLessor/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Id)
+                                                                           &id2=@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Code)">
+                @c
+            </a>
+        </td>
+        <td width="10%" align="center">
+            <a href="~/CasRenterLessor/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Id)
+                                                                           &id2=@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Code)">
+                @Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Id)
+            </a>
+        </td>
+        <td width="33%">
+            <a href="~/CasRenterLessor/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Id)
+                                                                           &id2=@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Code)">
+                @Html.DisplayFor(modelItem => item.CR_Mas_Renter_Information.CR_Mas_Renter_Information_Ar_Name)
+            </a>
+        </td>
+        <td width="9%" style="text-align:center!important;vertical-align:middle">
+            <a href="~/CasRenterLessor/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Id)
+                                                                           &id2=@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Code)">
+                @item.CR_Cas_Renter_Lessor_Date_First_Interaction.Value.ToString("yyyy/MM/dd")
+            </a>
+        </td>
+        <td width="9%" style="text-align:center!important;vertical-align:middle">
+            <a href="~/CasRenterLessor/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Id)
+                                                                           &id2=@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Code)">
+                @if (item.CR_Cas_Renter_Lessor_Date_Last_Interaction != null)
+                {
+                    @item.CR_Cas_Renter_Lessor_Date_Last_Interaction.Value.ToString("yyyy/MM/dd")
+                }
+                else
+                {
+                    @item.CR_Cas_Renter_Lessor_Date_Last_Interaction
+                }
+
+            </a>
+        </td>
+        <td width="8%" style="text-align:center!important;vertical-align:middle">
+            <a href="~/CasRenterLessor/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Id)
+                                                                           &id2=@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Code)">
+                @Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Balance)
+            </a>
+        </td>
+
+        <td width="8%" style="text-align:center!important;vertical-align:middle">
+            <a href="~/CasRenterLessor/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Id)
+                                                                           &id2=@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Code)">
+                @*@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Interaction_Amount_Value)*@
+                @{
+                    float floatConvert3;
+                    if (item.CR_Cas_Renter_Lessor_Interaction_Amount_Value != null)
+                    {
+                        floatConvert3 = (float)item.CR_Cas_Renter_Lessor_Interaction_Amount_Value;
+
+                    }
+                    else
+                    {
+                        floatConvert3 = 0;
+                    }
+                    var Amount_Value = floatConvert3.ToString("N2");
+                }
+                @Amount_Value
+            </a>
+        </td>
+
+
+        <td width="8%" style="text-align:center!important;vertical-align:middle">
+            <a href="~/CasRenterLessor/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Id)
+                                                                           &id2=@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Code)">
+                @item.CR_Cas_Renter_Lessor_Contract_Number
+            </a>
+
+        </td>
+
+        <td width="8%" style="text-align:center!important;vertical-align:middle">
+            <a href="~/CasRenterLessor/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Id)
+                                                                           &id2=@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Code)">
+                @Html.DisplayFor(modelItem => item.CR_Cas_Renter_Rating)
+            </a>
+
+        </td>
+
+
+        <td style="text-align:center!important;vertical-align:middle" width="7%">
+
+            @if (item.CR_Cas_Renter_Lessor_Status == "D")
             {
-                <tr>
-                    <td width="10%" align="center">
-                        <a href="~/CasRenterLessor/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Id)
+                <a href="~/CasRenterLessor/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Id)
                                                                            &id2=@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Code)">
-                            @Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Id)
-                        </a>
-                    </td>
-                    <td width="33%">
-                        <a href="~/CasRenterLessor/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Id)
+                    <label style="font-weight:100 !important">محذوف</label>
+                </a>
+
+            }
+            else if (item.CR_Cas_Renter_Lessor_Status == "A")
+            {
+                <a href="~/CasRenterLessor/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Id)
                                                                            &id2=@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Code)">
-                            @Html.DisplayFor(modelItem => item.CR_Mas_Renter_Information.CR_Mas_Renter_Information_Ar_Name)
-                        </a>
-                    </td>
-                    <td width="9%" style="text-align:center!important;vertical-align:middle">
-                        <a href="~/CasRenterLessor/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Id)
+                    <label style="font-weight:100 !important">نشط</label>
+                </a>
+
+            }
+            else if (item.CR_Cas_Renter_Lessor_Status == "K")
+            {
+                <a href="~/CasRenterLessor/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Id)
                                                                            &id2=@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Code)">
-                            @item.CR_Cas_Renter_Lessor_Date_First_Interaction.Value.ToString("yyyy/MM/dd")
-                        </a>
-                    </td>
-                    <td width="9%" style="text-align:center!important;vertical-align:middle">
-                        <a href="~/CasRenterLessor/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Id)
+                    <label style="font-weight:100 !important">محضور</label>
+                </a>
+
+            }
+            else if (item.CR_Cas_Renter_Lessor_Status == "R")
+            {
+                <a href="~/CasRenterLessor/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Id)
                                                                            &id2=@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Code)">
-                            @if (item.CR_Cas_Renter_Lessor_Date_Last_Interaction != null)
-                            {
-                                @item.CR_Cas_Renter_Lessor_Date_Last_Interaction.Value.ToString("yyyy/MM/dd")
-                            }
-                            else
-                            {
-                                @item.CR_Cas_Renter_Lessor_Date_Last_Interaction
-                            }
+                    <label style="font-weight:100 !important">مستأجر</label>
+                </a>
 
-                        </a>
-                    </td>
-                    <td width="8%" style="text-align:center!important;vertical-align:middle">
-                        <a href="~/CasRenterLessor/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Id)
-                                                                           &id2=@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Code)">
-                            @Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Balance)
-                        </a>
-                    </td>
-
-                    <td width="8%" style="text-align:center!important;vertical-align:middle">
-                        <a href="~/CasRenterLessor/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Id)
-                                                                           &id2=@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Code)">
-                            @Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Interaction_Amount_Value)
-                        </a>
-                    </td>
-
-
-                    <td width="8%" style="text-align:center!important;vertical-align:middle">
-                        <a href="~/CasRenterLessor/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Id)
-                                                                           &id2=@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Code)">
-                            @item.CR_Mas_Renter_Information.CR_Cas_Contract_Basic.Where(l => l.CR_Cas_Contract_Basic_Status != "y" && l.CR_Cas_Contract_Basic_Status != "U").Count()
-                        </a>
-
-                    </td>
-
-                    <td width="8%" style="text-align:center!important;vertical-align:middle">
-                        <a href="~/CasRenterLessor/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Id)
-                                                                           &id2=@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Code)">
-                            @Html.DisplayFor(modelItem => item.CR_Cas_Renter_Rating)
-                        </a>
-
-                    </td>
-
-
-                    <td style="text-align:center!important;vertical-align:middle" width="7%">
-
-                        @if (item.CR_Cas_Renter_Lessor_Status == "D")
-                        {
-                            <a href="~/CasRenterLessor/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Id)
-                                                                           &id2=@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Code)">
-                                <label>محذوف</label>
-                            </a>
-
-                        }
-                        else if (item.CR_Cas_Renter_Lessor_Status == "A")
-                        {
-                            <a href="~/CasRenterLessor/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Id)
-                                                                           &id2=@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Code)">
-                                <label>نشط</label>
-                            </a>
-
-                        }
-                        else if (item.CR_Cas_Renter_Lessor_Status == "K")
-                        {
-                            <a href="~/CasRenterLessor/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Id)
-                                                                           &id2=@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Code)">
-                                <label>محضور</label>
-                            </a>
-
-                        }
-                        else if (item.CR_Cas_Renter_Lessor_Status == "R")
-                        {
-                            <a href="~/CasRenterLessor/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Id)
-                                                                           &id2=@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Code)">
-                                <label>مستأجر</label>
-                            </a>
-
-                        }
-
-                    </td>
-
-                </tr>
             }
 
-        }
-    </tbody>
+        </td>
+
+    </tr>
+                    }
+
+                }
+            }
+        </tbody>
 </table>
 

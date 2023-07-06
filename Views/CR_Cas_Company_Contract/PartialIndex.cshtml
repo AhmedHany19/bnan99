@@ -8,7 +8,7 @@
                     <thead>
                         <tr>
 
-                            <th style="width:27%">
+                            <th style="width:27%" class="text-left">
                                 المستند
                             </th>
                             <th style="width:27%">
@@ -34,221 +34,448 @@
 
                             if (item.CR_Cas_Company_Contract_Code == "17")
                             {
-                                <tr>
-                                    <td hidden>
-                                        <a href="~/CR_Cas_Company_Contract/Create/?LessorCode=@Html.DisplayFor(modelItem => item.CR_Cas_Company_Contract_Lessor)
+                                if (item.CR_Cas_Company_Contract_Status != "A")
+                                {
+                                    <tr >
+                                        <td hidden>
+                                            <a href="~/CR_Cas_Company_Contract/Create/?LessorCode=@Html.DisplayFor(modelItem => item.CR_Cas_Company_Contract_Lessor)
                                                                                         &ProcCode=@Html.DisplayFor(modelItem => item.CR_Cas_Company_Contract_Code)&Cno=@Html.DisplayFor(modelItem => item.CR_Cas_Company_Contract_No)">
-                                            @Html.DisplayFor(modelItem => item.CR_Cas_Company_Contract_No)
-                                        </a>
-                                    </td>
-                                    <td  style="vertical-align:middle;width:27%">
-                                        <a href="~/CR_Cas_Company_Contract/Create/?LessorCode=@Html.DisplayFor(modelItem => item.CR_Cas_Company_Contract_Lessor)
+                                                @Html.DisplayFor(modelItem => item.CR_Cas_Company_Contract_No)
+                                            </a>
+                                        </td>
+                                        <td style="vertical-align: middle; width: 27%; color: red!important; float: inherit; font-weight: 100 !important;">
+                                            <a style="color: red !important; float: inherit; font-weight: 100 !important;" href="~/CR_Cas_Company_Contract/Create/?LessorCode=@Html.DisplayFor(modelItem => item.CR_Cas_Company_Contract_Lessor)
                                                                                         &ProcCode=@Html.DisplayFor(modelItem => item.CR_Cas_Company_Contract_Code)&Cno=@Html.DisplayFor(modelItem => item.CR_Cas_Company_Contract_No)">
-                                            @Html.DisplayFor(modelItem => item.CR_Mas_Sup_Procedures.CR_Mas_Sup_Procedures_Ar_Name)
-                                        </a>
-                                    </td>
+                                                @Html.DisplayFor(modelItem => item.CR_Mas_Sup_Procedures.CR_Mas_Sup_Procedures_Ar_Name)
+                                            </a>
+                                        </td>
 
-                                    <td style="vertical-align:middle;width:27%">
+                                        <td style="vertical-align: middle; width: 27%; color: red; float: inherit; font-weight: 100 !important;" class="text-center">
 
-                                        @Html.DisplayFor(model => item.CR_Cas_Company_Contract_Number)
+                                            @Html.DisplayFor(model => item.CR_Cas_Company_Contract_Number)
 
-                                    </td>
-                                    <td style="text-align:center;vertical-align:middle;width:12%">
-                                        @if (item.CR_Cas_Company_Contract_Date != null)
-                                        {
+                                        </td>
+                                        <td style="text-align: center; vertical-align: middle; width: 12%; color: red; float: inherit; font-weight: 100 !important;">
+                                            @if (item.CR_Cas_Company_Contract_Date != null)
+                                            {
 
-                                            @item.CR_Cas_Company_Contract_Date.Value.ToString("yyyy/MM/dd")
+                                                @item.CR_Cas_Company_Contract_Date.Value.ToString("yyyy/MM/dd")
 
-                                        }
-                                    </td>
+                                            }
+                                        </td>
 
-                                    <td style="text-align:center;vertical-align:middle;width:12%">
-                                        @if (item.CR_Cas_Company_Contract_Start_Date != null)
-                                        {
+                                        <td style="text-align: center; vertical-align: middle; width: 12%; color: red; float: inherit; font-weight: 100 !important; ">
+                                            @if (item.CR_Cas_Company_Contract_Start_Date != null)
+                                            {
 
-                                            @item.CR_Cas_Company_Contract_Start_Date.Value.ToString("yyyy/MM/dd")
+                                                @item.CR_Cas_Company_Contract_Start_Date.Value.ToString("yyyy/MM/dd")
 
-                                        }
-                                    </td>
-                                    <td style="text-align:center;vertical-align:middle;width:12%">
-                                        @if (item.CR_Cas_Company_Contract_End_Date != null)
-                                        {
+                                            }
+                                        </td>
+                                        <td style="text-align: center; vertical-align: middle; width: 12%; color: red; float: inherit; font-weight: 100 !important;">
+                                            @if (item.CR_Cas_Company_Contract_End_Date != null)
+                                            {
 
-                                            @item.CR_Cas_Company_Contract_End_Date.Value.ToString("yyyy/MM/dd")
+                                                @item.CR_Cas_Company_Contract_End_Date.Value.ToString("yyyy/MM/dd")
 
-                                        }
-                                    </td>
+                                            }
+                                        </td>
 
-                                    <td style="text-align:center;vertical-align:middle;width:10%">
+                                        <td style="text-align: center; vertical-align: middle; width: 10%; color: red; float: inherit; font-weight: 100 !important;">
 
-                                        @if (item.CR_Cas_Company_Contract_Status == "N")
-                                        {
-                                            <label style="color: darkcyan; float: inherit;">لم يسجل</label>
-                                        }
+                                            @if (item.CR_Cas_Company_Contract_Status == "N")
+                                            {
+                                                <label style="color: darkcyan; float: inherit; font-weight: 100 !important;">لم يسجل</label>
+                                            }
 
-                                        @if (item.CR_Cas_Company_Contract_Status == "D")
-                                        {
-                                            <label style="color: red; float: inherit;">محذوف</label>
-                                        }
-                                        @if (item.CR_Cas_Company_Contract_Status == "A")
-                                        {
-                                            <label style="color: green; float: inherit; ">نشط</label>
-                                        }
-                                        @if (item.CR_Cas_Company_Contract_Status == "E")
-                                        {
-                                            <label style="color: crimson; float: inherit;">منتهي</label>
-                                        }
-                                        @if (item.CR_Cas_Company_Contract_Status == "X")
-                                        {
-                                            <label style="color: darkorange; float: inherit;">على وشك الإنتهاء</label>
-                                        }
+                                            @if (item.CR_Cas_Company_Contract_Status == "D")
+                                            {
+                                                <label style="color: red; float: inherit; font-weight: 100 !important;">محذوف</label>
+                                            }
+                                            @if (item.CR_Cas_Company_Contract_Status == "A")
+                                            {
+                                                <label style="color: green; float: inherit; font-weight: 100 !important;">نشط</label>
+                                            }
+                                            @if (item.CR_Cas_Company_Contract_Status == "E")
+                                            {
+                                                <label style="color: crimson; float: inherit; font-weight: 100 !important;">منتهي</label>
+                                            }
+                                            @if (item.CR_Cas_Company_Contract_Status == "X")
+                                            {
+                                                <label style="color: darkorange; float: inherit; font-weight: 100 !important;">على وشك الإنتهاء</label>
+                                            }
 
-                                    </td>
+                                        </td>
 
-                                </tr>
+                                    </tr>
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td hidden>
+                                            <a href="~/CR_Cas_Company_Contract/Create/?LessorCode=@Html.DisplayFor(modelItem => item.CR_Cas_Company_Contract_Lessor)
+                                                                                        &ProcCode=@Html.DisplayFor(modelItem => item.CR_Cas_Company_Contract_Code)&Cno=@Html.DisplayFor(modelItem => item.CR_Cas_Company_Contract_No)">
+                                                @Html.DisplayFor(modelItem => item.CR_Cas_Company_Contract_No)
+                                            </a>
+                                        </td>
+                                        <td style="vertical-align:middle;width:27%" >
+                                            <a href="~/CR_Cas_Company_Contract/Create/?LessorCode=@Html.DisplayFor(modelItem => item.CR_Cas_Company_Contract_Lessor)
+                                                                                        &ProcCode=@Html.DisplayFor(modelItem => item.CR_Cas_Company_Contract_Code)&Cno=@Html.DisplayFor(modelItem => item.CR_Cas_Company_Contract_No)">
+                                                @Html.DisplayFor(modelItem => item.CR_Mas_Sup_Procedures.CR_Mas_Sup_Procedures_Ar_Name)
+                                            </a>
+                                        </td>
+
+                                        <td style="vertical-align:middle;width:27%" class="text-center">
+
+                                            @Html.DisplayFor(model => item.CR_Cas_Company_Contract_Number)
+
+                                        </td>
+                                        <td style="text-align:center;vertical-align:middle;width:12%">
+                                            @if (item.CR_Cas_Company_Contract_Date != null)
+                                            {
+
+                                                @item.CR_Cas_Company_Contract_Date.Value.ToString("yyyy/MM/dd")
+
+                                            }
+                                        </td>
+
+                                        <td style="text-align:center;vertical-align:middle;width:12%">
+                                            @if (item.CR_Cas_Company_Contract_Start_Date != null)
+                                            {
+
+                                                @item.CR_Cas_Company_Contract_Start_Date.Value.ToString("yyyy/MM/dd")
+
+                                            }
+                                        </td>
+                                        <td style="text-align:center;vertical-align:middle;width:12%">
+                                            @if (item.CR_Cas_Company_Contract_End_Date != null)
+                                            {
+
+                                                @item.CR_Cas_Company_Contract_End_Date.Value.ToString("yyyy/MM/dd")
+
+                                            }
+                                        </td>
+
+                                        <td style="text-align:center;vertical-align:middle;width:10%">
+
+                                            @if (item.CR_Cas_Company_Contract_Status == "N")
+                                            {
+                                                <label style="color: red; float: inherit; font-weight: 100 !important;">لم يسجل</label>
+                                            }
+
+                                            @if (item.CR_Cas_Company_Contract_Status == "D")
+                                            {
+                                                <label style="color: red; float: inherit; font-weight: 100 !important;">محذوف</label>
+                                            }
+                                            @if (item.CR_Cas_Company_Contract_Status == "A")
+                                            {
+                                                <label style="color: green; float: inherit; font-weight: 100 !important;">نشط</label>
+                                            }
+                                            @if (item.CR_Cas_Company_Contract_Status == "E")
+                                            {
+                                                <label style="color: red; float: inherit; font-weight: 100 !important;">منتهي</label>
+                                            }
+                                            @if (item.CR_Cas_Company_Contract_Status == "X")
+                                            {
+                                                <label style="color: red; float: inherit; font-weight: 100 !important;">على وشك الإنتهاء</label>
+                                            }
+
+                                        </td>
+
+                                    </tr>
+                                }
                             }
                             else if (item.CR_Cas_Company_Contract_Code == "19")
                             {
-                                <tr>
-                                    <td style="vertical-align:middle;width:27%">
-                                        <a href="~/CR_Cas_Company_Contract/Create/?LessorCode=@Html.DisplayFor(modelItem => item.CR_Cas_Company_Contract_Lessor)
-                                                                                        &ProcCode=@Html.DisplayFor(modelItem => item.CR_Cas_Company_Contract_Code)&Cno=@Html.DisplayFor(modelItem => item.CR_Cas_Company_Contract_No)">
+                                if (item.CR_Cas_Company_Contract_Status != "A")
+                                {
+                                    <tr>
+                                        <td style="vertical-align: middle; width: 27%; color: red; float: inherit; font-weight: 100 !important;">
+                                            <a style="vertical-align: middle; width: 27%; color: red !important; float: inherit; font-weight: 100 !important;"
+                                               href="~/CR_Cas_Company_Contract/Create/?LessorCode=@Html.DisplayFor(modelItem => item.CR_Cas_Company_Contract_Lessor)
+                                                                                        &ProcCode=@Html.DisplayFor(modelItem => item.CR_Cas_Company_Contract_Code)&Cno=@Html.DisplayFor(modelItem => item.CR_Cas_Company_Contract_No)"></a>
+
+                                                @Html.DisplayFor(modelItem => item.CR_Mas_Sup_Procedures.CR_Mas_Sup_Procedures_Ar_Name)
+
+                                        </td>
+
+                                        <td style="vertical-align: middle; width: 27%; color: red; float: inherit; font-weight: 100 !important;" class="text-center">
+
+                                            @Html.DisplayFor(model => item.CR_Cas_Company_Contract_Number)
+
+                                        </td>
+                                        <td style="text-align: center; vertical-align: middle; width: 12%; color: red; float: inherit; font-weight: 100 !important;">
+                                            @if (item.CR_Cas_Company_Contract_Date != null)
+                                            {
+
+                                                @item.CR_Cas_Company_Contract_Date.Value.ToString("yyyy/MM/dd")
+
+                                            }
+                                        </td>
+
+                                        <td style="text-align: center; vertical-align: middle; width: 12%; color: red; float: inherit; font-weight: 100 !important;">
+                                            @if (item.CR_Cas_Company_Contract_Start_Date != null)
+                                            {
+
+                                                @item.CR_Cas_Company_Contract_Start_Date.Value.ToString("yyyy/MM/dd")
+
+                                            }
+                                        </td>
+                                        <td style="text-align: center; vertical-align: middle; width: 12%; color: red; float: inherit; font-weight: 100 !important;">
+                                            @if (item.CR_Cas_Company_Contract_End_Date != null)
+                                            {
+
+                                                @item.CR_Cas_Company_Contract_End_Date.Value.ToString("yyyy/MM/dd")
+
+                                            }
+                                        </td>
+
+                                        <td style="text-align: center; vertical-align: middle; width: 10%; color: red; float: inherit; font-weight: 100 !important;">
+
+                                            @if (item.CR_Cas_Company_Contract_Status == "N")
+                                            {
+                                                <label style=" color: red; float: inherit; font-weight: 100!important;">لم يسجل</label>}
+
+                                            @if (item.CR_Cas_Company_Contract_Status == "D")
+                                            {
+                                                <label style="color: red; float: inherit; font-weight: 100 !important;">محذوف</label>
+
+                                            }
+                                            @if (item.CR_Cas_Company_Contract_Status == "A")
+                                            {
+                                                <label style="color: green; float: inherit;">نشط</label>
+
+                                            }
+                                            @if (item.CR_Cas_Company_Contract_Status == "E")
+                                            {
+                                                <label style="color: red; float: inherit; font-weight: 100 !important;">منتهي</label>
+                                            }
+                                            @if (item.CR_Cas_Company_Contract_Status == "X")
+                                            {
+                                                <label style="color: red; float: inherit; font-weight: 100 !important;">على وشك الإنتهاء</label>
+                                            }
+
+                                        </td>
+
+
+                                    </tr>
+                                }
+                                else
+                                {
+                                    <tr>
+
+                                        <td style="vertical-align:middle;width:27%">
+
 
                                             @Html.DisplayFor(modelItem => item.CR_Mas_Sup_Procedures.CR_Mas_Sup_Procedures_Ar_Name)
 
-                                    </td>
+                                        </td>
 
-                                    <td style="vertical-align:middle;width:27%">
+                                        <td style="vertical-align:middle;width:27%">
 
-                                        @Html.DisplayFor(model => item.CR_Cas_Company_Contract_Number)
+                                            @Html.DisplayFor(model => item.CR_Cas_Company_Contract_Number)
 
-                                    </td>
-                                    <td style="text-align:center;vertical-align:middle;width:12%">
-                                        @if (item.CR_Cas_Company_Contract_Date != null)
-                                        {
+                                        </td>
+                                        <td style="text-align:center;vertical-align:middle;width:12%">
+                                            @if (item.CR_Cas_Company_Contract_Date != null)
+                                            {
 
-                                            @item.CR_Cas_Company_Contract_Date.Value.ToString("yyyy/MM/dd")
+                                                @item.CR_Cas_Company_Contract_Date.Value.ToString("yyyy/MM/dd")
 
-                                        }
-                                    </td>
+                                            }
+                                        </td>
 
-                                    <td style="text-align:center;vertical-align:middle;width:12%">
-                                        @if (item.CR_Cas_Company_Contract_Start_Date != null)
-                                        {
+                                        <td style="text-align:center;vertical-align:middle;width:12%">
+                                            @if (item.CR_Cas_Company_Contract_Start_Date != null)
+                                            {
 
-                                            @item.CR_Cas_Company_Contract_Start_Date.Value.ToString("yyyy/MM/dd")
+                                                @item.CR_Cas_Company_Contract_Start_Date.Value.ToString("yyyy/MM/dd")
 
-                                        }
-                                    </td>
-                                    <td style="text-align:center;vertical-align:middle;width:12%">
-                                        @if (item.CR_Cas_Company_Contract_End_Date != null)
-                                        {
+                                            }
+                                        </td>
+                                        <td style="text-align:center;vertical-align:middle;width:12%">
+                                            @if (item.CR_Cas_Company_Contract_End_Date != null)
+                                            {
 
-                                            @item.CR_Cas_Company_Contract_End_Date.Value.ToString("yyyy/MM/dd")
+                                                @item.CR_Cas_Company_Contract_End_Date.Value.ToString("yyyy/MM/dd")
 
-                                        }
-                                    </td>
+                                            }
+                                        </td>
 
-                                    <td style="text-align:center;vertical-align:middle;width:10%">
+                                        <td style="text-align:center;vertical-align:middle;width:10%">
 
-                                        @if (item.CR_Cas_Company_Contract_Status == "N")
-                                        {
-                                            <label style="color: darkcyan; float: inherit;">لم يسجل</label>
-                                        }
+                                            @if (item.CR_Cas_Company_Contract_Status == "N")
+                                            {
+                                                <label style=" color: red; float: inherit; font-weight: 100!important;">لم يسجل</label>
+                                            }
 
-                                        @if (item.CR_Cas_Company_Contract_Status == "D")
-                                        {
-                                            <label style="color: red; float: inherit;">محذوف</label>
+                                            @if (item.CR_Cas_Company_Contract_Status == "D")
+                                            {
+                                                <label style="color: red; float: inherit; font-weight: 100 !important;">محذوف</label>
+                                            }
+                                            @if (item.CR_Cas_Company_Contract_Status == "A")
+                                            {
+                                                <label style="color: green; float: inherit;">نشط</label>
+                                            }
+                                            @if (item.CR_Cas_Company_Contract_Status == "E")
+                                            {
+                                                <label style="color: red; float: inherit; font-weight: 100 !important;">منتهي</label>
+                                            }
+                                            @if (item.CR_Cas_Company_Contract_Status == "X")
+                                            {
+                                                <label style="color: red; float: inherit; font-weight: 100 !important;">على وشك الإنتهاء</label>
+                                            }
 
-                                        }
-                                        @if (item.CR_Cas_Company_Contract_Status == "A")
-                                        {
-                                            <label style="color: green; float: inherit;">نشط</label>
+                                        </td>
 
-                                        }
-                                        @if (item.CR_Cas_Company_Contract_Status == "E")
-                                        {
-                                            <label style="color: crimson; float: inherit;">منتهي</label>
-                                        }
-                                        @if (item.CR_Cas_Company_Contract_Status == "X")
-                                        {
-                                          <label style="color: darkorange; float: inherit;">على وشك الإنتهاء</label>
-                                        }
-
-                                    </td>
+                                    </tr>
+                                }
 
 
-                                </tr>
                             }
+
+
+
                             else
                             {
-                                <tr>
+                                if (item.CR_Cas_Company_Contract_Status != "A")
+                                {
+                                    <tr style="color: red; float: inherit; font-weight: 100 !important;">
 
-                                    <td style="vertical-align:middle;width:27%">
+                                        <td style="vertical-align: middle; width: 27%; color: red !important; float: inherit; font-weight: 100 !important;">
+                                            @Html.DisplayFor(modelItem => item.CR_Mas_Sup_Procedures.CR_Mas_Sup_Procedures_Ar_Name)
+                                        </td>
+
+                                        <td style="vertical-align: middle; width: 27%; color: red; float: inherit; font-weight: 100 !important;">
+
+                                            @Html.DisplayFor(model => item.CR_Cas_Company_Contract_Number)
+
+                                        </td>
+                                        <td style="text-align: center; vertical-align: middle; width: 12%; color: red; float: inherit; font-weight: 100 !important;">
+                                            @if (item.CR_Cas_Company_Contract_Date != null)
+                                            {
+
+                                                @item.CR_Cas_Company_Contract_Date.Value.ToString("yyyy/MM/dd")
+
+                                            }
+                                        </td>
+
+                                        <td style="text-align: center; vertical-align: middle; width: 12%; color: red; float: inherit; font-weight: 100 !important;">
+                                            @if (item.CR_Cas_Company_Contract_Start_Date != null)
+                                            {
+
+                                                @item.CR_Cas_Company_Contract_Start_Date.Value.ToString("yyyy/MM/dd")
+
+                                            }
+                                        </td>
+                                        <td style="text-align: center; vertical-align: middle; width: 12%; color: red; float: inherit; font-weight: 100 !important;">
+                                            @if (item.CR_Cas_Company_Contract_End_Date != null)
+                                            {
+
+                                                @item.CR_Cas_Company_Contract_End_Date.Value.ToString("yyyy/MM/dd")
+
+                                            }
+                                        </td>
+
+                                        <td style="text-align: center; vertical-align: middle; width: 10%; color: red; float: inherit; font-weight: 100 !important;">
+
+                                            @if (item.CR_Cas_Company_Contract_Status == "N")
+                                            {
+                                                <label style=" color: red; float: inherit; font-weight: 100!important;">لم يسجل</label>
+                                            }
+
+                                            @if (item.CR_Cas_Company_Contract_Status == "D")
+                                            {
+                                                <label style="color: red; float: inherit; font-weight: 100 !important;">محذوف</label>
+                                            }
+                                            @if (item.CR_Cas_Company_Contract_Status == "A")
+                                            {
+                                                <label style="color: green; float: inherit;">نشط</label>
+                                            }
+                                            @if (item.CR_Cas_Company_Contract_Status == "E")
+                                            {
+                                                <label style="color: red; float: inherit; font-weight: 100 !important;">منتهي</label>
+                                            }
+                                            @if (item.CR_Cas_Company_Contract_Status == "X")
+                                            {
+                                                <label style="color: red; float: inherit; font-weight: 100 !important;">على وشك الإنتهاء</label>
+                                            }
+
+                                        </td>
+
+                                    </tr>
+                                }
+                                else
+                                {
+                                    <tr>
+
+                                        <td style="vertical-align:middle;width:27%">
 
 
-                                        @Html.DisplayFor(modelItem => item.CR_Mas_Sup_Procedures.CR_Mas_Sup_Procedures_Ar_Name)
+                                            @Html.DisplayFor(modelItem => item.CR_Mas_Sup_Procedures.CR_Mas_Sup_Procedures_Ar_Name)
 
-                                    </td>
+                                        </td>
 
-                                    <td style="vertical-align:middle;width:27%">
+                                        <td style="vertical-align:middle;width:27%">
 
-                                        @Html.DisplayFor(model => item.CR_Cas_Company_Contract_Number)
+                                            @Html.DisplayFor(model => item.CR_Cas_Company_Contract_Number)
 
-                                    </td>
-                                    <td style="text-align:center;vertical-align:middle;width:12%">
-                                        @if (item.CR_Cas_Company_Contract_Date != null)
-                                        {
+                                        </td>
+                                        <td style="text-align:center;vertical-align:middle;width:12%">
+                                            @if (item.CR_Cas_Company_Contract_Date != null)
+                                            {
 
-                                            @item.CR_Cas_Company_Contract_Date.Value.ToString("yyyy/MM/dd")
+                                                @item.CR_Cas_Company_Contract_Date.Value.ToString("yyyy/MM/dd")
 
-                                        }
-                                    </td>
+                                            }
+                                        </td>
 
-                                    <td style="text-align:center;vertical-align:middle;width:12%">
-                                        @if (item.CR_Cas_Company_Contract_Start_Date != null)
-                                        {
+                                        <td style="text-align:center;vertical-align:middle;width:12%">
+                                            @if (item.CR_Cas_Company_Contract_Start_Date != null)
+                                            {
 
-                                            @item.CR_Cas_Company_Contract_Start_Date.Value.ToString("yyyy/MM/dd")
+                                                @item.CR_Cas_Company_Contract_Start_Date.Value.ToString("yyyy/MM/dd")
 
-                                        }
-                                    </td>
-                                    <td style="text-align:center;vertical-align:middle;width:12%">
-                                        @if (item.CR_Cas_Company_Contract_End_Date != null)
-                                        {
+                                            }
+                                        </td>
+                                        <td style="text-align:center;vertical-align:middle;width:12%">
+                                            @if (item.CR_Cas_Company_Contract_End_Date != null)
+                                            {
 
-                                            @item.CR_Cas_Company_Contract_End_Date.Value.ToString("yyyy/MM/dd")
+                                                @item.CR_Cas_Company_Contract_End_Date.Value.ToString("yyyy/MM/dd")
 
-                                        }
-                                    </td>
+                                            }
+                                        </td>
 
-                                    <td style="text-align:center;vertical-align:middle;width:10%">
+                                        <td style="text-align:center;vertical-align:middle;width:10%">
 
-                                        @if (item.CR_Cas_Company_Contract_Status == "N")
-                                        {
-                                            <label style="color: darkcyan; float: inherit;">لم يسجل</label>
-                                        }
+                                            @if (item.CR_Cas_Company_Contract_Status == "N")
+                                            {
+                                                <label style=" color: red; float: inherit; font-weight: 100!important;">لم يسجل</label>
+                                            }
 
-                                        @if (item.CR_Cas_Company_Contract_Status == "D")
-                                        {
-                                            <label style="color: red; float: inherit;">محذوف</label>
-                                        }
-                                        @if (item.CR_Cas_Company_Contract_Status == "A")
-                                        {
-                                            <label style="color: green; float: inherit;">نشط</label>
-                                        }
-                                        @if (item.CR_Cas_Company_Contract_Status == "E")
-                                        {
-                                            <label style="color: crimson; float: inherit;">منتهي</label>
-                                        }
-                                        @if (item.CR_Cas_Company_Contract_Status == "X")
-                                        {
-                                            <label style="color: darkorange; float: inherit;">على وشك الإنتهاء</label>
-                                        }
+                                            @if (item.CR_Cas_Company_Contract_Status == "D")
+                                            {
+                                                <label style="color: red; float: inherit;">محذوف</label>
+                                            }
+                                            @if (item.CR_Cas_Company_Contract_Status == "A")
+                                            {
+                                                <label style="color: green; float: inherit;">نشط</label>
+                                            }
+                                            @if (item.CR_Cas_Company_Contract_Status == "E")
+                                            {
+                                                <label style="color: crimson; float: inherit;">منتهي</label>
+                                            }
+                                            @if (item.CR_Cas_Company_Contract_Status == "X")
+                                            {
+                                                <label style="color: darkorange; float: inherit;">على وشك الإنتهاء</label>
+                                            }
 
-                                    </td>
+                                        </td>
 
-                                </tr>
+                                    </tr>
+                                }
+
                             }
 
 

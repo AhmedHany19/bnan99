@@ -2277,6 +2277,7 @@
     <Content Include="Views\CarBasicPrice\Create.cshtml" />
     <Content Include="Views\CarBasicPrice\_BasicPriceLayout.cshtml" />
     <Content Include="Views\ClosingReception\PartialIndex.cshtml" />
+    <Content Include="Views\RenterReceiptList\Table.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

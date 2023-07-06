@@ -6,13 +6,13 @@
 }
 
 <style>
-    .tooltip > .tooltip-inner {
+   /* .tooltip > .tooltip-inner {
         background-color: #f00;
     }
 
     .tooltip > .tooltip-arrow {
         border-top-color: #f00 !important;
-    }
+    }*/
 </style>
 <style>
     #date_btn1 {
@@ -33,7 +33,7 @@
 
         <div class="row">
             <div class="col-12">
-                <div class="card-box table-responsive" style="height:79vh">
+                <div class="card-box table-responsive" style="height:80vh!important">
                     <div class="title_corp"><h3> القيود / الحركة المالية للمستأجرين / تفاصيل القيد</h3></div>
                     <div class="subtitle_corp">تمكنك الصفحة من عرض البيانات التفصيلية للقيد</div>
                     <div class="hr_60"></div>
@@ -53,7 +53,10 @@
                                                     <a href="~/CasHome/index" class="btn_form" data-toggle="tooltip" data-placement="top" title="إغلاق"><i class="fa fa-times"></i></a>
                                                 </div>*@
                                             <div class="href_layout" style="width:5%;float:right;margin-top:15px;margin-bottom:10px;">
-                                                <a href="~/RenterReceiptList/GetRenterReceiptList" class="btn_form " data-toggle="tooltip" data-placement="top" title="رجوع" style="width: 0;"><i class="fa fa dripicons-arrow-left d-flex align-items-center" style="width:40px"></i></a>
+                                                <a href="@Url.Action("GetRenterReceiptList", "RenterReceiptList", new { id = Model.CR_Cas_Renter_Lessor.CR_Cas_Renter_Lessor_Id })" class="btn_form" data-toggle="tooltip" data-placement="top" style="width: 0;color:black!important" title="رجوع" >
+                                                    <i class="fa fa dripicons-arrow-left d-flex align-items-center" style="width: 40px"></i>
+                                                </a>
+                                                @*<a href="~/RenterReceiptList/GetRenterReceiptList?id=@" class="btn_form " data-toggle="tooltip" data-placement="top" title="رجوع" style="width: 0;"><i class="fa fa dripicons-arrow-left d-flex align-items-center" style="width:40px"></i></a>*@
                                             </div>
 
                                         </div>

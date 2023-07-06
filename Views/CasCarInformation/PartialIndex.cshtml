@@ -7,264 +7,277 @@
                 <table id="myTable" class="table table-striped mb-0" style="cursor:pointer">
                     <thead>
                         <tr>
-
+                            <th width="5%">
+                                م
+                            </th>
                             <th style="width:12%;">الرقم التسلسلي</th>
-                            <th style="width:15%;">الفرع</th>
+                            <th style="width:15%;" class="text-left">الفرع</th>
                             @*<th style="width:10%;">متواجدة في</th>*@
-                            <th style="width:15%;">الفئة</th>
-                            <th style="width:50%;">السيارة</th>
+                            <th style="width:15%;" class="text-left">الفئة</th>
+                            <th style="width:50%;" class="text-left">السيارة</th>
                             @*<th style="width:10%;">حالة الصيانة</th>
-                                <th style="width:10%">حالة الوثائق</th>*@
-                            <th style="width:8%;">الحالة</th>
+        <th style="width:10%">حالة الوثائق</th>*@
+                            <th style="width:6%;">الحالة</th>
                         </tr>
                     </thead>
-                    <tbody id="tbl">
-                        @foreach (var item in Model)
-                        {
-                            if (item.CR_Cas_Sup_Car_Status == "D" || item.CR_Cas_Sup_Car_Status == "H" || item.CR_Cas_Sup_Car_Status == "O" || item.CR_Cas_Sup_Car_Status == "M" || item.CR_Cas_Sup_Car_Status == "S")
+                    <tbody id="tbl" style="height: 450px">
+                        @{ int c = 0;
+                            foreach (var item in Model)
                             {
-                                <tr>
-                                    <td align="center" style="width:12%;">
+                                c += 1;
+                                if (item.CR_Cas_Sup_Car_Status == "D" || item.CR_Cas_Sup_Car_Status == "H" || item.CR_Cas_Sup_Car_Status == "O" || item.CR_Cas_Sup_Car_Status == "M" || item.CR_Cas_Sup_Car_Status == "S")
+                                {
+                                                <tr>
+                                                    <td width="5%" align="center">
+                                                        <a>
+                                                            @c
+                                                        </a>
+                                                    </td>
+                                                    <td align="center" style="width:12%;">
 
-                                        <a href="~/CasCarInformation/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Serail_No)" style="color:red">
-                                            @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Serail_No)
-                                        </a>
-                                    </td>
-                                    <td style="width:15%;">
-                                        <a href="~/CasCarInformation/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Serail_No)" style="color:red">
-                                            @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch.CR_Cas_Sup_Branch_Ar_Short_Name)
-                                            @if (item.CR_Cas_Sup_Branch.CR_Cas_Sup_Branch_Status == "H")
-                                            {
-                                              <span id="statOfBranch"  style="font-size: 88%;"> ( الغرع موقوف ) </span>
-                                            }  
-                                            
-                                            @if (item.CR_Cas_Sup_Owners.CR_Cas_Sup_Owners_Status == "H")
-                                            {
-                                              <span id="statOfBranch"  style="font-size: 88%;"> ( المالك موقوف ) </span>
-                                            }   
+                                                        <a href="~/CasCarInformation/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Serail_No)" style="color:red">
+                                                            @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Serail_No)
+                                                        </a>
+                                                    </td>
+                                                    <td style="width:15%;">
+                                                        <a href="~/CasCarInformation/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Serail_No)" style="color:red">
+                                                            @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch.CR_Cas_Sup_Branch_Ar_Short_Name)
+                                                            @if (item.CR_Cas_Sup_Branch.CR_Cas_Sup_Branch_Status == "H")
+                                                            {
+                                                                <span id="statOfBranch" style="font-size: 88%;"> ( الغرع موقوف ) </span>
+                                                            }
 
-                                        </a>
+                                                            @if (item.CR_Cas_Sup_Owners.CR_Cas_Sup_Owners_Status == "H")
+                                                            {
+                                                                <span id="statOfBranch" style="font-size: 88%;"> ( المالك موقوف ) </span>
+                                                            }
 
-                                    </td>
+                                                        </a>
 
-                                    @*<td>
-                                            @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch.CR_Cas_Sup_Car_Information.
-                                            FirstOrDefault(x => x.CR_Cas_Sup_Branch.CR_Cas_Sup_Branch_Code == x.CR_Cas_Sup_Car_Location_Branch_Code).CR_Cas_Sup_Branch.CR_Cas_Sup_Branch_Ar_Short_Name)
-                                        </td>*@
+                                                    </td>
 
-                                    <td style="width:15%;">
-                                        <a href="~/CasCarInformation/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Serail_No)" style="color:red">
-                                            @Html.DisplayFor(modelItem => item.CR_Mas_Sup_Category_Car.CR_Mas_Sup_Category.CR_Mas_Sup_Category_Ar_Name)
-                                        </a>
-                                    </td>
+                                                    @*<td>
+            @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch.CR_Cas_Sup_Car_Information.
+            FirstOrDefault(x => x.CR_Cas_Sup_Branch.CR_Cas_Sup_Branch_Code == x.CR_Cas_Sup_Car_Location_Branch_Code).CR_Cas_Sup_Branch.CR_Cas_Sup_Branch_Ar_Short_Name)
+        </td>*@
 
-                                    <td style="width:50%;">
-                                        <a href="~/CasCarInformation/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Serail_No)" style="color:red">
-                                            @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Collect_Ar_Name)
+                                                    <td style="width:15%;">
+                                                        <a href="~/CasCarInformation/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Serail_No)" style="color:red">
+                                                            @Html.DisplayFor(modelItem => item.CR_Mas_Sup_Category_Car.CR_Mas_Sup_Category.CR_Mas_Sup_Category_Ar_Name)
+                                                        </a>
+                                                    </td>
 
-                                        </a>
+                                                    <td style="width:50%;">
+                                                        <a href="~/CasCarInformation/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Serail_No)" style="color:red">
+                                                            @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Collect_Ar_Name)
 
-                                    </td>
+                                                        </a>
+
+                                                    </td>
 
 
-                                    @if (item.CR_Cas_Sup_Car_Status == "D")
-                                    {
-                                        <td align="center" style="padding-right:10px;color:red;width:8%;">
-                                            محذوف
-                                            @if (item.Status == false)
-                                            {
-                                                <span style="color:red">*</span>
-                                            }
+                                                    @if (item.CR_Cas_Sup_Car_Status == "D")
+                                                    {
+                                                        <td align="center" style="padding-right:10px;color:red;width:6%;">
+                                                            محذوف
+                                                            @if (item.Status == false)
+                                                            {
+                                                                <span style="color:red">*</span>
+                                                            }
+                                                        </td>
+                                                    }
+                                                    @if (item.CR_Cas_Sup_Car_Status == "H")
+                                                    {
+                                                        <td align="center" style="padding-right: 10px; color: red; width: 6%;">
+                                                            موقوف
+                                                            @if (item.Status == false)
+                                                            {
+                                                                <span style="color:red">***</span>
+                                                            }
+                                                        </td>
+                                                    }
+                                                    @if (item.CR_Cas_Sup_Car_Status == "A")
+                                                    {
+                                                        <td align="center" style="padding-right: 10px; color: red; width: 6%;">
+                                                            نشط
+                                                            @if (item.Status == false)
+                                                            {
+                                                                <span style="color:red">*</span>
+                                                            }
+                                                        </td>
+                                                    }
+                                                    @if (item.CR_Cas_Sup_Car_Status == "O")
+                                                    {
+                                                        <td align="center" style="padding-right: 10px; color: red; width: 6%;">
+                                                            للبيع
+                                                            @if (item.Status == false)
+                                                            {
+                                                                <span style="color:red">*</span>
+                                                            }
+                                                        </td>
+                                                    }
+                                                    @if (item.CR_Cas_Sup_Car_Status == "M")
+                                                    {
+                                                        <td align="center" style="padding-right: 10px; color: red; width: 6%;">
+                                                            صيانة
+                                                            @if (item.Status == false)
+                                                            {
+                                                                <span style="color:red">*</span>
+                                                            }
+                                                        </td>
+                                                    }
+                                                    @if (item.CR_Cas_Sup_Car_Status == "R")
+                                                    {
+                                                        <td align="center" style="padding-right: 10px; color: red; width: 6%;">
+                                                            مؤجرة
+                                                            @if (item.Status == false)
+                                                            {
+                                                                <span style="color:red">*</span>
+                                                            }
+                                                        </td>
+                                                    }
+                                                    @if (item.CR_Cas_Sup_Car_Status == "S")
+                                                    {
+                                                        <td align="center" style="padding-right: 10px; color: red; width: 6%;">
+                                                            مباعة
+                                                            @if (item.Status == false)
+                                                            {
+                                                                <span style="color:red">*</span>
+                                                            }
+                                                        </td>
+                                                    }
+
+
+
+
+                                                </tr>
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td width="5%" align="center">
+                                                        <a>
+                                                            @c
+                                                        </a>
                                         </td>
-                                    }
-                                    @if (item.CR_Cas_Sup_Car_Status == "H")
-                                    {
-                                        <td align="center" style="padding-right: 10px; color: red; width: 8%;">
-                                            موقوف
-                                            @if (item.Status == false)
-                                            {
-                                                <span style="color:red">***</span>
-                                            }
+                                        <td align="center" style="width:12%;">
+                                            <a href="~/CasCarInformation/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Serail_No)">
+                                                @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Serail_No)
+                                            </a>
                                         </td>
-                                    }
-                                    @if (item.CR_Cas_Sup_Car_Status == "A")
-                                    {
-                                        <td align="center" style="padding-right: 10px; color: red; width: 8%;">
-                                            نشط
-                                            @if (item.Status == false)
-                                            {
-                                                <span style="color:red">*</span>
-                                            }
+                                        <td style="width:15%;">
+                                            <a href="~/CasCarInformation/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Serail_No)">
+                                                @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch.CR_Cas_Sup_Branch_Ar_Short_Name)
+
+                                                @if (item.CR_Cas_Sup_Branch.CR_Cas_Sup_Branch_Status == "H")
+                                                {
+                                                    <span id="statOfBranch" style="font-size: 88%;"> ( الغرع موقوف ) </span>
+                                                }
+
+                                                @if (item.CR_Cas_Sup_Owners.CR_Cas_Sup_Owners_Status == "H")
+                                                {
+                                                    <span id="statOfBranch" style="font-size: 88%;"> ( المالك موقوف ) </span>
+                                                }
+                                            </a>
+
                                         </td>
-                                    }
-                                    @if (item.CR_Cas_Sup_Car_Status == "O")
-                                    {
-                                        <td align="center" style="padding-right: 10px; color: red; width: 8%;">
-                                            للبيع
-                                            @if (item.Status == false)
-                                            {
-                                                <span style="color:red">*</span>
-                                            }
+
+                                        @*<td>
+                            @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch.CR_Cas_Sup_Car_Information.
+                            FirstOrDefault(x => x.CR_Cas_Sup_Branch.CR_Cas_Sup_Branch_Code == x.CR_Cas_Sup_Car_Location_Branch_Code).CR_Cas_Sup_Branch.CR_Cas_Sup_Branch_Ar_Short_Name)
+                        </td>*@
+
+                                        <td style="width:15%;">
+                                            <a href="~/CasCarInformation/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Serail_No)">
+                                                @Html.DisplayFor(modelItem => item.CR_Mas_Sup_Category_Car.CR_Mas_Sup_Category.CR_Mas_Sup_Category_Ar_Name)
+                                            </a>
                                         </td>
-                                    }
-                                    @if (item.CR_Cas_Sup_Car_Status == "M")
-                                    {
-                                        <td align="center" style="padding-right: 10px; color: red; width: 8%;">
-                                            صيانة
-                                            @if (item.Status == false)
-                                            {
-                                                <span style="color:red">*</span>
-                                            }
+
+                                        <td style="width:50%;">
+                                            <a href="~/CasCarInformation/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Serail_No)">
+                                                @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Collect_Ar_Name)
+
+                                            </a>
+
                                         </td>
-                                    }
-                                    @if (item.CR_Cas_Sup_Car_Status == "R")
-                                    {
-                                        <td align="center" style="padding-right: 10px; color: red; width: 8%;">
-                                            مؤجرة
-                                            @if (item.Status == false)
-                                            {
-                                                <span style="color:red">*</span>
-                                            }
-                                        </td>
-                                    }
-                                    @if (item.CR_Cas_Sup_Car_Status == "S")
-                                    {
-                                        <td align="center" style="padding-right: 10px; color: red; width: 8%;">
-                                            مباعة
-                                            @if (item.Status == false)
-                                            {
-                                                <span style="color:red">*</span>
-                                            }
-                                        </td>
-                                    }
 
 
+                                        @if (item.CR_Cas_Sup_Car_Status == "D")
+                                        {
+                                            <td align="center" style="padding-right: 10px; color: red; width: 6%;">
+                                                محذوف
+                                                @if (item.Status == false)
+                                                {
+                                                    <span style="color:red">*</span>
+                                                }
+                                            </td>
+                                        }
+                                        @if (item.CR_Cas_Sup_Car_Status == "H")
+                                        {
+                                            <td align="center" style="padding-right: 10px; color: salmon; width: 6%;">
+                                                موقوف
+                                                @if (item.Status == false)
+                                                {
+                                                    <span style="color:red">***</span>
+                                                }
+                                            </td>
+                                        }
+                                        @if (item.CR_Cas_Sup_Car_Status == "A")
+                                        {
+                                            <td align="center" style="padding-right: 10px; color: green; width: 6%;">
+                                                نشط
+                                                @if (item.Status == false)
+                                                {
+                                                    <span style="color:red">*</span>
+                                                }
+                                            </td>
+                                        }
+                                        @if (item.CR_Cas_Sup_Car_Status == "O")
+                                        {
+                                            <td align="center" style="padding-right: 10px; color: burlywood; width: 6%;">
+                                                للبيع
+                                                @if (item.Status == false)
+                                                {
+                                                    <span style="color:red">*</span>
+                                                }
+                                            </td>
+                                        }
+                                        @if (item.CR_Cas_Sup_Car_Status == "M")
+                                        {
+                                            <td align="center" style="padding-right: 10px; color: darkgray; width: 6%;">
+                                                صيانة
+                                                @if (item.Status == false)
+                                                {
+                                                    <span style="color:red">*</span>
+                                                }
+                                            </td>
+                                        }
+                                        @if (item.CR_Cas_Sup_Car_Status == "R")
+                                        {
+                                            <td align="center" style="padding-right: 10px; color: darkblue; width:6%;">
+                                                مؤجرة
+                                                @if (item.Status == false)
+                                                {
+                                                    <span style="color:red">*</span>
+                                                }
+                                            </td>
+                                        }
+                                        @if (item.CR_Cas_Sup_Car_Status == "S")
+                                        {
+                                            <td align="center" style="padding-right: 10px; color: darkblue; width: 6%;">
+                                                مباعة
+                                                @if (item.Status == false)
+                                                {
+                                                    <span style="color:red">*</span>
+                                                }
+                                            </td>
+                                        }
 
-
-                                </tr>
+                                    </tr>
+                                    }
+                                }
                             }
-                            else
-                            {
-                                <tr>
-                                    <td align="center" style="width:12%;">
-
-                                        <a href="~/CasCarInformation/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Serail_No)">
-                                            @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Serail_No)
-                                        </a>
-                                    </td>
-                                    <td style="width:15%;">
-                                        <a href="~/CasCarInformation/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Serail_No)">
-                                            @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch.CR_Cas_Sup_Branch_Ar_Short_Name)
-
-                                            @if (item.CR_Cas_Sup_Branch.CR_Cas_Sup_Branch_Status == "H")
-                                            {
-                                                <span id="statOfBranch"  style="font-size: 88%;" > ( الغرع موقوف ) </span>
-                                            }
-
-                                            @if (item.CR_Cas_Sup_Owners.CR_Cas_Sup_Owners_Status == "H")
-                                            {
-                                                <span id="statOfBranch"  style="font-size: 88%;"> ( المالك موقوف ) </span>
-                                            }
-                                        </a>
-
-                                    </td>
-
-                                    @*<td>
-                                            @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch.CR_Cas_Sup_Car_Information.
-                                            FirstOrDefault(x => x.CR_Cas_Sup_Branch.CR_Cas_Sup_Branch_Code == x.CR_Cas_Sup_Car_Location_Branch_Code).CR_Cas_Sup_Branch.CR_Cas_Sup_Branch_Ar_Short_Name)
-                                        </td>*@
-
-                                    <td style="width:15%;">
-                                        <a href="~/CasCarInformation/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Serail_No)">
-                                            @Html.DisplayFor(modelItem => item.CR_Mas_Sup_Category_Car.CR_Mas_Sup_Category.CR_Mas_Sup_Category_Ar_Name)
-                                        </a>
-                                    </td>
-
-                                    <td style="width:50%;">
-                                        <a href="~/CasCarInformation/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Serail_No)">
-                                            @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Collect_Ar_Name)
-
-                                        </a>
-
-                                    </td>
-
-
-                                    @if (item.CR_Cas_Sup_Car_Status == "D")
-                                    {
-                                        <td align="center" style="padding-right: 10px; color: red; width: 8%;">
-                                            محذوف
-                                            @if (item.Status == false)
-                                            {
-                                                <span style="color:red">*</span>
-                                            }
-                                        </td>
-                                    }
-                                    @if (item.CR_Cas_Sup_Car_Status == "H")
-                                    {
-                                        <td align="center" style="padding-right: 10px; color: salmon; width: 8%;">
-                                            موقوف
-                                            @if (item.Status == false)
-                                            {
-                                                <span style="color:red">***</span>
-                                            }
-                                        </td>
-                                    }
-                                    @if (item.CR_Cas_Sup_Car_Status == "A")
-                                    {
-                                        <td align="center" style="padding-right: 10px; color: green; width: 8%;">
-                                            نشط
-                                            @if (item.Status == false)
-                                            {
-                                                <span style="color:red">*</span>
-                                            }
-                                        </td>
-                                    }
-                                    @if (item.CR_Cas_Sup_Car_Status == "O")
-                                    {
-                                        <td align="center" style="padding-right: 10px; color: burlywood; width: 8%;">
-                                            للبيع
-                                            @if (item.Status == false)
-                                            {
-                                                <span style="color:red">*</span>
-                                            }
-                                        </td>
-                                    }
-                                    @if (item.CR_Cas_Sup_Car_Status == "M")
-                                    {
-                                        <td align="center" style="padding-right: 10px; color: darkgray; width: 8%;">
-                                            صيانة
-                                            @if (item.Status == false)
-                                            {
-                                                <span style="color:red">*</span>
-                                            }
-                                        </td>
-                                    }
-                                    @if (item.CR_Cas_Sup_Car_Status == "R")
-                                    {
-                                        <td align="center" style="padding-right: 10px; color: darkblue; width: 8%;">
-                                            مؤجرة
-                                            @if (item.Status == false)
-                                            {
-                                                <span style="color:red">*</span>
-                                            }
-                                        </td>
-                                    }
-                                    @if (item.CR_Cas_Sup_Car_Status == "S")
-                                    {
-                                        <td align="center" style="padding-right: 10px; color: darkblue; width: 8%;">
-                                            مباعة
-                                            @if (item.Status == false)
-                                            {
-                                                <span style="color:red">*</span>
-                                            }
-                                        </td>
-                                    }
-
-                                </tr>
-                            }
-                        }
-
-                    </tbody>
+                        </tbody>
                 </table>
             </div>
             <iframe name="print_frame" width="0" height="0" frameborder="0" src="about:blank"></iframe>

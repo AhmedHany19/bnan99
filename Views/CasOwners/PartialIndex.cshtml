@@ -8,10 +8,10 @@
                     <thead>
                         <tr>
                             <th style="width:10%;">
-                                هوية المالك
+                                الهوية 
                             </th>
-                            <th style="width:20%;">
-                                إسم المالك
+                            <th style="width:20%;" class="text-left">
+                                 المالك
                             </th>
                             <th style="width:12%;">
                                 السجل التجاري
@@ -33,7 +33,7 @@
                             </th>
                         </tr>
                     </thead>
-                    <tbody id="tbl">
+                    <tbody id="tbl" style="height:450px">
                         @foreach (var item in Model)
                         {
                             if (item.CR_Cas_Sup_Owners_Status == "H" || item.CR_Cas_Sup_Owners_Status == "D")

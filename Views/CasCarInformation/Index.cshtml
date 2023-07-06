@@ -42,7 +42,7 @@
                                     <div class="dataTables_filter">
                                         <label class="label_search_input">
                                             <img src="~/images/srch.png" id="SrchImg" />
-                                            بحث:<input class="form-control form_search_input" type="text" id="inputtext" name="TxtSearch" style="width:84%"/>
+                                            بحث:<input class="form-control form_search_input" type="text" id="inputtext" name="TxtSearch" style="width:70%" />
                                         </label>
                                     </div>
                                     
@@ -54,31 +54,31 @@
                                         <div class="col-md-7" style="float:right">
                                             <div class="">
                                                 <div class="radio_top">
-                                                    <input type="radio" id="ShowSelled" name="Show" onclick="LoadData();GetFilter()" style="float:right;margin-left:4px;width:13px;height:13px;">
+                                                    <input type="radio" id="ShowSelled" name="Show" onclick="LoadData(); GetFilter(); clearInput();" style="float:right;margin-left:4px;width:13px;height:13px;">
                                                     <label for="javascript" style="float: left; font-size: 0.75rem">مباعة</label>
                                                 </div>
                                                 <div class="radio_top">
-                                                    <input type="radio" id="ShowForSale" name="Show" onclick="LoadData();GetFilter()" style="float:right;margin-left:4px;width:13px;height:13px;">
+                                                    <input type="radio" id="ShowForSale" name="Show" onclick="LoadData();GetFilter(); clearInput();" style="float:right;margin-left:4px;width:13px;height:13px;">
                                                     <label for="javascript" style="float: left; font-size: 0.75rem">للبيع</label>
                                                 </div>
                                                 <div class="radio_top">
-                                                    <input type="radio" id="ShowMaintenance" name="Show" onclick="LoadData();GetFilter()" style="float:right;margin-left:4px;width:13px;height:13px;">
+                                                    <input type="radio" id="ShowMaintenance" name="Show" onclick="LoadData();GetFilter(); clearInput();" style="float:right;margin-left:4px;width:13px;height:13px;">
                                                     <label for="javascript" style="float: left; font-size: 0.75rem">صيانة</label>
                                                 </div>
                                                 <div class="radio_top">
-                                                    <input type="radio" id="ShowRented" name="Show" onclick="LoadData();GetFilter()" style="float:right;margin-left:4px;width:13px;height:13px;">
+                                                    <input type="radio" id="ShowRented" name="Show" onclick="LoadData();GetFilter(); clearInput();" style="float:right;margin-left:4px;width:13px;height:13px;">
                                                     <label for="javascript" style="float:left;font-size:0.75rem">مؤجرة</label>
                                                 </div>
                                                 <div class="radio_top">
-                                                    <input type="radio" id="ShowDeleted" name="Show" onclick="LoadData();GetFilter()" style="float:right;margin-left:4px;width:13px;height:13px;">
+                                                    <input type="radio" id="ShowDeleted" name="Show" onclick="LoadData();GetFilter(); clearInput();" style="float:right;margin-left:4px;width:13px;height:13px;">
                                                     <label for="javascript" style="float: left; font-size: 0.75rem">محذوف</label>
                                                 </div>
                                                 <div class="radio_top">
-                                                    <input type="radio" id="ShowHolded" name="Show" onclick="LoadData();GetFilter()" style="float:right;margin-left:4px;width:13px;height:13px;;">
+                                                    <input type="radio" id="ShowHolded" name="Show" onclick="LoadData();GetFilter(); clearInput();" style="float:right;margin-left:4px;width:13px;height:13px;;">
                                                     <label for="javascript" style="float: left; font-size: 0.75rem">موقوف</label>
                                                 </div>
                                                 <div class="radio_top">
-                                                    <input type="radio" id="ShowActive" name="Show" onclick="LoadData();GetFilter()" style="float:right;margin-left:4px;width:13px;height:13px;">
+                                                    <input type="radio" id="ShowActive" name="Show" onclick="LoadData();GetFilter(); clearInput();" style="float:right;margin-left:4px;width:13px;height:13px;">
                                                     <label for="css" style="float: left; font-size: 0.75rem">نشط</label>
                                                 </div>
                                                 <div class="radio_top">
@@ -136,7 +136,8 @@
 
 
         function GetFilter() {
-
+            console.log($('#inputtext').val()) 
+            console.log("1111111111111") 
             if (document.getElementById('ShowRented').checked) {
                 $.ajax({
                     url: '@Url.Action("PartialIndex", "CasCarInformation")',
@@ -238,10 +239,16 @@
     <script>
         function LoadData() {
             //alert();
+            $('#inputtext').val("");
+            console.log($('#inputtext').val())   
             $('#preloader').css('display', 'block');
             $('#status').css('display', 'block');
         }
 
     </script>
-    
+    <script>
+        function clearInput() {
+            document.getElementById("inputtext").value = "";
+        }
+    </script>
 </div>

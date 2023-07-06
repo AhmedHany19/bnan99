@@ -20,6 +20,34 @@
         margin-right: 10px;
         line-height: 0.8
     }
+    .btn_form2 i {
+        width: 30px;
+        height: 30px;
+        line-height: 30px;
+        text-align: center;
+        color: #fff;
+        background: #4F7DB1;
+        float: right;
+        font-size: 20px;
+        margin-left: 10px;
+        text-align: center
+    }
+
+    .btn_form2 {
+        float: right;
+        color: #F3B161;
+        font-weight: bold;
+        margin-left: 10px;
+        width: 30px;
+        height: 30px;
+        line-height: 30px;
+        text-align: center;
+        color: #fff;
+        background: #4F7DB1;
+        border: none;
+        float: right;
+        margin-left: 10px;
+    }
 </style>
 <div class="content">
     <!-- Start Content-->
@@ -41,7 +69,7 @@
                                             <div class="table-responsive" data-pattern="priority-columns" style="border:none;">
                                                 <div class="href_layout" style="width:7%;float:right;margin-top:15px;margin-bottom:10px;">
                                                     @*<a href="/CasHome/index" class="btn_form" data-toggle="tooltip" data-placement="top" title="إغلاق"><i class="fa fa-times"></i></a>*@
-                                                    <a href="/RenterReceiptList/index" class="btn_form"><i class="fa fa dripicons-arrow-left" style="padding-top:12px;"></i></a>
+                                                    <a href="/RenterReceiptList/RenterReceiptBalance" class="btn_form"><i class="fa fa dripicons-arrow-left" style="padding-top:12px;"></i></a>
 
                                                     <script>
                                                         $(document).ready(function () {
@@ -55,122 +83,105 @@
                                                     </script>
 
                                                 </div>
-                                                <div class="" style="width: 28%; float: right; margin-top: 15px; margin-top: 5px;">
-                                                    <div style="float:right;width:30%;">
-                                                        <label class="lbl">المستأجر</label>
+
+                                            </div>
+                                            <div style="width: 100%; float: right; margin-top: 15px; margin-top: 5px;margin-bottom:10px ">
+                                                <div class="row">
+                                                    <div class="col-md-4" style=" display: flex; align-items: center">
+
+                                                        <div style="float:right;width:30%;">
+                                                            <label class="lbl">الهوية</label>
+                                                        </div>
+                                                        <div style="float: right; width: 70%;">
+                                                            <input type="text" class="form-control" name="ViewBag.RenterName" id="RenterName" value="@ViewBag.RenterId" readonly style="border:none" />
+                                                        </div>
                                                     </div>
-                                                    <div style="float: right; width: 70%;">
-                                                        <input type="text" class="form-control" name="ViewBag.RenterName" id="RenterName" value="@ViewBag.RenterName" readonly style="border:none"/>
+                                                    <div class="col-md-4" style=" display: flex; align-items: center">
+
+                                                        <div style="float:right;width:30%;">
+                                                            <label class="lbl">اسم المستأجر</label>
+                                                        </div>
+                                                        <div style="float: right; width: 70%;">
+                                                            <input type="text" class="form-control" name="ViewBag.RenterName" id="RenterName" value="@ViewBag.RenterName" readonly style="border:none" />
+                                                        </div>
                                                     </div>
+                                                    <div class="col-md-4" style=" display: flex; align-items: center">
+
+                                                        <div style="float:right;width:30%;">
+                                                            <label class="lbl">المهنه</label>
+                                                        </div>
+                                                        <div style="float: right; width: 70%;">
+                                                            <input type="text" class="form-control" name="ViewBag.RenterName" id="RenterName" value="@ViewBag.Work" readonly style="border:none" />
+                                                        </div>
+                                                    </div>
+
+
 
                                                 </div>
+                                                <div class="row">
+                                                    <div class="col-md-4" style=" display: flex; align-items: center">
+
+                                                        <div style="float:right;width:30%;">
+                                                            <label class="lbl">الرصيد الحالي</label>
+                                                        </div>
+                                                        <div style="float: right; width: 70%;">
+                                                            <input type="text" class="form-control" name="ViewBag.RenterName" id="RenterName" value="@ViewBag.Balance" readonly style="border:none" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4" style=" display: flex; align-items: center">
+
+                                                        <div style="float:right;width:30%;">
+                                                            <label class="lbl">مجموع الدائن</label>
+                                                        </div>
+                                                        <div style="float: right; width: 70%;">
+                                                            <input type="text" class="form-control" name="RenterCreit" id="RenterCreit" value="@ViewBag.RenterCreit" readonly style="border:none" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4" style=" display: flex; align-items: center">
+
+                                                        <div style="float:right;width:30%;">
+                                                            <label class="lbl">مجموع المدين</label>
+                                                        </div>
+                                                        <div style="float: right; width: 70%;">
+                                                            <input type="text" class="form-control" name="RenterDebit" id="RenterDebit" value="@ViewBag.RenterDebit" readonly style="border:none" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row mt-3 ">
+                                                    <div class="col-md-7">
+                                                        <div class="col-md-4" style="float:right">
+                                                            <div class="row">
+                                                                <div class="col-md-2" style="float:right">
+                                                                    <label>من</label>
+                                                                </div>
+                                                                <div class="col-md-10" style="float:right">
+                                                                    <input type="date" id="Startdate" onclick="GetDateFilter()" style="width:100%" value="@ViewBag.Sdate">
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4" style="float:right">
+                                                            <div class="row">
+                                                                <div class="col-md-2" style="float:right;padding-right:0px;">
+                                                                    <label>إلى</label>
+                                                                </div>
+                                                                <div class="col-md-10" style="float:right">
+                                                                    <input type="date" id="Enddate" onclick="GetDateFilter()" style="width:100%" value="@ViewBag.Edate">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-2" style="float:right">
+                                                            <a href="javascript:GetFilterDate();" class="btn_form2" data-toggle="tooltip" data-placement="top" title="بحث"><i class="fa fa-check-circle"></i></a>
+                                                        </div>
+                                                </div>
                                             </div>
-                                            <table class="table" id="table">
-                                                <thead>
-                                                    <tr>
-                                                        <th>
-                                                            رقم القيد
-                                                        </th>
-                                                        <th>
-                                                            تاريخ القيد
-                                                        </th>
+                                            
+                                            <div id="UserReceiptTable">
+                                                @{
+                                                    Html.RenderAction("table");
+                                                }
 
-                                                        <th>
-                                                            نوع المرجع
-                                                        </th>
-
-                                                        <th>
-                                                            دائن
-                                                        </th>
-                                                        <th>
-                                                            مدين
-                                                        </th>
-                                                        <th>
-                                                            رصيد سابق
-                                                        </th>
-                                                        <th>
-                                                            منفذ العملية
-                                                        </th>
-                                                        <th hidden>
-                                                            حالة العهدة
-                                                        </th>
-                                                        <th>
-                                                            الملاحظات
-                                                        </th>
-
-                                                    </tr>
-                                                </thead>
-                                                <tbody id="tbl">
-                                                    @foreach (var item in Model)
-                                                    {
-
-                                                        <tr>
-                                                            <td>
-                                                                <a href="~/RenterReceiptList/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Account_Receipt_No)">
-                                                                    @Html.DisplayFor(modelItem => item.CR_Cas_Account_Receipt_No)
-                                                                </a>
-
-                                                            </td>
-                                                            <td>
-                                                                <a href="~/RenterReceiptList/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Account_Receipt_No)">
-                                                                    @item.CR_Cas_Account_Receipt_Date.Value.ToString("yyyy/MM/dd")
-                                                                </a>
-                                                            </td>
-
-                                                            <td>
-                                                                <a href="~/RenterReceiptList/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Account_Receipt_No)">
-                                                                    @Html.DisplayFor(modelItem => item.CR_Cas_Account_Receipt_Reference_Type)
-                                                                </a>
-                                                            </td>
-
-                                                            <td>
-                                                                <a href="~/RenterReceiptList/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Account_Receipt_No)">
-                                                                    @Html.DisplayFor(modelItem => item.CR_Cas_Account_Receipt_Payment)
-                                                                </a>
-                                                            </td>
-                                                            <td>
-                                                                <a href="~/RenterReceiptList/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Account_Receipt_No)">
-                                                                    @Html.DisplayFor(modelItem => item.CR_Cas_Account_Receipt_Receipt)
-                                                                </a>
-                                                            </td>
-                                                            <td>
-                                                                <a href="~/RenterReceiptList/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Account_Receipt_No)">
-                                                                    @Html.DisplayFor(modelItem => item.CR_Cas_Account_Receipt_Renter_Previous_Balance)
-                                                                </a>
-                                                            </td>
-                                                            <td>
-                                                                <a href="~/RenterReceiptList/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Account_Receipt_No)">
-                                                                    @Html.DisplayFor(modelItem => item.CR_Cas_User_Information.CR_Cas_User_Information_Ar_Name)
-                                                                </a>
-                                                            </td>
-                                                            <td hidden>
-                                                                <a href="~/RenterReceiptList/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Account_Receipt_No)">
-                                                                    @if (item.CR_Cas_Account_Receipt_Is_Passing == "1")
-                                                                    {
-                                                                        <label>عهدة</label>
-                                                                    }
-                                                                    @if (item.CR_Cas_Account_Receipt_Is_Passing == "2")
-                                                                    {
-                                                                        <label>مرحل</label>
-                                                                    }
-                                                                    @if (item.CR_Cas_Account_Receipt_Is_Passing == "3")
-                                                                    {
-                                                                        <label>محجوز</label>
-                                                                    }
-                                                                </a>
-                                                            </td>
-
-                                                            <td>
-                                                                <a href="~/RenterReceiptList/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Account_Receipt_No)">
-                                                                    @Html.DisplayFor(modelItem => item.CR_Cas_Account_Receipt_Reasons)
-                                                                </a>
-                                                            </td>
-                                                        </tr>
-
-                                                    }
-                                                </tbody>
-
-                                            </table>
+                                            </div>
                                         </div>
 
                                     </div>
@@ -306,6 +317,48 @@
     }
 
 </script>
+<script>
+    @*function GetFilterDate() {
+    var sd = document.getElementById('Startdate').value;
+    var ed = document.getElementById('Enddate').value;
+    var id = '@ViewBag.RenterId';
 
+    $.ajax({
+        url: '@Url.Action("GetReceiptSum", "RenterReceiptList")',
+        type: "GET",
+        data: { type: "Date", StartDate: sd, EndDate: ed, id: id },
+        success: function (data) {
+            $('#table').html(data);
+            var t = data.split("/");
+            $('#RenterCreit').val(t[0]);
+            $('#RenterDebit').val(t[1]);
+        }
+    });
+    }*@
+    function GetFilterDate() {
+            var sd = document.getElementById('Startdate').value;
+            var ed = document.getElementById('Enddate').value;
+            var id = '@ViewBag.RenterId';
+
+            $.ajax({
+            url: '@Url.Action("Table", "RenterReceiptList")',
+            type: "POST",
+                data: { type: "Date", StartDate: sd, EndDate:ed,id:id },
+                success: function (data) {
+                    $('#UserReceiptTable').html(data);
+                }
+            });
+            $.ajax({
+                    url: '@Url.Action("GetReceiptSum", "RenterReceiptList")',
+                    type: "POST",
+                     data: { type: "Date", StartDate: sd, EndDate: ed, id: id },
+                        success: function (data) {
+                            var t = data.split("/");
+                            $('#UserCreit').val(t[0]);
+                            $('#UserDebit').val(t[1]);
+                        }
+                });
+        }
+</script>
 
 

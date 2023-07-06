@@ -573,14 +573,12 @@
                                 <li><a href="~/CasCarInformation/index">بيانات السيارات</a></li>
                                 <li><a href="~/CarDocMainten/index">الوثائق</a></li>
                                 <li><a href="~/Car_Mainten/index">الصيانة</a></li>
-                                <li><a href="~/TransferCars/index">نقل السيارة</a></li>
-                                @*<li><a href="#"> بيع السيارة</a></li>*@
-                                <li><a href="~/CarChangeOwner/index">تغيير المالك</a></li>
-                                @*<li><a href="~/CarDocMainten/index">المستندات</a></li>*@
+                                <li><a onclick="CheckBranch();" style="cursor:pointer">نقل السيارة</a></li>
+                                <li><a onclick="CheckOwners();" style="cursor:pointer">تغيير المالك</a></li>
                                 <li><a href="~/CarBasicPrice/Index">الأسعار</a></li>
-
                             </ul>
                         </li>
+                        
 
                         <li>
                             <a href="javascript: void(0);">
@@ -590,8 +588,7 @@
                             <ul class="nav-second-level" aria-expanded="false">
                                 <li><a href="~/CasRenterLessor/index">بيانات المستأجرين</a></li>
                                 <li><a href="~/CasRenterLessor/LoadRenters">عقود المستأجرين</a></li>
-                                <li><a href="~/RenterReceiptList/RenterReceiptBalance"> أرصدة المستأجرين</a></li>
-                                @*<li><a href="#">حسابات المستأجرين</a></li>*@
+                                <li><a href="~/RenterReceiptList/RenterReceiptBalance"> مديونيات المستأجرين</a></li>
                             </ul>
                         </li>
                         <li>
@@ -797,6 +794,37 @@
         $(document).ready(function () {
             $("input").inputmask();
         });
+    </script>
+
+
+    <script>
+      function CheckOwners() {
+        $.ajax({
+            url: '@Url.Action("CheckOwners", "CasOwners")',
+            type: "GET",
+            success: function (result) {
+                if (parseFloat(result) > 1) {
+                    window.location.href = "@Url.Action("index", "CarChangeOwner")";
+                } else {
+                    toastr.info("عفواً ....... لا يوجد ملاك ");
+                }
+            }
+        });
+        }
+
+        function CheckBranch() {
+        $.ajax({
+            url: '@Url.Action("CheckBranch", "CasBranch")',
+            type: "GET",
+            success: function (result) {
+                if (parseFloat(result) > 1) {
+                    window.location.href = "@Url.Action("index", "TransferCars")";
+                } else {
+                    toastr.info("عفواً ....... لا يوجد فروع ");
+                }
+            }
+        });
+    }
     </script>
     @*date hijri*@
     <script type="text/javascript">

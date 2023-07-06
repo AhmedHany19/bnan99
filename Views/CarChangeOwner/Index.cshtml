@@ -46,59 +46,92 @@
                                                     <table id="myTable" class="table table-striped mb-0" style="cursor:pointer">
                                                         <thead>
                                                             <tr>
+                                                                <th width="5%">
+                                                                    م
+                                                                </th>
                                                                 <th width="13%">
                                                                     @Html.DisplayNameFor(model => model.CR_Cas_Sup_Car_Serail_No)
                                                                 </th>
-                                                                <th width="20%">
-                                                                    المالك الحالي
-                                                                </th>
-                                                                @*<th>
-                                                                        @Html.DisplayNameFor(model => model.CR_Cas_Sup_Car_Location_Branch_Code)
-                                                                    </th>*@
-                                                                <th width="12%">
+                                                                <th width="12%" class="text-left">
                                                                     @Html.DisplayNameFor(model => model.CR_Cas_Sup_Car_Category_Code)
                                                                 </th>
-                                                                <th width="45%">
+                                                                <th width="45%" class="text-left">
                                                                     السيارة
                                                                 </th>
 
+                                                                <th width="15%" class="text-left">
+                                                                    الفرع
+                                                                </th>
+                                                                <th width="25%" class="text-left">
+                                                                    المالك 
+                                                                </th>
+                                                                
                                                             </tr>
                                                         </thead>
 
-                                                        <tbody id="tbl">
-                                                            @foreach (var item in Model)
-                                                            {
-                                                                <tr>
-                                                                    <td align="center" width="13%">
-                                                                        <a href="~/CarChangeOwner/Edit/?serialNo=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Serail_No)">
-                                                                            @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Serail_No)
-                                                                        </a>
-                                                                    </td>
-                                                                    <td width="20%">
-                                                                        <a href="~/CarChangeOwner/Edit/?serialNo=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Serail_No)">
-                                                                            @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Owners.CR_Cas_Sup_Owners_Ar_Long_Name)
-                                                                        </a>
-                                                                    </td>
-                                                                    @*<td>
-                                                                            <a href="~/TransferCars/Edit/@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Serail_No)">
-                                                                                @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch.CR_Cas_Sup_Branch_Ar_Short_Name)
+                                                        <tbody id="tbl" style="height:450px">
+                                                            @{ int c = 0;
+                                                                foreach (var item in Model)
+                                                                {
+                                                                    c += 1;
+                                                                    <tr>
+                                                                        <td width="5%" align="center">
+                                                                            <a href="~/CarChangeOwner/Edit/?serialNo=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Serail_No)">
+                                                                                @c
                                                                             </a>
-                                                                        </td>*@
-                                                                    <td width="12%">
-                                                                        <a href="~/CarChangeOwner/Edit/?serialNo=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Serail_No)">
-                                                                            @Html.DisplayFor(modelItem => item.CR_Mas_Sup_Category_Car.CR_Mas_Sup_Category.CR_Mas_Sup_Category_Ar_Name)
-                                                                        </a>
-                                                                    </td>
-                                                                    <td width="45%">
-                                                                        <a href="~/CarChangeOwner/Edit/?serialNo=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Serail_No)">
-                                                                            @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Collect_Ar_Name)
-                                                                        </a>
-                                                                    </td>
+                                                                        </td>
+                                                                        <td align="center" width="13%">
+                                                                            <a href="~/CarChangeOwner/Edit/?serialNo=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Serail_No)">
+                                                                                @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Serail_No)
+                                                                            </a>
+                                                                        </td>
+                                                                        <td width="12%">
+                                                                            <a href="~/CarChangeOwner/Edit/?serialNo=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Serail_No)">
+                                                                                @Html.DisplayFor(modelItem => item.CR_Mas_Sup_Category_Car.CR_Mas_Sup_Category.CR_Mas_Sup_Category_Ar_Name)
+                                                                            </a>
+                                                                        </td>
+                                                                        <td width="45%">
+                                                                            <a href="~/CarChangeOwner/Edit/?serialNo=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Serail_No)">
+                                                                                @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Collect_Ar_Name)
+                                                                            </a>
+                                                                        </td>
+                                                                        @if (item.CR_Cas_Sup_Branch.CR_Cas_Sup_Branch_Status == "H")
+                                                                        {
+                                                                            <td width="15%">
+                                                                                <a href="~/CarChangeOwner/Edit/?serialNo=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Serail_No)">
+                                                                                    @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch.CR_Cas_Sup_Branch_Ar_Name) <span class="text-danger">(الفرع موقوف)</span>
+                                                                                </a>
+                                                                            </td>
+                                                                        }
+                                                                        else {
+                                                                            <td width="15%">
+                                                                                <a href="~/CarChangeOwner/Edit/?serialNo=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Serail_No)">
+                                                                                    @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Branch.CR_Cas_Sup_Branch_Ar_Name)
+                                                                                </a>
+                                                                            </td>
+                                                                        }
+                                                                         @if (item.CR_Cas_Sup_Owners.CR_Cas_Sup_Owners_Status == "H")
+                                                                         {
+                                                                         <td width="25%">
+                                                                            <a href="~/CarChangeOwner/Edit/?serialNo=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Serail_No)">
+                                                                                @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Owners.CR_Cas_Sup_Owners_Ar_Long_Name) <span class="text-danger">(المالك موقوف)</span>
+                                                                            </a>
+                                                                        </td>
+                                                                         }
+                                                                        else
+                                                                        {
+                                                                            <td width="25%">
+                                                                                <a href="~/CarChangeOwner/Edit/?serialNo=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Serail_No)">
+                                                                                    @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Owners.CR_Cas_Sup_Owners_Ar_Long_Name)
+                                                                                </a>
+                                                                            </td>                                                          
+                                                                        }
 
-                                                                   
-                                                                </tr>
-                                                            }
-                                                        </tbody>
+
+                                                                    </tr>
+                                                                    }
+                                                                }
+                                                            </tbody>
 
                                                     </table>
                                                 </div>

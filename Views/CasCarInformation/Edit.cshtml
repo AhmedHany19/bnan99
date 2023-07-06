@@ -425,7 +425,7 @@
                                                 @Html.LabelFor(model => model.CR_Cas_Sup_Car_Reasons, htmlAttributes: new { @class = "lbl", style = "float:right;" })
                                             </div>
                                             <div class="col-md-9">
-                                                @Html.EditorFor(model => model.CR_Cas_Sup_Car_Reasons, new { htmlAttributes = new { @class = "form-control",maxlength="100" } })
+                                                @Html.EditorFor(model => model.CR_Cas_Sup_Car_Reasons, new { htmlAttributes = new { @class = "form-control", maxlength = "100" } })
                                             </div>
                                         </div>
                                     </div>
@@ -563,148 +563,170 @@
             <a href="/CasCarInformation/Index/" class="btn" style="font-family:'Times New Roman';float:left;font-size:15px!important;width: 70px !important;padding-top:4px;height:30px; background-color: #F3B161; padding-right: 22px; border-radius: 0px; color: white;">انهاء</a>
         </div>*@
 
-                            <div class="col-md-12" style="margin-bottom:20px;">
-                                @if (ViewBag.delete == "D")
-                                {
+                                <div class="col-md-12" style="margin-bottom:20px;">
+                                    @if (ViewBag.delete == "D")
+                                    {
 
-                                    @*<input type="submit" name="save" value="حفظ" class="btn btn-primary waves-effect" style="float: right;margin-right:29px;cursor:no-drop;" onclick="javascript:return false;" disabled />
-            <input type="submit" name="hold" class="btn btn-primary waves-effect" value="@ViewBag.h" style=" margin-right: 20px;cursor:no-drop;" onclick="javascript:return false;" disabled />*@
-                                    <a name="save" class="btn btn-primary waves-effect btn-disabled red-tooltip" data-toggle="tooltip" data-placement="top" data-original-title="لا يمكن حفظ السيارة" style="color:#fff;  margin-left: 20px; margin-top: 10px; cursor: no-drop;" disabled>
-                                        حفظ
-                                    </a>
-                                    <a name="hold" class="btn btn-primary waves-effect btn-disabled red-tooltip" data-toggle="tooltip" data-placement="top" data-original-title="لا يمكن إيقاف السيارة" style="color:#fff;  margin-left: 20px; margin-top: 10px; cursor: no-drop;" disabled>
-                                        @ViewBag.h
-                                    </a>
-
-
-                                    <input type="button" name="delete" id="btn-confirm" class="btn btn-primary waves-effect" value="@ViewBag.stat" style="margin-left: 20px; margin-top: 10px;" />
-                                    <input type="submit" name="Maintenance" class="btn btn-primary waves-effect" value="@ViewBag.Maintenance" style=" margin-left: 20px;margin-top: 10px;cursor:no-drop" disabled />
-                                    <input type="submit" name="Sell" class="btn btn-primary waves-effect" value="@ViewBag.Sell" style=" margin-left: 20px;margin-top: 10px;cursor:no-drop" disabled />
-
-                                    <a href="/CasCarInformation/Index/" class="btn btn-primary waves-effect" style="float:left; margin-top: 10px;">انهاء</a>
-
-                                }
-                                else if (ViewBag.delete == "H")
-                                {
-                                    @*<input type="submit" name="save" value="حفظ" class="btn btn-primary waves-effect" style="float: right;margin-right:29px;cursor:no-drop;" onclick="javascript:return false;" disabled />*@
-                                    <a name="save" class="btn btn-primary waves-effect btn-disabled red-tooltip" data-toggle="tooltip" data-placement="top" data-original-title="لا يمكن حفظ السيارة" style="color:#fff;  margin-left: 20px; margin-top: 10px; cursor: no-drop;" disabled>
-                                        حفظ
-                                    </a>
-                                    <input type="submit" name="hold" class="btn btn-primary waves-effect" value="@ViewBag.h" style=" margin-left: 20px; margin-top: 10px;" />
-                                    @*<input type="button" name="delete" id="btn-confirm" class="btn btn-primary waves-effect" value="@ViewBag.stat" style="margin-left: 20px;cursor:no-drop;" onclick="javascript:return false;" disabled />*@
-                                    <a name="delete" class="btn btn-primary waves-effect btn-disabled red-tooltip" data-toggle="tooltip" data-placement="top" data-original-title="لا يمكن حذف السيارة" style="color:#fff;  margin-left: 20px; margin-top: 10px; cursor: no-drop;" disabled>
-                                        @ViewBag.stat
-                                    </a>
-                                    <input type="submit" name="Maintenance" class="btn btn-primary waves-effect" value="@ViewBag.Maintenance" style=" margin-left: 20px;margin-top: 10px;cursor:no-drop" disabled />
-                                    <input type="submit" name="Sell" class="btn btn-primary waves-effect" value="@ViewBag.Sell" style=" margin-left: 20px;margin-top: 10px;cursor:no-drop" disabled />
-                                    <a href="/CasCarInformation/Index/" class="btn btn-primary waves-effect" style="float:left; margin-top: 10px;">انهاء</a>
-
-                                }
-                                else if (ViewBag.delete == "O")
-                                {
-
-                                    @*<input type="submit" name="save" value="حفظ" class="btn btn-primary waves-effect" style="float: right;margin-left:20px;cursor:no-drop;" onclick="javascript:return false;" disabled />*@
-                                    <a name="save" class="btn btn-primary waves-effect btn-disabled red-tooltip" data-toggle="tooltip" data-placement="top" data-original-title="لا يمكن حفظ السيارة" style="color:#fff;  margin-left: 20px; margin-top: 10px; cursor: no-drop;" disabled>
-                                        حفظ
-                                    </a>
-                                    @*<input type="submit" name="hold" class="btn btn-primary waves-effect" value="@ViewBag.h" style=" margin-left: 20px;cursor:no-drop;" onclick="javascript:return false;" disabled />*@
-                                    <a name="hold" class="btn btn-primary waves-effect btn-disabled red-tooltip" data-toggle="tooltip" data-placement="top" data-original-title="لا يمكن إيقاف السيارة" style="color:#fff;  margin-left: 20px; margin-top: 10px; cursor: no-drop;" disabled>
-                                        @ViewBag.h
-                                    </a>
-
-                                    <input type="button" name="delete" id="btn-confirm" class="btn btn-primary waves-effect" value="@ViewBag.stat" style="margin-left: 20px; margin-top: 10px;cursor:no-drop;" onclick="javascript:return false;" disabled />
-                                    <input type="submit" name="Maintenance" class="btn btn-primary waves-effect" value="@ViewBag.Maintenance" style=" margin-left: 20px;margin-top: 10px;cursor:no-drop" disabled />
-                                    <input type="submit" name="Sell" class="btn btn-primary waves-effect" value="@ViewBag.Sell" style=" margin-left: 20px; margin-top: 10px;" />
-                                    <a href="/CasCarInformation/Index/" class="btn btn-primary waves-effect" style="float:left; margin-top: 10px;">انهاء</a>
-                                }
-                                else if (ViewBag.delete == "M")
-                                {
+                                        @*<input type="submit" name="save" value="حفظ" class="btn btn-primary waves-effect" style="float: right;margin-right:29px;cursor:no-drop;" onclick="javascript:return false;" disabled />
+                <input type="submit" name="hold" class="btn btn-primary waves-effect" value="@ViewBag.h" style=" margin-right: 20px;cursor:no-drop;" onclick="javascript:return false;" disabled />*@
+                                        <a name="save" class="btn btn-primary waves-effect btn-disabled red-tooltip" data-toggle="tooltip" data-placement="top" data-original-title="لا يمكن حفظ السيارة" style="color:#fff;  margin-left: 20px; margin-top: 10px; cursor: no-drop;" disabled>
+                                            حفظ
+                                        </a>
+                                        <a name="hold" class="btn btn-primary waves-effect btn-disabled red-tooltip" data-toggle="tooltip" data-placement="top" data-original-title="لا يمكن إيقاف السيارة" style="color:#fff;  margin-left: 20px; margin-top: 10px; cursor: no-drop;" disabled>
+                                            @ViewBag.h
+                                        </a>
 
 
-                                    <a name="save" class="btn btn-primary waves-effect btn-disabled red-tooltip" data-toggle="tooltip" data-placement="top" data-original-title="لا يمكن حفظ السيارة" style="color:#fff;  margin-left: 20px; margin-top: 10px; cursor: no-drop;" disabled>
-                                        حفظ
-                                    </a>
+                                        <input type="button" name="delete" id="btn-confirm" class="btn btn-primary waves-effect" value="@ViewBag.stat" style="margin-left: 20px; margin-top: 10px;" />
+                                        <input type="submit" name="Maintenance" class="btn btn-primary waves-effect" value="@ViewBag.Maintenance" style=" margin-left: 20px;margin-top: 10px;cursor:no-drop" disabled />
+                                        <input type="submit" name="Sell" class="btn btn-primary waves-effect" value="@ViewBag.Sell" style=" margin-left: 20px;margin-top: 10px;cursor:no-drop" disabled />
 
-                                    <a name="hold" class="btn btn-primary waves-effect btn-disabled red-tooltip" data-toggle="tooltip" data-placement="top" data-original-title="لا يمكن إيقاف السيارة" style="color:#fff;  margin-left: 20px; margin-top: 10px; cursor: no-drop;" disabled>
-                                        @ViewBag.h
-                                    </a>
-                                    <input type="button" name="delete" id="btn-confirm" class="btn btn-primary waves-effect" value="@ViewBag.stat" style="margin-left: 20px; margin-top: 10px;cursor:no-drop;" onclick="javascript:return false;" disabled />
-                                    <input type="submit" name="Maintenance" class="btn btn-primary waves-effect" value="@ViewBag.Maintenance" style=" margin-left: 20px;margin-top: 10px;" />
-                                    <input type="submit" name="Sell" class="btn btn-primary waves-effect" value="@ViewBag.Sell" style=" margin-left: 20px; margin-top: 10px;" cursor:no-drop;" onclick="javascript:return false;" disabled />
-                                    <a href="/CasCarInformation/Index/" class="btn btn-primary waves-effect" style="float:left; margin-top: 10px;">انهاء</a>
-                                }
-                                else
-                                {
+                                        <a href="/CasCarInformation/Index/" class="btn btn-primary waves-effect" style="float:left; margin-top: 10px;">انهاء</a>
 
-                                    <input type="submit" name="save" value="حفظ" class="btn btn-primary waves-effect" style="float: right;margin-left:20px;margin-top: 10px;" />
+                                    }
+                                    else if (ViewBag.delete == "H")
+                                    {
+                                        @*<input type="submit" name="save" value="حفظ" class="btn btn-primary waves-effect" style="float: right;margin-right:29px;cursor:no-drop;" onclick="javascript:return false;" disabled />*@
+                                        <a name="save" class="btn btn-primary waves-effect btn-disabled red-tooltip" data-toggle="tooltip" data-placement="top" data-original-title="لا يمكن حفظ السيارة" style="color:#fff;  margin-left: 20px; margin-top: 10px; cursor: no-drop;" disabled>
+                                            حفظ
+                                        </a>
+                                        <input type="submit" name="hold" class="btn btn-primary waves-effect" value="@ViewBag.h" style=" margin-left: 20px; margin-top: 10px;" />
+                                        @*<input type="button" name="delete" id="btn-confirm" class="btn btn-primary waves-effect" value="@ViewBag.stat" style="margin-left: 20px;cursor:no-drop;" onclick="javascript:return false;" disabled />*@
+                                        <a name="delete" class="btn btn-primary waves-effect btn-disabled red-tooltip" data-toggle="tooltip" data-placement="top" data-original-title="لا يمكن حذف السيارة" style="color:#fff;  margin-left: 20px; margin-top: 10px; cursor: no-drop;" disabled>
+                                            @ViewBag.stat
+                                        </a>
+                                        <input type="submit" name="Maintenance" class="btn btn-primary waves-effect" value="@ViewBag.Maintenance" style=" margin-left: 20px;margin-top: 10px;cursor:no-drop" disabled />
+                                        <input type="submit" name="Sell" class="btn btn-primary waves-effect" value="@ViewBag.Sell" style=" margin-left: 20px;margin-top: 10px;cursor:no-drop" disabled />
+                                        <a href="/CasCarInformation/Index/" class="btn btn-primary waves-effect" style="float:left; margin-top: 10px;">انهاء</a>
 
-                                    <input type="submit" name="hold" class="btn btn-primary waves-effect" value="@ViewBag.h" style=" margin-left: 20px;margin-top: 10px;" />
+                                    }
+                                    else if (ViewBag.delete == "O")
+                                    {
 
-                                    <input type="button" name="delete" id="btn-confirm" class="btn btn-primary waves-effect" value="@ViewBag.stat" style="margin-left: 20px;margin-top: 10px; " />
+                                        @*<input type="submit" name="save" value="حفظ" class="btn btn-primary waves-effect" style="float: right;margin-left:20px;cursor:no-drop;" onclick="javascript:return false;" disabled />*@
+                                        <a name="save" class="btn btn-primary waves-effect btn-disabled red-tooltip" data-toggle="tooltip" data-placement="top" data-original-title="لا يمكن حفظ السيارة" style="color:#fff;  margin-left: 20px; margin-top: 10px; cursor: no-drop;" disabled>
+                                            حفظ
+                                        </a>
+                                        @*<input type="submit" name="hold" class="btn btn-primary waves-effect" value="@ViewBag.h" style=" margin-left: 20px;cursor:no-drop;" onclick="javascript:return false;" disabled />*@
+                                        <a name="hold" class="btn btn-primary waves-effect btn-disabled red-tooltip" data-toggle="tooltip" data-placement="top" data-original-title="لا يمكن إيقاف السيارة" style="color:#fff;  margin-left: 20px; margin-top: 10px; cursor: no-drop;" disabled>
+                                            @ViewBag.h
+                                        </a>
 
-                                    <input type="submit" name="Maintenance" class="btn btn-primary waves-effect" value="@ViewBag.Maintenance" style=" margin-left: 20px;margin-top: 10px;" />
+                                        <input type="button" name="delete" id="btn-confirm" class="btn btn-primary waves-effect" value="@ViewBag.stat" style="margin-left: 20px; margin-top: 10px;cursor:no-drop;" onclick="javascript:return false;" disabled />
+                                        <input type="submit" name="Maintenance" class="btn btn-primary waves-effect" value="@ViewBag.Maintenance" style=" margin-left: 20px;margin-top: 10px;cursor:no-drop" disabled />
+                                        <input type="submit" name="Sell" class="btn btn-primary waves-effect" value="@ViewBag.Sell" style=" margin-left: 20px; margin-top: 10px;" />
+                                        <a href="/CasCarInformation/Index/" class="btn btn-primary waves-effect" style="float:left; margin-top: 10px;">انهاء</a>
+                                    }
+                                    else if (ViewBag.delete == "M")
+                                    {
 
-                                    <input type="submit" name="Sell" class="btn btn-primary waves-effect" value="@ViewBag.Sell" style=" margin-left: 20px;margin-top: 10px;" />
+
+                                        <a name="save" class="btn btn-primary waves-effect btn-disabled red-tooltip" data-toggle="tooltip" data-placement="top" data-original-title="لا يمكن حفظ السيارة" style="color:#fff;  margin-left: 20px; margin-top: 10px; cursor: no-drop;" disabled>
+                                            حفظ
+                                        </a>
+
+                                        <a name="hold" class="btn btn-primary waves-effect btn-disabled red-tooltip" data-toggle="tooltip" data-placement="top" data-original-title="لا يمكن إيقاف السيارة" style="color:#fff;  margin-left: 20px; margin-top: 10px; cursor: no-drop;" disabled>
+                                            @ViewBag.h
+                                        </a>
+                                        <input type="button" name="delete" id="btn-confirm" class="btn btn-primary waves-effect" value="@ViewBag.stat" style="margin-left: 20px; margin-top: 10px;cursor:no-drop;" onclick="javascript:return false;" disabled />
+                                        <input type="submit" name="Maintenance" class="btn btn-primary waves-effect" value="@ViewBag.Maintenance" style=" margin-left: 20px;margin-top: 10px;" />
+                                        <input type="submit" name="Sell" class="btn btn-primary waves-effect" value="@ViewBag.Sell" style=" margin-left: 20px; margin-top: 10px;" cursor:no-drop;" onclick="javascript:return false;" disabled />
+                                        <a href="/CasCarInformation/Index/" class="btn btn-primary waves-effect" style="float:left; margin-top: 10px;">انهاء</a>
+                                    }
+                                    else
+                                    {
+
+                                        <input type="submit" name="save" value="حفظ" class="btn btn-primary waves-effect" style="float: right;margin-left:20px;margin-top: 10px;" />
+
+                                        <input type="submit" name="hold" class="btn btn-primary waves-effect" value="@ViewBag.h" style=" margin-left: 20px;margin-top: 10px;" />
+
+                                        <input type="button" name="delete" id="btn-confirm" class="btn btn-primary waves-effect" value="@ViewBag.stat" style="margin-left: 20px;margin-top: 10px; " />
+
+                                        <input type="submit" name="Maintenance" class="btn btn-primary waves-effect" value="@ViewBag.Maintenance" style=" margin-left: 20px;margin-top: 10px;" />
+
+                                        <input type="submit" name="Sell" class="btn btn-primary waves-effect" value="@ViewBag.Sell" style=" margin-left: 20px;margin-top: 10px;" />
 
 
 
-                                    <a href="/CasCarInformation/Index/" class="btn btn-primary waves-effect" style="float:left;margin-top: 10px;">انهاء</a>
+                                        <a href="/CasCarInformation/Index/" class="btn btn-primary waves-effect" style="float:left;margin-top: 10px;">انهاء</a>
 
-                                }
-                                <!--Popup For Delete-->
-                                <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="mi-modal" style="margin-top:17%;">
-                                    <div class="modal-dialog modal-sm">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h4 class="modal-title" id="myModalLabel" style=" margin-right: 10%;">تأكيد</h4>
-                                            </div>
-                                            <div class="modal-body">
-                                                <h6> هل انت متاكد من حذف هذه السيارة !!</h6>
-                                            </div>
-                                            <div class="modal-footer">
-                                                @if (ViewBag.delete == "D")
-                                                {
-                                                    <input type="submit" name="delete" class="submit_btn" value="@ViewBag.stat" id="modal-btn-si" style="float:right;width:80px;height:40px;font:bold 14px Tahoma;margin-left:10px;color:white;background-color:#5cb85c;" />
-                                                }
-                                                else
-                                                {
-                                                    <input type="submit" name="delete" class="submit_btn" value="@ViewBag.stat" id="modal-btn-si" style="float:right;width:80px;height:40px;font:bold 14px Tahoma;margin-left:10px;color:white;background-color:#d9534f;" />
-                                                }
-                                                <button type="button" class="btn btn-primary" id="modal-btn-no" style="float: left;width: 80px;height: 40px;font: bold 14px Tahoma">إلغاء</button>
+                                    }
+                                    <!--Popup For Delete-->
+                                    <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="mi-modal" style="margin-top:17%;">
+                                        <div class="modal-dialog modal-sm">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title" id="myModalLabel" style=" margin-right: 10%;">تأكيد</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <h6> هل انت متاكد من حذف هذه السيارة !!</h6>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    @if (ViewBag.delete == "D")
+                                                    {
+                                                        <input type="submit" name="delete" class="submit_btn" value="@ViewBag.stat" id="modal-btn-si" style="float:right;width:80px;height:40px;font:bold 14px Tahoma;margin-left:10px;color:white;background-color:#5cb85c;" />
+                                                    }
+                                                    else
+                                                    {
+                                                        <input type="submit" name="delete" class="submit_btn" value="@ViewBag.stat" id="modal-btn-si" style="float:right;width:80px;height:40px;font:bold 14px Tahoma;margin-left:10px;color:white;background-color:#d9534f;" />
+                                                    }
+                                                    <button type="button" class="btn btn-primary" id="modal-btn-no" style="float: left;width: 80px;height: 40px;font: bold 14px Tahoma">إلغاء</button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
+
+                                    <!--Popup For Hold-->
+                                    <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="mi-modal" style="margin-top:17%;">
+                                        <div class="modal-dialog modal-sm">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title" id="myModalLabel" style=" margin-right: 10%;">تأكيد</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <h6> هل انت متاكد من حذف هذه السيارة !!</h6>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    @if (ViewBag.delete == "D")
+                                                    {
+                                                        <input type="submit" name="delete" class="submit_btn" value="@ViewBag.stat" id="modal-btn-si" style="float:right;width:80px;height:40px;font:bold 14px Tahoma;margin-left:10px;color:white;background-color:#5cb85c;" />
+                                                    }
+                                                    else
+                                                    {
+                                                        <input type="submit" name="delete" class="submit_btn" value="@ViewBag.stat" id="modal-btn-si" style="float:right;width:80px;height:40px;font:bold 14px Tahoma;margin-left:10px;color:white;background-color:#d9534f;" />
+                                                    }
+                                                    <button type="button" class="btn btn-primary" id="modal-btn-no" style="float: left;width: 80px;height: 40px;font: bold 14px Tahoma">إلغاء</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
                                 </div>
 
-                                <!--Popup For Hold-->
-                                @*<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="mi-modal" style="margin-top:17%;">
-                                    <div class="modal-dialog modal-sm">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h4 class="modal-title" id="myModalLabel" style=" margin-right: 10%;">تأكيد</h4>
-                                            </div>
-                                            <div class="modal-body">
-                                                <h6> هل انت متاكد من حذف هذه السيارة !!</h6>
-                                            </div>
-                                            <div class="modal-footer">
-                                                @if (ViewBag.delete == "D")
-                                                {
-                                                    <input type="submit" name="delete" class="submit_btn" value="@ViewBag.stat" id="modal-btn-si" style="float:right;width:80px;height:40px;font:bold 14px Tahoma;margin-left:10px;color:white;background-color:#5cb85c;" />
-                                                }
-                                                else
-                                                {
-                                                    <input type="submit" name="delete" class="submit_btn" value="@ViewBag.stat" id="modal-btn-si" style="float:right;width:80px;height:40px;font:bold 14px Tahoma;margin-left:10px;color:white;background-color:#d9534f;" />
-                                                }
-                                                <button type="button" class="btn btn-primary" id="modal-btn-no" style="float: left;width: 80px;height: 40px;font: bold 14px Tahoma">إلغاء</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>*@
+                                <script>
+                                    $("#btn-confirm").on("click", function () {
+                                        var status = '@TempData["CarStatus"]';
+                                        console.log(status);
+                                        console.log(status);
+                                        console.log(status);
+                                        console.log(status);
+                                        var x = false;
+                                        if (status === "Rented") {
+                                            toastr.info("لا يمكن الحذف،هذه السيارة مؤجرة");
+                                            return;
+                                        }
+                                        else if (status === "Buy") {
+                                            toastr.info("لا يمكن الحذف،هذه السيارة معروضه للبيع");
+                                            return;
+                                        }
+                                        else {
+                                            x = true;
+                                        }
 
-
-
-                            </div>
-
+                                    })
+                                </script>
 
                                 <script>
 
@@ -815,47 +837,47 @@
 
 
                                 @*<script>
-                                    function getcarinfo() {
-                                        var year = $("#CR_Cas_Sup_Car_Year").val();
-                                        var model = $("#CR_Cas_Sup_Car_Model_Code").val();
-                                        if (year == null || model == null) {
-                                            return;
-                                        }
-                                        if (event.keyCode === 13) {
-                                            $.ajax({
-                                                url: '@Url.Action("GetCategory", "CasCarInformation")',
-                                                type: "GET",
-                                                data: { year: year, ModelCode: model},
-                                                success: function (result) {
-                                                    //alert(result.CR_Mas_Sup_Category_Ar_Name);
-                                                    if (result.CR_Mas_Sup_Category_Ar_Name != null) {
-                                                        $("#CR_Cas_Sup_Car_Category_Code").val(result.CR_Mas_Sup_Category_Ar_Name);
-                                                    } else {
+            function getcarinfo() {
+                var year = $("#CR_Cas_Sup_Car_Year").val();
+                var model = $("#CR_Cas_Sup_Car_Model_Code").val();
+                if (year == null || model == null) {
+                    return;
+                }
+                if (event.keyCode === 13) {
+                    $.ajax({
+                        url: '@Url.Action("GetCategory", "CasCarInformation")',
+                        type: "GET",
+                        data: { year: year, ModelCode: model},
+                        success: function (result) {
+                            //alert(result.CR_Mas_Sup_Category_Ar_Name);
+                            if (result.CR_Mas_Sup_Category_Ar_Name != null) {
+                                $("#CR_Cas_Sup_Car_Category_Code").val(result.CR_Mas_Sup_Category_Ar_Name);
+                            } else {
 
-                                                        $("#CR_Cas_Sup_Car_Category_Code").val="";
-                                                    }
-
-
-                                                    if (result.CR_Mas_Sup_Category_Code != null) {
-                                                        $("#CategoryCode").val(result.CR_Mas_Sup_Category_Code);
-
-                                                    } else {
-                                                        $("#CategoryCode").val="";
-                                                    }
-
-                                                    if (result.CR_Mas_Sup_Category_Reasons != null) {
-                                                        $("img[id=carimg]").attr("src", result.CR_Mas_Sup_Category_Reasons);
-                                                    } else {
-                                                        $("img[id=carimg]").attr("src", "");
-                                                    }
-                                                    LoadImg(result.CR_Mas_Sup_Category_Reasons);
+                                $("#CR_Cas_Sup_Car_Category_Code").val="";
+                            }
 
 
-                                                }
-                                            });
-                                        }
-                                    };
-                                </script>*@
+                            if (result.CR_Mas_Sup_Category_Code != null) {
+                                $("#CategoryCode").val(result.CR_Mas_Sup_Category_Code);
+
+                            } else {
+                                $("#CategoryCode").val="";
+                            }
+
+                            if (result.CR_Mas_Sup_Category_Reasons != null) {
+                                $("img[id=carimg]").attr("src", result.CR_Mas_Sup_Category_Reasons);
+                            } else {
+                                $("img[id=carimg]").attr("src", "");
+                            }
+                            LoadImg(result.CR_Mas_Sup_Category_Reasons);
+
+
+                        }
+                    });
+                }
+            };
+        </script>*@
 
 
                                 <script>

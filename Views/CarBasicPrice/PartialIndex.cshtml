@@ -15,7 +15,7 @@
                             <th width="5%">
                                 م
                             </th>
-                            <th width="25%">
+                            <th width="25%" class="text-left">
                                 السيارة
                             </th>
                             <th width="23%">
@@ -35,108 +35,212 @@
                             </th>
                         </tr>
                     </thead>
-                    <tbody id="tbl">
+                    <tbody id="tbl" style="height:450px">
                         @{
                             int c = 0;
                             foreach (var item in Model)
                             {
-                                c += 1;
-                                <tr>
-                                    <td hidden>
-
-                                        <a href="~/CarBasicPrice/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Car_Price_Basic_No)">
-                                            @Html.DisplayFor(modelItem => item.CR_Cas_Car_Price_Basic_No)
-                                        </a>
-                                    </td>
-                                    <td width="5%" align="center">
-
-                                        <a href="~/CarBasicPrice/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Car_Price_Basic_No)">
-                                            @c
-                                        </a>
-                                    </td>
-                                    <td width="25%">
-                                        <a href="~/CarBasicPrice/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Car_Price_Basic_No)">
-                                            @Html.DisplayFor(modelItem => item.CR_Mas_Sup_Brand.CR_Mas_Sup_Brand_Ar_Name)
-                                            -
-                                            @Html.DisplayFor(modelItem => item.CR_Mas_Sup_Model.CR_Mas_Sup_Model_Ar_Name)
-                                            -
-                                            @Html.DisplayFor(modelItem => item.CR_Cas_Car_Price_Basic_Car_Year)
-
-                                        </a>
-                                    </td>
-                                    <td width="23%">
-                                        <a href="~/CarBasicPrice/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Car_Price_Basic_No)">
-                                            @Html.DisplayFor(modelItem => item.CR_Cas_Car_Price_Basic_Daily_Rent)
-                                            -
-                                            @Html.DisplayFor(modelItem => item.CR_Cas_Car_Price_Basic_Weekly_Rent)
-                                            -
-                                            @Html.DisplayFor(modelItem => item.CR_Cas_Car_Price_Basic_Monthly_Rent)
-                                        </a>
-                                    </td>
-                                    <td align="center" width="10%">
-                                        @if (item.CR_Cas_Car_Price_Basic_Date != null)
-                                        {
-                                            <a href="~/CarBasicPrice/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Car_Price_Basic_No)">
-
-                                                @item.CR_Cas_Car_Price_Basic_Date.Value.ToString("yyyy/MM/dd")
-                                            </a>
-                                        }
-                                    </td>
-                                    <td align="center" width="10%">
-                                        @if (item.CR_Cas_Car_Price_Basic_Start_Date != null)
-                                        {
-                                            <a href="~/CarBasicPrice/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Car_Price_Basic_No)">
-                                                @item.CR_Cas_Car_Price_Basic_Start_Date.Value.ToString("yyyy/MM/dd")
-                                            </a>
-                                        }
-                                    </td>
-                                    <td align="center" width="10%">
-                                        @if (item.CR_Cas_Car_Price_Basic_End_Date != null)
-                                        {
-                                            <a href="~/CarBasicPrice/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Car_Price_Basic_No)">
-                                                @item.CR_Cas_Car_Price_Basic_End_Date.Value.ToString("yyyy/MM/dd")
-                                            </a>
-                                        }
-                                    </td>
-                                    <td style="text-align:center" width="12%">
-                                        @if (item.CR_Cas_Car_Price_Basic_Status == "A")
-                                        {
-                                            <a href="~/CarBasicPrice/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Car_Price_Basic_No)" >
-                                                <label>نشط</label>
-                                            </a>
-
-                                        }
-                                        else if (item.CR_Cas_Car_Price_Basic_Status == "D")
+                                if (item.CR_Cas_Car_Price_Basic_Status == "A")
                                 {
-                                            <a href="~/CarBasicPrice/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Car_Price_Basic_No)"  style="color:red">
-                                                <label>محذوف</label>
-                                            </a>
+                                    c += 1;
+                                    <tr>
+                                        <td hidden>
 
-                                        }
-                                else if (item.CR_Cas_Car_Price_Basic_Status == "X")
-                                {
                                             <a href="~/CarBasicPrice/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Car_Price_Basic_No)">
-                                                <label>على وشك الإنتهاء</label>
+                                                @Html.DisplayFor(modelItem => item.CR_Cas_Car_Price_Basic_No)
                                             </a>
+                                        </td>
+                                        <td width="5%" align="center">
 
-                                        }
-                                else if (item.CR_Cas_Car_Price_Basic_Status == "E")
+                                            <a href="~/CarBasicPrice/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Car_Price_Basic_No)">
+                                                @c
+                                            </a>
+                                        </td>
+                                        <td width="25%">
+                                            <a href="~/CarBasicPrice/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Car_Price_Basic_No)">
+                                                @Html.DisplayFor(modelItem => item.CR_Mas_Sup_Brand.CR_Mas_Sup_Brand_Ar_Name)
+                                                -
+                                                @Html.DisplayFor(modelItem => item.CR_Mas_Sup_Model.CR_Mas_Sup_Model_Ar_Name)
+                                                -
+                                                @Html.DisplayFor(modelItem => item.CR_Cas_Car_Price_Basic_Car_Year)
+
+                                            </a>
+                                        </td>
+                                        <td width="23%" class="text-center">
+                                            <a href="~/CarBasicPrice/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Car_Price_Basic_No)">
+                                                @Html.DisplayFor(modelItem => item.CR_Cas_Car_Price_Basic_Daily_Rent)
+                                                -
+                                                @Html.DisplayFor(modelItem => item.CR_Cas_Car_Price_Basic_Weekly_Rent)
+                                                -
+                                                @Html.DisplayFor(modelItem => item.CR_Cas_Car_Price_Basic_Monthly_Rent)
+                                            </a>
+                                        </td>
+                                        <td align="center" width="10%">
+                                            @if (item.CR_Cas_Car_Price_Basic_Date != null)
+                                            {
+                                                <a href="~/CarBasicPrice/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Car_Price_Basic_No)">
+
+                                                    @item.CR_Cas_Car_Price_Basic_Date.Value.ToString("yyyy/MM/dd")
+                                                </a>
+                                            }
+                                        </td>
+                                        <td align="center" width="10%">
+                                            @if (item.CR_Cas_Car_Price_Basic_Start_Date != null)
+                                            {
+                                                <a href="~/CarBasicPrice/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Car_Price_Basic_No)">
+                                                    @item.CR_Cas_Car_Price_Basic_Start_Date.Value.ToString("yyyy/MM/dd")
+                                                </a>
+                                            }
+                                        </td>
+                                        <td align="center" width="10%">
+                                            @if (item.CR_Cas_Car_Price_Basic_End_Date != null)
+                                            {
+                                                <a href="~/CarBasicPrice/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Car_Price_Basic_No)">
+                                                    @item.CR_Cas_Car_Price_Basic_End_Date.Value.ToString("yyyy/MM/dd")
+                                                </a>
+                                            }
+                                        </td>
+                                        <td style="text-align:center" width="12%">
+                                            @if (item.CR_Cas_Car_Price_Basic_Status == "A")
+                                            {
+                                                <a href="~/CarBasicPrice/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Car_Price_Basic_No)">
+                                                    <label style="color:forestgreen">نشط</label>
+                                                </a>
+
+                                            }
+                                            else if (item.CR_Cas_Car_Price_Basic_Status == "D")
+                                            {
+                                                <a href="~/CarBasicPrice/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Car_Price_Basic_No)" style="color:red;font-weight:100!important">
+                                                    <label>محذوف</label>
+                                                </a>
+
+                                            }
+                                            else if (item.CR_Cas_Car_Price_Basic_Status == "X")
+                                            {
+                                                <a style="color:red;font-weight:100!important" href="~/CarBasicPrice/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Car_Price_Basic_No)">
+                                                    <label style="color:red;font-weight:100!important">على وشك الإنتهاء</label>
+                                                </a>
+
+                                            }
+                                            else if (item.CR_Cas_Car_Price_Basic_Status == "E")
+                                            {
+                                                <a href="~/CarBasicPrice/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Car_Price_Basic_No)" style="color:red;font-weight:100!important">
+                                                    <label style="color:red;font-weight:100!important">منتهي</label>
+                                                </a>
+
+                                            }
+                                            else if (item.CR_Cas_Car_Price_Basic_Status == "N")
+                                            {
+                                                <a href="~/CarBasicPrice/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Car_Price_Basic_No)" style="color:red;font-weight:100!important">
+                                                    <label style="color:red;font-weight:100!important">لم يسجل</label>
+                                                </a>
+
+                                            }
+                                        </td>
+
+                                    </tr>
+                                }
+                                else
                                 {
-                                            <a href="~/CarBasicPrice/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Car_Price_Basic_No)" style="color:red">
-                                                <label>منتهي</label>
+                                    c += 1;
+                                    <tr>
+                                        <td hidden>
+
+                                            <a href="~/CarBasicPrice/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Car_Price_Basic_No)">
+                                                @Html.DisplayFor(modelItem => item.CR_Cas_Car_Price_Basic_No)
                                             </a>
+                                        </td>
+                                        <td width="5%" align="center" style="color:red;font-weight:100!important">
 
-                                        }
-                                else if (item.CR_Cas_Car_Price_Basic_Status == "N")
-                                {
-                                            <a href="~/CarBasicPrice/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Car_Price_Basic_No)" style="color:red">
-                                                <label style="color:crimson">لم يسجل</label>
+                                            <a href="~/CarBasicPrice/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Car_Price_Basic_No)" style="color:red;font-weight:100!important">
+                                                @c
                                             </a>
+                                        </td>
+                                        <td width="25%" style="color:red;font-weight:100!important">
+                                            <a href="~/CarBasicPrice/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Car_Price_Basic_No)" style="color:red;font-weight:100!important">
+                                                @Html.DisplayFor(modelItem => item.CR_Mas_Sup_Brand.CR_Mas_Sup_Brand_Ar_Name)
+                                                -
+                                                @Html.DisplayFor(modelItem => item.CR_Mas_Sup_Model.CR_Mas_Sup_Model_Ar_Name)
+                                                -
+                                                @Html.DisplayFor(modelItem => item.CR_Cas_Car_Price_Basic_Car_Year)
 
-                                        }
-                                    </td>
+                                            </a>
+                                        </td>
+                                        <td width="23%" class="text-center" style="color:red;font-weight:100!important">
+                                            <a href="~/CarBasicPrice/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Car_Price_Basic_No)" style="color:red;font-weight:100!important">
+                                                @Html.DisplayFor(modelItem => item.CR_Cas_Car_Price_Basic_Daily_Rent)
+                                                -
+                                                @Html.DisplayFor(modelItem => item.CR_Cas_Car_Price_Basic_Weekly_Rent)
+                                                -
+                                                @Html.DisplayFor(modelItem => item.CR_Cas_Car_Price_Basic_Monthly_Rent)
+                                            </a>
+                                        </td>
+                                        <td align="center" width="10%" style="color:red;font-weight:100!important">
+                                            @if (item.CR_Cas_Car_Price_Basic_Date != null)
+                                            {
+                                                <a href="~/CarBasicPrice/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Car_Price_Basic_No)" style="color:red;font-weight:100!important">
 
-                                </tr>
+                                                    @item.CR_Cas_Car_Price_Basic_Date.Value.ToString("yyyy/MM/dd")
+                                                </a>
+                                            }
+                                        </td>
+                                        <td align="center" width="10%" style="color:red;font-weight:100!important">
+                                            @if (item.CR_Cas_Car_Price_Basic_Start_Date != null)
+                                            {
+                                                <a href="~/CarBasicPrice/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Car_Price_Basic_No)" style="color:red;font-weight:100!important">
+                                                    @item.CR_Cas_Car_Price_Basic_Start_Date.Value.ToString("yyyy/MM/dd")
+                                                </a>
+                                            }
+                                        </td>
+                                        <td align="center" width="10%" style="color:red;font-weight:100!important">
+                                            @if (item.CR_Cas_Car_Price_Basic_End_Date != null)
+                                            {
+                                                <a href="~/CarBasicPrice/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Car_Price_Basic_No)" style="color:red;font-weight:100!important">
+                                                    @item.CR_Cas_Car_Price_Basic_End_Date.Value.ToString("yyyy/MM/dd")
+                                                </a>
+                                            }
+                                        </td>
+                                        <td style="text-align:center" width="12%" >
+                                            @if (item.CR_Cas_Car_Price_Basic_Status == "A")
+                                            {
+                                                <a href="~/CarBasicPrice/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Car_Price_Basic_No)">
+                                                    <label style="color:forestgreen">نشط</label>
+                                                </a>
+
+                                            }
+                                            else if (item.CR_Cas_Car_Price_Basic_Status == "D")
+                                            {
+                                                <a href="~/CarBasicPrice/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Car_Price_Basic_No)" style="color:red;font-weight:100!important">
+                                                    <label>محذوف</label>
+                                                </a>
+
+                                            }
+                                            else if (item.CR_Cas_Car_Price_Basic_Status == "X")
+                                            {
+                                                <a style="color:red;font-weight:100!important" href="~/CarBasicPrice/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Car_Price_Basic_No)">
+                                                    <label style="color:red;font-weight:100!important">على وشك الإنتهاء</label>
+                                                </a>
+
+                                            }
+                                            else if (item.CR_Cas_Car_Price_Basic_Status == "E")
+                                            {
+                                                <a href="~/CarBasicPrice/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Car_Price_Basic_No)" style="color:red;font-weight:100!important">
+                                                    <label style="color:red;font-weight:100!important">منتهي</label>
+                                                </a>
+
+                                            }
+                                            else if (item.CR_Cas_Car_Price_Basic_Status == "N")
+                                            {
+                                                <a href="~/CarBasicPrice/edit/?id=@Html.DisplayFor(modelItem => item.CR_Cas_Car_Price_Basic_No)" style="color:red;font-weight:100!important">
+                                                    <label style="color:red;font-weight:100!important">لم يسجل</label>
+                                                </a>
+
+                                            }
+                                        </td>
+
+                                    </tr>
+                                }
+
                             }
                         }
 

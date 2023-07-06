@@ -123,7 +123,13 @@ namespace RentCar.Controllers.CAS
             return View();
         }
 
+        public JsonResult CheckBranch()
+        {
+            string LessorCode = Session["LessorCode"].ToString();
 
+            var branchs = db.CR_Cas_Sup_Branch.Where(c => c.CR_Cas_Sup_Lessor_Code == LessorCode).Count();
+            return Json(branchs, JsonRequestBehavior.AllowGet);
+        }
         [HttpPost]
         [ActionName("Index")]
         public ActionResult Index_Post(String lang, String excelCall)
@@ -977,24 +983,25 @@ namespace RentCar.Controllers.CAS
                     TempData["CarsNo"] = "True";
                     //return RedirectToAction("Index");
                 }
-                //var BankCode = cR_Cas_Sup_Branch.CR_Cas_Sup_Lessor_Code + "0000";
-                //var SalesPoint = db.CR_Cas_Sup_SalesPoint.Where(s => s.CR_Cas_Sup_SalesPoint_Brn_Code == cR_Cas_Sup_Branch.CR_Cas_Sup_Branch_Code && 
-                //s.CR_Cas_Sup_SalesPoint_Com_Code == LessorCode && s.CR_Cas_Sup_SalesPoint_Bank_Code != BankCode && s.CR_Cas_Sup_SalesPoint_Status=="A");
-                //if (SalesPoint != null)
-                //{
-                //    var SalesPointCount = SalesPoint.Count();
-                //    //var SalesPointBalance = SalesPoint.Where(s => s.CR_Cas_Sup_SalesPoint_Balance > 0).Count();
-                //    if (SalesPointCount > 0)
-                //    {
-                //        TempData["SalesPointNo"] = "True";
-                //        //return RedirectToAction("Index");
-                //    }
+                var BankCode = cR_Cas_Sup_Branch.CR_Cas_Sup_Lessor_Code + "0000";
+                var SalesPoint = db.CR_Cas_Sup_SalesPoint.Where(s => s.CR_Cas_Sup_SalesPoint_Brn_Code == cR_Cas_Sup_Branch.CR_Cas_Sup_Branch_Code &&
+                s.CR_Cas_Sup_SalesPoint_Com_Code == LessorCode && s.CR_Cas_Sup_SalesPoint_Bank_Code != BankCode && s.CR_Cas_Sup_SalesPoint_Status == "A");
+                if (SalesPoint != null)
+                {
+                    //var SalesPointCount = SalesPoint.Count();
+                    var SalesPointBalance = SalesPoint.Where(s => s.CR_Cas_Sup_SalesPoint_Balance > 0).Count();
+                    if (SalesPointBalance > 0)
+                    {
+                        TempData["SalesPointNo"] = "True";
+                        //return RedirectToAction("Index");
+                    }
 
-                //}
+                }
             }
 
-            // cR_Cas_Sup_Branch.CR_Cas_Sup_Branch_Reasons = "";
-
+            //// cR_Cas_Sup_Branch.CR_Cas_Sup_Branch_Reasons = "";
+            //TempData["BankCode"] = cR_Cas_Sup_Branch.CR_Cas_Sup_Lessor_Code + "0000"; 
+            //TempData["BankCode"] = cR_Cas_Sup_Branch.CR_Cas_Sup_Lessor_Code + "0000";
 
             ViewBag.CR_MAS_SUP_City_Code = new SelectList(db.CR_Mas_Sup_City.Where(x => x.CR_Mas_Sup_Regions.CR_Mas_Sup_Regions_Status != "D"),
                 "CR_Mas_Sup_City_Code", "CR_Mas_Sup_City_Ar_Name", citycode);

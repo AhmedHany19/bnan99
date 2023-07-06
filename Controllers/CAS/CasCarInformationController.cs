@@ -977,6 +977,23 @@ namespace RentCar.Controllers.CAS
             ViewBag.BrandCode = brand.CR_Mas_Sup_Brand_Code;
             cR_Cas_Sup_Car_Information.CR_Cas_Sup_Car_Brand_Code = brand.CR_Mas_Sup_Brand_Ar_Name;
 
+           
+            if (cR_Cas_Sup_Car_Information.CR_Cas_Sup_Car_Status == "R")
+            {
+                TempData["CarStatus"] = "Rented";
+            }
+            if (cR_Cas_Sup_Car_Information.CR_Cas_Sup_Car_Status == "O")
+            {
+                TempData["CarStatus"] = "Buy";
+            }
+            //var carinfo = db.CR_Cas_Sup_Car_Information.Where(c => c.CR_Cas_Sup_Car_Lessor_Code == LessorCode && c.CR_Cas_Sup_Car_Status != "D"
+            //   && c.CR_Cas_Sup_Car_Owner_Branch_Code == cR_Cas_Sup_Branch.CR_Cas_Sup_Branch_Code).Count();
+            //if (carinfo > 0)
+            //{
+            //    TempData["CarsNo"] = "True";
+            //    //return RedirectToAction("Index");
+            //}
+
 
 
 

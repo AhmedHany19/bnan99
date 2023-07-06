@@ -7,13 +7,16 @@
                 <table id="myTable" class="table table-striped mb-0" style="cursor:pointer">
                     <thead>
                         <tr>
-                            <th width="10%">
-                                التسلسلي
+                            <th width="5%">
+                                م
                             </th>
-                            <th width="35%">
+                            <th width="10%">
+                                الرقم التسلسلي
+                            </th>
+                            <th width="35%" class="text-left">
                                 السيارة
                             </th>
-                            <th width="15%">
+                            <th width="15%" class="text-left">
                                 نوع الصيانة
                             </th>
 
@@ -23,120 +26,235 @@
                             <th width="15%">
                                 الصيانة عند القراءة
                             </th>
-                            <th width="15%">
+                            <th width="8%">
                                 الحالة
                             </th>
 
                         </tr>
                     </thead>
-                    <tbody id="tbl">
+                    <tbody id="tbl" style="height:450px">
 
-                        @foreach (var item in Model)
-                        {
-                            <tr>
-
-                                <td style="text-align:center;vertical-align:middle" width="10%">
-                                    <a href="~/Car_Mainten/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Doc_Mainten_Serail_No)
+                        @{ int c = 0;
+                            foreach (var item in Model)
+                            {
+                                c += 1;
+                                if (item.CR_Cas_Sup_Car_Doc_Mainten_Status == "A")
+                                {
+                                    <tr>
+                                        <td width="5%" align="center">
+                                                        <a>
+                                                            @c
+                                                        </a>
+                                        </td>
+                                        <td style="text-align:center;vertical-align:middle" width="10%">
+                                            <a href="~/Car_Mainten/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Doc_Mainten_Serail_No)
                                                                                &id2=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Doc_Mainten_Code)">
-                                        @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Doc_Mainten_Serail_No)
-                                    </a>
-                                </td>
+                                                @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Doc_Mainten_Serail_No)
+                                            </a>
+                                        </td>
 
-                                <td style="vertical-align:middle" width="35%">
-                                    <a href="~/Car_Mainten/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Doc_Mainten_Serail_No)
+                                        <td style="vertical-align:middle" width="35%">
+                                            <a href="~/Car_Mainten/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Doc_Mainten_Serail_No)
                                                                                &id2=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Doc_Mainten_Code)">
-                                        @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Information.CR_Mas_Sup_Brand.CR_Mas_Sup_Brand_Ar_Name)
-                                        -
-                                        @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Information.CR_Mas_Sup_Model.CR_Mas_Sup_Model_Ar_Name)
-                                        -
-                                        @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Information.CR_Cas_Sup_Car_Year)
-                                        -
-                                        @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Information.CR_Mas_Sup_Color.CR_Mas_Sup_Color_Ar_Name)
-                                        -
-                                        @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Information.CR_Cas_Sup_Car_Plate_Ar_No)
-                                    </a>
-                                </td>
+                                                @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Information.CR_Mas_Sup_Brand.CR_Mas_Sup_Brand_Ar_Name)
+                                                -
+                                                @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Information.CR_Mas_Sup_Model.CR_Mas_Sup_Model_Ar_Name)
+                                                -
+                                                @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Information.CR_Cas_Sup_Car_Year)
+                                                -
+                                                @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Information.CR_Mas_Sup_Color.CR_Mas_Sup_Color_Ar_Name)
+                                                -
+                                                @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Information.CR_Cas_Sup_Car_Plate_Ar_No)
+                                            </a>
+                                        </td>
 
-                                <td style="vertical-align:middle" width="15%">
-                                    <a href="~/Car_Mainten/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Doc_Mainten_Serail_No)
+                                        <td style="vertical-align:middle" width="15%">
+                                            <a href="~/Car_Mainten/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Doc_Mainten_Serail_No)
                                                                                &id2=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Doc_Mainten_Code)">
-                                        @Html.DisplayFor(modelItem => item.CR_Mas_Sup_Procedures.CR_Mas_Sup_Procedures_Ar_Name)
-                                    </a>
-                                </td>
+                                                @Html.DisplayFor(modelItem => item.CR_Mas_Sup_Procedures.CR_Mas_Sup_Procedures_Ar_Name)
+                                            </a>
+                                        </td>
 
-                                <td style="text-align:center;vertical-align:middle" width="10%">
-                                    @if (item.CR_Cas_Sup_Car_Doc_Mainten_End_Date != null)
-                                    {
-                                        <a href="~/Car_Mainten/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Doc_Mainten_Serail_No)
+                                        <td style="text-align:center;vertical-align:middle" width="10%">
+                                            @if (item.CR_Cas_Sup_Car_Doc_Mainten_End_Date != null)
+                                            {
+                                                <a href="~/Car_Mainten/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Doc_Mainten_Serail_No)
                                                                                &id2=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Doc_Mainten_Code)">
-                                            @item.CR_Cas_Sup_Car_Doc_Mainten_End_Date.Value.ToString("yyyy/MM/dd")
-                                        </a>
-                                    }
-                                </td>
+                                                    @item.CR_Cas_Sup_Car_Doc_Mainten_End_Date.Value.ToString("yyyy/MM/dd")
+                                                </a>
+                                            }
+                                        </td>
 
-                                <td style="text-align:center;vertical-align:middle" width="15%">
+                                        <td style="text-align:center;vertical-align:middle" width="15%">
 
-                                    <a href="~/Car_Mainten/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Doc_Mainten_Serail_No)
+                                            <a href="~/Car_Mainten/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Doc_Mainten_Serail_No)
                                                                             &id2=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Doc_Mainten_Code)">
-                                        @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Doc_Mainten_End_KM)
-                                    </a>
+                                                @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Doc_Mainten_End_KM)
+                                            </a>
 
-                                </td>
+                                        </td>
 
-                                <td style="text-align:center;vertical-align:middle" width="15%">
-                                    <a href="~/Car_Mainten/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Doc_Mainten_Serail_No)
+                                        <td style="text-align:center;vertical-align:middle" width="8%">
+                                            <a href="~/Car_Mainten/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Doc_Mainten_Serail_No)
                                                                                &id2=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Doc_Mainten_Code)">
-                                        @if (item.CR_Cas_Sup_Car_Doc_Mainten_Status == "N")
-                                        {
+                                                @if (item.CR_Cas_Sup_Car_Doc_Mainten_Status == "N")
+                                                {
 
-                                            <label style="color:black;">لم يسجل</label>
-
-
-                                        }
-                                        else if (item.CR_Cas_Sup_Car_Doc_Mainten_Status == "D")
-                                        {
-
-                                            <label style="color:red">محذوف</label>
+                                                    <label style="color:red;font-weight:100">لم يسجل</label>
 
 
-                                        }
-                                        else if (item.CR_Cas_Sup_Car_Doc_Mainten_Status == "A")
-                                        {
+                                                }
+                                                else if (item.CR_Cas_Sup_Car_Doc_Mainten_Status == "D")
+                                                {
 
-                                            <label style="color:green;">نشط</label>
-
-
-                                        }
-                                        else if (item.CR_Cas_Sup_Car_Doc_Mainten_Status == "E")
-                                        {
-
-                                            <label style="color:dimgrey;">منتهي</label>
+                                                    <label style="color:red;font-weight:100">محذوف</label>
 
 
-                                        }
-                                        else if (item.CR_Cas_Sup_Car_Doc_Mainten_Status == "X")
-                                        {
+                                                }
+                                                else if (item.CR_Cas_Sup_Car_Doc_Mainten_Status == "A")
+                                                {
 
-                                            <label style="color:orange">على وشك الإنتهاء</label>
+                                                    <label style="color:green;">نشط</label>
 
 
-                                        }
-                                    </a>
-                                </td>
-                                <td hidden>
-                                    @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Doc_Mainten_Type)
-                                </td>
-                                <td hidden>
-                                    @Html.DisplayFor(modelItem => item.CR_Mas_Sup_Procedures.CR_Mas_Sup_Procedures_Type)
-                                </td>
-                                <td hidden>
-                                    @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Doc_Mainten_Serail_No)
-                                </td>
-                            </tr>
+                                                }
+                                                else if (item.CR_Cas_Sup_Car_Doc_Mainten_Status == "E")
+                                                {
 
-                        }
+                                                    <label style="color:red;font-weight:100">منتهي</label>
 
-                    </tbody>
+
+                                                }
+                                                else if (item.CR_Cas_Sup_Car_Doc_Mainten_Status == "X")
+                                                {
+
+                                                    <label style="color:red;font-weight:100">على وشك الإنتهاء</label>
+                                                }
+                                            </a>
+                                        </td>
+                                        <td hidden>
+                                            @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Doc_Mainten_Type)
+                                        </td>
+                                        <td hidden>
+                                            @Html.DisplayFor(modelItem => item.CR_Mas_Sup_Procedures.CR_Mas_Sup_Procedures_Type)
+                                        </td>
+                                        <td hidden>
+                                            @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Doc_Mainten_Serail_No)
+                                        </td>
+                                    </tr>
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td width="5%" align="center">
+                                            <a>
+                                                @c
+                                            </a>
+                                        </td>
+                                        <td style="text-align:center;vertical-align:middle" width="10%">
+                                            <a style="color:red;font-weight:100" href="~/Car_Mainten/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Doc_Mainten_Serail_No)
+                                                                               &id2=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Doc_Mainten_Code)">
+                                                @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Doc_Mainten_Serail_No)
+                                            </a>
+                                        </td>
+
+                                        <td style="vertical-align:middle" width="35%">
+                                            <a style="color:red;font-weight:100" href="~/Car_Mainten/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Doc_Mainten_Serail_No)
+                                                                               &id2=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Doc_Mainten_Code)">
+                                                @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Information.CR_Mas_Sup_Brand.CR_Mas_Sup_Brand_Ar_Name)
+                                                -
+                                                @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Information.CR_Mas_Sup_Model.CR_Mas_Sup_Model_Ar_Name)
+                                                -
+                                                @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Information.CR_Cas_Sup_Car_Year)
+                                                -
+                                                @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Information.CR_Mas_Sup_Color.CR_Mas_Sup_Color_Ar_Name)
+                                                -
+                                                @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Information.CR_Cas_Sup_Car_Plate_Ar_No)
+                                            </a>
+                                        </td>
+
+                                        <td style="color:red;font-weight:100" style="vertical-align:middle" width="15%">
+                                            <a style="color:red;font-weight:100" href="~/Car_Mainten/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Doc_Mainten_Serail_No)
+                                                                               &id2=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Doc_Mainten_Code)">
+                                                @Html.DisplayFor(modelItem => item.CR_Mas_Sup_Procedures.CR_Mas_Sup_Procedures_Ar_Name)
+                                            </a>
+                                        </td>
+
+                                        <td style="color:red;font-weight:100" style="text-align:center;vertical-align:middle" width="10%">
+                                            @if (item.CR_Cas_Sup_Car_Doc_Mainten_End_Date != null)
+                                            {
+                                                <a style="color:red;font-weight:100" href="~/Car_Mainten/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Doc_Mainten_Serail_No)
+                                                                               &id2=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Doc_Mainten_Code)">
+                                                    @item.CR_Cas_Sup_Car_Doc_Mainten_End_Date.Value.ToString("yyyy/MM/dd")
+                                                </a>
+                                            }
+                                        </td>
+
+                                        <td style="text-align:center;vertical-align:middle" width="15%">
+
+                                            <a style="color:red;font-weight:100" href="~/Car_Mainten/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Doc_Mainten_Serail_No)
+                                                                            &id2=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Doc_Mainten_Code)">
+                                                @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Doc_Mainten_End_KM)
+                                            </a>
+
+                                        </td>
+
+                                        <td style="text-align:center;vertical-align:middle" width="8%">
+                                            <a style="color:red;font-weight:100" href="~/Car_Mainten/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Doc_Mainten_Serail_No)
+                                                                               &id2=@Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Doc_Mainten_Code)">
+                                                @if (item.CR_Cas_Sup_Car_Doc_Mainten_Status == "N")
+                                                {
+
+                                                    <label style="color:red;font-weight:100">لم يسجل</label>
+
+
+                                                }
+                                                else if (item.CR_Cas_Sup_Car_Doc_Mainten_Status == "D")
+                                                {
+
+                                                    <label style="color:red;font-weight:100">محذوف</label>
+
+
+                                                }
+                                                else if (item.CR_Cas_Sup_Car_Doc_Mainten_Status == "A")
+                                                {
+
+                                                    <label style="color:green;">نشط</label>
+
+
+                                                }
+                                                else if (item.CR_Cas_Sup_Car_Doc_Mainten_Status == "E")
+                                                {
+
+                                                    <label style="color:red;font-weight:100">منتهي</label>
+
+
+                                                }
+                                                else if (item.CR_Cas_Sup_Car_Doc_Mainten_Status == "X")
+                                                {
+
+                                                    <label style="color:red;font-weight:100">على وشك الإنتهاء</label>
+
+
+                                                }
+                                            </a>
+                                        </td>
+                                        <td hidden>
+                                            @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Doc_Mainten_Type)
+                                        </td>
+                                        <td hidden>
+                                            @Html.DisplayFor(modelItem => item.CR_Mas_Sup_Procedures.CR_Mas_Sup_Procedures_Type)
+                                        </td>
+                                        <td hidden>
+                                            @Html.DisplayFor(modelItem => item.CR_Cas_Sup_Car_Doc_Mainten_Serail_No)
+                                        </td>
+                                    </tr>
+                                    }
+
+
+                                }
+                            }
+                        </tbody>
                 </table>
             </div>
             <iframe name="print_frame" width="0" height="0" frameborder="0" src="about:blank"></iframe>
