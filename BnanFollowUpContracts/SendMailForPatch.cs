@@ -60,7 +60,7 @@ namespace BnanFollowUpContracts
             image.Save(savedModified);
 
 
-            string htmlBody = "<html><body><br><img src=cid:Contract style='width:100%;height:100%'></body></html>";
+            string htmlBody = string.Format("<html><body><h1>Contract Number {0}</h1><br><img src=cid:Contract style='width:100%;height:100%'></body></html>", contract.CR_Cas_Contract_Basic_No);
 
             AlternateView avHtml = AlternateView.CreateAlternateViewFromString
                (htmlBody, null, MediaTypeNames.Text.Html);
@@ -154,7 +154,7 @@ namespace BnanFollowUpContracts
 
 
 
-            string htmlBody = "<html><body><br><img src=cid:Contract style='width:100%;height:100%'></body></html>";
+            string htmlBody = string.Format("<html><body><h1>Contract Number {0}</h1><br><img src=cid:Contract style='width:100%;height:100%'></body></html>", contract.CR_Cas_Contract_Basic_No);
 
             AlternateView avHtml = AlternateView.CreateAlternateViewFromString
                (htmlBody, null, MediaTypeNames.Text.Html);
@@ -250,7 +250,7 @@ namespace BnanFollowUpContracts
 
 
 
-            string htmlBody = "<html><body><br><img src=cid:Contract style='width:100%;height:100%'></body></html>";
+            string htmlBody = string.Format("<html><body><h1>Contract Number {0}</h1><br><img src=cid:Contract style='width:100%;height:100%'></body></html>", contract.CR_Cas_Contract_Basic_No);
 
             AlternateView avHtml = AlternateView.CreateAlternateViewFromString
                (htmlBody, null, MediaTypeNames.Text.Html);
