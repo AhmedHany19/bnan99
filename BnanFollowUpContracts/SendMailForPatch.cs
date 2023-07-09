@@ -66,7 +66,7 @@ namespace BnanFollowUpContracts
                (htmlBody, null, MediaTypeNames.Text.Html);
 
             LinkedResource inline = new LinkedResource(savedModified, MediaTypeNames.Image.Jpeg);
-            inline.ContentId = "Contract";
+            inline.ContentId = string.Format("Contract Number {0}", contract.CR_Cas_Contract_Basic_No);
             avHtml.LinkedResources.Add(inline);
 
             MailMessage mail = new MailMessage();
@@ -85,7 +85,8 @@ namespace BnanFollowUpContracts
                 *//*         mail.To.Add(contract.CR_Mas_Renter_Information.CR_Mas_Renter_Information_Email);*//*
             }*/
             mail.To.Add("bnanbnanmail@gmail.com");
-            mail.Subject = " Contract will end after 1 day ";
+            mail.Subject = string.Format("Contract Number {0} will end after day", contract.CR_Cas_Contract_Basic_No);
+
             mail.Body = inline.ContentId;
 
             mail.IsBodyHtml = true;
@@ -159,7 +160,7 @@ namespace BnanFollowUpContracts
                (htmlBody, null, MediaTypeNames.Text.Html);
 
             LinkedResource inline = new LinkedResource(savedModified, MediaTypeNames.Image.Jpeg);
-            inline.ContentId = "Contract";
+            inline.ContentId = string.Format("Contract Number {0}", contract.CR_Cas_Contract_Basic_No);
             avHtml.LinkedResources.Add(inline);
 
             MailMessage mail = new MailMessage();
@@ -179,7 +180,9 @@ namespace BnanFollowUpContracts
                  *//*         mail.To.Add(contract.CR_Mas_Renter_Information.CR_Mas_Renter_Information_Email);*//*
              }*/
             mail.To.Add("bnanbnanmail@gmail.com");
-            mail.Subject = " Contract will end after 4 hours ";
+            mail.Subject = string.Format("Contract Number {0} will end after 4 hours", contract.CR_Cas_Contract_Basic_No);
+
+
             mail.Body = inline.ContentId;
 
             mail.IsBodyHtml = true;
@@ -253,7 +256,7 @@ namespace BnanFollowUpContracts
                (htmlBody, null, MediaTypeNames.Text.Html);
 
             LinkedResource inline = new LinkedResource(savedModified, MediaTypeNames.Image.Jpeg);
-            inline.ContentId = "Contract";
+            inline.ContentId = string.Format("Contract Number {0}", contract.CR_Cas_Contract_Basic_No);
             avHtml.LinkedResources.Add(inline);
 
             MailMessage mail = new MailMessage();
@@ -273,7 +276,8 @@ namespace BnanFollowUpContracts
                    *//*         mail.To.Add(contract.CR_Mas_Renter_Information.CR_Mas_Renter_Information_Email);*//*
                }*/
             mail.To.Add("bnanbnanmail@gmail.com");
-            mail.Subject = " Contract Ended ";
+            mail.Subject = string.Format("Contract Number {0} Ended", contract.CR_Cas_Contract_Basic_No);
+
             mail.Body = inline.ContentId;
 
             mail.IsBodyHtml = true;

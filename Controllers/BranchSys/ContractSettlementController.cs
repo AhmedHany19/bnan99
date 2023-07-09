@@ -1268,20 +1268,20 @@ namespace RentCar.Controllers
                             rd.SetParameterValue("UserName", " ");
                         }
 
-                        //var logo = lessor.CR_Mas_Com_Lessor_Logo_Print.ToString();
-                        //var log = logo.Replace("~", "");
-                        //log = log.Replace("/", "\\");
-                        //log = log.Substring(1, log.Length - 1);
-                        //var lm = System.Web.Hosting.HostingEnvironment.ApplicationPhysicalPath + log;
-                        //if (logo!=null &&lm!=null)
-                        //{
-                        //   rd.SetParameterValue("Logo", lm.Trim().ToString());
-                        //}
-                        //else
-                        //{
-                        //    rd.SetParameterValue("Logo", "   ");
-                        //}
-                       
+                        var logo = lessor.CR_Mas_Com_Lessor_Logo_Print.ToString();
+                        var log = logo.Replace("~", "");
+                        log = log.Replace("/", "\\");
+                        log = log.Substring(1, log.Length - 1);
+                        var lm = System.Web.Hosting.HostingEnvironment.ApplicationPhysicalPath + log;
+                        if (logo != null && lm != null)
+                        {
+                            rd.SetParameterValue("Logo", lm.Trim().ToString());
+                        }
+                        else
+                        {
+                            rd.SetParameterValue("Logo", "   ");
+                        }
+
 
                         if (lessor.CR_Mas_Com_Lessor_Tolk_Free != null)
                         {
@@ -1762,7 +1762,7 @@ namespace RentCar.Controllers
                         }
                         else
                         {
-                            rd.SetParameterValue("compensationstat", "0");
+                            rd.SetParameterValue("compensationstat", " ");
                         }
 
                         if (imgx1path != null && imgx1path != "")
@@ -2014,7 +2014,8 @@ namespace RentCar.Controllers
             string image1 = Path.Combine(projectFolder, "End.jpeg");
 
 
-            string htmlBody = "<html><body><h1>اغلاق العقد </h1><br><img src=cid:Contract style='width:100%;height:100%'></body></html>";
+            string htmlBody = "<html><body><h1>اغلاق العقد</h1><br><img src=cid:Contract style='width:100%;height:100%'></body></html>";
+
             htmlBody = System.Web.HttpUtility.HtmlEncode(htmlBody); // Encode the HTML string
             AlternateView avHtml = AlternateView.CreateAlternateViewFromString
                (htmlBody, null, MediaTypeNames.Text.Html);

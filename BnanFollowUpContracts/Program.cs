@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data.Entity;
 using System.Linq;
+using System.Timers;
 
 namespace BnanFollowUpContracts
 {
@@ -8,10 +9,20 @@ namespace BnanFollowUpContracts
     {
         public static void Main(string[] args)
         {
-            UpdateDatabase();
+            Timer timer = new Timer(60000); // 60000 milliseconds = 1 minute
+            timer.Elapsed += (sender, e) => UpdateDatabase();
+            timer.Start();
+            Console.WriteLine("Press any key to stop the program...");
+            Console.ReadKey();
+            // Stop and dispose of the timer when done
+            timer.Stop();
+            timer.Dispose();
+
+            //UpdateDatabase();
         }
         public static void UpdateDatabase()
         {
+            Console.WriteLine($"Updating the database at: {DateTime.Now}");
             RentCarDBEntities database = new RentCarDBEntities();
             var rentaldays = 2;
 
@@ -54,6 +65,10 @@ namespace BnanFollowUpContracts
                     }
                 }
             }
+            Console.WriteLine($"Finish update database at: {DateTime.Now}");
+
+            System.Threading.Thread.Sleep(1000);
+
         }
     }
 }
