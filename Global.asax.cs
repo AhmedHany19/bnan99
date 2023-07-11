@@ -1,15 +1,6 @@
-﻿using CrystalDecisions.CrystalReports.Engine;
-using log4net.Repository.Hierarchy;
-using Microsoft.Extensions.Logging;
-using System.Timers;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
-using System;
-using System.Timers;
-using Microsoft.Ajax.Utilities;
-using RentCar.Models;
-using System.Linq;
 
 namespace RentCar
 {

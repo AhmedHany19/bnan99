@@ -23,6 +23,8 @@ namespace RentCar.Controllers.CAS
             {
                 LessorCode = Session["LessorCode"].ToString();
                 UserLogin = System.Web.HttpContext.Current.Session["UserLogin"].ToString();
+                ViewBag.Enddate = DateTime.Now.ToString("yyyy-MM-dd");
+                ViewBag.Startdate = DateTime.Now.AddDays(-30).ToString("yyyy-MM-dd");
                 if (UserLogin == null || LessorCode == null)
                 {
                     RedirectToAction("Account", "Login");
@@ -41,12 +43,12 @@ namespace RentCar.Controllers.CAS
         {
             List<TracingMD> L = new List<TracingMD>();
             IOrderedQueryable<CR_Cas_Administrative_Procedures> tracing = null;
-            var d = DateTime.Now.AddDays(-200);
+            var d = DateTime.Now.AddDays(-30);
             if (type == "Date")
             {
                 tracing = db.CR_Cas_Administrative_Procedures.Where(t => t.CR_Cas_Administrative_Procedures_Lessor == LessorCode && t.CR_Cas_Administrative_Procedures_Sector == "1"
-                 && t.CR_Cas_Administrative_Procedures_Date > d && t.CR_Cas_Administrative_Int_Procedures_Code >= 60 && t.CR_Cas_Administrative_Int_Procedures_Code <= 69 &&
-                 t.CR_Cas_Administrative_Procedures_Date >= sd && t.CR_Cas_Administrative_Procedures_Date <= ed)
+                 && t.CR_Cas_Administrative_Procedures_Date >= sd && t.CR_Cas_Administrative_Procedures_Date <= ed && t.CR_Cas_Administrative_Int_Procedures_Code >= 60 && t.CR_Cas_Administrative_Int_Procedures_Code <= 69 )
+
                  .OrderByDescending(x => x.CR_Cas_Administrative_Procedures_Date)
                  .ThenByDescending(t => t.CR_Cas_Administrative_Procedures_Time);
             }
