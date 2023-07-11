@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data.Entity;
 using System.Linq;
+using System.Timers;
 
 namespace BnanFollowUpContracts
 {
@@ -8,14 +9,24 @@ namespace BnanFollowUpContracts
     {
         public static void Main(string[] args)
         {
+            //Timer timer = new Timer(60000); // 60000 milliseconds = 1 minute
+            //timer.Elapsed += (sender, e) => UpdateDatabase();
+            //timer.Start();
+            //Console.WriteLine("Press any key to stop the program...");
+            //Console.ReadKey();
+            //// Stop and dispose of the timer when done
+            //timer.Stop();
+            //timer.Dispose();
+
             UpdateDatabase();
         }
         public static void UpdateDatabase()
         {
+            //Console.WriteLine($"Updating the database at: {DateTime.Now}");
             RentCarDBEntities database = new RentCarDBEntities();
             var rentaldays = 2;
 
-            foreach (var item in database.CR_Cas_Contract_Basic.Include(l => l.CR_Mas_Com_Lessor).Include(l => l.CR_Mas_Renter_Information).Include(l => l.CR_Cas_Sup_Car_Information).Where(d => d.CR_Cas_Contract_Basic_Status == "A").ToList())
+            foreach (var item in database.CR_Cas_Contract_Basic.Where(d => d.CR_Cas_Contract_Basic_Status == "A").ToList())
             {
                 // check if contract will end after 24 hours
                 if (item.CR_Cas_Contract_Basic_Day_DateTime_Alert <= DateTime.Now && item.CR_Cas_Contract_Basic_Alert_Status == "0")
@@ -24,6 +35,11 @@ namespace BnanFollowUpContracts
                     {
                         SendMailForPatch.SendMailBeforeOneDay(item);
                     }
+                    item.CR_Cas_Contract_Basic_Alert_Status = "1";
+                    database.SaveChanges();
+                }
+                if (item.CR_Cas_Contract_Basic_Day_DateTime_Alert==null)
+                {
                     item.CR_Cas_Contract_Basic_Alert_Status = "1";
                     database.SaveChanges();
                 }
@@ -54,6 +70,10 @@ namespace BnanFollowUpContracts
                     }
                 }
             }
+            //Console.WriteLine($"Finish update database at: {DateTime.Now}");
+
+            //System.Threading.Thread.Sleep(1000);
+
         }
     }
 }
