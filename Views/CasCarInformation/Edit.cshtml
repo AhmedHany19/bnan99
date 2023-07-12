@@ -613,8 +613,8 @@
                                         </a>
 
                                         <input type="button" name="delete" id="btn-confirm" class="btn btn-primary waves-effect" value="@ViewBag.stat" style="margin-left: 20px; margin-top: 10px;cursor:no-drop;" onclick="javascript:return false;" disabled />
-                                        <input type="submit" name="Maintenance" class="btn btn-primary waves-effect" value="@ViewBag.Maintenance" style=" margin-left: 20px;margin-top: 10px;cursor:no-drop" disabled />
-                                        <input type="submit" name="Sell" class="btn btn-primary waves-effect" value="@ViewBag.Sell" style=" margin-left: 20px; margin-top: 10px;" />
+                                        <input type="submit" name="Maintenance" class="btn btn-primary waves-effect" value="@ViewBag.Maintenance" id="b-a-sell" style=" margin-left: 20px;margin-top: 10px;cursor:no-drop" disabled />
+                                        <a name="Sell" id="b-a-selll" class="btn btn-primary waves-effect" value="@ViewBag.Sell" style=" margin-left: 20px; margin-top: 10px; color:white">@ViewBag.Sell</a>
                                         <a href="/CasCarInformation/Index/" class="btn btn-primary waves-effect" style="float:left; margin-top: 10px;">انهاء</a>
                                     }
                                     else if (ViewBag.delete == "M")
@@ -644,7 +644,7 @@
 
                                         <a name="Maintenance" id="b-Maintenance" class="btn btn-primary waves-effect" value="@ViewBag.Maintenance" style=" margin-left: 20px;margin-top: 10px;color:white"> @ViewBag.Maintenance </a>
 
-                                        <input type="submit" name="Sell" class="btn btn-primary waves-effect" value="@ViewBag.Sell" style=" margin-left: 20px;margin-top: 10px;" />
+                                        <a name="Sell" id="b-sell" class="btn btn-primary waves-effect" value="@ViewBag.Sell" style=" margin-left: 20px;margin-top: 10px; color:white"> @ViewBag.Sell </a>
 
 
 
@@ -813,6 +813,60 @@
                                                 </div>
                                             </div>
                                         </div>
+                                    </div>  
+                                    
+                                    <!--Popup For Sell-->
+                                    <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="s-modal">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-body" style="padding: 35px;">
+                                                    <div style="width:75%;float:right;text-align:right;">
+                                                        <b style="color:red;">تأكيد عرض للبيع ......</b><br>
+                                                        سيترتب على عرض بيع السيارة إيقاف تأجير السيارة
+                                                    </div>
+
+                                                    <div style="width:20%;margin-right:5%;float:left; margin:0">
+                                                        @if (ViewBag.delete == "O")
+                                                        {
+                                                            <input type="submit" name="Sell" class="btn btn-primary waves-effect" value="@ViewBag.Sell" id="modal-btn-si" style="float:left;width:80px;height:40px;font:bold 14px Tahoma;color:white;background-color:#5cb85c; cursor:pointer;" />
+                                                        }
+                                                        else
+                                                        {
+                                                            <input type="submit" name="Sell" class="btn btn-primary waves-effect" value="@ViewBag.Sell" id="modal-btn-si" style="float: left; width: 80px; height: 40px; font: bold 14px Tahoma; color: white; background-color: #d9534f; cursor: pointer;" />
+                                                        }
+                                                        <button type="button" class="btn btn-primary" id="modal-hide-Sell" style="float: left;width: 80px;height: 40px;font: bold 14px Tahoma;margin-top:25px">إلغاء</button>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!--Popup For Active Sell-->
+                                    <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="s-active-modal">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-body" style="padding: 35px;">
+                                                    <div style="width:75%;float:right;text-align:right;">
+                                                        <b style="color:red;">تأكيد التنشيط ......</b><br>
+                                                        سيترتب على تنشيط السيارة تنشيط تأجير السيارة
+                                                    </div>
+
+                                                    <div style="width:20%;margin-right:5%;float:left; margin:0">
+                                                        @if (ViewBag.delete == "O")
+                                                        {
+                                                            <input type="submit" name="Sell" class="btn btn-primary waves-effect" value="@ViewBag.Sell" id="modal-btn-si" style="float:left;width:80px;height:40px;font:bold 14px Tahoma;color:white;background-color:#5cb85c; cursor:pointer;" />
+                                                        }
+                                                        else
+                                                        {
+                                                            <input type="submit" name="Sell" class="btn btn-primary waves-effect" value="@ViewBag.Sell" id="modal-btn-si" style="float: left; width: 80px; height: 40px; font: bold 14px Tahoma; color: white; background-color: #d9534f; cursor: pointer;" />
+                                                        }
+                                                        <button type="button" class="btn btn-primary" id="modal-hide-Sell-active" style="float: left;width: 80px;height: 40px;font: bold 14px Tahoma;margin-top:25px">إلغاء</button>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
 
 
@@ -887,6 +941,29 @@
                                             // hide modal active hold
                                             $("#modal-hide-active").on("click", function () {
                                                 $("#modal-hide-Mainataince-active").modal('hide');
+                                            });
+
+
+                                            //open modal the Sell
+                                            $("#b-sell").on("click", function () {
+
+                                                $("#s-modal").modal('show');
+
+                                            });
+                                            // hide modal the Maintenance
+                                            $("#modal-hide-Sell").on("click", function () {
+                                                $("#s-modal").modal('hide');
+                                            });
+
+                                            //open modal activate the sell
+                                            $("#b-a-selll").on("click", function () {
+
+                                                $("#s-active-modal").modal('show');
+
+                                            });
+                                            // hide modal active sell
+                                            $("#modal-hide-Sell-active").on("click", function () {
+                                                $("#s-active-modal").modal('hide');
                                             });
 
 
