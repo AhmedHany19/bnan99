@@ -38,9 +38,13 @@ namespace RentCar.Controllers.BranchSys
                 {
                     return RedirectToAction("Login", "Account");
                 }
-                LessorCode = Session["LessorCode"].ToString();
-                BranchCode = Session["BranchCode"].ToString();
-                UserLogin = System.Web.HttpContext.Current.Session["UserLogin"].ToString();
+                else
+                {
+                    LessorCode = Session["LessorCode"].ToString();
+                    BranchCode = Session["BranchCode"].ToString();
+                    UserLogin = System.Web.HttpContext.Current.Session["UserLogin"].ToString();
+                }
+                
             }
             catch
             {
@@ -62,9 +66,13 @@ namespace RentCar.Controllers.BranchSys
                 {
                      RedirectToAction("Login", "Account");
                 }
-                LessorCode = Session["LessorCode"].ToString();
-                BranchCode = Session["BranchCode"].ToString();
-                UserLogin = System.Web.HttpContext.Current.Session["UserLogin"].ToString();
+                else
+                {
+                    LessorCode = Session["LessorCode"].ToString();
+                    BranchCode = Session["BranchCode"].ToString();
+                    UserLogin = System.Web.HttpContext.Current.Session["UserLogin"].ToString();
+                }
+               
             }
             catch
             {
@@ -103,15 +111,23 @@ namespace RentCar.Controllers.BranchSys
                 {
                     if (d.CR_Cas_Sup_Car_Doc_Mainten_Code == "26" && (d.CR_Cas_Sup_Car_Doc_Mainten_End_Date < DateTime.Now || d.CR_Cas_Sup_Car_Doc_Mainten_End_Date == null))
                     {
-                        if (Session["TrafficLicense"].ToString() != "True")
+                        if (Session["TrafficLicense"].ToString()!=null)
                         {
-                            DocsModel.TrafficLicenseError = "رخصة السير منتهية";
-                            DocsModel.PassCar = false;
+                            if (Session["TrafficLicense"].ToString() != "True")
+                            {
+                                DocsModel.TrafficLicenseError = "رخصة السير منتهية";
+                                DocsModel.PassCar = false;
+                            }
+                            else
+                            {
+                                DocsModel.TrafficLicenseError = "";
+                            }
                         }
                         else
                         {
-                            DocsModel.TrafficLicenseError = "";
+                            RedirectToAction("Login", "Account");
                         }
+
                     }
                     else
                     {
@@ -120,17 +136,23 @@ namespace RentCar.Controllers.BranchSys
 
                     if (d.CR_Cas_Sup_Car_Doc_Mainten_Code == "27" && (d.CR_Cas_Sup_Car_Doc_Mainten_End_Date < DateTime.Now || d.CR_Cas_Sup_Car_Doc_Mainten_End_Date == null))
                     {
-
-                        if (Session["ContractInsurance"].ToString() != "True")
+                        if (Session["ContractInsurance"].ToString() !=null)
                         {
-                            DocsModel.ContractInsuranceError = "التأمين منتهي";
-                            DocsModel.PassCar = false;
+                            if (Session["ContractInsurance"].ToString() != "True")
+                            {
+                                DocsModel.ContractInsuranceError = "التأمين منتهي";
+                                DocsModel.PassCar = false;
+                            }
+                            else
+                            {
+                                DocsModel.ContractInsuranceError = "";
+                            }
                         }
                         else
                         {
-                            DocsModel.ContractInsuranceError = "";
-                        }
+                            RedirectToAction("Login", "Account");
 
+                        }
                     }
                     else
                     {
@@ -139,16 +161,23 @@ namespace RentCar.Controllers.BranchSys
 
                     if (d.CR_Cas_Sup_Car_Doc_Mainten_Code == "28" && (d.CR_Cas_Sup_Car_Doc_Mainten_End_Date < DateTime.Now || d.CR_Cas_Sup_Car_Doc_Mainten_End_Date == null))
                     {
-
-                        if (Session["ContractOperatingCard"].ToString() != "True")
+                        if (Session["ContractOperatingCard"].ToString()!=null)
                         {
-                            DocsModel.ContractOperatingCardError = "بطاقة التشغيل منتهية";
-                            DocsModel.PassCar = false;
+                            if (Session["ContractOperatingCard"].ToString() != "True")
+                            {
+                                DocsModel.ContractOperatingCardError = "بطاقة التشغيل منتهية";
+                                DocsModel.PassCar = false;
+                            }
+                            else
+                            {
+                                DocsModel.ContractOperatingCardError = "";
+                            }
                         }
                         else
                         {
-                            DocsModel.ContractOperatingCardError = "";
+                            RedirectToAction("Login", "Account");
                         }
+
 
                     }
                     else
@@ -159,16 +188,23 @@ namespace RentCar.Controllers.BranchSys
 
                     if (d.CR_Cas_Sup_Car_Doc_Mainten_Code == "29" && (d.CR_Cas_Sup_Car_Doc_Mainten_End_Date < DateTime.Now || d.CR_Cas_Sup_Car_Doc_Mainten_End_Date == null))
                     {
-
-                        if (Session["ContractChkecUp"].ToString() != "True")
+                        if (Session["ContractChkecUp"].ToString() !=null)
                         {
-                            DocsModel.ContractChkecUpError = "الفحص الدوري منتهي";
-                            DocsModel.PassCar = false;
+                            if (Session["ContractChkecUp"].ToString() != "True")
+                            {
+                                DocsModel.ContractChkecUpError = "الفحص الدوري منتهي";
+                                DocsModel.PassCar = false;
+                            }
+                            else
+                            {
+                                DocsModel.ContractChkecUpError = "";
+                            }
                         }
                         else
                         {
-                            DocsModel.ContractChkecUpError = "";
+                            RedirectToAction("Login", "Account");
                         }
+
 
                     }
                     else
@@ -192,15 +228,23 @@ namespace RentCar.Controllers.BranchSys
                 {
                     if (d.CR_Cas_Sup_Car_Doc_Mainten_Code == "36" && (d.CR_Cas_Sup_Car_Doc_Mainten_End_Date < DateTime.Now || d.CR_Cas_Sup_Car_Doc_Mainten_End_Date == null))
                     {
-                        if (Session["ContractTires"].ToString() != "True")
+                        if (Session["ContractTires"].ToString() != null)
                         {
-                            DocsModel.ContractTires = "صيانة الإطارات منتهية";
-                            DocsModel.PassCar = false;
+                            if (Session["ContractTires"].ToString() != "True")
+                            {
+                                DocsModel.ContractTires = "صيانة الإطارات منتهية";
+                                DocsModel.PassCar = false;
+                            }
+                            else
+                            {
+                                DocsModel.ContractTires = "";
+                            }
                         }
                         else
                         {
-                            DocsModel.ContractTires = "";
+                            RedirectToAction("Login", "Account");
                         }
+
                     }
                     else
                     {
@@ -209,17 +253,22 @@ namespace RentCar.Controllers.BranchSys
 
                     if (d.CR_Cas_Sup_Car_Doc_Mainten_Code == "37" && (d.CR_Cas_Sup_Car_Doc_Mainten_End_Date < DateTime.Now || d.CR_Cas_Sup_Car_Doc_Mainten_End_Date == null))
                     {
-
-                        if (Session["ContractOil"].ToString() != "True")
+                        if (Session["ContractOil"].ToString() !=null)
                         {
-                            DocsModel.ContractOil = "صيانة زيت المكينة منتهية";
-                            DocsModel.PassCar = false;
+                            if (Session["ContractOil"].ToString() != "True")
+                            {
+                                DocsModel.ContractOil = "صيانة زيت المكينة منتهية";
+                                DocsModel.PassCar = false;
+                            }
+                            else
+                            {
+                                DocsModel.ContractOil = "";
+                            }
                         }
                         else
                         {
-                            DocsModel.ContractOil = "";
+                            RedirectToAction("Login", "Account");
                         }
-
                     }
                     else
                     {
@@ -228,17 +277,22 @@ namespace RentCar.Controllers.BranchSys
 
                     if (d.CR_Cas_Sup_Car_Doc_Mainten_Code == "38" && (d.CR_Cas_Sup_Car_Doc_Mainten_End_Date < DateTime.Now || d.CR_Cas_Sup_Car_Doc_Mainten_End_Date == null))
                     {
-
-                        if (Session["ContractMaintenance"].ToString() != "True")
+                        if (Session["ContractMaintenance"].ToString() != null)
                         {
-                            DocsModel.ContractMaintenance = "الصيانة الدورية منتهية";
-                            DocsModel.PassCar = false;
+                            if (Session["ContractMaintenance"].ToString() != "True")
+                            {
+                                DocsModel.ContractMaintenance = "الصيانة الدورية منتهية";
+                                DocsModel.PassCar = false;
+                            }
+                            else
+                            {
+                                DocsModel.ContractMaintenance = "";
+                            }
                         }
                         else
                         {
-                            DocsModel.ContractMaintenance = "";
+                            RedirectToAction("Login", "Account");
                         }
-
                     }
                     else
                     {
@@ -248,17 +302,22 @@ namespace RentCar.Controllers.BranchSys
 
                     if (d.CR_Cas_Sup_Car_Doc_Mainten_Code == "39" && (d.CR_Cas_Sup_Car_Doc_Mainten_End_Date < DateTime.Now || d.CR_Cas_Sup_Car_Doc_Mainten_End_Date == null))
                     {
-
-                        if (Session["ContractFBrakeMaintenance"].ToString() != "True")
+                        if (Session["ContractFBrakeMaintenance"].ToString() !=null)
                         {
-                            DocsModel.ContractFBrakeMaintenance = "صيانة الفرامل الأمامية منتهية";
-                            DocsModel.PassCar = false;
+                            if (Session["ContractFBrakeMaintenance"].ToString() != "True")
+                            {
+                                DocsModel.ContractFBrakeMaintenance = "صيانة الفرامل الأمامية منتهية";
+                                DocsModel.PassCar = false;
+                            }
+                            else
+                            {
+                                DocsModel.ContractFBrakeMaintenance = "";
+                            }
                         }
                         else
                         {
-                            DocsModel.ContractFBrakeMaintenance = "";
+                            RedirectToAction("Login", "Account");
                         }
-
                     }
                     else
                     {
@@ -267,17 +326,22 @@ namespace RentCar.Controllers.BranchSys
 
                     if (d.CR_Cas_Sup_Car_Doc_Mainten_Code == "40" && (d.CR_Cas_Sup_Car_Doc_Mainten_End_Date < DateTime.Now || d.CR_Cas_Sup_Car_Doc_Mainten_End_Date == null))
                     {
-
-                        if (Session["ContractBBrakeMaintenance"].ToString() != "True")
+                        if (Session["ContractBBrakeMaintenance"].ToString()!=null)
                         {
-                            DocsModel.ContractBBrakeMaintenance = "صيانة الفرامل الخلفية منتهية";
-                            DocsModel.PassCar = false;
+                            if (Session["ContractBBrakeMaintenance"].ToString() != "True")
+                            {
+                                DocsModel.ContractBBrakeMaintenance = "صيانة الفرامل الخلفية منتهية";
+                                DocsModel.PassCar = false;
+                            }
+                            else
+                            {
+                                DocsModel.ContractBBrakeMaintenance = "";
+                            }
                         }
                         else
                         {
-                            DocsModel.ContractBBrakeMaintenance = "";
+                            RedirectToAction("Login", "Account");
                         }
-
                     }
                     else
                     {
@@ -300,9 +364,13 @@ namespace RentCar.Controllers.BranchSys
                 {
                     return RedirectToAction("Login", "Account");
                 }
-                LessorCode = Session["LessorCode"].ToString();
-                BranchCode = Session["BranchCode"].ToString();
-                UserLogin = System.Web.HttpContext.Current.Session["UserLogin"].ToString();
+                else
+                {
+                    LessorCode = Session["LessorCode"].ToString();
+                    BranchCode = Session["BranchCode"].ToString();
+                    UserLogin = System.Web.HttpContext.Current.Session["UserLogin"].ToString();
+                }
+                
             }
             catch
             {
@@ -1103,16 +1171,22 @@ namespace RentCar.Controllers.BranchSys
                         
                         if (elminfo.CR_Elm_Expiry_Driver_Date <= DateTime.Now)
                         {
-                            if (Session["ContractDrivingLicense"].ToString() != "True")
+                            if (Session["ContractDrivingLicense"].ToString() !=null)
                             {
-                                r.DrivingLicenceErrorMessage = "رخصة القيادة منتهية";
-                                r.PassRenter = false;
+                                if (Session["ContractDrivingLicense"].ToString() != "True")
+                                {
+                                    r.DrivingLicenceErrorMessage = "رخصة القيادة منتهية";
+                                    r.PassRenter = false;
+                                }
+                                else
+                                {
+                                    r.DrivingLicenceErrorMessage = "";
+                                }
                             }
                             else
                             {
-                                r.DrivingLicenceErrorMessage = "";
+                                RedirectToAction("Login", "Account");
                             }
-
                         }
                         else
                         {
@@ -1122,14 +1196,21 @@ namespace RentCar.Controllers.BranchSys
 
                         if (elminfo.CR_Elm_Expiry_ID_Date <= DateTime.Now)
                         {
-                            if (Session["ContractId"].ToString() != "True")
+                            if (Session["ContractId"].ToString() !=null)
                             {
-                                r.IdErrorMessage = "الهوية منتهية";
-                                r.PassRenter = false;
+                                if (Session["ContractId"].ToString() != "True")
+                                {
+                                    r.IdErrorMessage = "الهوية منتهية";
+                                    r.PassRenter = false;
+                                }
+                                else
+                                {
+                                    r.IdErrorMessage = "";
+                                }
                             }
                             else
                             {
-                                r.IdErrorMessage = "";
+                                RedirectToAction("Login", "Account");
                             }
 
                         }
@@ -1207,15 +1288,23 @@ namespace RentCar.Controllers.BranchSys
                     }
                     else
                     {
-                        if (Session["ContractRenterAddress"].ToString() != "True")
+                        if (Session["ContractRenterAddress"].ToString() !=null)
                         {
-                            r.AddressErrorMessage = "العنوان الوطني غير متوفر";
-                            r.PassRenter = false;
+                            if (Session["ContractRenterAddress"].ToString() != "True")
+                            {
+                                r.AddressErrorMessage = "العنوان الوطني غير متوفر";
+                                r.PassRenter = false;
+                            }
+                            else
+                            {
+                                r.AddressErrorMessage = "";
+                            }
                         }
                         else
                         {
-                            r.AddressErrorMessage = "";
+                            RedirectToAction("Login", "Account");
                         }
+
                     }
 
                 }
@@ -1318,18 +1407,22 @@ namespace RentCar.Controllers.BranchSys
                     elm.PassRenter = true;
                     if (DateTime.Now >= ElmInfo.CR_Elm_Expiry_Driver_Date)
                     {
-
-                        if (Session["ContractDrivingLicense"].ToString() != "True")
+                        if (Session["ContractDrivingLicense"].ToString()!=null)
                         {
-                            elm.IdErrorMessage = "صلاحية رخصة القيادة منتهية";
-                            elm.PassRenter = false;
+                            if (Session["ContractDrivingLicense"].ToString() != "True")
+                            {
+                                elm.IdErrorMessage = "صلاحية رخصة القيادة منتهية";
+                                elm.PassRenter = false;
+                            }
+                            else
+                            {
+                                elm.IdErrorMessage = "";
+                            }
                         }
                         else
                         {
-                            elm.IdErrorMessage = "";
+                            RedirectToAction("Login", "Account");
                         }
-
-
                     }
                     else
                     {
@@ -1339,16 +1432,23 @@ namespace RentCar.Controllers.BranchSys
                    
                     if (DateTime.Now >= ElmInfo.CR_Elm_Expiry_ID_Date)
                     {
-                       
-                        if (Session["ContractId"].ToString() != "True")
+                        if (Session["ContractId"].ToString()!=null)
                         {
-                            elm.IdErrorMessage = "صلاحية الهوية منتهية";
-                            elm.PassRenter = false;
+                            if (Session["ContractId"].ToString() != "True")
+                            {
+                                elm.IdErrorMessage = "صلاحية الهوية منتهية";
+                                elm.PassRenter = false;
+                            }
+                            else
+                            {
+                                elm.IdErrorMessage = "";
+                            }
                         }
                         else
                         {
-                            elm.IdErrorMessage = "";
+                            RedirectToAction("Login", "Account");
                         }
+
                     }
                     else
                     {
@@ -1559,15 +1659,23 @@ namespace RentCar.Controllers.BranchSys
                     }
                     else
                     {
-                        if (Session["ContractRenterAddress"].ToString() != "True")
+                        if (Session["ContractRenterAddress"].ToString()!=null)
                         {
-                            elm.AddressErrorMessage = "العنوان الوطني غير متوفر";
-                            elm.PassRenter = false;
+                            if (Session["ContractRenterAddress"].ToString() != "True")
+                            {
+                                elm.AddressErrorMessage = "العنوان الوطني غير متوفر";
+                                elm.PassRenter = false;
+                            }
+                            else
+                            {
+                                elm.AddressErrorMessage = "";
+                            }
                         }
                         else
                         {
-                            elm.AddressErrorMessage = "";
+                            RedirectToAction("Login", "Account");
                         }
+
                     }
 
 
@@ -1669,7 +1777,7 @@ namespace RentCar.Controllers.BranchSys
                 
                 }
 
-                db.SaveChanges();
+                //db.SaveChanges();
                 return Json(elm, JsonRequestBehavior.AllowGet);
             }
             else
@@ -1806,13 +1914,16 @@ namespace RentCar.Controllers.BranchSys
             var BranchCode = "";
             try
             {
-                if (Session["LessorCode"] == null || Session["UserLogin"] == null || Session["BranchCode"] == null)
+                if (Session["LessorCode"] == null || Session["UserLogin"] == null || Session["BranchCode"] == null || Session["CompName"].ToString() == null)
                 {
                     RedirectToAction("Login", "Account");
                 }
-                LessorCode = Session["LessorCode"].ToString();
-                BranchCode = Session["BranchCode"].ToString();
-                UserLogin = System.Web.HttpContext.Current.Session["UserLogin"].ToString();
+                else
+                {
+                    LessorCode = Session["LessorCode"].ToString();
+                    BranchCode = Session["BranchCode"].ToString();
+                    UserLogin = System.Web.HttpContext.Current.Session["UserLogin"].ToString();
+                }
             }
             catch
             {
@@ -1878,9 +1989,13 @@ namespace RentCar.Controllers.BranchSys
                     {
                         RedirectToAction("Login", "Account");
                     }
-                    LessorCode = Session["LessorCode"].ToString();
-                    BranchCode = Session["BranchCode"].ToString();
-                    UserLogin = System.Web.HttpContext.Current.Session["UserLogin"].ToString();
+                    else
+                    {
+                        LessorCode = Session["LessorCode"].ToString();
+                        BranchCode = Session["BranchCode"].ToString();
+                        UserLogin = System.Web.HttpContext.Current.Session["UserLogin"].ToString();
+                    }
+                    
                 }
                 catch
                 {

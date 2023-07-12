@@ -65,7 +65,7 @@
                 <div class="card" style="height:100%">
                     <fieldset class="card-body" style="padding-bottom:0px;padding-top:0px;border:none;">
 
-                        <center><h3 class="header-title" style="color:#0288C7;font-size:30px;"> تحرير عقد</h3></center>
+                        <center><h3 class="header-title" style="color:#0288C7;font-size:30px;">تحرير عقد</h3></center>
                         <div id="regForm">
                             <div style="min-height:70%">
 
@@ -1728,183 +1728,187 @@
                 type: "GET",
                 data: {
                     id: $("#CR_Cas_Contract_Basic_Renter_Id").val(), operation: '', RenterMobile: RMobile/*, RenterEmail: REmail*/,
-                    Driver_Mobile: $("#Driver_Mobile").val(), Driver_Email: $("#Driver_Email").val(), Additional_Driver_Mobile: $("#Additional_Driver_Mobile").val(),
-                    Additional_Driver_Email: $("#Additional_Driver_Email").val(), LessorCode, BranchCode, UserLogin, ContractNo
+                    Driver_Mobile: $("#Driver_Mobile").val(), /*Driver_Email: $("#Driver_Email").val(),*/ Additional_Driver_Mobile: $("#Additional_Driver_Mobile").val(),
+                    /*Additional_Driver_Email: $("#Additional_Driver_Email").val(),*/ LessorCode, BranchCode, UserLogin, ContractNo
                 },
 
                 success: function (result) {
                     console.log(result);
-                    if (result.CR_Mas_Renter_Information_Ar_Name != null || result.CR_Elm_Ar_Name != null) {
-                        if (result.Code != "" && result.Code != null) {
-                            if (result.CR_Elm_Ar_Name != null && result.CR_Elm_Ar_Name != "") {
-                                $("#HiddenRenterName").val(result.CR_Elm_Ar_Name);
-                            } else {
-                                $("#HiddenRenterName").val("");
-                            }
+                    if (LessorCode != null && BranchCode != null && UserLogin != null) {
+                        if (result.CR_Mas_Renter_Information_Ar_Name != null || result.CR_Elm_Ar_Name != null) {
+                            if (result.Code != "" && result.Code != null) {
+                                if (result.CR_Elm_Ar_Name != null && result.CR_Elm_Ar_Name != "") {
+                                    $("#HiddenRenterName").val(result.CR_Elm_Ar_Name);
+                                } else {
+                                    $("#HiddenRenterName").val("");
+                                }
 
-                            if (result.Age != null && result.Age != "") {
-                                $("#RenterAge").val(result.Age);
-                            } else {
+                                if (result.Age != null && result.Age != "") {
+                                    $("#RenterAge").val(result.Age);
+                                } else {
 
-                                $("#RenterAge").val("");
-                            }
-                            if (result.CR_Elm_Email != null && result.CR_Elm_Email != "") {
-                                $("#HiddenRenterEmail").val(result.CR_Elm_Email);
-                            } else {
+                                    $("#RenterAge").val("");
+                                }
+                                if (result.CR_Elm_Email != null && result.CR_Elm_Email != "") {
+                                    $("#HiddenRenterEmail").val(result.CR_Elm_Email);
+                                } else {
 
-                                $("#HiddenRenterEmail").val("");
+                                    $("#HiddenRenterEmail").val("");
 
-                            }
+                                }
 
-                            if (result.CR_Elm_Ar_Nationality != null && result.CR_Elm_Ar_Nationality != "") {
+                                if (result.CR_Elm_Ar_Nationality != null && result.CR_Elm_Ar_Nationality != "") {
+                                    $("#RenterNationality").val(result.CR_Elm_Ar_Nationality);
+                                } else {
+
+                                    $("#RenterNationality").val("");
+                                }
+
+                                $("#MsgCode").val(result.Code);
+
+                                if (result.Address != null && result.Address != "") {
+                                    $("#HiddenRenterAddress").val(result.Address);
+                                    $("#HiddenRenterAddress").css('color', "#0288C7");
+                                } else {
+
+                                    $("#HiddenRenterAddress").val("العنوان الوطني غير متوفر");
+                                    $("#HiddenRenterAddress").css('color', "red");
+                                }
+
+
                                 $("#RenterNationality").val(result.CR_Elm_Ar_Nationality);
+                                $("#RenterGender").val(result.CR_Elm_Ar_Gender);
+                                $("#RenterJob").val(result.CR_Elm_Ar_Jobs);
+                                if (result.CR_Elm_Ar_Workplace_Subscription != null && result.CR_Elm_Ar_Workplace_Subscription != "") {
+                                    $("#RenterEmployer").val(result.CR_Elm_Ar_Workplace_Subscription);
+                                    $("#RenterEmployer").css('color', "#0288C7");
+                                } else {
+                                    $("#RenterEmployer").val("جهة العمل غير متوفرة");
+                                    $("#RenterEmployer").css('color', "red");
+                                }
+
+                                $("#CR_Cas_Contract_Basic_Sector").val(result.OurSectorCode);
+                                $("#CR_Cas_Contract_Basic_No").val(result.TracingNo);
+                                $("#Expiry_Driving_License_Date").val(result.CR_Elm_Expiry_Driver_Date);
+
+                                if (result.IdErrorMessage != "") {
+
+                                    $("#RenterIdError").text(result.IdErrorMessage);
+                                }
+
+                                ///////////////// for Amir to allow/stop passing to the next page //////////////
+                                var x = result.PassRenter;
+                                //alert(x);
+                                if (x == false) {
+                                    //alert("t");
+                                    document.getElementById("nextBtn").style.display = true;
+                                } else {
+                                    // alert("f");
+                                    document.getElementById("nextBtn").style.display = false;
+                                }
+
+                                ///////////////////////////////////////////////////////////////////////////////
+
+
                             } else {
+                                ////////////////////////Datat from our base/////////////////////////
+                                $("#HiddenRenterName").val(result.CR_Mas_Renter_Information_Ar_Name);
+                                $("#HiddenRenterEmail").val(result.CR_Mas_Renter_Information_Email);
+                                $("#RenterNationality").val(result.CR_Mas_Renter_Information_Nationality);
+                                $("#CR_Cas_Contract_Basic_Sector").val(result.CR_Mas_Renter_Information_Sector);
 
-                                $("#RenterNationality").val("");
+                                $("#CR_Cas_Contract_Basic_No").val(result.TracingNo);
+
+                                $("#MsgCode").val(result.RenterMessageCode);
+                                var expiryLicence = new Date(parseInt(result.CR_Mas_Renter_Information_Expiry_Driving_License_Date.replace("/Date(", "").replace(")/", ""), 10));
+                                $("#Expiry_Driving_License_Date").val(expiryLicence.toLocaleDateString());
+
+                                //if (result.DrivingLicenceErrorMessage != "") {
+                                //    toastr.warning(result.DrivingLicenceErrorMessage);
+                                //}
+
+                                if (result.IdErrorMessage != "") {
+                                    //toastr.warning(result.IdErrorMessage);
+                                    $("#RenterIdError").text(result.IdErrorMessage);
+                                }
+
+                                //if (result.AddressErrorMessage != "") {
+                                //    toastr.warning(result.AddressErrorMessage);
+                                //}
+                                ///////////////// for Amir to allow/stop passing to the next page //////////////
+                                var x = result.PassRenter;
+                                //alert(x);
+                                if (x == false) {
+                                    document.getElementById("nextBtn").disabled = true;
+                                } else {
+                                    document.getElementById("nextBtn").disabled = false;
+                                }
+                                var x1 = result.HaveContract;
+                                if (x1 == true) {
+                                    //$("#RenterIdError").text("عفوا هذا العميل لديه عقد سار");
+                                    document.getElementById('RenterIdError').innerHTML = "عفوا هذا العميل لديه عقد سار";
+                                    document.getElementById("nextBtn").disabled = true;
+
+                                } else {
+
+                                    document.getElementById("nextBtn").disabled = false;
+                                }
+                                ///////////////////////////////////////////////////////////////////////////////
+                                //alert(result.EmployerErrorMessage);
+                                //if (result.EmployerErrorMessage != "") {
+                                //    toastr.warning(result.EmployerErrorMessage);
+                                //}
+                                ///////////////////////////////////////////////////////////////////////////////
+
+                                if (result.address != null && result.address != "") {
+                                    $("#HiddenRenterAddress").val(result.address);
+                                    $("#HiddenRenterAddress").css('color', "#0288C7");
+                                } else {
+
+                                    $("#HiddenRenterAddress").val("العنوان الوطني غير متوفر");
+                                    $("#HiddenRenterAddress").css('color', "red");
+                                }
+
+                                if (result.Age != null && result.Age != "") {
+                                    $("#RenterAge").val(result.Age);
+                                } else {
+
+                                    $("#RenterAge").val("");
+                                }
+
+
+                                $("#RenterNationality").val(result.Nationality);
+                                $("#RenterGender").val(result.Gender);
+                                $("#RenterJob").val(result.Job);
+
+                                if (result.Employer != null && result.Employer != "") {
+                                    $("#RenterEmployer").val(result.Employer);
+                                    $("#RenterEmployer").css('color', "#0288C7");
+                                } else {
+                                    $("#RenterEmployer").val("جهة العمل غير متوفرة");
+                                    $("#RenterEmployer").css('color', "red");
+                                }
+                                //$("#CR_Cas_Contract_Basic_Previous_Balance").val("0.00");
+                                var PrevBalance = result.PreviousBalance;
+                                $("#CR_Cas_Contract_Basic_Previous_Balance").val(PrevBalance);
                             }
-
-                            $("#MsgCode").val(result.Code);
-
-                            if (result.Address != null && result.Address != "") {
-                                $("#HiddenRenterAddress").val(result.Address);
-                                $("#HiddenRenterAddress").css('color', "#0288C7");
-                            } else {
-
-                                $("#HiddenRenterAddress").val("العنوان الوطني غير متوفر");
-                                $("#HiddenRenterAddress").css('color',"red");
-                            }
-
-
-                            $("#RenterNationality").val(result.CR_Elm_Ar_Nationality);
-                            $("#RenterGender").val(result.CR_Elm_Ar_Gender);
-                            $("#RenterJob").val(result.CR_Elm_Ar_Jobs);
-                            if (result.CR_Elm_Ar_Workplace_Subscription != null && result.CR_Elm_Ar_Workplace_Subscription != "") {
-                                $("#RenterEmployer").val(result.CR_Elm_Ar_Workplace_Subscription);
-                                $("#RenterEmployer").css('color',"#0288C7");
-                            } else {
-                                $("#RenterEmployer").val("جهة العمل غير متوفرة");
-                                $("#RenterEmployer").css('color',"red");
-                            }
-
-                            $("#CR_Cas_Contract_Basic_Sector").val(result.OurSectorCode);
-                            $("#CR_Cas_Contract_Basic_No").val(result.TracingNo);
-                            $("#Expiry_Driving_License_Date").val(result.CR_Elm_Expiry_Driver_Date);
-
-                            if (result.IdErrorMessage != "") {
-
-                                $("#RenterIdError").text(result.IdErrorMessage);
-                            }
-
-                            ///////////////// for Amir to allow/stop passing to the next page //////////////
-                            var x = result.PassRenter;
-                            //alert(x);
-                            if (x == false) {
-                                //alert("t");
-                                document.getElementById("nextBtn").style.display = true;
-                            } else {
-                                // alert("f");
-                                document.getElementById("nextBtn").style.display = false;
-                            }
-
-                            ///////////////////////////////////////////////////////////////////////////////
-
-
                         } else {
-                            ////////////////////////Datat from our base/////////////////////////
-                            $("#HiddenRenterName").val(result.CR_Mas_Renter_Information_Ar_Name);
-                            $("#HiddenRenterEmail").val(result.CR_Mas_Renter_Information_Email);
-                            $("#RenterNationality").val(result.CR_Mas_Renter_Information_Nationality);
-                            $("#CR_Cas_Contract_Basic_Sector").val(result.CR_Mas_Renter_Information_Sector);
-
-                            $("#CR_Cas_Contract_Basic_No").val(result.TracingNo);
-
-                            $("#MsgCode").val(result.RenterMessageCode);
-                            var expiryLicence = new Date(parseInt(result.CR_Mas_Renter_Information_Expiry_Driving_License_Date.replace("/Date(", "").replace(")/", ""), 10));
-                            $("#Expiry_Driving_License_Date").val(expiryLicence.toLocaleDateString());
-
-                            //if (result.DrivingLicenceErrorMessage != "") {
-                            //    toastr.warning(result.DrivingLicenceErrorMessage);
-                            //}
-
-                            if (result.IdErrorMessage != "") {
-                                //toastr.warning(result.IdErrorMessage);
-                                $("#RenterIdError").text(result.IdErrorMessage);
-                            }
-
-                            //if (result.AddressErrorMessage != "") {
-                            //    toastr.warning(result.AddressErrorMessage);
-                            //}
-                            ///////////////// for Amir to allow/stop passing to the next page //////////////
-                            var x = result.PassRenter;
-                            //alert(x);
-                            if (x == false) {
-                                document.getElementById("nextBtn").disabled = true;
-                            } else {
-                                document.getElementById("nextBtn").disabled = false;
-                            }
-                            var x1 = result.HaveContract;
-                            if (x1 == true) {
-                                //$("#RenterIdError").text("عفوا هذا العميل لديه عقد سار");
-                                document.getElementById('RenterIdError').innerHTML ="عفوا هذا العميل لديه عقد سار";
-                                document.getElementById("nextBtn").disabled = true;
-
-                            } else {
-
-                                document.getElementById("nextBtn").disabled = false;
-                            }
-                            ///////////////////////////////////////////////////////////////////////////////
-                            //alert(result.EmployerErrorMessage);
-                            //if (result.EmployerErrorMessage != "") {
-                            //    toastr.warning(result.EmployerErrorMessage);
-                            //}
-                            ///////////////////////////////////////////////////////////////////////////////
-
-                            if (result.address != null && result.address != "") {
-                                $("#HiddenRenterAddress").val(result.address);
-                                $("#HiddenRenterAddress").css('color',"#0288C7");
-                            } else {
-
-                                $("#HiddenRenterAddress").val("العنوان الوطني غير متوفر");
-                                $("#HiddenRenterAddress").css('color',"red");
-                            }
-
-                            if (result.Age != null && result.Age != "") {
-                                $("#RenterAge").val(result.Age);
-                            } else {
-
-                                $("#RenterAge").val("");
-                            }
-
-
-                            $("#RenterNationality").val(result.Nationality);
-                            $("#RenterGender").val(result.Gender);
-                            $("#RenterJob").val(result.Job);
-
-                            if (result.Employer != null && result.Employer != "") {
-                                $("#RenterEmployer").val(result.Employer);
-                                $("#RenterEmployer").css('color',"#0288C7");
-                            } else {
-                                $("#RenterEmployer").val("جهة العمل غير متوفرة");
-                                $("#RenterEmployer").css('color',"red");
-                            }
-
-
-                            //$("#CR_Cas_Contract_Basic_Previous_Balance").val("0.00");
-                            var PrevBalance = result.PreviousBalance;
-                            $("#CR_Cas_Contract_Basic_Previous_Balance").val(PrevBalance);
+                            $("#HiddenRenterName").val("");
+                            $("#HiddenRenterNationality").val("");
+                            $("#HiddenAddress").val("");
+                            $("#HiddenRenterGender").val("");
+                            $("#HiddenRenterJob").val("");
+                            $("#HiddenRenterEmployer").val("");
+                            $("#HiddenCR_Cas_Contract_Basic_Sector").val("");
+                            $("#HiddenCR_Cas_Contract_Basic_No").val("");
+                            //$("#d").val("");
+                            $("#HiddenRenterEmail").val("");
+                            $("#HiddenRenterIdError").text("عفوا لم يتم العثور على الهوية");
+                            //toastr.error("عفوا لم يتم العثور على الهوية");
                         }
-                    } else {
-                        $("#HiddenRenterName").val("");
-                        $("#HiddenRenterNationality").val("");
-                        $("#HiddenAddress").val("");
-                        $("#HiddenRenterGender").val("");
-                        $("#HiddenRenterJob").val("");
-                        $("#HiddenRenterEmployer").val("");
-                        $("#HiddenCR_Cas_Contract_Basic_Sector").val("");
-                        $("#HiddenCR_Cas_Contract_Basic_No").val("");
-                        $("#d").val("");
-                        $("#HiddenRenterIdError").text("عفوا لم يتم العثور على الهوية");
-                        //toastr.error("عفوا لم يتم العثور على الهوية");
+                    }
+                    else {
+                                window.location.href = '@Url.Action("Login", "Account")';
                     }
 
                     $.ajax({
@@ -1916,7 +1920,6 @@
                             document.getElementById('CarList').innerHTML = result;
                         }
                     });
-
                     $.ajax({
                         url: '@Url.Action("CategoriesList", "BasicContract")',
                         type: "GET",
@@ -1926,8 +1929,6 @@
 
                         }
                     });
-
-
                     CheckCarsListNo();
                 }
             });

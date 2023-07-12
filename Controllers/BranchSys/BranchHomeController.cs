@@ -19,9 +19,10 @@ namespace RentCar.Controllers.BranchSys
             var LessorCode = "";
             var UserLogin = "";
             var BranchCode = "";
+
             try
             {
-                if (Session["LessorCode"] == null || Session["UserLogin"] == null || Session["BranchCode"] == null|| Session["BranchName"]==null)
+                if (Session["LessorCode"] == null || Session["UserLogin"] == null || Session["BranchCode"] == null|| Session["BranchName"]==null || Session["CompName"].ToString()==null)
                 {
                     RedirectToAction("Login", "Account");
                 }
@@ -1076,9 +1077,13 @@ namespace RentCar.Controllers.BranchSys
                 {
                     RedirectToAction("Login", "Account");
                 }
-                LessorCode = Session["LessorCode"].ToString();
-                BranchCode = Session["BranchCode"].ToString();
-                UserLogin = System.Web.HttpContext.Current.Session["UserLogin"].ToString();
+                else
+                {
+                    LessorCode = Session["LessorCode"].ToString();
+                    BranchCode = Session["BranchCode"].ToString();
+                    UserLogin = System.Web.HttpContext.Current.Session["UserLogin"].ToString();
+                }
+                
                 
             }
             catch
@@ -1127,15 +1132,16 @@ namespace RentCar.Controllers.BranchSys
                 var afterDay =  date.AddDays(1);
                 ViewBag.NbrContracts = Contracts.Where(c => c.CR_Cas_Contract_Basic_Status != "U" && c.CR_Cas_Contract_Basic_Status != "y").Count();
                 ViewBag.NbrexpiredContracts = Contracts.Where(a => a.CR_Cas_Contract_Basic_Status == "E").Count();
-                ViewBag.NbrContractsAllActive = Contracts.Where(c => c.CR_Cas_Contract_Basic_Status == "A").Count();
+                //ViewBag.NbrContractsAllActive = Contracts.Where(c => c.CR_Cas_Contract_Basic_Status == "A").Count();
 
 
                 // this day
-                ViewBag.NbrDexpiredContracts = Contracts.Where(a => a.CR_Cas_Contract_Basic_Expected_End_Date== date && a.CR_Cas_Contract_Basic_Status != "C").Count();
+                ViewBag.NbrDexpiredContracts = Contracts.Where(a => a.CR_Cas_Contract_Basic_Expected_End_Date== date && a.CR_Cas_Contract_Basic_Status != "C"&& a.CR_Cas_Contract_Basic_Status == "A").Count();
                 // after day
                 ViewBag.NbrTexpiredContracts = Contracts.Where(a => a.CR_Cas_Contract_Basic_Expected_End_Date == afterDay && a.CR_Cas_Contract_Basic_Status != "C"&& a.CR_Cas_Contract_Basic_Status=="A").Count();
-                ViewBag.NbrActiveContracts = ViewBag.NbrContractsAllActive - ViewBag.NbrexpiredContracts - ViewBag.NbrDexpiredContracts - ViewBag.NbrTexpiredContracts;
                 ViewBag.NbrClosedContracts = Contracts.Where(a=>a.CR_Cas_Contract_Basic_Status=="C").Count();
+                ViewBag.NbrActiveContracts = ViewBag.NbrContracts - ViewBag.NbrexpiredContracts - ViewBag.NbrDexpiredContracts - ViewBag.NbrTexpiredContracts - ViewBag.NbrClosedContracts;
+
             }
 
             var Sp = db.CR_Cas_Sup_SalesPoint.Where(r=>r.CR_Cas_Sup_SalesPoint_Com_Code==LessorCode && r.CR_Cas_Sup_SalesPoint_Brn_Code==BranchCode);
