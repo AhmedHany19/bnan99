@@ -38,7 +38,7 @@ namespace BnanFollowUpContracts
                     item.CR_Cas_Contract_Basic_Alert_Status = "1";
                     database.SaveChanges();
                 }
-                if (item.CR_Cas_Contract_Basic_Day_DateTime_Alert==null)
+                if (item.CR_Cas_Contract_Basic_Day_DateTime_Alert == null)
                 {
                     item.CR_Cas_Contract_Basic_Alert_Status = "1";
                     database.SaveChanges();
@@ -57,10 +57,10 @@ namespace BnanFollowUpContracts
                 TimeSpan timeSpan = TimeSpan.FromHours(time);
                 TimeSpan minSpan = TimeSpan.FromMinutes(min);
                 var dateOnly = item.CR_Cas_Contract_Basic_Expected_End_Date; // Example date-only DateTime
-                if (timeSpan != null && minSpan != null && dateOnly !=null)
+                if (timeSpan != null && minSpan != null && dateOnly != null)
                 {
                     DateTime result = (DateTime)(dateOnly?.Add(timeSpan).Add(minSpan)); // Concatenate time span and date-only DateTime
-                     // check if contract will end Now
+                                                                                        // check if contract will end Now
                     if (result <= DateTime.Now && item.CR_Cas_Contract_Basic_Alert_Status == "2")
                     {
                         SendMailForPatch.SendMailWhenEnd(item);

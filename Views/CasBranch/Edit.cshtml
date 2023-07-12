@@ -21,7 +21,7 @@
 
         <div class="row">
             <div class="col-12">
-                <div class="card-box table-responsive">
+                <div class="card-box table-responsive" style="overflow:auto">
                     <div class="title_corp"><h3> الشركة / الفروع / تعديل</h3></div>
                     <div class="subtitle_corp">
                         تمكنك هذه الصفحة من تعديل بيانات فرع
@@ -875,13 +875,17 @@
                 if (x == true) {
                     $("#H-modal").modal('show');
                 }
-            } else if (st == 'H') {
+            }
+            else if (st == 'H') {
                 $("#H-modal").modal('show');
-            } else if (st == 'D') {
+            }
+            else if (st == 'D') {
                 toastr.info("لايمكن إيقاف فرع محذوف");
             }
             
         });
+
+
         $("#HoldModal-btn-si").on("click", function () {
             callback(true);
             $("#H-modal").modal('hide');

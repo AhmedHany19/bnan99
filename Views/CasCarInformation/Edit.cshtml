@@ -35,14 +35,14 @@
         appearance: none
     }
 
-        /* Hide the browser's default checkbox */
-        .checkbox_input input {
-            position: absolute;
-            opacity: 0;
-            cursor: pointer;
-            height: 0;
-            width: 0;
-        }
+    /* Hide the browser's default checkbox */
+    .checkbox_input input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+        height: 0;
+        width: 0;
+    }
 
     /* Create a custom checkbox */
     .checkmark {
@@ -101,7 +101,7 @@
 
         <div class="row">
             <div class="col-12">
-                <div class="card-box table-responsive" style="height:79vh">
+                <div class="card-box table-responsive" style="height:79vh;overflow:auto">
                     <div class="title_corp"><h3> السيارات / بيانات السيارات / تعديل</h3></div>
                     <div class="subtitle_corp">تمكنك هذه الصفحة من البحث و حذف و إيقاف و صيانة السيارة وعرضها للبيع</div>
                     <div class="hr_60"></div>
@@ -112,463 +112,463 @@
                             {
                                 @Html.AntiForgeryToken()
 
-                            <div class="form-horizontal" style="margin-top:15px;">
-                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                <div class="form-horizontal" style="margin-top:15px;">
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-                                @Html.HiddenFor(model => model.CR_Cas_Sup_Car_Category_Code, htmlAttributes: new { @class = "input_form " }) @*deleted by amir ????*@
-                                @Html.HiddenFor(Model => Model.CR_Cas_Sup_Car_Owner_Code)
-                                @Html.HiddenFor(Model => Model.CR_Cas_Sup_Car_Beneficiary_Code)
-                                @Html.HiddenFor(Model => Model.CR_Cas_Sup_Car_Registration_Code)
-                                <input type="text" id="ModelCode" name="ModelCode" value="@ViewBag.ModelCode" hidden />
-                                @Html.HiddenFor(Model => Model.CR_Cas_Sup_Car_Collect_Ar_Name)
-                                @Html.HiddenFor(Model => Model.CR_Cas_Sup_Car_Collect_Ar_Short_Name)
-                                @Html.HiddenFor(Model => Model.CR_Cas_Sup_Car_Collect_En_Name)
-                                @Html.HiddenFor(Model => Model.CR_Cas_Sup_Car_Collect_En_Short_Name)
-                                @Html.HiddenFor(Model => Model.CR_Cas_Sup_Car_Collect_Fr_Name)
-                                @Html.HiddenFor(Model => Model.CR_Cas_Sup_Car_Collect_Fr_Short_Name)
-                                @Html.HiddenFor(Model => Model.CR_Cas_Sup_Car_No_Current_Meter)
-                                @Html.HiddenFor(Model => Model.CR_Cas_Sup_Car_Joined_Fleet_Date)
-                                <input type="text" id="RegistrationCode" name="RegistrationCode" value="@ViewBag.RegistrationCode" hidden />
-                                <input type="text" id="OutMainColor" name="OutMainColor" value="@ViewBag.OutMainColor" hidden />
+                                    @Html.HiddenFor(model => model.CR_Cas_Sup_Car_Category_Code, htmlAttributes: new { @class = "input_form " }) @*deleted by amir ????*@
+                                    @Html.HiddenFor(Model => Model.CR_Cas_Sup_Car_Owner_Code)
+                                    @Html.HiddenFor(Model => Model.CR_Cas_Sup_Car_Beneficiary_Code)
+                                    @Html.HiddenFor(Model => Model.CR_Cas_Sup_Car_Registration_Code)
+                                    <input type="text" id="ModelCode" name="ModelCode" value="@ViewBag.ModelCode" hidden />
+                                    @Html.HiddenFor(Model => Model.CR_Cas_Sup_Car_Collect_Ar_Name)
+                                    @Html.HiddenFor(Model => Model.CR_Cas_Sup_Car_Collect_Ar_Short_Name)
+                                    @Html.HiddenFor(Model => Model.CR_Cas_Sup_Car_Collect_En_Name)
+                                    @Html.HiddenFor(Model => Model.CR_Cas_Sup_Car_Collect_En_Short_Name)
+                                    @Html.HiddenFor(Model => Model.CR_Cas_Sup_Car_Collect_Fr_Name)
+                                    @Html.HiddenFor(Model => Model.CR_Cas_Sup_Car_Collect_Fr_Short_Name)
+                                    @Html.HiddenFor(Model => Model.CR_Cas_Sup_Car_No_Current_Meter)
+                                    @Html.HiddenFor(Model => Model.CR_Cas_Sup_Car_Joined_Fleet_Date)
+                                    <input type="text" id="RegistrationCode" name="RegistrationCode" value="@ViewBag.RegistrationCode" hidden />
+                                    <input type="text" id="OutMainColor" name="OutMainColor" value="@ViewBag.OutMainColor" hidden />
 
-                                <input type="text" name="ImgL" id="ImgL" value="@ViewBag.LicenceCar" hidden />
+                                    <input type="text" name="ImgL" id="ImgL" value="@ViewBag.LicenceCar" hidden />
 
-                                <div class="row">
-                                    <div class="col-lg-8 col-md-12" style="float:right;">
-                                        <div class="row">
-                                            <div class="col-md-6" style="float:right;margin-bottom:0.5rem">
-                                                <div class="row">
-                                                    <div class="col-md-6 label6">
-                                                        @*@Html.LabelFor(model => model.CR_Cas_Sup_Branch_Ar_Short_Name, htmlAttributes: new { @class = "lbl col-md-6", style = "float:right" })*@
-                                                        <label id="CR_Cas_Sup_Car_Serail_No" class="lbl  style = " float:right">@Html.LabelFor(model => model.CR_Cas_Sup_Car_Serail_No)<label id="asterisk">*</label></label>
+                                    <div class="row">
+                                        <div class="col-lg-8 col-md-12" style="float:right;">
+                                            <div class="row">
+                                                <div class="col-md-6" style="float:right;margin-bottom:0.5rem">
+                                                    <div class="row">
+                                                        <div class="col-md-6 label6">
+                                                            @*@Html.LabelFor(model => model.CR_Cas_Sup_Branch_Ar_Short_Name, htmlAttributes: new { @class = "lbl col-md-6", style = "float:right" })*@
+                                                            <label id="CR_Cas_Sup_Car_Serail_No" class="lbl  style = " float:right">@Html.LabelFor(model => model.CR_Cas_Sup_Car_Serail_No)<label id="asterisk">*</label></label>
+                                                        </div>
+                                                        <div class="col-md-6 input6">
+                                                            @Html.TextBoxFor(model => model.CR_Cas_Sup_Car_Serail_No, htmlAttributes: new { @class = "form-control", style = "float:right;", onkeyup = "movetoNext('CR_Cas_Sup_Car_Customs_No')", autocomplete = "off", oninput = "this.value=this.value.replace(/[^0-9]/g,'')", onpaste = "return false;", maxlength = "10", @Readonly = "Readonly" })
+                                                        </div>
                                                     </div>
-                                                    <div class="col-md-6 input6">
-                                                        @Html.TextBoxFor(model => model.CR_Cas_Sup_Car_Serail_No, htmlAttributes: new { @class = "form-control", style = "float:right;", onkeyup = "movetoNext('CR_Cas_Sup_Car_Customs_No')", autocomplete = "off", oninput = "this.value=this.value.replace(/[^0-9]/g,'')", onpaste = "return false;", maxlength = "10", @Readonly = "Readonly" })
-                                                    </div>
+                                                    <div class="texterr" style="float:right">@ViewBag.CarInfo</div>
                                                 </div>
-                                                <div class="texterr" style="float:right">@ViewBag.CarInfo</div>
+                                                <div class="col-md-6" style="float:right;margin-bottom:0.5rem">
+                                                    <div class="row">
+                                                        <div class="col-md-6 label6">
+                                                            @*@Html.LabelFor(model => model.CR_Cas_Sup_Branch_Ar_Name, htmlAttributes: new { @class = "lbl col-md-3", style = "float:right" })*@
+                                                            <label id="" class="lbl" style=" float:right">@Html.LabelFor(model => model.CR_Cas_Sup_Car_Year)<label id="asterisk">*</label></label>
+
+                                                        </div>
+                                                        <div class="col-md-6 input6">
+                                                            @Html.TextBoxFor(model => model.CR_Cas_Sup_Car_Year, htmlAttributes: new { @class = "form-control ", style = "float:right;", onkeydown = "getcarinfo()", onkeyup = "movetoNext('CR_Cas_Sup_Car_Out_Main_Color_Code')", autocomplete = "off", oninput = "this.value=this.value.replace(/[^0-9]/g,'')", onpaste = "return false;", maxlength = "4", @Readonly = "Readonly" })
+                                                        </div>
+                                                    </div>
+                                                    <div class="texterr" style="float:right">@ViewBag.Year</div>
+                                                </div>
                                             </div>
-                                            <div class="col-md-6" style="float:right;margin-bottom:0.5rem">
-                                                <div class="row">
-                                                    <div class="col-md-6 label6">
-                                                        @*@Html.LabelFor(model => model.CR_Cas_Sup_Branch_Ar_Name, htmlAttributes: new { @class = "lbl col-md-3", style = "float:right" })*@
-                                                        <label id="" class="lbl" style=" float:right">@Html.LabelFor(model => model.CR_Cas_Sup_Car_Year)<label id="asterisk">*</label></label>
 
+                                            <div class="row">
+                                                <div class="col-md-6" style="float:right;margin-bottom:0.5rem">
+                                                    <div class="row">
+                                                        <div class="col-md-6 label6">
+                                                            @*@Html.LabelFor(model => model.CR_Cas_Sup_Branch_Ar_Name, htmlAttributes: new { @class = "lbl col-md-3", style = "float:right" })*@
+                                                            <label id="" class="lbl" style=" float:right">@Html.LabelFor(model => model.CR_Cas_Sup_Car_Model_Code)<label id="asterisk">*</label></label>
+
+                                                        </div>
+                                                        <div class="col-md-6 input6">
+                                                            @Html.DropDownList("CR_Cas_Sup_Car_Model_Code", null, " رجاء إختر الطراز ", htmlAttributes: new { @class = "form-control ", style = "float:right;", onkeyup = "movetoNext('CR_Cas_Sup_Branch_Tax_No')", autocomplete = "off", oninput = "this.value=this.value.replace(/[^0-9]/g,'')", onpaste = "return false;", @disabled = "disabled" })
+                                                        </div>
                                                     </div>
-                                                    <div class="col-md-6 input6">
-                                                        @Html.TextBoxFor(model => model.CR_Cas_Sup_Car_Year, htmlAttributes: new { @class = "form-control ", style = "float:right;", onkeydown = "getcarinfo()", onkeyup = "movetoNext('CR_Cas_Sup_Car_Out_Main_Color_Code')", autocomplete = "off", oninput = "this.value=this.value.replace(/[^0-9]/g,'')", onpaste = "return false;", maxlength = "4", @Readonly = "Readonly" })
-                                                    </div>
+                                                    <div class="texterr" style="float:right">@ViewBag.Carmodel</div>
                                                 </div>
-                                                <div class="texterr" style="float:right">@ViewBag.Year</div>
+
+                                                <div class="col-md-6" style="float:right;margin-bottom:0.5rem">
+                                                    <div class="row">
+                                                        <div class="col-md-6 label6">
+                                                            @*@Html.LabelFor(model => model.CR_Cas_Sup_Branch_Ar_Short_Name, htmlAttributes: new { @class = "lbl col-md-6", style = "float:right" })*@
+                                                            <label id="" class="lbl  style = " float:right">@Html.LabelFor(model => model.CR_Cas_Sup_Car_Brand_Code)</label><label>/</label><label id="" class="lbl  style = " float:right">@Html.LabelFor(model => model.CR_Cas_Sup_Car_Category_Code)</label>
+                                                        </div>
+                                                        <div class="col-md-6 input6">
+                                                            @Html.TextBoxFor(model => model.CR_Cas_Sup_Car_Brand_Code, htmlAttributes: new { @class = "form-control ", style = "float:right;border:none;width:50%", onpaste = "return false;", @ReadOnly = "True" })
+                                                            <input type="text" id="CategoryName" name="CategoryName" value="@ViewBag.CategoryName" class="form-control" style="float: right; border: none;width: 50%" ReadOnly />
+
+                                                            <input type="text" id="BrandCode" name="BrandCode" value="@ViewBag.BrandCode" class="form-control" style="float:right;border:none;width:50%" onpaste="return false;" hidden />
+                                                            <input type="text" id="CategoryCode" name="CategoryCode" value="@ViewBag.CategoryCode" class="form-control" style="float: right; border: none;width: 50%" hidden />
+                                                        </div>
+                                                    </div>
+                                                    <div class="texterr" style="float:right"></div>
+                                                </div>
+                                            </div>
+
+                                            @*, onkeydown = "getcarinfo()"*@
+                                            <div class="row">
+                                                <div class="col-md-6" style="float:right;margin-bottom:0.5rem">
+                                                    <div class="row">
+                                                        <div class="col-md-6 label6">
+                                                            <label id="CR_Cas_Sup_Car_Registration_Code" class="lbl  style = " float:right">@Html.LabelFor(model => model.CR_Cas_Sup_Car_Registration_Code)<label id="asterisk">*</label></label>
+                                                        </div>
+                                                        <div class="col-md-6 input6">
+                                                            @Html.DropDownList("CR_Cas_Sup_Car_Registration_Code", null, "رجاء إختر نوع التسجيل", htmlAttributes: new { @class = "form-control ", style = "float:right;", onkeyup = "movetoNext('CR_Cas_Sup_Branch_Tax_No')", autocomplete = "off", oninput = "this.value=this.value.replace(/[^0-9]/g,'')", onpaste = "return false;", maxlength = "10", @disabled = "disabled" })
+                                                        </div>
+                                                    </div>
+                                                    <div class="texterr" style="float:right">@ViewBag.Registration</div>
+                                                </div>
+
+
                                             </div>
                                         </div>
-
-                                        <div class="row">
-                                            <div class="col-md-6" style="float:right;margin-bottom:0.5rem">
-                                                <div class="row">
-                                                    <div class="col-md-6 label6">
-                                                        @*@Html.LabelFor(model => model.CR_Cas_Sup_Branch_Ar_Name, htmlAttributes: new { @class = "lbl col-md-3", style = "float:right" })*@
-                                                        <label id="" class="lbl" style=" float:right">@Html.LabelFor(model => model.CR_Cas_Sup_Car_Model_Code)<label id="asterisk">*</label></label>
-
-                                                    </div>
-                                                    <div class="col-md-6 input6">
-                                                        @Html.DropDownList("CR_Cas_Sup_Car_Model_Code", null, " رجاء إختر الطراز ", htmlAttributes: new { @class = "form-control ", style = "float:right;", onkeyup = "movetoNext('CR_Cas_Sup_Branch_Tax_No')", autocomplete = "off", oninput = "this.value=this.value.replace(/[^0-9]/g,'')", onpaste = "return false;", @disabled = "disabled" })
-                                                    </div>
+                                        <div class="col-lg-4 col-md-6" style="float:right;margin-bottom:0.5rem">
+                                            @if (ViewBag.PicturePath != null && ViewBag.PicturePath != "")
+                                            {
+                                                <img src="@Url.Content(ViewBag.PicturePath)" id="carimg" width="250" height="150" style="float: left; position: relative; margin-left: 0px; margin-top: 0px; object-fit: cover; margin-right: -100px;border:solid 1px #e7e7e7;" />
+                                                <input type="text" id="CarImage" name="CarImage" value="@ViewBag.Picturepath" hidden />
+                                            }
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-6" style="float:right;margin-bottom:0.5rem">
+                                            <div class="row">
+                                                <div class="col-md-6 label6">
+                                                    @*@Html.LabelFor(model => model.CR_Cas_Sup_Car_Plate_Ar_No, htmlAttributes: new { @class = "lbl", style = "float:right" })*@
+                                                    <label id="CR_Cas_Sup_Car_Plate_Ar_No" class="lbl  style = " float:right">@Html.LabelFor(model => model.CR_Cas_Sup_Car_Plate_Ar_No)<label id="asterisk">*</label></label>
                                                 </div>
-                                                <div class="texterr" style="float:right">@ViewBag.Carmodel</div>
+                                                <div class="col-md-6 input6">
+                                                    @Html.TextBoxFor(model => model.CR_Cas_Sup_Car_Plate_Ar_No, htmlAttributes: new
+                                                    {
+                                                        @class = "form-control ",
+                                                        style = "float:right;",
+                                                        onkeyup = "movetoNext('CR_Cas_Sup_Car_Plate_En_No')",
+                                                        autocomplete = "off",
+                                                        onpaste = "return false;",
+                                                        maxlength = "10",
+                                                        @Readonly = "Readonly"
+                                                    })
+                                                </div>
                                             </div>
+                                            <div class="texterr" style="float:right">@ViewBag.RegAr</div>
+                                        </div>
 
-                                            <div class="col-md-6" style="float:right;margin-bottom:0.5rem">
+                                        <div class="col-lg-4 col-md-6" style="float:right;margin-bottom:0.5rem">
+                                            <div class="row">
+                                                <div class="col-md-6 label6">
+                                                    @*@Html.LabelFor(model => model.CR_Cas_Sup_Car_Plate_En_No, htmlAttributes: new { @class = "lbl", style = "float:right" })*@
+                                                    <label id="CR_Cas_Sup_Car_Plate_En_No" class="lbl  style = " float:right">@Html.LabelFor(model => model.CR_Cas_Sup_Car_Plate_En_No)<label id="asterisk">*</label></label>
+                                                </div>
+                                                <div class="col-md-6 input6">
+                                                    @Html.TextBoxFor(model => model.CR_Cas_Sup_Car_Plate_En_No, htmlAttributes: new
+                                               {
+                                                   @class = "form-control ",
+                                                   style = "float:right;text-transform:uppercase;",
+                                                   onkeyup = "movetoNext('CR_Cas_Sup_Car_No_Current_Meter')",
+                                                   autocomplete = "off",
+                                                   onpaste = "return false;",
+                                                   maxlength = "10",
+                                                   @Readonly = "Readonly"
+                                               })
+                                                </div>
+                                            </div>
+                                            <div class="texterr" style="float:right">@ViewBag.RegEn</div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-6" style="float:right;margin-bottom:0.5rem">
+                                            <div class="row">
+                                                <div class="col-md-6 label6">
+                                                    @*@Html.LabelFor(model => model.CR_Cas_Sup_Car_Out_Main_Color_Code, htmlAttributes: new { @class = "lbl", style = "float:right" })*@
+                                                    <label id="CR_Cas_Sup_Car_Out_Main_Color_Code" class="lbl  style = " float:right">@Html.LabelFor(model => model.CR_Cas_Sup_Car_Out_Main_Color_Code)<label id="asterisk">*</label></label>
+                                                </div>
+                                                <div class="col-md-6 input6">
+                                                    @Html.DropDownList("CR_Cas_Sup_Car_Out_Main_Color_Code", null, "رجاء إختر اللون", htmlAttributes: new { @class = "form-control ", style = "float:right;", onkeyup = "movetoNext('CR_Cas_Sup_Branch_Tax_No')", autocomplete = "off", oninput = "this.value=this.value.replace(/[^0-9]/g,'')", onpaste = "return false;", maxlength = "10", @Disabled = "Disabled" })
+                                                </div>
+                                            </div>
+                                            <div class="texterr" style="float:right">@ViewBag.color</div>
+                                        </div>
+
+                                        <div class="col-lg-4 col-md-6" style="float:right;margin-bottom:0.5rem">
+                                            <div class="row">
+                                                <div class="col-md-6 label6">
+                                                    @Html.LabelFor(model => model.CR_Cas_Sup_Car_Out_Secondary_Color_Code, htmlAttributes: new { @class = "lbl", style = "float:right" })
+                                                </div>
+                                                <div class="col-md-6 input6">
+                                                    @Html.DropDownList("CR_Cas_Sup_Car_Out_Secondary_Color_Code", null, "رجاء إختر اللون", htmlAttributes: new { @class = "form-control ", style = "float:right;", onkeyup = "movetoNext('CR_Cas_Sup_Branch_Tax_No')", autocomplete = "off", oninput = "this.value=this.value.replace(/[^0-9]/g,'')", onpaste = "return false;", maxlength = "10" })
+                                                </div>
+                                            </div>
+                                            <div class="texterr" style="float:right"></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+
+                                        <div class="col-lg-4 col-md-6" style="float:right;margin-bottom:0.5rem">
+                                            <div class="row">
+                                                <div class="col-md-6 label6">
+                                                    @Html.LabelFor(model => model.CR_Cas_Sup_Car_In_Main_Color_Code, htmlAttributes: new { @class = "lbl", style = "float:right" })
+                                                </div>
+                                                <div class="col-md-6 input6">
+                                                    @Html.DropDownList("CR_Cas_Sup_Car_In_Main_Color_Code", null, "رجاء إختر اللون", htmlAttributes: new
+                                                    {
+                                                        @class = "form-control ",
+                                                        style = "float:right;",
+                                                   onkeyup = "movetoNext('CR_Cas_Sup_Branch_Tax_No')",
+                                                        autocomplete = "off",
+                                                        oninput = "this.value=this.value.replace(/[^0-9]/g,'')",
+                                                   onpaste = "return false;",
+                                                        maxlength = "10"
+                                                    })
+                                                </div>
+                                            </div>
+                                            <div class="texterr" style="float:right"></div>
+                                        </div>
+
+                                        <div class="col-lg-4 col-md-6" style="float:right;margin-bottom:0.5rem">
+                                            <div class="row">
+                                                <div class="col-md-6 label6">
+                                                    @Html.LabelFor(model => model.CR_Cas_Sup_Car_In_Secondary_Color_Code, htmlAttributes: new { @class = "lbl", style = "float:right" })
+                                                </div>
+                                                <div class="col-md-6 input6">
+                                                    @Html.DropDownList("CR_Cas_Sup_Car_In_Secondary_Color_Code", null, "رجاء إختر اللون", htmlAttributes: new
+                                                    {
+                                                        @class = "form-control ",
+                                                        style = "float:right;" +
+                                                    "",
+                                                        onkeyup = "movetoNext('CR_Cas_Sup_Branch_Tax_No')",
+                                                        autocomplete = "off",
+                                                        oninput = "this.value=this.value.replace(/[^0-9]/g,'')",
+                                                   onpaste = "return false;",
+                                                        maxlength = "10"
+                                                    })
+                                                </div>
+                                            </div>
+                                            <div class="texterr" style="float:right"></div>
+                                        </div>
+
+
+                                    </div>
+
+                                    <div class="row">
+
+                                        <div class="col-lg-4 col-md-6" style="float:right;margin-bottom:0.5rem">
+                                            <div class="row">
+                                                <div class="col-md-6 label6">
+                                                    @Html.LabelFor(model => model.CR_Cas_Sup_Car_Customs_No, htmlAttributes: new { @class = "lbl", style = "float:right" })
+                                                </div>
+                                                <div class="col-md-6 input6">
+                                                    @Html.TextBoxFor(model => model.CR_Cas_Sup_Car_Customs_No,
+                                                   htmlAttributes: new
+                                                        {
+                                                            @class = "form-control ",
+                                                       style = "float:right;",
+                                                       onkeyup = "movetoNext('CR_Cas_Sup_Car_Structure_No')",
+                                                       autocomplete = "off",
+                                                       oninput = "this.value=this.value.replace(/[^0-9]/g,'')",
+                                                       onpaste = "return false;",
+                                                       maxlength = "10",
+                                                            @Readonly = "Readonly"
+                                                        })
+                                                </div>
+                                            </div>
+                                            <div class="texterr" style="float:right">@ViewBag.LRExistArSh</div>
+                                        </div>
+
+                                        <div class="col-lg-4 col-md-6" style="float:right;margin-bottom:0.5rem">
+                                            <div class="row">
+                                                <div class="col-md-6 label6">
+                                                    @Html.LabelFor(model => model.CR_Cas_Sup_Car_Structure_No, htmlAttributes: new { @class = "lbl", style = "float:right" })
+                                                </div>
+                                                <div class="col-md-6 input6">
+                                                    @Html.TextBoxFor(model => model.CR_Cas_Sup_Car_Structure_No,
+                                                   htmlAttributes: new
+                                                        {
+                                                            @class = "form-control ",
+                                                       style = "float:right;",
+                                                            onkeyup = "movetoNext('CR_Cas_Sup_Car_Lessor_Code')",
+                                                       oninput = "this.value=this.value.replace(/[^0-9]/g,'')",
+                                                            onpaste = "return false;",
+                                                       maxlength = "50",
+                                                       @Readonly = "Readonly"
+                                                   })
+                                                </div>
+                                            </div>
+                                            <div class="texterr" style="float:right">@ViewBag.LRExistArSh</div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-6" style="float:right;margin-bottom:0.5rem">
+                                            <div class="row">
+                                                <div class="col-md-6 label6">
+                                                    <label class="lbl" style="float: right">تاريخ  الإصدار</label>
+                                                </div>
+                                                <div class="col-md-6 input6">
+                                                    <input class="form-control text-box single-line" data-val="true" data-val-date="The field CR_Cas_Sup_Branch_Documentation_End_Date must be a date."
+                                                           id="CR_Cas_Sup_Branch_Documentation_Start_Date" name="CR_Cas_Sup_Branch_Documentation_Start_Date" type="date" value="@ViewBag.CarteEndDate" readonly>
+                                                </div>
+                                            </div>
+                                            <div class="texterr" style="float:right"></div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-6" style="float:right;margin-bottom:0.5rem">
+                                            <div class="row">
+                                                <div class="col-md-6 label6" style=" float:right">
+                                                    @*<label id="CR_Cas_Sup_Car_Traffic_License_Img" class="lbl  style = " float:right">@Html.LabelFor(model => model.CR_Cas_Sup_Car_Traffic_License_Img)</label>*@
+                                                </div>
+                                                <div class="col-md-6 input6" style=" float:right">
+
+                                                    @*<input type="file" name="imgLicence" class="form-control" style="float:right;width:100%; object-fit: fill;" accept="image/*" id="CR_Cas_Sup_Car_Traffic_License_Img"
+                                                        onchange="loadFilesLicence(event)" onkeyup="movetoNext('')" />*@
+
+                                                </div>
+
+
+                                            </div>
+                                            <div class="texterr" style="float:right"></div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-8 col-md-12" style="float:right;margin-bottom:0.5rem">
+                                            <div class="row">
+                                                <div class="col-md-3">
+                                                    @Html.LabelFor(model => model.CR_Cas_Sup_Car_Reasons, htmlAttributes: new { @class = "lbl", style = "float:right;" })
+                                                </div>
+                                                <div class="col-md-9">
+                                                    @Html.EditorFor(model => model.CR_Cas_Sup_Car_Reasons, new { htmlAttributes = new { @class = "form-control", maxlength = "100" } })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @*<div class="row" hidden="hidden">
+                                            <div class="col-lg-4 col-md-6" style="float:right;margin-bottom:0.5rem">
                                                 <div class="row">
                                                     <div class="col-md-6 label6">
-                                                        @*@Html.LabelFor(model => model.CR_Cas_Sup_Branch_Ar_Short_Name, htmlAttributes: new { @class = "lbl col-md-6", style = "float:right" })*@
-                                                        <label id="" class="lbl  style = " float:right">@Html.LabelFor(model => model.CR_Cas_Sup_Car_Brand_Code)</label><label>/</label><label id="" class="lbl  style = " float:right">@Html.LabelFor(model => model.CR_Cas_Sup_Car_Category_Code)</label>
+                                                        @Html.LabelFor(model => model.CR_Cas_Sup_Car_Owner_Code, htmlAttributes: new { @class = "lbl", style = "float:right" })
                                                     </div>
                                                     <div class="col-md-6 input6">
-                                                        @Html.TextBoxFor(model => model.CR_Cas_Sup_Car_Brand_Code, htmlAttributes: new { @class = "form-control ", style = "float:right;border:none;width:50%", onpaste = "return false;", @ReadOnly = "True" })
-                                                        <input type="text" id="CategoryName" name="CategoryName" value="@ViewBag.CategoryName" class="form-control" style="float: right; border: none;width: 50%" ReadOnly />
-
-                                                        <input type="text" id="BrandCode" name="BrandCode" value="@ViewBag.BrandCode" class="form-control" style="float:right;border:none;width:50%" onpaste="return false;" hidden />
-                                                        <input type="text" id="CategoryCode" name="CategoryCode" value="@ViewBag.CategoryCode" class="form-control" style="float: right; border: none;width: 50%" hidden />
+                                                        @Html.DropDownList("CR_Cas_Sup_Car_Owner_Code", null, "رجاء إختر المالك", htmlAttributes: new { @class = "form-control ", onkeyup = "movetoNext('CR_Cas_Sup_Branch_Tax_No')", autocomplete = "off", oninput = "this.value=this.value.replace(/[^0-9]/g,'')", onpaste = "return false;", maxlength = "10" })
                                                     </div>
                                                 </div>
                                                 <div class="texterr" style="float:right"></div>
                                             </div>
-                                        </div>
+                                        </div>*@
 
-                                        @*, onkeydown = "getcarinfo()"*@
-                                        <div class="row">
-                                            <div class="col-md-6" style="float:right;margin-bottom:0.5rem">
+                                    @*<div class="row" hidden>
+                                            <div class="col-md-5" style="float:right;">
                                                 <div class="row">
-                                                    <div class="col-md-6 label6">
-                                                        <label id="CR_Cas_Sup_Car_Registration_Code" class="lbl  style = " float:right">@Html.LabelFor(model => model.CR_Cas_Sup_Car_Registration_Code)<label id="asterisk">*</label></label>
+                                                    <div class="col-md-8">
+                                                        @Html.DropDownList("CR_Cas_Sup_Car_Beneficiary_Code", null, "رجاء إختر المستفيد", htmlAttributes: new { @class = "form-control ", style = "float:right;width:250px;", onkeyup = "movetoNext('CR_Cas_Sup_Branch_Tax_No')", autocomplete = "off", oninput = "this.value=this.value.replace(/[^0-9]/g,'')", onpaste = "return false;", maxlength = "10" })
                                                     </div>
-                                                    <div class="col-md-6 input6">
-                                                        @Html.DropDownList("CR_Cas_Sup_Car_Registration_Code", null, "رجاء إختر نوع التسجيل", htmlAttributes: new { @class = "form-control ", style = "float:right;", onkeyup = "movetoNext('CR_Cas_Sup_Branch_Tax_No')", autocomplete = "off", oninput = "this.value=this.value.replace(/[^0-9]/g,'')", onpaste = "return false;", maxlength = "10", @disabled = "disabled" })
+                                                    <div class="col-lg-4 col-md-6">
+                                                        @Html.LabelFor(model => model.CR_Cas_Sup_Car_Beneficiary_Code, htmlAttributes: new { @class = "lbl", style = "float:right" })
                                                     </div>
                                                 </div>
-                                                <div class="texterr" style="float:right">@ViewBag.Registration</div>
+                                                <div class="texterr" style="float:right"></div>
                                             </div>
+                                        </div>*@
 
 
+
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-6" style="float:right;" hidden="hidden">
+                                            <div class="row">
+                                                <div>
+                                                    @Html.LabelFor(model => model.CR_Cas_Sup_Car_Joined_Fleet_Date, htmlAttributes: new { @class = "lbl col-md-6", style = "float:right" })
+                                                    <label id="asterisk" class="col-md-3">*</label>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <input class="form-control text-box single-line" data-val="true" data-val-date="The field CR_Cas_Sup_Car_Joined_Fleet_Date must be a date."
+                                                           id="CR_Cas_Sup_Car_Joined_Fleet_Date" name="CR_Cas_Sup_Car_Joined_Fleet_Date" type="date" value="@ViewBag.Joined" onkeyup="movetoNext('CR_Cas_Sup_Car_Left_Fleet_Date')">
+                                                </div>
+                                            </div>
+                                            <div class="texterr" style="float:right">@ViewBag.GovNumber</div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-6" style="float:right;" hidden="hidden">
+                                            <div class="row">
+                                                <div>
+                                                    @Html.LabelFor(model => model.CR_Cas_Sup_Car_Left_Fleet_Date, htmlAttributes: new { @class = "lbl col-md-6", style = "float:right" })
+                                                    <label id="asterisk" class="col-md-3">*</label>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <input class="form-control text-box single-line" data-val="true" data-val-date="The field CR_Cas_Sup_Car_Left_Fleet_Date must be a date."
+                                                           id="CR_Cas_Sup_Car_Left_Fleet_Date" name="CR_Cas_Sup_Car_Left_Fleet_Date" type="date" value="@ViewBag.Left" onkeyup="movetoNext('CR_Cas_Sup_Branch_Documentation_End_Date')">
+                                                </div>
+                                            </div>
+                                            <div class="texterr" style="float:right"></div>
+                                        </div>
+
+
+                                    </div>
+
+                                    <div class="row">
+
+                                        <div class="col-lg-6 col-md-12" style="float:right;margin-bottom:0.5rem">
+                                            <div class="input-group">
+                                                <span class="input-group-btn" style="width:100%">
+                                                    <span class="btn btn-primary" onclick="$(this).parent().find('input[type=file]').click();" style="width:100%;height:35px;width:100%;line-height:20px;">رخصة السير</span>
+                                                    <input name="imgLicence" type="file" class="form-control " style="display:none;float:right;width:100%; object-fit: fill;" accept="image/*" id="CR_Cas_Sup_Car_Traffic_License_Img"
+                                                           onchange="loadFilesLicence(event)" onkeyup="movetoNext('')">
+                                                </span>
+                                            </div>
+                                            @if (ViewBag.LicenceCar != " ")
+                                            {
+                                                <img src="@Url.Content(ViewBag.LicenceCar)" id="imgLicence" class="zoom" style="margin-top:0px;float:right;width:100%; height:215px;position:relative;object-fit:contain; border:solid 1px #e7e7e7;" />
+                                            }
+                                            else
+                                            {
+                                                <img id="imgLicence" class="zoom" style=" margin-top: 0px; float: right; width: 100%; height: 215px; position: relative; object-fit: cover; border: solid 1px #e7e7e7;" />
+                                            }
+                                        </div>
+                                        <div class="col-lg-6 col-md-12" style="float:right;margin-bottom:0.5rem">
+                                            @Html.Action("_CasInfoFeatures", "CasCarInformation", new { serialnumber = ViewBag.serialNumber })
                                         </div>
                                     </div>
-                                    <div class="col-lg-4 col-md-6" style="float:right;margin-bottom:0.5rem">
-                                        @if (ViewBag.PicturePath != null && ViewBag.PicturePath != "")
-                                        {
-                                            <img src="@Url.Content(ViewBag.PicturePath)" id="carimg" width="250" height="150" style="float: left; position: relative; margin-left: 0px; margin-top: 0px; object-fit: cover; margin-right: -100px;border:solid 1px #e7e7e7;" />
-                                            <input type="text" id="CarImage" name="CarImage" value="@ViewBag.Picturepath" hidden />
+
+                                    <div class="row" style="margin-top:25px;" hidden="hidden">
+                                        <div class="col-md-6" style="float:right;">
+                                            <div class="row">
+                                                @Html.LabelFor(model => model.CR_Cas_Sup_Car_Documentation_Status, htmlAttributes: new { @class = "lbl col-md-3", style = "float:right" })
+                                                <div class="col-md-3">
+                                                    @*<input type="checkbox" id="CR_Cas_Sup_Car_Documentation_Status" name="CR_Cas_Sup_Car_Documentation_Status" />*@
+                                                    @Html.CheckBox("CR_Cas_Sup_Car_Documentation_Status", new { htmlAttributes = new { @class = "form-control" } })
+                                                </div>
+                                                <div class="texterr" style="float:right">@ViewBag.LRExistEnLng</div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6" style="float:right;" hidden="hidden">
+                                            <div class="row">
+                                                @Html.LabelFor(model => model.CR_Cas_Sup_Car_Maintenance_Status, htmlAttributes: new { @class = "lbl col-md-3", style = "float:right;" })
+                                                <div class="col-md-3">
+                                                    @*<input type="checkbox" id="CR_Cas_Sup_Car_Maintenance_Status" name="CR_Cas_Sup_Car_Maintenance_Status" />*@
+                                                    @Html.CheckBox("CR_Cas_Sup_Car_Maintenance_Status", new { htmlAttributes = new { @class = "form-control" } })
+                                                </div>
+                                            </div>
+                                            <div class="texterr" style="float:right">@ViewBag.LRExistEnSh</div>
+                                        </div>
+                                    </div>
+
+
+                                    @Html.HiddenFor(model => model.CR_Cas_Sup_Car_Status, new { htmlAttributes = new { @class = "form-control" } })
+
+
+
+
+
+                                    <div>
+                                        @{
+                                            //Html.RenderAction("_CasInfoFeatures");
+                                            //@Html.Action("_CasInfoFeatures", "CasCarInformation", "");
                                         }
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-4 col-md-6" style="float:right;margin-bottom:0.5rem">
-                                        <div class="row">
-                                            <div class="col-md-6 label6">
-                                                @*@Html.LabelFor(model => model.CR_Cas_Sup_Car_Plate_Ar_No, htmlAttributes: new { @class = "lbl", style = "float:right" })*@
-                                                <label id="CR_Cas_Sup_Car_Plate_Ar_No" class="lbl  style = " float:right">@Html.LabelFor(model => model.CR_Cas_Sup_Car_Plate_Ar_No)<label id="asterisk">*</label></label>
-                                            </div>
-                                            <div class="col-md-6 input6">
-                                                @Html.TextBoxFor(model => model.CR_Cas_Sup_Car_Plate_Ar_No, htmlAttributes: new
-                                                {
-                                                    @class = "form-control ",
-                                                    style = "float:right;",
-                                                    onkeyup = "movetoNext('CR_Cas_Sup_Car_Plate_En_No')",
-                                                    autocomplete = "off",
-                                                    onpaste = "return false;",
-                                                    maxlength = "10",
-                                                    @Readonly = "Readonly"
-                                                })
-                                            </div>
-                                        </div>
-                                        <div class="texterr" style="float:right">@ViewBag.RegAr</div>
-                                    </div>
 
-                                    <div class="col-lg-4 col-md-6" style="float:right;margin-bottom:0.5rem">
-                                        <div class="row">
-                                            <div class="col-md-6 label6">
-                                                @*@Html.LabelFor(model => model.CR_Cas_Sup_Car_Plate_En_No, htmlAttributes: new { @class = "lbl", style = "float:right" })*@
-                                                <label id="CR_Cas_Sup_Car_Plate_En_No" class="lbl  style = " float:right">@Html.LabelFor(model => model.CR_Cas_Sup_Car_Plate_En_No)<label id="asterisk">*</label></label>
-                                            </div>
-                                            <div class="col-md-6 input6">
-                                                @Html.TextBoxFor(model => model.CR_Cas_Sup_Car_Plate_En_No, htmlAttributes: new
-                                           {
-                                               @class = "form-control ",
-                                               style = "float:right;text-transform:uppercase;",
-                                               onkeyup = "movetoNext('CR_Cas_Sup_Car_No_Current_Meter')",
-                                               autocomplete = "off",
-                                               onpaste = "return false;",
-                                               maxlength = "10",
-                                               @Readonly = "Readonly"
-                                           })
-                                            </div>
-                                        </div>
-                                        <div class="texterr" style="float:right">@ViewBag.RegEn</div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-4 col-md-6" style="float:right;margin-bottom:0.5rem">
-                                        <div class="row">
-                                            <div class="col-md-6 label6">
-                                                @*@Html.LabelFor(model => model.CR_Cas_Sup_Car_Out_Main_Color_Code, htmlAttributes: new { @class = "lbl", style = "float:right" })*@
-                                                <label id="CR_Cas_Sup_Car_Out_Main_Color_Code" class="lbl  style = " float:right">@Html.LabelFor(model => model.CR_Cas_Sup_Car_Out_Main_Color_Code)<label id="asterisk">*</label></label>
-                                            </div>
-                                            <div class="col-md-6 input6">
-                                                @Html.DropDownList("CR_Cas_Sup_Car_Out_Main_Color_Code", null, "رجاء إختر اللون", htmlAttributes: new { @class = "form-control ", style = "float:right;", onkeyup = "movetoNext('CR_Cas_Sup_Branch_Tax_No')", autocomplete = "off", oninput = "this.value=this.value.replace(/[^0-9]/g,'')", onpaste = "return false;", maxlength = "10", @Disabled = "Disabled" })
-                                            </div>
-                                        </div>
-                                        <div class="texterr" style="float:right">@ViewBag.color</div>
-                                    </div>
-
-                                    <div class="col-lg-4 col-md-6" style="float:right;margin-bottom:0.5rem">
-                                        <div class="row">
-                                            <div class="col-md-6 label6">
-                                                @Html.LabelFor(model => model.CR_Cas_Sup_Car_Out_Secondary_Color_Code, htmlAttributes: new { @class = "lbl", style = "float:right" })
-                                            </div>
-                                            <div class="col-md-6 input6">
-                                                @Html.DropDownList("CR_Cas_Sup_Car_Out_Secondary_Color_Code", null, "رجاء إختر اللون", htmlAttributes: new { @class = "form-control ", style = "float:right;", onkeyup = "movetoNext('CR_Cas_Sup_Branch_Tax_No')", autocomplete = "off", oninput = "this.value=this.value.replace(/[^0-9]/g,'')", onpaste = "return false;", maxlength = "10" })
-                                            </div>
-                                        </div>
-                                        <div class="texterr" style="float:right"></div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-
-                                    <div class="col-lg-4 col-md-6" style="float:right;margin-bottom:0.5rem">
-                                        <div class="row">
-                                            <div class="col-md-6 label6">
-                                                @Html.LabelFor(model => model.CR_Cas_Sup_Car_In_Main_Color_Code, htmlAttributes: new { @class = "lbl", style = "float:right" })
-                                            </div>
-                                            <div class="col-md-6 input6">
-                                                @Html.DropDownList("CR_Cas_Sup_Car_In_Main_Color_Code", null, "رجاء إختر اللون", htmlAttributes: new
-                                                {
-                                                    @class = "form-control ",
-                                                    style = "float:right;",
-                                               onkeyup = "movetoNext('CR_Cas_Sup_Branch_Tax_No')",
-                                                    autocomplete = "off",
-                                                    oninput = "this.value=this.value.replace(/[^0-9]/g,'')",
-                                               onpaste = "return false;",
-                                                    maxlength = "10"
-                                                })
-                                            </div>
-                                        </div>
-                                        <div class="texterr" style="float:right"></div>
-                                    </div>
-
-                                    <div class="col-lg-4 col-md-6" style="float:right;margin-bottom:0.5rem">
-                                        <div class="row">
-                                            <div class="col-md-6 label6">
-                                                @Html.LabelFor(model => model.CR_Cas_Sup_Car_In_Secondary_Color_Code, htmlAttributes: new { @class = "lbl", style = "float:right" })
-                                            </div>
-                                            <div class="col-md-6 input6">
-                                                @Html.DropDownList("CR_Cas_Sup_Car_In_Secondary_Color_Code", null, "رجاء إختر اللون", htmlAttributes: new
-                                                {
-                                                    @class = "form-control ",
-                                                    style = "float:right;" +
-                                                "",
-                                                    onkeyup = "movetoNext('CR_Cas_Sup_Branch_Tax_No')",
-                                                    autocomplete = "off",
-                                                    oninput = "this.value=this.value.replace(/[^0-9]/g,'')",
-                                               onpaste = "return false;",
-                                                    maxlength = "10"
-                                                })
-                                            </div>
-                                        </div>
-                                        <div class="texterr" style="float:right"></div>
                                     </div>
 
 
-                                </div>
-
-                                <div class="row">
-
-                                    <div class="col-lg-4 col-md-6" style="float:right;margin-bottom:0.5rem">
-                                        <div class="row">
-                                            <div class="col-md-6 label6">
-                                                @Html.LabelFor(model => model.CR_Cas_Sup_Car_Customs_No, htmlAttributes: new { @class = "lbl", style = "float:right" })
-                                            </div>
-                                            <div class="col-md-6 input6">
-                                                @Html.TextBoxFor(model => model.CR_Cas_Sup_Car_Customs_No,
-                                               htmlAttributes: new
-                                                    {
-                                                        @class = "form-control ",
-                                                   style = "float:right;",
-                                                   onkeyup = "movetoNext('CR_Cas_Sup_Car_Structure_No')",
-                                                   autocomplete = "off",
-                                                   oninput = "this.value=this.value.replace(/[^0-9]/g,'')",
-                                                   onpaste = "return false;",
-                                                   maxlength = "10",
-                                                        @Readonly = "Readonly"
-                                                    })
-                                            </div>
-                                        </div>
-                                        <div class="texterr" style="float:right">@ViewBag.LRExistArSh</div>
-                                    </div>
-
-                                    <div class="col-lg-4 col-md-6" style="float:right;margin-bottom:0.5rem">
-                                        <div class="row">
-                                            <div class="col-md-6 label6">
-                                                @Html.LabelFor(model => model.CR_Cas_Sup_Car_Structure_No, htmlAttributes: new { @class = "lbl", style = "float:right" })
-                                            </div>
-                                            <div class="col-md-6 input6">
-                                                @Html.TextBoxFor(model => model.CR_Cas_Sup_Car_Structure_No,
-                                               htmlAttributes: new
-                                                    {
-                                                        @class = "form-control ",
-                                                   style = "float:right;",
-                                                        onkeyup = "movetoNext('CR_Cas_Sup_Car_Lessor_Code')",
-                                                   oninput = "this.value=this.value.replace(/[^0-9]/g,'')",
-                                                        onpaste = "return false;",
-                                                   maxlength = "50",
-                                                   @Readonly = "Readonly"
-                                               })
-                                            </div>
-                                        </div>
-                                        <div class="texterr" style="float:right">@ViewBag.LRExistArSh</div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-4 col-md-6" style="float:right;margin-bottom:0.5rem">
-                                        <div class="row">
-                                            <div class="col-md-6 label6">
-                                                <label class="lbl" style="float: right">تاريخ  الإصدار</label>
-                                            </div>
-                                            <div class="col-md-6 input6">
-                                                <input class="form-control text-box single-line" data-val="true" data-val-date="The field CR_Cas_Sup_Branch_Documentation_End_Date must be a date."
-                                                       id="CR_Cas_Sup_Branch_Documentation_Start_Date" name="CR_Cas_Sup_Branch_Documentation_Start_Date" type="date" value="@ViewBag.CarteEndDate" readonly>
-                                            </div>
-                                        </div>
-                                        <div class="texterr" style="float:right"></div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-6" style="float:right;margin-bottom:0.5rem">
-                                        <div class="row">
-                                            <div class="col-md-6 label6" style=" float:right">
-                                                @*<label id="CR_Cas_Sup_Car_Traffic_License_Img" class="lbl  style = " float:right">@Html.LabelFor(model => model.CR_Cas_Sup_Car_Traffic_License_Img)</label>*@
-                                            </div>
-                                            <div class="col-md-6 input6" style=" float:right">
-
-                                                @*<input type="file" name="imgLicence" class="form-control" style="float:right;width:100%; object-fit: fill;" accept="image/*" id="CR_Cas_Sup_Car_Traffic_License_Img"
-                        onchange="loadFilesLicence(event)" onkeyup="movetoNext('')" />*@
-
-                                            </div>
-
-
-                                        </div>
-                                        <div class="texterr" style="float:right"></div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-8 col-md-12" style="float:right;margin-bottom:0.5rem">
-                                        <div class="row">
-                                            <div class="col-md-3">
-                                                @Html.LabelFor(model => model.CR_Cas_Sup_Car_Reasons, htmlAttributes: new { @class = "lbl", style = "float:right;" })
-                                            </div>
-                                            <div class="col-md-9">
-                                                @Html.EditorFor(model => model.CR_Cas_Sup_Car_Reasons, new { htmlAttributes = new { @class = "form-control", maxlength = "100" } })
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                @*<div class="row" hidden="hidden">
-            <div class="col-lg-4 col-md-6" style="float:right;margin-bottom:0.5rem">
-                <div class="row">
-                    <div class="col-md-6 label6">
-                        @Html.LabelFor(model => model.CR_Cas_Sup_Car_Owner_Code, htmlAttributes: new { @class = "lbl", style = "float:right" })
-                    </div>
-                    <div class="col-md-6 input6">
-                        @Html.DropDownList("CR_Cas_Sup_Car_Owner_Code", null, "رجاء إختر المالك", htmlAttributes: new { @class = "form-control ", onkeyup = "movetoNext('CR_Cas_Sup_Branch_Tax_No')", autocomplete = "off", oninput = "this.value=this.value.replace(/[^0-9]/g,'')", onpaste = "return false;", maxlength = "10" })
-                    </div>
-                </div>
-                <div class="texterr" style="float:right"></div>
-            </div>
-        </div>*@
-
-                                @*<div class="row" hidden>
-            <div class="col-md-5" style="float:right;">
-                <div class="row">
-                    <div class="col-md-8">
-                        @Html.DropDownList("CR_Cas_Sup_Car_Beneficiary_Code", null, "رجاء إختر المستفيد", htmlAttributes: new { @class = "form-control ", style = "float:right;width:250px;", onkeyup = "movetoNext('CR_Cas_Sup_Branch_Tax_No')", autocomplete = "off", oninput = "this.value=this.value.replace(/[^0-9]/g,'')", onpaste = "return false;", maxlength = "10" })
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        @Html.LabelFor(model => model.CR_Cas_Sup_Car_Beneficiary_Code, htmlAttributes: new { @class = "lbl", style = "float:right" })
-                    </div>
-                </div>
-                <div class="texterr" style="float:right"></div>
-            </div>
-        </div>*@
-
-
-
-                                <div class="row">
-                                    <div class="col-lg-4 col-md-6" style="float:right;" hidden="hidden">
-                                        <div class="row">
-                                            <div>
-                                                @Html.LabelFor(model => model.CR_Cas_Sup_Car_Joined_Fleet_Date, htmlAttributes: new { @class = "lbl col-md-6", style = "float:right" })
-                                                <label id="asterisk" class="col-md-3">*</label>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <input class="form-control text-box single-line" data-val="true" data-val-date="The field CR_Cas_Sup_Car_Joined_Fleet_Date must be a date."
-                                                       id="CR_Cas_Sup_Car_Joined_Fleet_Date" name="CR_Cas_Sup_Car_Joined_Fleet_Date" type="date" value="@ViewBag.Joined" onkeyup="movetoNext('CR_Cas_Sup_Car_Left_Fleet_Date')">
-                                            </div>
-                                        </div>
-                                        <div class="texterr" style="float:right">@ViewBag.GovNumber</div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-6" style="float:right;" hidden="hidden">
-                                        <div class="row">
-                                            <div>
-                                                @Html.LabelFor(model => model.CR_Cas_Sup_Car_Left_Fleet_Date, htmlAttributes: new { @class = "lbl col-md-6", style = "float:right" })
-                                                <label id="asterisk" class="col-md-3">*</label>
-                                            </div>
-                                            <div class="col-md-12">
-                                                <input class="form-control text-box single-line" data-val="true" data-val-date="The field CR_Cas_Sup_Car_Left_Fleet_Date must be a date."
-                                                       id="CR_Cas_Sup_Car_Left_Fleet_Date" name="CR_Cas_Sup_Car_Left_Fleet_Date" type="date" value="@ViewBag.Left" onkeyup="movetoNext('CR_Cas_Sup_Branch_Documentation_End_Date')">
-                                            </div>
-                                        </div>
-                                        <div class="texterr" style="float:right"></div>
-                                    </div>
-
-
-                                </div>
-
-                                <div class="row">
-
-                                    <div class="col-lg-6 col-md-12" style="float:right;margin-bottom:0.5rem">
-                                        <div class="input-group">
-                                            <span class="input-group-btn" style="width:100%">
-                                                <span class="btn btn-primary" onclick="$(this).parent().find('input[type=file]').click();" style="width:100%;height:35px;width:100%;line-height:20px;">رخصة السير</span>
-                                                <input name="imgLicence" type="file" class="form-control " style="display:none;float:right;width:100%; object-fit: fill;" accept="image/*" id="CR_Cas_Sup_Car_Traffic_License_Img"
-                                                       onchange="loadFilesLicence(event)" onkeyup="movetoNext('')">
-                                            </span>
-                                        </div>
-                                        @if (ViewBag.LicenceCar != " ")
-                                        {
-                                            <img src="@Url.Content(ViewBag.LicenceCar)" id="imgLicence" class="zoom" style="margin-top:0px;float:right;width:100%; height:215px;position:relative;object-fit:contain; border:solid 1px #e7e7e7;" />
-                                        }
-                                        else
-                                        {
-                                            <img id="imgLicence" class="zoom" style=" margin-top: 0px; float: right; width: 100%; height: 215px; position: relative; object-fit: cover; border: solid 1px #e7e7e7;" />
-                                        }
-                                    </div>
-                                    <div class="col-lg-6 col-md-12" style="float:right;margin-bottom:0.5rem">
-                                        @Html.Action("_CasInfoFeatures", "CasCarInformation", new { serialnumber = ViewBag.serialNumber })
-                                    </div>
-                                </div>
-
-                                <div class="row" style="margin-top:25px;" hidden="hidden">
-                                    <div class="col-md-6" style="float:right;">
-                                        <div class="row">
-                                            @Html.LabelFor(model => model.CR_Cas_Sup_Car_Documentation_Status, htmlAttributes: new { @class = "lbl col-md-3", style = "float:right" })
-                                            <div class="col-md-3">
-                                                @*<input type="checkbox" id="CR_Cas_Sup_Car_Documentation_Status" name="CR_Cas_Sup_Car_Documentation_Status" />*@
-                                                @Html.CheckBox("CR_Cas_Sup_Car_Documentation_Status", new { htmlAttributes = new { @class = "form-control" } })
-                                            </div>
-                                            <div class="texterr" style="float:right">@ViewBag.LRExistEnLng</div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6" style="float:right;" hidden="hidden">
-                                        <div class="row">
-                                            @Html.LabelFor(model => model.CR_Cas_Sup_Car_Maintenance_Status, htmlAttributes: new { @class = "lbl col-md-3", style = "float:right;" })
-                                            <div class="col-md-3">
-                                                @*<input type="checkbox" id="CR_Cas_Sup_Car_Maintenance_Status" name="CR_Cas_Sup_Car_Maintenance_Status" />*@
-                                                @Html.CheckBox("CR_Cas_Sup_Car_Maintenance_Status", new { htmlAttributes = new { @class = "form-control" } })
-                                            </div>
-                                        </div>
-                                        <div class="texterr" style="float:right">@ViewBag.LRExistEnSh</div>
-                                    </div>
-                                </div>
-
-
-                                @Html.HiddenFor(model => model.CR_Cas_Sup_Car_Status, new { htmlAttributes = new { @class = "form-control" } })
-
-
-
-
-
-                                <div>
-                                    @{
-                                        //Html.RenderAction("_CasInfoFeatures");
-                                        //@Html.Action("_CasInfoFeatures", "CasCarInformation", "");
-                                    }
-
-                                </div>
-
-
-                                @*<div class="col-md-12" style="margin-top:40px;">
-            <input type="submit" name="add" class="submit_btn" id="add_btn" value="حفظ" />
-            <input type="submit" name="hold" class="submit_btn" value="@ViewBag.h" style=" margin-right: 20px;" />
-            <input type="submit" name="Sell" class="submit_btn" value="@ViewBag.Sell" style=" margin-right: 20px;" />
-            <input type="button" name="delete" id="btn-confirm" class="submit_btn" value="@ViewBag.stat" style="margin-right: 20px; background-color: #F3B161;" />
-            <a href="/CasCarInformation/Index/" class="btn" style="font-family:'Times New Roman';float:left;font-size:15px!important;width: 70px !important;padding-top:4px;height:30px; background-color: #F3B161; padding-right: 22px; border-radius: 0px; color: white;">انهاء</a>
-        </div>*@
+                                    @*<div class="col-md-12" style="margin-top:40px;">
+                                            <input type="submit" name="add" class="submit_btn" id="add_btn" value="حفظ" />
+                                            <input type="submit" name="hold" class="submit_btn" value="@ViewBag.h" style=" margin-right: 20px;" />
+                                            <input type="submit" name="Sell" class="submit_btn" value="@ViewBag.Sell" style=" margin-right: 20px;" />
+                                            <input type="button" name="delete" id="btn-confirm" class="submit_btn" value="@ViewBag.stat" style="margin-right: 20px; background-color: #F3B161;" />
+                                            <a href="/CasCarInformation/Index/" class="btn" style="font-family:'Times New Roman';float:left;font-size:15px!important;width: 70px !important;padding-top:4px;height:30px; background-color: #F3B161; padding-right: 22px; border-radius: 0px; color: white;">انهاء</a>
+                                        </div>*@
 
                                 <div class="col-md-12" style="margin-bottom:20px;">
                                     @if (ViewBag.delete == "D")
                                     {
 
                                         @*<input type="submit" name="save" value="حفظ" class="btn btn-primary waves-effect" style="float: right;margin-right:29px;cursor:no-drop;" onclick="javascript:return false;" disabled />
-                <input type="submit" name="hold" class="btn btn-primary waves-effect" value="@ViewBag.h" style=" margin-right: 20px;cursor:no-drop;" onclick="javascript:return false;" disabled />*@
+            <input type="submit" name="hold" class="btn btn-primary waves-effect" value="@ViewBag.h" style=" margin-right: 20px;cursor:no-drop;" onclick="javascript:return false;" disabled />*@
                                         <a name="save" class="btn btn-primary waves-effect btn-disabled red-tooltip" data-toggle="tooltip" data-placement="top" data-original-title="لا يمكن حفظ السيارة" style="color:#fff;  margin-left: 20px; margin-top: 10px; cursor: no-drop;" disabled>
                                             حفظ
                                         </a>
@@ -577,7 +577,7 @@
                                         </a>
 
 
-                                        <input type="button" name="delete" id="btn-confirm" class="btn btn-primary waves-effect" value="@ViewBag.stat" style="margin-left: 20px; margin-top: 10px;" />
+                                        <input type="button" name="delete" id="b-a-delete" class="btn btn-primary waves-effect" value="@ViewBag.stat" style="margin-left: 20px; margin-top: 10px;" />
                                         <input type="submit" name="Maintenance" class="btn btn-primary waves-effect" value="@ViewBag.Maintenance" style=" margin-left: 20px;margin-top: 10px;cursor:no-drop" disabled />
                                         <input type="submit" name="Sell" class="btn btn-primary waves-effect" value="@ViewBag.Sell" style=" margin-left: 20px;margin-top: 10px;cursor:no-drop" disabled />
 
@@ -590,8 +590,8 @@
                                         <a name="save" class="btn btn-primary waves-effect btn-disabled red-tooltip" data-toggle="tooltip" data-placement="top" data-original-title="لا يمكن حفظ السيارة" style="color:#fff;  margin-left: 20px; margin-top: 10px; cursor: no-drop;" disabled>
                                             حفظ
                                         </a>
-                                        <input type="submit" name="hold" class="btn btn-primary waves-effect" value="@ViewBag.h" style=" margin-left: 20px; margin-top: 10px;" />
-                                        @*<input type="button" name="delete" id="btn-confirm" class="btn btn-primary waves-effect" value="@ViewBag.stat" style="margin-left: 20px;cursor:no-drop;" onclick="javascript:return false;" disabled />*@
+                                        <a id="b-active-hold" name="hold" class="btn btn-primary waves-effect" style=" margin-left: 20px; margin-top: 10px;color:white"> @ViewBag.h  </a>
+
                                         <a name="delete" class="btn btn-primary waves-effect btn-disabled red-tooltip" data-toggle="tooltip" data-placement="top" data-original-title="لا يمكن حذف السيارة" style="color:#fff;  margin-left: 20px; margin-top: 10px; cursor: no-drop;" disabled>
                                             @ViewBag.stat
                                         </a>
@@ -613,8 +613,8 @@
                                         </a>
 
                                         <input type="button" name="delete" id="btn-confirm" class="btn btn-primary waves-effect" value="@ViewBag.stat" style="margin-left: 20px; margin-top: 10px;cursor:no-drop;" onclick="javascript:return false;" disabled />
-                                        <input type="submit" name="Maintenance" class="btn btn-primary waves-effect" value="@ViewBag.Maintenance" style=" margin-left: 20px;margin-top: 10px;cursor:no-drop" disabled />
-                                        <input type="submit" name="Sell" class="btn btn-primary waves-effect" value="@ViewBag.Sell" style=" margin-left: 20px; margin-top: 10px;" />
+                                        <input type="submit" name="Maintenance" class="btn btn-primary waves-effect" value="@ViewBag.Maintenance" id="b-a-sell" style=" margin-left: 20px;margin-top: 10px;cursor:no-drop" disabled />
+                                        <a name="Sell" id="b-a-selll" class="btn btn-primary waves-effect" value="@ViewBag.Sell" style=" margin-left: 20px; margin-top: 10px; color:white">@ViewBag.Sell</a>
                                         <a href="/CasCarInformation/Index/" class="btn btn-primary waves-effect" style="float:left; margin-top: 10px;">انهاء</a>
                                     }
                                     else if (ViewBag.delete == "M")
@@ -629,7 +629,7 @@
                                             @ViewBag.h
                                         </a>
                                         <input type="button" name="delete" id="btn-confirm" class="btn btn-primary waves-effect" value="@ViewBag.stat" style="margin-left: 20px; margin-top: 10px;cursor:no-drop;" onclick="javascript:return false;" disabled />
-                                        <input type="submit" name="Maintenance" class="btn btn-primary waves-effect" value="@ViewBag.Maintenance" style=" margin-left: 20px;margin-top: 10px;" />
+                                        <a id="b-a-Maintenance" name="Maintenance" class="btn btn-primary waves-effect" value="@ViewBag.Maintenance" style=" margin-left: 20px;margin-top: 10px; color:white"> @ViewBag.Maintenance </a>
                                         <input type="submit" name="Sell" class="btn btn-primary waves-effect" value="@ViewBag.Sell" style=" margin-left: 20px; margin-top: 10px;" cursor:no-drop;" onclick="javascript:return false;" disabled />
                                         <a href="/CasCarInformation/Index/" class="btn btn-primary waves-effect" style="float:left; margin-top: 10px;">انهاء</a>
                                     }
@@ -638,13 +638,13 @@
 
                                         <input type="submit" name="save" value="حفظ" class="btn btn-primary waves-effect" style="float: right;margin-left:20px;margin-top: 10px;" />
 
-                                        <input type="submit" name="hold" class="btn btn-primary waves-effect" value="@ViewBag.h" style=" margin-left: 20px;margin-top: 10px;" />
+                                        <a name="hold" id="b-hold" class="btn btn-primary waves-effect" value="@ViewBag.h" style=" margin-left: 20px;margin-top: 10px;color:white;">@ViewBag.h</a>
 
-                                        <input type="button" name="delete" id="btn-confirm" class="btn btn-primary waves-effect" value="@ViewBag.stat" style="margin-left: 20px;margin-top: 10px; " />
+                                        <a name="delete" id="b-delete" class="btn btn-primary waves-effect" style="margin-left: 20px;margin-top: 10px; color:white ">@ViewBag.stat</a>
 
-                                        <input type="submit" name="Maintenance" class="btn btn-primary waves-effect" value="@ViewBag.Maintenance" style=" margin-left: 20px;margin-top: 10px;" />
+                                        <a name="Maintenance" id="b-Maintenance" class="btn btn-primary waves-effect" value="@ViewBag.Maintenance" style=" margin-left: 20px;margin-top: 10px;color:white"> @ViewBag.Maintenance </a>
 
-                                        <input type="submit" name="Sell" class="btn btn-primary waves-effect" value="@ViewBag.Sell" style=" margin-left: 20px;margin-top: 10px;" />
+                                        <a name="Sell" id="b-sell" class="btn btn-primary waves-effect" value="@ViewBag.Sell" style=" margin-left: 20px;margin-top: 10px; color:white"> @ViewBag.Sell </a>
 
 
 
@@ -652,60 +652,326 @@
 
                                     }
                                     <!--Popup For Delete-->
-                                    <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="mi-modal" style="margin-top:17%;">
-                                        <div class="modal-dialog modal-sm">
+                                    <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="d-modal">
+                                        <div class="modal-dialog modal-dialog-centered">
                                             <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h4 class="modal-title" id="myModalLabel" style=" margin-right: 10%;">تأكيد</h4>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <h6> هل انت متاكد من حذف هذه السيارة !!</h6>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    @if (ViewBag.delete == "D")
-                                                    {
-                                                        <input type="submit" name="delete" class="submit_btn" value="@ViewBag.stat" id="modal-btn-si" style="float:right;width:80px;height:40px;font:bold 14px Tahoma;margin-left:10px;color:white;background-color:#5cb85c;" />
-                                                    }
-                                                    else
-                                                    {
-                                                        <input type="submit" name="delete" class="submit_btn" value="@ViewBag.stat" id="modal-btn-si" style="float:right;width:80px;height:40px;font:bold 14px Tahoma;margin-left:10px;color:white;background-color:#d9534f;" />
-                                                    }
-                                                    <button type="button" class="btn btn-primary" id="modal-btn-no" style="float: left;width: 80px;height: 40px;font: bold 14px Tahoma">إلغاء</button>
+                                                <div class="modal-body" style="padding: 35px;">
+                                                    <div style="width:75%;float:right;text-align:right;">
+                                                        <b style="color:red;">تأكيد الحذف ......</b><br>
+                                                        سيترتب على حذف السيارة إيقاف تأجير السيارةسيترتب على حذف السيارة مع الاحتفاظ بجميع الإجراءات الإدارية و المالية السابقة
+                                                    </div>
+
+                                                    <div style="width:20%;margin-right:5%;float:left; margin:0">
+                                                        @if (ViewBag.delete == "D")
+                                                        {
+                                                            <input type="submit" name="delete" class="btn btn-primary waves-effect" value="@ViewBag.stat" id="modal-btn-si" style="float:left;width:80px;height:40px;font:bold 14px Tahoma;color:white;background-color:#5cb85c; cursor:pointer;" />
+                                                        }
+                                                        else
+                                                        {
+                                                            <input type="submit" name="delete" class="btn btn-primary waves-effect" value="@ViewBag.stat" id="modal-btn-si" style="float: left; width: 80px; height: 40px; font: bold 14px Tahoma; color: white; background-color: #d9534f; cursor: pointer;" />
+                                                        }
+                                                        <button type="button" class="btn btn-primary" id="modal-hide-delete" style="float: left;width: 80px;height: 40px;font: bold 14px Tahoma;margin-top:25px">إلغاء</button>
+
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+
+                                    <!--Popup For activate the delete-->
+                                    <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="d-a-modal">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-body" style="padding: 35px;">
+                                                    <div style="width:75%;float:right;text-align:right;">
+                                                        <b style="color:red;">تأكيد التنشيط ......</b><br>
+                                                        سيترتب على تنشيط السيارة تنشيط تأجير السيارة
+                                                    </div>
+
+                                                    <div style="width:20%;margin-right:5%;float:left; margin:0">
+                                                        @if (ViewBag.delete == "D")
+                                                        {
+                                                            <input type="submit" name="delete" class="btn btn-primary waves-effect" value="@ViewBag.stat" id="modal-btn-si" style="float:left;width:80px;height:40px;font:bold 14px Tahoma;color:white;background-color:#5cb85c; cursor:pointer;" />
+                                                        }
+                                                        else
+                                                        {
+                                                            <input type="submit" name="delete" class="btn btn-primary waves-effect" value="@ViewBag.stat" id="modal-btn-si" style="float: left; width: 80px; height: 40px; font: bold 14px Tahoma; color: white; background-color: #d9534f; cursor: pointer;" />
+                                                        }
+                                                        <button type="button" class="btn btn-primary" id="modal-hide-active" style="float: left;width: 80px;height: 40px;font: bold 14px Tahoma;margin-top:25px">إلغاء</button>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
 
                                     <!--Popup For Hold-->
-                                    <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="mi-modal" style="margin-top:17%;">
-                                        <div class="modal-dialog modal-sm">
+                                    <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="h-modal">
+                                        <div class="modal-dialog modal-dialog-centered">
                                             <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h4 class="modal-title" id="myModalLabel" style=" margin-right: 10%;">تأكيد</h4>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <h6> هل انت متاكد من حذف هذه السيارة !!</h6>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    @if (ViewBag.delete == "D")
-                                                    {
-                                                        <input type="submit" name="delete" class="submit_btn" value="@ViewBag.stat" id="modal-btn-si" style="float:right;width:80px;height:40px;font:bold 14px Tahoma;margin-left:10px;color:white;background-color:#5cb85c;" />
-                                                    }
-                                                    else
-                                                    {
-                                                        <input type="submit" name="delete" class="submit_btn" value="@ViewBag.stat" id="modal-btn-si" style="float:right;width:80px;height:40px;font:bold 14px Tahoma;margin-left:10px;color:white;background-color:#d9534f;" />
-                                                    }
-                                                    <button type="button" class="btn btn-primary" id="modal-btn-no" style="float: left;width: 80px;height: 40px;font: bold 14px Tahoma">إلغاء</button>
+                                                <div class="modal-body" style="padding: 35px;">
+                                                    <div style="width:75%;float:right;text-align:right;">
+                                                        <b style="color:red;">تأكيد الإيقاف ......</b><br>
+                                                        سيترتب على إيقاف السيارة إيقاف تأجير السيارة
+                                                    </div>
+
+                                                    <div style="width:20%;margin-right:5%;float:left; margin:0">
+                                                        @if (ViewBag.delete == "H")
+                                                        {
+                                                            <input type="submit" name="hold" class="btn btn-primary waves-effect" value="@ViewBag.h" id="modal-btn-si" style="float:left;width:80px;height:40px;font:bold 14px Tahoma;color:white;background-color:#5cb85c; cursor:pointer;" />
+                                                        }
+                                                        else
+                                                        {
+                                                            <input type="submit" name="hold" class="btn btn-primary waves-effect" value="@ViewBag.h" id="modal-btn-si" style="float: left; width: 80px; height: 40px; font: bold 14px Tahoma; color: white; background-color: #d9534f; cursor: pointer;" />
+                                                        }
+                                                        <button type="button" class="btn btn-primary" id="modal-hide-hold" style="float: left;width: 80px;height: 40px;font: bold 14px Tahoma;margin-top:25px">إلغاء</button>
+
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
 
+                                    <!--Popup For Active Hold-->
+                                    <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="a-modal">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-body" style="padding: 35px;">
+                                                    <div style="width:75%;float:right;text-align:right;">
+                                                        <b style="color:red;">تأكيد التنشيط ......</b><br>
+                                                        سيترتب على تنشيط السيارة تنشيط تأجير السيارة
+                                                    </div>
+
+                                                    <div style="width:20%;margin-right:5%;float:left; margin:0">
+                                                        @if (ViewBag.delete == "H")
+                                                        {
+                                                            <input type="submit" name="hold" class="btn btn-primary waves-effect" value="@ViewBag.h" id="modal-btn-si" style="float:left;width:80px;height:40px;font:bold 14px Tahoma;color:white;background-color:#5cb85c; cursor:pointer;" />
+                                                        }
+                                                        else
+                                                        {
+                                                            <input type="submit" name="hold" class="btn btn-primary waves-effect" value="@ViewBag.h" id="modal-btn-si" style="float: left; width: 80px; height: 40px; font: bold 14px Tahoma; color: white; background-color: #d9534f; cursor: pointer;" />
+                                                        }
+                                                        <button type="button" class="btn btn-primary" id="modal-hide-active" style="float: left;width: 80px;height: 40px;font: bold 14px Tahoma;margin-top:25px">إلغاء</button>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <!--Popup For Mainataince-->
+                                    <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="m-modal">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-body" style="padding: 35px;">
+                                                    <div style="width:75%;float:right;text-align:right;">
+                                                        <b style="color:red;">تأكيد الصيانه ......</b><br>
+                                                        سيترتب على صيانه السيارة إيقاف تأجير السيارة
+                                                    </div>
+
+                                                    <div style="width:20%;margin-right:5%;float:left; margin:0">
+                                                        @if (ViewBag.delete == "M")
+                                                        {
+                                                            <input type="submit" name="Maintenance" class="btn btn-primary waves-effect" value="@ViewBag.Maintenance" id="modal-btn-si" style="float:left;width:80px;height:40px;font:bold 14px Tahoma;color:white;background-color:#5cb85c; cursor:pointer;" />
+                                                        }
+                                                        else
+                                                        {
+                                                            <input type="submit" name="Maintenance" class="btn btn-primary waves-effect" value="@ViewBag.Maintenance" id="modal-btn-si" style="float: left; width: 80px; height: 40px; font: bold 14px Tahoma; color: white; background-color: #d9534f; cursor: pointer;" />
+                                                        }
+                                                        <button type="button" class="btn btn-primary" id="modal-hide-Mainataince" style="float: left;width: 80px;height: 40px;font: bold 14px Tahoma;margin-top:25px">إلغاء</button>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!--Popup For Active Maintenance-->
+                                    <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="m-a-modal">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-body" style="padding: 35px;">
+                                                    <div style="width:75%;float:right;text-align:right;">
+                                                        <b style="color:red;">تأكيد التنشيط ......</b><br>
+                                                        سيترتب على تنشيط السيارة تنشيط تأجير السيارة
+                                                    </div>
+
+                                                    <div style="width:20%;margin-right:5%;float:left; margin:0">
+                                                        @if (ViewBag.delete == "M")
+                                                        {
+                                                            <input type="submit" name="Maintenance" class="btn btn-primary waves-effect" value="@ViewBag.Maintenance" id="modal-btn-si" style="float:left;width:80px;height:40px;font:bold 14px Tahoma;color:white;background-color:#5cb85c; cursor:pointer;" />
+                                                        }
+                                                        else
+                                                        {
+                                                            <input type="submit" name="Maintenance" class="btn btn-primary waves-effect" value="@ViewBag.Maintenance" id="modal-btn-si" style="float: left; width: 80px; height: 40px; font: bold 14px Tahoma; color: white; background-color: #d9534f; cursor: pointer;" />
+                                                        }
+                                                        <button type="button" class="btn btn-primary" id="modal-hide-Mainataince-active" style="float: left;width: 80px;height: 40px;font: bold 14px Tahoma;margin-top:25px">إلغاء</button>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>  
+                                    
+                                    <!--Popup For Sell-->
+                                    <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="s-modal">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-body" style="padding: 35px;">
+                                                    <div style="width:75%;float:right;text-align:right;">
+                                                        <b style="color:red;">تأكيد عرض للبيع ......</b><br>
+                                                        سيترتب على عرض بيع السيارة إيقاف تأجير السيارة
+                                                    </div>
+
+                                                    <div style="width:20%;margin-right:5%;float:left; margin:0">
+                                                        @if (ViewBag.delete == "O")
+                                                        {
+                                                            <input type="submit" name="Sell" class="btn btn-primary waves-effect" value="@ViewBag.Sell" id="modal-btn-si" style="float:left;width:80px;height:40px;font:bold 14px Tahoma;color:white;background-color:#5cb85c; cursor:pointer;" />
+                                                        }
+                                                        else
+                                                        {
+                                                            <input type="submit" name="Sell" class="btn btn-primary waves-effect" value="@ViewBag.Sell" id="modal-btn-si" style="float: left; width: 80px; height: 40px; font: bold 14px Tahoma; color: white; background-color: #d9534f; cursor: pointer;" />
+                                                        }
+                                                        <button type="button" class="btn btn-primary" id="modal-hide-Sell" style="float: left;width: 80px;height: 40px;font: bold 14px Tahoma;margin-top:25px">إلغاء</button>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!--Popup For Active Sell-->
+                                    <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="s-active-modal">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-body" style="padding: 35px;">
+                                                    <div style="width:75%;float:right;text-align:right;">
+                                                        <b style="color:red;">تأكيد التنشيط ......</b><br>
+                                                        سيترتب على تنشيط السيارة تنشيط تأجير السيارة
+                                                    </div>
+
+                                                    <div style="width:20%;margin-right:5%;float:left; margin:0">
+                                                        @if (ViewBag.delete == "O")
+                                                        {
+                                                            <input type="submit" name="Sell" class="btn btn-primary waves-effect" value="@ViewBag.Sell" id="modal-btn-si" style="float:left;width:80px;height:40px;font:bold 14px Tahoma;color:white;background-color:#5cb85c; cursor:pointer;" />
+                                                        }
+                                                        else
+                                                        {
+                                                            <input type="submit" name="Sell" class="btn btn-primary waves-effect" value="@ViewBag.Sell" id="modal-btn-si" style="float: left; width: 80px; height: 40px; font: bold 14px Tahoma; color: white; background-color: #d9534f; cursor: pointer;" />
+                                                        }
+                                                        <button type="button" class="btn btn-primary" id="modal-hide-Sell-active" style="float: left;width: 80px;height: 40px;font: bold 14px Tahoma;margin-top:25px">إلغاء</button>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
 
 
                                 </div>
+                                    <script>
 
-                                <script>
+                                        $(document).ready(function () {
+                                            //open modal hold
+                                            $("#b-hold").on("click", function () {
+
+                                                $("#h-modal").modal('show');
+
+                                            });
+                                            //hide modals hold
+                                            $("#modal-hide-hold").on("click", function () {
+
+                                                $("#h-modal").modal('hide');
+                                            });
+
+
+                                            //open modal activate the hold
+                                            $("#b-active-hold").on("click", function () {
+
+                                                $("#a-modal").modal('show');
+
+                                            });
+                                            // hide modal active hold
+                                            $("#modal-hide-active").on("click", function () {
+                                                $("#a-modal").modal('hide');
+                                            });
+
+
+                                            //open modal delete
+                                            $("#b-delete").on("click", function () {
+
+                                                $("#d-modal").modal('show');
+                                            });
+                                            // hide modal delete
+                                            $("#modal-hide-delete").on("click", function () {
+                                                $("#d-modal").modal('hide');
+                                            });
+
+
+                                            //open modal activate the delete
+                                            $("#b-a-delete").on("click", function () {
+
+                                                $("#d-a-modal").modal('show');
+
+                                            });
+                                            // hide modal activate the delete
+                                            $("#modal-hide-active").on("click", function () {
+                                                $("#d-a-modal").modal('hide');
+                                            });
+
+                                            //open modal the Maintenance
+                                            $("#b-Maintenance").on("click", function () {
+
+                                                $("#m-modal").modal('show');
+
+                                            });
+                                            // hide modal the Maintenance
+                                            $("#modal-hide-Mainataince").on("click", function () {
+                                                $("#m-modal").modal('hide');
+                                            });
+
+                                            //open modal activate the hold
+                                            $("#b-a-Maintenance").on("click", function () {
+
+                                                $("#m-a-modal").modal('show');
+
+                                            });
+                                            // hide modal active hold
+                                            $("#modal-hide-active").on("click", function () {
+                                                $("#modal-hide-Mainataince-active").modal('hide');
+                                            });
+
+
+                                            //open modal the Sell
+                                            $("#b-sell").on("click", function () {
+
+                                                $("#s-modal").modal('show');
+
+                                            });
+                                            // hide modal the Maintenance
+                                            $("#modal-hide-Sell").on("click", function () {
+                                                $("#s-modal").modal('hide');
+                                            });
+
+                                            //open modal activate the sell
+                                            $("#b-a-selll").on("click", function () {
+
+                                                $("#s-active-modal").modal('show');
+
+                                            });
+                                            // hide modal active sell
+                                            $("#modal-hide-Sell-active").on("click", function () {
+                                                $("#s-active-modal").modal('hide');
+                                            });
+
+
+
+                                        })
+                                    </script>
+
+                                    <script>
                                     $("#btn-confirm").on("click", function () {
                                         var status = '@TempData["CarStatus"]';
                                         console.log(status);
@@ -726,40 +992,39 @@
                                         }
 
                                     })
-                                </script>
+                                    </script>
 
-                                <script>
+                                    <script>
 
-                                    var modalConfirm = function (callback) {
-                                        $("#btn-confirm").on("click", function () {
-                                            $("#mi-modal").modal('show');
+                                        var modalConfirm = function (callback) {
+                                            $("#btn-confirm").on("click", function () {
+                                                $("#mi-modal").modal('show');
+                                            });
+                                            $("#modal-btn-si").on("click", function () {
+                                                callback(true);
+                                                $("#mi-modal").modal('hide');
+                                            });
+                                            $("#modal-btn-no").on("click", function () {
+                                                callback(false);
+                                                $("#mi-modal").modal('hide');
+                                            });
+                                        };
+                                        modalConfirm(function (confirm) {
+                                            if (confirm) {
+                                                //Acciones si el usuario confirma
+                                                $("#form1").submit();
+                                            } else {
+                                                //Acciones si el usuario no confirma
+                                                $("#result").html("canceled");
+                                            }
                                         });
-                                        $("#modal-btn-si").on("click", function () {
-                                            callback(true);
-                                            $("#mi-modal").modal('hide');
-                                        });
-                                        $("#modal-btn-no").on("click", function () {
-                                            callback(false);
-                                            $("#mi-modal").modal('hide');
-                                        });
-                                    };
-                                    modalConfirm(function (confirm) {
-                                        if (confirm) {
-                                            //Acciones si el usuario confirma
-                                            $("#form1").submit();
-                                        } else {
-                                            //Acciones si el usuario no confirma
-                                            $("#result").html("canceled");
-                                        }
-                                    });
 
-                                </script>
+                                    </script>
 
-
-                                <script type="text/javascript">
-                                    $(document).ready(function () { setTimeout(function () { $("#Message").fadeOut(); }, 4000); });
-                                </script>
-                                <script>
+                                    <script type="text/javascript">
+                                        $(document).ready(function () { setTimeout(function () { $("#Message").fadeOut(); }, 4000); });
+                                    </script>
+                                    <script>
                                 $(document).ready(function () {
                                     $("#CR_Cas_Sup_Car_Model_Code").change(function () {
                                         $.ajax({
@@ -781,22 +1046,9 @@
                                         });
                                     })
                                 });
-                                </script>
+                                    </script>
 
-
-                                @*<script>
-            $(document).ready(function () {
-
-                $("#CR_Cas_Sup_Car_Year").change(function () {
-                    //~/images/Models / 3100000006 / 2020 / 1.jpg
-                    document.getElementById("output").attr('src', "/images/Models/3100000006/2020/1.jpg");
-                });
-
-            })
-
-        </script>*@
-
-                                <script>
+                                    <script>
                                     function Getinfo() {
 
                                             $.ajax({
@@ -833,76 +1085,34 @@
 
                                     };
 
-                                </script>
+                                    </script>
 
 
-                                @*<script>
-            function getcarinfo() {
-                var year = $("#CR_Cas_Sup_Car_Year").val();
-                var model = $("#CR_Cas_Sup_Car_Model_Code").val();
-                if (year == null || model == null) {
-                    return;
-                }
-                if (event.keyCode === 13) {
-                    $.ajax({
-                        url: '@Url.Action("GetCategory", "CasCarInformation")',
-                        type: "GET",
-                        data: { year: year, ModelCode: model},
-                        success: function (result) {
-                            //alert(result.CR_Mas_Sup_Category_Ar_Name);
-                            if (result.CR_Mas_Sup_Category_Ar_Name != null) {
-                                $("#CR_Cas_Sup_Car_Category_Code").val(result.CR_Mas_Sup_Category_Ar_Name);
-                            } else {
+                                 
 
-                                $("#CR_Cas_Sup_Car_Category_Code").val="";
-                            }
+                                    <script>
+                                        function LoadImg(content) {
 
+                                            if (content != null && content != '') {
+                                                document.getElementById("carimg")
+                                                    .style.display = "block";
 
-                            if (result.CR_Mas_Sup_Category_Code != null) {
-                                $("#CategoryCode").val(result.CR_Mas_Sup_Category_Code);
+                                            } else {
+                                                document.getElementById("carimg")
+                                                    .style.display = "none";
 
-                            } else {
-                                $("#CategoryCode").val="";
-                            }
+                                            }
 
-                            if (result.CR_Mas_Sup_Category_Reasons != null) {
-                                $("img[id=carimg]").attr("src", result.CR_Mas_Sup_Category_Reasons);
-                            } else {
-                                $("img[id=carimg]").attr("src", "");
-                            }
-                            LoadImg(result.CR_Mas_Sup_Category_Reasons);
-
-
-                        }
-                    });
-                }
-            };
-        </script>*@
-
-
-                                <script>
-                                    function LoadImg(content) {
-
-                                        if (content != null && content != '') {
-                                            document.getElementById("carimg")
-                                                .style.display = "block";
-
-                                        } else {
-                                            document.getElementById("carimg")
-                                                .style.display = "none";
 
                                         }
+                                    </script>
 
 
-                                    }
-                                </script>
-
-
-                            </div>
-
-                                    }
                                 </div>
-                            </div>
+
+                            }
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
