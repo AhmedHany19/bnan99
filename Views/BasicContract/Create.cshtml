@@ -1119,7 +1119,9 @@
                                                                 <div class="row">
                                                                     <label class="col-md-4 label6"> رصيد سابق</label>
                                                                     <div class="col-md-8 input6">
-                                                                        @Html.TextBoxFor(Model => Model.CR_Cas_Contract_Basic_Previous_Balance, new { @class = "form-control", style = "float:right;direction:ltr;text-align: right;", @readonly = "readonly", @value = "0" })
+                                                                        @*@Html.TextBoxFor(Model => Model.CR_Cas_Contract_Basic_Previous_Balance, new { @class = "form-control", style = "float:right;direction:ltr;text-align: right;", @readonly = "readonly" })*@
+                                                                        <input type="text" class="form-control" autocomplete="no" id="CR_Cas_Contract_Basic_Previous_Balance" name="CR_Cas_Contract_Basic_Previous_Balance" style="direction: rtl; width: 100px;" readonly="readonly">
+
                                                                     </div>
                                                                     <div class="texterr"></div>
                                                                 </div>
@@ -1531,6 +1533,8 @@
                     toastr.info("الرجاء ادخال ثلاث صور علي الأقل");
                 else
                     currentTab = currentTab + n;
+                    getBalanceRenter();
+
 
 
             }
@@ -1539,11 +1543,11 @@
 
             }
 
-
-
         } else {
 
             currentTab = currentTab + n;
+            getBalanceRenter();
+
         }
 
 
@@ -1889,8 +1893,8 @@
                                     $("#RenterEmployer").css('color', "red");
                                 }
                                 //$("#CR_Cas_Contract_Basic_Previous_Balance").val("0.00");
-                                var PrevBalance = result.PreviousBalance;
-                                $("#CR_Cas_Contract_Basic_Previous_Balance").val(PrevBalance);
+                                //var PrevBalance = result.CR_Cas_Renter_Lessor_Balance;
+                                //$("#CR_Cas_Contract_Basic_Previous_Balance").val(PrevBalance);
                             }
                         } else {
                             $("#HiddenRenterName").val("");
@@ -2328,9 +2332,22 @@
         } else if (RMobile == "") {
             document.getElementById('AdditionalDriverMobileErr').innerHTML = "الرجاء إدخال رقم الجوال";
         }
-    };
-</script>
 
+       
+</script>
+<script>
+       function getBalanceRenter() {
+        var LessorCode = '@Request.RequestContext.HttpContext.Session["LessorCode"]';
+        $.ajax({
+            url: '@Url.Action("GetBalance", "BasicContract")',
+            type: "GET",
+            data: { Id: $("#CR_Cas_Contract_Basic_Renter_Id").val(), LessorCode: LessorCode },
+            success: function(result) {
+                $("#CR_Cas_Contract_Basic_Previous_Balance").val(result);
+            }
+        });
+}
+</script>
 <script>
     function CalculateContract() {
         var price = 0;
@@ -2374,6 +2391,7 @@
             document.getElementById("TotalContract").value = totcontract.toFixed(2);
             document.getElementById("TotalContractHT").value = totcontract.toFixed(2);
             CalculateTaxVal();
+            
         } else {
             document.getElementById('jourerror').value = 'أدخل عدد الأيام';
             document.getElementById('CR_Cas_Contract_Basic_Expected_End_Date').value = "";

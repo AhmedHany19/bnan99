@@ -509,9 +509,12 @@ namespace RentCar.Controllers.BranchSys
                 {
                      RedirectToAction("Login", "Account");
                 }
-                LessorCode = Session["LessorCode"].ToString();
-                BranchCode = Session["BranchCode"].ToString();
-                UserLogin = System.Web.HttpContext.Current.Session["UserLogin"].ToString();
+                else
+                {
+                    LessorCode = Session["LessorCode"].ToString();
+                    BranchCode = Session["BranchCode"].ToString();
+                    UserLogin = System.Web.HttpContext.Current.Session["UserLogin"].ToString();
+                }
             }
             catch
             {
@@ -1027,6 +1030,7 @@ namespace RentCar.Controllers.BranchSys
                 var CasRenter = db.CR_Cas_Renter_Lessor.FirstOrDefault(rt=>rt.CR_Cas_Renter_Lessor_Id==id && rt.CR_Cas_Renter_Lessor_Code == LessorCode);
                 if (CasRenter != null)
                 {
+                    //CasRenter.CR_Cas_Renter_Lessor_Balance
                     if (CasRenter.CR_Cas_Renter_Lessor_Status == "R")
                     {
                         r.HaveContract = true;
@@ -1770,8 +1774,8 @@ namespace RentCar.Controllers.BranchSys
                         db.CR_Mas_Account_License_Owed.Add(LOwed);
                         ////////////////////////////////////////////////////////////////////////////////////////
 
-                       
                         elm.TracingNo = contract.CR_Cas_Contract_Basic_No;
+                        db.SaveChanges();
                     }
 
                 
@@ -1847,7 +1851,18 @@ namespace RentCar.Controllers.BranchSys
             Max = Max + 1;
             return Max;
         }
-
+        public string GetBalance(string Id,string LessorCode)
+        {
+            var RenterLessor = db.CR_Cas_Renter_Lessor.Where(x => x.CR_Cas_Renter_Lessor_Id == Id && x.CR_Cas_Renter_Lessor_Code == LessorCode).FirstOrDefault();
+            if (RenterLessor!=null)
+            {
+                return RenterLessor.CR_Cas_Renter_Lessor_Balance.ToString();
+            }
+            else
+            {
+                return "0.00";
+            }
+        }
 
         public int DataOwedLastRecord(string No)
         {
@@ -1929,6 +1944,8 @@ namespace RentCar.Controllers.BranchSys
             {
                 RedirectToAction("Login", "Account");
             }
+            //ViewBag.PerviousBalance = string.Format("{0:yyyy-MM-dd}", DateTime.Now);
+
             ViewBag.ContractDate = string.Format("{0:yyyy-MM-dd}", DateTime.Now);
             ViewBag.PayType= new SelectList(db.CR_Mas_Sup_Payment_Method.Where(p=>p.CR_Mas_Sup_Payment_Method_Type=="1" && p.CR_Mas_Sup_Payment_Method_Status=="A")
                 , "CR_Mas_Sup_Payment_Method_Code", "CR_Mas_Sup_Payment_Method_Ar_Name");
@@ -2264,6 +2281,8 @@ namespace RentCar.Controllers.BranchSys
                                 //}
                                 Contract.CR_Cas_Contract_Basic_Car_Price_Basic_No = PriceNo;
                                 Contract.CR_Cas_Contract_Basic_User_Insert = UserLogin;
+
+                                
                                 if(CR_Cas_Contract_Basic_Previous_Balance!=null && CR_Cas_Contract_Basic_Previous_Balance != "")
                                 {
                                     Contract.CR_Cas_Contract_Basic_Previous_Balance = Convert.ToDecimal(CR_Cas_Contract_Basic_Previous_Balance);
@@ -2412,6 +2431,7 @@ namespace RentCar.Controllers.BranchSys
                                             }
                                             RenterLessor.CR_Cas_Renter_Lessor_Balance += PayedValue * (-1);
                                             RenterLessor.CR_Cas_Renter_Lessor_Status = "R";
+                                            ViewBag.RenterBalance = RenterLessor.CR_Cas_Renter_Lessor_Balance;
                                             db.Entry(RenterLessor).State = EntityState.Modified;
 
 
@@ -3023,9 +3043,9 @@ namespace RentCar.Controllers.BranchSys
 
             }
 
-            //ViewBag.PayType = new SelectList(db.CR_Mas_Sup_Payment_Method.Where(p => p.CR_Mas_Sup_Payment_Method_Type == "1" && p.CR_Mas_Sup_Payment_Method_Status == "A")
-            //    , "CR_Mas_Sup_Payment_Method_Code", "CR_Mas_Sup_Payment_Method_Ar_Name");        
-            //ViewBag.CasherName = "";
+            ViewBag.PayType = new SelectList(db.CR_Mas_Sup_Payment_Method.Where(p => p.CR_Mas_Sup_Payment_Method_Type == "1" && p.CR_Mas_Sup_Payment_Method_Status == "A")
+                , "CR_Mas_Sup_Payment_Method_Code", "CR_Mas_Sup_Payment_Method_Ar_Name");
+            ViewBag.CasherName = "";
             return View(cR_Cas_Contract_Basic);
         }
 

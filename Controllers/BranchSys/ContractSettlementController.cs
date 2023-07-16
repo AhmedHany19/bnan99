@@ -1543,6 +1543,10 @@ namespace RentCar.Controllers
                                 rd.SetParameterValue("casherName", "    ");
                             }
                         }
+                        else
+                        {
+                            rd.SetParameterValue("casherName", "    ");
+                        }
 
 
                         var date = DateTime.Now;
