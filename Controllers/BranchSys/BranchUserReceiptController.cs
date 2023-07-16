@@ -50,7 +50,7 @@ namespace RentCar.Controllers
                 else
                 {
                     var convertUserBalanceToFloat = (float)user.CR_Cas_User_Information_Balance;
-                    var Receipt_Receipt = convertUserBalanceToFloat.ToString("N0");
+                    var Receipt_Receipt = convertUserBalanceToFloat.ToString("N2");
                     ViewBag.UserBalance = Receipt_Receipt;
                 }
                
@@ -61,11 +61,11 @@ namespace RentCar.Controllers
             if (rpt != null)
             {
                 var convertReceiptPaymentToFloat= (float) rpt.Select(m => m.CR_Cas_Account_Receipt_Payment).Sum();
-                var Receipt_Payment = convertReceiptPaymentToFloat.ToString("N0");
+                var Receipt_Payment = convertReceiptPaymentToFloat.ToString("N2");
                 ViewBag.UserCreit = Receipt_Payment;
 
                 var convertReceiptReceiptToFloat = (float)rpt.Select(m => m.CR_Cas_Account_Receipt_Receipt).Sum();
-                var Receipt_Receipt = convertReceiptReceiptToFloat.ToString("N0");
+                var Receipt_Receipt = convertReceiptReceiptToFloat.ToString("N2");
                 ViewBag.UserDebit = Receipt_Receipt;
             }
             return View();
