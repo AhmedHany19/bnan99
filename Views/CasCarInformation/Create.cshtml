@@ -105,7 +105,7 @@
 
         <div class="row">
             <div class="col-12">
-                <div class="card-box table-responsive" style="height:79vh">
+                <div class="card-box table-responsive" style="height:79vh;overflow:auto">
                     <div class="title_corp"><h3> السيارات/بيانات السيارة /إضافة </h3></div>
                     <div class="subtitle_corp">تمكنك هذه الصفحة من إضافة سيارة جديدة</div>
                     <div class="hr_60"></div>
@@ -178,7 +178,7 @@
                                                             <input type="text" id="BrandCode" name="BrandCode" hidden="hidden" />
                                                             @Html.TextBoxFor(model => model.CR_Cas_Sup_Car_Category_Code, htmlAttributes: new { @class = "form-control ", style = "float:right;border:none;width:50%", onkeyup = "movetoNext('CR_Cas_Sup_Branch_Tel')", oninput = "this.value=this.value.replace(/[^0-9]/g,'')", onpaste = "return false;", @ReadOnly = "True" })
                                                             <input type="text" id="CategoryCode" name="CategoryCode" hidden="hidden" />
-                                                            <div id="CarCatError" name="CarCatError" class="texterr" style="float:right">@ViewBag.CarCat</div>
+                                                            <div id="CarCatError" name="CarCatError" class="texterr" style="float:right;margin-top:-16px">@ViewBag.CarCat</div>
                                                         </div>
                                                     </div>
 

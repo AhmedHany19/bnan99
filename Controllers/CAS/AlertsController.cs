@@ -160,6 +160,7 @@ namespace RentCar.Controllers
                 var docs = db.CR_Cas_Sup_Car_Doc_Mainten.Where(d => d.CR_Cas_Sup_Car_Doc_Mainten_Lessor_Code == LessorCode && d.CR_Cas_Sup_Car_Doc_Mainten_Code == i.CR_Cas_Sup_Follow_Up_Mechanism_Procedures_Code);
                 foreach(var d in docs)
                 {
+                    d.CR_Cas_Sup_Car_Doc_Mainten_About_To_Expire = d.CR_Cas_Sup_Car_Doc_Mainten_End_Date?.AddDays(-(double)mech.CR_Cas_Sup_Follow_Up_Mechanism_Befor_Expire);
                     d.CR_Cas_Sup_Car_Doc_Mainten_Activation = i.CR_Cas_Sup_Follow_Up_Mechanism_Activate_Service;
                     db.Entry(d).State = EntityState.Modified;
                     
@@ -168,6 +169,7 @@ namespace RentCar.Controllers
                 var branchDocs = db.CR_Cas_Sup_Branch_Documentation.Where(b=>b.CR_Cas_Sup_Branch_Documentation_Lessor_Code==LessorCode && b.CR_Cas_Sup_Branch_Documentation_Code==i.CR_Cas_Sup_Follow_Up_Mechanism_Procedures_Code);
                 foreach(var b in branchDocs)
                 {
+                    b.CR_Cas_Sup_Branch_Documentation_About_To_Expire = b.CR_Cas_Sup_Branch_Documentation_End_Date?.AddDays(-(double)mech.CR_Cas_Sup_Follow_Up_Mechanism_Befor_Expire);
                     b.CR_Cas_Sup_Branch_Documentation_Activation = i.CR_Cas_Sup_Follow_Up_Mechanism_Activate_Service;
                     db.Entry(b).State = EntityState.Modified;
                    
