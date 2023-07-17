@@ -8,6 +8,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using System.Net.Mime;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using CrystalDecisions.CrystalReports.Engine;
@@ -1953,7 +1954,7 @@ namespace RentCar.Controllers
                             rd.SetParameterValue("insImg9", "");
                         }
 
-                        var x = "/images/Company/" + LessorCode + "/" + BranchCode + "/" + contract.CR_Cas_Contract_Basic_No + "/" + "ClosePDF" + "/" + "1" + "/" + contract.CR_Cas_Contract_Basic_No + ".pdf";
+                        var x = "/images/Company/" + LessorCode + "/" + BranchCode + "/" + contract.CR_Cas_Contract_Basic_No + "/" + "ClosePDF" + "/" + contract.CR_Cas_Contract_Basic_Copy + "/" + contract.CR_Cas_Contract_Basic_No + ".pdf";
                         var fullPath = System.Web.Hosting.HostingEnvironment.ApplicationPhysicalPath + x;
                         fullPath = fullPath.Replace("/", "\\");
                         rd.ExportToDisk(ExportFormatType.PortableDocFormat, fullPath);
@@ -1998,18 +1999,50 @@ namespace RentCar.Controllers
                 }
 
                 document.Close();
-
             }
 
             if (System.IO.File.Exists(outFile.Remove(outFile.Length - 1)))
             {
-                System.IO.File.Delete(outFile.Remove(outFile.Length - 1));
-            }
+                // Open the file stream with FileShare.ReadWrite to allow other processes to read or write to the file
+                using (var fileStream = System.IO.File.Open(outFile, FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite))
+                {
+                    // Perform operations on the stream
+                    // ...
+
+                    // Close the stream
+                    fileStream.Close();
+                }
+
+               
+                    System.IO.File.Delete(outFile.Remove(outFile.Length - 1));
+               }
 
             if (System.IO.File.Exists(outFile))
             {
-                System.IO.File.Move(outFile, outFile.Remove(outFile.Length - 1));
+                // Open the file stream with FileShare.ReadWrite to allow other processes to read or write to the file
+                using (var fileStream = System.IO.File.Open(outFile, FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite))
+                {
+                    // Perform operations on the stream
+                    // ...
+
+                    // Close the stream
+                    fileStream.Close();
+                }
+
+                    // Move the file
+                    System.IO.File.Move(outFile, outFile.Remove(outFile.Length - 1));
+                   
             }
+
+            //if (System.IO.File.Exists(outFile.Remove(outFile.Length - 1)))
+            //{
+            //    System.IO.File.Delete(outFile.Remove(outFile.Length - 1));
+            //}
+
+            //if (System.IO.File.Exists(outFile))
+            //{
+            //    System.IO.File.Move(outFile, outFile.Remove(outFile.Length - 1));
+            //}
         }
 
         private void SendMail(CR_Cas_Contract_Basic contract)

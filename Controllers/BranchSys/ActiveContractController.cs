@@ -561,12 +561,12 @@ namespace RentCar.Controllers.BranchSys
                         //////////////////////////////////////////////PDF////////////////////////////////////////
                         ///
                         string folderimages = Server.MapPath(string.Format("~/{0}/", "/images"));
-                        string FolderContract = Server.MapPath(string.Format("~/{0}/", "/images/Contract"));
-                        string FolderLessor = Server.MapPath(string.Format("~/{0}/", "/images/Contract/" + LessorCode));
-                        string FolderBranch = Server.MapPath(string.Format("~/{0}/", "/images/Contract/" + LessorCode + "/" + BranchCode));
-                        string FolderContractNo = Server.MapPath(string.Format("~/{0}/", "/images/Contract/" + LessorCode + "/" + BranchCode + "/" + cR_Cas_Contract_Basic.CR_Cas_Contract_Basic_No));
-                        string OpenPdf = Server.MapPath(string.Format("~/{0}/", "/images/Contract/" + LessorCode + "/" + BranchCode + "/" + cR_Cas_Contract_Basic.CR_Cas_Contract_Basic_No + "/" + "OpenPdf"));
-                        string CreateCopyFolder = Server.MapPath(string.Format("~/{0}/", "/images/Contract/" + LessorCode + "/" + BranchCode + "/" + cR_Cas_Contract_Basic.CR_Cas_Contract_Basic_No + "/" + "OpenPdf"
+                        string FolderContract = Server.MapPath(string.Format("~/{0}/", "/images/Company"));
+                        string FolderLessor = Server.MapPath(string.Format("~/{0}/", "/images/Company/" + LessorCode));
+                        string FolderBranch = Server.MapPath(string.Format("~/{0}/", "/images/Company/" + LessorCode + "/" + BranchCode));
+                        string FolderContractNo = Server.MapPath(string.Format("~/{0}/", "/images/Company/" + LessorCode + "/" + BranchCode + "/" + cR_Cas_Contract_Basic.CR_Cas_Contract_Basic_No));
+                        string OpenPdf = Server.MapPath(string.Format("~/{0}/", "/images/Company/" + LessorCode + "/" + BranchCode + "/" + cR_Cas_Contract_Basic.CR_Cas_Contract_Basic_No + "/" + "OpenPdf"));
+                        string CreateCopyFolder = Server.MapPath(string.Format("~/{0}/", "/images/Company/" + LessorCode + "/" + BranchCode + "/" + cR_Cas_Contract_Basic.CR_Cas_Contract_Basic_No + "/" + "OpenPdf"
                             + "/" + cR_Cas_Contract_Basic.CR_Cas_Contract_Basic_Copy));
 
                         if (!Directory.Exists(folderimages))
@@ -616,7 +616,6 @@ namespace RentCar.Controllers.BranchSys
                            
 
                             SavePDF(cR_Cas_Contract_Basic.CR_Cas_Contract_Basic_No, CarPrice, fullpath, LessorCode, BranchCode, UserLogin,PayType,CasherName,Reasons,cR_Cas_Contract_Basic.CR_Cas_Contract_Basic_Renter_Id,TotalToPay, PayedVal, Tprice);
-
                             return RedirectToAction("Index");
 
                         }
@@ -1351,8 +1350,6 @@ namespace RentCar.Controllers.BranchSys
                 {
                     rd.SetParameterValue("Reasons", "    ");
                 }
-                
-               
             }
 
             rd.ExportToDisk(ExportFormatType.PortableDocFormat, fullpath);
@@ -1365,7 +1362,6 @@ namespace RentCar.Controllers.BranchSys
             string[] paths = { firstPath, fullpath };
             var output     = fullpath;
             MergePDFs(paths, output + "1");
-             
             var cb = db.CR_Cas_Contract_Basic.OrderByDescending(x=>x.CR_Cas_Contract_Basic_Copy).FirstOrDefault(l => l.CR_Cas_Contract_Basic_No == contract.CR_Cas_Contract_Basic_No);
             SendMail(cb);
 
@@ -1394,13 +1390,70 @@ namespace RentCar.Controllers.BranchSys
 
             if (System.IO.File.Exists(outFile.Remove(outFile.Length - 1)))
             {
+                // Open the file stream
+                using (var fileStream = System.IO.File.Open(outFile, FileMode.Open))
+                {
+                    // Perform operations on the stream
+                    // ...
+
+                    // Close the stream
+                    fileStream.Close();
+                }
+
+                // Delete the file
                 System.IO.File.Delete(outFile.Remove(outFile.Length - 1));
             }
 
             if (System.IO.File.Exists(outFile))
             {
-                System.IO.File.Move(outFile , outFile.Remove(outFile.Length - 1));
+                // Open the file stream
+                using (var fileStream = System.IO.File.Open(outFile, FileMode.Open))
+                {
+                    // Perform operations on the stream
+                    // ...
+
+                    // Close the stream
+                    fileStream.Close();
+                }
+
+                // Move the file
+                System.IO.File.Move(outFile, outFile.Remove(outFile.Length - 1));
             }
+
+            //if (System.IO.File.Exists(outFile.Remove(outFile.Length - 1)))
+            //{
+            //    // Close the stream using the Close method
+            //    using (var fileStream = System.IO.File.Open(outFile, FileMode.Open))
+            //    {
+            //        // Perform operations on the stream
+            //        // ...
+            //        System.IO.File.Delete(outFile.Remove(outFile.Length - 1));
+            //        // Close the stream
+            //        fileStream.Close();
+            //    }
+            //}
+            //if (System.IO.File.Exists(outFile))
+            //{
+            //    // Close the stream using the Close method
+            //    using (var fileStream = System.IO.File.Open(outFile, FileMode.Open))
+            //    {
+            //        // Perform operations on the stream
+            //        // ...
+            //        System.IO.File.Move(outFile, outFile.Remove(outFile.Length - 1));
+            //        // Close the stream
+            //        fileStream.Close();
+            //    }
+            //}
+
+            //if (System.IO.File.Exists(outFile.Remove(outFile.Length - 1)))
+            //{
+            //    System.IO.File.Delete(outFile.Remove(outFile.Length - 1));
+            //}
+
+            //if (System.IO.File.Exists(outFile))
+            //{
+            //    System.IO.File.Move(outFile, outFile.Remove(outFile.Length - 1));
+            //}
         }
 
 

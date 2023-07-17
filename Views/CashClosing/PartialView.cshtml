@@ -85,8 +85,8 @@
                                                 @{
                                                     var floatConvert1 = (float)item.CR_Cas_Account_Receipt_Payment;
                                                     var floatConvert2 = (float)item.CR_Cas_Account_Receipt_Receipt;
-                                                    var Receipt_Payment = floatConvert1.ToString("N0");
-                                                    var Receipt_Receipt = floatConvert2.ToString("N0");
+                                                    var Receipt_Payment = floatConvert1.ToString("N2");
+                                                    var Receipt_Receipt = floatConvert2.ToString("N2");
                                                 }
                                                 <td style="width:12%">
                                                     @Receipt_Payment
@@ -167,10 +167,10 @@
                     document.getElementById('TotalVal').value = sum.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
                     console.log(sum.toLocaleString("en-US"))
 
-                    $(".totalCreditor").val(sum.toLocaleString("en-US"));
+                    $(".totalCreditor").val(sum.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }));
                 } else {
                     document.getElementById('TotalVal').value = "0.00";
-                    $(".totalCreditor").val(0);
+                    $(".totalCreditor").val("0.00");
                 }
 
 
@@ -210,7 +210,7 @@
     $(document).ready(function () {
         // Add separators to all input fields with type "number"
         $('.t1').each(function () {
-            var value = $(this).val(0);
+            var value = $(this).val("0.00");
         });
     });
 </script>
