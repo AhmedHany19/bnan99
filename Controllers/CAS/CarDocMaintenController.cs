@@ -365,6 +365,10 @@ namespace RentCar.Controllers.CAS
                                 "I", Reasons);
                             ////////////////////////////////////////////////////////////////////
                             cR_Cas_Sup_Car_Doc_Mainten.CR_Cas_Sup_Car_Doc_Mainten_Activation = true;
+
+                            //get CR_Cas_Sup_Follow_Up_Mechanism_Lessor_Code 
+                            var currMechanism = db.CR_Cas_Sup_Follow_Up_Mechanism.FirstOrDefault(l=>l.CR_Cas_Sup_Follow_Up_Mechanism_Lessor_Code == cR_Cas_Sup_Car_Doc_Mainten.CR_Cas_Sup_Car_Doc_Mainten_Lessor_Code && l.CR_Cas_Sup_Follow_Up_Mechanism_Procedures_Code == cR_Cas_Sup_Car_Doc_Mainten.CR_Cas_Sup_Car_Doc_Mainten_Code); 
+                            cR_Cas_Sup_Car_Doc_Mainten.CR_Cas_Sup_Car_Doc_Mainten_About_To_Expire = cR_Cas_Sup_Car_Doc_Mainten.CR_Cas_Sup_Car_Doc_Mainten_End_Date?.AddDays(-(double)currMechanism.CR_Cas_Sup_Follow_Up_Mechanism_Befor_Expire);
                             
                             cR_Cas_Sup_Car_Doc_Mainten.CR_Cas_Sup_Car_Doc_Mainten_Status = "A";
                             db.Entry(cR_Cas_Sup_Car_Doc_Mainten).State = EntityState.Modified;
@@ -380,7 +384,10 @@ namespace RentCar.Controllers.CAS
                     }
 
                         
-                }
+                }  
+
+
+
                 if (delete == "Delete" || delete == "حذف")
                 {
                     using (DbContextTransaction dbTran = db.Database.BeginTransaction())
