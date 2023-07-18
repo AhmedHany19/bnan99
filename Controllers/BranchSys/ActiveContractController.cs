@@ -1385,7 +1385,7 @@ namespace RentCar.Controllers.BranchSys
                 }
 
                 document.Close();
-                
+                stream.Close();
             }
 
             if (System.IO.File.Exists(outFile.Remove(outFile.Length - 1)))

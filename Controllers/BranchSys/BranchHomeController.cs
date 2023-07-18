@@ -1189,6 +1189,10 @@ namespace RentCar.Controllers.BranchSys
                     branchs.Add(br);
                 }
             }
+            if (TempData["toastr"] != null)
+            {
+                TempData["ShowToastr"] = "ShowToastr";
+            }
             GetValidityContract(UserLogin, BranchCode, LessorCode);
             GetBranchExpiredDocs(LessorCode, BranchCode);
             ViewBag.BranchList = new SelectList(branchs, "CR_Cas_Sup_Branch_Code", "CR_Cas_Sup_Branch_Ar_Name", BranchCode);

@@ -120,37 +120,34 @@
             </div>
 
             <!--For Test -->
-
-
-
             @*<div class="col-md-4">
-            <label style="width: 100%; text-align: center; font-size: 16px; font-weight: bold; padding-bottom: 10px;">الموجودات</label>
-            <div class="row col-md-12">
-                <div class="col-md-8">
-                    <label style="width:100%;font-size:12px;font-weight:bold"> الإجمالي</label>
-                </div>
-                <div class="col-md-4">
-                    <label>@ViewBag.TotReceipt</label>
-                </div>
-            </div>
-            <div class="row col-md-12">
-                <div class="col-md-8">
-                    <label style="width:100%;font-size:12px;font-weight:bold"> الصندوق النقدي</label>
-                </div>
-                <div class="col-md-4">
-                    <label>@ViewBag.TotCash</label>
-                </div>
-            </div>
-            <div class="row col-md-12">
-                <div class="col-md-8">
-                    <label style="width:100%;font-size:12px;font-weight:bold"> نقاط البيع</label>
-                </div>
-                <div class="col-md-4">
-                    <label>@ViewBag.TotSalesPoint</label>
-                </div>
-            </div>
+                    <label style="width: 100%; text-align: center; font-size: 16px; font-weight: bold; padding-bottom: 10px;">الموجودات</label>
+                    <div class="row col-md-12">
+                        <div class="col-md-8">
+                            <label style="width:100%;font-size:12px;font-weight:bold"> الإجمالي</label>
+                        </div>
+                        <div class="col-md-4">
+                            <label>@ViewBag.TotReceipt</label>
+                        </div>
+                    </div>
+                    <div class="row col-md-12">
+                        <div class="col-md-8">
+                            <label style="width:100%;font-size:12px;font-weight:bold"> الصندوق النقدي</label>
+                        </div>
+                        <div class="col-md-4">
+                            <label>@ViewBag.TotCash</label>
+                        </div>
+                    </div>
+                    <div class="row col-md-12">
+                        <div class="col-md-8">
+                            <label style="width:100%;font-size:12px;font-weight:bold"> نقاط البيع</label>
+                        </div>
+                        <div class="col-md-4">
+                            <label>@ViewBag.TotSalesPoint</label>
+                        </div>
+                    </div>
 
-        </div>*@
+                </div>*@
         </div>
 
         <div class="row" style="padding-top:45px;padding-bottom:10px;">
@@ -160,3 +157,12 @@
     </div>
 </div>
 
+@if (TempData["ShowToastr"] != null)
+{
+    <script>
+        $(document).ready(function () {
+            toastr.info("لقد حدث خطأ ما يرجي اعادة المحاولة");
+        });
+    </script>
+
+}

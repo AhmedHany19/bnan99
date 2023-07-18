@@ -903,7 +903,7 @@
                                             </div>
                                             @*<div class="row">
 
-                                </div>*@
+                                                </div>*@
                                             <div class="row mt-1">
                                                 <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
                                                     <div class="form-group row mb-3">
@@ -1069,13 +1069,13 @@
                                 <a href="/ContractSettlement/Index" class="btn btn-secondary text-white" style="float: right; margin-left: 20px; display: inline;">رجوع</a>
                                 <button type="button" id="prevBtn" onclick="PrevPrev(-1)" class="btn btn-secondary" style="float: right; margin-left: 20px;">السابق</button>
                                 @*@if (ViewBag.ContractCancel == "True")
-                    {*@
+                                    {*@
                                 <button type="button" id="nextBtn" onclick="nextPrev(1)" class="btn btn-secondary" style="float: left; margin-left: 20px;">التالي</button>
                                 @*}*@
                                 @*else
-                    {
-                        <button type="button" id="nextBtn" onclick="nextPrev(1)" class="btn btn-secondary" style="float: left; margin-left: 20px;" disabled title="عفوا لا يمكنك انهاء العقد قبل التاريخ المحدد">التالي</button>
-                    }*@
+                                    {
+                                        <button type="button" id="nextBtn" onclick="nextPrev(1)" class="btn btn-secondary" style="float: left; margin-left: 20px;" disabled title="عفوا لا يمكنك انهاء العقد قبل التاريخ المحدد">التالي</button>
+                                    }*@
 
                                 <input type="submit" name="add" class="btn btn-secondary" id="add_btn" value="حفظ" style="display: none; float: left; margin-left: 20px; height: 38px !important" />
                                 <input type="button" name="AuthBtn" class="btn btn-secondary" id="AuthBtn" value="الموحد" style="display: none; float: left; margin-left: 20px; height: 38px !important" hidden />
@@ -2380,7 +2380,7 @@
                             toastr.success("جــاري حفظ بيانات اغلاق العقــد وارســالـه للمستــاجــر ......")
                         }
                     }
-                    
+
                 }
                 else {
                     document.getElementById("add_btn").disabled = true;
@@ -2388,8 +2388,8 @@
                     toastr.options.setTimeout = 99999;
                     toastr.success("جــاري حفظ بيانات اغلاق العقــد وارســالـه للمستــاجــر ......")
                 }
-                
-                   
+
+
             }
             else if (TotToPay > 0) {
                 if (fieldVal > 0 && fieldVal != null && fieldVal !== "") {
@@ -2411,7 +2411,7 @@
                     toastr.success("جــاري حفظ بيانات اغلاق العقــد وارســالـه للمستــاجــر ......")
                 }
             }
-            
+
             else {
                 document.getElementById("add_btn").disabled = true;
                 $("#loader").removeAttr("hidden");
@@ -2421,9 +2421,7 @@
         });
 </script>
 
-<script>
-   
-</script>
+
 
 
 
