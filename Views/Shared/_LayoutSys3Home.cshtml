@@ -3,13 +3,14 @@
 }
 
 <head>
-    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />   
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 </head>
 <style>
     #toast-message {
         color: black;
-        background-color:black;
+        background-color: black;
     }
+
     .toast-warning {
         background-color: #f89406;
     }
@@ -477,3 +478,14 @@
     </script>
 
 }
+
+
+@*@if (TempData["ShowToastr"] != null)
+{
+    <script>
+        $(document).ready(function () {
+            toastr.info("لقد حدث خطأ ما يرجي اعادة المحاولة");
+        });
+    </script>
+
+}*@

@@ -8,6 +8,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using System.Net.Mime;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using CrystalDecisions.CrystalReports.Engine;
@@ -16,6 +17,8 @@ using iTextSharp.text;
 using iTextSharp.text.pdf;
 using RentCar.Models;
 using RentCar.Models.RptModels;
+using System.Threading;
+using System.Web.UI;
 
 namespace RentCar.Controllers
 {
@@ -1049,6 +1052,11 @@ namespace RentCar.Controllers
                                        imgx1path, imgx2path, imgx3path, imgx4path, imgy1path, imgy2path, imgy3path, imgy4path, img1path, img2path, img3path, img4path, img5path, img6path, img7path, img8path, img9path);
 
                             //Contract.CR_Cas_Contract_Basic_CreateContract_Pdf = fullpath;
+                            if (ViewBag.ShowToastr==true)
+                            {
+                                TempData["toastr"] = true;
+                                return RedirectToAction("BranchStat", "BranchHome");
+                            }
                             db.Entry(Contract).State = EntityState.Modified;
                             db.SaveChanges();
                             TempData["TempModel"] = "Saved";
@@ -1953,7 +1961,7 @@ namespace RentCar.Controllers
                             rd.SetParameterValue("insImg9", "");
                         }
 
-                        var x = "/images/Company/" + LessorCode + "/" + BranchCode + "/" + contract.CR_Cas_Contract_Basic_No + "/" + "ClosePDF" + "/" + "1" + "/" + contract.CR_Cas_Contract_Basic_No + ".pdf";
+                        var x = "/images/Company/" + LessorCode + "/" + BranchCode + "/" + contract.CR_Cas_Contract_Basic_No + "/" + "ClosePDF" + "/" + contract.CR_Cas_Contract_Basic_Copy + "/" + contract.CR_Cas_Contract_Basic_No + ".pdf";
                         var fullPath = System.Web.Hosting.HostingEnvironment.ApplicationPhysicalPath + x;
                         fullPath = fullPath.Replace("/", "\\");
                         rd.ExportToDisk(ExportFormatType.PortableDocFormat, fullPath);
@@ -1972,9 +1980,10 @@ namespace RentCar.Controllers
                 }
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw ex;
+                 ViewBag.ShowToastr = true;
+                 return;
             }
 
         }
@@ -1983,33 +1992,64 @@ namespace RentCar.Controllers
         public void MergePDFs(string[] fileNames, string outFile)
         {
 
-            using (var stream = new FileStream(outFile, FileMode.Append, FileAccess.Write))
-            {
-                var document = new Document();
-                var writer = new PdfCopy(document, stream);
-                document.Open();
-
-                foreach (string fileName in fileNames)
+            
+                using (var stream = new FileStream(outFile, FileMode.Append, FileAccess.Write))
                 {
-                    using (var reader = new PdfReader(fileName))
+                    var document = new Document();
+                    var writer = new PdfCopy(document, stream);
+                    document.Open();
+
+                    foreach (string fileName in fileNames)
                     {
-                        writer.AddDocument(reader);
+                        using (var reader = new PdfReader(fileName))
+                        {
+                            writer.AddDocument(reader);
+                        }
+                    }
+
+                    document.Close();
+                    stream.Close();
+                }
+
+                Thread.Sleep(1000);
+
+
+                if (System.IO.File.Exists(outFile.Remove(outFile.Length - 1)))
+                {
+                    // Open the file stream with FileShare.ReadWrite to allow other processes to read or write to the file
+                    using (var fileStream = System.IO.File.Open(outFile, FileMode.Open, FileAccess.ReadWrite, FileShare.None))
+                    {
+                        // Perform operations on the stream
+                        // ...
+
+                        // Close the stream
+                        fileStream.Close();
+                    }
+                    System.IO.File.Delete(outFile.Remove(outFile.Length - 1));
+                // Retry deleting the file
+                    bool deleteSuccess = false;
+                    int retryCount = 3;
+                    while (!deleteSuccess && retryCount > 0)
+                    {
+                        try
+                        {
+                            System.IO.File.Delete(outFile.Remove(outFile.Length - 1));
+                            deleteSuccess = true;
+                        }
+                        catch (IOException)
+                        {
+                            // Failed to delete the file, retry after a delay
+                            Thread.Sleep(1000);
+                            retryCount--;
+                        }
                     }
                 }
 
-                document.Close();
-
-            }
-
-            if (System.IO.File.Exists(outFile.Remove(outFile.Length - 1)))
-            {
-                System.IO.File.Delete(outFile.Remove(outFile.Length - 1));
-            }
-
-            if (System.IO.File.Exists(outFile))
-            {
-                System.IO.File.Move(outFile, outFile.Remove(outFile.Length - 1));
-            }
+                if (System.IO.File.Exists(outFile))
+                {
+                    System.IO.File.Move(outFile, outFile.Remove(outFile.Length - 1));
+                }
+            
         }
 
         private void SendMail(CR_Cas_Contract_Basic contract)

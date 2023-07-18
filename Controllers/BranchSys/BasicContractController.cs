@@ -2795,15 +2795,23 @@ namespace RentCar.Controllers.BranchSys
                                 string folderRenterLicense = Server.MapPath(string.Format("~/{0}/", "/images/Bnan/Renter/" + cR_Cas_Contract_Basic.CR_Cas_Contract_Basic_Renter_Id + "/License"));
                                 string folderRenterPassport = Server.MapPath(string.Format("~/{0}/", "/images/Bnan/Renter/" + cR_Cas_Contract_Basic.CR_Cas_Contract_Basic_Renter_Id + "/Passport"));
                                 string folderRenterSignature = Server.MapPath(string.Format("~/{0}/", "/images/Bnan/Renter/" + cR_Cas_Contract_Basic.CR_Cas_Contract_Basic_Renter_Id + "/Signature"));
+
                                 string FolderContract = Server.MapPath(string.Format("~/{0}/", "/images/Company"));
                                 string FolderLessor = Server.MapPath(string.Format("~/{0}/", "/images/Company/" + LessorCode));
                                 string FolderBranch = Server.MapPath(string.Format("~/{0}/", "/images/Company/" + LessorCode + "/" + BranchCode));
                                 string FolderContractNo = Server.MapPath(string.Format("~/{0}/", "/images/Company/" + LessorCode + "/" + BranchCode + "/" + ContractSerialNo));
                                 string OpenPdf = Server.MapPath(string.Format("~/{0}/", "/images/Company/" + LessorCode + "/" + BranchCode + "/" + ContractSerialNo + "/" + "OpenPdf"));
                                 string CreateCopyFolder = Server.MapPath(string.Format("~/{0}/", "/images/Company/" + LessorCode + "/" + BranchCode + "/" + ContractSerialNo + "/" + "OpenPdf"
-                                    + "/" +"1"));
+                                    + "/" + "1"));
                                 string OpenImage = Server.MapPath(string.Format("~/{0}/", "/images/Company/" + LessorCode + "/" + BranchCode + "/" + ContractSerialNo + "/" + "OpenImage"));
-                               
+
+                                //string FolderContract = Server.MapPath("~/images/Company");
+                                //string FolderLessor = Path.Combine(FolderContract , LessorCode);
+                                //string FolderBranch = Path.Combine(FolderLessor , BranchCode);
+                                //string FolderContractNo =Path.Combine(FolderBranch , ContractSerialNo);
+                                //string OpenPdf = Path.Combine(FolderContractNo, "OpenPdf");
+                                //string CreateCopyFolder = Path.Combine(OpenPdf, "1");
+
                                 if (!Directory.Exists(folderimages))
                                 {
                                     Directory.CreateDirectory(folderimages);
@@ -3010,7 +3018,7 @@ namespace RentCar.Controllers.BranchSys
                                     }
                                 }
                                 string fname = ContractSerialNo + ".pdf";
-                                string fullpath = CreateCopyFolder + fname;
+                                string fullpath =Path.Combine(CreateCopyFolder , fname);
                                 //////////////////////////////////////////////////////////////////////////////////
                                 Contract.CR_Cas_Contract_Basic_CreateContract_Pdf = fullpath;
                                 if(CurrentMeter!=null && CurrentMeter != "")

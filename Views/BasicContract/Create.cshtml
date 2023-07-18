@@ -2395,20 +2395,20 @@
         } else {
             document.getElementById('jourerror').value = 'أدخل عدد الأيام';
             document.getElementById('CR_Cas_Contract_Basic_Expected_End_Date').value = "";
-            document.getElementById('Price').value = "0";
-            document.getElementById('ChoicesTotal').value = "0";
-            document.getElementById('AdditionalTotal').value = "0";
-            document.getElementById('ValueAdditionalDriver').value = "0";
-            document.getElementById('TotalContract').value = "0";
-            document.getElementById('ContractDiscount').value = "0";
-            document.getElementById('CR_Cas_Contract_Basic_Free_Additional_Hours').value = "0";
-            document.getElementById('CR_Cas_Contract_Basic_Daily_Free_KM').value = "0";
-            document.getElementById('TotalContractHT').value = "0";
-            document.getElementById('TotalContractTax').value = "0";
-            document.getElementById('TotalContractPrice').value = "0";
-            document.getElementById('CR_Cas_Contract_Basic_Previous_Balance').value = "0";
-            document.getElementById('TotalToPay').value = "0";
-            document.getElementById('TotalPayed').value = "0";
+            document.getElementById('Price').value = "0.00";
+            document.getElementById('ChoicesTotal').value = "0.00";
+            document.getElementById('AdditionalTotal').value = "0.00";
+            document.getElementById('ValueAdditionalDriver').value = "0.00";
+            document.getElementById('TotalContract').value = "0.00";
+            document.getElementById('ContractDiscount').value = "0.00";
+            document.getElementById('CR_Cas_Contract_Basic_Free_Additional_Hours').value = "0.00";
+            document.getElementById('CR_Cas_Contract_Basic_Daily_Free_KM').value = "0.00";
+            document.getElementById('TotalContractHT').value = "0.00";
+            document.getElementById('TotalContractTax').value = "0.00";
+            document.getElementById('TotalContractPrice').value = "0.00";
+            document.getElementById('CR_Cas_Contract_Basic_Previous_Balance').value = "0.00";
+            document.getElementById('TotalToPay').value = "0.00";
+            document.getElementById('TotalPayed').value = "0.00";
             document.getElementById('PayType').disabled = true;
             document.getElementById('PayType').selectedIndex = 0;
             document.getElementById('CasherName').disabled = true;
@@ -2473,9 +2473,9 @@
         var TotalContractPrice = parseFloat(document.getElementById('TotalContractPrice').value);
         var PreviousBalance = parseFloat(document.getElementById('CR_Cas_Contract_Basic_Previous_Balance').value);
         if (PreviousBalance > 0) {
-            document.getElementById('TotalToPay').value = TotalContractPrice + parseFloat(PreviousBalance);
+            document.getElementById('TotalToPay').value = (parseFloat(TotalContractPrice) + parseFloat(PreviousBalance)).toFixed(2);
         } else {
-            document.getElementById('TotalToPay').value = TotalContractPrice;
+            document.getElementById('TotalToPay').value = (parseFloat(TotalContractPrice) + parseFloat(PreviousBalance)).toFixed(2);
         }
     };
 </script>
