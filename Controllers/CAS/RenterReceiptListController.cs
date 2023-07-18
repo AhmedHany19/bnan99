@@ -98,8 +98,9 @@ namespace RentCar.Controllers.CAS
                 ViewBag.RenterName = renter.CR_Mas_Renter_Information.CR_Mas_Renter_Information_Ar_Name;
                 ViewBag.RenterId = renter.CR_Mas_Renter_Information.CR_Mas_Renter_Information_Id;
                 ViewBag.Work = renter.CR_Mas_Renter_Information.CR_Mas_Sup_Jobs.CR_Mas_Sup_Jobs_Ar_Name;
-                ViewBag.Balance = renter.CR_Cas_Renter_Lessor_Balance;
-                var rpt = db.CR_Cas_Account_Receipt.Where(rp => rp.CR_Cas_Account_Receipt_Lessor_Code == LessorCode && rp.CR_Cas_Account_Receipt_Renter_Code==renter.CR_Cas_Renter_Lessor_Id);
+                var BalanceToFloat = (float)renter.CR_Cas_Renter_Lessor_Balance;
+                ViewBag.Balance = BalanceToFloat.ToString("N2");
+                    var rpt = db.CR_Cas_Account_Receipt.Where(rp => rp.CR_Cas_Account_Receipt_Lessor_Code == LessorCode && rp.CR_Cas_Account_Receipt_Renter_Code==renter.CR_Cas_Renter_Lessor_Id);
                 if (rpt != null)
                 {
                     var convertReceiptPaymentToFloat = (float)rpt.Select(m => m.CR_Cas_Account_Receipt_Payment).Sum();

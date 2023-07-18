@@ -15,6 +15,11 @@
         margin-right: 10px;
         line-height: 0.8
     }
+
+     table a {
+        pointer-events: none;
+        cursor: default;
+    }
 </style>
 <div class="content">
     <!-- Start Content-->
@@ -35,7 +40,7 @@
                                     <div class="responsive-table-plugin">
                                         <div class="table-rep-plugin">
                                             <div class="table-responsive" data-pattern="priority-columns" style="border:none;">
-                                                <div class="href_layout" style="margin-bottom:10px;">
+                                                <div class="href_layout" style="margin-bottom: 10px; pointer-events: auto; cursor: pointer;">
                                                     <a href="/CasHome/index" class="btn_form" data-toggle="tooltip" data-placement="top" title="إغلاق"><i class="fa fa-times"></i></a>
                                                     @*<a href="/CasBranch/Create" class="btn_form" data-toggle="tooltip" data-placement="top" title="إضافة سجل جديد"><i class="fa fa-plus"></i></a>*@
                                                     @*<button type="submit" name="excelCall" class="btn_form" value="Excel" style="padding-right:4px;" data-toggle="tooltip" data-placement="top" title="ترحيل البيانات للإكسل">

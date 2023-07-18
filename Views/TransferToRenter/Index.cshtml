@@ -41,21 +41,12 @@
                                                             <i class="far fa-file-excel" aria-hidden="true" style=" margin-bottom: 3px; padding-left: 10px;"></i>
                                                         </button>*@
 
-                                                    <script>
-                                                        $(document).ready(function () {
-                                                            $("#inputtext").on("keyup", function () {
-                                                                var value = $(this).val().toLowerCase();
-                                                                $("#tbl tr").filter(function () {
-                                                                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-                                                                });
-                                                            });
-                                                        });
-                                                    </script>
+
                                                 </div>
                                                 <div id="responsive-datatable_filter" class="dataTables_filter">
                                                     <label class="label_search_input">
                                                         <img src="~/images/common/srch.png" id="SrchImg" />
-                                                        بحث:<input type="search" id="inputtext href_layout" class="form-control form_search_input" placeholder="" aria-controls="responsive-datatable" style="width:33%">
+                                                        بحث:<input type="search" id="inputtext" class="form-control form_search_input" placeholder="" aria-controls="responsive-datatable" style="width:33%">
                                                     </label>
 
                                                 </div>
@@ -253,49 +244,60 @@
 </div> <!-- content -->
 
 
+<script>
+    $(document).ready(function () {
+        $("#inputtext").on("keyup", function () {
+            var value = $(this).val().toLowerCase();
+            $("#tbl tr").filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+</script>
+
 @*<script>
 
-    // Get a reference to the HTML table
-    const table = document.getElementById('myTable');
+        // Get a reference to the HTML table
+        const table = document.getElementById('myTable');
 
-    // Specify the indexes of the columns to format (starting from 0)
-    const columnIndexes = [2, 3]; // for example, format columns  2, 3
+        // Specify the indexes of the columns to format (starting from 0)
+        const columnIndexes = [2, 3]; // for example, format columns  2, 3
 
-    // Loop through each row in the table
-    for (let i = 1; i < table.rows.length; i++) { // starting from row 1 to exclude the header row
-        // Loop through each column index in the list
-        for (let j = 0; j < columnIndexes.length; j++) {
-            // Get the cell in the current row for the specified column index
-            const cell = table.rows[i].cells[columnIndexes[j]];
+        // Loop through each row in the table
+        for (let i = 1; i < table.rows.length; i++) { // starting from row 1 to exclude the header row
+            // Loop through each column index in the list
+            for (let j = 0; j < columnIndexes.length; j++) {
+                // Get the cell in the current row for the specified column index
+                const cell = table.rows[i].cells[columnIndexes[j]];
 
-            // Check if the cell contains an <a> tag
-            if (cell.querySelector('a')) {
-                // If it does, get the inner text of the <a> tag and attempt to parse it as a number
-                const value = parseFloat(cell.querySelector('a').innerText);
+                // Check if the cell contains an <a> tag
+                if (cell.querySelector('a')) {
+                    // If it does, get the inner text of the <a> tag and attempt to parse it as a number
+                    const value = parseFloat(cell.querySelector('a').innerText);
 
-                // Check if the parsed value is a valid number
-                if (!isNaN(value) && isFinite(value)) {
-                    // Convert the parsed value to a string with thousand separators and decimal points
-                    const formattedValue = value.toLocaleString('en-US', { minimumFractionDigits: 2 });
+                    // Check if the parsed value is a valid number
+                    if (!isNaN(value) && isFinite(value)) {
+                        // Convert the parsed value to a string with thousand separators and decimal points
+                        const formattedValue = value.toLocaleString('en-US', { minimumFractionDigits: 2 });
 
-                    // Update the inner text of the <a> tag with the formatted value
-                    cell.querySelector('a').innerText = formattedValue;
-                }
-            } else {
-                // If the cell doesn't contain an <a> tag, attempt to parse the cell value as a number
-                const value = parseFloat(cell.innerHTML);
+                        // Update the inner text of the <a> tag with the formatted value
+                        cell.querySelector('a').innerText = formattedValue;
+                    }
+                } else {
+                    // If the cell doesn't contain an <a> tag, attempt to parse the cell value as a number
+                    const value = parseFloat(cell.innerHTML);
 
-                // Check if the parsed value is a valid number
-                if (!isNaN(value) && isFinite(value)) {
-                    // Convert the parsed value to a string with thousand separators and decimal points
-                    const formattedValue = value.toLocaleString('en-US', { minimumFractionDigits: 2 });
+                    // Check if the parsed value is a valid number
+                    if (!isNaN(value) && isFinite(value)) {
+                        // Convert the parsed value to a string with thousand separators and decimal points
+                        const formattedValue = value.toLocaleString('en-US', { minimumFractionDigits: 2 });
 
-                    // Update the cell's innerHTML property with the formatted value
-                    cell.innerHTML = formattedValue;
+                        // Update the cell's innerHTML property with the formatted value
+                        cell.innerHTML = formattedValue;
+                    }
                 }
             }
         }
-    }
-</script>*@
+    </script>*@
 
 

@@ -38,11 +38,21 @@
                                                     <a href="/CasHome/index" class="btn_form" data-toggle="tooltip" data-placement="top" title="إغلاق"><i class="fa fa-times"></i></a>
                                                     @*<a href="/CasBranch/Create" class="btn_form" data-toggle="tooltip" data-placement="top" title="إضافة سجل جديد"><i class="fa fa-plus"></i></a>*@
                                                     @*<button type="submit" name="excelCall" class="btn_form" value="Excel" style="padding-right:4px;" data-toggle="tooltip" data-placement="top" title="ترحيل البيانات للإكسل">
-                                                            <i class="far fa-file-excel" aria-hidden="true" style=" margin-bottom: 3px; padding-left: 10px;"></i>
-                                                        </button>*@
+                <i class="far fa-file-excel" aria-hidden="true" style=" margin-bottom: 3px; padding-left: 10px;"></i>
+            </button>*@
 
 
                                                 </div>
+                                                <script>
+                                                    $(document).ready(function () {
+                                                        $("#inputtext").on("keyup", function () {
+                                                            var value = $(this).val().toLowerCase();
+                                                            $("#tbl tr").filter(function () {
+                                                                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                                                            });
+                                                        });
+                                                    });
+                                                </script>
                                                 <div id="responsive-datatable_filter" class="dataTables_filter">
                                                     <label class="label_search_input">
                                                         <img src="~/images/srch.png" id="SrchImg" />
@@ -61,9 +71,9 @@
                                                                 <label for="javascript" style="float: left; font-size: 0.75rem">محضور</label>
                                                             </div>
                                                             @*<div class="radio_top">
-                                                                    <input type="radio" id="ShowDeleted" name="Show" onclick="GetFilter()" style="float:right;margin-left:4px;width:13px;height:13px;">
-                                                                    <label for="javascript" style="float: left; font-size: 0.75rem">محذوف</label>
-                                                                </div>*@
+                        <input type="radio" id="ShowDeleted" name="Show" onclick="GetFilter()" style="float:right;margin-left:4px;width:13px;height:13px;">
+                        <label for="javascript" style="float: left; font-size: 0.75rem">محذوف</label>
+                    </div>*@
                                                             <div class="radio_top">
                                                                 <input type="radio" id="ShowRenter" name="Show" onclick="GetFilter()" style="float:right;margin-left:4px;width:13px;height:13px;">
                                                                 <label for="css" style="float: left; font-size: 0.75rem">مستأجر</label>
