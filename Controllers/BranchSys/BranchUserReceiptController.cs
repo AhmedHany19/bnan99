@@ -35,11 +35,12 @@ namespace RentCar.Controllers
             {
                 RedirectToAction("Login", "Account");
             }
-            var sd = DateTime.Now.AddDays(-30);
-            var ed = DateTime.Now;
-            ViewBag.Sdate = string.Format("{0:yyyy-MM-dd}", sd);
-            ViewBag.Edate = string.Format("{0:yyyy-MM-dd}", ed);
-            
+            var sd = DateTime.Now.AddDays(-30).Date;
+            var ed = DateTime.Now.Date;
+            ed = ed.AddHours(23).AddMinutes(59).AddSeconds(0);
+            ViewBag.Sdate = sd.ToString("yyyy-MM-dd");
+            ViewBag.Edate = ed.ToString("yyyy-MM-dd");
+
             var user = db.CR_Cas_User_Information.FirstOrDefault(u=>u.CR_Cas_User_Information_Id==UserLogin);
             if (user != null)
             {
@@ -82,15 +83,19 @@ namespace RentCar.Controllers
                 sd = sd.Date;
                 ed = Convert.ToDateTime(EndDate);
                 ed = ed.Date;
+                ed = ed.AddHours(23).AddMinutes(59).AddSeconds(0);
+
             }
             else
             {
                  
                 sd1=sd1.AddDays(-30);
                 sd = sd1.Date;
-                ed = DateTime.Now;
+                ed = DateTime.Now.Date;
+                ed = ed.AddHours(23).AddMinutes(59).AddSeconds(0);
+
             }
-            
+
             var LessorCode = "";
             var UserLogin = "";
             var BranchCode = "";
@@ -149,13 +154,9 @@ namespace RentCar.Controllers
             {
                 Receipt = db.CR_Cas_Account_Receipt.Where(r => r.CR_Cas_Account_Receipt_Lessor_Code == LessorCode && r.CR_Cas_Account_Receipt_Branch_Code == BranchCode
                 && r.CR_Cas_Account_Receipt_User_Code == UserLogin && r.CR_Cas_Account_Receipt_Payment_Method != "24" &&
-                r.CR_Cas_Account_Receipt_Date >= sd1 && r.CR_Cas_Account_Receipt_Date <= ed);
+                r.CR_Cas_Account_Receipt_Date >= sd && r.CR_Cas_Account_Receipt_Date <= ed);
                
             }
-
-            
-
-
 
             return PartialView(Receipt.OrderBy(x=>x.CR_Cas_Account_Receipt_Date));
         }
@@ -174,6 +175,8 @@ namespace RentCar.Controllers
                 sd = sd.Date;
                 ed = Convert.ToDateTime(EndDate);
                 ed = ed.Date;
+                ed = ed.AddHours(23).AddMinutes(59).AddSeconds(0);
+
             }
             else
             {
@@ -181,6 +184,8 @@ namespace RentCar.Controllers
                 sd1 = sd1.AddDays(-30);
                 sd = sd1.Date;
                 ed = DateTime.Now.Date;
+                ed = ed.AddHours(23).AddMinutes(59).AddSeconds(0);
+
             }
 
             var LessorCode = "";
@@ -268,6 +273,14 @@ namespace RentCar.Controllers
                     UserDebit = (int)Receipt.Select(m => m.CR_Cas_Account_Receipt_Receipt).Sum();
                 }
             }
+
+            //var convertReceiptPaymentToFloat = (float)UserCreit;
+            //var Receipt_Payment = convertReceiptPaymentToFloat.ToString("N2");
+            //ViewBag.UserCreit = Receipt_Payment;
+
+            //var convertReceiptReceiptToFloat = (float)UserDebit;
+            //var Receipt_Receipt = convertReceiptReceiptToFloat.ToString("N2");
+            //ViewBag.UserDebit = Receipt_Receipt;
             return Json(UserCreit+ "/" + UserDebit, JsonRequestBehavior.AllowGet);
         }
 

@@ -430,6 +430,10 @@ namespace RentCar.Controllers
                             {
                                 Contract.CR_Cas_Contract_Basic_Net_Value = Convert.ToDecimal(TotalContractIT);
                             }
+                            if (TotPayed=="")
+                            {
+                                TotPayed = "0";
+                            }
                             if (TotPayed != "")
                             {
                                 Contract.CR_Cas_Contract_Basic_Payed_Value = Convert.ToDecimal(TotPayed);
@@ -678,54 +682,104 @@ namespace RentCar.Controllers
 
                             // Create ACcount Receipt ' مستند صرف ' if totaltoPay < 0
                             CR_Cas_Account_Receipt Receipt = new CR_Cas_Account_Receipt();
-
-                            if (Convert.ToDecimal(TotToPay) < 0)
+                            if (Convert.ToDecimal(TotPayed) > 0)
                             {
-                                DateTime year = DateTime.Now;
-                                var y = year.ToString("yy");
-                                var Sector = "1";
-                                var autoinc = GetReceiptLastRecord(LessorCode, BranchCode).CR_Cas_Account_Receipt_No;
-                                Receipt.CR_Cas_Account_Receipt_No = y + "-" + Sector + "-" + "61" + "-" + LessorCode + "-" + BranchCode + autoinc;
+                                if (Convert.ToDecimal(TotToPay) < 0)
+                                {
+                                    DateTime year = DateTime.Now;
+                                    var y = year.ToString("yy");
+                                    var Sector = "1";
+                                    var autoinc = GetReceiptLastRecord(LessorCode, BranchCode).CR_Cas_Account_Receipt_No;
+                                    Receipt.CR_Cas_Account_Receipt_No = y + "-" + Sector + "-" + "61" + "-" + LessorCode + "-" + BranchCode + autoinc;
 
-                                Receipt.CR_Cas_Account_Receipt_Year = y;
-                                Receipt.CR_Cas_Account_Receipt_Type = "61";
-                                Receipt.CR_Cas_Account_Receipt_Lessor_Code = LessorCode;
-                                Receipt.CR_Cas_Account_Receipt_Branch_Code = BranchCode;
-                                Receipt.CR_Cas_Account_Receipt_Date = DateTime.Now;
-                                Receipt.CR_Cas_Account_Receipt_Contract_Operation = Contract.CR_Cas_Contract_Basic_No;
-                                Receipt.CR_Cas_Account_Receipt_Payment = 0;
-                                Receipt.CR_Cas_Account_Receipt_Receipt = Convert.ToDecimal(TotPayed);
-                                Receipt.CR_Cas_Account_Receipt_Payment_Method = PayType;
-                                /////////////////////////////////Update Sales Point//////////////////////
-                                var salesPoint = db.CR_Cas_Sup_SalesPoint.Single(s => s.CR_Cas_Sup_SalesPoint_Code == CasherName);
-                                if (salesPoint != null)
-                                {
-                                    Receipt.CR_Cas_Account_Receipt_SalesPoint_No = CasherName;
-                                    Receipt.CR_Cas_Account_Receipt_Bank_Code = salesPoint.CR_Cas_Sup_SalesPoint_Bank_Code;
-                                    Receipt.CR_Cas_Account_Receipt_SalesPoint_Previous_Balance = salesPoint.CR_Cas_Sup_SalesPoint_Balance;
-                                    salesPoint.CR_Cas_Sup_SalesPoint_Balance -= Convert.ToDecimal(TotPayed);
-                                    db.Entry(salesPoint).State = EntityState.Modified;
+                                    Receipt.CR_Cas_Account_Receipt_Year = y;
+                                    Receipt.CR_Cas_Account_Receipt_Type = "61";
+                                    Receipt.CR_Cas_Account_Receipt_Lessor_Code = LessorCode;
+                                    Receipt.CR_Cas_Account_Receipt_Branch_Code = BranchCode;
+                                    Receipt.CR_Cas_Account_Receipt_Date = DateTime.Now;
+                                    Receipt.CR_Cas_Account_Receipt_Contract_Operation = Contract.CR_Cas_Contract_Basic_No;
+                                    Receipt.CR_Cas_Account_Receipt_Payment = 0;
+                                    Receipt.CR_Cas_Account_Receipt_Receipt = Convert.ToDecimal(TotPayed);
+                                    Receipt.CR_Cas_Account_Receipt_Payment_Method = PayType;
+                                    /////////////////////////////////Update Sales Point//////////////////////
+                                    var salesPoint = db.CR_Cas_Sup_SalesPoint.Single(s => s.CR_Cas_Sup_SalesPoint_Code == CasherName);
+                                    if (salesPoint != null)
+                                    {
+                                        Receipt.CR_Cas_Account_Receipt_SalesPoint_No = CasherName;
+                                        Receipt.CR_Cas_Account_Receipt_Bank_Code = salesPoint.CR_Cas_Sup_SalesPoint_Bank_Code;
+                                        Receipt.CR_Cas_Account_Receipt_SalesPoint_Previous_Balance = salesPoint.CR_Cas_Sup_SalesPoint_Balance;
+                                        salesPoint.CR_Cas_Sup_SalesPoint_Balance -= Convert.ToDecimal(TotPayed);
+                                        db.Entry(salesPoint).State = EntityState.Modified;
+                                    }
+                                    /////////////////////////////////Update Cas User Information//////////////////////
+                                    var userinfo = db.CR_Cas_User_Information.Single(u => u.CR_Cas_User_Information_Id == UserLogin);
+                                    if (userinfo != null)
+                                    {
+                                        Receipt.CR_Cas_Account_Receipt_User_Previous_Balance = userinfo.CR_Cas_User_Information_Balance;
+                                        userinfo.CR_Cas_User_Information_Balance -= Convert.ToDecimal(TotPayed);
+                                        db.Entry(userinfo).State = EntityState.Modified;
+                                    }
+                                    //////////////////////////////////////////////////////////////////////////////////
+                                    Receipt.CR_Cas_Account_Receipt_Renter_Code = Contract.CR_Cas_Contract_Basic_Renter_Id;
+                                    Receipt.CR_Cas_Account_Receipt_Renter_Previous_Balance = Convert.ToDecimal(RenterPrevBalance);
+                                    Receipt.CR_Cas_Account_Receipt_User_Code = UserLogin;
+                                    //Receipt.CR_Cas_Account_Receipt_User_Previous_Balance = 0;
+                                    Receipt.CR_Cas_Account_Receipt_Car_Code = Contract.CR_Cas_Contract_Basic_Car_Serail_No;
+                                    Receipt.CR_Cas_Account_Receipt_Status = "A";
+                                    Receipt.CR_Cas_Account_Receipt_Reference_Type = "عقد";
+                                    Receipt.CR_Cas_Account_Receipt_Is_Passing = "1";
+                                    Receipt.CR_Cas_Account_Receipt_Reasons = remarque;
+                                    db.CR_Cas_Account_Receipt.Add(Receipt);
                                 }
-                                /////////////////////////////////Update Cas User Information//////////////////////
-                                var userinfo = db.CR_Cas_User_Information.Single(u => u.CR_Cas_User_Information_Id == UserLogin);
-                                if (userinfo != null)
+                                if (Convert.ToDecimal(TotToPay) > 0)
                                 {
-                                    Receipt.CR_Cas_Account_Receipt_User_Previous_Balance = userinfo.CR_Cas_User_Information_Balance;
-                                    userinfo.CR_Cas_User_Information_Balance -= Convert.ToDecimal(TotPayed);
-                                    db.Entry(userinfo).State = EntityState.Modified;
+                                    DateTime year = DateTime.Now;
+                                    var y = year.ToString("yy");
+                                    var Sector = "1";
+                                    var autoinc = GetReceiptLastRecord(LessorCode, BranchCode).CR_Cas_Account_Receipt_No;
+                                    Receipt.CR_Cas_Account_Receipt_No = y + "-" + Sector + "-" + "61" + "-" + LessorCode + "-" + BranchCode + autoinc;
+
+                                    Receipt.CR_Cas_Account_Receipt_Year = y;
+                                    Receipt.CR_Cas_Account_Receipt_Type = "60";
+                                    Receipt.CR_Cas_Account_Receipt_Lessor_Code = LessorCode;
+                                    Receipt.CR_Cas_Account_Receipt_Branch_Code = BranchCode;
+                                    Receipt.CR_Cas_Account_Receipt_Date = DateTime.Now;
+                                    Receipt.CR_Cas_Account_Receipt_Contract_Operation = Contract.CR_Cas_Contract_Basic_No;
+                                    Receipt.CR_Cas_Account_Receipt_Payment = 0;
+                                    Receipt.CR_Cas_Account_Receipt_Receipt = Convert.ToDecimal(TotPayed);
+                                    Receipt.CR_Cas_Account_Receipt_Payment_Method = PayType;
+                                    /////////////////////////////////Update Sales Point//////////////////////
+                                    var salesPoint = db.CR_Cas_Sup_SalesPoint.Single(s => s.CR_Cas_Sup_SalesPoint_Code == CasherName);
+                                    if (salesPoint != null)
+                                    {
+                                        Receipt.CR_Cas_Account_Receipt_SalesPoint_No = CasherName;
+                                        Receipt.CR_Cas_Account_Receipt_Bank_Code = salesPoint.CR_Cas_Sup_SalesPoint_Bank_Code;
+                                        Receipt.CR_Cas_Account_Receipt_SalesPoint_Previous_Balance = salesPoint.CR_Cas_Sup_SalesPoint_Balance;
+                                        salesPoint.CR_Cas_Sup_SalesPoint_Balance -= Convert.ToDecimal(TotPayed);
+                                        db.Entry(salesPoint).State = EntityState.Modified;
+                                    }
+                                    /////////////////////////////////Update Cas User Information//////////////////////
+                                    var userinfo = db.CR_Cas_User_Information.Single(u => u.CR_Cas_User_Information_Id == UserLogin);
+                                    if (userinfo != null)
+                                    {
+                                        Receipt.CR_Cas_Account_Receipt_User_Previous_Balance = userinfo.CR_Cas_User_Information_Balance;
+                                        userinfo.CR_Cas_User_Information_Balance -= Convert.ToDecimal(TotPayed);
+                                        db.Entry(userinfo).State = EntityState.Modified;
+                                    }
+                                    //////////////////////////////////////////////////////////////////////////////////
+                                    Receipt.CR_Cas_Account_Receipt_Renter_Code = Contract.CR_Cas_Contract_Basic_Renter_Id;
+                                    Receipt.CR_Cas_Account_Receipt_Renter_Previous_Balance = Convert.ToDecimal(RenterPrevBalance);
+                                    Receipt.CR_Cas_Account_Receipt_User_Code = UserLogin;
+                                    //Receipt.CR_Cas_Account_Receipt_User_Previous_Balance = 0;
+                                    Receipt.CR_Cas_Account_Receipt_Car_Code = Contract.CR_Cas_Contract_Basic_Car_Serail_No;
+                                    Receipt.CR_Cas_Account_Receipt_Status = "A";
+                                    Receipt.CR_Cas_Account_Receipt_Reference_Type = "عقد";
+                                    Receipt.CR_Cas_Account_Receipt_Is_Passing = "1";
+                                    Receipt.CR_Cas_Account_Receipt_Reasons = remarque;
+                                    db.CR_Cas_Account_Receipt.Add(Receipt);
                                 }
-                                //////////////////////////////////////////////////////////////////////////////////
-                                Receipt.CR_Cas_Account_Receipt_Renter_Code = Contract.CR_Cas_Contract_Basic_Renter_Id;
-                                Receipt.CR_Cas_Account_Receipt_Renter_Previous_Balance = Convert.ToDecimal(RenterPrevBalance);
-                                Receipt.CR_Cas_Account_Receipt_User_Code = UserLogin;
-                                //Receipt.CR_Cas_Account_Receipt_User_Previous_Balance = 0;
-                                Receipt.CR_Cas_Account_Receipt_Car_Code = Contract.CR_Cas_Contract_Basic_Car_Serail_No;
-                                Receipt.CR_Cas_Account_Receipt_Status = "A";
-                                Receipt.CR_Cas_Account_Receipt_Reference_Type = "عقد";
-                                Receipt.CR_Cas_Account_Receipt_Is_Passing = "1";
-                                Receipt.CR_Cas_Account_Receipt_Reasons = remarque;
-                                db.CR_Cas_Account_Receipt.Add(Receipt);
                             }
+                           
                             var receiptNo = db.CR_Cas_Account_Receipt.FirstOrDefault(c => c.CR_Cas_Account_Receipt_Contract_Operation == Contract.CR_Cas_Contract_Basic_No);
 
                             var carInfo = db.CR_Cas_Sup_Car_Information.FirstOrDefault(c => c.CR_Cas_Sup_Car_Lessor_Code == LessorCode && c.CR_Cas_Sup_Car_Location_Branch_Code == BranchCode && c.CR_Cas_Sup_Car_Serail_No == Contract.CR_Cas_Contract_Basic_Car_Serail_No);

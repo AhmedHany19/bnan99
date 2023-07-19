@@ -2380,6 +2380,12 @@
                             toastr.success("جــاري حفظ بيانات اغلاق العقــد وارســالـه للمستــاجــر ......")
                         }
                     }
+                    else {
+                        document.getElementById("add_btn").disabled = true;
+                        $("#loader").removeAttr("hidden");
+                        toastr.options.setTimeout = 99999;
+                        toastr.success("جــاري حفظ بيانات اغلاق العقــد وارســالـه للمستــاجــر ......")
+                    }
 
                 }
                 else {

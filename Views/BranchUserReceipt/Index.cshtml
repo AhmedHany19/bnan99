@@ -290,8 +290,17 @@
                     data: { type: "Date", StartDate: sd, EndDate: ed },
                         success: function (data) {
                             var t = data.split("/");
-                            $('#UserCreit').val(t[0]);
-                            $('#UserDebit').val(t[1]);
+                            var credit = parseFloat(t[0]).toLocaleString(undefined, {
+                                minimumFractionDigits: 2,
+                                maximumFractionDigits: 2
+                            });
+                            var debit = parseFloat(t[1]).toLocaleString(undefined, {
+                                minimumFractionDigits: 2,
+                                maximumFractionDigits: 2
+                            });
+
+                            $('#UserCreit').val(credit);
+                            $('#UserDebit').val(debit);
                         }
                 });
         }
@@ -317,8 +326,17 @@
                     data: { type: "T", StartDate: sd, EndDate: ed },
                         success: function (data) {
                             var t = data.split("/");
-                            $('#UserCreit').val(t[0]);
-                            $('#UserDebit').val(t[1]);
+                            var credit = parseFloat(t[0]).toLocaleString(undefined, {
+                                minimumFractionDigits: 2,
+                                maximumFractionDigits: 2
+                            });
+                            var debit = parseFloat(t[1]).toLocaleString(undefined, {
+                                minimumFractionDigits: 2,
+                                maximumFractionDigits: 2
+                            });
+
+                            $('#UserCreit').val(credit);
+                            $('#UserDebit').val(debit);
                         }
                 });
             } else if (document.getElementById('ShowCustody').checked) {
@@ -337,8 +355,17 @@
                     data: { type: "C", StartDate: sd, EndDate: ed },
                         success: function (data) {
                             var t = data.split("/");
-                            $('#UserCreit').val(t[0]);
-                            $('#UserDebit').val(t[1]);
+                            var credit = parseFloat(t[0]).toLocaleString(undefined, {
+                                minimumFractionDigits: 2,
+                                maximumFractionDigits: 2
+                            });
+                            var debit = parseFloat(t[1]).toLocaleString(undefined, {
+                                minimumFractionDigits: 2,
+                                maximumFractionDigits: 2
+                            });
+
+                            $('#UserCreit').val(credit);
+                            $('#UserDebit').val(debit);
                         }
                 });
             } else if (document.getElementById('Showbooked').checked) {
@@ -357,8 +384,17 @@
                     data: { type: "B", StartDate: sd, EndDate: ed },
                         success: function (data) {
                             var t = data.split("/");
-                            $('#UserCreit').val(t[0]);
-                            $('#UserDebit').val(t[1]);
+                            var credit = parseFloat(t[0]).toLocaleString(undefined, {
+                                minimumFractionDigits: 2,
+                                maximumFractionDigits: 2
+                            });
+                            var debit = parseFloat(t[1]).toLocaleString(undefined, {
+                                minimumFractionDigits: 2,
+                                maximumFractionDigits: 2
+                            });
+
+                            $('#UserCreit').val(credit);
+                            $('#UserDebit').val(debit);
                         }
                 });
             }
@@ -378,8 +414,17 @@
                     data: { type: "All", StartDate: sd, EndDate: ed },
                         success: function (data) {
                             var t = data.split("/");
-                            $('#UserCreit').val(t[0]);
-                            $('#UserDebit').val(t[1]);
+                            var credit = parseFloat(t[0]).toLocaleString(undefined, {
+                                minimumFractionDigits: 2,
+                                maximumFractionDigits: 2
+                            });
+                            var debit = parseFloat(t[1]).toLocaleString(undefined, {
+                                minimumFractionDigits: 2,
+                                maximumFractionDigits: 2
+                            });
+
+                            $('#UserCreit').val(credit);
+                            $('#UserDebit').val(debit);
                         }
                 });
             }
