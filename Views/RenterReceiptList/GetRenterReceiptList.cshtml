@@ -69,7 +69,7 @@
                                             <div class="table-responsive" data-pattern="priority-columns" style="border:none;">
                                                 <div class="href_layout" style="width:7%;float:right;margin-top:15px;margin-bottom:10px;">
                                                     @*<a href="/CasHome/index" class="btn_form" data-toggle="tooltip" data-placement="top" title="إغلاق"><i class="fa fa-times"></i></a>*@
-                                                    <a href="/RenterReceiptList/RenterReceiptBalance" class="btn_form"><i class="fa fa dripicons-arrow-left" style="padding-top:12px;"></i></a>
+                                                    <a href="/RenterReceiptList/index" class="btn_form"><i class="fa fa dripicons-arrow-left" style="padding-top:12px;"></i></a>
 
                                                     <script>
                                                         $(document).ready(function () {
@@ -346,6 +346,7 @@
                 data: { type: "Date", StartDate: sd, EndDate:ed,id:id },
                 success: function (data) {
                     $('#UserReceiptTable').html(data);
+                    console.log(data)
                 }
             });
             $.ajax({

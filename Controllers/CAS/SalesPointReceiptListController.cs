@@ -71,19 +71,59 @@ namespace RentCar.Controllers.CAS
 
         public ActionResult SalesPointMovementSheet(string id)
         {
-            var receipt = db.CR_Cas_Account_Receipt.Where(r=>r.CR_Cas_Account_Receipt_SalesPoint_No==id)
-                .Include(r=>r.CR_Mas_Sup_Payment_Method)
-                .Include(r=>r.CR_Cas_Sup_SalesPoint)
-                .Include(r=>r.CR_Cas_User_Information)
-                .Include(r=>r.CR_Cas_Sup_Branch);
+            var StartDate = DateTime.Now;
+            var EndDate = DateTime.Now.AddDays(-1000);
+
+           /* var receipt = db.CR_Cas_Account_Receipt
+                .Where(r => r.CR_Cas_Account_Receipt_SalesPoint_No == id && r.CR_Cas_Account_Receipt_Date <= StartDate && r.CR_Cas_Account_Receipt_Date >= EndDate)
+                .Include(r => r.CR_Mas_Sup_Payment_Method)
+                .Include(r => r.CR_Cas_Sup_SalesPoint)
+                .Include(r => r.CR_Cas_User_Information)
+                .Include(r => r.CR_Cas_Sup_Branch);*/
 
             var salespoint = db.CR_Cas_Sup_SalesPoint.FirstOrDefault(s=>s.CR_Cas_Sup_SalesPoint_Code==id);
             if (salespoint != null)
             {
                 ViewBag.SalesPointName = salespoint.CR_Cas_Sup_SalesPoint_Ar_Name;
+                ViewBag.SalesPointBalance = salespoint.CR_Cas_Sup_SalesPoint_Balance;
+                var sd = DateTime.Now.AddDays(-30);
+                var ed = DateTime.Now;
+                ViewBag.StartDate = string.Format("{0:yyyy-MM-dd}", sd);
+                ViewBag.EndDate = string.Format("{0:yyyy-MM-dd}", ed);
+                ViewBag.id = id;
             }
-            return View(receipt);
+            return View();
         }
+        
+        public PartialViewResult table(string id, DateTime? startDate, DateTime? endDate)
+        {
+            IQueryable<CR_Cas_Account_Receipt> receipt = null;
+
+            if (startDate != null && endDate != null)
+            {
+                 receipt = db.CR_Cas_Account_Receipt
+               .Where(r => r.CR_Cas_Account_Receipt_SalesPoint_No == id && r.CR_Cas_Account_Receipt_Date <= endDate && r.CR_Cas_Account_Receipt_Date >= startDate)
+               .Include(r => r.CR_Mas_Sup_Payment_Method)
+               .Include(r => r.CR_Cas_Sup_SalesPoint)
+               .Include(r => r.CR_Cas_User_Information)
+               .Include(r => r.CR_Cas_Sup_Branch);
+            }
+            else
+            {
+                receipt = db.CR_Cas_Account_Receipt
+               .Where(r => r.CR_Cas_Account_Receipt_SalesPoint_No == id)
+               .Include(r => r.CR_Mas_Sup_Payment_Method)
+               .Include(r => r.CR_Cas_Sup_SalesPoint)
+               .Include(r => r.CR_Cas_User_Information)
+               .Include(r => r.CR_Cas_Sup_Branch);
+            }
+
+
+
+            return PartialView(receipt);
+        }
+
+        
 
         // GET: SalesPointReceiptList/Details/5
         public ActionResult Details(string id)
