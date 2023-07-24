@@ -424,7 +424,7 @@ namespace RentCar.Controllers.BranchSys
             ViewBag.RenterBalance = Renter.CR_Cas_Renter_Lessor_Balance;
 
             var cR_Cas_Contract_Basic = db.CR_Cas_Contract_Basic.Where(c => c.CR_Cas_Contract_Basic_Lessor == LessorCode
-                && (c.CR_Cas_Contract_Basic_Status != "U") &&
+                && (c.CR_Cas_Contract_Basic_Status != "U"&& c.CR_Cas_Contract_Basic_Status != "y") &&
                 (c.CR_Cas_Contract_Basic_Renter_Id == id || c.CR_Cas_Contract_Basic_Driver_Id == id || c.CR_Cas_Contract_Basic_Additional_Driver_Id == id))
                 .Include(c => c.CR_Mas_Com_Lessor).Include(car => car.CR_Cas_Sup_Car_Information);
 
@@ -2312,10 +2312,14 @@ namespace RentCar.Controllers.BranchSys
                                 }
 
                                 ///////////////////////////////////////////////////////////////////
+                                if (TotalPayed==null)
+                                {
+                                    TotalPayed = "0";
+                                }
                                 if (TotalPayed != null && TotalPayed != "")
                                 {
                                     var PayedValue = decimal.Parse(TotalPayed);
-                                    if (PayedValue > 0)
+                                    if (PayedValue >= 0)
                                     {
                                         /////////////////////////////Sub-main-com-account///////////////////
                                         var MainAccount1 = db.CR_Cas_Sup_Main_Com_Account.FirstOrDefault(ac => ac.CR_Cas_Sup_Main_Com_Account_Com_Code == LessorCode

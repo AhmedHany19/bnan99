@@ -219,7 +219,7 @@
             if (document.getElementById('ShowActive').checked) {
 
                  $.ajax({
-                         url: '@Url.Action("PartialIndex", "CasRenterLessor")',
+                         url: '@Url.Action("PartialIndex", "Sys3RenterLessor")',
                         type: "POST",
                         data: { type: "A" },
                         success: function (data) {
@@ -229,7 +229,7 @@
             } else if (document.getElementById('ShowHolded').checked) {
 
                  $.ajax({
-                        url: '@Url.Action("PartialIndex", "CasRenterLessor")',
+                        url: '@Url.Action("PartialIndex", "Sys3RenterLessor")',
                         type: "POST",
                         data: { type: "K" },
                         success: function (data) {
@@ -239,7 +239,7 @@
             }     else if (document.getElementById('ShowRenter').checked) {
 
                  $.ajax({
-                        url: '@Url.Action("PartialIndex", "CasRenterLessor")',
+                        url: '@Url.Action("PartialIndex", "Sys3RenterLessor")',
                         type: "POST",
                         data: { type: "R" },
                         success: function (data) {
@@ -249,7 +249,7 @@
             }
             else {
                 $.ajax({
-                     url: '@Url.Action("PartialIndex", "CasRenterLessor")',
+                     url: '@Url.Action("PartialIndex", "Sys3RenterLessor")',
                     type: "POST",
                     data: { type: "All" },
                         success: function (data) {

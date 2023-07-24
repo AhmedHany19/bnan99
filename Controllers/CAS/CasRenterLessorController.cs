@@ -201,7 +201,7 @@ namespace RentCar.Controllers.CAS
             ViewBag.RenterBalance = Renter.CR_Cas_Renter_Lessor_Balance;
 
 
-            var Contracts = db.CR_Cas_Contract_Basic.Where(c => c.CR_Cas_Contract_Basic_Lessor == LessorCode && (c.CR_Cas_Contract_Basic_Status != "U") && (c.CR_Cas_Contract_Basic_Renter_Id == id ||c.CR_Cas_Contract_Basic_Driver_Id==id || c.CR_Cas_Contract_Basic_Additional_Driver_Id==id))
+            var Contracts = db.CR_Cas_Contract_Basic.Where(c => c.CR_Cas_Contract_Basic_Lessor == LessorCode && (c.CR_Cas_Contract_Basic_Status != "U"&& c.CR_Cas_Contract_Basic_Status != "y") && (c.CR_Cas_Contract_Basic_Renter_Id == id ||c.CR_Cas_Contract_Basic_Driver_Id==id || c.CR_Cas_Contract_Basic_Additional_Driver_Id==id))
                                                     .Include(c => c.CR_Mas_Com_Lessor)
                                                     .Include(car => car.CR_Cas_Sup_Car_Information);
 
