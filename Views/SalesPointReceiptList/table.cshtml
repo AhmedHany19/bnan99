@@ -1,0 +1,85 @@
+﻿@model IEnumerable<RentCar.Models.CR_Cas_Account_Receipt>
+    <table id="table" class="table table-striped mb-0" style="margin-top:10px">
+        <thead>
+            <tr>
+                <th width="20%">
+                    رقم القيد
+                </th>
+                <th width="10%">
+                    تاريخ القيد
+                </th>
+                <th width="10%">
+                    نوع المرجع
+                </th>
+                <th width="10%">
+                    دائن
+                </th>
+                <th width="10%">
+                    مدين
+                </th>
+                <th width="10%">
+                    رصيد سابق
+                </th>
+                <th width="20%">
+                    منفذ العملية
+                </th>
+                <th width="10%" hidden>
+                    حالة العهدة
+                </th>
+                <th width="10%">
+                    الملاحظات
+                </th>
+
+            </tr>
+        </thead>
+
+        <tbody id="tbl" style="height:285px">
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td width="20%">
+                        @Html.DisplayFor(modelItem => item.CR_Cas_Account_Receipt_No)
+                    </td>
+                    <td width="10%">
+                        @item.CR_Cas_Account_Receipt_Date.Value.ToString("yyyy/MM/dd")
+                    </td>
+                    <td width="10%">
+                        @Html.DisplayFor(modelItem => item.CR_Cas_Account_Receipt_Reference_Type)
+                    </td>
+                    <td width="10%">
+                        @Html.DisplayFor(modelItem => item.CR_Cas_Account_Receipt_Payment)
+                    </td>
+                    <td width="10%">
+                        @Html.DisplayFor(modelItem => item.CR_Cas_Account_Receipt_Receipt)
+                    </td>
+                    <td width="10%">
+                        @Html.DisplayFor(modelItem => item.CR_Cas_Account_Receipt_SalesPoint_Previous_Balance)
+                    </td>
+                    <td width="20%">
+                        @Html.DisplayFor(modelItem => item.CR_Cas_User_Information.CR_Cas_User_Information_Ar_Name)
+                    </td>
+                    <td width="10%" hidden>
+                        @if (item.CR_Cas_Account_Receipt_Is_Passing == "2")
+                        {
+                            <label>مرحل</label>
+                        }
+                        @if (item.CR_Cas_Account_Receipt_Is_Passing == "3")
+                        {
+                            <label>محجوز</label>
+                        }
+                        @if (item.CR_Cas_Account_Receipt_Is_Passing == "1")
+                        {
+                            <label>عهدة</label>
+                        }
+                    </td>
+                    <td width="10%">
+                        @Html.DisplayFor(modelItem => item.CR_Cas_Account_Receipt_Reasons)
+                    </td>
+
+
+                </tr>
+            }
+
+        </tbody>
+    </table>
+

@@ -1,8 +1,8 @@
 ﻿@model IEnumerable<RentCar.Models.CR_Cas_Account_Receipt>
-
 @{
     ViewBag.Title = "SalesPointMovementSheet";
     Layout = "~/Views/Shared/_CASLayout.cshtml";
+
 }
 
 <style>
@@ -37,7 +37,7 @@
                                             <div class="table-responsive" data-pattern="priority-columns" style="border:none;">
                                                 <div class="href_layout" style="width:15%;float:right;margin-top:15px;margin-bottom:10px;">
                                                     @*<a href="/CasHome/index" class="btn_form" data-toggle="tooltip" data-placement="top" title="إغلاق"><i class="fa fa-times"></i></a>*@
-                                                    <a href="/SalesPointReceiptList/index" class="btn_form" data-toggle="tooltip" data-placement="top" title="العودة لقائمة حركة نقاط البيع"><i class="fa fa dripicons-arrow-left" style="padding-top:12px;"></i></a>
+                                                    <a href="/SalesPointReceiptList/index" class="btn_form" title="العودة لقائمة حركة نقاط البيع"><i class="fa fa dripicons-arrow-left" style="padding-top:12px;"></i></a>
 
                                                     <script>
                                                         $(document).ready(function () {
@@ -50,108 +50,202 @@
                                                         });
                                                     </script>
                                                 </div>
-                                                <div class="" style="width:50%;float:right; margin-top:15px;">
-                                                    <div style="float:right;width:30%;">
-                                                        إسم نقطة البيع
+                                                @* <div class="" style="width:50%;float:right; margin-top:15px;">
+                                                        <div style="float:right;width:30%;">
+                                                            إسم نقطة البيع
+                                                        </div>
+                                                        <div style="float:right;width:70%;">
+                                                            <input type="text" name="SalesPointName" id="SalesPointName" class="form-control" value="@ViewBag.SalesPointName" />
+                                                        </div>
                                                     </div>
-                                                    <div style="float:right;width:70%;">
-                                                        <input type="text" name="SalesPointName" id="SalesPointName" class="form-control" value="@ViewBag.SalesPointName" />
-                                                    </div>
-                                                </div>
-                                                <div id="responsive-datatable_filter" class="dataTables_filter" style=" float: right;right: 0;width: 35%;margin-top: 15px;">
-                                                    <label class="label_search_input">
-                                                        <img src="~/images/srch.png" id="SrchImg" />
-                                                        بحث:<input type="search" id="inputtext" class="form-control form_search_input" placeholder="" aria-controls="responsive-datatable" style="width:50%">
-                                                    </label>
-                                                </div>
+                                                    <div id="responsive-datatable_filter" class="dataTables_filter" style=" float: right;right: 0;width: 35%;margin-top: 15px;">
+                                                        <label class="label_search_input">
+                                                            <img src="~/images/srch.png" id="SrchImg" />
+                                                            بحث:<input type="search" id="inputtext" class="form-control form_search_input" placeholder="" aria-controls="responsive-datatable" style="width:50%">
+                                                        </label>
+                                                    </div>*@
                                                 <div style="width:100%;float:left"></div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-4" style=" display: flex; align-items: center">
+
+                                                    <div style="float:right;width:30%;">
+                                                        <label class="lbl">إسم نقطه البيع</label>
+                                                    </div>
+                                                    <div style="float: right; width: 70%;">
+                                                        <input type="text" class="form-control" name="ViewBag.RenterName" id="RenterName" value="@ViewBag.SalesPointName" readonly style="border:none" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4" style=" display: flex; align-items: center">
+
+                                                    @* <div style="float:right;width:30%;">
+                                                            <label class="lbl">اسم المستأجر</label>
+                                                        </div>
+                                                        <div style="float: right; width: 70%;">
+                                                            <input type="text" class="form-control" name="ViewBag.RenterName" id="RenterName" value="@ViewBag.RenterName" readonly style="border:none" />
+                                                        </div>*@
+                                                </div>
+                                                <div class="col-md-4" style=" display: flex; align-items: center">
+
+                                                    @* <div style="float:right;width:30%;">
+                                                            <label class="lbl">المهنه</label>
+                                                        </div>
+                                                        <div style="float: right; width: 70%;">
+                                                            <input type="text" class="form-control" name="ViewBag.RenterName" id="RenterName" value="@ViewBag.Work" readonly style="border:none" />
+                                                        </div>*@
+                                                </div>
 
 
 
                                             </div>
-                                            <table id="myTable" class="table table-striped mb-0" style="margin-top:10px">
-                                                <thead>
-                                                    <tr>
-                                                        <th width="20%">
-                                                            رقم القيد
-                                                        </th>
-                                                        <th width="10%">
-                                                            تاريخ القيد
-                                                        </th>
-                                                        <th width="10%">
-                                                            نوع المرجع
-                                                        </th>
-                                                        <th width="10%">
-                                                            دائن
-                                                        </th>
-                                                        <th width="10%">
-                                                            مدين
-                                                        </th>
-                                                        <th width="10%">
-                                                            رصيد سابق
-                                                        </th>
-                                                        <th width="20%">
-                                                            منفذ العملية
-                                                        </th>
-                                                        <th width="10%" hidden>
-                                                            حالة العهدة
-                                                        </th>
-                                                        <th width="10%">
-                                                            الملاحظات
-                                                        </th>
+                                            <div class="row">
+                                                <div class="col-md-4" style=" display: flex; align-items: center">
 
-                                                    </tr>
-                                                </thead>
+                                                    <div style="float:right;width:30%;">
+                                                        <label class="lbl">الرصيد الحالي</label>
+                                                    </div>
+                                                    <div style="float: right; width: 70%;">
+                                                        <input type="text" class="form-control" name="ViewBag.SalesPointBalance" id="RenterName" value="@ViewBag.SalesPointBalance" readonly style="border:none" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4" style=" display: flex; align-items: center">
 
-                                                <tbody id="tbl" style="height:285px">
-                                                    @foreach (var item in Model)
-                                                    {
-                                                        <tr>
-                                                            <td width="20%">
-                                                                @Html.DisplayFor(modelItem => item.CR_Cas_Account_Receipt_No)
-                                                            </td>
-                                                            <td width="10%">
-                                                                @item.CR_Cas_Account_Receipt_Date.Value.ToString("yyyy/MM/dd")
-                                                            </td>
-                                                            <td width="10%">
-                                                                @Html.DisplayFor(modelItem => item.CR_Cas_Account_Receipt_Reference_Type)
-                                                            </td>
-                                                            <td width="10%">
-                                                                @Html.DisplayFor(modelItem => item.CR_Cas_Account_Receipt_Payment)
-                                                            </td>
-                                                            <td width="10%">
-                                                                @Html.DisplayFor(modelItem => item.CR_Cas_Account_Receipt_Receipt)
-                                                            </td>
-                                                            <td width="10%">
-                                                                @Html.DisplayFor(modelItem => item.CR_Cas_Account_Receipt_SalesPoint_Previous_Balance)
-                                                            </td>
-                                                            <td width="20%">
-                                                                @Html.DisplayFor(modelItem => item.CR_Cas_User_Information.CR_Cas_User_Information_Ar_Name)
-                                                            </td>
-                                                            <td width="10%" hidden>
-                                                                @if (item.CR_Cas_Account_Receipt_Is_Passing == "2")
-                                                                {
-                                                                    <label>مرحل</label>
-                                                                }
-                                                                @if (item.CR_Cas_Account_Receipt_Is_Passing == "3")
-                                                                {
-                                                                    <label>محجوز</label>
-                                                                }
-                                                                @if (item.CR_Cas_Account_Receipt_Is_Passing == "1")
-                                                                {
-                                                                    <label>عهدة</label>
-                                                                }
-                                                            </td>
-                                                            <td width="10%">
-                                                                @Html.DisplayFor(modelItem => item.CR_Cas_Account_Receipt_Reasons)
-                                                            </td>
+                                                    <div style="float:right;width:30%;">
+                                                        <label class="lbl">مجموع الدائن</label>
+                                                    </div>
+                                                    <div style="float: right; width: 70%;">
+                                                        <input type="text" class="form-control" name="RenterCreit" id="RenterCreit" @*value="@ViewBag.RenterCreit"*@ readonly style="border:none" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4" style=" display: flex; align-items: center">
+
+                                                    <div style="float:right;width:30%;">
+                                                        <label class="lbl">مجموع المدين</label>
+                                                    </div>
+                                                    <div style="float: right; width: 70%;">
+                                                        <input type="text" class="form-control" name="RenterDebit" id="RenterDebit" @*value="@ViewBag.RenterDebit"*@ readonly style="border:none" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row mt-3 ">
+                                                <div class="col-md-7">
+                                                    <div class="col-md-4" style="float:right">
+                                                        <div class="row">
+                                                            <div class="col-md-2" style="float:right">
+                                                                <label>من</label>
+                                                            </div>
+                                                            <div class="col-md-10" style="float:right">
+                                                                <input type="date" id="Startdate" onclick="GetDateFilter()" style="width:100%" value="@ViewBag.StartDate">
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4" style="float:right">
+                                                        <div class="row">
+                                                            <div class="col-md-2" style="float:right;padding-right:0px;">
+                                                                <label>إلى</label>
+                                                            </div>
+                                                            <div class="col-md-10" style="float:right">
+                                                                <input type="date" id="Enddate" onclick="GetDateFilter()" style="width:100%" value="@ViewBag.EndDate">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-2" style="float:right">
+                                                        <a href="javascript:GetFilterDate();" class="btn_form2" data-toggle="tooltip" data-placement="top" title="بحث"><i class="fa fa-check-circle"></i></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div id="partial_table">
+                                                @{
+                                                    Html.RenderAction("table");
+                                                }
+                                                @*   <table id="myTable" class="table table-striped mb-0" style="margin-top:10px">
+                                                        <thead>
+                                                            <tr>
+                                                                <th width="20%">
+                                                                    رقم القيد
+                                                                </th>
+                                                                <th width="10%">
+                                                                    تاريخ القيد
+                                                                </th>
+                                                                <th width="10%">
+                                                                    نوع المرجع
+                                                                </th>
+                                                                <th width="10%">
+                                                                    دائن
+                                                                </th>
+                                                                <th width="10%">
+                                                                    مدين
+                                                                </th>
+                                                                <th width="10%">
+                                                                    رصيد سابق
+                                                                </th>
+                                                                <th width="20%">
+                                                                    منفذ العملية
+                                                                </th>
+                                                                <th width="10%" hidden>
+                                                                    حالة العهدة
+                                                                </th>
+                                                                <th width="10%">
+                                                                    الملاحظات
+                                                                </th>
+
+                                                            </tr>
+                                                        </thead>
+
+                                                        <tbody id="tbl" style="height:285px">
+                                                            @foreach (var item in Model)
+                                                            {
+                                                                <tr>
+                                                                    <td width="20%">
+                                                                        @Html.DisplayFor(modelItem => item.CR_Cas_Account_Receipt_No)
+                                                                    </td>
+                                                                    <td width="10%">
+                                                                        @item.CR_Cas_Account_Receipt_Date.Value.ToString("yyyy/MM/dd")
+                                                                    </td>
+                                                                    <td width="10%">
+                                                                        @Html.DisplayFor(modelItem => item.CR_Cas_Account_Receipt_Reference_Type)
+                                                                    </td>
+                                                                    <td width="10%">
+                                                                        @Html.DisplayFor(modelItem => item.CR_Cas_Account_Receipt_Payment)
+                                                                    </td>
+                                                                    <td width="10%">
+                                                                        @Html.DisplayFor(modelItem => item.CR_Cas_Account_Receipt_Receipt)
+                                                                    </td>
+                                                                    <td width="10%">
+                                                                        @Html.DisplayFor(modelItem => item.CR_Cas_Account_Receipt_SalesPoint_Previous_Balance)
+                                                                    </td>
+                                                                    <td width="20%">
+                                                                        @Html.DisplayFor(modelItem => item.CR_Cas_User_Information.CR_Cas_User_Information_Ar_Name)
+                                                                    </td>
+                                                                    <td width="10%" hidden>
+                                                                        @if (item.CR_Cas_Account_Receipt_Is_Passing == "2")
+                                                                        {
+                                                                            <label>مرحل</label>
+                                                                        }
+                                                                        @if (item.CR_Cas_Account_Receipt_Is_Passing == "3")
+                                                                        {
+                                                                            <label>محجوز</label>
+                                                                        }
+                                                                        @if (item.CR_Cas_Account_Receipt_Is_Passing == "1")
+                                                                        {
+                                                                            <label>عهدة</label>
+                                                                        }
+                                                                    </td>
+                                                                    <td width="10%">
+                                                                        @Html.DisplayFor(modelItem => item.CR_Cas_Account_Receipt_Reasons)
+                                                                    </td>
 
 
-                                                        </tr>
-                                                    }
+                                                                </tr>
+                                                            }
 
-                                                </tbody>
-                                            </table>
+                                                        </tbody>
+                                                    </table>*@
+                                            </div>
+
+
                                         </div>
 
                                     </div>
@@ -246,7 +340,7 @@
     const table = document.getElementById('myTable');
 
     // Specify the indexes of the columns to format (starting from 0)
-    const columnIndexes = [3,4,5]; // for example, format columns  4,5
+    const columnIndexes = [3, 4, 5]; // for example, format columns  4,5
 
     // Loop through each row in the table
     for (let i = 1; i < table.rows.length; i++) { // starting from row 1 to exclude the header row
@@ -283,4 +377,67 @@
             }
         }
     }
+</script>
+
+<script>
+    window.addEventListener('DOMContentLoaded', function () {
+        var columnIndex = 3; // Index of the column you want to sum (zero-based index)
+        var sum = 0;
+
+        var table = document.getElementById('myTable');
+        var rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+
+        for (var i = 0; i < rows.length; i++) {
+            var cells = rows[i].getElementsByTagName('td');
+            var value = parseFloat(cells[columnIndex].textContent.replace(/,/g, ''));
+
+            if (!isNaN(value)) {
+                sum += value;
+            }
+        }
+
+        var sumResult = document.getElementById('RenterCreit');
+        sumResult.value = sum.toLocaleString();
+    });
+</script>
+
+<script>
+    window.addEventListener('DOMContentLoaded', function () {
+        var columnIndex = 4; // Index of the column you want to sum (zero-based index)
+        var sum = 0;
+
+        var table = document.getElementById('myTable');
+        var rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+
+        for (var i = 0; i < rows.length; i++) {
+            var cells = rows[i].getElementsByTagName('td');
+            var value = parseFloat(cells[columnIndex].textContent.replace(/,/g, ''));
+
+            if (!isNaN(value)) {
+                sum += value;
+            }
+        }
+
+        var sumResult = document.getElementById('RenterDebit');
+        sumResult.value = sum.toLocaleString();
+    });
+</script>
+
+
+<script>
+        function GetFilterDate() {
+            var sd = document.getElementById('Startdate').value;
+            var ed = document.getElementById('Enddate').value;
+            var id = '@ViewBag.id';
+
+            $.ajax({
+            url: '@Url.Action("table", "SalesPointReceiptList")',
+            type: "POST",
+            data: {StartDate: sd, EndDate:ed,id:id },
+            success: function (data) {
+                $('#partial_table').html(data);
+                console.log(data)
+               }
+            });
+        }
 </script>

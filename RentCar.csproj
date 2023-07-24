@@ -2293,6 +2293,7 @@
     <Content Include="Views\ClosingReception\PartialIndex.cshtml" />
     <Content Include="Views\RenterReceiptList\Table.cshtml" />
     <Content Include="Views\ClosingReception\ShowCreate.cshtml" />
+    <Content Include="Views\SalesPointReceiptList\table.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
