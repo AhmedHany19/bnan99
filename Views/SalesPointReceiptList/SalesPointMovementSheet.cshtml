@@ -36,7 +36,6 @@
                                         <div class="table-rep-plugin">
                                             <div class="table-responsive" data-pattern="priority-columns" style="border:none;">
                                                 <div class="href_layout" style="width:15%;float:right;margin-top:15px;margin-bottom:10px;">
-                                                    @*<a href="/CasHome/index" class="btn_form" data-toggle="tooltip" data-placement="top" title="إغلاق"><i class="fa fa-times"></i></a>*@
                                                     <a href="/SalesPointReceiptList/index" class="btn_form" title="العودة لقائمة حركة نقاط البيع"><i class="fa fa dripicons-arrow-left" style="padding-top:12px;"></i></a>
 
                                                     <script>
@@ -50,20 +49,6 @@
                                                         });
                                                     </script>
                                                 </div>
-                                                @* <div class="" style="width:50%;float:right; margin-top:15px;">
-                                                        <div style="float:right;width:30%;">
-                                                            إسم نقطة البيع
-                                                        </div>
-                                                        <div style="float:right;width:70%;">
-                                                            <input type="text" name="SalesPointName" id="SalesPointName" class="form-control" value="@ViewBag.SalesPointName" />
-                                                        </div>
-                                                    </div>
-                                                    <div id="responsive-datatable_filter" class="dataTables_filter" style=" float: right;right: 0;width: 35%;margin-top: 15px;">
-                                                        <label class="label_search_input">
-                                                            <img src="~/images/srch.png" id="SrchImg" />
-                                                            بحث:<input type="search" id="inputtext" class="form-control form_search_input" placeholder="" aria-controls="responsive-datatable" style="width:50%">
-                                                        </label>
-                                                    </div>*@
                                                 <div style="width:100%;float:left"></div>
                                             </div>
                                             <div class="row">
@@ -155,99 +140,12 @@
                                                     </div>
                                                 </div>
                                             </div>
-
                                             <div id="partial_table">
                                                 @{
                                                     Html.RenderAction("table");
                                                 }
-                                                @*   <table id="myTable" class="table table-striped mb-0" style="margin-top:10px">
-                                                        <thead>
-                                                            <tr>
-                                                                <th width="20%">
-                                                                    رقم القيد
-                                                                </th>
-                                                                <th width="10%">
-                                                                    تاريخ القيد
-                                                                </th>
-                                                                <th width="10%">
-                                                                    نوع المرجع
-                                                                </th>
-                                                                <th width="10%">
-                                                                    دائن
-                                                                </th>
-                                                                <th width="10%">
-                                                                    مدين
-                                                                </th>
-                                                                <th width="10%">
-                                                                    رصيد سابق
-                                                                </th>
-                                                                <th width="20%">
-                                                                    منفذ العملية
-                                                                </th>
-                                                                <th width="10%" hidden>
-                                                                    حالة العهدة
-                                                                </th>
-                                                                <th width="10%">
-                                                                    الملاحظات
-                                                                </th>
-
-                                                            </tr>
-                                                        </thead>
-
-                                                        <tbody id="tbl" style="height:285px">
-                                                            @foreach (var item in Model)
-                                                            {
-                                                                <tr>
-                                                                    <td width="20%">
-                                                                        @Html.DisplayFor(modelItem => item.CR_Cas_Account_Receipt_No)
-                                                                    </td>
-                                                                    <td width="10%">
-                                                                        @item.CR_Cas_Account_Receipt_Date.Value.ToString("yyyy/MM/dd")
-                                                                    </td>
-                                                                    <td width="10%">
-                                                                        @Html.DisplayFor(modelItem => item.CR_Cas_Account_Receipt_Reference_Type)
-                                                                    </td>
-                                                                    <td width="10%">
-                                                                        @Html.DisplayFor(modelItem => item.CR_Cas_Account_Receipt_Payment)
-                                                                    </td>
-                                                                    <td width="10%">
-                                                                        @Html.DisplayFor(modelItem => item.CR_Cas_Account_Receipt_Receipt)
-                                                                    </td>
-                                                                    <td width="10%">
-                                                                        @Html.DisplayFor(modelItem => item.CR_Cas_Account_Receipt_SalesPoint_Previous_Balance)
-                                                                    </td>
-                                                                    <td width="20%">
-                                                                        @Html.DisplayFor(modelItem => item.CR_Cas_User_Information.CR_Cas_User_Information_Ar_Name)
-                                                                    </td>
-                                                                    <td width="10%" hidden>
-                                                                        @if (item.CR_Cas_Account_Receipt_Is_Passing == "2")
-                                                                        {
-                                                                            <label>مرحل</label>
-                                                                        }
-                                                                        @if (item.CR_Cas_Account_Receipt_Is_Passing == "3")
-                                                                        {
-                                                                            <label>محجوز</label>
-                                                                        }
-                                                                        @if (item.CR_Cas_Account_Receipt_Is_Passing == "1")
-                                                                        {
-                                                                            <label>عهدة</label>
-                                                                        }
-                                                                    </td>
-                                                                    <td width="10%">
-                                                                        @Html.DisplayFor(modelItem => item.CR_Cas_Account_Receipt_Reasons)
-                                                                    </td>
-
-
-                                                                </tr>
-                                                            }
-
-                                                        </tbody>
-                                                    </table>*@
                                             </div>
-
-
                                         </div>
-
                                     </div>
                                 </div>
                                 <div id="dtBasicExample_print">
