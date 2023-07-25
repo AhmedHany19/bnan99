@@ -59,17 +59,17 @@
                                                     <input class="keyvalCashClosing" value="@item.CR_Cas_Account_Receipt_No" id="Index" />
                                                 </td>
                                                 @*<td align="center" style="width:5%">
-                                                        <input type="checkbox" id="Chk_@item.CR_Cas_Account_Receipt_No" name="Chk_@item.CR_Cas_Account_Receipt_No" class="form-control ChkListCashClosing" style="height:25px;margin-top:2px;" />
-                                                    </td>*@
+            <input type="checkbox" id="Chk_@item.CR_Cas_Account_Receipt_No" name="Chk_@item.CR_Cas_Account_Receipt_No" class="form-control ChkListCashClosing" style="height:25px;margin-top:2px;" />
+        </td>*@
 
                                                 <td style="vertical-align: middle;" width="25%">
                                                     @Html.DisplayFor(modelItem => item.CR_Cas_Account_Receipt_No)
                                                     <input type="checkbox" id="Chk_@item.CR_Cas_Account_Receipt_No" name="Chk_@item.CR_Cas_Account_Receipt_No" class="form-control chkbox ChkChoicesList" style="height: 20px; width: 20px; float: right; margin-left: 10px;">
                                                 </td>
                                                 @*<td style="width:25%">
-                                                        <input type="checkbox" id="Chk_@item.CR_Cas_Account_Receipt_No" name="Chk_@item.CR_Cas_Account_Receipt_No" class="form-control ChkListCashClosing" style="height:25px;margin-top:2px;" />
-                                                        @Html.DisplayFor(modelItem => item.CR_Cas_Account_Receipt_No)
-                                                    </td>*@
+            <input type="checkbox" id="Chk_@item.CR_Cas_Account_Receipt_No" name="Chk_@item.CR_Cas_Account_Receipt_No" class="form-control ChkListCashClosing" style="height:25px;margin-top:2px;" />
+            @Html.DisplayFor(modelItem => item.CR_Cas_Account_Receipt_No)
+        </td>*@
                                                 <td style="width:12%">
                                                     @item.CR_Cas_Account_Receipt_Date.Value.ToString("yyyy/MM/dd")
                                                 </td>
@@ -92,13 +92,17 @@
                                                     @Receipt_Payment
                                                 </td>
 
-                                                <td style="width:12%" class="Creditor">
+                                                <td style="width:12%" >
                                                     @Receipt_Receipt
                                                 </td>
 
                                                 <td style="width:8%" hidden class="debtor">
                                                     @Html.DisplayFor(modelItem => item.CR_Cas_Account_Receipt_Payment)
                                                     <input type="text" name="ValCashClosing_@item.CR_Cas_Account_Receipt_No" id="ValCashClosing_@item.CR_Cas_Account_Receipt_No" value="@item.CR_Cas_Account_Receipt_Payment" hidden />
+                                                </td>
+                                                <td style="width:8%" hidden class="Creditor">
+                                                    @Html.DisplayFor(modelItem => item.CR_Cas_Account_Receipt_Receipt)
+                                                    <input type="text" name="ValCashClosing1_@item.CR_Cas_Account_Receipt_No" id="ValCashClosing1_@item.CR_Cas_Account_Receipt_No" value="@item.CR_Cas_Account_Receipt_Receipt" hidden />
                                                 </td>
 
                                             </tr>
@@ -133,15 +137,19 @@
 
             $(".ChkChoicesList").change(function () {
                 var sum = 0;
+                var Creditor = 0;
                 $('.t1').each(function () {
                     var value = $(this).val().toString().replace(/,/g, '');
                     $(this).val(value.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                    console.log("value:" + value);
+
                 });
 
                 $("#TblCashClosing TR").each(function () {
                     $('.t1').each(function () {
                         var value = $(this).val().toString().replace(/,/g, '');
                         $(this).val(value.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                        console.log("value:" + value);
                     });
                     var chk = $(this).find('input[type="checkbox"]').is(':checked');
                     console.log(chk)
@@ -149,15 +157,26 @@
 
                         var k = $(this).find(".keyCashClosing").find(".keyvalCashClosing").val();
                         //alert(k);
+
                         var rs = $("#ValCashClosing_" + k).val();
+                        var rd = $("#ValCashClosing1_" + k).val();
                         //alert(rs);
+                        console.log("rs:" + rs);
+                        console.log("rd:" + rd);
+
                         sum = parseFloat(sum) + parseFloat(rs);
+                        Creditor = parseFloat(Creditor) + parseFloat(rd);
                         //alert(sum);
+                        console.log("sum:" + sum);
+                        console.log("Creditor:" + Creditor);
+
 
                         $('.t1').each(function () {
                             var value = $(this).val().toString().replace(/,/g, '');
                             $(this).val(value.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                            console.log("value:" + value);
                         });
+
                     }
 
                 });
@@ -165,13 +184,26 @@
                 if (sum > 0) {
 
                     document.getElementById('TotalVal').value = sum.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-                    console.log(sum.toLocaleString("en-US"))
+                    console.log(sum)
 
                     $(".totalCreditor").val(sum.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }));
                 } else {
                     document.getElementById('TotalVal').value = "0.00";
                     $(".totalCreditor").val("0.00");
                 }
+
+                if (Creditor > 0) {
+
+                    //document.getElementById('TotalVal').value = sum.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+                    console.log(Creditor)
+
+                    $(".totaldebtor").val(Creditor.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }));
+                } else {
+                    //document.getElementById('TotalVal').value = "0.00";
+                    $(".totaldebtor").val("0.00");
+                }
+
+
 
 
 
