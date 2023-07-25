@@ -72,14 +72,42 @@ namespace RentCar.Controllers.CAS
 
         public ActionResult ReceiptList(string id)
         {
-            var receipt = db.CR_Cas_Account_Receipt.Where(r => r.CR_Cas_Account_Receipt_User_Code == id && r.CR_Cas_Account_Receipt_Payment_Method!="24");
             var User = db.CR_Cas_User_Information.FirstOrDefault(u=>u.CR_Cas_User_Information_Id==id);
+            if (User != null)
+            {
+                ViewBag.id = User.CR_Cas_User_Information_Id;
+                ViewBag.UserName = User.CR_Cas_User_Information_Ar_Name;
+                ViewBag.Balance = User.CR_Cas_User_Information_Balance;
+                var sd = DateTime.Now.AddDays(-30);
+                var ed = DateTime.Now;
+                ViewBag.startDate = string.Format("{0:yyyy-MM-dd}", sd);
+                ViewBag.endDate = string.Format("{0:yyyy-MM-dd}", ed);
+            }
+            
+            return View();
+        }
+
+        public PartialViewResult table(string id, DateTime? startDate, DateTime? endDate)
+        {
+            IQueryable<CR_Cas_Account_Receipt> receipt = null;
+            if (startDate == null || endDate == null)
+            {
+                 receipt = db.CR_Cas_Account_Receipt.Where(r => r.CR_Cas_Account_Receipt_User_Code == id && r.CR_Cas_Account_Receipt_Payment_Method != "24");
+
+            } else
+            {
+                 receipt = db.CR_Cas_Account_Receipt.Where(r => r.CR_Cas_Account_Receipt_User_Code == id 
+                                                                && r.CR_Cas_Account_Receipt_Payment_Method != "24" 
+                                                                && r.CR_Cas_Account_Receipt_Date <= endDate 
+                                                                && r.CR_Cas_Account_Receipt_Date >= startDate);
+            }
+           
+            var User = db.CR_Cas_User_Information.FirstOrDefault(u => u.CR_Cas_User_Information_Id == id);
             if (User != null)
             {
                 ViewBag.UserName = User.CR_Cas_User_Information_Ar_Name;
             }
-            
-            return View(receipt);
+            return PartialView(receipt);
         }
 
 
