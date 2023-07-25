@@ -132,8 +132,8 @@
                     <td width="8%" style="text-align:center!important;vertical-align:middle">
                         <a href="~/CasRenterLessor/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Id)
                                                                            &id2=@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Code)" style="color:red;">
-                            
-                            @Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Contract_Number)
+
+                            @item.CR_Mas_Renter_Information.CR_Cas_Contract_Basic.Where(l => l.CR_Cas_Contract_Basic_Status != "y" && l.CR_Cas_Contract_Basic_Status != "U").Count()
                         </a>
 
                     </td>
@@ -272,7 +272,7 @@
         <td width="8%" style="text-align:center!important;vertical-align:middle">
             <a href="~/CasRenterLessor/edit/?id1=@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Id)
                                                                            &id2=@Html.DisplayFor(modelItem => item.CR_Cas_Renter_Lessor_Code)">
-                @item.CR_Cas_Renter_Lessor_Contract_Number
+                @item.CR_Mas_Renter_Information.CR_Cas_Contract_Basic.Where(l => l.CR_Cas_Contract_Basic_Status != "y" && l.CR_Cas_Contract_Basic_Status != "U").Count()
             </a>
 
         </td>
