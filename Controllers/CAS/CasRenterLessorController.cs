@@ -33,7 +33,7 @@ namespace RentCar.Controllers.CAS
             {
                 RedirectToAction("Login", "Account");
             }
-            var cR_Cas_Renter_Lessor = db.CR_Cas_Renter_Lessor.Where(l =>l.CR_Cas_Renter_Lessor_Code==LessorCode).Include(c => c.CR_Mas_Com_Lessor).Include(c => c.CR_Mas_Renter_Information);
+            var cR_Cas_Renter_Lessor = db.CR_Cas_Renter_Lessor.Where(l =>l.CR_Cas_Renter_Lessor_Code==LessorCode && l.CR_Cas_Renter_Lessor_Status == "C" && l.CR_Cas_Renter_Lessor_Status == "A").Include(c => c.CR_Mas_Com_Lessor).Include(c => c.CR_Mas_Renter_Information);
             return View(cR_Cas_Renter_Lessor.ToList());
         }
 

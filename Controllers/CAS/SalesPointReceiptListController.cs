@@ -86,7 +86,7 @@ namespace RentCar.Controllers.CAS
             {
                 ViewBag.SalesPointName = salespoint.CR_Cas_Sup_SalesPoint_Ar_Name;
                 ViewBag.SalesPointBalance = salespoint.CR_Cas_Sup_SalesPoint_Balance;
-                var sd = DateTime.Now.AddDays(-30);
+                var sd = DateTime.Now.AddDays(-60);
                 var ed = DateTime.Now;
                 ViewBag.StartDate = string.Format("{0:yyyy-MM-dd}", sd);
                 ViewBag.EndDate = string.Format("{0:yyyy-MM-dd}", ed);
@@ -110,8 +110,10 @@ namespace RentCar.Controllers.CAS
             }
             else
             {
+                var edate = DateTime.Now;
+                var sdate = edate.AddMonths(-2);
                 receipt = db.CR_Cas_Account_Receipt
-               .Where(r => r.CR_Cas_Account_Receipt_SalesPoint_No == id)
+               .Where(r => r.CR_Cas_Account_Receipt_SalesPoint_No == id && r.CR_Cas_Account_Receipt_Date <= edate && r.CR_Cas_Account_Receipt_Date >= sdate)
                .Include(r => r.CR_Mas_Sup_Payment_Method)
                .Include(r => r.CR_Cas_Sup_SalesPoint)
                .Include(r => r.CR_Cas_User_Information)

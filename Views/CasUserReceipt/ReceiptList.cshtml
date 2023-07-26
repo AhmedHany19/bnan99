@@ -15,6 +15,36 @@
         line-height: 0.8
     }
 </style>
+<style>
+    .btn_form2 {
+        float: right;
+        color: #F3B161;
+        font-weight: bold;
+        margin-left: 10px;
+        width: 30px;
+        height: 30px;
+        line-height: 30px;
+        text-align: center;
+        color: #fff;
+        background: #4F7DB1;
+        border: none;
+        float: right;
+        margin-left: 10px;
+    }
+
+        .btn_form2 i {
+            width: 30px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            color: #fff;
+            background: #4F7DB1;
+            float: right;
+            font-size: 20px;
+            margin-left: 10px;
+            text-align: center;
+        }
+</style>
 <div class="content">
     <!-- Start Content-->
     <div class="container-fluid">
@@ -280,7 +310,41 @@
             data: {StartDate: sd, EndDate:ed,id:id },
             success: function (data) {
                 $('#partial_table').html(data);
-                console.log(data)
+                var columnIndex = 6; // Index of the column you want to sum (zero-based index)
+                var sum = 0;
+
+                var table = document.getElementById('myTable');
+                var rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+
+                for (var i = 0; i < rows.length; i++) {
+                    var cells = rows[i].getElementsByTagName('td');
+                    var value = parseFloat(cells[columnIndex].textContent.replace(/,/g, ''));
+
+                    if (!isNaN(value)) {
+                        sum += value;
+                    }
+                }
+
+                var sumResult = document.getElementById('RenterCreit');
+                sumResult.value = sum.toLocaleString();
+
+                var columnIndex = 7; // Index of the column you want to sum (zero-based index)
+                var sum = 0;
+
+                var table = document.getElementById('myTable');
+                var rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+
+                for (var i = 0; i < rows.length; i++) {
+                    var cells = rows[i].getElementsByTagName('td');
+                    var value = parseFloat(cells[columnIndex].textContent.replace(/,/g, ''));
+
+                    if (!isNaN(value)) {
+                        sum += value;
+                    }
+                }
+
+                var sumResult = document.getElementById('RenterDebit');
+                sumResult.value = sum.toLocaleString();
                }
             });
         }
