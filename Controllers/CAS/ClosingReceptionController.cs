@@ -249,12 +249,12 @@ namespace RentCar.Controllers.CAS
                             /////////////////////////////////////////////////////////////////////
 
                             //////////////////////////////////////Cas User ///////////////////////////////
-                            var User = db.CR_Cas_User_Information.Single(u => u.CR_Cas_User_Information_Id == userlogin);
+                           /* var User = db.CR_Cas_User_Information.Single(u => u.CR_Cas_User_Information_Id == userlogin);
                             if (User != null)
                             {
                                 User.CR_Cas_User_Information_Balance = User.CR_Cas_User_Information_Balance - p.CR_Cas_Administrative_Procedures_Value;
                                 db.Entry(User).State = EntityState.Modified;
-                            }
+                            }*/
                             ////////////////////////////////////////////////////////////////////////////////
                             //////////////////////////////Sales Point///////////////////////////////////////
                             /* var Spoint = db.CR_Cas_Sup_SalesPoint.Single(s => s.CR_Cas_Sup_SalesPoint_Code == p.CR_Cas_Administrative_Procedures_Targeted_Action);
