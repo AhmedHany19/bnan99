@@ -670,7 +670,7 @@
                                                         <div class="row">
                                                             <div class="col-md-3">
                                                                 <div class="form-group row mt-2">
-                                                                    <label class="col-md-12" for="input3" style="text-align:center">قراءة العداد الحالي </label>
+                                                                    <label class="col-md-12" for="input3" style="text-align:center">القراءة الحالية</label>
                                                                     <div class="col-md-12">
                                                                         <input class="text-center" type="text" id="CurrentMeter" name="CurrentMeter" value="" style="width:100%" />
                                                                     </div>
@@ -678,7 +678,7 @@
                                                             </div>
                                                             <div class="col-md-3">
                                                                 <div class="form-group row mt-2">
-                                                                    <label class="col-md-12" for="input3" style="text-align: center">الكيلومترات المجانية </label>
+                                                                    <label class="col-md-12" for="input3" style="text-align: center">الكيلوات المجانية </label>
                                                                     <div class="col-md-12">
                                                                         <input class="text-center" type="text" id="TotalFreeKm" name="TotalFreeKm" value="" style="width:100%" />
                                                                     </div>
@@ -686,7 +686,7 @@
                                                             </div>
                                                             <div class="col-md-3">
                                                                 <div class="form-group row mt-2">
-                                                                    <label class="col-md-12" for="input3" style="text-align: center">العداد قبل تسليم السيارة </label>
+                                                                    <label class="col-md-12" for="input3" style="text-align: center">العداد عند التسليم</label>
                                                                     <div class="col-md-12">
                                                                         <input class="text-center" type="text" id="OldKm" name="OldKm" value="@ViewBag.OldCurrentKm" style="width:100%" />
                                                                     </div>
@@ -694,7 +694,7 @@
                                                             </div>
                                                             <div class="col-md-3">
                                                                 <div class="form-group row mt-2">
-                                                                    <label class="col-md-12 " for="input3" style="text-align: center">الكيلومترات الإضافية </label>
+                                                                    <label class="col-md-12 " for="input3" style="text-align: center">الكيلوات الإضافية </label>
                                                                     <div class="col-md-12">
                                                                         <input class="text-center" type="text" id="AdditionalKmNo" name="AdditionalKmNo" style="width:100%" value="@ViewBag.AdditionalKmNo" />
                                                                     </div>
@@ -2130,7 +2130,11 @@
         var ExtraKmValue = parseFloat(document.getElementById('ExtraKmValue').value);
         var TotalHoursValue = parseFloat(document.getElementById('TotalHoursValue').value);
         var AuthValue = parseFloat(document.getElementById('AuthValue').value);
-        var ContractValED = (parseFloat(r) + ChoicesVal + AdditionalDriverVal + AdditionalVal + ExtraKmValue + TotalHoursValue + AuthValue);
+        if (@ViewBag.IsOpenKm.ToString().ToLower()) {
+            var ContractValED = (parseFloat(r) + ChoicesVal + AdditionalDriverVal + AdditionalVal /*+ ExtraKmValue*/ + TotalHoursValue + AuthValue);
+        } else {
+            var ContractValED = (parseFloat(r) + ChoicesVal + AdditionalDriverVal + AdditionalVal + ExtraKmValue + TotalHoursValue + AuthValue);
+        }
 
         document.getElementById('ContractValED').value = ContractValED.toFixed(2);
         var Discount = parseFloat(document.getElementById('Discount').value);
