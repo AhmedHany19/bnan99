@@ -763,7 +763,7 @@ namespace RentCar.Controllers
                                     if (userinfo != null)
                                     {
                                         Receipt.CR_Cas_Account_Receipt_User_Previous_Balance = userinfo.CR_Cas_User_Information_Balance;
-                                        userinfo.CR_Cas_User_Information_Balance -= Convert.ToDecimal(TotPayed);
+                                        userinfo.CR_Cas_User_Information_Balance += Convert.ToDecimal(TotPayed);
                                         db.Entry(userinfo).State = EntityState.Modified;
                                     }
                                     //////////////////////////////////////////////////////////////////////////////////
