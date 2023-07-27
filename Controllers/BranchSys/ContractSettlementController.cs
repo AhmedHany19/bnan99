@@ -2127,7 +2127,7 @@ namespace RentCar.Controllers
             Attachment attachment = new Attachment(contract.CR_Cas_Contract_Basic_CreateContract_Pdf);
             mail.Attachments.Add(attachment);
 
-            mail.From = new MailAddress("Bnanrent@outlook.com");
+            mail.From = new MailAddress("bnanbnanout@outlook.com");
 
 
             if (contract.CR_Mas_Renter_Information.CR_Mas_Renter_Information_Email != null)
@@ -2141,7 +2141,7 @@ namespace RentCar.Controllers
             smtpClient.Port = 587;
             smtpClient.UseDefaultCredentials = false;
             smtpClient.EnableSsl = true;
-            smtpClient.Credentials = new NetworkCredential("Bnanrent@outlook.com", "bnan123123");
+            smtpClient.Credentials = new NetworkCredential("bnanbnanout@outlook.com", "bnan123123");
 
             // Send the message
             smtpClient.Send(mail);
