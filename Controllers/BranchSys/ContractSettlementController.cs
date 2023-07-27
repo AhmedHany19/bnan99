@@ -737,7 +737,7 @@ namespace RentCar.Controllers
                                     var y = year.ToString("yy");
                                     var Sector = "1";
                                     var autoinc = GetReceiptLastRecord(LessorCode, BranchCode).CR_Cas_Account_Receipt_No;
-                                    Receipt.CR_Cas_Account_Receipt_No = y + "-" + Sector + "-" + "61" + "-" + LessorCode + "-" + BranchCode + autoinc;
+                                    Receipt.CR_Cas_Account_Receipt_No = y + "-" + Sector + "-" + "60" + "-" + LessorCode + "-" + BranchCode + autoinc;
 
                                     Receipt.CR_Cas_Account_Receipt_Year = y;
                                     Receipt.CR_Cas_Account_Receipt_Type = "60";
@@ -745,8 +745,8 @@ namespace RentCar.Controllers
                                     Receipt.CR_Cas_Account_Receipt_Branch_Code = BranchCode;
                                     Receipt.CR_Cas_Account_Receipt_Date = DateTime.Now;
                                     Receipt.CR_Cas_Account_Receipt_Contract_Operation = Contract.CR_Cas_Contract_Basic_No;
-                                    Receipt.CR_Cas_Account_Receipt_Payment = 0;
-                                    Receipt.CR_Cas_Account_Receipt_Receipt = Convert.ToDecimal(TotPayed);
+                                    Receipt.CR_Cas_Account_Receipt_Payment = Convert.ToDecimal(TotPayed);
+                                    Receipt.CR_Cas_Account_Receipt_Receipt = 0;
                                     Receipt.CR_Cas_Account_Receipt_Payment_Method = PayType;
                                     /////////////////////////////////Update Sales Point//////////////////////
                                     var salesPoint = db.CR_Cas_Sup_SalesPoint.Single(s => s.CR_Cas_Sup_SalesPoint_Code == CasherName);
