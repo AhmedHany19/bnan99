@@ -2361,8 +2361,8 @@
             document.getElementById('CR_Cas_Contract_Basic_Expected_End_Date').value = today.toLocaleDateString('ja-JP', options).replace(/\//g, '/');
             var PriceET = parseFloat(price) * parseFloat(nbrDays);
             document.getElementById('Price').value = PriceET.toFixed(2);
-            document.getElementById('CR_Cas_Contract_Basic_Daily_Free_KM').value = "0";
-            document.getElementById('CR_Cas_Contract_Basic_Free_Additional_Hours').value = "0";
+            //document.getElementById('CR_Cas_Contract_Basic_Daily_Free_KM').value = "0";
+            //document.getElementById('CR_Cas_Contract_Basic_Free_Additional_Hours').value = "0";
             var TotalChoices = document.getElementById('TotalChoices').innerHTML;
             var TotalAdditionals = document.getElementById('TotalAdditionals').innerHTML;
             if (TotalChoices != "") {
@@ -2400,13 +2400,12 @@
             document.getElementById('AdditionalTotal').value = "0.00";
             document.getElementById('ValueAdditionalDriver').value = "0.00";
             document.getElementById('TotalContract').value = "0.00";
-            document.getElementById('ContractDiscount').value = "0.00";
-            document.getElementById('CR_Cas_Contract_Basic_Free_Additional_Hours').value = "0.00";
-            document.getElementById('CR_Cas_Contract_Basic_Daily_Free_KM').value = "0.00";
+            document.getElementById('ContractDiscount').value = "0";
+            //document.getElementById('CR_Cas_Contract_Basic_Free_Additional_Hours').value = "0";
+            //document.getElementById('CR_Cas_Contract_Basic_Daily_Free_KM').value = "0";
             document.getElementById('TotalContractHT').value = "0.00";
             document.getElementById('TotalContractTax').value = "0.00";
             document.getElementById('TotalContractPrice').value = "0.00";
-            document.getElementById('CR_Cas_Contract_Basic_Previous_Balance').value = "0.00";
             document.getElementById('TotalToPay').value = "0.00";
             document.getElementById('TotalPayed').value = "0.00";
             document.getElementById('PayType').disabled = true;

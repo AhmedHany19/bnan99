@@ -429,7 +429,7 @@ namespace RentCar.Controllers.BranchSys
                 .Include(c => c.CR_Mas_Com_Lessor).Include(car => car.CR_Cas_Sup_Car_Information);
 
             
-            return View(cR_Cas_Contract_Basic.ToList());
+            return View(cR_Cas_Contract_Basic.ToList().OrderByDescending(x=>x.CR_Cas_Contract_Basic_Date));
         }
 
         public JsonResult GetCurrentMeter(string No)
