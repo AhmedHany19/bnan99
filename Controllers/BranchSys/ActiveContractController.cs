@@ -1363,7 +1363,7 @@ namespace RentCar.Controllers.BranchSys
             var output     = fullpath;
             MergePDFs(paths, output + "1");
             var cb = db.CR_Cas_Contract_Basic.OrderByDescending(x=>x.CR_Cas_Contract_Basic_Copy).FirstOrDefault(l => l.CR_Cas_Contract_Basic_No == contract.CR_Cas_Contract_Basic_No);
-            SendMail(cb);
+            //SendMail(cb);
 
         }
 

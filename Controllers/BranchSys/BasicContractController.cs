@@ -3040,7 +3040,7 @@ namespace RentCar.Controllers.BranchSys
 
 
                                 var cb = db.CR_Cas_Contract_Basic.FirstOrDefault(l => l.CR_Cas_Contract_Basic_No == Contract.CR_Cas_Contract_Basic_No);
-                                SendMail(cb);
+                                //SendMail(cb);
 
                                 return RedirectToAction("BranchStat", "BranchHome");
                             }

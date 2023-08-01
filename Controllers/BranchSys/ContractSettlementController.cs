@@ -19,6 +19,7 @@ using RentCar.Models;
 using RentCar.Models.RptModels;
 using System.Threading;
 using System.Web.UI;
+using System.Diagnostics.Contracts;
 
 namespace RentCar.Controllers
 {
@@ -467,8 +468,17 @@ namespace RentCar.Controllers
                             {
                                 Contract.CR_Cas_Contract_Basic_Contarct_is_Expenses = "1";
                             }
-                            Contract.CR_Cas_Contract_Basic_Contarct_Expenses_Value = Depences;
-                            Contract.CR_Cas_Contract_Basic_Contarct_Expenses_Description = DepencesReason;
+                            if (Contract.CR_Cas_Contract_Basic_Contarct_is_Expenses == "1")
+                            {
+                                Contract.CR_Cas_Contract_Basic_Contarct_Expenses_Value = Depences;
+                                Contract.CR_Cas_Contract_Basic_Contarct_Expenses_Description = DepencesReason;
+                            }
+                            else
+                            {
+                                Contract.CR_Cas_Contract_Basic_Contarct_Expenses_Value = "0";
+                                Contract.CR_Cas_Contract_Basic_Contarct_Expenses_Description = "";
+                            }
+
 
                             if (Chk_Compensation == "false" || Chk_Compensation == null)
                             {
@@ -478,8 +488,18 @@ namespace RentCar.Controllers
                             {
                                 Contract.CR_Cas_Contract_Basic_Contarct_is_Compensation = "1";
                             }
-                            Contract.CR_Cas_Contract_Basic_Contarct_Compensation_Value = CompensationVal;
-                            Contract.CR_Cas_Contract_Basic_Contarct_Compensation_Description = CompensationReason;
+
+                            if (Contract.CR_Cas_Contract_Basic_Contarct_is_Compensation == "1")
+                            {
+                                Contract.CR_Cas_Contract_Basic_Contarct_Compensation_Value = CompensationVal;
+                                Contract.CR_Cas_Contract_Basic_Contarct_Compensation_Description = CompensationReason;
+                            }
+                            else
+                            {
+                                Contract.CR_Cas_Contract_Basic_Contarct_Compensation_Value = "0";
+                                Contract.CR_Cas_Contract_Basic_Contarct_Compensation_Description = "";
+                            }
+                            
 
                             Contract.CR_Cas_Contract_Basic_Close_Previous_Balance = RenterPrevBalance;
                             Contract.CR_Cas_Contract_Basic_Contarct_Remaining_Amount = reste;
@@ -1044,61 +1064,78 @@ namespace RentCar.Controllers
                             ///
 
                             ////////////////////////////////////////////////////////////Compensation///////////////////////////////////////////////////////
-                            string imgy1path = "";
-                            if (imgy1 != null)
-                            {
-                                if (imgy1.FileName.Length > 0)
+                            
+                                string imgy1path = "";
+                                if (imgy1 != null)
                                 {
-                                    imgy1path = "/images/Company/" + LessorCode + "/" + BranchCode + "/" + Contract.CR_Cas_Contract_Basic_No + "/" + "CloseImage/Compensation" + "/" + Path.GetFileName(imgy1.FileName);
-                                    imgy1.SaveAs(HttpContext.Server.MapPath(imgy1path));
+                                    if (imgy1.FileName.Length > 0)
+                                    {
+                                        imgy1path = "/images/Company/" + LessorCode + "/" + BranchCode + "/" + Contract.CR_Cas_Contract_Basic_No + "/" + "CloseImage/Compensation" + "/" + Path.GetFileName(imgy1.FileName);
+                                        imgy1.SaveAs(HttpContext.Server.MapPath(imgy1path));
+                                    }
                                 }
-                            }
-                            else
+                                else
+                                {
+                                    imgy1path = "/images/common/Empty.bmp";
+                                }
+
+                                string imgy2path = "";
+                                if (imgy2 != null)
+                                {
+                                    if (imgy2.FileName.Length > 0)
+                                    {
+                                        imgy2path = "/images/Company/" + LessorCode + "/" + BranchCode + "/" + Contract.CR_Cas_Contract_Basic_No + "/" + "CloseImage/Compensation" + "/" + Path.GetFileName(imgy2.FileName);
+                                        imgy2.SaveAs(HttpContext.Server.MapPath(imgy2path));
+                                    }
+                                }
+                                else
+                                {
+                                    imgy2path = "/images/common/Empty.bmp";
+                                }
+
+                                string imgy3path = "";
+                                if (imgy3 != null)
+                                {
+                                    if (imgy3.FileName.Length > 0)
+                                    {
+                                        imgy3path = "/images/Company/" + LessorCode + "/" + BranchCode + "/" + Contract.CR_Cas_Contract_Basic_No + "/" + "CloseImage/Compensation" + "/" + Path.GetFileName(imgy3.FileName);
+                                        imgy3.SaveAs(HttpContext.Server.MapPath(imgy3path));
+                                    }
+                                }
+                                else
+                                {
+                                    imgy3path = "/images/common/Empty.bmp";
+                                }
+
+                                string imgy4path = "";
+                                if (imgy4 != null)
+                                {
+                                    if (imgy4.FileName.Length > 0)
+                                    {
+                                        imgy4path = "/images/Company/" + LessorCode + "/" + BranchCode + "/" + Contract.CR_Cas_Contract_Basic_No + "/" + "CloseImage/Compensation" + "/" + Path.GetFileName(imgy4.FileName);
+                                        imgy4.SaveAs(HttpContext.Server.MapPath(imgy4path));
+                                    }
+                                }
+                                else
+                                {
+                                    imgy4path = "/images/common/Empty.bmp";
+                                }
+                            if (Contract.CR_Cas_Contract_Basic_Contarct_is_Compensation=="0")
                             {
-                                imgy1path = "/images/common/Empty.bmp";
+                                imgy4path = "";
+                                imgy3path = "";
+                                imgy2path = "";
+                                imgy1path = "";
+                            }
+                            if (Contract.CR_Cas_Contract_Basic_Contarct_is_Expenses=="0")
+                            {
+                                imgx1path = "";
+                                imgx2path = "";
+                                imgx3path = "";
+                                imgx4path = "";
                             }
 
-                            string imgy2path = "";
-                            if (imgy2 != null)
-                            {
-                                if (imgy2.FileName.Length > 0)
-                                {
-                                    imgy2path = "/images/Company/" + LessorCode + "/" + BranchCode + "/" + Contract.CR_Cas_Contract_Basic_No + "/" + "CloseImage/Compensation" + "/" + Path.GetFileName(imgy2.FileName);
-                                    imgy2.SaveAs(HttpContext.Server.MapPath(imgy2path));
-                                }
-                            }
-                            else
-                            {
-                                imgy2path = "/images/common/Empty.bmp";
-                            }
 
-                            string imgy3path = "";
-                            if (imgy3 != null)
-                            {
-                                if (imgy3.FileName.Length > 0)
-                                {
-                                    imgy3path = "/images/Company/" + LessorCode + "/" + BranchCode + "/" + Contract.CR_Cas_Contract_Basic_No + "/" + "CloseImage/Compensation" + "/" + Path.GetFileName(imgy3.FileName);
-                                    imgy3.SaveAs(HttpContext.Server.MapPath(imgy3path));
-                                }
-                            }
-                            else
-                            {
-                                imgy3path = "/images/common/Empty.bmp";
-                            }
-
-                            string imgy4path = "";
-                            if (imgy4 != null)
-                            {
-                                if (imgy4.FileName.Length > 0)
-                                {
-                                    imgy4path = "/images/Company/" + LessorCode + "/" + BranchCode + "/" + Contract.CR_Cas_Contract_Basic_No + "/" + "CloseImage/Compensation" + "/" + Path.GetFileName(imgy4.FileName);
-                                    imgy4.SaveAs(HttpContext.Server.MapPath(imgy4path));
-                                }
-                            }
-                            else
-                            {
-                                imgy4path = "/images/common/Empty.bmp";
-                            }
                             /////////////////////////////////////////////////////////////////////////
                             SavePdf(Contract, fullpath, ContractEndDateEx, ContractEndTimeEx, ContractNo, CarSerialNo, ContractEndDate, ContractEndTime, ContractDaysNbr, ContractValED, ContractValID, TaxVal,
                                        TotalContractIT, TotPayed, CurrentMeter, OldKm, TotalFreeKm, AdditionalHours, ExtraKmValue, TotalHoursValue, Chk_Depences, Chk_Compensation,
@@ -1115,7 +1152,7 @@ namespace RentCar.Controllers
                             db.SaveChanges();
                             TempData["TempModel"] = "Saved";
                             dbTran.Commit();
-                            SendMail(Contract);
+                            //SendMail(Contract);
 
 
 
@@ -1743,141 +1780,167 @@ namespace RentCar.Controllers
                         }
 
                         ////depences ===>> expenses
-                        if (depences != null)
-                        {
-                            rd.SetParameterValue("expensesval", depences);
-                        }
-                        else
+                        if (chk_Depences == "false" || chk_Depences == null)
                         {
                             rd.SetParameterValue("expensesval", "0");
-                        }
-
-                        if (depencesReason != null)
-                        {
-                            rd.SetParameterValue("expensesstat", depencesReason);
-                        }
-                        else
-                        {
                             rd.SetParameterValue("expensesstat", " ");
-                        }
-
-                        if (imgy1path != null && imgy1path != "")
-                        {
-                            imgy1path = imgy1path.Replace("/", "\\");
-                            imgy1path = imgy1path.Substring(1, imgy1path.Length - 1);
-                            var img1path = System.Web.Hosting.HostingEnvironment.ApplicationPhysicalPath + imgy1path;
-                            rd.SetParameterValue("expenseImg1", img1path);
-                        }
-                        else
-                        {
                             rd.SetParameterValue("expenseImg1", "         ");
-                        }
-
-                        if (imgy2path != null && imgy2path != "")
-                        {
-                            imgy2path = imgy2path.Replace("/", "\\");
-                            imgy2path = imgy2path.Substring(1, imgy2path.Length - 1);
-                            var img2path = System.Web.Hosting.HostingEnvironment.ApplicationPhysicalPath + imgy2path;
-                            rd.SetParameterValue("expenseImg2", img2path);
-                        }
-                        else
-                        {
                             rd.SetParameterValue("expenseImg2", "         ");
-                        }
-
-                        if (imgy3path != null && imgy3path != "")
-                        {
-                            imgy3path = imgy2path.Replace("/", "\\");
-                            imgy3path = imgy2path.Substring(1, imgy3path.Length - 1);
-                            var img3path = System.Web.Hosting.HostingEnvironment.ApplicationPhysicalPath + imgy3path;
-                            rd.SetParameterValue("expenseImg3", img3path);
-                        }
-                        else
-                        {
                             rd.SetParameterValue("expenseImg3", "         ");
-                        }
-
-                        if (imgy4path != null && imgy4path != "")
-                        {
-                            imgy4path = imgy4path.Replace("/", "\\");
-                            imgy4path = imgy4path.Substring(1, imgy4path.Length - 1);
-                            var img4path = System.Web.Hosting.HostingEnvironment.ApplicationPhysicalPath + imgy4path;
-                            rd.SetParameterValue("expenseImg4", img4path);
-                        }
-                        else
-                        {
                             rd.SetParameterValue("expenseImg4", "         ");
                         }
+                        else
+                        {
+                            if (depences != null)
+                            {
+                                rd.SetParameterValue("expensesval", depences);
+                            }
+                            else
+                            {
+                                rd.SetParameterValue("expensesval", "0");
+                            }
+
+                            if (depencesReason != null)
+                            {
+                                rd.SetParameterValue("expensesstat", depencesReason);
+                            }
+                            else
+                            {
+                                rd.SetParameterValue("expensesstat", " ");
+                            }
+
+                            if (imgy1path != null && imgy1path != "")
+                            {
+                                imgy1path = imgy1path.Replace("/", "\\");
+                                imgy1path = imgy1path.Substring(1, imgy1path.Length - 1);
+                                var img1path = System.Web.Hosting.HostingEnvironment.ApplicationPhysicalPath + imgy1path;
+                                rd.SetParameterValue("expenseImg1", img1path);
+                            }
+                            else
+                            {
+                                rd.SetParameterValue("expenseImg1", "         ");
+                            }
+
+                            if (imgy2path != null && imgy2path != "")
+                            {
+                                imgy2path = imgy2path.Replace("/", "\\");
+                                imgy2path = imgy2path.Substring(1, imgy2path.Length - 1);
+                                var img2path = System.Web.Hosting.HostingEnvironment.ApplicationPhysicalPath + imgy2path;
+                                rd.SetParameterValue("expenseImg2", img2path);
+                            }
+                            else
+                            {
+                                rd.SetParameterValue("expenseImg2", "         ");
+                            }
+
+                            if (imgy3path != null && imgy3path != "")
+                            {
+                                imgy3path = imgy2path.Replace("/", "\\");
+                                imgy3path = imgy2path.Substring(1, imgy3path.Length - 1);
+                                var img3path = System.Web.Hosting.HostingEnvironment.ApplicationPhysicalPath + imgy3path;
+                                rd.SetParameterValue("expenseImg3", img3path);
+                            }
+                            else
+                            {
+                                rd.SetParameterValue("expenseImg3", "         ");
+                            }
+
+                            if (imgy4path != null && imgy4path != "")
+                            {
+                                imgy4path = imgy4path.Replace("/", "\\");
+                                imgy4path = imgy4path.Substring(1, imgy4path.Length - 1);
+                                var img4path = System.Web.Hosting.HostingEnvironment.ApplicationPhysicalPath + imgy4path;
+                                rd.SetParameterValue("expenseImg4", img4path);
+                            }
+                            else
+                            {
+                                rd.SetParameterValue("expenseImg4", "         ");
+                            }
+
+                        }
+
 
 
 
                         //compestaion
-
-                        if (compensationVal != null)
-                        {
-                            rd.SetParameterValue("compensationVal", compensationVal);
-                        }
-                        else
+                        if (chk_Compensation == "false" || chk_Compensation == null)
                         {
                             rd.SetParameterValue("compensationVal", "0");
-                        }
-
-                        if (compensationReason != null)
-                        {
-                            rd.SetParameterValue("compensationstat", compensationReason);
-                        }
-                        else
-                        {
                             rd.SetParameterValue("compensationstat", " ");
-                        }
-
-                        if (imgx1path != null && imgx1path != "")
-                        {
-                            imgx1path = imgx1path.Replace("/", "\\");
-                            imgx1path = imgx1path.Substring(1, imgx1path.Length - 1);
-                            var img1path = System.Web.Hosting.HostingEnvironment.ApplicationPhysicalPath + imgx1path;
-                            rd.SetParameterValue("compensationImg1", img1path);
-                        }
-                        else
-                        {
                             rd.SetParameterValue("compensationImg1", "         ");
-                        }
-
-                        if (imgx2path != null && imgx2path != "")
-                        {
-                            imgx2path = imgx2path.Replace("/", "\\");
-                            imgx2path = imgx2path.Substring(1, imgx2path.Length - 1);
-                            var img1path = System.Web.Hosting.HostingEnvironment.ApplicationPhysicalPath + imgx2path;
-                            rd.SetParameterValue("compensationImg2", img1path);
-                        }
-                        else
-                        {
                             rd.SetParameterValue("compensationImg2", "         ");
-                        }
-
-                        if (imgx3path != null && imgx3path != "")
-                        {
-                            imgx3path = imgx3path.Replace("/", "\\");
-                            imgx3path = imgx3path.Substring(1, imgx3path.Length - 1);
-                            var img1path = System.Web.Hosting.HostingEnvironment.ApplicationPhysicalPath + imgx3path;
-                            rd.SetParameterValue("compensationImg3", img1path);
-                        }
-                        else
-                        {
                             rd.SetParameterValue("compensationImg3", "         ");
-                        }
-
-                        if (imgx4path != null && imgx4path != "")
-                        {
-                            imgx4path = imgx4path.Replace("/", "\\");
-                            imgx4path = imgx4path.Substring(1, imgx4path.Length - 1);
-                            var img1path = System.Web.Hosting.HostingEnvironment.ApplicationPhysicalPath + imgx4path;
-                            rd.SetParameterValue("compensationImg4", img1path);
-                        }
-                        else
-                        {
                             rd.SetParameterValue("compensationImg4", "         ");
                         }
+                        else
+                        {
+                            if (compensationVal != null)
+                            {
+                                rd.SetParameterValue("compensationVal", compensationVal);
+                            }
+                            else
+                            {
+                                rd.SetParameterValue("compensationVal", "0");
+                            }
+
+                            if (compensationReason != null)
+                            {
+                                rd.SetParameterValue("compensationstat", compensationReason);
+                            }
+                            else
+                            {
+                                rd.SetParameterValue("compensationstat", " ");
+                            }
+
+                            if (imgx1path != null && imgx1path != "")
+                            {
+                                imgx1path = imgx1path.Replace("/", "\\");
+                                imgx1path = imgx1path.Substring(1, imgx1path.Length - 1);
+                                var img1path = System.Web.Hosting.HostingEnvironment.ApplicationPhysicalPath + imgx1path;
+                                rd.SetParameterValue("compensationImg1", img1path);
+                            }
+                            else
+                            {
+                                rd.SetParameterValue("compensationImg1", "         ");
+                            }
+
+                            if (imgx2path != null && imgx2path != "")
+                            {
+                                imgx2path = imgx2path.Replace("/", "\\");
+                                imgx2path = imgx2path.Substring(1, imgx2path.Length - 1);
+                                var img1path = System.Web.Hosting.HostingEnvironment.ApplicationPhysicalPath + imgx2path;
+                                rd.SetParameterValue("compensationImg2", img1path);
+                            }
+                            else
+                            {
+                                rd.SetParameterValue("compensationImg2", "         ");
+                            }
+
+                            if (imgx3path != null && imgx3path != "")
+                            {
+                                imgx3path = imgx3path.Replace("/", "\\");
+                                imgx3path = imgx3path.Substring(1, imgx3path.Length - 1);
+                                var img1path = System.Web.Hosting.HostingEnvironment.ApplicationPhysicalPath + imgx3path;
+                                rd.SetParameterValue("compensationImg3", img1path);
+                            }
+                            else
+                            {
+                                rd.SetParameterValue("compensationImg3", "         ");
+                            }
+
+                            if (imgx4path != null && imgx4path != "")
+                            {
+                                imgx4path = imgx4path.Replace("/", "\\");
+                                imgx4path = imgx4path.Substring(1, imgx4path.Length - 1);
+                                var img1path = System.Web.Hosting.HostingEnvironment.ApplicationPhysicalPath + imgx4path;
+                                rd.SetParameterValue("compensationImg4", img1path);
+                            }
+                            else
+                            {
+                                rd.SetParameterValue("compensationImg4", "         ");
+                            }
+                        }
+                            
 
                         //inspection
                         if (currentMeter != null)
