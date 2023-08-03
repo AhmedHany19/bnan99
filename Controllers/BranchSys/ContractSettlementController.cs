@@ -1617,7 +1617,7 @@ namespace RentCar.Controllers
                         }
 
 
-                        if (totPayed != null && totPayed != "")
+                        if (totPayed != null && totPayed != "" && totPayed!="0")
                         {
                             if (payType != null && payType != "")
                             {
@@ -1793,36 +1793,27 @@ namespace RentCar.Controllers
                             rd.SetParameterValue("Reasons", "0");
                         }
 
-                        ////depences ===>> expenses
-                        if (chk_Depences == "false" || chk_Depences == null)
+                        ///compestaion
+                        if (chk_Compensation == "true")
                         {
-                            rd.SetParameterValue("expensesval", "0");
-                            rd.SetParameterValue("expensesstat", " ");
-                            rd.SetParameterValue("expenseImg1", "         ");
-                            rd.SetParameterValue("expenseImg2", "         ");
-                            rd.SetParameterValue("expenseImg3", "         ");
-                            rd.SetParameterValue("expenseImg4", "         ");
-                        }
-                        else
-                        {
-                            if (depences != null)
+
+                            if (compensationVal != null)
                             {
-                                rd.SetParameterValue("expensesval", depences);
+                                rd.SetParameterValue("compensationVal", compensationVal);
                             }
                             else
                             {
-                                rd.SetParameterValue("expensesval", "0");
+                                rd.SetParameterValue("compensationVal", "0");
                             }
 
-                            if (depencesReason != null)
+                            if (compensationReason != null)
                             {
-                                rd.SetParameterValue("expensesstat", depencesReason);
+                                rd.SetParameterValue("compensationstat", compensationReason);
                             }
                             else
                             {
-                                rd.SetParameterValue("expensesstat", " ");
+                                rd.SetParameterValue("compensationstat", " ");
                             }
-
                             if (imgy1path != null && imgy1path != "")
                             {
                                 imgy1path = imgy1path.Replace("/", "\\");
@@ -1872,38 +1863,39 @@ namespace RentCar.Controllers
                             }
 
                         }
-
-
-
-
-                        //compestaion
-                        if (chk_Compensation == "false" || chk_Compensation == null)
+                        else
                         {
                             rd.SetParameterValue("compensationVal", "0");
                             rd.SetParameterValue("compensationstat", " ");
-                            rd.SetParameterValue("compensationImg1", "         ");
-                            rd.SetParameterValue("compensationImg2", "         ");
-                            rd.SetParameterValue("compensationImg3", "         ");
-                            rd.SetParameterValue("compensationImg4", "         ");
+                            rd.SetParameterValue("expenseImg1", "         ");
+                            rd.SetParameterValue("expenseImg2", "         ");
+                            rd.SetParameterValue("expenseImg3", "         ");
+                            rd.SetParameterValue("expenseImg4", "         ");
                         }
-                        else
+
+
+
+
+                        ////depences ===>> expenses
+
+                        if (chk_Depences == "true" )
                         {
-                            if (compensationVal != null)
+                            if (depences != null)
                             {
-                                rd.SetParameterValue("compensationVal", compensationVal);
+                                rd.SetParameterValue("expensesval", depences);
                             }
                             else
                             {
-                                rd.SetParameterValue("compensationVal", "0");
+                                rd.SetParameterValue("expensesval", "0");
                             }
 
-                            if (compensationReason != null)
+                            if (depencesReason != null)
                             {
-                                rd.SetParameterValue("compensationstat", compensationReason);
+                                rd.SetParameterValue("expensesstat", depencesReason);
                             }
                             else
                             {
-                                rd.SetParameterValue("compensationstat", " ");
+                                rd.SetParameterValue("expensesstat", " ");
                             }
 
                             if (imgx1path != null && imgx1path != "")
@@ -1953,6 +1945,15 @@ namespace RentCar.Controllers
                             {
                                 rd.SetParameterValue("compensationImg4", "         ");
                             }
+                        }
+                        else
+                        {
+                            rd.SetParameterValue("expensesval", "0");
+                            rd.SetParameterValue("expensesstat", " ");
+                            rd.SetParameterValue("compensationImg1", "         ");
+                            rd.SetParameterValue("compensationImg2", "         ");
+                            rd.SetParameterValue("compensationImg3", "         ");
+                            rd.SetParameterValue("compensationImg4", "         ");
                         }
                             
 
@@ -2111,7 +2112,7 @@ namespace RentCar.Controllers
                 }
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                  ViewBag.ShowToastr = true;
                  return;
