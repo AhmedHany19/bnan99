@@ -1144,11 +1144,17 @@
         var differenceInHoursEx = Math.round(differenceInMsEx / (1000 * 60 * 60));
 
         if (today > eDate) {
+            console.log("111111111")
             if (differenceInHoursEx > 0) {
+                console.log("22222222")
                 if (parseInt(freeAddHoursContract) != 0) {
+                    console.log("333333333")
+
                     differenceInHoursEx = differenceInHoursEx - parseInt(freeAddHoursContract);
                     if (differenceInHoursEx > 0) {
                         if (parseInt(additionalHours) <= parseInt(differenceInHoursEx)) {
+                            console.log("parseFloat(additionalHours) :" + parseFloat(additionalHours))
+                            console.log("parseFloat(extraHourValue) :" + parseFloat(extraHourValue))
 
                             $("#TotalHoursValue").val(parseFloat(additionalHours) * parseFloat(extraHourValue));
                             differenceInHoursEx = differenceInHoursEx - additionalHours;
@@ -1175,8 +1181,16 @@
 
                     }
                 }
+                else {
+                    $("#TotalHoursValue").val(0);
+                    localStorage.setItem('key', 0);
+                    $("#textErr").text("");
+                    localStorage.setItem('extraDayValue', 0);
+                }
             }
             else {
+                console.log("22222222else")
+
                 $("#TotalHoursValue").val("0.00");
                 localStorage.setItem('key', 0);
                 $("#textErr").text("");
@@ -1185,6 +1199,7 @@
             }
         }
         else {
+            console.log("111111111else")
             $("#textErr").text("");
             $("#TotalHoursValue").val(0);
             localStorage.setItem('key', 0);
@@ -2090,10 +2105,18 @@
         var ExtraKmValue = parseFloat(document.getElementById('ExtraKmValue').value);
         var TotalHoursValue = parseFloat(document.getElementById('TotalHoursValue').value);
         var AuthValue = parseFloat(document.getElementById('AuthValue').value);
+        if (TotalHoursValue == null || TotalHoursValue=="") {
+            TotalHoursValue = 0;
+        }
+        console.log("TotalHoursValue:"+TotalHoursValue)
         if (@ViewBag.IsOpenKm.ToString().ToLower()) {
             var ContractValED = (parseFloat(r) + ChoicesVal + AdditionalDriverVal + AdditionalVal /*+ ExtraKmValue*/ + TotalHoursValue + AuthValue);
+            console.log("ContractValED If:" + ContractValED)
+
         } else {
             var ContractValED = (parseFloat(r) + ChoicesVal + AdditionalDriverVal + AdditionalVal + ExtraKmValue + TotalHoursValue + AuthValue);
+            console.log("ContractValED else:" + ContractValED)
+
         }
 
         document.getElementById('ContractValED').value = ContractValED.toFixed(2);

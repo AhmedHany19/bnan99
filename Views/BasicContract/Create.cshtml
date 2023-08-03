@@ -392,7 +392,7 @@
 
                                                 <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
                                                     <div class="form-group row mb-4">
-                                                        <label class="col-md-4 col-form-label" for="userName3" style="padding-left:0"> البريد الالكتروني</label>
+                                                        <label class="col-md-4 col-form-label" for="Driver_Email" style="padding-left:0"> البريد الالكتروني</label>
                                                         <div class="col-md-6">
                                                             <input type="text" name="Driver_Email" id="Driver_Email" autocomplete="no" class="form-control" style="float: right; width: 510px;" readonly="readonly" />
                                                             <div><span id="textErr"></span></div>
@@ -1473,6 +1473,7 @@
                 if (Driver_Id && DriverName) {
                     if ((checkBox2.checked == true)) {
                         currentTab = currentTab + n;
+                        CancelAddDriverModal();
                         console.log(currentTab)
                     } else if (CheckChoicesListNo()) {
                         currentTab = currentTab + n + 1;
@@ -2194,7 +2195,7 @@
     function getAdditionalDriverInfo(k) {
         var ContractNo = document.getElementById('CR_Cas_Contract_Basic_No').value;
         var err = document.getElementById('AdditionalDriverIdError').innerHTML;
-        var LessorCode ='@Request.RequestContext.HttpContext.Session["LessorCode"]';
+        var LessorCode = '@Request.RequestContext.HttpContext.Session["LessorCode"]';
         var BranchCode = '@Request.RequestContext.HttpContext.Session["BranchCode"]';
         var UserLogin = '@Request.RequestContext.HttpContext.Session["UserLogin"]';
         var RMobile = document.getElementById('Additional_Driver_Mobile').value;
@@ -2204,9 +2205,9 @@
                 url: '@Url.Action("getCustomerInfo", "BasicContract")',
                 type: "GET",
                 data: {
-                    id: $("#CR_Cas_Contract_Basic_Additional_Driver_Id").val(), operation: 'AdditionalDriver', RenterMobile: $("#RenterMobile").val(), RenterEmail: $("#RenterEmail").val(),
-                    Driver_Mobile: $("#Driver_Mobile").val(), Driver_Email: $("#Driver_Email").val(), Additional_Driver_Mobile: $("#Additional_Driver_Mobile").val(),
-                    Additional_Driver_Email: REmail, LessorCode, BranchCode, UserLogin, ContractNo
+                    id: $("#CR_Cas_Contract_Basic_Additional_Driver_Id").val(), operation: 'AdditionalDriver', RenterMobile: $("#RenterMobile").val(),
+                    Driver_Mobile: $("#Driver_Mobile").val(), Additional_Driver_Mobile: $("#Additional_Driver_Mobile").val(),
+                    LessorCode, BranchCode, UserLogin, ContractNo
                 },
                 success: function (result) {
                     if (result.CR_Mas_Renter_Information_Ar_Name != null || result.CR_Elm_Ar_Name != null) {
@@ -2332,7 +2333,7 @@
         } else if (RMobile == "") {
             document.getElementById('AdditionalDriverMobileErr').innerHTML = "الرجاء إدخال رقم الجوال";
         }
-
+    }
        
 </script>
 <script>
@@ -2480,40 +2481,60 @@
 </script>
 
 <script>
-    $(document).ready(
-        function () {
-            $("#CR_Cas_Contract_Basic_is_Additional_Driver").click(function () {
+    //$(document).ready(
+    //    function () {
+    //        $("#CR_Cas_Contract_Basic_is_Additional_Driver").click(function () {
 
-                var SerialNo = document.getElementById("serialNo").value;
-                if (document.getElementById('CR_Cas_Contract_Basic_is_Additional_Driver').checked) {
-                    var DriverVal = document.getElementById('AdditionalDriverVal_' + SerialNo).innerHTML;
-                    document.getElementById("ValueAdditionalDriver").value = parseFloat(DriverVal).toFixed(2);
-                } else {
-                    document.getElementById("CR_Cas_Contract_Basic_Additional_Driver_Id").value = "";
-                    document.getElementById("AdditionalDriverBirthDate").value = "";
-                    document.getElementById("AdditionalDriverName").value = "";
-                    document.getElementById("Additional_Driver_Email").value = "";
-                    document.getElementById("AdditionalDriverNationality").value = "";
-                    document.getElementById("AdditionalDriverGender").value = "";
-                    document.getElementById("AdditionalDriverJob").value = "";
-                    document.getElementById("AdditionalDriver_Driving_License_Date").value = "";
-                    document.getElementById("AdditionalDriverEmployer").value = "";
-                    document.getElementById("AdditionalDriverAddress").value = "";
-                    document.getElementById("AdditionalDriverReason").value = "";
-                    document.getElementById("ValueAdditionalDriver").value = "0.00";
-                }
+    //            var SerialNo = document.getElementById("serialNo").value;
+    //            if (document.getElementById('CR_Cas_Contract_Basic_is_Additional_Driver').checked) {
+    //                var DriverVal = document.getElementById('AdditionalDriverVal_' + SerialNo).innerHTML;
+    //                document.getElementById("ValueAdditionalDriver").value = parseFloat(DriverVal).toFixed(2);
+    //            } else {
+    //                document.getElementById("CR_Cas_Contract_Basic_Additional_Driver_Id").value = "";
+    //                document.getElementById("AdditionalDriverBirthDate").value = "";
+    //                document.getElementById("AdditionalDriverName").value = "";
+    //                document.getElementById("Additional_Driver_Email").value = "";
+    //                document.getElementById("AdditionalDriverNationality").value = "";
+    //                document.getElementById("AdditionalDriverGender").value = "";
+    //                document.getElementById("AdditionalDriverJob").value = "";
+    //                document.getElementById("AdditionalDriver_Driving_License_Date").value = "";
+    //                document.getElementById("AdditionalDriverEmployer").value = "";
+    //                document.getElementById("AdditionalDriverAddress").value = "";
+    //                document.getElementById("AdditionalDriverReason").value = "";
+    //                document.getElementById("ValueAdditionalDriver").value = "0.00";
+    //                CancelAddDriverModal();
+    //            }
 
-            })
-        });
+    //        })
+    //    });
 </script>
 
 <script>
+        $(document).ready(function () {
+            $('#CR_Cas_Contract_Basic_is_Additional_Driver').change(function () {
+                if (document.getElementById('CR_Cas_Contract_Basic_is_Additional_Driver').checked == true) {
+                    document.getElementById('CR_Cas_Contract_Basic_Additional_Driver_Id').readOnly = false;
+                    document.getElementById('Additional_Driver_Mobile').readOnly = false;
+
+                } else {
+                    document.getElementById('CR_Cas_Contract_Basic_Additional_Driver_Id').readOnly = true;
+                    document.getElementById('AdditionalDriverName').value = "";
+                    document.getElementById('Additional_Driver_Email').value = "";
+                    document.getElementById('AdditionalDriverNationality').value = "";
+                    document.getElementById('AdditionalDriverGender').value = "";
+                    document.getElementById('AdditionalDriverJob').value = "";
+                    document.getElementById('AdditionalDriverEmployer').value = "";
+                    document.getElementById('AdditionalDriverAddress').value = "";
+                    document.getElementById('AdditionalDriver_Driving_License_Date').value = "";
+                    CancelAddDriverModal();
+                }
+            })
+        })
     $(document).ready(function () {
         $('#CR_Cas_Contract_Basic_is_Renter_Driver').change(function () {
             if (document.getElementById('CR_Cas_Contract_Basic_is_Renter_Driver').checked == true) {
                 document.getElementById('CR_Cas_Contract_Basic_Driver_Id').readOnly = true;
                 document.getElementById('Driver_Mobile').readOnly = true;
-                document.getElementById('Driver_Email').readOnly = true;
                 document.getElementById('Driver_code').readOnly = true;
 
             } else {
@@ -2529,8 +2550,8 @@
                 document.getElementById('CR_Mas_Renter_Information_Expiry_Driving_License_Date').value = "";
                 document.getElementById('DriverAge').value = "";
                 document.getElementById('Driver_Mobile').readOnly = false;
-                document.getElementById('Driver_Email').readOnly = false;
                 document.getElementById('Driver_code').readOnly = false;
+                CancelDriverModal();
             }
         })
     })
@@ -2846,7 +2867,6 @@
             }
             if ((n != 1 && n != 2 && n != 7) || nbr != 10) {
                 document.getElementById('RenterIdError').innerHTML = "الحد الأدنى 10 ارقام ويبداء 7,2,1";
-                //document.getElementById('Renter_code').readOnly = true;
                 RAZRenterInfo();
                 RazDriverInfo();
                 RazAdditionalDriverInfo();
@@ -2854,8 +2874,6 @@
                 RazHiddenTextBox();
             } else {
                 document.getElementById('RenterIdError').innerHTML = "";
-                //document.getElementById('Renter_code').readOnly = false;
-                //alert();
                 RAZRenterInfo();
                 RazDriverInfo();
                 RazAdditionalDriverInfo();
@@ -2873,6 +2891,7 @@
             var id = document.getElementById('CR_Cas_Contract_Basic_Driver_Id').value;
             if (id == "" || id == null || id == " ") {
                 document.getElementById('DriverIdError').innerHTML = "الحد الأدنى 10 ارقام ويبداء 2,1";
+                RazDriverInfo();
                 return;
             }
             var renterid = document.getElementById("CR_Cas_Contract_Basic_Renter_Id").value;
@@ -2884,9 +2903,12 @@
                 RazDriverInfo();
             } else if (renterid == id) {
                 document.getElementById('DriverIdError').innerHTML = "عفوا رقم الهوية متكرر فالمستأجر";
+                RazDriverInfo();
             }
             else {
                 document.getElementById('DriverIdError').innerHTML = "";
+                RazDriverInfo();
+
             }
         })
     })
@@ -3675,7 +3697,6 @@
                 var AdditionalDriverName = document.getElementById('AdditionalDriverName').value;
                 var AddDriverMobile = document.getElementById('Additional_Driver_Mobile').value;
                 var MobileErr = document.getElementById('AdditionalDriverMobileErr').innerHTML;
-
                 //CheckAddDriverMobile(AddDriverMobile);
                 if (MobileErr != "") {
                     return;
@@ -3683,11 +3704,15 @@
                 else {
                     if (AdditionalDriverName == "") {
                         getAdditionalDriverInfo(13);
+                        console.log("AdditionalDriverName:" + AdditionalDriverName)
                         setTimeout(function () {
                             var Driver = document.getElementById('DriverIdError').innerHTML;
+                            console.log("set Driver:" + Driver)
                             if (Driver != "") {
                                 return;
                             }
+                            console.log("Additional_Driver_code:" + Additional_Driver_code)
+
                             OpenAddDriverModal();
                             $('Additional_Driver_code').focus();
                         }, 1500);
@@ -3742,6 +3767,7 @@
         document.getElementById('Additional_Driver_Mobile').value = "9665";
         document.getElementById('CR_Cas_Contract_Basic_Additional_Driver_Id').value = "";
         document.getElementById('AdditionalDriverIdError').innerHTML = "";
+        document.getElementById('AdditionalDriverMobileErr').innerHTML = "";
         CloseAddDriverModal();
     }
 

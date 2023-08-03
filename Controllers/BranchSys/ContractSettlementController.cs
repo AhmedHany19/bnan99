@@ -229,7 +229,7 @@ namespace RentCar.Controllers
 
                 if (cR_Cas_Contract_Basic.CR_Cas_Contract_Basic_is_Renter_Driver == true)
                 {
-                    ViewBag.AdditionalDriverVal = 0;
+                    ViewBag.AdditionalDriverVal = "0.00";
                 }
                 else
                 {
@@ -1616,29 +1616,37 @@ namespace RentCar.Controllers
                             rd.SetParameterValue("contractValueAfterDIs", "0");
                         }
 
-                        if (payType != null && payType != "")
+
+                        if (totPayed != null && totPayed != "")
                         {
-                            var PayMethod = db.CR_Mas_Sup_Payment_Method.FirstOrDefault(m => m.CR_Mas_Sup_Payment_Method_Code == payType);
-                            if (PayMethod != null)
+                            if (payType != null && payType != "")
                             {
-                                rd.SetParameterValue("PayMethod", PayMethod.CR_Mas_Sup_Payment_Method_Ar_Name.Trim());
+                                var PayMethod = db.CR_Mas_Sup_Payment_Method.FirstOrDefault(m => m.CR_Mas_Sup_Payment_Method_Code == payType);
+                                if (PayMethod != null)
+                                {
+                                    rd.SetParameterValue("PayMethod", PayMethod.CR_Mas_Sup_Payment_Method_Ar_Name.Trim());
+                                }
+                                else
+                                {
+                                    rd.SetParameterValue("PayMethod", "    ");
+                                }
                             }
                             else
                             {
                                 rd.SetParameterValue("PayMethod", "    ");
                             }
-                        }
-                        else
-                        {
-                            rd.SetParameterValue("PayMethod", "    ");
-                        }
 
-                        if (casherName != null && casherName != "")
-                        {
-                            var casher = db.CR_Cas_Sup_SalesPoint.FirstOrDefault(c => c.CR_Cas_Sup_SalesPoint_Code == casherName);
-                            if (casher != null && casher.CR_Cas_Sup_SalesPoint_Bank_Code != LessorCode + "0000")
+                            if (casherName != null && casherName != "")
                             {
-                                rd.SetParameterValue("casherName", casher.CR_Cas_Sup_SalesPoint_Ar_Name.Trim());
+                                var casher = db.CR_Cas_Sup_SalesPoint.FirstOrDefault(c => c.CR_Cas_Sup_SalesPoint_Code == casherName);
+                                if (casher != null && casher.CR_Cas_Sup_SalesPoint_Bank_Code != LessorCode + "0000")
+                                {
+                                    rd.SetParameterValue("casherName", casher.CR_Cas_Sup_SalesPoint_Ar_Name.Trim());
+                                }
+                                else
+                                {
+                                    rd.SetParameterValue("casherName", "    ");
+                                }
                             }
                             else
                             {
@@ -1648,7 +1656,10 @@ namespace RentCar.Controllers
                         else
                         {
                             rd.SetParameterValue("casherName", "    ");
+                            rd.SetParameterValue("PayMethod", "    ");
+
                         }
+
 
 
                         var date = DateTime.Now;
@@ -1765,7 +1776,7 @@ namespace RentCar.Controllers
                         {
                             rd.SetParameterValue("ContractNetValue", "0");
                         }
-                        if (totPayed != null)
+                        if (totPayed != null || totPayed!="")
                         {
                             rd.SetParameterValue("amountPaid", totPayed);
                         }
