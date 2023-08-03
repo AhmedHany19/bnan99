@@ -20,6 +20,7 @@ using RentCar.Models.RptModels;
 using System.Threading;
 using System.Web.UI;
 using System.Diagnostics.Contracts;
+using static iTextSharp.text.pdf.AcroFields;
 
 namespace RentCar.Controllers
 {
@@ -48,6 +49,8 @@ namespace RentCar.Controllers
             {
                 RedirectToAction("Login", "Account");
             }
+            DateTime? currentdate = DateTime.Now;
+
             var cR_Cas_Contract_Basic = db.CR_Cas_Contract_Basic.Where(c => c.CR_Cas_Contract_Basic_Lessor == LessorCode
             && (c.CR_Cas_Contract_Basic_Status == "A" || c.CR_Cas_Contract_Basic_Status == "E")
             && (c.CR_Cas_Contract_Basic_Owner_Branch == BranchCode || c.CR_Cas_Contract_Basic_is_Receiving_Branch == true))
@@ -55,7 +58,7 @@ namespace RentCar.Controllers
                 .Include(c => c.CR_Mas_Com_Lessor)
                 .Include(c => c.CR_Mas_Sup_Sector)
                 .Include(c => c.CR_Mas_Renter_Information)
-                .Include(c => c.CR_Cas_Sup_Car_Information);
+                .Include(c => c.CR_Cas_Sup_Car_Information).OrderBy(x => DbFunctions.DiffDays(currentdate, x.CR_Cas_Contract_Basic_Expected_End_Date));
             return View(cR_Cas_Contract_Basic.ToList());
         }
 
