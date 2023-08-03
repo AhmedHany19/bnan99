@@ -1174,7 +1174,7 @@
                         }
                     }
                     else {
-                        $("#TotalHoursValue").val(0);
+                        $("#TotalHoursValue").val("0.00");
                         localStorage.setItem('key', 0);
                         $("#textErr").text("");
                         localStorage.setItem('extraDayValue', 0);
@@ -1182,14 +1182,13 @@
                     }
                 }
                 else {
-                    $("#TotalHoursValue").val(0);
+                    $("#TotalHoursValue").val("0.00");
                     localStorage.setItem('key', 0);
                     $("#textErr").text("");
                     localStorage.setItem('extraDayValue', 0);
                 }
             }
             else {
-                console.log("22222222else")
 
                 $("#TotalHoursValue").val("0.00");
                 localStorage.setItem('key', 0);
@@ -1201,7 +1200,7 @@
         else {
             console.log("111111111else")
             $("#textErr").text("");
-            $("#TotalHoursValue").val(0);
+            $("#TotalHoursValue").val("0.00");
             localStorage.setItem('key', 0);
             localStorage.setItem('extraDayValue', 0);
 
@@ -1379,7 +1378,13 @@
             ExNbrDays++;
         }
         $("#TotalFreeKm").val(parseInt(ExNbrDays) * parseInt(kmFreeDaily));
+        if ($("#TotalFreeKm").val()==0) {
+            $("#TotalFreeKm").val("0.00");
+        }
         $("#ChoicesVal").val(parseInt(ExNbrDays) * parseInt(valueChoices));
+        if ($("#ChoicesVal").val() == 0) {
+            $("#ChoicesVal").val("0.00");
+        }
     });
 </script>
 
@@ -1896,7 +1901,6 @@
         else {
             currentTab = currentTab + n;
             Calculate()
-           
         }
 
         // if you have reached the end of the form...
@@ -2105,9 +2109,6 @@
         var ExtraKmValue = parseFloat(document.getElementById('ExtraKmValue').value);
         var TotalHoursValue = parseFloat(document.getElementById('TotalHoursValue').value);
         var AuthValue = parseFloat(document.getElementById('AuthValue').value);
-        if (TotalHoursValue == null || TotalHoursValue=="") {
-            TotalHoursValue = 0;
-        }
         console.log("TotalHoursValue:"+TotalHoursValue)
         if (@ViewBag.IsOpenKm.ToString().ToLower()) {
             var ContractValED = (parseFloat(r) + ChoicesVal + AdditionalDriverVal + AdditionalVal /*+ ExtraKmValue*/ + TotalHoursValue + AuthValue);
