@@ -182,9 +182,7 @@
                                                         <div class="form-group row mb-3">
                                                             <label class="col-md-5 col-form-label flex-grow-0" for="confirm3">تاريخ الميلاد</label>
                                                             <div class="col-lg-6 col-md-7">
-                                                                @*<input class="form-control text-box single-line" data-val="true" data-val-date="The field CR_Cas_Sup_Branch_Documentation_Date must be a date."
-                                                                    id="d" name="d" type="date" value="@ViewBag.ContractDate" style="width:100%" onchange="CheckRenterBirthDate()">*@
-
+                                                               
                                                                 <input class="form-control text-box single-line" data-val="true" data-val-date="The field CR_Cas_Sup_Branch_Documentation_Date must be a date." id="d" name="d" data-inputmask="'alias': 'yyyy/mm/dd'" value="@ViewBag.ContractDate" style="width:100%" onblur="affich_btn_1($event)">
                                                                 <input type="button" class="hijri-date-input2" id="date_btn1" onblur="affich_affich_1(event)" />
                                                                 <div id="textErr"><span id="BirthDateError"></span></div>
@@ -362,15 +360,9 @@
                                                     <div class="form-group row mb-3">
                                                         <label class="col-md-4 col-form-label" for="age">تاريخ الميلاد </label>
                                                         <div class="col-md-6 offset-md-2">
-                                                            @*<input type="text" class="form-control" id="DriverBirthDate" name="DriverBirthDate" readonly>*@
-
-
-                                                            @*<input class="form-control text-box single-line" onchange="CheckDriverBirthDate();" data-val="true" id="DriverBirthDate" name="DriverBirthDate" type="date" value="@ViewBag.ContractDate" style="width:100%">*@
-
-                                                            @*<input class="form-control text-box single-line" data-val="true" data-val-date="The field CR_Cas_Sup_Branch_Documentation_Date must be a date." id="DriverBirthDate" name="DriverBirthDate" data-inputmask="'alias': 'yyyy/mm/dd'" value="@ViewBag.ContractDate" style="width:100%" onblur="affich_btn_2($event)">
-                                                                <input type="button" class="hijri-date-input2" id="date_btn2" onblur="affich_affich_2(event)"  />*@
+                                                            
                                                             <input class="form-control text-box single-line" data-val="true" data-val-date="The field CR_Cas_Sup_Branch_Documentation_Date must be a date." id="DriverBirthDate" name="DriverBirthDate" data-inputmask="'alias': 'yyyy/mm/dd'" value="@ViewBag.ContractDate" style="width:100%" onblur="affich_btn_2($event)">
-                                                            <input type="button" class="hijri-date-input2" id="date_btn2" onblur="affich_affich_1(event)" />
+                                                            <input type="button" class="hijri-date-input2" id="date_btn2" onblur="affich_affich_2(event)" />
                                                             <div id="textErr"><span id="DriverBirthDateErr"></span></div>
                                                         </div>
                                                     </div>
@@ -573,9 +565,7 @@
                                                 <div class="form-group row mb-3">
                                                     <label class="col-md-4 col-form-label" for="age">تاريخ الميلاد </label>
                                                     <div class="col-md-6 offset-md-2">
-                                                        @*<input type="text" class="form-control" id="AdditionalDriverBirthDate" name="AdditionalDriverBirthDate" readonly>*@
-                                                        @*<input class="form-control text-box single-line" onchange="CheckAddDriverBirthDate()" data-val="true" id="AdditionalDriverBirthDate" name="AdditionalDriverBirthDate" type="date" value="@ViewBag.ContractDate" style="width:100%">*@
-
+                                                     
                                                         <input class="form-control text-box single-line" data-val="true" data-val-date="The field CR_Cas_Sup_Branch_Documentation_Date must be a date." id="AdditionalDriverBirthDate" name="AdditionalDriverBirthDate" data-inputmask="'alias': 'yyyy/mm/dd'" value="@ViewBag.ContractDate" style="width:100%" onblur="affich_btn_3(event)">
                                                         <input type="button" class="hijri-date-input2" id="date_btn3" onblur="affich_affich_3(event)" />
 
@@ -1296,8 +1286,17 @@
 <script type="text/javascript">
 
     function affich_affich_1(e) {
+        var viewbagDate = '@ViewBag.ContractDate';
         var date = e.target.value;
-        document.getElementById("d").value = date;
+
+        if (!date) {
+            document.getElementById("d").value = viewbagData;
+            console.log("d:" + endDate)
+
+        }
+        else {
+            document.getElementById("d").value = date;
+        }
     }
     function affich_btn_1(e) {
         var date = e.target.value;
@@ -1306,18 +1305,40 @@
 
     ///
     function affich_affich_2(e) {
+        var viewbagDate = '@ViewBag.ContractDate';
         var date = e.target.value;
-        document.getElementById("DriverBirthDate").value = date;
+
+        if (!date) {
+            document.getElementById("DriverBirthDate").value = viewbagDate;
+        }
+        else {
+            document.getElementById("DriverBirthDate").value = date;
+        }
     }
     function affich_btn_2(e) {
+         var viewbagDate = '@ViewBag.ContractDate';
         var date = e.target.value;
-        document.getElementById("date_btn2").value = date;
+
+        if (!date) {
+            document.getElementById("DriverBirthDate").value = viewbagDate;
+        }
+        else {
+            document.getElementById("DriverBirthDate").value = date;
+        }
     }
 
     ////
     function affich_affich_3(e) {
+
+        var viewbagDate = '@ViewBag.ContractDate';
         var date = e.target.value;
-        document.getElementById("AdditionalDriverBirthDate").value = date;
+
+        if (!date) {
+            document.getElementById("AdditionalDriverBirthDate").value = viewbagDate;
+        }
+        else {
+            document.getElementById("AdditionalDriverBirthDate").value = date;
+        }
     }
     function affich_btn_3(e) {
         var date = e.target.value;
@@ -2322,7 +2343,7 @@
                         document.getElementById('HiddenAdditionalDriverNationality').value = "";
                         $("#HiddenAdditionalDriverEmployer").val("");
                         $("#HiddenAdditionalDriverAddress").val("");
-                        $("#HiddenAdditionalDriverBirthDate").val("");
+                        //$("#HiddenAdditionalDriverBirthDate").val("");
                         $("#HiddenAdditionalDriverName").val("");
                         $("#HiddenAdditionalDriverEmail").val("");
                         $("#HiddenAdditionalDriverNationality").val("");
@@ -2540,7 +2561,6 @@
             } else {
                 document.getElementById('CR_Cas_Contract_Basic_Driver_Id').readOnly = false;
                 document.getElementById('CR_Cas_Contract_Basic_Driver_Id').value = "";
-                document.getElementById('DriverBirthDate').value = "";
                 document.getElementById('DriverName').value = "";
                 document.getElementById('DriverNationality').value = "";
                 document.getElementById('DriverGender').value = "";
@@ -2602,13 +2622,8 @@
                 document.getElementById("DriverAddress").style.color = "#0288C7";
             }
         } else {
-            var today = new Date();
-            var dd = String(today.getDate()).padStart(2, '0');
-            var mm = String(today.getMonth() + 1).padStart(2, '0');
-            var yyyy = today.getFullYear();
-
-            today = yyyy + '/' + mm + '/' + dd;
-            document.getElementById('DriverBirthDate').value = today;
+                var viewbagDate = '@ViewBag.ContractDate';
+                document.getElementById("DriverBirthDate").value = viewbagDate;
         }
     }
 </script>
@@ -2966,7 +2981,7 @@
     function RazDriverInfo() {
         //alert("Raz driver info");
         // document.getElementById('CR_Cas_Contract_Basic_Driver_Id').value = "";
-        document.getElementById('DriverBirthDate').value = "";
+        //document.getElementById('DriverBirthDate').value = "";
         document.getElementById('Driver_code').value = "";
         //document.getElementById('Driver_Mobile').value = "";
         document.getElementById('Driver_Email').value = "";
@@ -2985,7 +3000,6 @@
     function RazAdditionalDriverInfo() {
         //alert("Raz driver info");
         //document.getElementById('CR_Cas_Contract_Basic_Additional_Driver_Id').value = "";
-        document.getElementById('AdditionalDriverBirthDate').value = "";
         document.getElementById('Additional_Driver_code').value = "";
         //document.getElementById('Additional_Driver_Mobile').value = "";
         document.getElementById('Additional_Driver_Email').value = "";
@@ -2999,6 +3013,11 @@
         document.getElementById('AdditionalDriverAddress').value = ""
         document.getElementById('AdditionalDriverReason').value = "";
         document.getElementById('AdditionalDriverAge').value = "";
+
+        var viewbagDate = '@ViewBag.ContractDate';
+        document.getElementById("AdditionalDriverBirthDate").value = viewbagDate;
+      
+        
     }
 
     function RazContractInfo() {

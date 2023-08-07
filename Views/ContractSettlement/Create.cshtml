@@ -1212,25 +1212,41 @@
 
 <script type="text/javascript">
     //$(document).ready(function () {
-    //    $("#ContractEndDate").change(function () {
-    //        var v = document.getElementById("#ContractEndDate").value;
+    //    $("#ContractEndDateEx").change(function () {
+    //        var v = document.getElementById("#ContractEndDateEx").value;
     //        alert(v);
     //    });
-    //    $("#ContractEndDate").focusout(function () {
-    //        var v = document.getElementById("#ContractEndDate").value;
+    //    $("#ContractEndDateEx").focusout(function () {
+    //        var v = document.getElementById("#ContractEndDateEx").value;
     //        alert(v);
     //    });
     //});
-    function updateDays() {
 
-    }
 
     function affich_affich_1(e) {
+
+        var viewbagData='@ViewBag.ContractEndDateEx';
         var date = e.target.value;
-        document.getElementById("ContractEndDateEx").value = date;
+
+
+        //document.getElementById("ContractEndDateEx").value = date;
         var endDate = document.getElementById("date_btn1").value;
         var startDate = document.getElementById("ContractStartDate").value;
         var days = document.getElementById("ContractDaysNbr");
+
+        
+        var date = e.target.value;
+
+
+        if (!date) {
+            document.getElementById("ContractEndDateEx").value = viewbagData;
+            endDate = viewbagData;
+            console.log("endDate:" + endDate)
+
+        }
+        else {
+            document.getElementById("ContractEndDateEx").value = date;
+        }
 
         const date1 = new Date(startDate);
         const date2 = new Date(endDate);
@@ -1238,26 +1254,53 @@
 
         // Calculate the difference in milliseconds
         const differenceInMs = Math.abs(date2 - date1);
-
         // Convert the difference to days
         const differenceInDays = Math.ceil(differenceInMs / (1000 * 60 * 60 * 24));
-        if (differenceInDays == 0) {
-            days.value = 1;
+        if (endDate == viewbagData) {
+            if (differenceInDays == 0) {
+                days.value = 1;
+            }
+            else {
+                days.value = differenceInDays 
+            }
         }
         else {
-            days.value = differenceInDays - 1;
+            if (differenceInDays == 0) {
+                days.value = 1;
+            }
+            else {
+                days.value = differenceInDays -1
+            }
         }
-        if (days.value == 0) {
-            days.value = 1;
-        }
+        
         cal();
 
     }
-    function affich_btn_1(e) {
-        var date = e.target.value;
-        document.getElementById("date_btn1").value = date;
-    }
+    //var endDate = document.getElementById("ContractEndDateEx").value;
+    //var startDate = document.getElementById("ContractStartDate").value;
+    //var days = document.getElementById("ContractDaysNbr");
+    //var rentaldays = document.getElementById("CR_Cas_Contract_Basic_Expected_Rental_Days");
+
+    //const date1 = new Date(startDate);
+    //const date2 = new Date(endDate);
+
+    //// Calculate the difference in milliseconds
+    //const differenceInMs = Math.abs(date2 - date1);
+
+    //// Convert the difference to days
+    //const differenceInDays = Math.ceil(differenceInMs / (1000 * 60 * 60 * 24));
+    //if (differenceInDays == 0) {
+    //    days.value = 1;
+    //}
+    //else {
+    //    days.value = differenceInDays;
+    //}
+    //function affich_btn_1(e) {
+    //    var date = e.target.value;
+    //    document.getElementById("date_btn1").value = date;
+    //}
 </script>
+
 <script>
     function cal() {
         var startDate = $("#ContractStartDate").val();
@@ -1359,9 +1402,6 @@
         $("#TotalFreeKm").val(parseInt(ExNbrDays) * parseInt(kmFreeDaily));
         $("#ChoicesVal").val(parseInt(ExNbrDays) * parseInt(valueChoices));
     }
-
-
-
 </script>
 <script>
     $(document).ready(function () {
@@ -2286,9 +2326,6 @@
     var days = document.getElementById("ContractDaysNbr");
     var rentaldays = document.getElementById("CR_Cas_Contract_Basic_Expected_Rental_Days");
    
-
-
-
     const date1 = new Date(startDate);
     const date2 = new Date(endDate);
 
@@ -2305,10 +2342,6 @@
     }
 </script>
 <script>
-
-
-
-
 
     $(document).ready(function () {
         var today = new Date();

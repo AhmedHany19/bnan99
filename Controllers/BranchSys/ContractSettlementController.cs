@@ -315,7 +315,7 @@ namespace RentCar.Controllers
                 ViewBag.AuthValue = cR_Cas_Contract_Basic.CR_Cas_Contract_Basic_Authorization_Value;
                 ViewBag.Discount = cR_Cas_Contract_Basic.CR_Cas_Contract_Basic_User_Discount;
                 ViewBag.Tax = cR_Cas_Contract_Basic.CR_Cas_Contract_Basic_Tax_Rate;
-                var renter = db.CR_Cas_Renter_Lessor.FirstOrDefault(r => r.CR_Cas_Renter_Lessor_Id == cR_Cas_Contract_Basic.CR_Cas_Contract_Basic_Renter_Id);
+                var renter = db.CR_Cas_Renter_Lessor.Where(x=>x.CR_Cas_Renter_Lessor_Code==LessorCode).FirstOrDefault(r => r.CR_Cas_Renter_Lessor_Id == cR_Cas_Contract_Basic.CR_Cas_Contract_Basic_Renter_Id);
                 if (renter != null)
                 {
                     ViewBag.RenterPrevBalance = renter.CR_Cas_Renter_Lessor_Balance;
