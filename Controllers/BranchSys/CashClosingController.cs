@@ -69,7 +69,7 @@ namespace RentCar.Controllers.BranchSys
                 ViewBag.Total1 = GetTotalCashInSalesPoint;
             }
 
-            return PartialView(Receipt);
+            return PartialView(Receipt.OrderByDescending(x=>x.CR_Cas_Account_Receipt_Date));
         }
 
 

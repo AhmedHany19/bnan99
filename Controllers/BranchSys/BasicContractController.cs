@@ -429,7 +429,7 @@ namespace RentCar.Controllers.BranchSys
                 .Include(c => c.CR_Mas_Com_Lessor).Include(car => car.CR_Cas_Sup_Car_Information);
 
             
-            return View(cR_Cas_Contract_Basic.ToList());
+            return View(cR_Cas_Contract_Basic.ToList().OrderByDescending(x=>x.CR_Cas_Contract_Basic_Date));
         }
 
         public JsonResult GetCurrentMeter(string No)
@@ -958,8 +958,8 @@ namespace RentCar.Controllers.BranchSys
             return age;
         }
 
-        public JsonResult getCustomerInfo(string id, string operation,string RenterMobile/*,string RenterEmail*/,string Driver_Mobile,/*string Driver_Email,*/string Additional_Driver_Mobile
-            /*,string Additional_Driver_Email*/,string LessorCode,string BranchCode,string UserLogin,string ContractNo)
+        public JsonResult getCustomerInfo(string id, string operation,string RenterMobile,string Driver_Mobile,string Additional_Driver_Mobile
+            ,string LessorCode,string BranchCode,string UserLogin,string ContractNo)
         {
             var renterinfo = db.CR_Mas_Renter_Information.FirstOrDefault(x => x.CR_Mas_Renter_Information_Id == id);
             if (renterinfo != null)
@@ -1351,8 +1351,6 @@ namespace RentCar.Controllers.BranchSys
 
                 ///
                 db.SaveChanges();
-
-
                 return Json(r, JsonRequestBehavior.AllowGet);
             }
             else if (renterinfo == null)/////////////////////////////Data from ELM/////////////////////////////////////////////
@@ -1775,20 +1773,18 @@ namespace RentCar.Controllers.BranchSys
                         ////////////////////////////////////////////////////////////////////////////////////////
 
                         elm.TracingNo = contract.CR_Cas_Contract_Basic_No;
-                        db.SaveChanges();
                     }
 
-                
+                    db.SaveChanges();
+
                 }
 
-                //db.SaveChanges();
+                db.SaveChanges();
                 return Json(elm, JsonRequestBehavior.AllowGet);
             }
             else
             {
-
                 return Json(null, JsonRequestBehavior.AllowGet);
-
             }
 
 
@@ -3040,7 +3036,7 @@ namespace RentCar.Controllers.BranchSys
 
 
                                 var cb = db.CR_Cas_Contract_Basic.FirstOrDefault(l => l.CR_Cas_Contract_Basic_No == Contract.CR_Cas_Contract_Basic_No);
-                                SendMail(cb);
+                                //SendMail(cb);
 
                                 return RedirectToAction("BranchStat", "BranchHome");
                             }
@@ -3174,7 +3170,7 @@ namespace RentCar.Controllers.BranchSys
             {
                 mail.From = new MailAddress(contract.CR_Mas_Com_Lessor.CR_Mas_Com_Lessor_Email);
             }*/
-            mail.From = new MailAddress("Bnanrent@outlook.com");
+            mail.From = new MailAddress("bnanbnanout@outlook.com");
 
 
           /*  if (contract.CR_Mas_Renter_Information.CR_Mas_Renter_Information_Email == null)
@@ -3191,7 +3187,7 @@ namespace RentCar.Controllers.BranchSys
             smtpClient.Port = 587;
             smtpClient.UseDefaultCredentials = false;
             smtpClient.EnableSsl = true;
-            smtpClient.Credentials = new NetworkCredential("Bnanrent@outlook.com", "bnan123123");
+            smtpClient.Credentials = new NetworkCredential("bnanbnanout@outlook.com", "bnan123123");
 
             // Send the message
             smtpClient.Send(mail);
@@ -4144,23 +4140,40 @@ namespace RentCar.Controllers.BranchSys
                         rd.SetParameterValue("DriverGender", "     ");
                     }
 
-                    //var job = db.CR_Mas_Sup_Jobs.FirstOrDefault(j => j.CR_Mas_Sup_Jobs_Code == Driver.CR_Mas_Renter_Information_Jobs);
-                    //if (job != null)
-                    //{
-                    //    rd.SetParameterValue("DriverJob", job.CR_Mas_Sup_Jobs_Ar_Name);
-                    //}
-                    //else
-                    //{
-                    //    rd.SetParameterValue("DriverJob", "");
-                    //}
+                    
                     if (Driver.CR_Mas_Renter_Information_Expiry_Driving_License_Date != null)
                     {
-                        rd.SetParameterValue("DriverDrivingLicenceEndDate", string.Format("{0:yyyy-MM-dd}", Driver.CR_Mas_Renter_Information_Expiry_Driving_License_Date));
+                        rd.SetParameterValue("DriverDrivingLicenceEndDate", Driver.CR_Mas_Renter_Information_Expiry_Driving_License_Date);
                     }
                     else
                     {
                         rd.SetParameterValue("DriverDrivingLicenceEndDate","      ");
                     }
+
+                    if (DriverReason != null)
+                    {
+                        rd.SetParameterValue("DriverReason", DriverReason);
+                    }
+                    else
+                    {
+                        rd.SetParameterValue("DriverReason", "      ");
+                    }
+
+                }
+                else
+                {
+                    rd.SetParameterValue("DriverId", " ");
+                    rd.SetParameterValue("DriverName", " ");
+                    rd.SetParameterValue("DriverNationality", "     ");
+                    rd.SetParameterValue("DriverWorkPlace", "     ");
+                    rd.SetParameterValue("DriverJob", "     ");
+                    rd.SetParameterValue("DriverEmail", "     ");
+                    rd.SetParameterValue("DriverBirthDate", "     ");
+                    rd.SetParameterValue("DriverMembership", "     ");
+                    rd.SetParameterValue("DriverAdr", "    ");
+                    rd.SetParameterValue("DriverGender", "     ");
+                    rd.SetParameterValue("DriverDrivingLicenceEndDate", "      ");
+                    rd.SetParameterValue("DriverReason", "      ");
 
                 }
                 /////////////////////////////////////////////////////////////////Additional Driver Info////////////////////////////////////////////////////////////
@@ -4276,24 +4289,25 @@ namespace RentCar.Controllers.BranchSys
                         rd.SetParameterValue("AdditionalDriverGender", "      ");
                     }
 
-                    //var job = db.CR_Mas_Sup_Jobs.FirstOrDefault(j => j.CR_Mas_Sup_Jobs_Code == AdditionalDriver.CR_Mas_Renter_Information_Jobs);
-                    //if (job != null)
-                    //{
-                    //    rd.SetParameterValue("AdditionalDriverJob", job.CR_Mas_Sup_Jobs_Ar_Name);
-                    //}
-                    //else
-                    //{
-                    //    rd.SetParameterValue("AdditionalDriverJob", "     ");
-                    //}
+                    
 
                     if (AdditionalDriver.CR_Mas_Renter_Information_Expiry_Driving_License_Date != null)
                     {
-                        rd.SetParameterValue("AdditionalDriverDrivingLicenceEndDate", string.Format("{0:yyyy-MM-dd}", AdditionalDriver.CR_Mas_Renter_Information_Expiry_Driving_License_Date));
+                        rd.SetParameterValue("AdditionalDriverDrivingLicenceEndDate", AdditionalDriver.CR_Mas_Renter_Information_Expiry_Driving_License_Date);
                     }
                     else
                     {
                         rd.SetParameterValue("AdditionalDriverDrivingLicenceEndDate", "      ");
                     }
+                    if (AdditionalDriverReason != null)
+                    {
+                        rd.SetParameterValue("AdditionalDriverReason", AdditionalDriverReason);
+                    }
+                    else
+                    {
+                        rd.SetParameterValue("AdditionalDriverReason", "      ");
+                    }
+
 
                 }
                 else
@@ -4309,7 +4323,11 @@ namespace RentCar.Controllers.BranchSys
                     rd.SetParameterValue("AdditionalDriverJob", "      ");
                     rd.SetParameterValue("AdditionalDriverEmail", "     ");
                     rd.SetParameterValue("AdditionalDriverDrivingLicenceEndDate", "      ");
+                    rd.SetParameterValue("AdditionalDriverReason", "      ");
                 }
+
+
+
 
                 if (CarPrice != null)
                 {

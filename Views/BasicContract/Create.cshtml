@@ -182,9 +182,7 @@
                                                         <div class="form-group row mb-3">
                                                             <label class="col-md-5 col-form-label flex-grow-0" for="confirm3">تاريخ الميلاد</label>
                                                             <div class="col-lg-6 col-md-7">
-                                                                @*<input class="form-control text-box single-line" data-val="true" data-val-date="The field CR_Cas_Sup_Branch_Documentation_Date must be a date."
-                                                                    id="d" name="d" type="date" value="@ViewBag.ContractDate" style="width:100%" onchange="CheckRenterBirthDate()">*@
-
+                                                               
                                                                 <input class="form-control text-box single-line" data-val="true" data-val-date="The field CR_Cas_Sup_Branch_Documentation_Date must be a date." id="d" name="d" data-inputmask="'alias': 'yyyy/mm/dd'" value="@ViewBag.ContractDate" style="width:100%" onblur="affich_btn_1($event)">
                                                                 <input type="button" class="hijri-date-input2" id="date_btn1" onblur="affich_affich_1(event)" />
                                                                 <div id="textErr"><span id="BirthDateError"></span></div>
@@ -362,15 +360,9 @@
                                                     <div class="form-group row mb-3">
                                                         <label class="col-md-4 col-form-label" for="age">تاريخ الميلاد </label>
                                                         <div class="col-md-6 offset-md-2">
-                                                            @*<input type="text" class="form-control" id="DriverBirthDate" name="DriverBirthDate" readonly>*@
-
-
-                                                            @*<input class="form-control text-box single-line" onchange="CheckDriverBirthDate();" data-val="true" id="DriverBirthDate" name="DriverBirthDate" type="date" value="@ViewBag.ContractDate" style="width:100%">*@
-
-                                                            @*<input class="form-control text-box single-line" data-val="true" data-val-date="The field CR_Cas_Sup_Branch_Documentation_Date must be a date." id="DriverBirthDate" name="DriverBirthDate" data-inputmask="'alias': 'yyyy/mm/dd'" value="@ViewBag.ContractDate" style="width:100%" onblur="affich_btn_2($event)">
-                                                                <input type="button" class="hijri-date-input2" id="date_btn2" onblur="affich_affich_2(event)"  />*@
+                                                            
                                                             <input class="form-control text-box single-line" data-val="true" data-val-date="The field CR_Cas_Sup_Branch_Documentation_Date must be a date." id="DriverBirthDate" name="DriverBirthDate" data-inputmask="'alias': 'yyyy/mm/dd'" value="@ViewBag.ContractDate" style="width:100%" onblur="affich_btn_2($event)">
-                                                            <input type="button" class="hijri-date-input2" id="date_btn2" onblur="affich_affich_1(event)" />
+                                                            <input type="button" class="hijri-date-input2" id="date_btn2" onblur="affich_affich_2(event)" />
                                                             <div id="textErr"><span id="DriverBirthDateErr"></span></div>
                                                         </div>
                                                     </div>
@@ -392,7 +384,7 @@
 
                                                 <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
                                                     <div class="form-group row mb-4">
-                                                        <label class="col-md-4 col-form-label" for="userName3" style="padding-left:0"> البريد الالكتروني</label>
+                                                        <label class="col-md-4 col-form-label" for="Driver_Email" style="padding-left:0"> البريد الالكتروني</label>
                                                         <div class="col-md-6">
                                                             <input type="text" name="Driver_Email" id="Driver_Email" autocomplete="no" class="form-control" style="float: right; width: 510px;" readonly="readonly" />
                                                             <div><span id="textErr"></span></div>
@@ -573,9 +565,7 @@
                                                 <div class="form-group row mb-3">
                                                     <label class="col-md-4 col-form-label" for="age">تاريخ الميلاد </label>
                                                     <div class="col-md-6 offset-md-2">
-                                                        @*<input type="text" class="form-control" id="AdditionalDriverBirthDate" name="AdditionalDriverBirthDate" readonly>*@
-                                                        @*<input class="form-control text-box single-line" onchange="CheckAddDriverBirthDate()" data-val="true" id="AdditionalDriverBirthDate" name="AdditionalDriverBirthDate" type="date" value="@ViewBag.ContractDate" style="width:100%">*@
-
+                                                     
                                                         <input class="form-control text-box single-line" data-val="true" data-val-date="The field CR_Cas_Sup_Branch_Documentation_Date must be a date." id="AdditionalDriverBirthDate" name="AdditionalDriverBirthDate" data-inputmask="'alias': 'yyyy/mm/dd'" value="@ViewBag.ContractDate" style="width:100%" onblur="affich_btn_3(event)">
                                                         <input type="button" class="hijri-date-input2" id="date_btn3" onblur="affich_affich_3(event)" />
 
@@ -1296,8 +1286,17 @@
 <script type="text/javascript">
 
     function affich_affich_1(e) {
+        var viewbagDate = '@ViewBag.ContractDate';
         var date = e.target.value;
-        document.getElementById("d").value = date;
+
+        if (!date) {
+            document.getElementById("d").value = viewbagData;
+            console.log("d:" + endDate)
+
+        }
+        else {
+            document.getElementById("d").value = date;
+        }
     }
     function affich_btn_1(e) {
         var date = e.target.value;
@@ -1306,18 +1305,40 @@
 
     ///
     function affich_affich_2(e) {
+        var viewbagDate = '@ViewBag.ContractDate';
         var date = e.target.value;
-        document.getElementById("DriverBirthDate").value = date;
+
+        if (!date) {
+            document.getElementById("DriverBirthDate").value = viewbagDate;
+        }
+        else {
+            document.getElementById("DriverBirthDate").value = date;
+        }
     }
     function affich_btn_2(e) {
+         var viewbagDate = '@ViewBag.ContractDate';
         var date = e.target.value;
-        document.getElementById("date_btn2").value = date;
+
+        if (!date) {
+            document.getElementById("DriverBirthDate").value = viewbagDate;
+        }
+        else {
+            document.getElementById("DriverBirthDate").value = date;
+        }
     }
 
     ////
     function affich_affich_3(e) {
+
+        var viewbagDate = '@ViewBag.ContractDate';
         var date = e.target.value;
-        document.getElementById("AdditionalDriverBirthDate").value = date;
+
+        if (!date) {
+            document.getElementById("AdditionalDriverBirthDate").value = viewbagDate;
+        }
+        else {
+            document.getElementById("AdditionalDriverBirthDate").value = date;
+        }
     }
     function affich_btn_3(e) {
         var date = e.target.value;
@@ -1473,6 +1494,7 @@
                 if (Driver_Id && DriverName) {
                     if ((checkBox2.checked == true)) {
                         currentTab = currentTab + n;
+                        CancelAddDriverModal();
                         console.log(currentTab)
                     } else if (CheckChoicesListNo()) {
                         currentTab = currentTab + n + 1;
@@ -2194,7 +2216,7 @@
     function getAdditionalDriverInfo(k) {
         var ContractNo = document.getElementById('CR_Cas_Contract_Basic_No').value;
         var err = document.getElementById('AdditionalDriverIdError').innerHTML;
-        var LessorCode ='@Request.RequestContext.HttpContext.Session["LessorCode"]';
+        var LessorCode = '@Request.RequestContext.HttpContext.Session["LessorCode"]';
         var BranchCode = '@Request.RequestContext.HttpContext.Session["BranchCode"]';
         var UserLogin = '@Request.RequestContext.HttpContext.Session["UserLogin"]';
         var RMobile = document.getElementById('Additional_Driver_Mobile').value;
@@ -2204,9 +2226,9 @@
                 url: '@Url.Action("getCustomerInfo", "BasicContract")',
                 type: "GET",
                 data: {
-                    id: $("#CR_Cas_Contract_Basic_Additional_Driver_Id").val(), operation: 'AdditionalDriver', RenterMobile: $("#RenterMobile").val(), RenterEmail: $("#RenterEmail").val(),
-                    Driver_Mobile: $("#Driver_Mobile").val(), Driver_Email: $("#Driver_Email").val(), Additional_Driver_Mobile: $("#Additional_Driver_Mobile").val(),
-                    Additional_Driver_Email: REmail, LessorCode, BranchCode, UserLogin, ContractNo
+                    id: $("#CR_Cas_Contract_Basic_Additional_Driver_Id").val(), operation: 'AdditionalDriver', RenterMobile: $("#RenterMobile").val(),
+                    Driver_Mobile: $("#Driver_Mobile").val(), Additional_Driver_Mobile: $("#Additional_Driver_Mobile").val(),
+                    LessorCode, BranchCode, UserLogin, ContractNo
                 },
                 success: function (result) {
                     if (result.CR_Mas_Renter_Information_Ar_Name != null || result.CR_Elm_Ar_Name != null) {
@@ -2321,7 +2343,7 @@
                         document.getElementById('HiddenAdditionalDriverNationality').value = "";
                         $("#HiddenAdditionalDriverEmployer").val("");
                         $("#HiddenAdditionalDriverAddress").val("");
-                        $("#HiddenAdditionalDriverBirthDate").val("");
+                        //$("#HiddenAdditionalDriverBirthDate").val("");
                         $("#HiddenAdditionalDriverName").val("");
                         $("#HiddenAdditionalDriverEmail").val("");
                         $("#HiddenAdditionalDriverNationality").val("");
@@ -2332,7 +2354,7 @@
         } else if (RMobile == "") {
             document.getElementById('AdditionalDriverMobileErr').innerHTML = "الرجاء إدخال رقم الجوال";
         }
-
+    }
        
 </script>
 <script>
@@ -2361,8 +2383,8 @@
             document.getElementById('CR_Cas_Contract_Basic_Expected_End_Date').value = today.toLocaleDateString('ja-JP', options).replace(/\//g, '/');
             var PriceET = parseFloat(price) * parseFloat(nbrDays);
             document.getElementById('Price').value = PriceET.toFixed(2);
-            document.getElementById('CR_Cas_Contract_Basic_Daily_Free_KM').value = "0";
-            document.getElementById('CR_Cas_Contract_Basic_Free_Additional_Hours').value = "0";
+            //document.getElementById('CR_Cas_Contract_Basic_Daily_Free_KM').value = "0";
+            //document.getElementById('CR_Cas_Contract_Basic_Free_Additional_Hours').value = "0";
             var TotalChoices = document.getElementById('TotalChoices').innerHTML;
             var TotalAdditionals = document.getElementById('TotalAdditionals').innerHTML;
             if (TotalChoices != "") {
@@ -2400,13 +2422,12 @@
             document.getElementById('AdditionalTotal').value = "0.00";
             document.getElementById('ValueAdditionalDriver').value = "0.00";
             document.getElementById('TotalContract').value = "0.00";
-            document.getElementById('ContractDiscount').value = "0.00";
-            document.getElementById('CR_Cas_Contract_Basic_Free_Additional_Hours').value = "0.00";
-            document.getElementById('CR_Cas_Contract_Basic_Daily_Free_KM').value = "0.00";
+            document.getElementById('ContractDiscount').value = "0";
+            //document.getElementById('CR_Cas_Contract_Basic_Free_Additional_Hours').value = "0";
+            //document.getElementById('CR_Cas_Contract_Basic_Daily_Free_KM').value = "0";
             document.getElementById('TotalContractHT').value = "0.00";
             document.getElementById('TotalContractTax').value = "0.00";
             document.getElementById('TotalContractPrice').value = "0.00";
-            document.getElementById('CR_Cas_Contract_Basic_Previous_Balance').value = "0.00";
             document.getElementById('TotalToPay').value = "0.00";
             document.getElementById('TotalPayed').value = "0.00";
             document.getElementById('PayType').disabled = true;
@@ -2481,46 +2502,65 @@
 </script>
 
 <script>
-    $(document).ready(
-        function () {
-            $("#CR_Cas_Contract_Basic_is_Additional_Driver").click(function () {
+    //$(document).ready(
+    //    function () {
+    //        $("#CR_Cas_Contract_Basic_is_Additional_Driver").click(function () {
 
-                var SerialNo = document.getElementById("serialNo").value;
-                if (document.getElementById('CR_Cas_Contract_Basic_is_Additional_Driver').checked) {
-                    var DriverVal = document.getElementById('AdditionalDriverVal_' + SerialNo).innerHTML;
-                    document.getElementById("ValueAdditionalDriver").value = parseFloat(DriverVal).toFixed(2);
-                } else {
-                    document.getElementById("CR_Cas_Contract_Basic_Additional_Driver_Id").value = "";
-                    document.getElementById("AdditionalDriverBirthDate").value = "";
-                    document.getElementById("AdditionalDriverName").value = "";
-                    document.getElementById("Additional_Driver_Email").value = "";
-                    document.getElementById("AdditionalDriverNationality").value = "";
-                    document.getElementById("AdditionalDriverGender").value = "";
-                    document.getElementById("AdditionalDriverJob").value = "";
-                    document.getElementById("AdditionalDriver_Driving_License_Date").value = "";
-                    document.getElementById("AdditionalDriverEmployer").value = "";
-                    document.getElementById("AdditionalDriverAddress").value = "";
-                    document.getElementById("AdditionalDriverReason").value = "";
-                    document.getElementById("ValueAdditionalDriver").value = "0.00";
-                }
+    //            var SerialNo = document.getElementById("serialNo").value;
+    //            if (document.getElementById('CR_Cas_Contract_Basic_is_Additional_Driver').checked) {
+    //                var DriverVal = document.getElementById('AdditionalDriverVal_' + SerialNo).innerHTML;
+    //                document.getElementById("ValueAdditionalDriver").value = parseFloat(DriverVal).toFixed(2);
+    //            } else {
+    //                document.getElementById("CR_Cas_Contract_Basic_Additional_Driver_Id").value = "";
+    //                document.getElementById("AdditionalDriverBirthDate").value = "";
+    //                document.getElementById("AdditionalDriverName").value = "";
+    //                document.getElementById("Additional_Driver_Email").value = "";
+    //                document.getElementById("AdditionalDriverNationality").value = "";
+    //                document.getElementById("AdditionalDriverGender").value = "";
+    //                document.getElementById("AdditionalDriverJob").value = "";
+    //                document.getElementById("AdditionalDriver_Driving_License_Date").value = "";
+    //                document.getElementById("AdditionalDriverEmployer").value = "";
+    //                document.getElementById("AdditionalDriverAddress").value = "";
+    //                document.getElementById("AdditionalDriverReason").value = "";
+    //                document.getElementById("ValueAdditionalDriver").value = "0.00";
+    //                CancelAddDriverModal();
+    //            }
 
-            })
-        });
+    //        })
+    //    });
 </script>
 
 <script>
+        $(document).ready(function () {
+            $('#CR_Cas_Contract_Basic_is_Additional_Driver').change(function () {
+                if (document.getElementById('CR_Cas_Contract_Basic_is_Additional_Driver').checked == true) {
+                    document.getElementById('CR_Cas_Contract_Basic_Additional_Driver_Id').readOnly = false;
+                    document.getElementById('Additional_Driver_Mobile').readOnly = false;
+
+                } else {
+                    document.getElementById('CR_Cas_Contract_Basic_Additional_Driver_Id').readOnly = true;
+                    document.getElementById('AdditionalDriverName').value = "";
+                    document.getElementById('Additional_Driver_Email').value = "";
+                    document.getElementById('AdditionalDriverNationality').value = "";
+                    document.getElementById('AdditionalDriverGender').value = "";
+                    document.getElementById('AdditionalDriverJob').value = "";
+                    document.getElementById('AdditionalDriverEmployer').value = "";
+                    document.getElementById('AdditionalDriverAddress').value = "";
+                    document.getElementById('AdditionalDriver_Driving_License_Date').value = "";
+                    CancelAddDriverModal();
+                }
+            })
+        })
     $(document).ready(function () {
         $('#CR_Cas_Contract_Basic_is_Renter_Driver').change(function () {
             if (document.getElementById('CR_Cas_Contract_Basic_is_Renter_Driver').checked == true) {
                 document.getElementById('CR_Cas_Contract_Basic_Driver_Id').readOnly = true;
                 document.getElementById('Driver_Mobile').readOnly = true;
-                document.getElementById('Driver_Email').readOnly = true;
                 document.getElementById('Driver_code').readOnly = true;
 
             } else {
                 document.getElementById('CR_Cas_Contract_Basic_Driver_Id').readOnly = false;
                 document.getElementById('CR_Cas_Contract_Basic_Driver_Id').value = "";
-                document.getElementById('DriverBirthDate').value = "";
                 document.getElementById('DriverName').value = "";
                 document.getElementById('DriverNationality').value = "";
                 document.getElementById('DriverGender').value = "";
@@ -2530,8 +2570,8 @@
                 document.getElementById('CR_Mas_Renter_Information_Expiry_Driving_License_Date').value = "";
                 document.getElementById('DriverAge').value = "";
                 document.getElementById('Driver_Mobile').readOnly = false;
-                document.getElementById('Driver_Email').readOnly = false;
                 document.getElementById('Driver_code').readOnly = false;
+                CancelDriverModal();
             }
         })
     })
@@ -2582,13 +2622,8 @@
                 document.getElementById("DriverAddress").style.color = "#0288C7";
             }
         } else {
-            var today = new Date();
-            var dd = String(today.getDate()).padStart(2, '0');
-            var mm = String(today.getMonth() + 1).padStart(2, '0');
-            var yyyy = today.getFullYear();
-
-            today = yyyy + '/' + mm + '/' + dd;
-            document.getElementById('DriverBirthDate').value = today;
+                var viewbagDate = '@ViewBag.ContractDate';
+                document.getElementById("DriverBirthDate").value = viewbagDate;
         }
     }
 </script>
@@ -2847,7 +2882,6 @@
             }
             if ((n != 1 && n != 2 && n != 7) || nbr != 10) {
                 document.getElementById('RenterIdError').innerHTML = "الحد الأدنى 10 ارقام ويبداء 7,2,1";
-                //document.getElementById('Renter_code').readOnly = true;
                 RAZRenterInfo();
                 RazDriverInfo();
                 RazAdditionalDriverInfo();
@@ -2855,8 +2889,6 @@
                 RazHiddenTextBox();
             } else {
                 document.getElementById('RenterIdError').innerHTML = "";
-                //document.getElementById('Renter_code').readOnly = false;
-                //alert();
                 RAZRenterInfo();
                 RazDriverInfo();
                 RazAdditionalDriverInfo();
@@ -2874,6 +2906,7 @@
             var id = document.getElementById('CR_Cas_Contract_Basic_Driver_Id').value;
             if (id == "" || id == null || id == " ") {
                 document.getElementById('DriverIdError').innerHTML = "الحد الأدنى 10 ارقام ويبداء 2,1";
+                RazDriverInfo();
                 return;
             }
             var renterid = document.getElementById("CR_Cas_Contract_Basic_Renter_Id").value;
@@ -2885,9 +2918,12 @@
                 RazDriverInfo();
             } else if (renterid == id) {
                 document.getElementById('DriverIdError').innerHTML = "عفوا رقم الهوية متكرر فالمستأجر";
+                RazDriverInfo();
             }
             else {
                 document.getElementById('DriverIdError').innerHTML = "";
+                RazDriverInfo();
+
             }
         })
     })
@@ -2945,7 +2981,7 @@
     function RazDriverInfo() {
         //alert("Raz driver info");
         // document.getElementById('CR_Cas_Contract_Basic_Driver_Id').value = "";
-        document.getElementById('DriverBirthDate').value = "";
+        //document.getElementById('DriverBirthDate').value = "";
         document.getElementById('Driver_code').value = "";
         //document.getElementById('Driver_Mobile').value = "";
         document.getElementById('Driver_Email').value = "";
@@ -2964,7 +3000,6 @@
     function RazAdditionalDriverInfo() {
         //alert("Raz driver info");
         //document.getElementById('CR_Cas_Contract_Basic_Additional_Driver_Id').value = "";
-        document.getElementById('AdditionalDriverBirthDate').value = "";
         document.getElementById('Additional_Driver_code').value = "";
         //document.getElementById('Additional_Driver_Mobile').value = "";
         document.getElementById('Additional_Driver_Email').value = "";
@@ -2978,6 +3013,11 @@
         document.getElementById('AdditionalDriverAddress').value = ""
         document.getElementById('AdditionalDriverReason').value = "";
         document.getElementById('AdditionalDriverAge').value = "";
+
+        var viewbagDate = '@ViewBag.ContractDate';
+        document.getElementById("AdditionalDriverBirthDate").value = viewbagDate;
+      
+        
     }
 
     function RazContractInfo() {
@@ -3676,7 +3716,6 @@
                 var AdditionalDriverName = document.getElementById('AdditionalDriverName').value;
                 var AddDriverMobile = document.getElementById('Additional_Driver_Mobile').value;
                 var MobileErr = document.getElementById('AdditionalDriverMobileErr').innerHTML;
-
                 //CheckAddDriverMobile(AddDriverMobile);
                 if (MobileErr != "") {
                     return;
@@ -3684,11 +3723,15 @@
                 else {
                     if (AdditionalDriverName == "") {
                         getAdditionalDriverInfo(13);
+                        console.log("AdditionalDriverName:" + AdditionalDriverName)
                         setTimeout(function () {
                             var Driver = document.getElementById('DriverIdError').innerHTML;
+                            console.log("set Driver:" + Driver)
                             if (Driver != "") {
                                 return;
                             }
+                            console.log("Additional_Driver_code:" + Additional_Driver_code)
+
                             OpenAddDriverModal();
                             $('Additional_Driver_code').focus();
                         }, 1500);
@@ -3743,6 +3786,7 @@
         document.getElementById('Additional_Driver_Mobile').value = "9665";
         document.getElementById('CR_Cas_Contract_Basic_Additional_Driver_Id').value = "";
         document.getElementById('AdditionalDriverIdError').innerHTML = "";
+        document.getElementById('AdditionalDriverMobileErr').innerHTML = "";
         CloseAddDriverModal();
     }
 

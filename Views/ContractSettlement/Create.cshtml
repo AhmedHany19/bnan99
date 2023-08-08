@@ -1110,18 +1110,14 @@
         var rentalPrice = $("#RentalPrice").val();
 
         var dateTimeString = endDate + " " + startTime;
-        console.log("dateTimeString :" + dateTimeString);
         var dateObj = new Date(dateTimeString);
         var eeeeDate = dateObj.getFullYear() + "-" + (dateObj.getMonth() + 1) + "-" + dateObj.getDate() + " " + dateObj.getHours() + ":" + dateObj.getMinutes() + ":" + dateObj.getSeconds();
 
         var dateTimeStringEx = endDateEx + " " + endTimeEx;
-        console.log("dateTimeStringEx :" + dateTimeStringEx);
         var dateObjEx = new Date(dateTimeStringEx);
         var eeeeDateEx = dateObjEx.getFullYear() + "-" + (dateObjEx.getMonth() + 1) + "-" + dateObjEx.getDate() + " " + dateObjEx.getHours() + ":" + dateObjEx.getMinutes() + ":" + dateObjEx.getSeconds();
         var today = new Date(eeeeDateEx);
         var eDate = new Date(eeeeDate);
-        console.log("today:" + today)
-        console.log("eDate:" + eDate)
 
         var dateTimeString1 = endDate + " " + startTime;
         var dateTimeStringEx1 = endDateEx + " " + endTimeEx;
@@ -1143,31 +1139,31 @@
         const dateEndTimeOnlyEx = new Date(`${now.toDateString()} ${endTimeOnlyEx}`);
         const dateEndTimeOnly = new Date(`${now.toDateString()} ${endTimeOnly}`);
 
-        //console.log("dateEndTimeOnlyEx:" + dateEndTimeOnlyEx)
-        //console.log("dateEndTimeOnly:" + dateEndTimeOnly)
+        
         var differenceInMsEx = dateEndTimeOnlyEx - dateEndTimeOnly;
         var differenceInHoursEx = Math.round(differenceInMsEx / (1000 * 60 * 60));
-        console.log("Total Hours EX :" + differenceInHoursEx)
 
         if (today > eDate) {
-            console.log("Welcome :" + "Ahmed ")
+            console.log("111111111")
             if (differenceInHoursEx > 0) {
+                console.log("22222222")
                 if (parseInt(freeAddHoursContract) != 0) {
+                    console.log("333333333")
+
                     differenceInHoursEx = differenceInHoursEx - parseInt(freeAddHoursContract);
-                    console.log("freeAddHoursContract:" + freeAddHoursContract)
                     if (differenceInHoursEx > 0) {
                         if (parseInt(additionalHours) <= parseInt(differenceInHoursEx)) {
+                            console.log("parseFloat(additionalHours) :" + parseFloat(additionalHours))
+                            console.log("parseFloat(extraHourValue) :" + parseFloat(extraHourValue))
 
                             $("#TotalHoursValue").val(parseFloat(additionalHours) * parseFloat(extraHourValue));
                             differenceInHoursEx = differenceInHoursEx - additionalHours;
-                            console.log("differenceInHoursEx:" + differenceInHoursEx)
 
                             if (differenceInHoursEx > 0) {
                                 rentalPrice = parseFloat(DailyRentValue).toFixed(2);
                                 $("#textErr").text(`عدد الساعات المتاخرة ${differenceInHoursEx} وستحاسب عليهم بسعر اليوم `);
                                 localStorage.setItem('extraDayValue', differenceInHoursEx);
                                 localStorage.setItem('key', rentalPrice);
-                                console.log("rentalPrice:" + rentalPrice);
 
                             } else {
                                 localStorage.setItem('key', 0);
@@ -1178,15 +1174,22 @@
                         }
                     }
                     else {
-                        $("#TotalHoursValue").val(0);
+                        $("#TotalHoursValue").val("0.00");
                         localStorage.setItem('key', 0);
                         $("#textErr").text("");
                         localStorage.setItem('extraDayValue', 0);
 
                     }
                 }
+                else {
+                    $("#TotalHoursValue").val("0.00");
+                    localStorage.setItem('key', 0);
+                    $("#textErr").text("");
+                    localStorage.setItem('extraDayValue', 0);
+                }
             }
             else {
+
                 $("#TotalHoursValue").val("0.00");
                 localStorage.setItem('key', 0);
                 $("#textErr").text("");
@@ -1195,8 +1198,9 @@
             }
         }
         else {
+            console.log("111111111else")
             $("#textErr").text("");
-            $("#TotalHoursValue").val(0);
+            $("#TotalHoursValue").val("0.00");
             localStorage.setItem('key', 0);
             localStorage.setItem('extraDayValue', 0);
 
@@ -1208,57 +1212,95 @@
 
 <script type="text/javascript">
     //$(document).ready(function () {
-    //    $("#ContractEndDate").change(function () {
-    //        var v = document.getElementById("#ContractEndDate").value;
+    //    $("#ContractEndDateEx").change(function () {
+    //        var v = document.getElementById("#ContractEndDateEx").value;
     //        alert(v);
     //    });
-    //    $("#ContractEndDate").focusout(function () {
-    //        var v = document.getElementById("#ContractEndDate").value;
+    //    $("#ContractEndDateEx").focusout(function () {
+    //        var v = document.getElementById("#ContractEndDateEx").value;
     //        alert(v);
     //    });
     //});
-    function updateDays() {
 
-    }
 
     function affich_affich_1(e) {
+
+        var viewbagData='@ViewBag.ContractEndDateEx';
         var date = e.target.value;
-        document.getElementById("ContractEndDateEx").value = date;
+
+
+        //document.getElementById("ContractEndDateEx").value = date;
         var endDate = document.getElementById("date_btn1").value;
         var startDate = document.getElementById("ContractStartDate").value;
         var days = document.getElementById("ContractDaysNbr");
-        console.log(endDate);
-        console.log(startDate);
+
+        
+        var date = e.target.value;
+
+
+        if (!date) {
+            document.getElementById("ContractEndDateEx").value = viewbagData;
+            endDate = viewbagData;
+            console.log("endDate:" + endDate)
+
+        }
+        else {
+            document.getElementById("ContractEndDateEx").value = date;
+        }
 
         const date1 = new Date(startDate);
         const date2 = new Date(endDate);
 
-        console.log(date2 - date1)
 
         // Calculate the difference in milliseconds
         const differenceInMs = Math.abs(date2 - date1);
-
         // Convert the difference to days
         const differenceInDays = Math.ceil(differenceInMs / (1000 * 60 * 60 * 24));
-        if (differenceInDays == 0) {
-            console.log(differenceInDays + "A7a1");
-            days.value = 1;
+        if (endDate == viewbagData) {
+            if (differenceInDays == 0) {
+                days.value = 1;
+            }
+            else {
+                days.value = differenceInDays 
+            }
         }
         else {
-            days.value = differenceInDays - 1;
+            if (differenceInDays == 0) {
+                days.value = 1;
+            }
+            else {
+                days.value = differenceInDays -1
+            }
         }
-        if (days.value == 0) {
-            days.value = 1;
-        }
-        console.log(differenceInDays + "A7a2"); // Output: 3
+        
         cal();
 
     }
-    function affich_btn_1(e) {
-        var date = e.target.value;
-        document.getElementById("date_btn1").value = date;
-    }
+    //var endDate = document.getElementById("ContractEndDateEx").value;
+    //var startDate = document.getElementById("ContractStartDate").value;
+    //var days = document.getElementById("ContractDaysNbr");
+    //var rentaldays = document.getElementById("CR_Cas_Contract_Basic_Expected_Rental_Days");
+
+    //const date1 = new Date(startDate);
+    //const date2 = new Date(endDate);
+
+    //// Calculate the difference in milliseconds
+    //const differenceInMs = Math.abs(date2 - date1);
+
+    //// Convert the difference to days
+    //const differenceInDays = Math.ceil(differenceInMs / (1000 * 60 * 60 * 24));
+    //if (differenceInDays == 0) {
+    //    days.value = 1;
+    //}
+    //else {
+    //    days.value = differenceInDays;
+    //}
+    //function affich_btn_1(e) {
+    //    var date = e.target.value;
+    //    document.getElementById("date_btn1").value = date;
+    //}
 </script>
+
 <script>
     function cal() {
         var startDate = $("#ContractStartDate").val();
@@ -1274,19 +1316,14 @@
         var rentalPrice = $("#RentalPrice").val();
 
         var dateTimeString = endDate + " " + startTime;
-        console.log("dateTimeString :" + dateTimeString);
         var dateObj = new Date(dateTimeString);
         var eeeeDate = dateObj.getFullYear() + "-" + (dateObj.getMonth() + 1) + "-" + dateObj.getDate() + " " + dateObj.getHours() + ":" + dateObj.getMinutes() + ":" + dateObj.getSeconds();
 
         var dateTimeStringEx = endDateEx + " " + endTimeEx;
-        console.log("dateTimeStringEx :" + dateTimeStringEx);
         var dateObjEx = new Date(dateTimeStringEx);
         var eeeeDateEx = dateObjEx.getFullYear() + "-" + (dateObjEx.getMonth() + 1) + "-" + dateObjEx.getDate() + " " + dateObjEx.getHours() + ":" + dateObjEx.getMinutes() + ":" + dateObjEx.getSeconds();
         var today = new Date(eeeeDateEx);
         var eDate = new Date(eeeeDate);
-        console.log("today:" + today)
-        console.log("eDate:" + eDate)
-
         var dateTimeString1 = endDate + " " + startTime;
         var dateTimeStringEx1 = endDateEx + " " + endTimeEx;
 
@@ -1307,33 +1344,26 @@
         const dateEndTimeOnlyEx = new Date(`${now.toDateString()} ${endTimeOnlyEx}`);
         const dateEndTimeOnly = new Date(`${now.toDateString()} ${endTimeOnly}`);
 
-        //console.log("dateEndTimeOnlyEx:" + dateEndTimeOnlyEx)
-        //console.log("dateEndTimeOnly:" + dateEndTimeOnly)
+       
         var differenceInMsEx = dateEndTimeOnlyEx - dateEndTimeOnly;
         var differenceInHoursEx = Math.round(differenceInMsEx / (1000 * 60 * 60));
-        console.log("Total Hours EX :" + differenceInHoursEx)
 
         if (today > eDate) {
-            console.log("Welcome :" + "Ahmed ")
             var d = differenceInHoursEx + parseInt(freeAddHoursContract) + parseFloat(additionalHours);
-            console.log("d  :" + d)
 
             if (differenceInHoursEx > 0) {
                 if (parseInt(freeAddHoursContract) != 0) {
                     differenceInHoursEx = differenceInHoursEx - parseInt(freeAddHoursContract);
-                    console.log("freeAddHoursContract:" + freeAddHoursContract)
                     if (differenceInHoursEx > 0) {
                         if (parseInt(additionalHours) <= parseInt(differenceInHoursEx)) {
                             $("#TotalHoursValue").val(parseFloat(additionalHours) * parseFloat(extraHourValue));
                             differenceInHoursEx = differenceInHoursEx - additionalHours;
-                            console.log("differenceInHoursEx:" + differenceInHoursEx)
                             if (differenceInHoursEx > 0) {
                                 rentalPrice = parseFloat(DailyRentValue).toFixed(2);
                                 $("#textErr").text(`عدد الساعات المتاخرة ${differenceInHoursEx} وستحاسب عليهم بسعر اليوم `);
                                 localStorage.setItem('extraDayValue', differenceInHoursEx);
                                 localStorage.setItem('key', rentalPrice);
 
-                                console.log("rentalPrice:" + rentalPrice);
                             } else {
                                 localStorage.setItem('extraDayValue', 0);
                                 localStorage.setItem('key', 0);
@@ -1369,14 +1399,9 @@
         if (extraDay > 0) {
             ExNbrDays++;
         }
-        console.log("kmFreeDaily :" + kmFreeDaily)
-        console.log("ContractDaysNbr :" + ExNbrDays)
         $("#TotalFreeKm").val(parseInt(ExNbrDays) * parseInt(kmFreeDaily));
         $("#ChoicesVal").val(parseInt(ExNbrDays) * parseInt(valueChoices));
     }
-
-
-
 </script>
 <script>
     $(document).ready(function () {
@@ -1384,23 +1409,22 @@
         var valueChoices = $("#CR_Cas_Contract_Basic_Choices_Value").val();
         if (@Session["ContractCancel"].ToString().ToLower() == true) {
             var ExNbrDays = $("#ContractDaysNbr").val();
-             console.log("User is logged in.");
-             console.log(ContractDaysNbr);
 
         } else {
              var ExNbrDays = $("#ExContractDaysNbr").val();
-             console.log("User is not logged in.");
-             console.log(ContractDaysNbr);
         }
         var extraDay = localStorage.getItem('extraDayValue');
-        console.log("extraDay:" + extraDay)
         if (extraDay > 0) {
             ExNbrDays++;
         }
-        console.log("kmFreeDaily :" + kmFreeDaily)
-        console.log("ContractDaysNbr :" + ExNbrDays)
         $("#TotalFreeKm").val(parseInt(ExNbrDays) * parseInt(kmFreeDaily));
+        if ($("#TotalFreeKm").val()==0) {
+            $("#TotalFreeKm").val("0.00");
+        }
         $("#ChoicesVal").val(parseInt(ExNbrDays) * parseInt(valueChoices));
+        if ($("#ChoicesVal").val() == 0) {
+            $("#ChoicesVal").val("0.00");
+        }
     });
 </script>
 
@@ -1440,7 +1464,6 @@
         if (regEx.test(ele.value)) {
             errMsg.style.display = 'none';
             ele.parentNode.classList.remove('error');
-            console.log(ele.value);
             success = true;
         } else {
             ele.parentNode.classList.add('error');
@@ -1458,7 +1481,6 @@
         if (regEx.test(ele.value)) {
             errMsg.style.display = 'none';
             ele.parentNode.classList.remove('error');
-            console.log(ele.value);
             success = true;
         } else {
             if (ele.value > 100) {
@@ -1754,9 +1776,7 @@
 
         // This function will display the specified tab of the form...
         var x = document.getElementsByClassName("tab");
-        console.log(x);
         x[n].style.display = "block";
-        console.log(n);
         //... and fix the Previous/Next buttons:
         if (n == 0) {
             document.getElementById("prevBtn").style.display = "none";
@@ -1789,26 +1809,38 @@
         var x = document.getElementsByClassName("tab");
         var depencesCheckbox = document.getElementById("Chk_Depences");// المصروفات
         var compensationCheckbox = document.getElementById("Chk_Compensation");// التعويضات
-        var Depences = document.getElementById("Depences").value;// التعويضات
+        var Depences = document.getElementById("Depences").value;// المصروفات
+        var TotDepences = document.getElementById("TotDepences").value;// المصروفات
         var CompensationVal = document.getElementById("CompensationVal").value;// التعويضات
-        var CurrentMeter = document.getElementById("CurrentMeter").value;// التعويضات
+        var TotCompensation = document.getElementById("TotCompensation").value;// التعويضات
+        var CurrentMeter = document.getElementById("CurrentMeter").value;
 
         // Hide the current tab:'
         x[currentTab].style.display = "none";
         document.getElementById("prevBtn").style.display = "inline";
         if (currentTab == 0) {
             if (depencesCheckbox.checked == false && compensationCheckbox.checked == false) {
+                Depences = "";
+                CompensationVal = "";
+               
                 currentTab = currentTab + n + 2;
             }
             if (depencesCheckbox.checked == true && compensationCheckbox.checked == true) {
                 currentTab = currentTab + n;
+                
+               
             }
             if (depencesCheckbox.checked == true && compensationCheckbox.checked == false) {
+                CompensationVal = "";
+                
                 currentTab = currentTab + n;
             }
             if (depencesCheckbox.checked == false && compensationCheckbox.checked == true) {
+                Depences = "";
+                
                 currentTab = currentTab + n + 1;
             }
+            Calculate()
         }
         else if (currentTab == 1) {
             if (compensationCheckbox.checked == true) {
@@ -1825,6 +1857,7 @@
 
                 if (Depences != null && Depences != "" && m >= 1) {
                     currentTab = currentTab + n;
+                    
                 }
                 else {
                     toastr.info("الرجاء ادخال قيمة المصروفات وصورة واحدة علي الاقل");
@@ -1844,11 +1877,13 @@
 
                 if (Depences != null && Depences != "" && m >= 1) {
                     currentTab = currentTab + n + 1;
+                    
                 }
                 else {
                     toastr.info("الرجاء ادخال قيمة المصروفات وصورة واحدة علي الاقل");
                 }
             }
+            Calculate()
         }
         else if (currentTab == 2) {
             var m = 0;
@@ -1866,6 +1901,7 @@
             else {
                 toastr.info("الرجاء ادخال قيمة التعويضات وصورة واحدة علي الاقل");
             }
+            Calculate()
         }
 
         else if (currentTab == 3) {
@@ -1899,10 +1935,12 @@
             else {
                 toastr.info("الرجاء التحقق من الفحص الظاهري");
             }
+            Calculate()
 
         }
         else {
             currentTab = currentTab + n;
+            Calculate()
         }
 
         // if you have reached the end of the form...
@@ -1973,7 +2011,6 @@
 
         //Reference the CheckBoxes in Table.
         var checkbox = grid.getElementsByClassName("ChkChoicesList");
-        console.log(checkbox)
 
         //Loop through the CheckBoxes.
         for (var i = 0; i < checkbox.length; i++) {
@@ -1987,7 +2024,6 @@
             return true;
         } else {
             return false;
-            console.log("false")
             toastr.warning("الرجاء اكمال الفحص الضاهري");
         }
     }
@@ -2031,10 +2067,7 @@
             var OldCurrentKm = document.getElementById('OldCurrentKm').value;
             var CurrentMeter = document.getElementById('CurrentMeter').value;
             var TotalFreeKm = document.getElementById('TotalFreeKm').value;
-            console.log("TotalFreeKm:" + TotalFreeKm);
 
-            //TotalFreeKm = parseInt(nbrDaysEx);
-            console.log("TotalFreeKm:" + TotalFreeKm);
             if (parseFloat(CurrentMeter) > (parseFloat(OldCurrentKm) + parseFloat(TotalFreeKm))) {
                 var c = parseFloat(CurrentMeter) - (parseFloat(OldCurrentKm) + parseFloat(TotalFreeKm));
                 document.getElementById('AdditionalKmNo').value = c;
@@ -2059,11 +2092,8 @@
 </script>
 <script>
     $("#CurrentMeter").focusout(function () {
-        console.log("AAAAAAAAAAAAAAAAAAA");
         var OldKm = Number(document.getElementById("OldKm").value);
         var NewCurrentMeter = Number(document.getElementById('CurrentMeter').value);
-        console.log(OldKm);
-        console.log(NewCurrentMeter);
         if (NewCurrentMeter < OldKm) {
             document.getElementById('CurrentMeterError').innerHTML = "لا يمكن أن يكون أقل من" + OldKm;
         } else {
@@ -2076,11 +2106,7 @@
 
 
     function Calculate() {
-
-
-
-
-
+        
         var ExtraKmValue = document.getElementById('ExtraKmValue').value;
         if (ExtraKmValue == "") {
             document.getElementById('ExtraKmValue').value = "0.00";
@@ -2089,14 +2115,11 @@
         var ExtraHourValue  = parseFloat(document.getElementById('ExtraHourValue').value);
         if (@Session["ContractCancel"].ToString().ToLower() == true) {
              var ContractDaysNbr = parseFloat(document.getElementById('ContractDaysNbr').value);
-             console.log("User is logged in.");
-             console.log(ContractDaysNbr);
+             
 
         } else {
              var ContractDaysNbr = parseFloat(document.getElementById('ExContractDaysNbr').value);
-             console.log("User is not logged in.");
-             console.log(ContractDaysNbr);
-
+            
         }
         var extraDay = localStorage.getItem('extraDayValue');
         if (extraDay > 0) {
@@ -2113,16 +2136,12 @@
 
         var valueRental = localStorage.getItem('key');
 
-        console.log("valueRental"+valueRental);
-        console.log("RentalPrice" + RentalPrice);
+       
 
         document.getElementById('RentalPrice').value = /*(parseFloat(valueRental) +*/ parseFloat(RentalPrice).toFixed(2);
 
-      //localStorage.removeItem('key');
 
         var r = document.getElementById('RentalPrice').value;
-        console.log("r" + r);
-
         var RentalPrice = parseFloat(document.getElementById('RentalPrice').value);
         var ChoicesVal = parseFloat(document.getElementById('ChoicesVal').value);
         var AdditionalDriverVal = parseFloat(document.getElementById('AdditionalDriverVal').value);
@@ -2130,10 +2149,15 @@
         var ExtraKmValue = parseFloat(document.getElementById('ExtraKmValue').value);
         var TotalHoursValue = parseFloat(document.getElementById('TotalHoursValue').value);
         var AuthValue = parseFloat(document.getElementById('AuthValue').value);
+        console.log("TotalHoursValue:"+TotalHoursValue)
         if (@ViewBag.IsOpenKm.ToString().ToLower()) {
             var ContractValED = (parseFloat(r) + ChoicesVal + AdditionalDriverVal + AdditionalVal /*+ ExtraKmValue*/ + TotalHoursValue + AuthValue);
+            console.log("ContractValED If:" + ContractValED)
+
         } else {
             var ContractValED = (parseFloat(r) + ChoicesVal + AdditionalDriverVal + AdditionalVal + ExtraKmValue + TotalHoursValue + AuthValue);
+            console.log("ContractValED else:" + ContractValED)
+
         }
 
         document.getElementById('ContractValED').value = ContractValED.toFixed(2);
@@ -2146,32 +2170,40 @@
         document.getElementById('TaxVal').value = TaxVal;
         var ContractValIT = (ContractValID * (1 + (Tax / 100))).toFixed(2);
         document.getElementById('TotalContractIT').value = ContractValIT;
+
+        var depencesCheckbox = document.getElementById("Chk_Depences");// المصروفات
+        var compensationCheckbox = document.getElementById("Chk_Compensation");// التعويضات
         var depences = document.getElementById('Depences').value;
-        if (depences == "") {
+       
+
+        if (depences == "" || depences == null || depencesCheckbox.checked == false) {
             document.getElementById('TotDepences').value = "0.00";
-            depences = 0;
-            //alert(1);
+            depences = "0";
         } else {
-            document.getElementById('TotDepences').value = depences;
-            //alert(2);
+            var Totdepences = parseFloat(depences);
+            document.getElementById('TotDepences').value = Totdepences.toFixed(2);
         }
 
 
-        //var InsuranceVal = document.getElementById('InsuranceVal').value;
-        //if (InsuranceVal == "") {
-        //    InsuranceVal = 0;
-        //}
+       
         var CompensationVal = document.getElementById('CompensationVal').value;
-        if (CompensationVal == "") {
-            CompensationVal = 0;
+       
+
+        if (CompensationVal == "" || CompensationVal == null || compensationCheckbox.checked == false) {
+            document.getElementById('TotCompensation').value = "0.00";
+            CompensationVal = "0";
+
+        }
+        else {
+            var TotCompensation = parseFloat(CompensationVal);
+            document.getElementById('TotCompensation').value = TotCompensation.toFixed(2);
         }
 
-        var TotCompensation = parseFloat(CompensationVal);
-        document.getElementById('TotCompensation').value = TotCompensation.toFixed(2);
+       
 
 
         var RenterPrevBalance = parseFloat(document.getElementById('RenterPrevBalance').value);
-        var TotToPay = parseFloat(ContractValIT) + parseFloat(TotCompensation) + parseFloat(RenterPrevBalance) - parseFloat(depences);
+        var TotToPay = parseFloat(ContractValIT) + parseFloat(CompensationVal) + parseFloat(RenterPrevBalance) - parseFloat(depences);
         //alert(TotToPay);
         document.getElementById('TotToPay').value = TotToPay.toFixed(2);
 
@@ -2293,12 +2325,7 @@
     var startDate = document.getElementById("ContractStartDate").value;
     var days = document.getElementById("ContractDaysNbr");
     var rentaldays = document.getElementById("CR_Cas_Contract_Basic_Expected_Rental_Days");
-    console.log(endDate);
-    console.log(startDate);
-    console.log(rentaldays);
-
-
-
+   
     const date1 = new Date(startDate);
     const date2 = new Date(endDate);
 
@@ -2308,19 +2335,13 @@
     // Convert the difference to days
     const differenceInDays = Math.ceil(differenceInMs / (1000 * 60 * 60 * 24));
     if (differenceInDays == 0) {
-        console.log(differenceInDays + "11111111");
         days.value = 1;
     }
     else {
         days.value = differenceInDays;
     }
-    console.log(differenceInDays + "222222222"); // Output: 3
 </script>
 <script>
-
-
-
-
 
     $(document).ready(function () {
         var today = new Date();
@@ -2343,7 +2364,6 @@
             var PayType = $('#PayType').val();
             var userBalance = @Html.Raw(Json.Encode(ViewBag.UserBalance));
             var TotToPay = $("#TotToPay").val();
-            console.log(`Input value has changed to: ${TotToPay}`);
 
 
             //if (!fieldVal || fieldVal === '0') {
@@ -2364,10 +2384,7 @@
 
         //}
             if (TotToPay<0) {
-                    console.log("رصيدك يسمح......");
-                    console.log(`Input value has changed to: ${$("#TotToPay").val()}`);
                 if (fieldVal > parseInt(userBalance.replace(",", ""))) {
-                    console.log("رصيدك لا يسمح  ")
                     toastr.info("رصيدك لا يسمح");
                     e.preventDefault();
                 }

@@ -57,8 +57,11 @@ namespace RentCar.Controllers
                
             }
 
-            var rpt = db.CR_Cas_Account_Receipt.Where(rp=>rp.CR_Cas_Account_Receipt_User_Code==UserLogin && rp.CR_Cas_Account_Receipt_Date>=sd &&
-            rp.CR_Cas_Account_Receipt_Date<=ed && rp.CR_Cas_Account_Receipt_Payment_Method != "24");
+
+            var rpt = db.CR_Cas_Account_Receipt.Where(r => r.CR_Cas_Account_Receipt_Lessor_Code == LessorCode && r.CR_Cas_Account_Receipt_Branch_Code == BranchCode &&
+                (r.CR_Cas_Account_Receipt_Is_Passing == "3" || r.CR_Cas_Account_Receipt_Is_Passing == "1")
+                && r.CR_Cas_Account_Receipt_User_Code == UserLogin && r.CR_Cas_Account_Receipt_Payment_Method != "24" &&
+                r.CR_Cas_Account_Receipt_Date >= sd && r.CR_Cas_Account_Receipt_Date <= ed);
             if (rpt != null)
             {
                 var convertReceiptPaymentToFloat= (float) rpt.Select(m => m.CR_Cas_Account_Receipt_Payment).Sum();
@@ -152,7 +155,8 @@ namespace RentCar.Controllers
             }
             else
             {
-                Receipt = db.CR_Cas_Account_Receipt.Where(r => r.CR_Cas_Account_Receipt_Lessor_Code == LessorCode && r.CR_Cas_Account_Receipt_Branch_Code == BranchCode
+                Receipt = db.CR_Cas_Account_Receipt.Where(r => r.CR_Cas_Account_Receipt_Lessor_Code == LessorCode && r.CR_Cas_Account_Receipt_Branch_Code == BranchCode&&
+                (r.CR_Cas_Account_Receipt_Is_Passing == "3" || r.CR_Cas_Account_Receipt_Is_Passing == "1")
                 && r.CR_Cas_Account_Receipt_User_Code == UserLogin && r.CR_Cas_Account_Receipt_Payment_Method != "24" &&
                 r.CR_Cas_Account_Receipt_Date >= sd && r.CR_Cas_Account_Receipt_Date <= ed);
                
