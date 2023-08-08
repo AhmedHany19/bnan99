@@ -193,7 +193,8 @@
     function GetReceipt() {
 
 
-
+        $('.totalCreditor').val("0.00");
+        $('.totaldebtor').val("0.00");
         document.getElementById('TotalVal').value = "0.00";
         $.ajax({
             url: '@Url.Action("PartialView","CashClosing")',
@@ -202,6 +203,7 @@
             success: function (result) {
                 //alert();
                 $('#Table').html(result);
+               
             }
         });
 
