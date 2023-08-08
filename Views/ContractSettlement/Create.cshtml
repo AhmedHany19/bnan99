@@ -1936,11 +1936,13 @@
                 toastr.info("الرجاء التحقق من الفحص الظاهري");
             }
             Calculate()
+            LetTotpayedZero()
 
         }
         else {
             currentTab = currentTab + n;
             Calculate()
+            LetTotpayedZero()
         }
 
         // if you have reached the end of the form...
@@ -2252,31 +2254,131 @@
         }
 
     }
-
-    $(document).ready(function () {
-        $('#TotPayed').focusout(function () {
+    function LetTotpayedZero() {
+        $(document).ready(function () {
+            $("#TotPayed").val("0");
             var TotPayed = document.getElementById('TotPayed').value;
             var TotToPay = Number(document.getElementById('TotToPay').value);
-            if (TotPayed != "") {
-                TotPayed = Number(TotPayed);
-                if (TotToPay > 0) {
-                    var reste = TotPayed - TotToPay;
-                } else {
-                    var reste = TotPayed + TotToPay;
+            if (TotToPay >= 0) {
+                if (TotPayed != "") {
+                    TotPayed = Number(TotPayed);
+                    if (TotToPay > 0) {
+                        var reste = TotToPay - TotPayed;
+                    } else {
+                        var reste = TotPayed + TotToPay;
+                    }
+                    if (reste == 0) {
+                        document.getElementById('RestLabel').innerHTML = "الباقي";
+                    } else if (reste > 0) {
+                        document.getElementById('RestLabel').innerHTML = "الباقي على للمستأجر";
+                    }
+                    else
+                    {
+                        document.getElementById('RestLabel').innerHTML = "الباقي للمستأجر";
+                    }
+                    document.getElementById('reste').value = reste.toFixed(2);
                 }
-                if (reste == 0) {
-                    document.getElementById('RestLabel').innerHTML = "الباقي";
-                } else if (reste > 0) {
-                    document.getElementById('RestLabel').innerHTML = "الباقي للمستأجر";
-                } else {
-                    document.getElementById('RestLabel').innerHTML = "الباقي على للمستأجر";
-                }
-                document.getElementById('reste').value = reste.toFixed(2);
             }
             else {
-                document.getElementById('reste').value = "";
-
+                if (TotPayed != "") {
+                    TotPayed = Number(TotPayed);
+                    if (TotToPay > 0) {
+                        var reste = TotPayed - TotToPay;
+                    } else {
+                        var reste = TotPayed + TotToPay;
+                    }
+                    if (reste == 0) {
+                        document.getElementById('RestLabel').innerHTML = "الباقي";
+                    } else if (reste > 0) {
+                        document.getElementById('RestLabel').innerHTML = "الباقي على للمستأجر";
+                    } 
+                    else
+                    {
+                        document.getElementById('RestLabel').innerHTML = "الباقي للمستأجر";
+                    }
+                    document.getElementById('reste').value = reste.toFixed(2);
+                }
             }
+           
+        })
+    }
+   
+    $(document).ready(function () {
+        $('#TotPayed').focusout(function () {
+            
+            var TotPayed = document.getElementById('TotPayed').value;
+            var TotToPay = Number(document.getElementById('TotToPay').value);
+            if (TotToPay >= 0) {
+                if (TotPayed != "") {
+                    TotPayed = Number(TotPayed);
+                    if (TotToPay > 0) {
+                        var reste = TotToPay - TotPayed;
+                    } else {
+                        var reste = TotPayed + TotToPay;
+                    }
+                    if (reste == 0) {
+                        document.getElementById('RestLabel').innerHTML = "الباقي";
+                    } else if (reste > 0) {
+                        document.getElementById('RestLabel').innerHTML = "الباقي على للمستأجر";
+                    } else {
+                        document.getElementById('RestLabel').innerHTML = "الباقي للمستأجر";
+                    }
+                    document.getElementById('reste').value = reste.toFixed(2);
+                }
+                else {
+                    TotPayed = "0"
+                    TotPayed = Number(TotPayed);
+                    if (TotToPay > 0) {
+                        var reste = TotPayed - TotToPay;
+                    } else {
+                        var reste = TotPayed + TotToPay;
+                    }
+                    if (reste == 0) {
+                        document.getElementById('RestLabel').innerHTML = "الباقي";
+                    } else if (reste > 0) {
+                        document.getElementById('RestLabel').innerHTML = "الباقي للمستأجر";
+                    } else {
+                        document.getElementById('RestLabel').innerHTML = "الباقي على للمستأجر";
+                    }
+                    document.getElementById('reste').value = reste.toFixed(2);
+                }
+            }
+            else {
+                if (TotPayed != "") {
+                    TotPayed = Number(TotPayed);
+                    if (TotToPay > 0) {
+                        var reste = TotPayed - TotToPay;
+                    } else {
+                        var reste = TotPayed + TotToPay;
+                    }
+                    if (reste == 0) {
+                        document.getElementById('RestLabel').innerHTML = "الباقي";
+                    } else if (reste > 0) {
+                        document.getElementById('RestLabel').innerHTML = "الباقي على للمستأجر";
+                    } else {
+                        document.getElementById('RestLabel').innerHTML = "الباقي للمستأجر";
+                    }
+                    document.getElementById('reste').value = reste.toFixed(2);
+                }
+                else {
+                    TotPayed = "0"
+                    TotPayed = Number(TotPayed);
+                    if (TotToPay > 0) {
+                        var reste = TotPayed - TotToPay;
+                    } else {
+                        var reste = TotPayed + TotToPay;
+                    }
+                    if (reste == 0) {
+                        document.getElementById('RestLabel').innerHTML = "الباقي";
+                    } else if (reste > 0) {
+                        document.getElementById('RestLabel').innerHTML = "الباقي على للمستأجر";
+                    } else {
+                        document.getElementById('RestLabel').innerHTML = "الباقي للمستأجر";
+                    }
+                    document.getElementById('reste').value = reste.toFixed(2);
+                }
+            }
+            
         })
     })
 </script>
