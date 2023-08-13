@@ -409,7 +409,7 @@
                                                         <div class="form-group row mb-3">
                                                             <label class="col-md-4" for="userName3">المصروفات </label>
                                                             <div class="col-md-2 offset-md-6">
-                                                                <input class="form-control" id="Chk_Depences" name="Chk_Depences" style="height:26px !important;margin-top:0px;" type="checkbox" value="true">
+                                                                <input class="form-control" id="Chk_Depences" name="Chk_Depences" style="height:26px !important;margin-top:0px;" type="checkbox" value="true" >
                                                             </div>
                                                         </div>
                                                     </div>
@@ -456,7 +456,7 @@
                                                     <div class="row">
                                                         <label class="col-md-4" for="userName3">قيمة المصروفات</label>
                                                         <div class="col-md-8">
-                                                            <input autocomplete="off" class="form-control " id="Depences" name="Depences" style="float:right;width:100%" type="text" value="">
+                                                            <input autocomplete="off" class="form-control " id="Depences" name="Depences" style="float:right;width:40%" type="text" value="" maxlength="10">
                                                         </div>
                                                     </div>
                                                     <div class="row">
@@ -555,7 +555,7 @@
                                                     <div class="row">
                                                         <label class="col-md-4" for="userName3">قيمة التعويضات</label>
                                                         <div class="col-md-8">
-                                                            <input autocomplete="off" class="form-control " id="CompensationVal" name="CompensationVal" style="float:right;width:100%" type="text" value="">
+                                                            <input autocomplete="off" class="form-control " id="CompensationVal" name="CompensationVal" style="float:right;width:40%" type="text" value="" maxlength="10">
                                                         </div>
                                                     </div>
                                                     <div class="row">
@@ -672,7 +672,7 @@
                                                                 <div class="form-group row mt-2">
                                                                     <label class="col-md-12" for="input3" style="text-align:center">القراءة الحالية</label>
                                                                     <div class="col-md-12">
-                                                                        <input class="text-center" type="text" id="CurrentMeter" name="CurrentMeter" value="" style="width:100%" />
+                                                                        <input class="text-center" type="text" id="CurrentMeter" name="CurrentMeter" value="" style="width:100%" maxlength="7" />
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -1019,7 +1019,7 @@
                                                     <div class="form-group row mb-3">
                                                         <label class="col-md-6" for="userName3">المبلغ المدفوع</label>
                                                         <div class="col-md-6">
-                                                            <input autocomplete="off" class="form-control " id="TotPayed" name="TotPayed" style="float: right; width: 65%; text-align: right; direction: ltr; height: 35px !important " type="text" value="">
+                                                            <input autocomplete="off" class="form-control " id="TotPayed" name="TotPayed" style="float: right; width: 80%; text-align: right; direction: ltr; height: 35px !important " type="text" value="" maxlength="10">
                                                         </div>
 
                                                     </div>
@@ -1093,6 +1093,8 @@
 </form>
 
 <script>
+    //     // Install input filters.
+
     $(document).ready(function () {
         var startDate = $("#ContractStartDate").val();
         var endDateEx = $("#ContractEndDateEx").val();

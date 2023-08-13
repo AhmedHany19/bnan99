@@ -311,7 +311,7 @@ namespace RentCar.Controllers
                 {
                     ViewBag.IsOpenKm = "False";
                 }
-                ViewBag.OldCurrentKm = cR_Cas_Contract_Basic.CR_Cas_Contract_Basic_CurrentMeters;
+                ViewBag.OldCurrentKm = Convert.ToInt32(cR_Cas_Contract_Basic.CR_Cas_Contract_Basic_CurrentMeters);
                 ViewBag.AuthValue = cR_Cas_Contract_Basic.CR_Cas_Contract_Basic_Authorization_Value;
                 ViewBag.Discount = cR_Cas_Contract_Basic.CR_Cas_Contract_Basic_User_Discount;
                 ViewBag.Tax = cR_Cas_Contract_Basic.CR_Cas_Contract_Basic_Tax_Rate;

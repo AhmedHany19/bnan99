@@ -173,9 +173,6 @@
                                                             <input type="radio" id="ShowAll" name="Show" onclick="GetFilter()" style="float:right;margin-left:4px;width:13px;height:13px;">
                                                             <label for="javascript" style="float: left; font-size: 0.75rem">الكل</label>
                                                         </div>
-
-
-
                                                     </div>
                                                 </div>
                                             </div>
@@ -273,6 +270,13 @@
     </div> <!-- container-fluid -->
     <!-- validation init -->
     <script>
+
+        function removeAllCheckPoints() {
+            var radioButtons = document.getElementsByName('Show');
+            for (var i = 0; i < radioButtons.length; i++) {
+                radioButtons[i].checked = false;
+            }
+        }
         function GetFilterDate() {
             var sd = document.getElementById('Startdate').value;
             var ed = document.getElementById('Enddate').value;
@@ -282,6 +286,8 @@
                 data: { type: "Date", StartDate: sd, EndDate:ed },
                 success: function (data) {
                     $('#UserReceiptTable').html(data);
+                    removeAllCheckPoints()
+
                 }
             });
             $.ajax({
@@ -301,6 +307,7 @@
 
                             $('#UserCreit').val(credit);
                             $('#UserDebit').val(debit);
+                            removeAllCheckPoints()
                         }
                 });
         }
