@@ -143,7 +143,6 @@
                     var value = $(this).val().toString().replace(/,/g, '');
                     $(this).val(value.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
                     console.log("value1:" + value);
-
                 });
 
                 $("#TblCashClosing TR").each(function () {
@@ -172,23 +171,16 @@
                         console.log("Da2n sum:" + sum);
                         console.log("Moden sum:" + Creditor);
                         console.log("diffss:" + diffss);
-
-
                         $('.t1').each(function () {
                             var value = $(this).val().toString().replace(/,/g, '');
                             $(this).val(value.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
                             console.log("value3:" + value);
                         });
-
                     }
-
                 });
 
                 if (sum > 0) {
-
                     document.getElementById('TotalVal').value = sum.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-                    console.log(sum)
-
                     $(".totalCreditor").val(sum.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }));
                 } else {
                     document.getElementById('TotalVal').value = "0.00";
@@ -196,32 +188,16 @@
                 }
 
                 if (Creditor > 0) {
-
-                    //document.getElementById('TotalVal').value = sum.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-                    console.log(Creditor)
-
                     $(".totaldebtor").val(Creditor.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }));
                 } else {
-                    //document.getElementById('TotalVal').value = "0.00";
                     $(".totaldebtor").val("0.00");
                 }
 
                 if (diffss > 0) {
-
-                    //document.getElementById('TotalVal').value = sum.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-                    console.log(Creditor)
-
                     $("#TotalVal").val(diffss.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }));
                 } else {
-                    //document.getElementById('TotalVal').value = "0.00";
                     $("#TotalVal").val("0.00");
                 }
-
-
-
-
-
-
 
             })
 

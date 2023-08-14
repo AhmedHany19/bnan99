@@ -66,13 +66,21 @@ namespace RentCar.Controllers.BranchSys
             if (SalesPointCode != null && SalesPointCode!="")
             {
                 var GetTotalCashInSalesPoint = db.CR_Cas_Sup_SalesPoint.FirstOrDefault(l => l.CR_Cas_Sup_SalesPoint_Code == SalesPointCode).CR_Cas_Sup_SalesPoint_Balance;
-                var userBalance = db.CR_Cas_Account_Receipt.Where(x => x.CR_Cas_Account_Receipt_Lessor_Code == LessorCode && x.CR_Cas_Account_Receipt_Branch_Code == BranchCode && x.CR_Cas_Account_Receipt_User_Code == UserLogin && x.CR_Cas_Account_Receipt_SalesPoint_No == SalesPointCode&&x.CR_Cas_Account_Receipt_Is_Passing!="3");
-
-                var userReceiptPayment = userBalance.Sum(x => x.CR_Cas_Account_Receipt_Payment);
-                var userReceiptReceipt = userBalance.Sum(x => x.CR_Cas_Account_Receipt_Receipt);
-                var userBalanceForEachBranch = userReceiptPayment - userReceiptReceipt;
-                ViewBag.userBalanceForEachBranch = userBalanceForEachBranch;
                 ViewBag.Total1 = GetTotalCashInSalesPoint;
+
+                var userBalance = db.CR_Cas_Account_Receipt.Where(x => x.CR_Cas_Account_Receipt_Lessor_Code == LessorCode && x.CR_Cas_Account_Receipt_Branch_Code == BranchCode && x.CR_Cas_Account_Receipt_User_Code == UserLogin && x.CR_Cas_Account_Receipt_SalesPoint_No == SalesPointCode&&x.CR_Cas_Account_Receipt_Is_Passing!="3").ToList();
+                if (userBalance.Count()!=0)
+                {
+                    var userReceiptPayment = userBalance.Sum(x => x.CR_Cas_Account_Receipt_Payment);
+                    var userReceiptReceipt = userBalance.Sum(x => x.CR_Cas_Account_Receipt_Receipt);
+                    var userBalanceForEachBranch = userReceiptPayment - userReceiptReceipt;
+                    ViewBag.userBalanceForEachBranch = userBalanceForEachBranch;
+                }
+                else
+                {
+                    ViewBag.userBalanceForEachBranch = "0.00";
+                }
+
             }
             else
             {
@@ -80,9 +88,6 @@ namespace RentCar.Controllers.BranchSys
                 ViewBag.Total1 = "0.00";
 
             }
-
-
-
 
             return PartialView(Receipt.OrderByDescending(x=>x.CR_Cas_Account_Receipt_Date));
         }
