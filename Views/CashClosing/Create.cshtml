@@ -202,7 +202,9 @@
         });
 
     function GetReceipt() {
-
+        $('.totalCreditor').val("0.00");
+        $('.totaldebtor').val("0.00");
+        $('#TotalVal').val("0.00");
         $.ajax({
             url: '@Url.Action("PartialView","CashClosing")',
             type: "GET",
@@ -219,28 +221,21 @@
 <script>
     $('#form_validation').submit(function () {
         var userBalanceForEachBranch = $('#userBalanceForEachBranch').val();
+        var BalanceForEachBranch = $('#TotalVal1').val();
         var TotalVal = $('#TotalVal').val();
-        console.log("userBalanceForEachBranch: " + userBalanceForEachBranch);
-        console.log("TotalVal: " + TotalVal);
         if (userBalanceForEachBranch != "" && TotalVal != "") {
-            if (parseFloat(TotalVal) > parseFloat(userBalanceForEachBranch)) {
+            if (parseFloat(TotalVal.replace(/,/g, "")) > parseFloat(userBalanceForEachBranch.replace(/,/g, ""))) {
                 toastr.info("عفوا رصيدك لا يسمح ....");
+                return false; // Cancel form submission
+            }
+            if (parseFloat(TotalVal.replace(/,/g, "")) > parseFloat(BalanceForEachBranch.replace(/,/g, ""))) {
+                toastr.info("عفوا رصيد نقطه البيع لا يسمح ....");
                 return false; // Cancel form submission
             }
         }
     });
 
-    //$('#add_btnss').click(function () {
-    //    var userBalanceForEachBranch = $('#userBalanceForEachBranch').val();
-    //    var TotalVal = $('#TotalVal').val();
-    //    console.log("userBalanceForEachBranch: " + userBalanceForEachBranch);
-    //    console.log("TotalVal: " + TotalVal);
-    //    if (Number(userBalanceForEachBranch) != null && Number(TotalVal) != null) {
-    //        if (TotalVal > userBalanceForEachBranch) {
-    //            toastr.info("عفوا رصيدك لا يسمح ....")
-    //        }
-    //    }
-    //});
+   
 </script>
 
 <style>
