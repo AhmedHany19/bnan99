@@ -2203,13 +2203,14 @@
         var TotToPay = parseFloat(ContractValIT) + parseFloat(CompensationVal) + parseFloat(RenterPrevBalance) - parseFloat(depences);
         //alert(TotToPay);
         document.getElementById('TotToPay').value = TotToPay.toFixed(2);
-
         document.getElementById('TotPayed').focus;
-
         var userBalance = @Html.Raw(Json.Encode(ViewBag.UserBalance));
         var TotPayed = $('#TotPayed').val();
-       // اذا كان المستأجر له فلوس يبقي لازم ندفعله نقدا من الصندوق
-        if ($("#TotToPay").val() < 0 && parseInt(userBalance.replace(",", "")) > Math.abs(TotToPay)) {
+        // اذا كان المستأجر له فلوس يبقي لازم ندفعله نقدا من الصندوق
+
+        console.log("TotToPay:" + TotToPay)
+        console.log(userBalance)
+        if ($("#TotToPay").val() < 0) {
             //document.getElementById("PayType").value = "11"; // تعيين القيمة الأولى في القائمة كقيمة افتراضية
             $.get("/ContractSettlement/GetSalesPoint", { paycode: '11' }, function (data) {
                 $("#CasherName").empty();
@@ -2227,7 +2228,7 @@
                 });
             });
         }
-        else if ($("#TotToPay").val() < 0 && parseInt(userBalance.replace(",", "")) < Math.abs(TotToPay)) {
+        else if ($("#TotToPay").val() < 0) {
             $("#PayType").change(function () {
                 $.get("/ContractSettlement/GetSalesPoint", { PayCode: $("#PayType").val() }, function (data) {
                     $("#CasherName").empty();

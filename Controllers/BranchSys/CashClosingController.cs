@@ -68,7 +68,7 @@ namespace RentCar.Controllers.BranchSys
                 var GetTotalCashInSalesPoint = db.CR_Cas_Sup_SalesPoint.FirstOrDefault(l => l.CR_Cas_Sup_SalesPoint_Code == SalesPointCode).CR_Cas_Sup_SalesPoint_Balance;
                 ViewBag.Total1 = GetTotalCashInSalesPoint;
 
-                var userBalance = db.CR_Cas_Account_Receipt.Where(x => x.CR_Cas_Account_Receipt_Lessor_Code == LessorCode && x.CR_Cas_Account_Receipt_Branch_Code == BranchCode && x.CR_Cas_Account_Receipt_User_Code == UserLogin && x.CR_Cas_Account_Receipt_SalesPoint_No == SalesPointCode&&x.CR_Cas_Account_Receipt_Is_Passing!="3").ToList();
+                var userBalance = db.CR_Cas_Account_Receipt.Where(x => x.CR_Cas_Account_Receipt_Lessor_Code == LessorCode && x.CR_Cas_Account_Receipt_Branch_Code == BranchCode && x.CR_Cas_Account_Receipt_User_Code == UserLogin && x.CR_Cas_Account_Receipt_SalesPoint_No == SalesPointCode&&x.CR_Cas_Account_Receipt_Is_Passing=="1").ToList();
                 if (userBalance.Count()!=0)
                 {
                     var userReceiptPayment = userBalance.Sum(x => x.CR_Cas_Account_Receipt_Payment);
@@ -140,7 +140,7 @@ namespace RentCar.Controllers.BranchSys
 
 
         [HttpPost]
-        public ActionResult Create(string TracingNo, FormCollection collection, string sd, string ed, string CR_Cas_Sup_SalesPoint_Code, string reason)
+        public ActionResult Create(string TracingNo, FormCollection collection, string sd, string ed, string CR_Cas_Sup_SalesPoint_Code, string reason ,string TotalVal)
         {
             var b = false;
             var totalS = "";
@@ -165,10 +165,7 @@ namespace RentCar.Controllers.BranchSys
                         val += Convert.ToDecimal(Amount);
                         var receipt = db.CR_Cas_Account_Receipt.Single(r => r.CR_Cas_Account_Receipt_No == ReceiptNo);
                         receipt.CR_Cas_Account_Receipt_Reasons = reason.ToString();
-                        //Get The Current SalesPoint 
-                        var currentSalesPoint = db.CR_Cas_Sup_SalesPoint.FirstOrDefault(l => l.CR_Cas_Sup_SalesPoint_Code == CR_Cas_Sup_SalesPoint_Code);
-                        currentSalesPoint.CR_Cas_Sup_SalesPoint_Balance -= Convert.ToDecimal(Amount);
-
+                       
                         //Get The current user 
                         var currentUser = db.CR_Cas_User_Information.FirstOrDefault(l => l.CR_Cas_User_Information_Id == userlogin);
                         currentUser.CR_Cas_User_Information_Balance -= Convert.ToDecimal(Amount);
@@ -220,7 +217,12 @@ namespace RentCar.Controllers.BranchSys
             }
             if (b == true)
             {
-               List<CR_Cas_Account_Receipt> receipts = new List<CR_Cas_Account_Receipt>(); ;
+                //Get The Current SalesPoint 
+                var currentSalesPoint = db.CR_Cas_Sup_SalesPoint.FirstOrDefault(l => l.CR_Cas_Sup_SalesPoint_Code == CR_Cas_Sup_SalesPoint_Code);
+                currentSalesPoint.CR_Cas_Sup_SalesPoint_Balance -= Convert.ToDecimal(TotalVal);
+
+                List<CR_Cas_Account_Receipt> receipts = new List<CR_Cas_Account_Receipt>(); ;
+
                 foreach (string item in collection.AllKeys)
                 {
                     if (item.StartsWith("Chk_"))

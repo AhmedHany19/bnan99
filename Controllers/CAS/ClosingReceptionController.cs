@@ -310,7 +310,8 @@ namespace RentCar.Controllers.CAS
                             {
                                 foreach (var r in Receipt)
                                 {
-                                    r.CR_Cas_Sup_SalesPoint.CR_Cas_Sup_SalesPoint_Balance += r.CR_Cas_Account_Receipt_Payment;
+                                    r.CR_Cas_Sup_SalesPoint.CR_Cas_Sup_SalesPoint_Balance += r.CR_Cas_Account_Receipt_Payment-r.CR_Cas_Account_Receipt_Receipt;
+                                    //r.CR_Cas_Sup_SalesPoint.CR_Cas_Sup_SalesPoint_Balance -= r.CR_Cas_Account_Receipt_Receipt;
                                     r.CR_Cas_User_Information.CR_Cas_User_Information_Balance += r.CR_Cas_Account_Receipt_Payment;
                                     r.CR_Cas_Account_Receipt_Is_Passing = "1";
                                     r.CR_Cas_Account_Receipt_Reference_Passing = "";
