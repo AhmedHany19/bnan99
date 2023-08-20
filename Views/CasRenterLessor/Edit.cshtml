@@ -226,7 +226,7 @@
                                         <div class="form-group row">
                                             <label class="col-md-4 padding_left_none padding_right_none">قيمة المعاملات</label>
                                             <div class="col-md-8 padding_right_none">
-                                                @Html.EditorFor(model => model.CR_Cas_Renter_Lessor_Interaction_Amount_Value, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                                @Html.EditorFor(model => model.CR_Cas_Renter_Lessor_Interaction_Amount_Value, new { htmlAttributes = new { @class = "form-control t1", @readonly = "readonly" } })
 
                                             </div>
                                         </div>
@@ -237,7 +237,7 @@
                                         <div class="form-group row">
                                             <label class="col-md-4 padding_left_none">الرصيد</label>
                                             <div class="col-md-5 padding_right_none">
-                                                @Html.EditorFor(model => model.CR_Cas_Renter_Lessor_Balance, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", style = "direction: ltr!important;" } })
+                                                @Html.EditorFor(model => model.CR_Cas_Renter_Lessor_Balance, new { htmlAttributes = new { @class = "form-control t3", @readonly = "readonly", style = "direction: ltr!important;" } })
 
                                             </div>
                                         </div>
@@ -246,7 +246,7 @@
                                         <div class="form-group row">
                                             <label class="col-md-4 padding_left_none padding_right_none">المسافة المقطوعة</label>
                                             <div class="col-md-8 padding_right_none">
-                                                @Html.EditorFor(model => model.CR_Cas_Renter_Lessor_KM, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                                @Html.EditorFor(model => model.CR_Cas_Renter_Lessor_KM, new { htmlAttributes = new { @class = "form-control t2 text-box single-line", @readonly = "readonly", @type="text"} })
 
                                             </div>
                                         </div>
@@ -435,7 +435,7 @@
 
         });
 </script>
-<script
+
 <script>
     var HoldModal = function (callback) {
         $("#btnHold").on("click", function () {
@@ -465,6 +465,8 @@
 <script>
     $(document).ready(function () {
         formatInputNumber($(".t1"));
+        formatInputNumber($(".t2"));
+        formatInputNumber($(".t3"));
     });
 
     function formatInputNumber(input) {
@@ -472,7 +474,4 @@
         num = num.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'); // Format the number with commas
         input.val(num); // Set the formatted number as the value of the input
     }
-</script>
-<script>
-   
 </script>

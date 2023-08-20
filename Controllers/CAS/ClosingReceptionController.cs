@@ -124,7 +124,8 @@ namespace RentCar.Controllers.CAS
                 return View(Receipt);
             }
 
-        }
+        }  
+
         public ActionResult ShowCreate(string No, string Date)
         {
             var LessorCode = "";
@@ -168,7 +169,9 @@ namespace RentCar.Controllers.CAS
                 return View(Receipt);
             }
 
-        }
+        }   
+
+
         [HttpPost]
         public ActionResult Create(string TracingNo, string save, string Cancel)
         {
@@ -393,7 +396,7 @@ namespace RentCar.Controllers.CAS
 
 
             var Admin = db.CR_Cas_Administrative_Procedures.Where(a => a.CR_Cas_Administrative_Procedures_Lessor == LessorCode && a.CR_Cas_Administrative_Procedures_Code == "69"
-            && a.CR_Cas_Administrative_Procedures_User_Insert != UserLogin && a.CR_Cas_Administrative_Procedures_Type != "Z");
+            && a.CR_Cas_Administrative_Procedures_User_Insert != UserLogin && a.CR_Cas_Administrative_Procedures_Type == "I");
 
             if (type == "I")
             {
@@ -411,6 +414,11 @@ namespace RentCar.Controllers.CAS
                 && a.CR_Cas_Administrative_Procedures_User_Insert != UserLogin && a.CR_Cas_Administrative_Procedures_Type == "Q");
             }
 
+            if(Admin == null)
+            {
+            Admin = db.CR_Cas_Administrative_Procedures.Where(a => a.CR_Cas_Administrative_Procedures_Lessor == LessorCode && a.CR_Cas_Administrative_Procedures_Code == "69"
+             && a.CR_Cas_Administrative_Procedures_User_Insert != UserLogin && a.CR_Cas_Administrative_Procedures_Type == "Q").OrderBy(a=>a.CR_Cas_Administrative_Procedures_Doc_End_Date);
+            }
 
             var x = Admin.Count();
             List<ClosingReceptionMD> ListReception = new List<ClosingReceptionMD>();

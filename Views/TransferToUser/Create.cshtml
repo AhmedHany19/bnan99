@@ -83,8 +83,8 @@
                                                     <label class="control-label">تاريخ التغذية</label><label id="asterisk">*</label>
                                                 </div>
                                                 <div class="col-md-5 padding_right_none">
-                                                    <input class="form-control text-box single-line" data-val="true" id="TransferDate" name="TransferDate" type="text" value="@ViewBag.TransferDate" data-inputmask="'alias': 'yyyy-mm-dd'" style="width:100%" onblur="affich_btn_1(event)" onchange="CheckDate(this.value)">
-                                                    <input name="b1" type="button"  onchange="CheckDate(this.value)" class="hijri-date-input2" id="date_btn1" onblur="affich_affich_1(event)"/>
+                                                    <input class="form-control text-box single-line" data-val="true" id="TransferDate" name="TransferDate" type="text" value="@ViewBag.TransferDate" data-inputmask="'alias': 'yyyy-mm-dd'" style="width:100%">
+                                                    <input name="b1" type="button" value="@ViewBag.TransferDate" onchange="CheckDate(this.value)" class="hijri-date-input2" id="date_btn1" onblur="affich_affich_1(event)"/>
                                                     <div class="texterr" id="StDate" style="float:right;margin-top:0 !important"></div>
 
                                                 </div>
@@ -120,7 +120,7 @@
 
                                     <div class="row">
                                         <div class="col-md-6 offset-md-6" style="height: 43px;">
-                                            <div class="row">
+                                            <div class="row mt-4">
                                                 <div class="col-md-3 padding_left_none">
                                                     <label class="control-label">الملاحظات</label>
                                                 </div>
@@ -155,17 +155,18 @@
 
     function affich_affich_1(e) {
         var date = e.target.value;
+  
         document.getElementById("TransferDate").value = date;
+
     }
     function affich_btn_1(e) {
         var date = e.target.value;
+     
         document.getElementById("date_btn1").value = date;
-    }
-
-    function CheckDate(d) {
-        alert(d);
+        console.log(`${date} from date_btn1`)
     }
 
    
    
 </script>
+

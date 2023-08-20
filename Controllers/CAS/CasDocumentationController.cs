@@ -227,7 +227,7 @@ namespace RentCar.Controllers.CAS
             else
             {
                 cR_Cas_Sup_Branch_Documentation = db.CR_Cas_Sup_Branch_Documentation.Where(d => d.CR_Cas_Sup_Procedures_Type == "1" &&
-                d.CR_Cas_Sup_Branch_Documentation_Lessor_Code == LessorCode && (d.CR_Cas_Sup_Branch_Documentation_Status=="N" || d.CR_Cas_Sup_Branch_Documentation_Status=="E") )
+                d.CR_Cas_Sup_Branch_Documentation_Lessor_Code == LessorCode && (d.CR_Cas_Sup_Branch_Documentation_Status=="N" || d.CR_Cas_Sup_Branch_Documentation_Status=="E" || d.CR_Cas_Sup_Branch_Documentation_Status == "X") )
                .Include(c => c.CR_Mas_Sup_Procedures);
             }
             

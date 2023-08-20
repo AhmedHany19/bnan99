@@ -10,7 +10,7 @@
 
         <div class="row">
             <div class="col-12">
-                <div class="card-box table-responsive" style="height:79vh; overflow:auto">
+                <div class="card-box table-responsive" style="height:79vh; overflow:hidden">
                     <div class="title_corp"><h3> الحسابات/إستلام عهدة/قبول أو رفض</h3></div>
                     <div class="subtitle_corp">تمكنك الصفحة عرض بيانات استلام العهدة من الموظف و قبول أو رفض الاستلام</div>
                     <div class="hr_60"></div>
@@ -72,7 +72,7 @@
                                                     <label class="label_form" style="float:right;">رصيد نقطه البيع </label>
                                                 </div>
                                                 <div class="col-lg-4 col-md-4">
-                                                    <input class="form-control"
+                                                    <input class="form-control t1"
                                                            id="Date" name="Date" type="text" value="@Model.FirstOrDefault().CR_Cas_Sup_SalesPoint.CR_Cas_Sup_SalesPoint_Balance" readonly>
                                                 </div>
                                             </div>
@@ -163,7 +163,7 @@
 
                                                                 </tr>
                                                             </thead>
-                                                            <tbody id="TblCashClosing" style="cursor:auto;height:340px!important">
+                                                            <tbody id="TblCashClosing" style="cursor:auto;height:240px!important">
 
                                                                 @{ int c = 0;
                                                                     foreach (var item in Model)
@@ -171,8 +171,8 @@
                                                                         c += 1;
 
                                                                         <tr class="text-center">
-                                                                             <td width="2%" >
-                                                                                            @c
+                                                                            <td width="2%">
+                                                                                @c
                                                                             </td>
                                                                             <td style="width:15%">
                                                                                 @Html.DisplayFor(modelItem => item.CR_Cas_Account_Receipt_No)
@@ -197,9 +197,9 @@
                                                                             </td>
 
                                                                         </tr>
-                                                                        }
                                                                     }
-                                                                </tbody>
+                                                                }
+                                                            </tbody>
                                                         </table>
                                                     </div>
                                                 </div>
@@ -209,20 +209,20 @@
 
 
                                     </div>
-                                    
+
                                     <div class="row mb-5">
                                         <div class="col-md-4 col-50 ">
                                             <input type="submit" name="Save" class="btn btn-primary waves-effect" id="add_btn" value="قبول" style=" margin-left: 18px;" />
                                             <input type="submit" name="Cancel" class="btn btn-primary waves-effect" id="CancelBtn" value="رفض" style=" margin-left: 18px;" />
                                             <a href="/ClosingReception/index" tabindex="" class="btn btn-primary waves-effect">انهاء</a>
                                         </div>
-                                    
+
 
 
 
                                         @* <div class="col-md-1 col-50" style="margin-top:50px;">
-                <div></div>
-            </div>*@
+                                                <div></div>
+                                            </div>*@
 
                                     </div>
 
@@ -237,8 +237,8 @@
 </div>
 
 <style>
-    .row{
-        align-items:center
+    .row {
+        align-items: center
     }
 </style>
 
@@ -250,7 +250,7 @@
     const table = document.getElementById('myTable');
 
     // Specify the indexes of the columns to format (starting from 0)
-    const columnIndexes = [5,6]; // for example, format columns  5, 6    
+    const columnIndexes = [5, 6]; // for example, format columns  5, 6
 
     // Loop through each row in the table
     for (let i = 1; i < table.rows.length; i++) { // starting from row 1 to exclude the header row
@@ -292,46 +292,40 @@
 
 <script>
     $(document).ready(function () {
+        var total = 0;
+        $('.Creditor').each(function () {
+            var price = parseFloat($(this).text().replace(/,/g, ''));
+            if (!isNaN(price)) {
+                total += price;
+            }
+        });
+        $('.totalCreditor').val(total.toFixed(2).toLocaleString('en-US'));
+        formatInputNumber($(".totalCreditor"));
+    });
+
+    $(document).ready(function () {
+        var total = 0;
+        $('.debtor').each(function () {
+            var price = parseFloat($(this).text().replace(/,/g, ''));
+            if (!isNaN(price)) {
+                total += price;
+            }
+        });
+        $('.totaldebtor').val(total.toFixed(2).toLocaleString('en-US'));
+        formatInputNumber($(".totaldebtor"));
+    });
+
+</script>
+
+<script>
+    $(document).ready(function () {
         formatInputNumber($(".t1"));
     });
-        
+
     function formatInputNumber(input) {
         let num = parseFloat(input.val()); // Get the value of the input and parse it as a float
         num = num.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'); // Format the number with commas
         input.val(num); // Set the formatted number as the value of the input
     }
-</script>
-
-<script>
-        $(document).ready(function () {
-            var total = 0;
-            $('.Creditor').each(function () {
-                var price = parseFloat($(this).text().replace(/,/g, ''));
-                if (!isNaN(price)) {
-                    total += price;
-                } 
-            });
-            console.log(total)
-            $('.totalCreditor').val(total.toFixed(2).toLocaleString('en-US'));
-        }); 
-
-        $(document).ready(function () {
-            var total = 0;
-            $('.debtor').each(function () {
-                var price = parseFloat($(this).text().replace(/,/g, ''));
-                if (!isNaN(price)) {
-                    total += price;
-                }
-            });
-            $('.totaldebtor').val(total.toFixed(2).toLocaleString('en-US'));
-        }); 
-
-
-    $(document).ready(function () {
-        $('.t1').each(function () {
-            var value = $(this).val().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-            $(this).val(value);
-        });
-    });
 </script>
 
