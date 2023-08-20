@@ -409,7 +409,7 @@
                                                         <div class="form-group row mb-3">
                                                             <label class="col-md-4" for="userName3">المصروفات </label>
                                                             <div class="col-md-2 offset-md-6">
-                                                                <input class="form-control" id="Chk_Depences" name="Chk_Depences" style="height:26px !important;margin-top:0px;" type="checkbox" value="true">
+                                                                <input class="form-control" id="Chk_Depences" name="Chk_Depences" style="height:26px !important;margin-top:0px;" type="checkbox" value="true" >
                                                             </div>
                                                         </div>
                                                     </div>
@@ -456,7 +456,7 @@
                                                     <div class="row">
                                                         <label class="col-md-4" for="userName3">قيمة المصروفات</label>
                                                         <div class="col-md-8">
-                                                            <input autocomplete="off" class="form-control " id="Depences" name="Depences" style="float:right;width:100%" type="text" value="">
+                                                            <input autocomplete="off" class="form-control " id="Depences" name="Depences" style="float:right;width:40%" type="text" value="" maxlength="10" oninput="this.value=this.value.replace(/[^0-9]/g,'')">
                                                         </div>
                                                     </div>
                                                     <div class="row">
@@ -555,7 +555,7 @@
                                                     <div class="row">
                                                         <label class="col-md-4" for="userName3">قيمة التعويضات</label>
                                                         <div class="col-md-8">
-                                                            <input autocomplete="off" class="form-control " id="CompensationVal" name="CompensationVal" style="float:right;width:100%" type="text" value="">
+                                                            <input autocomplete="off" class="form-control " id="CompensationVal" name="CompensationVal" style="float:right;width:40%" type="text" value="" maxlength="10" oninput="this.value=this.value.replace(/[^0-9]/g,'')">
                                                         </div>
                                                     </div>
                                                     <div class="row">
@@ -672,7 +672,7 @@
                                                                 <div class="form-group row mt-2">
                                                                     <label class="col-md-12" for="input3" style="text-align:center">القراءة الحالية</label>
                                                                     <div class="col-md-12">
-                                                                        <input class="text-center" type="text" id="CurrentMeter" name="CurrentMeter" value="" style="width:100%" />
+                                                                        <input class="text-center" type="text" id="CurrentMeter" name="CurrentMeter" value="" style="width:100%" maxlength="7" oninput="this.value=this.value.replace(/[^0-9]/g,'')"/>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -1019,7 +1019,7 @@
                                                     <div class="form-group row mb-3">
                                                         <label class="col-md-6" for="userName3">المبلغ المدفوع</label>
                                                         <div class="col-md-6">
-                                                            <input autocomplete="off" class="form-control " id="TotPayed" name="TotPayed" style="float: right; width: 65%; text-align: right; direction: ltr; height: 35px !important " type="text" value="">
+                                                            <input autocomplete="off" class="form-control " id="TotPayed" name="TotPayed" style="float: right; width: 80%; text-align: right; direction: ltr; height: 35px !important " type="text" value="" maxlength="10" oninput="this.value=this.value.replace(/[^0-9.]/g,'')">
                                                         </div>
 
                                                     </div>
@@ -1092,10 +1092,9 @@
     </div>
 </form>
 
-
-
-
 <script>
+    //     // Install input filters.
+
     $(document).ready(function () {
         var startDate = $("#ContractStartDate").val();
         var endDateEx = $("#ContractEndDateEx").val();
@@ -1840,7 +1839,6 @@
                 
                 currentTab = currentTab + n + 1;
             }
-            Calculate()
         }
         else if (currentTab == 1) {
             if (compensationCheckbox.checked == true) {
@@ -1883,7 +1881,6 @@
                     toastr.info("الرجاء ادخال قيمة المصروفات وصورة واحدة علي الاقل");
                 }
             }
-            Calculate()
         }
         else if (currentTab == 2) {
             var m = 0;
@@ -1901,7 +1898,6 @@
             else {
                 toastr.info("الرجاء ادخال قيمة التعويضات وصورة واحدة علي الاقل");
             }
-            Calculate()
         }
 
         else if (currentTab == 3) {
@@ -1936,11 +1932,12 @@
                 toastr.info("الرجاء التحقق من الفحص الظاهري");
             }
             Calculate()
+            LetTotpayedZero()
 
         }
         else {
             currentTab = currentTab + n;
-            Calculate()
+            LetTotpayedZero()
         }
 
         // if you have reached the end of the form...
@@ -2206,13 +2203,14 @@
         var TotToPay = parseFloat(ContractValIT) + parseFloat(CompensationVal) + parseFloat(RenterPrevBalance) - parseFloat(depences);
         //alert(TotToPay);
         document.getElementById('TotToPay').value = TotToPay.toFixed(2);
-
         document.getElementById('TotPayed').focus;
-
         var userBalance = @Html.Raw(Json.Encode(ViewBag.UserBalance));
         var TotPayed = $('#TotPayed').val();
-       // اذا كان المستأجر له فلوس يبقي لازم ندفعله نقدا من الصندوق
-        if ($("#TotToPay").val() < 0 && parseInt(userBalance.replace(",", "")) > Math.abs(TotToPay)) {
+        // اذا كان المستأجر له فلوس يبقي لازم ندفعله نقدا من الصندوق
+
+        console.log("TotToPay:" + TotToPay)
+        console.log(userBalance)
+        if ($("#TotToPay").val() < 0) {
             //document.getElementById("PayType").value = "11"; // تعيين القيمة الأولى في القائمة كقيمة افتراضية
             $.get("/ContractSettlement/GetSalesPoint", { paycode: '11' }, function (data) {
                 $("#CasherName").empty();
@@ -2230,7 +2228,7 @@
                 });
             });
         }
-        else if ($("#TotToPay").val() < 0 && parseInt(userBalance.replace(",", "")) < Math.abs(TotToPay)) {
+        else if ($("#TotToPay").val() < 0) {
             $("#PayType").change(function () {
                 $.get("/ContractSettlement/GetSalesPoint", { PayCode: $("#PayType").val() }, function (data) {
                     $("#CasherName").empty();
@@ -2252,31 +2250,131 @@
         }
 
     }
-
-    $(document).ready(function () {
-        $('#TotPayed').focusout(function () {
+    function LetTotpayedZero() {
+        $(document).ready(function () {
+            $("#TotPayed").val("0");
             var TotPayed = document.getElementById('TotPayed').value;
             var TotToPay = Number(document.getElementById('TotToPay').value);
-            if (TotPayed != "") {
-                TotPayed = Number(TotPayed);
-                if (TotToPay > 0) {
-                    var reste = TotPayed - TotToPay;
-                } else {
-                    var reste = TotPayed + TotToPay;
+            if (TotToPay >= 0) {
+                if (TotPayed != "") {
+                    TotPayed = Number(TotPayed);
+                    if (TotToPay > 0) {
+                        var reste = TotToPay - TotPayed;
+                    } else {
+                        var reste = TotPayed + TotToPay;
+                    }
+                    if (reste == 0) {
+                        document.getElementById('RestLabel').innerHTML = "الباقي";
+                    } else if (reste > 0) {
+                        document.getElementById('RestLabel').innerHTML = "الباقي على للمستأجر";
+                    }
+                    else
+                    {
+                        document.getElementById('RestLabel').innerHTML = "الباقي للمستأجر";
+                    }
+                    document.getElementById('reste').value = reste.toFixed(2);
                 }
-                if (reste == 0) {
-                    document.getElementById('RestLabel').innerHTML = "الباقي";
-                } else if (reste > 0) {
-                    document.getElementById('RestLabel').innerHTML = "الباقي للمستأجر";
-                } else {
-                    document.getElementById('RestLabel').innerHTML = "الباقي على للمستأجر";
-                }
-                document.getElementById('reste').value = reste.toFixed(2);
             }
             else {
-                document.getElementById('reste').value = "";
-
+                if (TotPayed != "") {
+                    TotPayed = Number(TotPayed);
+                    if (TotToPay > 0) {
+                        var reste = TotPayed - TotToPay;
+                    } else {
+                        var reste = TotPayed + TotToPay;
+                    }
+                    if (reste == 0) {
+                        document.getElementById('RestLabel').innerHTML = "الباقي";
+                    } else if (reste > 0) {
+                        document.getElementById('RestLabel').innerHTML = "الباقي على للمستأجر";
+                    } 
+                    else
+                    {
+                        document.getElementById('RestLabel').innerHTML = "الباقي للمستأجر";
+                    }
+                    document.getElementById('reste').value = reste.toFixed(2);
+                }
             }
+           
+        })
+    }
+   
+    $(document).ready(function () {
+        $('#TotPayed').focusout(function () {
+            
+            var TotPayed = document.getElementById('TotPayed').value;
+            var TotToPay = Number(document.getElementById('TotToPay').value);
+            if (TotToPay >= 0) {
+                if (TotPayed != "") {
+                    TotPayed = Number(TotPayed);
+                    if (TotToPay > 0) {
+                        var reste = TotToPay - TotPayed;
+                    } else {
+                        var reste = TotPayed + TotToPay;
+                    }
+                    if (reste == 0) {
+                        document.getElementById('RestLabel').innerHTML = "الباقي";
+                    } else if (reste > 0) {
+                        document.getElementById('RestLabel').innerHTML = "الباقي على للمستأجر";
+                    } else {
+                        document.getElementById('RestLabel').innerHTML = "الباقي للمستأجر";
+                    }
+                    document.getElementById('reste').value = reste.toFixed(2);
+                }
+                else {
+                    TotPayed = "0"
+                    TotPayed = Number(TotPayed);
+                    if (TotToPay > 0) {
+                        var reste = TotPayed - TotToPay;
+                    } else {
+                        var reste = TotPayed + TotToPay;
+                    }
+                    if (reste == 0) {
+                        document.getElementById('RestLabel').innerHTML = "الباقي";
+                    } else if (reste > 0) {
+                        document.getElementById('RestLabel').innerHTML = "الباقي للمستأجر";
+                    } else {
+                        document.getElementById('RestLabel').innerHTML = "الباقي على للمستأجر";
+                    }
+                    document.getElementById('reste').value = reste.toFixed(2);
+                }
+            }
+            else {
+                if (TotPayed != "") {
+                    TotPayed = Number(TotPayed);
+                    if (TotToPay > 0) {
+                        var reste = TotPayed - TotToPay;
+                    } else {
+                        var reste = TotPayed + TotToPay;
+                    }
+                    if (reste == 0) {
+                        document.getElementById('RestLabel').innerHTML = "الباقي";
+                    } else if (reste > 0) {
+                        document.getElementById('RestLabel').innerHTML = "الباقي على للمستأجر";
+                    } else {
+                        document.getElementById('RestLabel').innerHTML = "الباقي للمستأجر";
+                    }
+                    document.getElementById('reste').value = reste.toFixed(2);
+                }
+                else {
+                    TotPayed = "0"
+                    TotPayed = Number(TotPayed);
+                    if (TotToPay > 0) {
+                        var reste = TotPayed - TotToPay;
+                    } else {
+                        var reste = TotPayed + TotToPay;
+                    }
+                    if (reste == 0) {
+                        document.getElementById('RestLabel').innerHTML = "الباقي";
+                    } else if (reste > 0) {
+                        document.getElementById('RestLabel').innerHTML = "الباقي على للمستأجر";
+                    } else {
+                        document.getElementById('RestLabel').innerHTML = "الباقي للمستأجر";
+                    }
+                    document.getElementById('reste').value = reste.toFixed(2);
+                }
+            }
+            
         })
     })
 </script>

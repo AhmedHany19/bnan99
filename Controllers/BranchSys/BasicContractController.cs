@@ -2439,10 +2439,37 @@ namespace RentCar.Controllers.BranchSys
                                             Contract.CR_Cas_Contract_Basic_Statistics_Membership_Code = RenterLessor.CR_Cas_Renter_Membership_Code;
                                             /////////////////////////////////////////////////////////////////////////////////
                                         }
+
+                                        //////////////////////////////////////////////////////////////////////////////////
+                                        /// 
+                                        ////////////////////////////////////Driver//////////////////////////
+
+                                        if (IsRenterDriver==false)
+                                        {
+                                           var driver = db.CR_Cas_Renter_Lessor.FirstOrDefault(r => r.CR_Cas_Renter_Lessor_Id == DriverID && r.CR_Cas_Renter_Lessor_Code == LessorCode);
+                                            if (driver!=null)
+                                            {
+                                                driver.CR_Cas_Renter_Lessor_Date_Last_Interaction = DateTime.Now;
+                                                driver.CR_Cas_Renter_Lessor_Status = "R";
+                                                db.Entry(driver).State = EntityState.Modified;
+                                            }
+                                        }
+                                        if (IsAdditionalDriver == true)
+                                        {
+                                            var additionalDriver = db.CR_Cas_Renter_Lessor.FirstOrDefault(r => r.CR_Cas_Renter_Lessor_Id == AdditionalDriverId && r.CR_Cas_Renter_Lessor_Code == LessorCode);
+                                            if (additionalDriver != null)
+                                            {
+                                                additionalDriver.CR_Cas_Renter_Lessor_Date_Last_Interaction = DateTime.Now;
+                                                additionalDriver.CR_Cas_Renter_Lessor_Status = "R";
+                                                db.Entry(additionalDriver).State = EntityState.Modified;
+                                            }
+                                        }
+
+
                                         //////////////////////////////////////////////////////////////////////////////////
                                         /// 
                                         ////////////////////////////////////CR_Cas_Account_Receipt//////////////////////////
-                                        if(PayedValue>0)
+                                        if (PayedValue>0)
                                         {
                                             
                                             DateTime year = DateTime.Now;

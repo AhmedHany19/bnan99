@@ -86,7 +86,7 @@
                                         </div>
 
                                         <div class="row mb-2">
-                                            <div class="col-md-6 offset-md-12 " style="">
+                                            <div class="col-md-4 offset-md-12 " style="">
                                                 <div class="row">
                                                     <div>
                                                         <label class="control-label">نقطة البيع</label>
@@ -96,7 +96,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-6">
+                                            <div class="col-md-4">
                                                 <div class="row">
                                                     <div>
                                                         <label class="control-label"> رصيد نقطه البيع</label>
@@ -106,27 +106,27 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-9 offset-md-12 " style="" hidden>
+                                            <div class="col-md-4 offset-md-12 " style="">
                                                 <div class="row">
                                                     <div>
-                                                        <label class="control-label">المبلغ المسلم</label>
+                                                        <label class="control-label">رصيد الموظف</label>
                                                     </div>
                                                     <div style=" margin-right: 20px;">
-                                                        <input type="text" id="TotalVal" name="TotalVal" class="form-control text-box single-line" readonly />
+                                                        <input type="text" id="userBalanceForEachBranch" name="userBalanceForEachBranch" class="form-control text-box single-line t2" readonly  />
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-6">
+                                            <div class="col-lg-4">
                                                 <div class="row mt-2">
                                                     <div>
                                                         <label class="control-label "> مجموع الدائن</label>
                                                     </div>
                                                     <div style=" margin-right: 20px;">
-                                                        <input type="text" class="form-control text-box single-line totalCreditor"  readonly />
+                                                        <input type="text" class="form-control text-box single-line totalCreditor" readonly />
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-4 offset-md-12" >
+                                            <div class="col-md-4 offset-md-12">
                                                 <div class="row">
                                                     <div>
                                                         <label class="control-label"> مجموع المدين</label>
@@ -136,6 +136,17 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div class="col-md-4 offset-md-12 " style="">
+                                                <div class="row">
+                                                    <div>
+                                                        <label class="control-label">المبلغ المسلم</label>
+                                                    </div>
+                                                    <div style=" margin-right: 20px;">
+                                                        <input type="text" id="TotalVal" name="TotalVal" class="form-control text-box single-line" readonly />
+                                                    </div>
+                                                </div>
+                                            </div>
+
                                             <div class="col-md-12 offset-md-12 mb-2">
                                                 <div class="row">
                                                     <div>
@@ -191,11 +202,9 @@
         });
 
     function GetReceipt() {
-
-
         $('.totalCreditor').val("0.00");
         $('.totaldebtor').val("0.00");
-        document.getElementById('TotalVal').value = "0.00";
+        $('#TotalVal').val("0.00");
         $.ajax({
             url: '@Url.Action("PartialView","CashClosing")',
             type: "GET",
@@ -208,6 +217,25 @@
         });
 
         };
+</script>
+<script>
+    $('#form_validation').submit(function () {
+        var userBalanceForEachBranch = $('#userBalanceForEachBranch').val();
+        var BalanceForEachBranch = $('#TotalVal1').val();
+        var TotalVal = $('#TotalVal').val();
+        if (userBalanceForEachBranch != "" && TotalVal != "") {
+            if (parseFloat(TotalVal.replace(/,/g, "")) > parseFloat(userBalanceForEachBranch.replace(/,/g, ""))) {
+                toastr.info("عفوا رصيدك لا يسمح ....");
+                return false; // Cancel form submission
+            }
+            if (parseFloat(TotalVal.replace(/,/g, "")) > parseFloat(BalanceForEachBranch.replace(/,/g, ""))) {
+                toastr.info("عفوا رصيد نقطه البيع لا يسمح ....");
+                return false; // Cancel form submission
+            }
+        }
+    });
+
+   
 </script>
 
 <style>

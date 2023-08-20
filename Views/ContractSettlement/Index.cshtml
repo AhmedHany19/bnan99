@@ -102,9 +102,8 @@
                                                                 </td>
                                                                 <td style="width:8%">
                                                                     @{
-                                                                        DateTime currentdate = DateTime.Now;
+                                                                        DateTime currentdate = DateTime.Now.Date;
                                                                         DateTime enddate = (DateTime)item.CR_Cas_Contract_Basic_Expected_End_Date;
-
                                                                         var diff = (enddate - currentdate).TotalDays;
                                                                     }
                                                                     <label style="color:red">@String.Format("{0:#,##0}", diff)</label>

@@ -311,7 +311,7 @@ namespace RentCar.Controllers
                 {
                     ViewBag.IsOpenKm = "False";
                 }
-                ViewBag.OldCurrentKm = cR_Cas_Contract_Basic.CR_Cas_Contract_Basic_CurrentMeters;
+                ViewBag.OldCurrentKm = Convert.ToInt32(cR_Cas_Contract_Basic.CR_Cas_Contract_Basic_CurrentMeters);
                 ViewBag.AuthValue = cR_Cas_Contract_Basic.CR_Cas_Contract_Basic_Authorization_Value;
                 ViewBag.Discount = cR_Cas_Contract_Basic.CR_Cas_Contract_Basic_User_Discount;
                 ViewBag.Tax = cR_Cas_Contract_Basic.CR_Cas_Contract_Basic_Tax_Rate;
@@ -657,12 +657,14 @@ namespace RentCar.Controllers
                                         }
                                     }
                                     CasRenter.CR_Cas_Renter_Lessor_Days = allDaysForRenter;
-                                    CasRenter.CR_Cas_Renter_Lessor_Interaction_Amount_Value = Convert.ToDecimal(TotalContractIT);
+                                    CasRenter.CR_Cas_Renter_Lessor_Interaction_Amount_Value += Convert.ToDecimal(TotalContractIT);
                                     CasRenter.CR_Cas_Renter_Lessor_KM = allkms;
                                     CasRenter.CR_Cas_Renter_Lessor_Status = "A";
+                                    var rs = Convert.ToDecimal(reste);
                                     if (reste != null && reste != "")
                                     {
-                                        CasRenter.CR_Cas_Renter_Lessor_Balance = Convert.ToDecimal(reste);
+                                        
+                                            CasRenter.CR_Cas_Renter_Lessor_Balance = Convert.ToDecimal(reste);
                                     }
                                     CasRenter.CR_Cas_Renter_Lessor_Date_Last_Interaction = DateTime.Now.Date;
                                     CasRenter.CR_Cas_Renter_Lessor_Statistics_Nationalities = Contract.CR_Cas_Contract_Basic_Statistics_Nationalities;
@@ -676,6 +678,27 @@ namespace RentCar.Controllers
 
                                 }
                             }
+
+                            // Driver to active---
+                            if (Contract.CR_Cas_Contract_Basic_is_Renter_Driver==false)
+                            {
+                                var driver = db.CR_Cas_Renter_Lessor.FirstOrDefault(r => r.CR_Cas_Renter_Lessor_Id == Contract.CR_Cas_Contract_Basic_Driver_Id && r.CR_Cas_Renter_Lessor_Code == LessorCode);
+                                if (driver!=null)
+                                {
+                                    driver.CR_Cas_Renter_Lessor_Status = "A";
+                                }
+                            }
+                            // Additional Driver to active---
+
+                            if (Contract.CR_Cas_Contract_Basic_is_Additional_Driver == true)
+                            {
+                                var Adddriver = db.CR_Cas_Renter_Lessor.FirstOrDefault(r => r.CR_Cas_Renter_Lessor_Id == Contract.CR_Cas_Contract_Basic_Additional_Driver_Id && r.CR_Cas_Renter_Lessor_Code == LessorCode);
+                                if (Adddriver!=null)
+                                {
+                                    Adddriver.CR_Cas_Renter_Lessor_Status = "A";
+                                }
+                            }
+
                             // Renter Information for All Company /////////
 
                             var CasRenterComs = db.CR_Cas_Renter_Lessor.Where(r => r.CR_Cas_Renter_Lessor_Id == Contract.CR_Cas_Contract_Basic_Renter_Id);
@@ -778,7 +801,7 @@ namespace RentCar.Controllers
                                         Receipt.CR_Cas_Account_Receipt_SalesPoint_No = CasherName;
                                         Receipt.CR_Cas_Account_Receipt_Bank_Code = salesPoint.CR_Cas_Sup_SalesPoint_Bank_Code;
                                         Receipt.CR_Cas_Account_Receipt_SalesPoint_Previous_Balance = salesPoint.CR_Cas_Sup_SalesPoint_Balance;
-                                        salesPoint.CR_Cas_Sup_SalesPoint_Balance -= Convert.ToDecimal(TotPayed);
+                                        salesPoint.CR_Cas_Sup_SalesPoint_Balance += Convert.ToDecimal(TotPayed);
                                         db.Entry(salesPoint).State = EntityState.Modified;
                                     }
                                     /////////////////////////////////Update Cas User Information//////////////////////
@@ -809,6 +832,10 @@ namespace RentCar.Controllers
                             if (carInfo!=null)
                             {
                                 carInfo.CR_Cas_Sup_Car_Status = "A";
+                                if (CurrentMeter!=null && CurrentMeter!="")
+                                {
+                                    carInfo.CR_Cas_Sup_Car_No_Current_Meter = Convert.ToInt32(CurrentMeter);
+                                }
                             }
 
 
@@ -1556,9 +1583,9 @@ namespace RentCar.Controllers
                         }
 
 
-                        if (contract.CR_Cas_Contract_Basic_Previous_Balance != null)
+                        if (renterPrevBalance != null)
                         {
-                            rd.SetParameterValue("PreviousBalance", contract.CR_Cas_Contract_Basic_Previous_Balance.ToString());
+                            rd.SetParameterValue("PreviousBalance", renterPrevBalance);
                         }
                         else
                         {

@@ -1020,7 +1020,7 @@
                                                                 <div class="row">
                                                                     <label class="col-md-4 label6"> نسبة الخصم</label>
                                                                     <div class="col-md-8 input6">
-                                                                        <input type="text" class="form-control" style="width: 60px;" id="ContractDiscount" name="ContractDiscount" value="0">
+                                                                        <input type="text" class="form-control" style="width: 70px;" id="ContractDiscount" name="ContractDiscount" oninput="this.value=this.value.replace(/[^0-9]/g,'')" value="0">
                                                                     </div>
                                                                     <div class="texterr"></div>
                                                                 </div>
@@ -1032,7 +1032,7 @@
                                                                 <div class="row">
                                                                     <label class="col-md-4 label6"> الساعات الإضافية</label>
                                                                     <div class="col-md-8 input6">
-                                                                        <input type="text" class="form-control" style="width: 100px;" id="CR_Cas_Contract_Basic_Free_Additional_Hours" name="CR_Cas_Contract_Basic_Free_Additional_Hours" maxlength="3" value="0">
+                                                                        <input type="text" class="form-control" style="width: 60px;" id="CR_Cas_Contract_Basic_Free_Additional_Hours" name="CR_Cas_Contract_Basic_Free_Additional_Hours" oninput="this.value=this.value.replace(/[^0-9]/g,'')" maxlength="2" value="0">
                                                                     </div>
                                                                     <div class="texterr"></div>
                                                                 </div>
@@ -1046,7 +1046,7 @@
                                                                 <div class="row">
                                                                     <label class="col-md-4 label6"> قيمة الخصم</label>
                                                                     <div class="col-md-8 input6">
-                                                                        <input type="text" class="form-control" id="CR_Cas_Contract_Basic_Discount_Value" name="CR_Cas_Contract_Basic_Discount_Value" value="0" readonly>
+                                                                        <input type="text" class="form-control" id="CR_Cas_Contract_Basic_Discount_Value" name="CR_Cas_Contract_Basic_Discount_Value" oninput="this.value=this.value.replace(/[^0-9]/g,'')" value="0" readonly>
                                                                     </div>
                                                                     <div class="texterr"></div>
                                                                 </div>
@@ -1057,7 +1057,7 @@
                                                                 <div class="row">
                                                                     <label class="col-md-4 label6"> الكيلوات الإضافية</label>
                                                                     <div class="col-md-8 input6">
-                                                                        <input type="text" class="form-control" style="width: 100px;" id="CR_Cas_Contract_Basic_Daily_Free_KM" name="CR_Cas_Contract_Basic_Daily_Free_KM" maxlength="3" value="0">
+                                                                        <input type="text" class="form-control" style="width: 60px;" id="CR_Cas_Contract_Basic_Daily_Free_KM" name="CR_Cas_Contract_Basic_Daily_Free_KM" oninput="this.value=this.value.replace(/[^0-9]/g,'')" maxlength="3" value="0">
                                                                     </div>
                                                                     <div class="texterr"></div>
                                                                 </div>
@@ -1136,7 +1136,7 @@
                                                                 <div class="row">
                                                                     <label class="col-md-4 label6"> المبلغ المدفوع</label>
                                                                     <div class="col-md-8 input6">
-                                                                        <input type="text" class="form-control" style="width: 100px;" autocomplete="no" id="TotalPayed" name="TotalPayed" value="0" maxlength="9">
+                                                                        <input type="text" class="form-control" style="width: 120px;" autocomplete="no" id="TotalPayed" name="TotalPayed" oninput="this.value=this.value.replace(/[^0-9.]|(\..*)\./g,'$1')" value="0" maxlength="8">
                                                                     </div>
                                                                     <div class="texterr"></div>
                                                                 </div>
@@ -1371,7 +1371,7 @@
     // Install input filters.
     $("#inputinteger").inputFilter(function (value) { return /^\d*$/.test(value) && (value === "" || parseInt(value) <= 100000); });
     $("#ContractDiscount").inputFilter(function (value) { return /^-?\d*[.]?\d{0,2}$/.test(value) && (value === "" || parseInt(value) <= 100); });
-    $("#TotalPayed").inputFilter(function (value) { return /^-?\d*[.]?\d{0,2}$/.test(value) && (value === "" || parseInt(value) <= 1000000); });
+    //$("#TotalPayed").inputFilter(function (value) { return /^-?\d*[.]?\d{0,2}$/.test(value) && (value === "" || parseInt(value) <= 10000000); });
 
 </script>
 <script>

@@ -62,14 +62,28 @@ namespace RentCar.Controllers
                 (r.CR_Cas_Account_Receipt_Is_Passing == "3" || r.CR_Cas_Account_Receipt_Is_Passing == "1")
                 && r.CR_Cas_Account_Receipt_User_Code == UserLogin && r.CR_Cas_Account_Receipt_Payment_Method != "24" &&
                 r.CR_Cas_Account_Receipt_Date >= sd && r.CR_Cas_Account_Receipt_Date <= ed);
-            if (rpt != null)
-            {
-                var convertReceiptPaymentToFloat= (float) rpt.Select(m => m.CR_Cas_Account_Receipt_Payment).Sum();
-                var Receipt_Payment = convertReceiptPaymentToFloat.ToString("N2");
-                ViewBag.UserCreit = Receipt_Payment;
 
+           
+
+            if (rpt.Count()==0 || rpt== null)
+            {
+                rpt = db.CR_Cas_Account_Receipt.Where(r => r.CR_Cas_Account_Receipt_Lessor_Code == LessorCode && r.CR_Cas_Account_Receipt_Branch_Code == BranchCode 
+                && r.CR_Cas_Account_Receipt_User_Code == UserLogin && r.CR_Cas_Account_Receipt_Payment_Method != "24" &&
+                r.CR_Cas_Account_Receipt_Date >= sd && r.CR_Cas_Account_Receipt_Date <= ed);
+                var convertReceiptPaymentToFloat = (float)rpt.Select(m => m.CR_Cas_Account_Receipt_Payment).Sum();
+                var Receipt_Payment = convertReceiptPaymentToFloat.ToString("N2");
                 var convertReceiptReceiptToFloat = (float)rpt.Select(m => m.CR_Cas_Account_Receipt_Receipt).Sum();
                 var Receipt_Receipt = convertReceiptReceiptToFloat.ToString("N2");
+                ViewBag.UserCreit = "0.00";
+                ViewBag.UserDebit = "0.00";
+            }
+            else 
+            {
+                var convertReceiptPaymentToFloat = (float)rpt.Select(m => m.CR_Cas_Account_Receipt_Payment).Sum();
+                var Receipt_Payment = convertReceiptPaymentToFloat.ToString("N2");
+                var convertReceiptReceiptToFloat = (float)rpt.Select(m => m.CR_Cas_Account_Receipt_Receipt).Sum();
+                var Receipt_Receipt = convertReceiptReceiptToFloat.ToString("N2");
+                ViewBag.UserCreit = Receipt_Payment;
                 ViewBag.UserDebit = Receipt_Receipt;
             }
             return View();
@@ -149,9 +163,10 @@ namespace RentCar.Controllers
             else if (type == "Date")
             {
                 Receipt = db.CR_Cas_Account_Receipt.Where(r => r.CR_Cas_Account_Receipt_Lessor_Code == LessorCode && r.CR_Cas_Account_Receipt_Branch_Code == BranchCode &&
-                r.CR_Cas_Account_Receipt_User_Code == UserLogin && r.CR_Cas_Account_Receipt_Payment_Method != "24" &&
-                r.CR_Cas_Account_Receipt_Date >= sd && r.CR_Cas_Account_Receipt_Date <= ed);
-               
+               (r.CR_Cas_Account_Receipt_Is_Passing == "3" || r.CR_Cas_Account_Receipt_Is_Passing == "1")
+               && r.CR_Cas_Account_Receipt_User_Code == UserLogin && r.CR_Cas_Account_Receipt_Payment_Method != "24" &&
+               r.CR_Cas_Account_Receipt_Date >= sd && r.CR_Cas_Account_Receipt_Date <= ed);
+
             }
             else
             {
@@ -159,8 +174,15 @@ namespace RentCar.Controllers
                 (r.CR_Cas_Account_Receipt_Is_Passing == "3" || r.CR_Cas_Account_Receipt_Is_Passing == "1")
                 && r.CR_Cas_Account_Receipt_User_Code == UserLogin && r.CR_Cas_Account_Receipt_Payment_Method != "24" &&
                 r.CR_Cas_Account_Receipt_Date >= sd && r.CR_Cas_Account_Receipt_Date <= ed);
-               
             }
+
+            //if (Receipt.Count()==0)
+            //{
+            //    Receipt = db.CR_Cas_Account_Receipt.Where(r => r.CR_Cas_Account_Receipt_Lessor_Code == LessorCode && r.CR_Cas_Account_Receipt_Branch_Code == BranchCode &&
+            //    r.CR_Cas_Account_Receipt_User_Code == UserLogin && r.CR_Cas_Account_Receipt_Payment_Method != "24" &&
+            //    r.CR_Cas_Account_Receipt_Date >= sd && r.CR_Cas_Account_Receipt_Date <= ed);
+            //}
+
 
             return PartialView(Receipt.OrderBy(x=>x.CR_Cas_Account_Receipt_Date));
         }
@@ -258,8 +280,9 @@ namespace RentCar.Controllers
             else if (type == "Date")
             {
                 Receipt = db.CR_Cas_Account_Receipt.Where(r => r.CR_Cas_Account_Receipt_Lessor_Code == LessorCode && r.CR_Cas_Account_Receipt_Branch_Code == BranchCode &&
-                r.CR_Cas_Account_Receipt_User_Code == UserLogin && r.CR_Cas_Account_Receipt_Payment_Method != "24" &&
-                r.CR_Cas_Account_Receipt_Date >= sd && r.CR_Cas_Account_Receipt_Date <= ed);
+               (r.CR_Cas_Account_Receipt_Is_Passing == "3" || r.CR_Cas_Account_Receipt_Is_Passing == "1")
+               && r.CR_Cas_Account_Receipt_User_Code == UserLogin && r.CR_Cas_Account_Receipt_Payment_Method != "24" &&
+               r.CR_Cas_Account_Receipt_Date >= sd && r.CR_Cas_Account_Receipt_Date <= ed);
                 if (Receipt != null && Receipt.Count() > 0)
                 {
                     UserCreit = (decimal)Receipt.Select(m => m.CR_Cas_Account_Receipt_Payment).Sum();
@@ -268,9 +291,11 @@ namespace RentCar.Controllers
             }
             else
             {
-                Receipt = db.CR_Cas_Account_Receipt.Where(r => r.CR_Cas_Account_Receipt_Lessor_Code == LessorCode && r.CR_Cas_Account_Receipt_Branch_Code == BranchCode
-                && r.CR_Cas_Account_Receipt_User_Code == UserLogin && r.CR_Cas_Account_Receipt_Payment_Method != "24" &&
-                r.CR_Cas_Account_Receipt_Date >= sd1 && r.CR_Cas_Account_Receipt_Date <= ed);
+                Receipt = db.CR_Cas_Account_Receipt.Where(r => r.CR_Cas_Account_Receipt_Lessor_Code == LessorCode && r.CR_Cas_Account_Receipt_Branch_Code == BranchCode &&
+               (r.CR_Cas_Account_Receipt_Is_Passing == "3" || r.CR_Cas_Account_Receipt_Is_Passing == "1")
+               && r.CR_Cas_Account_Receipt_User_Code == UserLogin && r.CR_Cas_Account_Receipt_Payment_Method != "24" &&
+               r.CR_Cas_Account_Receipt_Date >= sd && r.CR_Cas_Account_Receipt_Date <= ed);
+                
                 if (Receipt != null && Receipt.Count() > 0)
                 {
                     UserCreit = (decimal)Receipt.Select(m => m.CR_Cas_Account_Receipt_Payment).Sum();

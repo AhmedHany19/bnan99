@@ -138,18 +138,18 @@
             $(".ChkChoicesList").change(function () {
                 var sum = 0;
                 var Creditor = 0;
+                var diffss = 0;
                 $('.t1').each(function () {
                     var value = $(this).val().toString().replace(/,/g, '');
                     $(this).val(value.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-                    console.log("value:" + value);
-
+                    console.log("value1:" + value);
                 });
 
                 $("#TblCashClosing TR").each(function () {
                     $('.t1').each(function () {
                         var value = $(this).val().toString().replace(/,/g, '');
                         $(this).val(value.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-                        console.log("value:" + value);
+                        console.log("value2:" + value);
                     });
                     var chk = $(this).find('input[type="checkbox"]').is(':checked');
                     console.log(chk)
@@ -161,31 +161,26 @@
                         var rs = $("#ValCashClosing_" + k).val();
                         var rd = $("#ValCashClosing1_" + k).val();
                         //alert(rs);
-                        console.log("rs:" + rs);
-                        console.log("rd:" + rd);
+                        console.log("Da2n:" + rs);
+                        console.log("MOden:" + rd);
 
                         sum = parseFloat(sum) + parseFloat(rs);
                         Creditor = parseFloat(Creditor) + parseFloat(rd);
+                        diffss = sum - Creditor;
                         //alert(sum);
-                        console.log("sum:" + sum);
-                        console.log("Creditor:" + Creditor);
-
-
+                        console.log("Da2n sum:" + sum);
+                        console.log("Moden sum:" + Creditor);
+                        console.log("diffss:" + diffss);
                         $('.t1').each(function () {
                             var value = $(this).val().toString().replace(/,/g, '');
                             $(this).val(value.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-                            console.log("value:" + value);
+                            console.log("value3:" + value);
                         });
-
                     }
-
                 });
 
                 if (sum > 0) {
-
                     document.getElementById('TotalVal').value = sum.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-                    console.log(sum)
-
                     $(".totalCreditor").val(sum.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }));
                 } else {
                     document.getElementById('TotalVal').value = "0.00";
@@ -193,21 +188,16 @@
                 }
 
                 if (Creditor > 0) {
-
-                    //document.getElementById('TotalVal').value = sum.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-                    console.log(Creditor)
-
                     $(".totaldebtor").val(Creditor.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }));
                 } else {
-                    //document.getElementById('TotalVal').value = "0.00";
                     $(".totaldebtor").val("0.00");
                 }
 
-
-
-
-
-
+                if (diffss > 0) {
+                    $("#TotalVal").val(diffss.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }));
+                } else {
+                    $("#TotalVal").val("0.00");
+                }
 
             })
 
@@ -251,8 +241,8 @@
 
 
 <script>
-
-  $("#TotalVal1").val("@ViewBag.Total1")
+$("#TotalVal1").val(@ViewBag.Total1)
+$("#userBalanceForEachBranch").val(@ViewBag.userBalanceForEachBranch)
 
   $('.t2').each(function () {
             var value = $(this).val().toString().replace(/,/g, '');
