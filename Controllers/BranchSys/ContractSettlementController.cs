@@ -337,20 +337,44 @@ namespace RentCar.Controllers
                 ViewBag.OldKm = cR_Cas_Contract_Basic.CR_Cas_Contract_Basic_CurrentMeters;
 
                 var user = db.CR_Cas_User_Information.FirstOrDefault(u => u.CR_Cas_User_Information_Id == UserLogin);
-                if (user != null)
+                var userBalance = db.CR_Cas_Account_Receipt.Where(x => x.CR_Cas_Account_Receipt_Lessor_Code == LessorCode && x.CR_Cas_Account_Receipt_Branch_Code == BranchCode && x.CR_Cas_Account_Receipt_User_Code == UserLogin &&( x.CR_Cas_Account_Receipt_Payment_Method == "11" || x.CR_Cas_Account_Receipt_Payment_Method == "10") && x.CR_Cas_Account_Receipt_Is_Passing == "1").ToList();
+
+                if (userBalance.Count() != 0)
                 {
-                    if (user.CR_Cas_User_Information_Balance == null)
+                    var userReceiptPayment = userBalance.Sum(x => x.CR_Cas_Account_Receipt_Payment);
+                    var userReceiptReceipt = userBalance.Sum(x => x.CR_Cas_Account_Receipt_Receipt);
+                    var userBalanceForEachBranch = userReceiptPayment - userReceiptReceipt;
+                    if (userBalanceForEachBranch == null)
                     {
-                        ViewBag.UserBalance = 0;
+                        ViewBag.UserBalance ="0.00";
                     }
                     else
                     {
-                        var convertUserBalanceToFloat = (float)user.CR_Cas_User_Information_Balance;
+                        var convertUserBalanceToFloat = (float)userBalanceForEachBranch;
                         var Receipt_Receipt = convertUserBalanceToFloat.ToString("N0");
                         ViewBag.UserBalance = Receipt_Receipt;
                     }
 
                 }
+                else
+                {
+                    ViewBag.UserBalance = "0.00";
+                }
+
+                //if (user != null)
+                //{
+                //    if (user.CR_Cas_User_Information_Balance == null)
+                //    {
+                //        ViewBag.UserBalance = 0;
+                //    }
+                //    else
+                //    {
+                //        var convertUserBalanceToFloat = (float)user.CR_Cas_User_Information_Balance;
+                //        var Receipt_Receipt = convertUserBalanceToFloat.ToString("N0");
+                //        ViewBag.UserBalance = Receipt_Receipt;
+                //    }
+
+                //}
 
                 ViewBag.PayType = new SelectList(db.CR_Mas_Sup_Payment_Method.Where(p => p.CR_Mas_Sup_Payment_Method_Type == "2" && p.CR_Mas_Sup_Payment_Method_Status == "A")
                 , "CR_Mas_Sup_Payment_Method_Code", "CR_Mas_Sup_Payment_Method_Ar_Name");

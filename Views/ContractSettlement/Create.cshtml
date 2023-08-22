@@ -2483,10 +2483,13 @@
         //}
             if (TotToPay<0) {
                 if (fieldVal > parseInt(userBalance.replace(",", ""))) {
+                    console.log("userBalance" + userBalance.replace(",", ""))
+                    console.log("fieldVal" + fieldVal)
                     toastr.info("رصيدك لا يسمح");
                     e.preventDefault();
                 }
                 else if (fieldVal < parseInt(userBalance.replace(",", ""))) {
+                    console.log("userBalance" + userBalance.replace(",", ""))
                     if (fieldVal > 0 && fieldVal != null && fieldVal !== "") {
                         if (PayType === "") {
                             toastr.info("يرجي ادخال طريقة الدفع......");
@@ -2544,6 +2547,81 @@
                 toastr.success("جــاري حفظ بيانات اغلاق العقــد وارســالـه للمستــاجــر ......")
             }
         });
+</script>
+<script>
+    $("#AuthBtn2").click(function () {
+            var fieldVal = $('#TotPayed').val();
+            var PayType = $('#PayType').val();
+            var userBalance = @Html.Raw(Json.Encode(ViewBag.UserBalance));
+            var TotToPay = $("#TotToPay").val();
+
+       
+        if (TotToPay < 0) {
+            if (fieldVal > parseFloat(userBalance.replace(/,/g, ""))) {
+                console.log("userBalance:" + parseFloat(userBalance.replace(/,/g, "")))
+                console.log("fieldVal" + fieldVal)
+                toastr.info("رصيدك لا يسمح");
+                e.preventDefault();
+            }
+            else if (fieldVal < parseFloat(userBalance.replace(/,/g, ""))) {
+                console.log("userBalance" + parseFloat(userBalance.replace(/,/g, "")))
+                if (fieldVal > 0 && fieldVal != null && fieldVal !== "") {
+                    if (PayType === "") {
+                        toastr.info("يرجي ادخال طريقة الدفع......");
+                        e.preventDefault();
+                    }
+                    else {
+                        document.getElementById("add_btn").disabled = true;
+                        $("#loader").removeAttr("hidden");
+                        toastr.options.setTimeout = 99999;
+                        toastr.success("جــاري حفظ بيانات اغلاق العقــد وارســالـه للمستــاجــر ......")
+                    }
+                }
+                else {
+                    document.getElementById("add_btn").disabled = true;
+                    $("#loader").removeAttr("hidden");
+                    toastr.options.setTimeout = 99999;
+                    toastr.success("جــاري حفظ بيانات اغلاق العقــد وارســالـه للمستــاجــر ......")
+                }
+
+            }
+            else {
+                document.getElementById("add_btn").disabled = true;
+                $("#loader").removeAttr("hidden");
+                toastr.options.setTimeout = 99999;
+                toastr.success("جــاري حفظ بيانات اغلاق العقــد وارســالـه للمستــاجــر ......")
+            }
+
+
+        }
+        else if (TotToPay > 0) {
+            if (fieldVal > 0 && fieldVal != null && fieldVal !== "") {
+                if (PayType === "") {
+                    toastr.info("يرجي ادخال طريقة الدفع......");
+                    e.preventDefault();
+                }
+                else {
+                    document.getElementById("add_btn").disabled = true;
+                    $("#loader").removeAttr("hidden");
+                    toastr.options.setTimeout = 99999;
+                    toastr.success("جــاري حفظ بيانات اغلاق العقــد وارســالـه للمستــاجــر ......")
+                }
+            }
+            else {
+                document.getElementById("add_btn").disabled = true;
+                $("#loader").removeAttr("hidden");
+                toastr.options.setTimeout = 99999;
+                toastr.success("جــاري حفظ بيانات اغلاق العقــد وارســالـه للمستــاجــر ......")
+            }
+        }
+
+        else {
+            document.getElementById("add_btn").disabled = true;
+            $("#loader").removeAttr("hidden");
+            toastr.options.setTimeout = 99999;
+            toastr.success("جــاري حفظ بيانات اغلاق العقــد وارســالـه للمستــاجــر ......")
+        }
+    })
 </script>
 
 
