@@ -267,10 +267,21 @@
                                                 <a href="/CasDocumentation/Index/" class="btn btn-primary waves-effect" style="margin-right:10px;margin-top:10px;">انهاء</a>
 
                                             }
-                                            else if (ViewBag.Status == "N" || ViewBag.Status == "X")
+                                            else if (ViewBag.Status == "N")
                                             {
                                                 <input type="submit" name="save" value="حفظ" class="btn btn-primary waves-effect" style="float: right;margin-right:10px;margin-top:10px;" />
+
                                                 <input type="button" name="delete" class="btn btn-primary waves-effect" id="btn-confirm" value="@ViewBag.stat" style="margin-right: 20px; margin-top: 10px; background-color: #F3B161;cursor:no-drop;" onclick="javascript:return false;" disabled />
+
+                                                <a href="/CasDocumentation/Index/" class="btn btn-primary waves-effect" style="margin-right:10px;margin-top:10px;">انهاء</a>
+
+                                            }
+                                            else if (ViewBag.Status == "X")
+                                            {
+                                                <input type="submit" name="save" value="حفظ" class="btn btn-primary waves-effect" style="float: right;margin-right:10px;margin-top:10px;" />
+
+                                                <input type="button" name="delete" class="btn btn-primary waves-effect" id="btn-confirm" value="@ViewBag.stat" style="margin-right: 20px; margin-top: 10px; background-color: #F3B161;" onclick="javascript:return false;" />
+
                                                 <a href="/CasDocumentation/Index/" class="btn btn-primary waves-effect" style="margin-right:10px;margin-top:10px;">انهاء</a>
 
                                             }
@@ -341,13 +352,7 @@
                                             </script>
 
 
-                                            @*<script type="text/javascript">
 
-            function reply_click(clicked_id) {
-                alert(clicked_id)
-            }
-
-        </script>*@
 
                                         </div>
                                         <div class="col-md-0 col-30" style="margin-top:20px;margin-bottom:10px;">
